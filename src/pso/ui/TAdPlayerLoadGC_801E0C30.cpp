@@ -96,7 +96,8 @@ s32 CARDMountAsync(s32 chan, void *workArea, void (*detachCallback)(s32), void (
 s32 CARDGetSectorSize(s32 chan, u32 *size);
 s32 CARDSetStatus(s32 chan, s32 fileNo, CARDStat_801E2048 *stat);
 s32 CARDClose(CARDFileInfo_801E15A4 *fileInfo);
-s32 CARDOpen(s32 chan, const char *fileName, CARDFileInfo_801E15A4 *fileInfo);
+void *CARDOpen(s32 chan, const char *fileName, CARDFileInfo_801E15A4 *fileInfo);
+void *CARDCreate(s32 chan, const char *fileName, s32 length, CARDFileInfo_801E15A4 *fileInfo);
 s32 CARDReadAsync(CARDFileInfo_801E15A4 *fileInfo, void *addr, s32 length, s32 offset, void (*callback)(s32, s32));
 s32 CARDSetAttributes(s32 chan, s32 fileNo, u8 attr);
 s32 CARDWriteAsync(CARDFileInfo_801E15A4 *fileInfo, const void *addr, s32 length, s32 offset, void (*callback)(s32, s32));
@@ -937,6 +938,57 @@ s32 TAdPlayerLoadGC__sub_801E263C(s32 unused, s32 chan, u8 *workArea) {
     }
     TAdPlayerLoadGC__card_result_code = 0;
     return 0;
+}
+
+s32 TAdPlayerLoadGC__sub_801E26DC(s32 chan, const char *name, void *buf, u32 size) {
+    char fileName[0x20];
+    s32 status;
+
+    memset(fileName, 0, 0x20);
+    strncpy(fileName, name, 0x20);
+    lbl_805D5E3C = (s32)size;
+    status = (long) CARDOpen(chan, name, &TAdPlayerLoadGC__data_80511EE8);
+    switch (status) {
+    case -128:
+        return status;
+    case -10:
+        return status;
+    case -5:
+        return status;
+    case -1:
+        break;
+    case 0:
+        break;
+    case -3:
+        return -0xFF;
+    case -4:
+        status = (long) CARDCreate(chan, fileName, lbl_805D5E3C, &TAdPlayerLoadGC__data_80511EE8);
+        switch (status) {
+        case -128:
+            return status;
+        case -12:
+            return status;
+        case -7:
+            break;
+        case -6:
+            return status;
+        case -4:
+            return status;
+        case -3:
+            break;
+        case -2:
+            return status;
+        case -1:
+            break;
+        case 0:
+            break;
+        default:
+            return status;
+        }
+        break;
+    default:
+        return status;
+    }
 }
 
 }
