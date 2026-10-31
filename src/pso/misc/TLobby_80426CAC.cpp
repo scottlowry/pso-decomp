@@ -270,9 +270,11 @@ inline s16 put_end_of_list(u8 **p) {
 }
 
 inline s16 put_end_of_list3(u8 **p) {
+    s32 tag;
     u16 type;
     u16 len;
     s16 ret;
+    tag = 0;
     type = 0;
     NetMemcpy(*p, &type, 2);
     len = 0;
