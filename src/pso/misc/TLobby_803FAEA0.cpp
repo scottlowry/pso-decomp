@@ -439,6 +439,7 @@ extern s16 lbl_805D7A84;
 extern s16 lbl_805D7A88;
 extern s16 lbl_805D7A8A;
 extern s32 lbl_805D7A8C;
+extern s32 lbl_805D7BDC;
 s16 NetApplyConnectionConfig(u8 *arg0);
 extern "C" {
 
@@ -689,6 +690,73 @@ s32 TLobby__sub_803FB280(u8 *cfg) {
         }
     }
     return -1;
+}
+
+struct SubA_803FB358 {
+    u8 pad[8];
+    u32 w8;
+    u32 wC;
+    u8 pad10[8];
+    u32 w18;
+    u32 w1C;
+    u8 pad20[0x44];
+    u32 w64;
+    u32 w68;
+};
+
+struct SubB_803FB358 {
+    u8 pad[8];
+    u32 w8;
+    u32 wC;
+    u32 w10;
+    u32 w14;
+};
+
+s32 TLobby__sub_803FB358(NetStatus_803FB358 *status) {
+    u8 *base;
+    u32 g1;
+    u8 *d4;
+    SubA_803FB358 *subA;
+    SubB_803FB358 *subB;
+    u32 t0;
+    u32 t1;
+
+    TLobby::lock_mutex(lbl_805C18A0.value);
+    base = lbl_805C0038;
+    g1 = base[0x6c];
+    d4 = base + 0xd4;
+    subB = *(SubB_803FB358 **)(base + 0x104);
+    subA = *(SubA_803FB358 **)(base + 0x9c);
+    if (g1 == 5) {
+        status->link_up = 1;
+    } else {
+        status->link_up = 0;
+    }
+    status->w10 = subA->w8;
+    status->w14 = subA->wC;
+    status->w18 = subA->w18;
+    status->w1C = subA->w1C;
+    status->w20 = subA->w64;
+    status->w24 = subA->w68;
+    if (d4[0] == 5) {
+        status->ppp_up = 1;
+    } else {
+        status->ppp_up = 0;
+    }
+    t0 = subB->w8;
+    t1 = subB->wC;
+    NetMemcpy(status->addr[0], &t0, 4);
+    NetMemcpy(status->addr[1], &t1, 4);
+    t0 = subB->w10;
+    t1 = subB->w14;
+    NetMemcpy(status->addr[2], &t0, 4);
+    NetMemcpy(status->addr[3], &t1, 4);
+    status->state = lbl_805D7A8A;
+    status->w8 = lbl_805D7BDC;
+    status->h6 = lbl_805D7A82;
+    status->hC = lbl_805D7A84;
+    TUdpSocket::unlock_mutex(((s32 *)&lbl_805C18A0)[0]);
+    return 0;
 }
 }
 
