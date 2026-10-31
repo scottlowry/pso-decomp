@@ -3,6 +3,7 @@
 #include "pso/misc/TOTrapAncient01_80226534.h"
 #include "pso/boss/TBoss4Type2_800874F4.h"
 #include "pso/misc/TCameraCtrl_800687BC.h"
+#include "pso/misc/TCameraCtrl.h"
 #include "pso/object/TObject_80019A50.h"
 #include "pso/player/TObjPlayer_803E4954.h"
 #include "pso/unk/text_80087278.h"
@@ -22,6 +23,10 @@ struct Vec_8033CDF8 { f32 x, y, z; };
 
 struct Fish_8033CDF8 { u8 pad[0x4C]; Vec_8033CDF8 vecs[3]; };
 
+struct Trip_8033D1AC { s32 a, b, c; };
+
+struct Fish_8033D1AC { u8 pad[0x28]; Trip_8033D1AC t[2]; };
+
 extern "C" {
 s32 play_sound_effect(int, int, int, int);
 extern Range_8033CDF8 fish_spawn_entry_table[];
@@ -35,6 +40,20 @@ void *TObjFish__sub_8033D1AC(void *, void *, void *);
 void __dl__7TObjectFPv(void *);
 void __dt__7TObjectFv(void *, int);
 void *__nw__7TObjectFUl(int);
+void __ct__7TObjectFP7TObject(void *, void *);
+void VecCopy__FP3VecPC3Vec(void *, void *);
+void *get_fish_count__8TObjFishFv(void);
+s32 get_bml_model(void *, s32);
+s32 get_bml_motion(void *, s32);
+s32 TObjFish__sub_8001EDB0(void *, s32);
+s32 TObjFish__sub_800E3124(u8 *list, s32 vecs);
+void set_scripted_camera_pose(void *, void *, void *);
+extern s32 lbl_804EF9D8[];
+extern s32 lbl_804DF614[];
+extern s32 lbl_805D42A0;
+extern u8 lbl_80477E60[];
+extern u8 lbl_80477EC0[];
+extern u8 lbl_80477ECC[];
 
 void TBoss6Demo11_TYPE1_DEAD::render_fade_model() {
     u8 *arg0 = (u8 *)this;
@@ -173,6 +192,45 @@ void *TBoss6Demo11_TYPE1_DEAD::destroy(s16 arg1) {
     }
     return this;
 }
+
+#pragma push
+#pragma opt_lifetimes off
+#pragma pool_data off
+#pragma opt_loop_invariants off
+#pragma opt_common_subs off
+#pragma opt_propagation off
+void *TObjFish__sub_8033D1AC(void *arg0, void *arg1, void *arg2) {
+    s32 *tbl = lbl_804EF9D8;
+    u8 *o = (u8 *)arg0;
+    Fish_8033D1AC *self = (Fish_8033D1AC *)arg0;
+    s32 v;
+    void *count;
+    s32 i;
+    __ct__7TObjectFP7TObject(arg0, arg1);
+    *(s32 **)(o + 0x18) = &tbl[5];
+    *(s32 *)o = lbl_805D42A0;
+    *(void **)(o + 0x48) = arg1;
+    VecCopy__FP3VecPC3Vec(o + 0x1c, &tbl[2]);
+    count = get_fish_count__8TObjFishFv();
+    for (i = 0; i < 2; i++) {
+        {
+            s32 t = lbl_804DF614[i];
+            v = t;
+            self->t[i].a = get_bml_model(count, t);
+        }
+        self->t[i].b = TObjFish__sub_8001EDB0(count, v);
+        self->t[i].c = get_bml_motion(count, tbl[i]);
+    }
+    *(s32 *)(o + 0x88) = TObjFish__sub_800E3124(lbl_80477E60, (s32)(o + 0x4c));
+    *(s32 *)(o + 0x8c) = 0;
+    activate_camera_mode(5);
+    set_scripted_camera_pose(o + 0x1c, o + 0x1c, lbl_80477EC0);
+    ((TCameraCtrl *)lbl_80477ECC)->cache_target_and_forward(0x416C);
+    *(f32 *)(o + 0x40) = lbl_805DFA5C;
+    *(s32 *)(o + 0x44) = 0;
+    return arg0;
+}
+#pragma pop
 
 void *TBoss6PlotFalz::create(void *arg0, void *arg1) {
     void *o;
