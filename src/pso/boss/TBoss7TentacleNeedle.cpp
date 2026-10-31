@@ -742,3 +742,49 @@ TBoss7Tentacle::TBoss7Tentacle(TObject *object, s32 arg2, s32 arg3) : TObject(ob
 }
 
 void TObjPlayer__sub_802F0D2C(void) {  }
+
+struct Node_802F0D30 {
+    u32 flags;
+    void *model;
+    V_802EFF24 position;
+    u8 pad14[8];
+    s32 ang;
+    u8 pad20[0xC];
+    Node_802F0D30 *child;
+    Node_802F0D30 *sibling;
+    f32 pad34;
+};
+
+typedef char Node_802F0D30_size[sizeof(Node_802F0D30) == 0x38 ? 1 : -1];
+
+extern "C" {
+void copy_model_node(u8 *dst, u8 *src);
+
+void TObjPlayer__sub_802F0D30(void) {
+    Node_802EFF24 *nodes;
+    Node_802EFF24 *src;
+    Node_802EFF24 *dst;
+    s32 i;
+
+    nodes = lbl_80541528;
+    src = (Node_802EFF24 *)queue_boss_effect__10TObjPlayerFPv(1);
+    notify_fish_obj__10TObjPlayerFPv(0x11);
+    dst = nodes;
+    for (i = 0; i < 12; i++) {
+        copy_model_node((u8 *)dst, (u8 *)src);
+        *(u32 *)&dst->pad20[0xC] = (u32)(dst + 1);
+        dst++;
+        src = *(Node_802EFF24 **)&src->pad20[0xC];
+    }
+    copy_model_node((u8 *)dst, (u8 *)src);
+    *(u32 *)&dst->pad20[0x10] = (u32)(dst + 1);
+    copy_model_node((u8 *)&dst[1], (u8 *)*(Node_802EFF24 **)&src->pad20[0x10]);
+    for (i = 0; i < 14; i++) {
+        *(u32 *)&nodes[i] &= ~3;
+        ((V_802F0A5C *)&nodes[14])[i].x = nodes[i].pos.x;
+        ((V_802F0A5C *)&nodes[14])[i].y = nodes[i].pos.y;
+        ((V_802F0A5C *)&nodes[14])[i].z = nodes[i].pos.z;
+        ((u32 *)&nodes[17])[i] = (u32)nodes[i].ang;
+    }
+}
+}
