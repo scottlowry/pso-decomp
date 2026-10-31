@@ -37,6 +37,7 @@ s32 subtract_vector(void *, void *);
 extern const f32 TObjEnePanarms__data_805DA530;
 void TObjEnePanarms__sub_800E0D1C(u8 *arg0);
 s32 TObjEnePanarms__sub_800E1774(void *);
+extern f32 lbl_8043CD80[];
 extern f32 lbl_8043CD98[];
 extern const f32 lbl_805DA54C;
 extern const f32 lbl_805DA574;
@@ -1187,6 +1188,48 @@ void TObjEnePanarms::attack_target_player(s32 arg1) {
             Hit_800E1608 h2 = lbl_8043CD90[0];
             ((VObj_18_b27ba1 *)t)->m21(this, &h2, 0, -1, -1);
         }
+    }
+}
+#pragma pop
+
+#pragma push
+#pragma fp_contract on
+#pragma opt_propagation off
+#pragma opt_lifetimes off
+s32 TObjEnePanarms__sub_800E1774(void *arg0) {
+    Vec_800E0A44 v;
+    s32 idx;
+    s32 ok;
+    f64 d1;
+    f64 d2;
+
+    if (((TObjEnePanarms *)arg0)->get_state_flag() != 0) {
+        ok = 0;
+        if (TObjEnePanarms__sub_800E2FB4((O_800E2FB4 *)*(s32 *)((s8 *)arg0 + 0x3A0)) == 0) {
+            idx = ((TObjEnePanarms *)arg0)->find_nearest_enemy_with_flag_alt_target((s32)&v, lbl_8043CD80[((TObjEnePanarms *)arg0)->m_380]);
+            *(s32 *)((s8 *)arg0 + 0x3B8) = idx;
+            if (idx != 0xFFFF) {
+                d1 = TObjEnePanarms__data_8043CDD0 * ((f64 (*)(f32, f32))atan2_float)(v.x, v.z);
+                if (angle_difference_abs(((TObjMotion *)arg0)->rotation_y, (s32)d1) < 0x400) {
+                    ok = 1;
+                }
+            }
+        }
+        return (u8)ok;
+    }
+    {
+        ok = 0;
+        if (TObjEnePanarms__sub_800E2FB4((O_800E2FB4 *)*(s32 *)((s8 *)arg0 + 0x3A0)) == 0) {
+            idx = find_nearest_visible_player(arg0, &v, lbl_8043CD80[((TObjEnePanarms *)arg0)->m_380]);
+            *(s32 *)((s8 *)arg0 + 0x3B8) = idx;
+            if (idx != 0xFFFF) {
+                d2 = TObjEnePanarms__data_8043CDD0 * ((f64 (*)(f32, f32))atan2_float)(*(f32 *)((s8 *)&v), *(f32 *)((s8 *)&v + 8));
+                if (angle_difference_abs(((TObjMotion *)arg0)->rotation_y, (s32)d2) < 0x400) {
+                    ok = 1;
+                }
+            }
+        }
+        return (u8)ok;
     }
 }
 #pragma pop
