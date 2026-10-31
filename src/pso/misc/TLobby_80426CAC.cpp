@@ -861,23 +861,24 @@ s32 TLobby__sub_80428094(s16 slot) {
 }
 
 s16 TLobby__sub_804281DC(u8 *arg0) {
-    Ent_80427D40 *tbl = (Ent_80427D40 *)&lobby_pppoe_slot_table;
+    Ent_80427D40 *tbl;
     Ent_80427D40 *p;
     Ent_80427D40 *e;
     s32 now;
+    s32 stamp;
     s16 i;
     s16 slot;
     s16 set;
+    tbl = (0, (Ent_80427D40 *)&lobby_pppoe_slot_table);
     set = 0;
-    for (p = tbl, i = 0; i < 1; p++, i++) {
+    for (p = &tbl[0], i = 0; i < 1; p++, (i++) & 0xFFFFFFFFFFFFFFFF) {
         if (p->state == 6) {
             p->state = -1;
             set = 1;
             break;
         }
     }
-    e = NULL;
-    for (p = tbl, i = 0; i < 1; p++, i++) {
+    for (p = &tbl[0], i = 0, e = NULL; i < 1; p++, i++) {
         e = p;
         if (e->state == -1) {
             slot = i;
@@ -892,8 +893,9 @@ s16 TLobby__sub_804281DC(u8 *arg0) {
     }
     e->names = *(PppoeNames *)arg0;
     e->m_4 = set;
+    stamp = (s32)e;
     TLobby::get_time_ms(&now);
-    NetMemcpy(e->m_32, &e, 4);
+    NetMemcpy(e->m_32, &stamp, 4);
     NetMemcpy(e->m_32 + 4, &now, 4);
     NetMemcpy(e->m_10, (u8 *)&tbl[1], 6);
     NetMemcpy(e->m_16, (u8 *)&tbl[1] + 6, 6);
