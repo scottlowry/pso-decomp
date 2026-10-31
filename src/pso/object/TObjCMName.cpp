@@ -1765,20 +1765,20 @@ void TObjCMMainMenu__sub_802979BC(void *arg0) {
     s32 state = TObjCMMainMenu__data_805D659C;
     if ((state == 0 || (state == 1 && self->entries[self->selected_entry] != 7)) &&
             TObjCMMainMenu::validate_character_name((s8 *)name) != 0) {
+        hi = 1.0f;
         v = self->unknown44;
-        hi = lbl_805DDA70;
-        v = v + lbl_805DDAAC;
+        v = lbl_805DDAAC + v;
         self->unknown44 = v;
         if (v > hi) {
-            self->unknown44 = lbl_805DDA70;
+            self->unknown44 = 1.0f;
         }
     } else {
+        lo = 0.0f;
         v = self->unknown44;
-        lo = lbl_805DDA90;
-        v = v + lbl_805DDAA8;
+        v = lbl_805DDAA8 + v;
         self->unknown44 = v;
         if (v < lo) {
-            self->unknown44 = lbl_805DDA90;
+            self->unknown44 = 0.0f;
             return;
         }
     }
