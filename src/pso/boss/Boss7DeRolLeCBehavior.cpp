@@ -488,8 +488,8 @@ void TObjFish__sub_802E7D70(void *self, s16 arg1, void *arg2, void *arg3, s32 ar
         }
     }
     f2c = *(s16 *)((u8 *)self + 0x2c);
-    block.spA = 1;
     block.sp8 = (u16)(f2c + rel);
+    block.spA = 1;
     block.spC = 0;
     block.spE = target;
     block.sp10 = (u16)*(s16 *)((u8 *)self + 0x28);
