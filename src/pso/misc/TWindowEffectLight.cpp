@@ -114,6 +114,8 @@ void TWindowEffectLight__sub_802AD040(void *window, f32 f) {
     f32 x0v;
     f32 new_var;
     f32 vy;
+    float new_var3;
+    f32 *new_var2;
     s32 color = ((TWindowEffectLight *)window)->calc_alpha() | 0xFFFFFF;
     f32 s = ((TWindowEffectLight *)window)->calc_scale();
     set_draw_texture_and_color(2, color);
@@ -121,6 +123,7 @@ void TWindowEffectLight__sub_802AD040(void *window, f32 f) {
     h = lbl_805DE0F8 * s;
 
     q.x0 = ((Light_802AD1CC *)window)->x - dx - h;
+    new_var2 = &((Light_802AD1CC *)window)->x;
     q.y0 = ((Light_802AD1CC *)window)->y - h;
     q.x1 = ((Light_802AD1CC *)window)->x - dx;
     q.y1 = ((Light_802AD1CC *)window)->y + h;
@@ -141,7 +144,7 @@ void TWindowEffectLight__sub_802AD040(void *window, f32 f) {
     draw_textured_quad_at_depth((f32 *)&q, TWindowEffectLight__data_805DE0E4);
 
     if (f > lbl_805DE0F4) {
-        x0v = ((Light_802AD1CC *)window)->x - dx;
+        x0v = (*new_var2) - dx;
         w2 = lbl_805DE100;
         if (((!lbl_805DE100) && (!lbl_805DE100)) && (!lbl_805DE100)) {
         }
@@ -150,15 +153,16 @@ void TWindowEffectLight__sub_802AD040(void *window, f32 f) {
         vy = ((Light_802AD1CC *)window)->y;
         q.x1 = x1v;
         new_var = vy - h;
+        new_var3 = vy + h;
         if (((!window) && (!window)) && (!window)) {
         }
         q.y0 = new_var;
-        q.y1 = vy + h;
+        q.y1 = new_var3;
         q.u0 = w2;
         q.v0 = TWindowEffectLight__data_805DE0E4;
-        x1v = lbl_805DE104;
         q.u1 = w2;
-        q.v1 = x1v;
+        w2 = lbl_805DE104;
+        q.v1 = w2;
         draw_textured_quad_at_depth((f32 *)&q, TWindowEffectLight__data_805DE0E4);
     }
 }
