@@ -10,8 +10,20 @@ struct E_8007F3F8 { s32 a; f32 f; };
 
 struct O_8007F3F8 { u8 pad[0x40]; s32 count; E_8007F3F8 e[4]; };
 
+struct Quad_8007F27C {
+    f32 *pos;
+    u32 *col;
+    s32 start;
+    s32 count;
+};
+
 extern "C" {
 s32 fn_8007F3F8(O_8007F3F8 *arg0, f32 farg0);
+s32 draw_tri_fan_2d__14TObjCMHairMenuFllf(void *arg0, s32 arg1, s32 arg2, f32 farg0);
+extern const f32 lbl_805D92A8;
+extern const f32 lbl_805D92B4;
+extern const f32 lbl_805D92B8;
+extern const Quad_8007F27C lbl_80438AB4;
 struct Obj_8007F0E4 {
     u8 pad0[0x1C];
     f32 f1C;
@@ -164,6 +176,91 @@ void TDLGraph::draw_countdown_timer(f32 x, f32 y) {
         self->time--;
     }
 }
+
+#pragma push
+#pragma opt_common_subs off
+#pragma fp_contract on
+void fn_8007F27C(u8 *arg0, f32 *arg1, f32 *arg2)
+{
+    f32 pos[8];
+    f32 b0;
+    u32 col[4];
+    Quad_8007F27C q;
+    f32 a0;
+    f32 c0;
+    f32 b1;
+    f32 d0;
+    f32 x0;
+    f32 tx;
+    f32 ty;
+    f32 y0;
+    f32 y1;
+    u32 k0;
+    u32 k1;
+    f32 a1;
+    f32 c1;
+    f32 d1;
+    f32 ty2;
+    f32 x1b;
+    f32 k;
+    f32 sum;
+    f32 x1;
+    k = lbl_805D92A8;
+    a0 = arg1[0];
+    b0 = arg1[1];
+    c0 = arg2[0];
+    y0 = b0;
+    x0 = a0 - k;
+    tx = a0 + c0;
+    d0 = arg2[1];
+    ty = y0 + d0;
+    x1 = k + tx;
+    do
+    {
+        y0 = y0 - k;
+        y1 = k + ty;
+        q.pos = lbl_80438AB4.pos;
+    }
+    while (0);
+    q.col = lbl_80438AB4.col;
+    q.start = lbl_80438AB4.start;
+    q.count = lbl_80438AB4.count;
+    q.pos = pos;
+    q.col = col;
+    col[0] = col[1] = col[2] = col[3] = 0xFF;
+    pos[0] = pos[6] = x0;
+    pos[2] = pos[4] = x1;
+    pos[1] = pos[3] = y0;
+    pos[5] = pos[7] = y1;
+    draw_tri_fan_2d__14TObjCMHairMenuFllf(&q, 4, 2, lbl_805D92B4);
+    k0 = *(u32 *)(arg0 + 0x34);
+    col[3] = k0;
+    c1 = arg2[0];
+    col[2] = k0;
+    b1 = arg1[1];
+    d1 = arg2[1];
+    col[1] = k0;
+    a1 = arg1[0];
+    ty2 = d1 + b1;
+    col[0] = k0;
+    pos[0] = pos[6] = a1;
+    x1b = (c1 * (*(f32 *)(arg0 + 0x1C))) + a1;
+    pos[1] = pos[3] = b1;
+    pos[2] = pos[4] = x1b;
+    pos[5] = pos[7] = ty2;
+    draw_tri_fan_2d__14TObjCMHairMenuFllf(&q, 4, 2, lbl_805D92B8);
+    sum = arg2[0] + arg1[0];
+    k1 = *(u32 *)(arg0 + 0x38);
+    col[3] = k1;
+    col[2] = k1;
+    col[1] = k1;
+    col[0] = k1;
+    ty2 = pos[6] = sum;
+    pos[0] = ty2;
+    draw_tri_fan_2d__14TObjCMHairMenuFllf(&q, 4, 2, lbl_805D92B8);
+}
+#pragma pop
+
 s32 fn_8007F3F8(O_8007F3F8 *arg0, f32 farg0) {
     f32 sum;
     f32 df;
