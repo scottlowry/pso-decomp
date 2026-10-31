@@ -112,6 +112,7 @@ void TWindowEffectLight__sub_802AD040(void *window, f32 f) {
     f32 w2;
     f32 x1v;
     f32 x0v;
+    f32 new_var;
     f32 vy;
     s32 color = ((TWindowEffectLight *)window)->calc_alpha() | 0xFFFFFF;
     f32 s = ((TWindowEffectLight *)window)->calc_scale();
@@ -148,9 +149,10 @@ void TWindowEffectLight__sub_802AD040(void *window, f32 f) {
         q.x0 = x0v;
         vy = ((Light_802AD1CC *)window)->y;
         q.x1 = x1v;
+        new_var = vy - h;
         if (((!window) && (!window)) && (!window)) {
         }
-        q.y0 = vy - h;
+        q.y0 = new_var;
         q.y1 = vy + h;
         q.u0 = w2;
         q.v0 = TWindowEffectLight__data_805DE0E4;
