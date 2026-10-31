@@ -45,6 +45,10 @@ struct Vec_80353C60 { f32 x, y, z; };
 
 struct Vec_80353A14 { f32 x, y, z; };
 
+struct Vec_80354188 { f32 x, y, z; };
+
+struct Prm_80354188 { f32 radius; s32 count; };
+
 struct E_803546B0 { s32 id; f32 f4; u8 pad8[0xC]; };
 
 struct R_803546B0 {
@@ -422,6 +426,68 @@ u8 *TBoss6Rock::get_rock_entry(s32 arg0) {
         return NULL;
     }
     return (u8 *)&TBoss6Rock__data_80479258.value + (*(s32 *)((s8 *)(*(u8 **)((s8 *)((u8 *)(&(*(RecoveredGlobal_80354148_TBoss6Rock__data_80543778 *)&TBoss6Rock__instance_table).value) + (arg0 * 4)) + 0)) + 0xB4) * 0x14);
+}
+#pragma pop
+
+extern "C" {
+f32 sin_table_lookup(int);
+f32 cos_table_lookup(int);
+extern s32 TBoss6Type2__data_8047105C[];
+extern s8 lbl_805D6F00;
+extern const f32 lbl_805DE3F0;
+extern const f32 lbl_805DFF7C;
+extern const f32 lbl_805DFF80;
+extern const f32 lbl_805DFF84;
+extern const f32 lbl_805DFF88;
+extern Prm_80354188 lbl_804F1260[];
+}
+
+#pragma push
+#pragma fp_contract on
+void TBoss6Rock__sub_80354188(void) {
+    Vec_80354188 v;
+    s32 cx;
+    s32 cy;
+    s32 cz;
+    s32 i;
+    s32 k;
+    s32 j;
+    s32 count;
+    s32 step;
+    s32 angle;
+    f32 radius;
+    Prm_80354188 *p;
+    if (lbl_805D6F00 == 0) {
+        lbl_804F1260[0].radius = lbl_805DFF7C * lbl_805DE3F0 / lbl_805DFF80;
+        lbl_804F1260[1].radius = lbl_805DFF84 * lbl_805DE3F0 / lbl_805DFF80;
+        lbl_804F1260[2].radius = TBoss6Rock__data_805DFF48 * lbl_805DE3F0 / lbl_805DFF80;
+        lbl_804F1260[3].radius = lbl_805DFF88 * lbl_805DE3F0 / lbl_805DFF80;
+        lbl_805D6F00 = 1;
+    }
+    cx = TBoss6Type2__data_8047105C[0];
+    cy = TBoss6Type2__data_8047105C[1];
+    cz = TBoss6Type2__data_8047105C[2];
+    j = 0;
+    for (i = 0; i < 4; i++) {
+        p = &lbl_804F1260[i];
+        count = p->count;
+        radius = p->radius;
+        step = 0x10000 / count;
+        angle = (i & 1) * (step / 2);
+        for (k = 0; k < count; k++) {
+            if (j >= 0x20) {
+                return;
+            }
+            *(s32 *)&v.x = cx;
+            *(s32 *)&v.y = cy;
+            *(s32 *)&v.z = cz;
+            v.x = v.x + radius * sin_table_lookup(angle);
+            v.z = v.z + radius * cos_table_lookup(angle);
+            VecCopy((Vec *)&((Vec_80354188 *)TBoss6Rock__rock_point_table)[j], (const Vec *)&v);
+            angle += step;
+            j++;
+        }
+    }
 }
 #pragma pop
 
