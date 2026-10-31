@@ -446,8 +446,8 @@ extern Prm_80354188 lbl_804F1260[];
 #pragma fp_contract on
 void TBoss6Rock__sub_80354188(void) {
     Vec_80354188 v;
-    s32 cx;
     s32 cy;
+    s32 cx;
     s32 cz;
     s32 i;
     s32 k;
@@ -458,10 +458,11 @@ void TBoss6Rock__sub_80354188(void) {
     f32 radius;
     Prm_80354188 *p;
     if (lbl_805D6F00 == 0) {
-        lbl_804F1260[0].radius = lbl_805DFF7C * lbl_805DE3F0 / lbl_805DFF80;
-        lbl_804F1260[1].radius = lbl_805DFF84 * lbl_805DE3F0 / lbl_805DFF80;
-        lbl_804F1260[2].radius = TBoss6Rock__data_805DFF48 * lbl_805DE3F0 / lbl_805DFF80;
-        lbl_804F1260[3].radius = lbl_805DFF88 * lbl_805DE3F0 / lbl_805DFF80;
+        f32 mv = lbl_805DE3F0;
+        lbl_804F1260[0].radius = lbl_805DFF7C * mv / lbl_805DFF80;
+        lbl_804F1260[1].radius = lbl_805DFF84 * mv / lbl_805DFF80;
+        lbl_804F1260[2].radius = TBoss6Rock__data_805DFF48 * mv / lbl_805DFF80;
+        lbl_804F1260[3].radius = lbl_805DFF88 * mv / lbl_805DFF80;
         lbl_805D6F00 = 1;
     }
     cx = TBoss6Type2__data_8047105C[0];
