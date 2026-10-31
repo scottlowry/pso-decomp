@@ -949,18 +949,17 @@ s32 TAdPlayerLoadGC__sub_801E26DC(s32 chan, const char *name, void *buf, u32 siz
     lbl_805D5E3C = (s32)size;
     status = (long) CARDOpen(chan, name, &TAdPlayerLoadGC__data_80511EE8);
     switch (status) {
-    case -128:
-        return status;
-    case -10:
-        return status;
-    case -5:
-        return status;
-    case -1:
-        break;
-    case 0:
-        break;
     case -3:
         return -0xFF;
+    case -1:
+        return;
+    case 0:
+        return;
+    case -6:
+    case -10:
+    case -128:
+    default:
+        return status;
     case -4:
         status = (long) CARDCreate(chan, fileName, lbl_805D5E3C, &TAdPlayerLoadGC__data_80511EE8);
         switch (status) {
@@ -968,26 +967,25 @@ s32 TAdPlayerLoadGC__sub_801E26DC(s32 chan, const char *name, void *buf, u32 siz
             return status;
         case -12:
             return status;
-        case -7:
-            break;
         case -6:
             return status;
         case -4:
             return status;
-        case -3:
-            break;
         case -2:
             return status;
-        case -1:
+        case -5:
+        default:
+            return status;
+        case -7:
+            break;
+        case -3:
             break;
         case 0:
             break;
-        default:
-            return status;
+        case -1:
+            break;
         }
         break;
-    default:
-        return status;
     }
 }
 
