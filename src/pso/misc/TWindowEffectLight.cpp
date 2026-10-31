@@ -156,8 +156,9 @@ void TWindowEffectLight__sub_802AD040(void *window, f32 f) {
         q.y1 = vy + h;
         q.u0 = w2;
         q.v0 = TWindowEffectLight__data_805DE0E4;
+        x1v = lbl_805DE104;
         q.u1 = w2;
-        q.v1 = lbl_805DE104;
+        q.v1 = x1v;
         draw_textured_quad_at_depth((f32 *)&q, TWindowEffectLight__data_805DE0E4);
     }
 }
