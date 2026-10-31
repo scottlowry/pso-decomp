@@ -191,6 +191,7 @@ void fn_8007F27C(u8 *arg0, f32 *arg1, f32 *arg2)
     f32 d0;
     f32 b1;
     Quad_8007F27C q;
+    float t2;
     f32 x0;
     f32 tx;
     f32 ty;
@@ -239,15 +240,16 @@ void fn_8007F27C(u8 *arg0, f32 *arg1, f32 *arg2)
     col[2] = k0;
     b1 = arg1[1];
     d1 = arg2[1];
+    t2 = d1 + b1;
     col[1] = k0;
     a1 = arg1[0];
-    ty2 = d1 + b1;
+    ty2 = t2;
     col[0] = k0;
     pos[0] = pos[6] = a1;
     x1b = (c1 * (*(f32 *)(arg0 + 0x1C))) + a1;
     pos[1] = pos[3] = b1;
-    pos[2] = pos[4] = x1b;
     pos[5] = pos[7] = ty2;
+    pos[2] = pos[4] = x1b;
     draw_tri_fan_2d__14TObjCMHairMenuFllf(&q, 4, 2, lbl_805D92B8);
     sum = arg2[0] + arg1[0];
     k1 = *(u32 *)(arg0 + 0x38);
