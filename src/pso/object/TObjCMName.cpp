@@ -1758,20 +1758,26 @@ void TObjCMMainMenu__sub_802979BC(void *arg0) {
     TObjCMMainMenu *self = (TObjCMMainMenu *)arg0;
     char *name = (char *)self->character;
     f32 v;
+    f32 hi;
+    f32 lo;
     f32 x;
     u32 color;
     s32 state = TObjCMMainMenu__data_805D659C;
     if ((state == 0 || (state == 1 && self->entries[self->selected_entry] != 7)) &&
             TObjCMMainMenu::validate_character_name((s8 *)name) != 0) {
-        v = self->unknown44 + lbl_805DDAAC;
+        v = self->unknown44;
+        hi = lbl_805DDA70;
+        v = v + lbl_805DDAAC;
         self->unknown44 = v;
-        if (v > lbl_805DDA70) {
+        if (v > hi) {
             self->unknown44 = lbl_805DDA70;
         }
     } else {
-        v = self->unknown44 + lbl_805DDAA8;
+        v = self->unknown44;
+        lo = lbl_805DDA90;
+        v = v + lbl_805DDAA8;
         self->unknown44 = v;
-        if (v < lbl_805DDA90) {
+        if (v < lo) {
             self->unknown44 = lbl_805DDA90;
             return;
         }
