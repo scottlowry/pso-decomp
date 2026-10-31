@@ -548,17 +548,14 @@ s32 TAdMultiPlyChrSelectGC__sub_802C5F1C(void *arg0, int arg1) {
             if (cnt < 4) {
                 idx = cnt;
             }
-            /* All quad stores route through the re-cast arg0, and the identity
-               i++/i-- pair between the v0 and u1 stores is load-bearing: it
-               re-ties the allocator onto orig's row-pointer/clamp numbering. */
+            /* Re-casting arg0 (instead of routing every store through `self`) is what
+               lands the constant-preload and cell-pointer registers on orig's numbering. */
             ((S_802C50EC *)arg0)->quad[i][j].u0 = uu;
             a = lbl_805DE588 * (f32)idx;
             b = lbl_805DE588 + a;
             ((S_802C50EC *)arg0)->quad[i][j].v0 = a * TAdMultiPlyChrSelectGC__data_805DE584;
-            i++;
-            i--;
-            ((S_802C50EC *)arg0)->quad[i][j].u1 = lbl_805DE58C;
-            ((S_802C50EC *)arg0)->quad[i][j].v1 = b * TAdMultiPlyChrSelectGC__data_805DE584;
+            self->quad[i][j].u1 = lbl_805DE58C;
+            self->quad[i][j].v1 = b * TAdMultiPlyChrSelectGC__data_805DE584;
         }
     }
 
