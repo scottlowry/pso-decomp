@@ -22,6 +22,18 @@ struct Li_802F2348 { u8 pad[0x14]; Nd_802F2348 *head; };
 
 struct Vec_802F25AC { f32 x, y, z; };
 
+struct RecoveredGlobal_802F28E0_lbl_804E4978 {
+    s32 value;
+    u8 remaining[0x128];
+};
+
+union StepPtuf_802F28E0 { s32 words[3]; void (TUnk_804E4B3C::*fn)(); };
+
+struct Words3_802F28E0 { s32 delta; s32 delta2; void *f; };
+union Ov_802F28E0 { Words3_802F28E0 w; void (TUnk_804E4B3C::*pmf)(); };
+
+typedef char StepPtuf_802F28E0_size[sizeof(StepPtuf_802F28E0) == 12 ? 1 : -1];
+
 extern "C" {
 u32 __nw__7TObjectFUl(s32);
 s32 fn_802F1FB0(void *, s32, s32, f32, s32);
@@ -97,6 +109,8 @@ u8 *__ct__13TObjBoss7DustFv(u8 *arg0, s32 arg1, s32 arg2);
 s32 rand();
 extern s32 tl_05;
 s32 TObjBoss2Tunnel__sub_802F2070(void);
+extern RecoveredGlobal_802F28E0_lbl_804E4978 boss2_tunnel_effect_name_table;
+extern s8 lbl_805D6971;
 
 s32 TObjBoss2Tunnel__sub_802F2070(void) {
     return ((u32) boss2_tunnel_state_flags >> 0xFU) & 1;
@@ -329,6 +343,36 @@ void TUnk_804E4B3C::update_phase_motion() {
         break;
     }
 }
+#pragma push
+#pragma opt_propagation off
+void TUnk_804E4B3C::run_task() {
+    u8 *tblb;
+    union StepPtuf_802F28E0 step;
+    u8 *tp;
+    u8 *v1;
+    u8 *v2;
+    s32 st;
+    s32 coff;
+    tblb = (u8 *)&boss2_tunnel_effect_name_table.value;
+    update_phase_motion();
+    if (lbl_805D6971 == 0) {
+        ((Ov_802F28E0 *)(tblb + 0x108))[0].pmf = ((Ov_802F28E0 *)(tblb + 0xE4))[0].pmf;
+        v1 = tblb + 0x108;
+        ((Ov_802F28E0 *)(v1 + 0xC))[0].pmf = ((Ov_802F28E0 *)(tblb + 0xF0))[0].pmf;
+        ((Ov_802F28E0 *)(v1 + 0x18))[0].pmf = ((Ov_802F28E0 *)(tblb + 0xFC))[0].pmf;
+        lbl_805D6971 = 1;
+    }
+    v2 = tblb + 0x108;
+    st = *(s32 *)((s8 *)this + 0x1C);
+    coff = st * 0xC;
+    tp = v2 + coff;
+    step.words[0] = *(s32 *)(tp + 0);
+    step.words[1] = *(s32 *)(tp + 4);
+    step.words[2] = *(s32 *)(tp + 8);
+    (this->*step.fn)();
+    ((void (*)(void *))TObjBoss2Tunnel__sub_802F273C)(this);
+}
+#pragma pop
 void *TUnk_804E4B3C::destroy(s16 arg1) {
     if (this != NULL) {
         *(s32 **)((s8 *)this + 0x18) = lbl_804E4B3C;
