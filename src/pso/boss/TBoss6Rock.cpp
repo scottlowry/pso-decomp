@@ -479,8 +479,8 @@ void TBoss6Rock__sub_80354188(void) {
             if (j >= 0x20) {
                 return;
             }
-            *(s32 *)&v.x = cx;
             *(s32 *)&v.y = cy;
+            *(s32 *)&v.x = cx;
             *(s32 *)&v.z = cz;
             v.x = v.x + radius * sin_table_lookup(angle);
             v.z = v.z + radius * cos_table_lookup(angle);
