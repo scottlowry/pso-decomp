@@ -290,15 +290,14 @@ s16 TLobby__sub_80426D80(Ent_80427D40 *e) {
     s16 n;
     u16 type;
     u8 flag;
-    s16 ret;
     s32 padA;
     s32 padB;
     s32 padC;
     switch (e->state) {
     case 0:
     case 1:
-        ret = TLobby__sub_804270C0(e);
-        if (ret >= 0) {
+        n = TLobby__sub_804270C0(e);
+        if (n >= 0) {
             src = e->m_16;
             type = 0x8863;
             flag = 9;
@@ -307,8 +306,8 @@ s16 TLobby__sub_80426D80(Ent_80427D40 *e) {
         goto out;
     case 2:
     case 3:
-        ret = TLobby__sub_80426EB8(e);
-        if (ret >= 0) {
+        n = TLobby__sub_80426EB8(e);
+        if (n >= 0) {
             src = e->m_20;
             type = 0x8863;
             flag = 0x19;
@@ -317,27 +316,28 @@ s16 TLobby__sub_80426D80(Ent_80427D40 *e) {
         goto out;
     case 5:
         if (e->id == 0) {
-            ret = -1;
+            n = -1;
             goto out;
         }
         p = e->frame + 0x14;
-        n = ret = put_end_of_list3(&p);
-        if (ret >= 0) {
+        n = put_end_of_list3(&p);
+        if (n >= 0) {
             src = e->m_20;
             type = 0x8863;
+            n = 2 + 2;
             flag = 0xA7;
             break;
         }
         goto out;
     case 4:
     default:
-        ret = -1;
+        n = -1;
         goto out;
     }
-    ret = ((TLobby *)e->frame)->build_ethernet_frame_header(src, e->m_10, type, flag, e->id, ret);
-    e->frame_len = ret;
+    n = ((TLobby *)e->frame)->build_ethernet_frame_header(src, e->m_10, type, flag, e->id, n);
+    e->frame_len = n;
 out:
-    return ret;
+    return n;
 }
 #pragma pop
 s16 TLobby__sub_80426EB8(Ent_80427D40 *e) {
