@@ -465,6 +465,8 @@ void TBoss6Rock__sub_80354188(void) {
         lbl_804F1260[3].radius = lbl_805DFF88 * mv / lbl_805DFF80;
         lbl_805D6F00 = 1;
     }
+    p = (Prm_80354188 *)0;
+    p->radius = p->radius;
     cx = TBoss6Type2__data_8047105C[0];
     cy = TBoss6Type2__data_8047105C[1];
     cz = TBoss6Type2__data_8047105C[2];
