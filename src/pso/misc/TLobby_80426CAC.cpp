@@ -134,6 +134,8 @@ s32 TLobby__sub_8042787C(Ent_80427D40 *e, u8 *p, u16 len);
 s32 TLobby__sub_80427F48(s16 slot, u8 *frame, u16 len);
 s16 TLobby__sub_80426D80(Ent_80427D40 *e);
 s32 TLobby__sub_80426574(s32);
+s16 TLobby__sub_80426EB8(Ent_80427D40 *e);
+s16 TLobby__sub_804270C0(Ent_80427D40 *e);
 Ent_80427D40 *TLobby__sub_80427B6C(u8 *p, u16 len);
 void TLobby__sub_80427378(Ent_80427D40 *e);
 s16 TLobby__sub_804275B0(s32, u16);
@@ -264,6 +266,62 @@ inline s16 put_end_of_list(u8 **p) {
     NetMemcpy(*p, &len, 2);
     *p += 2;
     ret = 4;
+    return ret;
+}
+
+s16 TLobby__sub_80426D80(Ent_80427D40 *e) {
+    void *src;
+    u8 *p;
+    u16 type;
+    u8 flag;
+    s16 n;
+    s16 ret;
+    switch (e->state) {
+    case 0:
+    case 1:
+        n = TLobby__sub_804270C0(e);
+        if (n >= 0) {
+            src = e->m_16;
+            type = 0x8863;
+            flag = 9;
+            break;
+        }
+        ret = n;
+        goto out;
+    case 2:
+    case 3:
+        n = TLobby__sub_80426EB8(e);
+        if (n >= 0) {
+            src = e->m_20;
+            type = 0x8863;
+            flag = 0x19;
+            break;
+        }
+        ret = n;
+        goto out;
+    case 5:
+        if (e->id == 0) {
+            ret = -1;
+            goto out;
+        }
+        p = e->frame + 0x14;
+        n = put_end_of_list(&p);
+        if (n >= 0) {
+            src = e->m_20;
+            type = 0x8863;
+            flag = 0xA7;
+            break;
+        }
+        ret = n;
+        goto out;
+    case 4:
+    default:
+        ret = -1;
+        goto out;
+    }
+    ret = ((TLobby *)e->frame)->build_ethernet_frame_header(src, e->m_10, type, flag, e->id, n);
+    e->frame_len = ret;
+out:
     return ret;
 }
 
