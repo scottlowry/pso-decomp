@@ -448,15 +448,15 @@ void TBoss6Rock__sub_80354188(void) {
     Vec_80354188 v;
     s32 cy;
     s32 cx;
-    s32 cz;
-    s32 i;
     s32 k;
     s32 j;
+    s32 i;
     s32 count;
     s32 step;
     s32 angle;
     f32 radius;
     Prm_80354188 *p;
+    s32 cz;
     if (lbl_805D6F00 == 0) {
         f32 mv = lbl_805DE3F0;
         lbl_804F1260[0].radius = lbl_805DFF7C * mv / lbl_805DFF80;
