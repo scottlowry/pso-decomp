@@ -145,6 +145,7 @@ extern const f32 lbl_805DDBA0;
 extern const f32 lbl_805DDBA4;
 extern const f32 lbl_805DDBA8;
 extern const f32 lbl_805DDBAC;
+extern const u32 lbl_805DDB9C;
 void request_creation_motion(s32 arg0);
 extern const f32 lbl_805DDBF4;
 extern const f32 lbl_805DDBF8;
@@ -1748,6 +1749,46 @@ void TObjCMMainMenu::draw_root_menu() {
             d.y += 44.0f;
         }
     }
+}
+#pragma pop
+
+#pragma push
+#pragma fp_contract on
+void TObjCMMainMenu__sub_802979BC(void *arg0) {
+    TObjCMMainMenu *self = (TObjCMMainMenu *)arg0;
+    char *name = (char *)self->character;
+    f32 v;
+    f32 x;
+    u32 color;
+    s32 state = TObjCMMainMenu__data_805D659C;
+    if ((state == 0 || (state == 1 && self->entries[self->selected_entry] != 7)) &&
+            TObjCMMainMenu::validate_character_name((s8 *)name) != 0) {
+        v = self->unknown44 + lbl_805DDAAC;
+        self->unknown44 = v;
+        if (v > lbl_805DDA70) {
+            self->unknown44 = lbl_805DDA70;
+        }
+    } else {
+        v = self->unknown44 + lbl_805DDAA8;
+        self->unknown44 = v;
+        if (v < lbl_805DDA90) {
+            self->unknown44 = lbl_805DDA90;
+            return;
+        }
+    }
+    if (self->unknown44 <= lbl_805DDA90) {
+        return;
+    }
+    x = lbl_805DDBA0 - (f32)calc_text_width(name);
+    color = ((CreationCharaRecord *)self->character)->name_color;
+    if (!(color & 0xFF000000)) {
+        color = 0xFFFFFFFF;
+    }
+    color &= lbl_805DDB9C;
+    color = ((u32)(TObjCMMainMenu__data_805DDB44 * self->unknown44) << 24) | color;
+    TCameraCtrl::restore_full_screen_view();
+    draw_menu_text(x, lbl_805DDBA4 * TObjCMMainMenu::get_scale(), name, color);
+    TCameraCtrl__sub_80068EF0();
 }
 #pragma pop
 
