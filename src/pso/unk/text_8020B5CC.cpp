@@ -55,7 +55,7 @@ s32 TLobby__sub_8020B5CC(void *self)
 {
   struct Hdr_8020B5CC *h = (struct Hdr_8020B5CC *) self;
   void *new_var3;
-  u16 *out = (u16 *) (((char *) self) - -0x10);
+  u16 *out = (u16 *) (((char *) self) - (-0x10));
   s32 j;
   volatile int pad;
   void *new_var;
@@ -63,12 +63,13 @@ s32 TLobby__sub_8020B5CC(void *self)
   s32 i;
   s32 total = 0;
   s32 total2;
+  s32 n;
   h->f0 = 0x10;
   new_var3 = (new_var = self);
   for (i = 0; i < (18 & 0xFF); i++)
   {
     struct Tbl_8020B970 *t = &TLobby__floor_enemy_group_table[i];
-    s32 n = t->count;
+    n = t->count;
     if (n <= 0)
     {
       s32 j;
@@ -112,7 +113,7 @@ s32 TLobby__sub_8020B5CC(void *self)
   for (i = 0; i < 18; i++)
   {
     struct Tbl_8020B970 *t = &TLobby__floor_enemy_group_table[i];
-    s32 n = t->count2;
+    n = t->count2;
     if (n <= 0)
     {
       continue;
@@ -132,7 +133,7 @@ s32 TLobby__sub_8020B5CC(void *self)
         s16 tmp = p->f2 & (~2);
         bswap_16__FPUs((u16 *) (&tmp));
         *(out++) = tmp;
-        p = (struct Row8_8020B5CC *) (((char *) p) + 0x48);
+        p = (struct Row8_8020B5CC *) (0x48 + ((char *) p));
         total2++;
       }
 
