@@ -42,9 +42,6 @@ s32 get_instance__19TAdPlyPltAnimCtrlGCFl(s32);
 #pragma push
 #pragma opt_propagation off
 #pragma opt_common_subs off
-#pragma opt_lifetimes off
-#pragma opt_loop_invariants off
-#pragma pool_data off
 u8 *TAdChrSelPlyPlateGC__ct(void *self, s32 arg1, s32 arg2) {
   s8 *base = (s8 *) self;
   s8 *d = (s8 *) TAdMultiPlyChrSelectGC__data_804E0A48;
@@ -78,7 +75,7 @@ u8 *TAdChrSelPlyPlateGC__ct(void *self, s32 arg1, s32 arg2) {
       *((s32 *) (((base + (4 * j)) + (12 * i)) + 0x444)) = 0;
       *((s32 *) (((base + (4 * j)) + (12 * i)) + 0x500)) = 0;
       *((s32 *) (((base + (4 * j)) + (12 * i)) + 0x4ac)) = 0;
-      *((s32 *) (((4 * j) + 0x4dc) + base)) = 0;
+      ((s32 *) base)[311 + j] = 0;
     }
 
     pz[i] = 0;
