@@ -148,7 +148,7 @@ void TWindowSubStatusDisp__sub_8026E1D4(TWindowSubStatusDisp *self, s32 arg1, s3
     e6 = get_array_entry__13TUnk_804CE018Fi(self, 6);
     e7 = get_array_entry__13TUnk_804CE018Fi(self, 7);
     e8 = get_array_entry__13TUnk_804CE018Fi(self, 8);
-    e10 = get_array_entry__13TUnk_804CE018Fi(self, 10);
+    e10 = (0, get_array_entry__13TUnk_804CE018Fi(self, 10));
     mode = *arg2;
     set_text_entry_string__FPUcUll(e0, get_message_10__20TWindowSubStatusDispFl(0xc4), 0);
     fn_80266BD0(arg1, &a, &b, self->m_20);
@@ -201,9 +201,9 @@ void TWindowSubStatusDisp__sub_8026E1D4(TWindowSubStatusDisp *self, s32 arg1, s3
     case 3:
         chat = open_symbol_chat__11TWindowChatFPl((void *)(arg2 + 1));
         set_text_entry_string__FPUcUll(e10, get_symbol_chat_data__20TWindowSubSymbolChatFv(chat), 0);
-        x0 = pos[0] - lbl_805DD36C * lbl_805DD374;
+        x0 = pos[0] - lbl_805DD374 * lbl_805DD36C;
         size[0] = lbl_805DD374;
-        y0 = pos[1] - lbl_805DD36C * lbl_805DD378;
+        y0 = pos[1] - lbl_805DD378 * lbl_805DD36C;
         size[1] = lbl_805DD378;
         pos[0] = x0;
         pos[1] = y0;
