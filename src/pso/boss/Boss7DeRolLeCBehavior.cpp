@@ -476,8 +476,8 @@ void TBoss7DeRolLeC__try_spawn_pattern_crawfish(void *self, s32 variant, s32 ind
     d2 = dfltPos[2];
     single = sub == 0;
     pos[0] = d0;
-    pos[1] = d1;
     pos[2] = d2;
+    pos[1] = d1;
     { s32 mval = *(const s32 *)((const u8 *)midPtr + ioff); pos[1] = mval; }
     slot = TObjFish__sub_802E7CC4(self);
     TObjFish__sub_802E7D70(self, slot, (void *)(vecPtr + index * 0xc), (void *)pos, single);
