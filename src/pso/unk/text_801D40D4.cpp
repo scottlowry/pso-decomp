@@ -131,16 +131,16 @@ u8 *__nw__FUl(u32);
 
 s32 TObjPlayer__sub_801D4368(TObjPlayer *arg0) {
     u8 *obj;
-    void *down;
+    s32 cnt_2;
     s32 cnt;
     u32 *rec;
     void *down_4;
-    s32 cnt_2;
     s32 owner;
     u32 *rec_2;
     u32 *rec_3;
     void *down_3;
     void *down_2;
+    void *down;
     s32 cnt_3;
 
     if (*(void **)((s8 *)arg0 + 0x1c4) == NULL) {
