@@ -1195,9 +1195,8 @@ void TLobby__sub_80423298(void) {
         acc = lbl_805D7B5C;
         secs = lbl_805D7B70;
         lbl_805D7B5C = acc + t;
-        t = lbl_805D7B5C;
         lbl_805D7B60 = nowbuf[1];
-        lbl_805D7B70 = (new_var = secs) + t / 1000;
+        lbl_805D7B70 = (new_var = secs) + (t = lbl_805D7B5C) / 1000;
         secs = lbl_805D7B70;
         lbl_805D7B5C = t % 1000;
         if (secs >= lbl_805D7B64) {
