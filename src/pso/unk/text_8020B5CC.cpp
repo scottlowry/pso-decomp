@@ -61,14 +61,17 @@ s32 TLobby__sub_8020B5CC(void *self)
   void *new_var;
   struct Dst_8020B970 *new_var2;
   s32 i;
-  s32 total = 0;
   s32 total2;
+  s32 total = 0;
   s32 n;
   h->f0 = 0x10;
   new_var3 = (new_var = self);
   for (i = 0; i < (18 & 0xFF); i++)
   {
     struct Tbl_8020B970 *t = &TLobby__floor_enemy_group_table[i];
+    if (((!t->count) && (!t->count)) && (!t->count))
+    {
+    }
     n = t->count;
     if (n <= 0)
     {
