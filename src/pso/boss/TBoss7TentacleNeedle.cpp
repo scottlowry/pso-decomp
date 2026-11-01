@@ -101,7 +101,7 @@ struct Ten_802F0A5C { u8 pad0[0x50]; V_802F0A5C v[14]; u32 w[14]; };
 
 struct V_802EFF24 { f32 x, y, z; };
 
-struct Node_802EFF24 { u8 pad0[8]; V_802EFF24 pos; u8 pad14[8]; s32 ang; u8 pad20[0x18]; };
+struct Node_802EFF24 { u32 flags; u8 pad4[4]; V_802EFF24 pos; u8 pad14[8]; s32 ang; u8 pad20[0x18]; };
 
 struct Tent_802EFF24 { u8 pad0[0x50]; V_802EFF24 pos[14]; s32 ang[14]; };
 
@@ -747,16 +747,23 @@ void TObjPlayer__sub_802F0D2C(void) {  }
 extern "C" {
 void copy_model_node(u8 *dst, u8 *src);
 
+// Unit-owned .bss banks (claim 1eadd7fe: pso/boss/TBoss7TentacleNeedle .bss
+// 0x80541528-0x80541918). Definition order == address order: nodes 0x310,
+// segment_offsets +0x310 (0xA8), needle_offsets +0x3B8 (0x38).
+// In-TU defined (twin TBoss2Tentacle precedent, 100.0): enables MWCC
+// base-hoist into r31 + copy-propagation sink; externs remat instead.
+Node_802EFF24 lbl_80541528[14];
+V_802F0A5C TBoss7Tentacle__segment_offsets[14];
+u32 TBoss7Tentacle__needle_offsets[14];
+
 void TObjPlayer__sub_802F0D30(void) {
-    Node_802EFF24 *nodes;
     Node_802EFF24 *src;
     Node_802EFF24 *dst;
     s32 i;
 
-    nodes = lbl_80541528;
-    dst = nodes;
     src = (Node_802EFF24 *)queue_boss_effect__10TObjPlayerFPv(1);
     notify_fish_obj__10TObjPlayerFPv(0x11);
+    dst = lbl_80541528;
     for (i = 0; i < 12; i++) {
         copy_model_node((u8 *)dst, (u8 *)src);
         *(u32 *)&dst->pad20[0xC] = (u32)(dst + 1);
@@ -767,11 +774,11 @@ void TObjPlayer__sub_802F0D30(void) {
     *(u32 *)&dst->pad20[0x10] = (u32)(dst + 1);
     copy_model_node((u8 *)&dst[1], (u8 *)*(Node_802EFF24 **)&src->pad20[0x10]);
     for (i = 0; i < 14; i++) {
-        *(u32 *)&nodes[i] &= ~3;
-        *(f32 *)((char *)lbl_80541528 + 0x310 + i * 12) = nodes[i].pos.x;
-        *(f32 *)((char *)lbl_80541528 + 0x314 + i * 12) = nodes[i].pos.y;
-        *(f32 *)((char *)lbl_80541528 + 0x318 + i * 12) = nodes[i].pos.z;
-        *(u32 *)((char *)lbl_80541528 + 0x3B8 + i * 4) = (u32)nodes[i].ang;
+        lbl_80541528[i].flags &= ~3;
+        TBoss7Tentacle__segment_offsets[i].x = (f64)lbl_80541528[i].pos.x;
+        TBoss7Tentacle__segment_offsets[i].y = lbl_80541528[i].pos.y;
+        TBoss7Tentacle__segment_offsets[i].z = lbl_80541528[i].pos.z;
+        TBoss7Tentacle__needle_offsets[i] = (u32)lbl_80541528[i].ang;
     }
 }
 }
