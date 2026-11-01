@@ -295,9 +295,9 @@ void TLobby__sub_803C0238(AudioStreamInputState *arg0) {
     s32 lb2;
     s32 a4;
     s32 n;
-    s32 amt;
     u8 *cur8;
     s32 *cur4;
+    s32 amt;
     SjRingBuffer *rp;
     SjChunk out1;
     SjChunk out0;
