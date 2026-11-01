@@ -519,7 +519,7 @@ s32 TAdPlayerLoadGC__sub_801E1944(s32 chan, const char *name, void *buf, u32 blo
     if (chan >= 2) {
         return 0;
     }
-    switch (CARDOpen(chan, name, &TAdPlayerLoadGC__data_80511EE8)) {
+    switch ((long)CARDOpen(chan, name, &TAdPlayerLoadGC__data_80511EE8)) {
     case -3:
         TAdPlayerLoadGC__card_result_code = -0xFF;
         return -0xFF;
