@@ -60,6 +60,7 @@ void TBoss7Crawfish::update_attack_state() {
 s32 TBoss7Crawfish__sub_80308ED8(void *self, f32 *pos) {
     f32 buf[3];
     int new_var2;
+    void *new_var;
     s32 hit;
     f32 p0 = pos[0];
     f32 p1 = pos[1];
@@ -71,9 +72,9 @@ s32 TBoss7Crawfish__sub_80308ED8(void *self, f32 *pos) {
     f32 y = *(f32 *)(((u8 *)self) + 0x3c);
     p1 = p1 + y;
     buf[1] = p1;
-    f32 z = *(f32 *)(((u8 *)self) + 0x40);
-    p2 = z + p2;
-    buf[2] = p2;
+    new_var = self;
+    f32 z = *(f32 *)(((u8 *)new_var) + 0x40);
+    p2 = (buf[2] = p2 + z);
     new_var2 = 1;
     (void)new_var2;
     if (1)
