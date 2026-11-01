@@ -148,7 +148,7 @@ void TWindowSubStatusDisp__sub_8026E1D4(TWindowSubStatusDisp *self, s32 arg1, s3
     e6 = get_array_entry__13TUnk_804CE018Fi(self, 6);
     e7 = get_array_entry__13TUnk_804CE018Fi(self, 7);
     e8 = get_array_entry__13TUnk_804CE018Fi(self, 8);
-    e10 = (0, get_array_entry__13TUnk_804CE018Fi(self, 10));
+    e10 = get_array_entry__13TUnk_804CE018Fi(self, 10);
     mode = *arg2;
     set_text_entry_string__FPUcUll(e0, get_message_10__20TWindowSubStatusDispFl(0xc4), 0);
     fn_80266BD0(arg1, &a, &b, self->m_20);
@@ -168,7 +168,8 @@ void TWindowSubStatusDisp__sub_8026E1D4(TWindowSubStatusDisp *self, s32 arg1, s3
     set_sprite_uv_from_pixels__FPUcff(e6, *(f32 *)o, *(f32 *)((s8 *)o + 4));
     pos[0] = lbl_805DD350;
     pos[1] = lbl_805DD354;
-    set_text_entry_string__FPUcUll(e8, get_message_10__20TWindowSubStatusDispFl(0x35), 0);
+    q = get_message_10__20TWindowSubStatusDispFl(0x35);
+    set_text_entry_string__FPUcUll(e8, q, 0);
     switch (mode) {
     case 0:
         break;
