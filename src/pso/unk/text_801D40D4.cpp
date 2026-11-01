@@ -134,14 +134,14 @@ s32 TObjPlayer__sub_801D4368(TObjPlayer *arg0) {
     void *down;
     s32 cnt;
     u32 *rec;
-    void *down_2;
+    void *down_4;
     s32 cnt_2;
     s32 owner;
     u32 *rec_2;
     void *down_3;
+    void *down_2;
     s32 cnt_3;
     u32 *rec_3;
-    void *down_4;
 
     if (*(void **)((s8 *)arg0 + 0x1c4) == NULL) {
         return 0;
@@ -189,8 +189,8 @@ s32 TObjPlayer__sub_801D4368(TObjPlayer *arg0) {
     }
     ((TObjPlayer *)obj)->sort_by_key();
     cnt_3 = 0;
-    rec_2 = (u32 *)*(s32 *)(obj + 4);
     down_3 = *(void **)((s8 *)*(s32 *)((s8 *)arg0 + 0x1c4) + 0x14);
+    rec_2 = (u32 *)*(s32 *)(obj + 4);
     while (down_3 != NULL) {
         if (is_item_valid__9TItemListFl(down_3) != 0 && ((TObjPlayer *)down_3)->get_owner_if_alive() != 0U && rec_2[1] != 0) {
             rec_2 = (u32 *)((s8 *)rec_2 + 8);
