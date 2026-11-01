@@ -286,7 +286,7 @@ void process_audio_stream_input(AudioStreamInputState *arg0) {
 
 void TLobby__sub_803C0238(AudioStreamInputState *arg0) {
     s32 st;
-    s32 lb;
+    u32 lb;
     s32 delta;
     s32 h;
     s32 i;
