@@ -138,9 +138,9 @@ typedef struct S_802C4CA0 {
 
 void TAdEnterSerialAccessGC__sub_802C4B64(void *, void *, void *, int);
 void TAdPlyChrSelPlateGC::render() {
+    u32 i;
     S_802C4CA0 *self = (S_802C4CA0 *)this;
     s32 w;
-    u32 i;
     if (TMainTask::get_render_pass() != 1) {
         set_color_blending_mode(0, 8);
         set_color_blending_mode(1, 10);
