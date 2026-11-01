@@ -55,12 +55,14 @@ s32 TLobby__sub_8020B5CC(void *self)
 {
   struct Hdr_8020B5CC *h = (struct Hdr_8020B5CC *) self;
   void *new_var3;
-  u16 *out = (u16 *) (((char *) self) + 0x10);
+  u16 *out = (u16 *) (((char *) self) - -0x10);
   s32 j;
+  volatile int pad;
   void *new_var;
   struct Dst_8020B970 *new_var2;
   s32 i;
   s32 total = 0;
+  s32 total2;
   h->f0 = 0x10;
   new_var3 = (new_var = self);
   for (i = 0; i < (18 & 0xFF); i++)
@@ -105,8 +107,8 @@ s32 TLobby__sub_8020B5CC(void *self)
   }
 
   ((struct Hdr_8020B5CC *) new_var)->f4 = total;
-  ((struct Hdr_8020B5CC *) new_var)->f8 = ((((((((((((((struct Hdr_8020B5CC *) new_var)->f4 * 2) + 0x10) & 0xFFFFFFFFFFFFFFFFu) & 0xFFFFFFFFFFFFFFFFu) & 0xFFFFFFFFFFFFFFFFu) & 0xFFFFFFFFFFFFFFFFu) & 0xFFFFFFFFFFFFFFFFu) & 0xFFFFFFFFFFFFFFFFu) & 0xFFFFFFFFFFFFFFFFu) & 0xFFFFFFFFFFFFFFFFu) & 0xFFFFFFFFFFFFFFFFu) & 0xFFFFFFFFFFFFFFFFu) & 0xFFFFFFFFFFFFFFFFu;
-  s32 total2 = 0;
+  total2 = 0;
+  ((struct Hdr_8020B5CC *) new_var)->f8 = (((((((0xFFFFFFFFFFFFFFFFu & (((((((struct Hdr_8020B5CC *) new_var)->f4 * 2) + 0x10) & 0xFFFFFFFFFFFFFFFFu) & 0xFFFFFFFFFFFFFFFFu) & 0xFFFFFFFFFFFFFFFFu)) & 0xFFFFFFFFFFFFFFFFu) & 0xFFFFFFFFFFFFFFFFu) & 0xFFFFFFFFFFFFFFFFu) & 0xFFFFFFFFFFFFFFFFu) & 0xFFFFFFFFFFFFFFFFu) & 0xFFFFFFFFFFFFFFFFu) & 0xFFFFFFFFFFFFFFFFu;
   for (i = 0; i < 18; i++)
   {
     struct Tbl_8020B970 *t = &TLobby__floor_enemy_group_table[i];
