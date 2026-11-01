@@ -99,11 +99,21 @@ typedef struct Tbl_804267F0 {
     Ent_804267F0 ent[6];
 } Tbl_804267F0;
 
+typedef struct Ent_80480138 {
+    u32 f0;
+    s32 mode[4];
+} Ent_80480138;
+
+extern Ent_80480138 lbl_80480138[5];
+
+typedef char lbl_80480138_size[sizeof(lbl_80480138) == 0x64 ? 1 : -1];
+
 extern u8 lbl_805CF240[];
 s32 TLobby__sub_803F97E8(int);
 extern void *lbl_805C18A0[];
 extern s16 lbl_805D7A86;
 s32 TLobby__sub_80428EC0(u8 *src, u8 *dst, u8 **next);
+void TLobby__sub_80428DC8(s16 entry, s16 slot, u8 *text, s16 *cnt, s16 *num_cnt);
 s16 TLobby__sub_804293B0(u8 *buf, s16 len);
 s16 TLobby__sub_804036FC(u16 *avail);
 s16 TLobby__sub_80403730(u8 *dst, u16 n);
@@ -278,6 +288,39 @@ s32 TLobby__sub_80428BB0(ModemRequest *req) {
     }
     return TLobby__sub_804290D4(req->timeout);
 }
+
+#pragma push
+#pragma opt_propagation off
+void TLobby__sub_80428DC8(s16 entry, s16 slot, u8 *text, s16 *cnt, s16 *num_cnt) {
+    s16 c;
+    s16 n;
+    char *dest;
+    s16 i;
+    u8 ch;
+
+    if (lbl_80480138[entry].mode[slot] == 0) {
+        c = *cnt;
+        dest = lobby_net_session_state.strbuf + (c * lobby_net_session_state.strstride);
+        NetCopyString(dest, (char *)text);
+        lobby_net_session_state.fields[slot] = (u8 *)dest;
+        *cnt = c + 1;
+    }
+    if (lbl_80480138[entry].mode[slot] == 1) {
+        n = *num_cnt;
+        i = 0;
+        entry = 0;
+        while ((ch = text[i]) != 0) {
+            entry = entry * 10;
+            entry = ch + entry;
+            entry = entry - '0';
+            i++;
+        }
+        lobby_net_session_state.ints[n] = entry;
+        lobby_net_session_state.fields[slot] = (u8 *)&lobby_net_session_state.ints[n];
+        *num_cnt = n + 1;
+    }
+}
+#pragma pop
 
 s32 TLobby__sub_80428EC0(u8 *src, u8 *dst, u8 **next) {
     s16 n;
