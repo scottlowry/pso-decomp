@@ -310,7 +310,9 @@ void TLobby__sub_80428DC8(s16 entry, s16 slot, u8 *text, s16 *cnt, s16 *num_cnt)
         i = 0;
         entry = 0;
         while ((ch = text[i]) != 0) {
-            entry = entry * 10 - '0' + ch;
+            entry = entry * 10;
+            entry += ch;
+            entry -= '0';
             i++;
         }
         lobby_net_session_state.ints[n] = entry;
