@@ -199,7 +199,7 @@ extern u8 lbl_805D7B1C[6];
 extern u32 lbl_805D7B4C;
 extern u32 lbl_805D7B50;
 extern u32 lbl_805D7B58;
-extern u32 lbl_805D7B60;
+extern volatile u32 lbl_805D7B60;
 extern volatile s32 lbl_805D4820;
 extern u8 lbl_805D7B24[4];
 extern s32 lbl_805D7B28;
@@ -1157,7 +1157,7 @@ s32 TLobby__sub_8042325C(s32 a, s32 b, s32 c, s32 (*fn)(s32, s32, s32)) {
 
 extern volatile s32 lbl_805D7B0C;
 extern s16 lbl_805D7B18;
-extern u32 lbl_805D7B5C;
+extern volatile u32 lbl_805D7B5C;
 extern u32 lbl_805D7B64;
 extern u32 lbl_805D7B68;
 extern u32 lbl_805D7B6C;
@@ -1165,6 +1165,66 @@ extern u32 lbl_805D7B70;
 void TLobby__sub_8042422C(void);
 void TLobby__sub_80423E80(void);
 s32 TLobby__sub_80423C04(void);
+
+void TLobby__sub_80423298(void) {
+    s32 nowbuf[2];
+    u32 acc;
+    u32 secs;
+    u32 t;
+    u32 new_var;
+    u32 d;
+    lbl_805D7BA0 = 0;
+    if (lbl_805D4820 == 1) {
+        TLobby__sub_8042422C();
+        return;
+    }
+    if (lbl_805D4820 == 2) {
+        TLobby__sub_80423E80();
+        return;
+    }
+    if (lbl_805D4820 == 6) {
+        TLobby__sub_80423C04();
+        return;
+    }
+    if ((lbl_805D4820 != 3 && lbl_805D4820 != 4 && lbl_805D4820 != 5) || (u32) (lbl_805D7B64 + 0x10000) == 0xFFFFU) {
+        return;
+    }
+        TLobby::get_time_ms(&nowbuf[1]);
+        d = lbl_805D7B60;
+        t = (u32) nowbuf[1] - d;
+        acc = lbl_805D7B5C;
+        secs = lbl_805D7B70;
+        lbl_805D7B5C = acc + t;
+        t = lbl_805D7B5C;
+        lbl_805D7B60 = nowbuf[1];
+        lbl_805D7B70 = (new_var = secs) + t / 1000;
+        secs = lbl_805D7B70;
+        lbl_805D7B5C = t % 1000;
+        if (secs >= lbl_805D7B64) {
+            if (lbl_805D7B18 > -1) {
+                TLobby__sub_80421B3C(lbl_805D7B18);
+                lbl_805D7B18 = -1;
+            }
+            lbl_805D4820 = -1;
+            lbl_805D7BA0 = 9;
+            return;
+        }
+        if (lbl_805D4820 != 5 && secs >= lbl_805D7B6C) {
+            lbl_805D4820 = 5;
+            lbl_805D7B0C = 0;
+        }
+        if (lbl_805D4820 != 4 && lbl_805D4820 != 5 && secs >= lbl_805D7B68) {
+            lbl_805D4820 = 4;
+            lbl_805D7B0C = 0;
+        }
+        if (lbl_805D4820 == 4) {
+            TLobby__sub_80423E80();
+            return;
+        }
+        if (lbl_805D4820 == 5) {
+            TLobby__sub_80423E80();
+        }
+}
 
 extern s32 lbl_805D7B2C;
 extern s32 lbl_805D7B30;
