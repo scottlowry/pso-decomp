@@ -44,17 +44,19 @@ void TDuelEffectNumber__sub_800802F8(void *self, void *layout, f32 f) {
     f32 l5 = l[5];
     f32 l3 = l[3];
     f32 l1 = l[1];
-    f32 cy = *(f32 *)((s8 *)self + 0x20);
+    f32 cy;
     f32 u1 = l0 + l2;
     f32 u2 = l4 + l2;
     f32 u3 = l5 + l3;
     f32 t0 = l1 + l3;
-    q[0] = f * l0 + cx;
+    q[0] = l0 * f + cx;
+    cy = *(f32 *)((s8 *)self + 0x20);
     q[1] = f * l1 + cy;
     q[2] = f * u1 + cx;
     q[3] = f * t0 + cy;
     q[4] = l4;
     q[4] *= lbl_805D930C;
+    if ((l && l) && l) {}
     q[5] = l5;
     q[5] *= lbl_805D930C;
     q[6] = u2;
