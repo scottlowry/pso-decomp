@@ -63,6 +63,8 @@ void THunterGuildWarning__sub_80211774(void *selfv) {
     case 1: {
         s32 raw = get_nth_view_player_id__11TCameraCtrlFl(0);
         u16 id = (u16)raw;
+        if (((!self) && (!self)) && (!self)) {
+        }
         if (get_player_by_client_id(id) != 0) {
             self->w[(u16)raw] = (u32)create_message_window__6TLobbyFllUls(get_window_layout_position(0x31), &pair, 1, id);
         }
@@ -79,8 +81,8 @@ void THunterGuildWarning__sub_80211774(void *selfv) {
             msg = 0x6a;
         }
         s32 raw = get_nth_view_player_id__11TCameraCtrlFl(0);
-        s32 i;
         s32 vm = (0, msg);
+        s32 i;
         for (i = 0; i < 4; i++) {
             if ((u16)raw == i) {
                 continue;
