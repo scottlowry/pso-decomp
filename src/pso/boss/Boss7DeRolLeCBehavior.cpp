@@ -437,7 +437,6 @@ void TBoss7DeRolLeC__try_spawn_pattern_crawfish(void *self, s32 variant, s32 ind
     const u32 *midPtr;
     const u8 *vecPtr;
     const u32 *dfltPos;
-    u32 d0;
     u32 d1;
     u32 d2;
     s32 patternId;
@@ -450,14 +449,16 @@ void TBoss7DeRolLeC__try_spawn_pattern_crawfish(void *self, s32 variant, s32 ind
     s32 p8;
     s32 varRow;
     u32 sub;
+    u32 d0;
     s32 voff;
 
     paramBase = (const u8 *)&lbl_804E3BF0;
     ioff = index * 4;
+    d2 = 0x3c;
     phase = *(const s32 *)((const s8 *)self + 0x6b4);
     diffv = game_difficulty_selection;
     poff = diffv * 4;
-    { const u8 *pa = paramBase + 0x3c; planRow = *(const PlanRow_802E7BE8 **)(pa + poff); }
+    { const u8 *pa = paramBase + d2; planRow = *(const PlanRow_802E7BE8 **)(pa + poff); }
     p8 = phase << 3;
     e = (const u8 *)planRow + p8;
     varRow = ((const s32 *)e)[1];
@@ -473,7 +474,7 @@ void TBoss7DeRolLeC__try_spawn_pattern_crawfish(void *self, s32 variant, s32 ind
     d0 = dfltPos[0];
     { const u8 *va = paramBase + 0x4c; vecPtr = *(const u8 **)(va + voff); }
     d2 = dfltPos[2];
-    single = (sub == 0);
+    single = sub == 0;
     pos[0] = d0;
     pos[1] = d1;
     pos[2] = d2;
