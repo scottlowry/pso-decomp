@@ -302,9 +302,9 @@ void TLobby__sub_803C0238(AudioStreamInputState *arg0) {
     SjChunk out1;
     SjChunk out0;
 
-    h = (s32)arg0->f4;
+    lb = (s32)arg0->f4;
+    h = lb;
     if (get_entry_id__6TLobbyFv(h) == 0) {
-        lb = (s32)arg0->f4;
         st = (s32)arg0->f8;
         if (arg0->f3 == 1) {
             if (((AudioStreamSource *)st)->vt->reserve((AudioStreamSource *)st, 1) == 0) {
@@ -341,7 +341,7 @@ phase2:
         lb2 = (s32)arg0->f4;
         st = (s32)arg0->f8;
         avail = TLobby__sub_803C3ABC((u8 *)lb2);
-        a4 = get_field_0xa4__6TLobbyFv(lb2);
+        a4 = (0, get_field_0xa4__6TLobbyFv(lb2));
         n = get_field_a0__6TLobbyFv(lb2);
         delta = avail - arg0->f34;
         if (n < delta) {
