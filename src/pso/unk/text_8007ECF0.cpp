@@ -183,54 +183,51 @@ void TDLGraph::draw_countdown_timer(f32 x, f32 y) {
 void fn_8007F27C(u8 *arg0, f32 *arg1, f32 *arg2)
 {
   f32 pos[8];
+  f32 b0t;
   u32 col[4];
+  Quad_8007F27C q;
+  f32 k;
+  f32 x1;
+  f32 b1;
   f32 a0;
   f32 c0;
-  u32 k0;
-  f32 b1;
   f32 d0;
-  Quad_8007F27C q;
-  f32 tx;
   f32 ty;
-  f32 b0t;
-  f32 y0;
   f32 x0;
+  f32 y0;
   f32 y1;
+  u32 k0;
   u32 k1;
   f32 c1;
   f32 a1;
   f32 d1;
   f32 ty2;
-  int t2x;
   f32 x1b;
-  f32 k;
   f32 sum;
-  f32 x1;
   k = lbl_805D92A8;
   a0 = arg1[0];
   b0t = arg1[1];
   c0 = arg2[0];
   y0 = b0t;
-  t2x = 0;
   x0 = a0 - k;
-  tx = a0 + c0;
+  if ((!lbl_80438AB4.start) && (!lbl_80438AB4.start))
+  {
+  }
+  y1 = a0 + c0;
   d0 = arg2[1];
   ty = y0 + d0;
+  x1 = y1 + k;
+  y0 = y0 - k;
+  y1 = k + ty;
   q.pos = lbl_80438AB4.pos;
-  x1 = k + tx;
-  do
-  {
-    y0 = y0 - k;
-    y1 = k + ty;
-  }
-  while (t2x);
   q.col = lbl_80438AB4.col;
   q.start = lbl_80438AB4.start;
   q.count = lbl_80438AB4.count;
   q.pos = pos;
+  b1 = x0;
   q.col = col;
   col[0] = (col[1] = (col[2] = (col[3] = 0xFF)));
-  pos[0] = (pos[6] = x0);
+  pos[0] = (pos[6] = b1);
   pos[2] = (pos[4] = x1);
   pos[1] = (pos[3] = y0);
   pos[5] = (pos[7] = y1);
