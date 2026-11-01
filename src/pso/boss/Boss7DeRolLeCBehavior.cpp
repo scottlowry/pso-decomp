@@ -471,7 +471,7 @@ void TBoss7DeRolLeC__try_spawn_pattern_crawfish(void *self, s32 variant, s32 ind
     d1 = dfltPos[1];
     { const u8 *va = paramBase + 0x4c; vecPtr = *(const u8 **)(va + voff); }
     d2 = dfltPos[2];
-    single = (sub == 0);
+    single = ((short)sub) == 0;
     pos[0] = d0;
     pos[1] = d1;
     pos[2] = d2;
