@@ -123,6 +123,7 @@ void TWindowSubStatusDisp__sub_8026E1D4(TWindowSubStatusDisp *self, s32 arg1, s3
     f32 pos[2];
     f32 size[2];
     u8 a;
+    s32 mode;
     u8 b;
     const u8 *tbl;
     u16 *e0;
@@ -133,12 +134,12 @@ void TWindowSubStatusDisp__sub_8026E1D4(TWindowSubStatusDisp *self, s32 arg1, s3
     u16 *e7;
     u16 *e8;
     u16 *e10;
-    s32 mode;
     void *p;
     void *q;
     void *o;
     s32 name;
     s32 chat;
+    f32 g;
     f32 x0;
     f32 y0;
     e0 = get_array_entry__13TUnk_804CE018Fi(self, 0);
@@ -202,11 +203,12 @@ void TWindowSubStatusDisp__sub_8026E1D4(TWindowSubStatusDisp *self, s32 arg1, s3
     case 3:
         chat = open_symbol_chat__11TWindowChatFPl((void *)(arg2 + 1));
         set_text_entry_string__FPUcUll(e10, get_symbol_chat_data__20TWindowSubSymbolChatFv(chat), 0);
-        x0 = pos[0] - lbl_805DD374 * lbl_805DD36C;
+        g = lbl_805DD36C;
+        x0 = pos[0] - lbl_805DD374 * g;
         size[0] = lbl_805DD374;
-        y0 = pos[1] - lbl_805DD378 * lbl_805DD36C;
-        size[1] = lbl_805DD378;
         pos[0] = x0;
+        y0 = pos[1] - lbl_805DD378 * g;
+        size[1] = lbl_805DD378;
         pos[1] = y0;
         o = __nw__7TObjectFUl(0x68);
         if (o != NULL) {
