@@ -102,6 +102,10 @@ s32 __dl__7TObjectFPv(void *);
 s32 __dt__7TObjectFv(void *, s32);
 s32 is_technique_ready__8TTecCtrlFv();
 s32 set_flag70_bit10__21TWindowSubComCardListFv();
+void __ct__7TObjectFP7TObject(void *, void *);
+s32 begin_player_keyboard_hold(s32);
+s32 get_card_window_flags__20TWindowShortListCtrlFv(s32);
+extern u32 lbl_805D39E0;
 
 void TWindowShortListCtrl::set_displayed_item(s32 arg1) {
     if (((u32) this->m_34 != 0U) && (arg1 != (s32) this->m_38)) {
@@ -513,6 +517,55 @@ void *__dt__20TWindowShortListCtrlFv(TWindowShortListCtrl *arg0, s16 arg1) {
         }
     }
     return arg0;
+}
+
+void *TWindowShortListCtrl__ct(TWindowShortListCtrl *self, void *parent, s32 player_id) {
+    s32 player;
+    u8 *tply;
+    u8 t;
+
+    __ct__7TObjectFP7TObject(self, parent);
+    *(void **)((s8 *)self + 0x18) = __vt__20TWindowShortListCtrl;
+    *(void * *)&self->m_name = (void *)lbl_805D39E0;
+    self->m_24 = (u32)player_id;
+    player = get_player_by_client_id((s32)self->m_24);
+    if (player == 0) {
+        queue_destruction__7TObjectFv(self);
+        return self;
+    }
+    tply = (u8 *)(player + 0x85C);
+    if (tply == NULL) {
+        queue_destruction__7TObjectFv(self);
+        return self;
+    }
+    self->m_1c = (u8)get_card_window_flags__20TWindowShortListCtrlFv((s32)self->m_24);
+    if (((s32)self->m_1c == 2) && (self->is_technique_usable() == 0)) {
+        self->m_1c = (u8)(self->m_1c + 1);
+        t = self->m_1c;
+        if ((s8)t >= 4) {
+            self->m_1c = (u8)(t - 4);
+        }
+    }
+    if ((((RecoveredFields_8026EA60_temp_r29 *)tply)->field_34 & 0x10) != 0) {
+        t = self->m_1c;
+        if ((s32)t == 3) {
+            self->m_1c = (u8)(t + 1);
+            t = self->m_1c;
+            if ((s8)t >= 4) {
+                self->m_1c = (u8)(t - 4);
+            }
+        }
+    }
+    self->sub_8026EA48();
+    self->m_1e = 0;
+    self->m_2c = 0U;
+    self->m_30 = 0U;
+    self->m_34 = 0U;
+    self->m_38 = 0xFFFFFFFFU;
+    begin_player_keyboard_hold(self->m_24);
+    TWindowCtrl::set_flag_active();
+    ((TObjPlayer *)player)->reset_equip_slots();
+    return self;
 }
 
 void TWindowShortListCtrl::set_card_window_flags(s32 arg0, s32 arg1) {
