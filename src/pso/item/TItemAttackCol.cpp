@@ -378,105 +378,125 @@ extern const GunStarLightBlock lbl_804729A8[];
 extern const s32 lbl_804E3530[];
 }
 
-void *TItemAttackCol__ct(TItemAttackCol *a0, void *owner, AttackColInit *init_) {
-
-    construct_attack_collision((u8 *)a0, (s32)owner, (u8 *)init_);
-    *(s32 **)((s8 *)a0 + 0x18) = __vt__14TItemAttackCol;
-    __ct__8FlagWordFv(&a0->m_e0);
-    a0->m_name = lbl_805D3F88;
-    VecCopy((Vec *)&a0->m_c4, (const Vec *)init_);
-    if (init_->f40 & 1) {
-        VecCopy((Vec *)&a0->m_d0, (const Vec *)init_->f2C);
-        normalize_vector((void *)&a0->m_d0);
-        a0->m_f0 = -(s32)(lbl_804729C0 * atan2_float(*(f32 *)((s8 *)a0 + 0xD4),
-            newton_sqrtf((*(f32 *)&a0->m_d0 * *(f32 *)&a0->m_d0) +
-                         (*(f32 *)((s8 *)a0 + 0xD8) * *(f32 *)((s8 *)a0 + 0xD8)))));
-        a0->m_f4 = (s32)(lbl_804729C0 * atan2_float(*(f32 *)&a0->m_d0, *(f32 *)((s8 *)a0 + 0xD8)));
-        a0->m_f8 = 0;
-    } else {
-        *(f32 *)&a0->m_d0 = sin_table_lookup(init_->f28);
-        *(f32 *)((s8 *)a0 + 0xD4) = lbl_805DE914;
-        *(f32 *)((s8 *)a0 + 0xD8) = cos_table_lookup(init_->f28);
-        a0->m_f0 = 0;
-        a0->m_f4 = init_->f28;
-        a0->m_f8 = 0;
+void *TItemAttackCol__ct(TItemAttackCol *a0, void *owner, AttackColInit *init_)
+{
+  construct_attack_collision((u8 *) a0, (s32) owner, (u8 *) init_);
+  *((s32 **) (((s8 *) a0) + 0x18)) = __vt__14TItemAttackCol;
+  __ct__8FlagWordFv(&a0->m_e0);
+  a0->m_name = lbl_805D3F88;
+  VecCopy((Vec *) (&a0->m_c4), (const Vec *) init_);
+  if (init_->f40 & 1)
+  {
+    VecCopy((Vec *) (&a0->m_d0), (const Vec *) init_->f2C);
+    normalize_vector((void *) (&a0->m_d0));
+    a0->m_f0 = -((s32) (lbl_804729C0 * atan2_float(*((f32 *) (((s8 *) a0) + 0xD4)), newton_sqrtf(((*((f32 *) (&a0->m_d0))) * (*((f32 *) (&a0->m_d0)))) + ((*((f32 *) (((s8 *) a0) + 0xD8))) * (*((f32 *) (((s8 *) a0) + 0xD8))))))));
+    a0->m_f4 = (s32) (lbl_804729C0 * atan2_float(*((f32 *) (&a0->m_d0)), *((f32 *) (((s8 *) a0) + 0xD8))));
+    a0->m_f8 = 0;
+  }
+  else
+  {
+    *((f32 *) (&a0->m_d0)) = sin_table_lookup(init_->f28);
+    *((f32 *) (((s8 *) a0) + 0xD4)) = lbl_805DE914;
+    *((f32 *) (((s8 *) a0) + 0xD8)) = cos_table_lookup(init_->f28);
+    a0->m_f0 = 0;
+    a0->m_f4 = init_->f28;
+    a0->m_f8 = 0;
+  }
+  *((f32 *) (&a0->m_d0)) = (*((f32 *) (&a0->m_d0))) * init_->f38;
+  *((f32 *) (((s8 *) a0) + 0xD4)) = (*((f32 *) (((s8 *) a0) + 0xD4))) * init_->f38;
+  *((f32 *) (((s8 *) a0) + 0xD8)) = (*((f32 *) (((s8 *) a0) + 0xD8))) * init_->f38;
+  *((u32 *) (&a0->m_30)) = a0->m_f4;
+  a0->m_dc = init_->f3C * init_->f3C;
+  a0->m_e8 = init_->f44;
+  a0->m_ec = init_->f48;
+  *((f32 *) (&a0->m_108)) = init_->f4C;
+  *((f32 *) (&a0->_pad10C)) = init_->f4C;
+  *((f32 *) (((s8 *) a0) + 0x110)) = init_->f4C;
+  copy_xyz(((s8 *) a0) + 0xFC, (void *) init_->f50);
+  a0->m_114 = 0;
+  a0->m_118 = 0;
+  a0->m_11c = 0;
+  *((f32 *) (((s8 *) a0) + 0x120)) = lbl_805DE918;
+  *((f32 *) (((s8 *) a0) + 0x124)) = lbl_805DE918;
+  *((f32 *) (((s8 *) a0) + 0x128)) = lbl_805DE918;
+  ((FlagWord *)((s8 *)a0 + 0xE0))->reset();
+  if (init_->f40 & 2)
+  {
+    GunStarLightBlock blk = lbl_804729A8[0];
+    f32 vr = lbl_805DE91C * init_->f64;
+    f32 vg = lbl_805DE91C * init_->f68;
+    f32 vb = lbl_805DE91C * init_->f6C;
+    if (((!lbl_805D3F88) && (!lbl_805D3F88)) && (!lbl_805D3F88))
+    {
     }
-    *(f32 *)&a0->m_d0 = *(f32 *)&a0->m_d0 * init_->f38;
-    *(f32 *)((s8 *)a0 + 0xD4) = *(f32 *)((s8 *)a0 + 0xD4) * init_->f38;
-    *(f32 *)((s8 *)a0 + 0xD8) = *(f32 *)((s8 *)a0 + 0xD8) * init_->f38;
-    *(u32 *)&a0->m_30 = a0->m_f4;
-    a0->m_dc = init_->f3C * init_->f3C;
-    a0->m_e8 = init_->f44;
-    a0->m_ec = init_->f48;
-    *(f32 *)&a0->m_108 = init_->f4C;
-    *(f32 *)&a0->_pad10C = init_->f4C;
-    *(f32 *)((s8 *)a0 + 0x110) = init_->f4C;
-    copy_xyz((s8 *)a0 + 0xFC, (void *)init_->f50);
-    a0->m_114 = 0;
-    a0->m_118 = 0;
-    a0->m_11c = 0;
-    *(f32 *)((s8 *)a0 + 0x120) = lbl_805DE918;
-    *(f32 *)((s8 *)a0 + 0x124) = lbl_805DE918;
-    *(f32 *)((s8 *)a0 + 0x128) = lbl_805DE918;
-    ((FlagWord *)((s8 *)a0 + 0xE0))->reset();
-    if (init_->f40 & 2) {
-        GunStarLightBlock blk = lbl_804729A8[0];
-        f32 vr = lbl_805DE91C * init_->f64;
-        f32 vg = lbl_805DE91C * init_->f68;
-        f32 vb = lbl_805DE91C * init_->f6C;
-        if (((!lbl_805D3F88) && (!lbl_805D3F88)) && (!lbl_805D3F88)) {}
-        s32 ir = (s32)vr;
-        s32 ig = (s32)vg;
-        s32 ib = (s32)vb;
-        blk.r = (u8)ir;
-        blk.g = (u8)ig;
-        blk.b = (u8)ib;
-        blk.inner_size = init_->f5C;
-        a0->m_12c = (u32)spawn_star_light_2d__Flll((Vec *)&a0->m_24, &blk, (TObject *)a0);
-    } else {
-        a0->m_12c = 0;
+    s32 ir = (s32) vr;
+    s32 ig = (s32) vg;
+    s32 ib = (s32) vb;
+    blk.r = (u8) ir;
+    blk.g = (u8) ig;
+    blk.b = (u8) ib;
+    blk.inner_size = init_->f5C;
+    a0->m_12c = (u32) spawn_star_light_2d__Flll((Vec *) (&a0->m_24), &blk, (TObject *) a0);
+  }
+  else
+  {
+    a0->m_12c = 0;
+  }
+  a0->m_138 = init_->f70;
+  a0->m_13c = init_->f74;
+  a0->m_e4 = init_->f40;
+  if (init_->f40 & 0x800)
+  {
+    a0->check_object_hits();
+    if (a0->m_138 != 0)
+    {
+      ((Cb_802E435C) a0->m_138)(a0->m_ac, &a0->m_24, (void *) (&a0->m_d0));
     }
-    a0->m_138 = init_->f70;
-    a0->m_13c = init_->f74;
-    a0->m_e4 = init_->f40;
-    if (init_->f40 & 0x800) {
-        a0->check_object_hits();
-        if (a0->m_138 != 0) {
-            ((Cb_802E435C)a0->m_138)(a0->m_ac, &a0->m_24, (void *)&a0->m_d0);
-        }
-        a0->m_130 = 0;
-        a0->m_134 = 0;
-        a0->m_140 = 0;
-        queue_destruction__7TObjectFv(a0);
-        disallow_rendering__7TObjectFv(a0);
-    } else {
-        ((TUnk_804E355C *)a0)->check_hits();
-        if (init_->f78 != -1) {
-            a0->m_130 = create_particle_emitter(&a0->m_24);
-            if (a0->m_130 != 0) {
-                s32 d = init_->f28;
-                s32 v[3];
-                v[0] = lbl_804E3530[0];
-                v[0] = v[0] + d;
-                v[1] = lbl_804E3530[1];
-                v[2] = lbl_804E3530[2];
-                set_direction__13TParticleCtrlFPv((void *)a0->m_130, v);
-            }
-        } else {
-            a0->m_130 = 0;
-        }
-        if (init_->f7C != -1) {
-            a0->m_134 = create_particle_emitter(&a0->m_24);
-        } else {
-            a0->m_134 = 0;
-        }
-        if (init_->f40 & 0x10) {
-            a0->m_140 = spawn_continuous_particle_effect_with_flags(&a0->m_24, 0x19E, 0x2000);
-        } else {
-            a0->m_140 = 0;
-        }
+    a0->m_130 = 0;
+    a0->m_134 = 0;
+    a0->m_140 = 0;
+    queue_destruction__7TObjectFv(a0);
+    disallow_rendering__7TObjectFv(a0);
+  }
+  else
+  {
+    ((TUnk_804E355C *)a0)->check_hits();
+    if (init_->f78 != (-1))
+    {
+      a0->m_130 = create_particle_emitter(&a0->m_24);
+      if (a0->m_130 != 0)
+      {
+        s32 d = init_->f28;
+        s32 v[3];
+        v[0] = lbl_804E3530[0];
+        v[1] = lbl_804E3530[1];
+        v[2] = lbl_804E3530[2];
+        v[0] = v[0] + d;
+        set_direction__13TParticleCtrlFPv((void *) a0->m_130, v);
+      }
     }
-    return a0;
+    else
+    {
+      a0->m_130 = 0;
+    }
+    if (init_->f7C != (-1))
+    {
+      a0->m_134 = create_particle_emitter(&a0->m_24);
+    }
+    else
+    {
+      a0->m_134 = 0;
+    }
+    if (init_->f40 & 0x10)
+    {
+      a0->m_140 = spawn_continuous_particle_effect_with_flags(&a0->m_24, 0x19E, 0x2000);
+    }
+    else
+    {
+      a0->m_140 = 0;
+    }
+  }
+  return a0;
 }
 
 void TItemAttackCol::create(void *arg0, void *arg1) {
