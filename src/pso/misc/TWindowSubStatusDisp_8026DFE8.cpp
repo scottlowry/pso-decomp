@@ -207,7 +207,7 @@ void TWindowSubStatusDisp__sub_8026E1D4(TWindowSubStatusDisp *self, s32 arg1, s3
         x0 = pos[0] - lbl_805DD374 * g;
         size[0] = lbl_805DD374;
         pos[0] = x0;
-        y0 = pos[1] - lbl_805DD378 * g;
+        y0 = pos[1] - g * lbl_805DD378;
         size[1] = lbl_805DD378;
         pos[1] = y0;
         o = __nw__7TObjectFUl(0x68);
