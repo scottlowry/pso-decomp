@@ -670,12 +670,11 @@ void TWindowKeyBoardSoft::convert_input_text() {
 }
 
 void TWindowKeyBoardSoft__sub_8025DBDC(void *arg0, s32 arg1) {
+    KbSoft_8025DBDC *self = (KbSoft_8025DBDC *)arg0;
     u16 *p;
-    KbSoft_8025DBDC *self;
     s32 lim; u32 n; s32 j; s32 rb; s32 ret; s8 c; s8 *q;
     u32 cnt;
     s8 out[5]; s8 scratch[8];
-    self = (KbSoft_8025DBDC *)arg0;
     cnt = self->count;
     if (cnt == 0) return;
     p = self->buf + cnt - 1;
@@ -687,8 +686,8 @@ void TWindowKeyBoardSoft__sub_8025DBDC(void *arg0, s32 arg1) {
     while (j < n) { out[j] = (u8)*p; j++; p++; }
     out[j] = 0;
     q = out;
-    rb = n * 2;
     for (;;) {
+        rb = n * 2;
         if (n == 0) break;
         if (arg1 == 0 && n == 1) { c = *q; if (c == 'n' || c == 'N') return; }
         if (self->mode & 8) { ret = dispatch_request_0f__19TWindowKeyBoardSoftFll(q, scratch); } else { ret = dispatch_request_0x10__19TWindowKeyBoardSoftFll(q, scratch); }
@@ -701,8 +700,8 @@ void TWindowKeyBoardSoft__sub_8025DBDC(void *arg0, s32 arg1) {
         }
         q++; n--; rb -= 2;
         if (ret != 0) continue;
-        s8 *w = scratch;
         s32 bytes = 0;
+        s8 *w = scratch;
         u16 *dst = (u16 *)((char *)self->buf + self->count * 2 - ((n + 1) * 2));
         u16 v;
         while (*w != 0) {
