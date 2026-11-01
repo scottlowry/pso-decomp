@@ -1873,8 +1873,9 @@ pso/enemy/TObjEneRe2Flower_800C4B78.cpp:
 
 pso/enemy/TObjEneBeast_800C4E08.cpp:
 	.text       start:0x800C4E08 end:0x800C69E8
-	.rodata     start:0x8043BC78 end:0x8043BC88
-	.data       start:0x804935EC end:0x80493614
+	.rodata     start:0x8043BC78 end:0x8043BC90
+	.data       start:0x80493450 end:0x80493614
+	.sdata2     start:0x805DA028 end:0x805DA068
 
 pso/unk/text_800C69E8.cpp:
 	.text       start:0x800C69E8 end:0x800C6A18
@@ -2366,22 +2367,24 @@ pso/object/TObjEZRopeBase.cpp:
 	.data       start:0x8049DCF0 end:0x8049DD60
 	.sdata      start:0x805D2B50 end:0x805D2B54
 
+pso/unk/tails_adjacent_name.cpp:
+	.sdata      start:0x805D2B54 end:0x805D2B58
+
 pso/player/TObjPlayer_800FFA88.cpp:
-	.text       start:0x800FFA88 end:0x800FFC34
-	.sdata2     start:0x805DAA68 end:0x805DAA80
-
-pso/ui/TAdSinglePlyChrSelectGC_800FFC34.cpp:
-	.text       start:0x800FFC34 end:0x800FFC6C
-
-pso/unk/text_800FFC6C.cpp:
-	.text       start:0x800FFC6C end:0x800FFCCC
+	.text       start:0x800FFA88 end:0x800FFA98
 
 pso/object/TObjTailsTailsMove.cpp:
-	.text       start:0x800FFCCC end:0x800FFE1C
+	.text       start:0x800FFA98 end:0x800FFE04
+	.rodata     start:0x8043DF48 end:0x8043DF60
 	.data       start:0x8049DD60 end:0x8049DD78
+	.sdata      start:0x805D2B58 end:0x805D2B5C
+	.sdata2     start:0x805DAA68 end:0x805DAA7C
 
 pso/misc/KeyboardCharacterMaps.cpp:
 	.data       start:0x8049DD78 end:0x8049E8F8
+
+pso/unk/text_800FFE04.cpp:
+	.text       start:0x800FFE04 end:0x800FFE1C
 
 pso/item/TItem.cpp:
 	.text       start:0x800FFE1C end:0x801031CC
@@ -2428,6 +2431,7 @@ pso/unk/text_80104F4C.cpp:
 
 pso/unk/text_80104FCC.cpp:
 	.text       start:0x80104FCC end:0x801057A8
+	.data       start:0x8049EEFC end:0x8049EF54
 
 pso/unk/text_801057A8.cpp:
 	.text       start:0x801057A8 end:0x80105874
@@ -7629,11 +7633,15 @@ pso/misc/TQuestListOnline_80218310.cpp:
 	.text       start:0x80218310 end:0x802183B4
 
 pso/misc/TWindowSubComCard.cpp:
-	.text       start:0x802183B4 end:0x80218570
+	.text       start:0x802183B4 end:0x802183F8
 
 pso/quest/TQuestListVM.cpp:
-	.text       start:0x80218570 end:0x80219EE8
-	.data       start:0x804C9D80 end:0x804C9DD4
+	.text       start:0x802183F8 end:0x80219EE8
+	.rodata     start:0x8044BEE8 end:0x8044BF58
+	.data       start:0x804C9D50 end:0x804C9DD4
+	.sdata      start:0x805D3690 end:0x805D3694
+	.sbss       start:0x805D6200 end:0x805D6214
+	.sdata2     start:0x805DC6B0 end:0x805DC6C0
 
 pso/quest/StoryQuestProgress.cpp:
 	.text       start:0x80219EE8 end:0x8021A394
@@ -10191,6 +10199,7 @@ pso/menu/TAdPlyChrSelPlateGC.cpp:
 
 pso/ui/TAdMultiPlyChrSelectGC_802C50EC.cpp:
 	.text       start:0x802C50EC end:0x802C6D64
+	.rodata     start:0x80471A88 end:0x80471D08
 	.data       start:0x804E0A48 end:0x804E0A58
 
 pso/ui/TAdChrSelPlyPlateGC.cpp:
@@ -10564,6 +10573,7 @@ pso/boss/TBoss7TentacleNeedle.cpp:
 	.text       start:0x802EF800 end:0x802F0E24
 	.rodata     start:0x804740C8 end:0x804740E0
 	.data       start:0x804E4848 end:0x804E4860
+	.bss        start:0x80541528 end:0x80541918
 	.sdata2     start:0x805DEC40 end:0x805DEC4C
 
 pso/unk/text_802F0E24.cpp:

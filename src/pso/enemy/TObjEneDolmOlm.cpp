@@ -1,3 +1,4 @@
+#include "pso/misc/SampledMotionPoints.h"
 #include "pso/render/reflection.h"
 #include "pso/enemy/TObjEneRe7Berura_803E4CE0.h"
 #include "pso/player/TObjPlayer_803E4954.h"
@@ -311,7 +312,6 @@ struct Ene_803021AC : EBase_803021AC {
     u32 f3e4;
 };
 
-struct Vec_803021AC { f32 x, y, z; };
 
 struct Vec_8030177C { f32 x, y, z; };
 
@@ -429,7 +429,6 @@ void fn_800D88E4(void *);
 extern s32 actor_frame_tick;
 extern const f32 lbl_805DEF4C;
 void spawn_ground_effects__14TObjEneDolmOlmFPvPv(u8 *arg0, Vec_80300D00 *arg1);
-s32 draw_trail_with_colors(u32, s32, s32, int, int);
 extern const f32 lbl_805DEF64;
 s32 obj_testFlags30__14TObjCollidableFUl(void *, u32);
 void vfunc_59__14TObjEneDolmOlmFv(u8 *arg0);
@@ -489,7 +488,6 @@ s32 register_object__6TLobbyFl(int);
 s32 dispatch_shared_handler_b__6TLobbyFl(int);
 s32 register_boss__6TLobbyFl(int);
 u8 *load_resource_from_descriptor(void *, int, void *, int, int, int);
-u8 *init_trail_buffer__11TBoss4Type3FPvifff(void *, int, f32, f32, f32);
 u8 *mem_alloc(s32);
 s32 spawn_npc_enemy__6TLobbyFslllff(s16, s32, s32, void *, f32, f32);
 extern u32 dolm_olm_combat_stat_id_pair;
@@ -508,11 +506,10 @@ void vfunc_58__14TObjEneDolmOlmFv(void *arg0);
 void TLobby__sub_8001FE7C(void*, int);
 void *__ct__11TObjControlFP7TObject(void *, void *);
 u8 *TObjEneDolmOlm__ct(u8 *, s32, s32);
-void __dt__11TBoss4Type3FPvs(void*, int);
 void *__nw__7TObjectFUl(int);
 void mem_free(void*);
 s32 get_mode__11TCameraCtrlFPv(void *);
-s32 init_enemy_base__13TUnk_80493450Fv(void *, s32);
+s32 __ct__13TUnk_80493450FP7TObject(void *, s32);
 s32 create__13TUnk_80494968FUlUl(u32, u32);
 }
 void restore_render_scissor(s32 arg0);
@@ -619,7 +616,7 @@ extern "C" {
 void beast_retire_corpse__13TUnk_80493450Fv();
 }
 extern "C" {
-void beast_select_target();
+void vfunc_28__13TUnk_80493450Fv();
 }
 extern "C" {
 void beast_update_approach__13TUnk_80493450Fv();
@@ -670,7 +667,7 @@ extern "C" {
 void vfunc_62__13TUnk_80493450Fv();
 }
 extern "C" {
-void enter_state_8__10TObjPlayerFv();
+void vfunc_63__13TUnk_80493450Fv();
 }
 extern "C" {
 void vfunc_78__9TObjCharaFl();
@@ -867,7 +864,7 @@ void *lbl_804E6928[103] = {
     (void *)&get_actor_level_index__9TObjCharaFv, (void *)&update_actor_ground_y__9TObjCharaFv, (void *)&vfunc_18__9TObjCharaFPUc, (void *)&is_actor_cadence_frame__9TObjCharaFl,
     (void *)&select_melee_contact_body__9TObjCharaFPvf, (void *)&calc_distance_accuracy_penalty__9TObjCharaFPvPvPvf, (void *)&receive_physical_attack__9TObjCharaFPvf, (void *)&receive_direct_attack__9TObjCharaFPv19DirectAttackPayloadPvll,
     (void *)&receive_weapon_special_attack__9TObjCharaFPvPv, (void *)&apply_knockback_from_attacker__9TObjCharaFPUcf, (void *)&try_start_action__9TObjCharaFll, (void *)&roll_physical_accuracy__9TObjCharaFPvlf,
-    (void *)&beast_select_target, (void *)&vfunc_29__9TObjCharaFv, (void *)&is_target_in_attack_range__9TObjCharaFv, (void *)&test_flag_256__13TUnk_80493450Fv,
+    (void *)&vfunc_28__13TUnk_80493450Fv, (void *)&vfunc_29__9TObjCharaFv, (void *)&is_target_in_attack_range__9TObjCharaFv, (void *)&test_flag_256__13TUnk_80493450Fv,
     (void *)&test_flag30_512__9TObjCharaFv, (void *)&has_flag_0x800__9TObjCharaFv, (void *)&test_flag_1000__9TObjCharaFv, (void *)&update_poison_status__9TObjCharaFv,
     (void *)&update_action_hold_status__13TUnk_80493450Fv, (void *)&vfunc_37__9TObjCharaFv, (void *)&update_flag30_timer__9TObjCharaFv, (void *)&update_movement_status__13TUnk_80493450Fv,
     (void *)&update_shock_clock__9TObjCharaFv, (void *)&update_attack_stat_status__9TObjCharaFv, (void *)&update_defense_stat_status__9TObjCharaFv, (void *)&vfunc_43__9TObjCharaFv,
@@ -875,7 +872,7 @@ void *lbl_804E6928[103] = {
     (void *)&apply_movement_ailment__9TObjCharaFl, (void *)&apply_shock_status__9TObjCharaFv, (void *)&clear_harmful_statuses__9TObjCharaFv, (void *)&apply_attack_stat_status__9TObjCharaFPv,
     (void *)&apply_defense_stat_status__9TObjCharaFPv, (void *)&cure_poison_ailment__9TObjCharaFv, (void *)&cure_paralysis__9TObjCharaFv, (void *)&clear_all_status_effects__9TObjCharaFv,
     (void *)&apply_action_hold_status__9TObjCharaFf, (void *)&apply_anti_technique__9TObjCharaFl, (void *)&vfunc_58__14TObjEneDolmOlmFv, (void *)&vfunc_59__14TObjEneDolmOlmFv,
-    (void *)&vfunc_60__14TObjEneDolmOlmFv, (void *)&vfunc_61__13TUnk_80493450Fv, (void *)&vfunc_62__13TUnk_80493450Fv, (void *)&enter_state_8__10TObjPlayerFv,
+    (void *)&vfunc_60__14TObjEneDolmOlmFv, (void *)&vfunc_61__13TUnk_80493450Fv, (void *)&vfunc_62__13TUnk_80493450Fv, (void *)&vfunc_63__13TUnk_80493450Fv,
     (void *)&reset_pose__9TObjCharaFv, (void *)&get_anim_node_position__9TObjCharaFlP3Vec, (void *)&vfunc_66__9TObjCharaFv, (void *)&vfunc_67__9TObjCharaFf,
     (void *)&get_pos__9TObjCharaFl, (void *)&apply_switch_attack__9TObjCharaFv, (void *)&enemy_spawn_jellen_effect__9TObjCharaFv, (void *)&trigger_switch_attack__9TObjCharaFv,
     (void *)&enemy_spawn_zalure_effect__9TObjCharaFv, (void *)&recalc_stats__9TObjCharaFv, (void *)&vfunc_74__9TObjEnemyFl, (void *)&vfunc_75__9TObjCharaFf,
@@ -940,7 +937,7 @@ void TObjEneDolmOlm::load_params_from_table(s32 i) {
 u8 *TObjEneDolmOlm__ct(u8 *arg0, s32 arg1, s32 arg2) {
     u32 col;
 
-    init_enemy_base__13TUnk_80493450Fv(arg0, arg1);
+    __ct__13TUnk_80493450FP7TObject(arg0, arg1);
     *(void **)((s8 *)arg0 + 0x18) = lbl_804E6928;
     __ct__13TUnk_80494938Fv((arg0 + 0x3A8));
     *(s32 *)((s8 *)arg0 + 0) = obj_ene_dolm_olm_class_name;
@@ -1030,21 +1027,13 @@ void TObjEneDolmOlm::load_shared_resources() {
         }
         TObjEneDolmOlm__resource_bundle = (u32) p;
     }
-    p = (u8 *)::operator new(0x18);
-    if (p != NULL) {
-        p = init_trail_buffer__11TBoss4Type3FPvifff(p, 2, TObjEneDolmOlm__data_805DEF54, TObjEneDolmOlm__data_805DEF6C, lbl_805DEF90);
-    }
+    p = (u8 *)new SampledMotionPoints(2, TObjEneDolmOlm__data_805DEF54, TObjEneDolmOlm__data_805DEF6C, lbl_805DEF90);
     TObjEneDolmOlm__data_805D6A14 = (u32) p;
-    p = (u8 *)::operator new(0x18);
-    if (p != NULL) {
-        p = init_trail_buffer__11TBoss4Type3FPvifff(p, 2, TObjEneDolmOlm__data_805DEF54, TObjEneDolmOlm__data_805DEF6C, lbl_805DEF90);
-    }
+    p = (u8 *)new SampledMotionPoints(2, TObjEneDolmOlm__data_805DEF54, TObjEneDolmOlm__data_805DEF6C, lbl_805DEF90);
     TObjEneDolmOlm__data_805D6A18 = (u32) p;
     set_motion_packed_rotation();
-    draw_trail_with_colors(TObjEneDolmOlm__data_805D6A14, ((Res_80302784 *)TObjEneDolmOlm__resource_bundle)->x42C->f8,
-        ((Res_80302784 *)TObjEneDolmOlm__resource_bundle)->x430[((s32 *) TObjEneDolmOlm__param_table)[13]].b, 0x1C, 0x1D);
-    draw_trail_with_colors(TObjEneDolmOlm__data_805D6A18, ((Res_80302784 *)TObjEneDolmOlm__resource_bundle)->x42C->f8,
-        ((Res_80302784 *)TObjEneDolmOlm__resource_bundle)->x430[((s32 *) TObjEneDolmOlm__param_table)[17]].b, 0x14, 0x15);
+    ((SampledMotionPoints *)TObjEneDolmOlm__data_805D6A14)->sample_two_nodes((NJS_OBJECT *)((Res_80302784 *)TObjEneDolmOlm__resource_bundle)->x42C->f8, (NJS_MOTION *)((Res_80302784 *)TObjEneDolmOlm__resource_bundle)->x430[((s32 *) TObjEneDolmOlm__param_table)[13]].b, 0x1C, 0x1D);
+    ((SampledMotionPoints *)TObjEneDolmOlm__data_805D6A18)->sample_two_nodes((NJS_OBJECT *)((Res_80302784 *)TObjEneDolmOlm__resource_bundle)->x42C->f8, (NJS_MOTION *)((Res_80302784 *)TObjEneDolmOlm__resource_bundle)->x430[((s32 *) TObjEneDolmOlm__param_table)[17]].b, 0x14, 0x15);
     clear_motion_packed_rotation();
     dolm_olm_combat_stat_id_pair = (u32) mem_alloc(8);
     TObjEneDolmOlm__shared_handler_ids = (u32) mem_alloc(8);
@@ -1086,11 +1075,11 @@ void TObjEneDolmOlm::free_shared_resources() {
         TObjEneDolmOlm__behavior_params_by_variant = 0U;
     }
     if ((u32) TObjEneDolmOlm__data_805D6A18 != 0U) {
-        __dt__11TBoss4Type3FPvs((void*)TObjEneDolmOlm__data_805D6A18, 1);
+        delete (SampledMotionPoints *)TObjEneDolmOlm__data_805D6A18;
         TObjEneDolmOlm__data_805D6A18 = 0U;
     }
     if ((u32) TObjEneDolmOlm__data_805D6A14 != 0U) {
-        __dt__11TBoss4Type3FPvs((void*)TObjEneDolmOlm__data_805D6A14, 1);
+        delete (SampledMotionPoints *)TObjEneDolmOlm__data_805D6A14;
         TObjEneDolmOlm__data_805D6A14 = 0U;
     }
     if ((u32) TObjEneDolmOlm__resource_bundle != 0U) {
@@ -1254,11 +1243,11 @@ void TObjEneDolmOlm::render() {
         break;
     default:
         if (!(arg0->f3e4 & 0x4000)) {
-            Vec_803021AC v;
+            Vec v;
             v.x = lbl_805DEF8C;
             v.y = TObjEneDolmOlm__data_805DEF50;
             v.z = TObjEneDolmOlm__data_805DEF68;
-            ((TObjEnemy *)arg0)->render_with_position_override((u8 *)&v, 0);
+            ((TObjEnemy *)arg0)->draw_ground_shadow(&v, 0);
         }
         break;
     }
@@ -1407,7 +1396,7 @@ s32 TObjEneDolmOlm__sub_8030177C(void *arg0_) {
     if (arg0->f338 < 0x1000) {
         Obj_8030177C *tgt = (Obj_8030177C *)get_player_by_client_id(arg0->f338);
         f32 d = horizontal_distance_squared(&tgt->pos, &arg0->pos);
-        if (tgt != 0 && ((TObjPlayer *)tgt)->get_field_3e4() == get_current_floor() &&
+        if (tgt != 0 && ((TObjPlayer *)tgt)->get_floor() == get_current_floor() &&
             d < (*(Param_8030177C ** *)&TObjEneDolmOlm__behavior_params_by_variant)[arg0->kind]->range * (*(Param_8030177C ** *)&TObjEneDolmOlm__behavior_params_by_variant)[arg0->kind]->range) {
             arg0->target = tgt;
         } else {
@@ -1610,7 +1599,7 @@ void TObjEneDolmOlm::vfunc_60() {
             if (player != NULL) {
                 temp_f31 = horizontal_distance_squared(player + 0x38, (void *) (((u8 *)this) + 0x38));
                 var_f30 = fabs_float(*(f32 *)((s8 *)player + 0x3C) - *(f32 *)((s8 *)((u8 *)this) + 0x3C));
-                if (((TObjPlayer *)player)->get_field_3e4() == get_current_floor()) {
+                if (((TObjPlayer *)player)->get_floor() == get_current_floor()) {
                     if ((temp_f31 < (*(f32 *)((s8 *)(*(s32 *)((s8 *)TObjEneDolmOlm__behavior_params_by_variant + (this->variant * 4))) + 0x10) * *(f32 *)((s8 *)(*(s32 *)((s8 *)TObjEneDolmOlm__behavior_params_by_variant + (this->variant * 4))) + 0x10))) && (((f32 (*)(void *)) random_ratio__9TObjCharaFv)(this) < this->m_3d0)) {
                         var_r29 = 1;
                     }
@@ -1680,12 +1669,8 @@ void TObjEneDolmOlm::sub_80301148() {
     }
     this->load_params_from_table(*(s32 *)&this->variant);
     set_motion_packed_rotation();
-    draw_trail_with_colors(TObjEneDolmOlm__data_805D6A14,
-        ((T_80301148 *)TObjEneDolmOlm__resource_bundle)->a[*(s32 *)&this->variant].v,
-        ((T_80301148 *)TObjEneDolmOlm__resource_bundle)->b[TObjEneDolmOlm__param_table[13]].v, 0x1C, 0x1D);
-    draw_trail_with_colors(TObjEneDolmOlm__data_805D6A18,
-        ((T_80301148 *)TObjEneDolmOlm__resource_bundle)->a[*(s32 *)&this->variant].v,
-        ((T_80301148 *)TObjEneDolmOlm__resource_bundle)->b[TObjEneDolmOlm__param_table[17]].v, 0x14, 0x15);
+    ((SampledMotionPoints *)TObjEneDolmOlm__data_805D6A14)->sample_two_nodes((NJS_OBJECT *)((T_80301148 *)TObjEneDolmOlm__resource_bundle)->a[*(s32 *)&this->variant].v, (NJS_MOTION *)((T_80301148 *)TObjEneDolmOlm__resource_bundle)->b[TObjEneDolmOlm__param_table[13]].v, 0x1C, 0x1D);
+    ((SampledMotionPoints *)TObjEneDolmOlm__data_805D6A18)->sample_two_nodes((NJS_OBJECT *)((T_80301148 *)TObjEneDolmOlm__resource_bundle)->a[*(s32 *)&this->variant].v, (NJS_MOTION *)((T_80301148 *)TObjEneDolmOlm__resource_bundle)->b[TObjEneDolmOlm__param_table[17]].v, 0x14, 0x15);
     clear_motion_packed_rotation();
     *(f32 *)((s8 *)((u8 *)this) + 0x3CC) = lbl_805DEF64 + *(f32 *)((s8 *)((u8 *)this) + 0x35C);
     this->m_3d0 = lbl_805DEF64 + *(f32 *)((s8 *)((u8 *)this) + 0x360);
@@ -1702,11 +1687,11 @@ void TObjEneDolmOlm::vfunc_93() {
     }
     switch (this->requested_action) {
     case 3:
-        e = TObjPlayer::lookup_entry_by_value((void *)(*(s32 *)&TObjEneDolmOlm__data_805D6A14), this->frame);
+        e = (s32)((SampledMotionPoints *)((void *)(*(s32 *)&TObjEneDolmOlm__data_805D6A14)))->lookup(this->frame);
         idx = 0;
         break;
     case 4:
-        e = TObjPlayer::lookup_entry_by_value((void *)(*(s32 *)&TObjEneDolmOlm__data_805D6A18), this->frame);
+        e = (s32)((SampledMotionPoints *)((void *)(*(s32 *)&TObjEneDolmOlm__data_805D6A18)))->lookup(this->frame);
         idx = 1;
         break;
     default:

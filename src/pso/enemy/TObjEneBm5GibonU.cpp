@@ -1,3 +1,4 @@
+#include "pso/math/FloatRounding.h"
 #include "pso/player/PlayerAttackParams.h"
 #include "pso/enemy/TObjEneRe7Berura_803E4CE0.h"
 #include "pso/player/TObjPlayer_803E4954.h"
@@ -188,7 +189,6 @@ struct Obj_800D0F44 { u8 pad0[0x38]; Vec_800D0F44 pos; u8 pad44[0x60 - 0x44]; s3
 struct Spawn_800D1990 { s32 a, b, c, d; };
 
 extern "C" {
-s32 update_player_state__9TObjEneDDFv(void *, s32, s32);
 s32 get_target_info__9TObjEneDDFv();
 s32 pack_debug_text_position(s32, s32);
 Ene_800D17E8 *find_enemy_by_id__16TObjEneBm5GibonUFi(s32 id);
@@ -1851,7 +1851,7 @@ void TObjEneBm5GibonU::render_debug() {
         debug_printf_at(pack_debug_text_position(0, 6), lbl_8043C0D8);
     }
     if (self->m8(lbl_805DA180, TObjEneBm5GibonU__data_805DA184) != 0) {
-        update_player_state__9TObjEneDDFv(self, 0, 0);
+        ((TObjEneDD *)(self))->draw_ground_shadow(0, 0);
         TObjFish::set_global_param(self->f24);
         push_matrix();
         post_translate_matrix(&self->pos);
@@ -4068,7 +4068,6 @@ typedef struct Ene_800D0FDC {
 } Ene_800D0FDC;
 
 extern "C" {
-f32 get_random_float__21TObjEneMe3ShinowaRealFv(f32);
 Hit_800D0E14 *csnVector(void *, void *, s32);
 void pick_wander_destination__16TObjEneBm5GibonUFPv(Ene_800D0E14 *arg0);
 s32 angle_diff_s16(s32, s32);
@@ -4156,7 +4155,7 @@ void turn_toward_angle__16TObjEneBm5GibonUFPvi(Ene_800D0FDC *arg0, s32 arg1) {
 }
 
 void TObjEneBm5GibonU::sub_800D10A0() {
-    *(s32 *)((s8 *)((u8 *)this) + 0x46C) = (s32) get_random_float__21TObjEneMe3ShinowaRealFv((f32) (*(f32 *)((s8 *)((u8 *)this) + 0x354)));
+    *(s32 *)((s8 *)((u8 *)this) + 0x46C) = (s32) floor_to_float((f32) (*(f32 *)((s8 *)((u8 *)this) + 0x354)));
     if (*(f32 *)((s8 *)((u8 *)this) + 0x358) >= TObjEneBm5GibonU__data_805DA168) {
         *(s32 *)((s8 *)((u8 *)this) + 0x470) = 0;
     } else {
@@ -4193,7 +4192,7 @@ void TObjEneBm5GibonU::sub_800D10A0() {
 #define update_movement_status__9TObjCharaFv ((s32 (*)())update_movement_status__9TObjCharaFv)
 #define get_entity_id ((s16 (*)(s32))get_entity_id)
 
-#include "pso/enemy/TObjEneMe1GiGue.h"
+#include "pso/enemy/TObjEnemyCustom.h"
 #include "pso/enemy/TObjEneMe3SinowZoa.h"
 #include "pso/enemy/TObjEnePanarms.h"
 
@@ -4776,7 +4775,7 @@ void TObjEneBm5GibonU::clear_flag_and_update() {
     u8 *arg0 = (u8 *)this;
     if ((s32) *(s32 *)((s8 *)arg0 + 0x374) == 7) {
         this->m_388 = (s32) (this->m_388 & 0xFFFFFFFE);
-        ((TObjEneMe1GiGue *)arg0)->update_if_active(0);
+        ((TObjEnemyCustom *)arg0)->update_if_active(0);
     }
 }
 

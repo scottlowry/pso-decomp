@@ -1,3 +1,4 @@
+#include "pso/misc/SampledMotionPoints.h"
 #include "pso/unk/TUnk_80494968.h"
 #include "pso/enemy/TObjEneRe7Berura_803E4CE0.h"
 #include "types.h"
@@ -159,12 +160,6 @@ struct Owner_800ABDD8
   Fade_800ABDD8 fades[4];
 };
 
-struct Vec_800ABDD8
-{
-  f32 x;
-  f32 y;
-  f32 z;
-};
 
 extern "C" {
 s32 post_translate_matrix(void *);
@@ -274,11 +269,11 @@ void TObjEneShark::vfunc_93() {
     }
     switch (this->m_b8) {
     case 3:
-        e = TObjPlayer::lookup_entry_by_value((void *)TObjEneShark__attack_motion_3_trail, this->m_c0);
+        e = (s32)((SampledMotionPoints *)((void *)TObjEneShark__attack_motion_3_trail))->lookup(this->m_c0);
         idx = 0;
         break;
     case 4:
-        e = TObjPlayer::lookup_entry_by_value((void *)shark_attack4_trail_buffer, this->m_c0);
+        e = (s32)((SampledMotionPoints *)((void *)shark_attack4_trail_buffer))->lookup(this->m_c0);
         idx = 1;
         break;
     default:
@@ -371,7 +366,6 @@ typedef struct VBase_14_800ABDD8 VBase_14_800ABDD8;
 typedef struct VBase_18_800ABDD8 VBase_18_800ABDD8;
 typedef struct VObj_14_800ABDD8 VObj_14_800ABDD8;
 typedef struct VObj_18_800ABDD8 VObj_18_800ABDD8;
-typedef struct Vec_800ABDD8 Vec_800ABDD8;
 #define PSO_VCALL_VObj_18_800ABDD8_m9(_self, _arg0, _arg1, _arg2) (((VObj_18_800ABDD8 *)(_self))->m9((_arg0), (_arg1), (_arg2)))
 }
 
@@ -529,11 +523,11 @@ void TObjEneShark::render() {
       return;
     default:
     {
-      Vec_800ABDD8 v;
+      Vec v;
       v.x = lbl_805D9BBC;
       v.y = lbl_805D9BC0;
       v.z = lbl_805D9BC4;
-      ((TObjEnemy *)arg0)->render_with_position_override((u8 *)&v, 0);
+      ((TObjEnemy *)arg0)->draw_ground_shadow(&v, 0);
     }
   }
 }
@@ -585,8 +579,6 @@ s32 dispatch_shared_handler_b__6TLobbyFl(int);
 s32 register_boss__6TLobbyFl(int);
 u8 *load_enemy_bml_resource_named(void *, void *);
 u8 *load_resource_from_descriptor(void *, s32, void *, s32, s32, s32);
-void draw_trail_with_colors(u8 *boss4_type3, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
-void *init_trail_buffer__11TBoss4Type3FPvifff(void *, s32, f32, f32, f32);
 void *mem_alloc(u32 size);
 void spawn_npc_enemy__6TLobbyFslllff(int, int, int, void *, f32, f32);
 extern u8 lbl_8043AEDC[];
@@ -599,7 +591,6 @@ extern const f32 lbl_805D9BCC;
 void vfunc_99__13TUnk_80493450Fv(void);
 void TLobby__sub_8001FE7C(void*, int);
 void *__ct__11TObjControlFP7TObject(void *, void *);
-s32 *__dt__11TBoss4Type3FPvs(s32 *arg0, s16 arg1);
 void mem_free(void*);
 
 extern void *tl_04;
@@ -635,7 +626,7 @@ extern "C" void apply_switch_attack__9TObjCharaFv();
 extern "C" void vfunc_59__13TUnk_80493450Fv();
 extern "C" void beast_idle_update__13TUnk_80493450Fv();
 extern "C" void beast_retire_corpse__13TUnk_80493450Fv();
-extern "C" void beast_select_target();
+extern "C" void vfunc_28__13TUnk_80493450Fv();
 extern "C" void vfunc_60__13TUnk_80493450Fv();
 extern "C" void beast_update_approach__13TUnk_80493450Fv();
 extern "C" void beast_update_attack__13TUnk_80493450Fv();
@@ -655,7 +646,7 @@ extern "C" void cure_poison_ailment__9TObjCharaFv();
 extern "C" void enemy_spawn_jellen_effect__9TObjCharaFv();
 extern "C" void enemy_spawn_zalure_effect__9TObjCharaFv();
 extern "C" void vfunc_62__13TUnk_80493450Fv();
-extern "C" void enter_state_8__10TObjPlayerFv();
+extern "C" void vfunc_63__13TUnk_80493450Fv();
 extern "C" void vfunc_78__9TObjCharaFl();
 extern "C" void vfunc_77__9TObjCharaFv();
 extern "C" void vfunc_76__9TObjCharaFv();
@@ -695,7 +686,7 @@ extern "C" void roll_physical_accuracy__9TObjCharaFPvlf();
 extern "C" void run_task__13TUnk_80493450Fv();
 extern "C" void select_melee_contact_body__9TObjCharaFPvf();
 extern "C" void update_movement_status__13TUnk_80493450Fv();
-extern "C" void tick_freeze_state__10TObjPlayerFv();
+extern "C" void vfunc_58__13TUnk_80493450Fv();
 extern "C" void trigger_switch_attack__9TObjCharaFv(s32 arg0);
 extern "C" void try_start_action__9TObjCharaFll();
 extern "C" void update_action_hold_status__13TUnk_80493450Fv();
@@ -762,15 +753,15 @@ void *lbl_8049168C[103] = {
     (void *)&get_actor_level_index__9TObjCharaFv, (void *)&update_actor_ground_y__9TObjCharaFv, (void *)&vfunc_18__9TObjCharaFPUc, (void *)&is_actor_cadence_frame__9TObjCharaFl,
     (void *)&select_melee_contact_body__9TObjCharaFPvf, (void *)&calc_distance_accuracy_penalty__9TObjCharaFPvPvPvf, (void *)&receive_physical_attack__9TObjCharaFPvf, (void *)&receive_direct_attack__9TObjCharaFPv19DirectAttackPayloadPvll,
     (void *)&receive_weapon_special_attack__9TObjCharaFPvPv, (void *)&apply_knockback_from_attacker__9TObjCharaFPUcf, (void *)&try_start_action__9TObjCharaFll, (void *)&roll_physical_accuracy__9TObjCharaFPvlf,
-    (void *)&beast_select_target, (void *)&vfunc_29__9TObjCharaFv, (void *)&is_target_in_attack_range__9TObjCharaFv, (void *)&test_flag_256__13TUnk_80493450Fv,
+    (void *)&vfunc_28__13TUnk_80493450Fv, (void *)&vfunc_29__9TObjCharaFv, (void *)&is_target_in_attack_range__9TObjCharaFv, (void *)&test_flag_256__13TUnk_80493450Fv,
     (void *)&test_flag30_512__9TObjCharaFv, (void *)&has_flag_0x800__9TObjCharaFv, (void *)&test_flag_1000__9TObjCharaFv, (void *)&update_poison_status__9TObjCharaFv,
     (void *)&update_action_hold_status__13TUnk_80493450Fv, (void *)&vfunc_37__9TObjCharaFv, (void *)&update_flag30_timer__9TObjCharaFv, (void *)&update_movement_status__13TUnk_80493450Fv,
     (void *)&update_shock_clock__9TObjCharaFv, (void *)&update_attack_stat_status__9TObjCharaFv, (void *)&update_defense_stat_status__9TObjCharaFv, (void *)&vfunc_43__9TObjCharaFv,
     (void *)&apply_poison_status__9TObjCharaFv, (void *)&apply_paralysis__9TObjCharaFv, (void *)&apply_slow_status__9TObjCharaFv, (void *)&apply_confusion_status__9TObjCharaFv,
     (void *)&apply_movement_ailment__9TObjCharaFl, (void *)&apply_shock_status__9TObjCharaFv, (void *)&clear_harmful_statuses__9TObjCharaFv, (void *)&apply_attack_stat_status__9TObjCharaFPv,
     (void *)&apply_defense_stat_status__9TObjCharaFPv, (void *)&cure_poison_ailment__9TObjCharaFv, (void *)&cure_paralysis__9TObjCharaFv, (void *)&clear_all_status_effects__9TObjCharaFv,
-    (void *)&apply_action_hold_status__9TObjCharaFf, (void *)&apply_anti_technique__9TObjCharaFl, (void *)&tick_freeze_state__10TObjPlayerFv, (void *)&vfunc_59__13TUnk_80493450Fv,
-    (void *)&vfunc_60__13TUnk_80493450Fv, (void *)&vfunc_61__13TUnk_80493450Fv, (void *)&vfunc_62__13TUnk_80493450Fv, (void *)&enter_state_8__10TObjPlayerFv,
+    (void *)&apply_action_hold_status__9TObjCharaFf, (void *)&apply_anti_technique__9TObjCharaFl, (void *)&vfunc_58__13TUnk_80493450Fv, (void *)&vfunc_59__13TUnk_80493450Fv,
+    (void *)&vfunc_60__13TUnk_80493450Fv, (void *)&vfunc_61__13TUnk_80493450Fv, (void *)&vfunc_62__13TUnk_80493450Fv, (void *)&vfunc_63__13TUnk_80493450Fv,
     (void *)&reset_pose__9TObjCharaFv, (void *)&get_anim_node_position__9TObjCharaFlP3Vec, (void *)&vfunc_66__9TObjCharaFv, (void *)&vfunc_67__9TObjCharaFf,
     (void *)&get_pos__9TObjCharaFl, (void *)&apply_switch_attack__9TObjCharaFv, (void *)&enemy_spawn_jellen_effect__9TObjCharaFv, (void *)&trigger_switch_attack__9TObjCharaFv,
     (void *)&enemy_spawn_zalure_effect__9TObjCharaFv, (void *)&recalc_stats__9TObjCharaFv, (void *)&vfunc_74__9TObjEnemyFl, (void *)&vfunc_75__9TObjCharaFf,
@@ -818,11 +809,11 @@ void TObjEneShark::free_resources() {
         shark_resource_buffer = 0U;
     }
     if ((u32) shark_attack4_trail_buffer != 0U) {
-        __dt__11TBoss4Type3FPvs((s32 *)shark_attack4_trail_buffer, 1);
+        delete (SampledMotionPoints *)shark_attack4_trail_buffer;
         shark_attack4_trail_buffer = 0U;
     }
     if ((u32) TObjEneShark__attack_motion_3_trail != 0U) {
-        __dt__11TBoss4Type3FPvs((s32 *)TObjEneShark__attack_motion_3_trail, 1);
+        delete (SampledMotionPoints *)TObjEneShark__attack_motion_3_trail;
         TObjEneShark__attack_motion_3_trail = 0U;
     }
     if ((u32) shark_bml_resource != 0U) {
@@ -851,18 +842,12 @@ void TLobby::load_shark_resources() {
         }
         G_B8 = (u8 *)p;
     }
-    p = ::operator new(0x18);
-    if (p != NULL) {
-        p = init_trail_buffer__11TBoss4Type3FPvifff(p, 2, lbl_805D9BC8, lbl_805D9BAC, lbl_805D9BC0);
-    }
+    p = new SampledMotionPoints(2, lbl_805D9BC8, lbl_805D9BAC, lbl_805D9BC0);
     G_BC = p;
-    p = ::operator new(0x18);
-    if (p != NULL) {
-        p = init_trail_buffer__11TBoss4Type3FPvifff(p, 2, lbl_805D9BC8, lbl_805D9BAC, lbl_805D9BC0);
-    }
+    p = new SampledMotionPoints(2, lbl_805D9BC8, lbl_805D9BAC, lbl_805D9BC0);
     G_C0 = p;
-    draw_trail_with_colors((u8 *)G_BC, RES->bodies->model, RES->motions[TObjEneShark__action_table[3].idx].b, 5, 8);
-    draw_trail_with_colors((u8 *)G_C0, RES->bodies->model, RES->motions[TObjEneShark__action_table[4].idx].b, 0xA, 0xD);
+    ((SampledMotionPoints *)G_BC)->sample_two_nodes((NJS_OBJECT *)RES->bodies->model, (NJS_MOTION *)RES->motions[TObjEneShark__action_table[3].idx].b, 5, 8);
+    ((SampledMotionPoints *)G_C0)->sample_two_nodes((NJS_OBJECT *)RES->bodies->model, (NJS_MOTION *)RES->motions[TObjEneShark__action_table[4].idx].b, 0xA, 0xD);
     G_A8 = (s32 *)mem_alloc(0xC);
     G_AC = (s32 *)mem_alloc(0xC);
     G_B0 = (s32 *)mem_alloc(0xC);
@@ -995,7 +980,7 @@ struct Shark_800AC6B0 : VObj_800AC6B0 {
 extern "C" {
 f32 random_ratio__9TObjCharaFv(s32 arg0);
 
-void init_enemy_base__13TUnk_80493450Fv(void *);
+void __ct__13TUnk_80493450FP7TObject(void *);
 }
 int initialize_enemy_photon_effect(void *p);
 extern "C" {
@@ -1012,7 +997,7 @@ void *TObjEneShark__ct(void *arg0, void *arg1, void *arg2) {
     s32 color;
     s32 i;
 
-    ((void (*)(void *, void *))init_enemy_base__13TUnk_80493450Fv)(self, arg1);
+    ((void (*)(void *, void *))__ct__13TUnk_80493450FP7TObject)(self, arg1);
     *(void **)((u8 *)self + 0x18) = lbl_8049168C;
     __ct__13TUnk_80494938Fv(((u8 *)arg0 + 0x3A8));
     __construct_array(self->f3CC, (void *)__ct__15RenderFadeStateFv, __dt__15RenderFadeStateFv, 0x1C, 4);

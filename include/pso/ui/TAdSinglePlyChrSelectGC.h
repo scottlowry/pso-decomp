@@ -39,7 +39,6 @@ struct TAdSinglePlyChrSelectGC : public TObject {
     static u8 *get_global_state();
     static int get_state();
     static void safe_free(u32 arg0);
-    void advance_field28();
     s32 get_selected_slot();
     void set_position(void* q);
     void noop_laser();
@@ -97,7 +96,7 @@ struct TAdSinglePlyChrSelectGC : public TObject {
     void clear_inventory_slot();
     static void draw_window_bg(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
     static void load_player(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
-    int load_player_slot(int a1, int a2);
+    static s32 load_player_slot(s32 chan, const char *file_name, void *buffer);
     s32 try_acquire_slot();
     s32 are_all_selections_done();
     s32 load_preview_models();
@@ -137,7 +136,7 @@ struct TAdSinglePlyChrSelectGC : public TObject {
     static int get_data();
     s32 start_offline_seq();
     void *destroy(s16 arg1);
-    s32 has_no_save_files();
+    static s32 has_no_save_files(s32 chan);
     static void *create_check_memory_card(void *arg0, void *arg1, void *arg2);
     static void permute_save_blocks(void* stream, const u8* source, u8* destination, u32 size);
     u8 unk_38[0x4];
@@ -152,7 +151,6 @@ struct TAdSinglePlyChrSelectGC : public TObject {
     s32 m_5c;
     static void free_all_resources();
     u8 load_and_verify_character_save(char *desc);
-    void transform_vertex_list();
     static void remove_matching_entries(s32 arg0);
     static s32 free_chardata(s32 arg0, s16 arg1);
     u8 *copy_character_data(u8 *arg1);

@@ -155,7 +155,7 @@ struct TObjPlayer : public TObjChara {
     s32 m_3d8;
     s32 m_3dc;
     u8 unk_3E0[0x4];
-    s32 m_3e4;
+    s32 current_floor;
     u8 unk_3E8[0x4];
     s32 m_3ec;
     u8 unk_3F0[0x4];
@@ -371,7 +371,7 @@ struct TObjPlayer : public TObjChara {
     void bswap_head16();
     void send_head();
     void init_packet_9a();
-    s32 get_field_3e4();
+    s32 get_floor();
     static s32 get_player_count();
     s32 register_object();
     void clear_ground_candidates();
@@ -454,7 +454,6 @@ struct TObjPlayer : public TObjChara {
     static void spawn_dead_spot_here(s32 arg0, s32 arg1);
     static void spawn_dead_spot_type2(s32 arg0, s32 arg1);
     static void destroy_static_lobby();
-    static s32 lookup_entry_by_value(void *arg0, f32 farg0);
     void copy_vec3(void* q);
     static void init_render_globals();
     static void push_material_color_override(f32 farg0, f32 farg1, f32 farg2, f32 farg3);
@@ -462,7 +461,6 @@ struct TObjPlayer : public TObjChara {
     static void clear_alt_model_flag();
     static void set_alt_model_flag();
     void *create_hairmove(void *arg1, void *arg2);
-    s32 interpolate_along_curve(void *arg1);
     void set_tp(s16 tp);
     s32 get_tp_bonus();
     s32 get_hp_bonus();

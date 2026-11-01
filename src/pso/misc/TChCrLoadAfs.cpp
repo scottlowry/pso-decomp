@@ -1,3 +1,4 @@
+#include "pso/math/FloatRounding.h"
 #include "types.h"
 #include "pso/misc/TChCrLoadAfs.h"
 #include "pso/object/TObject_80019A50.h"
@@ -109,7 +110,6 @@ struct Ld_8028BE00 {
 
 extern "C" {
 extern Te_8028BFA4 player_class_texture_archive_table[];
-f32 get_status_value_f32__23TObjEneMe1CanadinLeaderFv(f32);
 f32 TLobby__sub_8028C50C(f32);
 s32 strcmp(const char *, const char *);
 extern const f32 lbl_805DD920;
@@ -131,7 +131,7 @@ void TChCrLoadAfs::start_download() {
             return;
         }
         count = TLobby__sub_803CC53C((u8 *)(*(u32 *)((s8 *)this + 0x1C)));
-        temp_r3_3 = ((TQuestVmDownLoadServer *)(count << 0xB))->alloc();
+        temp_r3_3 = (s32)TQuestVmDownLoadServer::alloc(count << 0xB);
         *(u32 *)((s8 *)this + 0x28) = temp_r3_3;
         if (temp_r3_3 == 0U) {
             *(s32 *)((s8 *)this + 0x2C) = 3;
@@ -223,7 +223,7 @@ s32 find_player_texture_name_ordinal(u8 *object) {
     name = *(char **)(**(u8 ***)((s8 *)object + 0x30) + *(s32 *)((s8 *)object + 0x5C) * 0xC);
     count = (&player_class_texture_archive_table[*(s32 *)((s8 *)object + 0x70)].id)[1];
     l2 = TLobby__sub_8028C50C(lbl_805DD920);
-    steps = (s32)get_status_value_f32__23TObjEneMe1CanadinLeaderFv(TLobby__sub_8028C50C(count) / l2) + 1;
+    steps = (s32)ceil_to_float(TLobby__sub_8028C50C(count) / l2) + 1;
     mid = (count + 1) >> 1;
     step = (mid + 1) >> 1;
     list = (char **)(&player_class_texture_archive_table[*(s32 *)((s8 *)object + 0x70)].id)[3];
@@ -310,7 +310,7 @@ void TChCrLoadAfsTextureReq::start_read(void *) {
         arg0->f20 = 0;
         arg0->f24 = 0;
         n = TLobby__sub_803CC53C((u8 *)arg0->f60);
-        buf = ((void *)((TQuestVmDownLoadServer *)(n << 11))->alloc());
+        buf = ((void *)TQuestVmDownLoadServer::alloc(n << 11));
         arg0->bufs[arg0->f5c] = buf;
         if (buf != NULL) {
             TLobby::read_checked_align((u32)arg0->f60, (s32)n, (u32)arg0->bufs[arg0->f5c]);

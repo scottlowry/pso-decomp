@@ -1,3 +1,4 @@
+#include "pso/math/FloatRounding.h"
 #include "pso/enemy/TObjEnemy.h"
 #include "pso/enemy/TObjEneRe7Berura_803E4CE0.h"
 #include "pso/player/TObjPlayer_803E4954.h"
@@ -1167,7 +1168,6 @@ struct Vec_800B4824 { f32 x, y, z; };
 struct Ent16_800B4824 { s32 f0; s32 f4; s32 f8; s32 fC; };
 struct Ent8_800B4824 { s32 f0; u8 *f4; };
 
-s32 update_player_state__9TObjEneDDFv(void *, int, int);
 s32 pack_debug_text_position(s32 arg0, s32 arg1);
 s32 debug_draw_line(void *, void *, int, int);
 s32 debug_printf_at(s32, const char *, ...);
@@ -1194,7 +1194,7 @@ void render_debug__14TObjEneBm5WolfFPv(u8 *ene_bm5_wolf) {
         }
     }
     if (((VObj_18_26a62c *)(ene_bm5_wolf))->m8(lbl_805D9D70, TObjEneBm5Wolf__data_805D9D74) != 0) {
-        update_player_state__9TObjEneDDFv(ene_bm5_wolf, 0, 0);
+        ((TObjEneDD *)(ene_bm5_wolf))->draw_ground_shadow(0, 0);
         TObjFish::set_global_param(((TObjEneBm5Wolf *)ene_bm5_wolf)->texlist);
         push_matrix();
         post_translate_matrix(ene_bm5_wolf + 0x38);
@@ -3061,7 +3061,6 @@ typedef struct Wolf_800B7DDC {
 } Wolf_800B7DDC;
 
 extern "C" {
-f32 get_random_float__21TObjEneMe3ShinowaRealFv(f32);
 void *csnVector(void *from, void *to, u32 flags);
 s32 angle_diff_s16(s32, s32);
 
@@ -3155,7 +3154,7 @@ void advance_pose_turn__14TObjEneBm5WolfFPvi(Wolf_800B7DDC *s, s32 target) {
 }
 
 void TObjEneBm5Wolf::select_subtype() {
-    *(s32 *)&this->_pad3DC = (s32) get_random_float__21TObjEneMe3ShinowaRealFv((f32) (*(f32 *)((s8 *)((u8 *)this) + 0x354)));
+    *(s32 *)&this->_pad3DC = (s32) floor_to_float((f32) (*(f32 *)((s8 *)((u8 *)this) + 0x354)));
     if (this->parameters[1] >= (*(f32 *)&TObjEneBm5Wolf__data_805D9D8C)) {
         this->m_3d8 = 1;
         (*(s32 *)&this->model) = (s32) *(s32 *)((s8 *)(*(u8 **)((s8 *)(*(u8**)&TObjEneBm5Wolf__bml_resource) + 0x42C)) + 0x18);

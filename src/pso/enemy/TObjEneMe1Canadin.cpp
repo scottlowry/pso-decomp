@@ -1,3 +1,4 @@
+#include "pso/math/FloatRounding.h"
 #include "pso/enemy/TObjEnemy.h"
 #include "pso/enemy/TObjEneRe7Berura_803E4CE0.h"
 #include "pso/system/vector.h"
@@ -568,7 +569,6 @@ struct VObj_18_26a62c : VBase_18_26a62c {
 
 extern "C" {
 s32 is_main_phase_15__9TObjEneDDFv();
-s32 update_player_state__9TObjEneDDFv(void *, int, int);
 s32 defer_render__7TObjectFv(void *);
 s32 rotate_matrix_y(int, int);
 s32 rotate_matrix_z(int, int);
@@ -1791,9 +1791,7 @@ struct Tbl_8009F004 { Arr_8009F004 a, b, c, d; };
 f32 random_ratio__9TObjCharaFv(s32);
 u16 get_entity_id(void *);
 f32 newton_sqrtf(f32);
-f32 get_random_float__21TObjEneMe3ShinowaRealFv(f32);
 bool is_vec_xz_cross_negative(u8 *arg0, u8 *arg1);
-f32 get_status_value_f32__23TObjEneMe1CanadinLeaderFv(f32);
 void *create_timed_particle_emitter(void *owner, s32 id, s32 b, s32 c);
 void * __dt__26TObjEneDf2Bringer_Eff_RushFv(void *arg0, s16 arg1);
 void TObjEneMe1CanadinLeader__vt110(Leader_8009AB4C *obj, s32 mode);
@@ -2551,7 +2549,7 @@ void TObjEneMe1CanadinLeader__vt115(Leader_8009B274 *self, u32 id) {
         }
     }
     if (self->mode == 3) {
-        s32 k = get_status_value_f32__23TObjEneMe1CanadinLeaderFv((f32)self->max / (f32)self->info->f2C);
+        s32 k = ceil_to_float((f32)self->max / (f32)self->info->f2C);
         if (self->count <= self->max - k) {
             self->f3C0 = (s32)find_entity_by_id(self->f4C8);
             ((TObjEneMe1CanadinLeader *)(self->f3C0))->set_flag3c8_bit8();
@@ -2586,7 +2584,7 @@ void TObjEneMe1CanadinLeader__vt105(Leader_8009B43C *self) {
     s32 i;
     s32 j;
     Vec_8009B43C v;
-    n = (s32)get_status_value_f32__23TObjEneMe1CanadinLeaderFv((f32)self->max / (f32)self->info->f2C);
+    n = (s32)ceil_to_float((f32)self->max / (f32)self->info->f2C);
     if (n < 1) {
         n = 1;
     }
@@ -2815,7 +2813,7 @@ void TObjEneMe1Canadin::render_canadin_model_with_debug_type() {
         }
     }
     if (((VObj_18_26a62c *)(arg0))->m8(lbl_805D98A0, lbl_805D98A4) != 0) {
-        update_player_state__9TObjEneDDFv(arg0, 0, 0);
+        ((TObjEneDD *)(arg0))->draw_ground_shadow(0, 0);
         TObjPlayer::toggle_particle_effect();
         TObjFish::set_global_param((int) (*(s32 *)((s8 *)arg0 + 0x24)));
         push_matrix();
@@ -2851,7 +2849,7 @@ void TObjEneMe1Canadin::render() {
     }
     if (var_r30 != 0) {
         if (*(s32 *)((s8 *)arg0 + 0x3C8) & 0x01000000) {
-            update_player_state__9TObjEneDDFv(arg0, 0, 0);
+            ((TObjEneDD *)(arg0))->draw_ground_shadow(0, 0);
         }
         ((TObjEneDD *)arg0)->update_secondary_light();
         TObjFish::set_global_param((int) (*(s32 *)((s8 *)arg0 + 0x24)));
@@ -4353,7 +4351,7 @@ void TObjEneMe1Canadin::vfunc_106() {
 }
 
 void TObjEneMe1Canadin::update_by_field_0x354() {
-    if ((s32) get_random_float__21TObjEneMe3ShinowaRealFv(*(f32 *)((s8 *)this + 0x354)) == 0) {
+    if ((s32) floor_to_float(*(f32 *)((s8 *)this + 0x354)) == 0) {
         ((s32 (*)(void *))TObjEneMe1CanadinLeader__sub_8009E350)(this);
         return;
     }

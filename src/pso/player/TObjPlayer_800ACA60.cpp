@@ -1,3 +1,4 @@
+#include "pso/misc/SampledMotionPoints.h"
 #include "pso/player/PlayerAttackParams.h"
 #include "pso/player/TObjPlayer_803E4954.h"
 #include "types.h"
@@ -335,7 +336,6 @@ struct Moja_800AE7F4 {
     s32 f384;
 };
 
-struct Vec_800AF080 { f32 x, y, z; };
 
 struct FadeBase_800AF080 { u8 pad[0x14]; };
 
@@ -524,7 +524,6 @@ extern const f32 lbl_805D9C1C;
 extern const f32 lbl_805D9C30;
 
 s32 obj_is_hit_receivable();
-s32 lookup_entry_by_value__10TObjPlayerFPvf(void *);
 
 s32 mult_vec_array__10TObjPlayerFUll(int, int, void *, int);
 void set_matrix_identity(u8 *arg0);
@@ -553,7 +552,6 @@ extern const f32 lbl_805D9C40;
 extern const f32 lbl_805D9C44;
 extern const f32 lbl_805D9C48;
 void update_appearance_jump__11TObjEneMojaFv(Moja_800AE7F4 *self);
-s32 render_with_position_override__9TObjEnemyFPUcl(void *, f32 *, s32, f32);
 s32 get_camera_mode__11TCameraCtrlFv();
 s32 update__15RenderFadeStateFv(void *, s32, s32, s32);
 s32 restore_scene_lighting(s32, s32);
@@ -751,7 +749,7 @@ s32 TObjEneMoja::update_technique_state(void *self_800AD3D8) {
     id = self->target_id;
     if (id < 0x1000) {
         p = (u8 *)get_player_by_client_id(id);
-        if (p != NULL && ((TObjPlayer *)p)->get_field_3e4() == get_current_floor() &&
+        if (p != NULL && ((TObjPlayer *)p)->get_floor() == get_current_floor() &&
             ((TObjBase *)self)->get_room() == ((TObjBase *)p)->get_room()) {
             self->target = (Tgt_800AD3D8 *) p;
         } else {
@@ -945,7 +943,7 @@ s32 TObjEneMoja::update_punch_attack(void *self_800ADAAC) {
             }
         }
         if ((lbl_805D9C28 <= *(f32 *)(arg0 + 0xC0)) && (*(f32 *)(arg0 + 0xC0) <= lbl_805D9C2C)) {
-            e = lookup_entry_by_value__10TObjPlayerFPvf(lbl_805D50DC);
+            e = (s32)((SampledMotionPoints *)lbl_805D50DC)->lookup(((TObjMotion *)self_800ADAAC)->frame);
             if (e != 0) {
                 push_matrix();
                 set_matrix_identity(0);
@@ -1479,7 +1477,7 @@ void acquire_target__11TObjEneMojaFPv(u8 *arg0) {
         if (tid < 0x1000U) {
             q = (u8 *)get_player_by_client_id(tid);
             if (q != NULL) {
-                if (((TObjPlayer *)q)->get_field_3e4() == get_current_floor()) {
+                if (((TObjPlayer *)q)->get_floor() == get_current_floor()) {
                     ((TObjEneMoja *)arg0)->target = q;
                     return;
                 }
@@ -1497,7 +1495,7 @@ void acquire_target__11TObjEneMojaFPv(u8 *arg0) {
 }
 
 void render__11TObjEneMojaFv(u8 *arg0) {
-    Vec_800AF080 pos;
+    Vec pos;
     Fade_800AF080 *fade;
     s32 cam;
     s32 vis;
@@ -1566,7 +1564,7 @@ void render__11TObjEneMojaFv(u8 *arg0) {
         pos.x = lbl_805D9C58;
         pos.y = lbl_805D9BDC;
         pos.z = lbl_805D9C58;
-        render_with_position_override__9TObjEnemyFPUcl(arg0, &pos.x, 0, lbl_805D9C58);
+        ((TObjEnemy *)(arg0))->draw_ground_shadow(&pos, 0);
         break;
     }
 }
@@ -1587,7 +1585,7 @@ void TObjEneMoja::run_task() {
     if (temp_r3 < 0x1000U) {
         temp_r3_2 = (u8 *)(get_player_by_client_id(temp_r3));
         if (temp_r3_2 != NULL) {
-            if (((TObjPlayer *)temp_r3_2)->get_field_3e4() == get_current_floor()) {
+            if (((TObjPlayer *)temp_r3_2)->get_floor() == get_current_floor()) {
                 this->target = temp_r3_2;
                 goto done;
             }

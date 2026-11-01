@@ -1,4 +1,5 @@
 #include "types.h"
+#include "pso/misc/TWindowBase.h"
 #include "pso/object/TObjWarpBossMulti.h"
 #include "pso/misc/TWindowMessageYesNo.h"
 #include "pso/object/TObjCityMainWarpChallenge.h"
@@ -42,7 +43,6 @@ extern "C" {
 s32 get_current_floor(void);
 f32 xz_distance_squared(void *, void *);
 void *get_player_by_client_id(s32 i);
-void TWindow__close(u8 *arg0);
 char *strcpy(char *, const char *);
 extern s32 local_client_id;
 extern const f32 lbl_805DBCA8;
@@ -164,11 +164,11 @@ void TObjCityMainWarpChallenge::update_challenge_state() {
             break;
         }
         if (*(u32 *)((s8 *)arg0 + 0xB0) != 0) {
-            TWindow__close((u8 *)(*(u32 *)((s8 *)arg0 + 0xB0)));
+            ((TWindowBase *)(*(u32 *)((s8 *)arg0 + 0xB0)))->close();
             *(u32 *)((s8 *)arg0 + 0xB0) = 0;
         }
         if (*(u32 *)((s8 *)arg0 + 0x164) != 0) {
-            TWindow__close((u8 *)(*(u32 *)((s8 *)arg0 + 0x164)));
+            ((TWindowBase *)(*(u32 *)((s8 *)arg0 + 0x164)))->close();
             *(u32 *)((s8 *)arg0 + 0x164) = 0;
         }
         break;
@@ -237,7 +237,7 @@ void TObjCityMainWarpChallenge::count_players_in_warp_radius() {
     for (i = 0; i < 4; i++) {
         pl = (Player_80187438 *)get_player_by_client_id(i);
         if (pl != NULL) {
-            room = ((TObjPlayer *)pl)->get_field_3e4();
+            room = ((TObjPlayer *)pl)->get_floor();
             if (room == self->fbc) {
                 self->f15c = 1;
             }
@@ -257,11 +257,11 @@ void TObjCityMainWarpChallenge::count_players_in_warp_radius() {
         self->names[i][0] = 0;
     }
     if (old != self->count && self->window != 0) {
-        TWindow__close((u8 *)self->window);
+        ((TWindowBase *)self->window)->close();
         self->window = 0;
     }
     pl2 = (Player_80187438 *)get_player_by_client_id(local_client_id);
-    if (pl2 != NULL && ((TObjPlayer *)pl2)->get_field_3e4() == get_current_floor()) {
+    if (pl2 != NULL && ((TObjPlayer *)pl2)->get_floor() == get_current_floor()) {
         if (xz_distance_squared(pl2->pos, self->pos) <= (lbl_805DBCA8 + self->radius) * (lbl_805DBCA8 + self->radius)) {
             if (TObjWarpBossMulti::is_flag_clear(pl2) != 0) {
                 ((TObjPlayer *)pl2)->check_technique_flag();

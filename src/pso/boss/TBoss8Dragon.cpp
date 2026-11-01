@@ -1,3 +1,4 @@
+#include "pso/math/FloatRounding.h"
 #include "pso/enemy/TObjEnemy.h"
 #include "pso/enemy/TObjEneRe7Berura_803E4CE0.h"
 #include "pso/player/TObjPlayer_803E4954.h"
@@ -1412,7 +1413,6 @@ s32 register_object__6TLobbyFl(int);
 s32 register_boss__6TLobbyFl(int);
 void TLobby__sub_8001FE7C(void*, int);
 void TBoss1Dragon__sub_80027A80(u8 *arg0, u8 *arg1);
-f32 get_random_float__21TObjEneMe3ShinowaRealFv(f32);
 s32 set_frames__15ProtectionTimerFl(void *, int);
 s32 spawn_particle_effect_with_flags(void *, void *, int);
 void TObjEneEpsilon__sub_800B9384(u8 *arg0, s32 arg1, f32 farg0);
@@ -5771,7 +5771,7 @@ void TBoss8Dragon::freeze_player_at_self() {
     u8 *player;
     player = ((u8 * (*)(s32))get_player_by_client_id)(this->m_750);
     if (player != NULL) {
-        if (((TObjPlayer *)player)->get_field_3e4() == get_current_floor()) {
+        if (((TObjPlayer *)player)->get_floor() == get_current_floor()) {
             start_freeze__10TObjPlayerFv((int)player);
             set_frames__15ProtectionTimerFl(player + 0x644, 0x14);
             ((TObjPlayer *)player)->actorFlags = (s32) (((TObjPlayer *)player)->actorFlags & 0xFFEFFFDF);
@@ -5817,7 +5817,7 @@ u16 TBoss8Dragon::find_player_on_floor(void *arg0) {
     u16 i;
     p = ((u8 * (*)(s32))get_player_by_client_id)(TLobby__designated_client_id);
     if (p != NULL) {
-        if (((TObjPlayer *)p)->get_field_3e4() == get_current_floor()) {
+        if (((TObjPlayer *)p)->get_floor() == get_current_floor()) {
             return TLobby__designated_client_id;
         }
     }
@@ -5825,7 +5825,7 @@ u16 TBoss8Dragon::find_player_on_floor(void *arg0) {
         idx = (TLobby__designated_client_id + i + 1) % 4;
         p = ((u8 * (*)(s32))get_player_by_client_id)(idx);
         if (p != NULL) {
-            if (((TObjPlayer *)p)->get_field_3e4() == get_current_floor()) {
+            if (((TObjPlayer *)p)->get_floor() == get_current_floor()) {
                 break;
             }
         }
@@ -6216,6 +6216,34 @@ s32 TBoss8Dragon__sub_802FBFA4(u8 *arg0) {
 }
 #pragma pop
 
+#pragma push
+#pragma fp_contract on
+void TBoss8Dragon__sub_802FC060(void *arg0, s32 arg1) {
+    extern const f32 TBoss8Dragon__data_805DED50;
+    extern const f32 TBoss8Dragon__data_805DED60;
+    extern const f32 TBoss8Dragon__data_805DEDA8;
+    extern const f32 TBoss8Dragon__data_805DEE9C;
+    extern const f32 lbl_805DEECC;
+    extern const f32 lbl_805DEDEC;
+    f32 height;
+    f32 turn;
+    f32 half;
+
+    *(s32 *)((s8 *)arg0 + 0x650) = (s16) *(s32 *)((s8 *)arg0 + 0x650);
+    height = (f32) *(s32 *)((s8 *)arg0 + 0x650);
+    turn = (f32) angle_diff_s16(*(s32 *)((s8 *)arg0 + 0x60), arg1);
+    half = TBoss8Dragon__data_805DEDA8 * height;
+    *(f32 *)((s8 *)arg0 + 0x660) = -(TBoss8Dragon__data_805DED60 * (turn - half * TBoss8Dragon__data_805DEE9C)) / lbl_805DEECC;
+    *(f32 *)((s8 *)arg0 + 0x65C) = -(*(f32 *)((s8 *)arg0 + 0x660) * lbl_805DEDEC + height) / TBoss8Dragon__data_805DEE9C;
+    *(f32 *)((s8 *)arg0 + 0x670) = TBoss8Dragon__data_805DED50;
+    *(f32 *)((s8 *)arg0 + 0x664) = height;
+    *(f32 *)((s8 *)arg0 + 0x668) = -(*(f32 *)((s8 *)arg0 + 0x660) * lbl_805DEDEC);
+    half = TBoss8Dragon__data_805DEDA8 * *(f32 *)((s8 *)arg0 + 0x65C);
+    *(f32 *)((s8 *)arg0 + 0x66C) = TBoss8Dragon__data_805DEE9C * (half * TBoss8Dragon__data_805DEE9C + height);
+    *(s32 *)((s8 *)arg0 + 0x658) = *(s32 *)((s8 *)arg0 + 0x60);
+}
+#pragma pop
+
 void TBoss8Dragon::check_hit_result(s32 arg1, s32 arg2) {
     if (angle_diff_s16(arg1, arg2) >= 0) {
         this->m_654 = 1;
@@ -6301,7 +6329,7 @@ s32 select_target_in_front__12TBoss8DragonFPv(u8 *ene_dd_st) {
         enemy_set_target_id(ene_dd_st, ids[0]);
         return 1;
     }
-    enemy_set_target_id(ene_dd_st, ids[(s32)get_random_float__21TObjEneMe3ShinowaRealFv((f32)n * ((f32 (*)(void *))random_ratio__9TObjCharaFv)(ene_dd_st))]);
+    enemy_set_target_id(ene_dd_st, ids[(s32)floor_to_float((f32)n * ((f32 (*)(void *))random_ratio__9TObjCharaFv)(ene_dd_st))]);
     return 1;
 }
 
@@ -6323,7 +6351,7 @@ s32 TBoss8Dragon__sub_802FC580(Obj_802FC580 *obj, f32 *out) {
     s32 i;
     s32 n;
     f32 r;
-    i = (s32)get_random_float__21TObjEneMe3ShinowaRealFv(TBoss8Dragon__data_805DED64 * random_ratio__9TObjCharaFv());
+    i = (s32)floor_to_float(TBoss8Dragon__data_805DED64 * random_ratio__9TObjCharaFv());
     n = obj->count;
     if (n < 12) {
         obj->count = n + 1;
