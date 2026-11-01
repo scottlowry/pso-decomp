@@ -63,11 +63,19 @@ s32 TBoss7Crawfish__sub_80308ED8(void *self, f32 *pos) {
     s32 hit;
     f32 p0 = pos[0];
     f32 p1 = pos[1];
+    f32 x = *(f32 *)(((u8 *)self) + 0x38);
+    x = x;
+    x = x + p0;
     f32 p2 = pos[2];
+    buf[0] = x;
+    f32 y = *(f32 *)(((u8 *)self) + 0x3c);
+    p1 = p1 + y;
+    buf[1] = p1;
+    f32 z = *(f32 *)(((u8 *)self) + 0x40);
+    p2 = z + p2;
+    buf[2] = p2;
     new_var2 = 1;
-    buf[0] = (*((f32 *)(((u8 *)self) + 0x38))) + p0;
-    buf[new_var2] = p1 + (*((f32 *)(((u8 *)self) + 0x3c)));
-    buf[2] = p2 + (*((f32 *)(((u8 *)self) + 0x40)));
+    (void)new_var2;
     if (1)
         if (((CrawV_18_405891 *)self)->m16(buf) != 0) {
             if (sub_80308688__14TBoss7CrawfishFv(self)) {
