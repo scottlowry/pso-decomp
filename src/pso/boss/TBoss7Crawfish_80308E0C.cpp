@@ -3,6 +3,13 @@
 #include "pso/boss/TBoss7Crawfish.h"
 
 struct Pair_80308F8C { void *a; s32 b; };
+struct CrawV_18_405891 { char pad[0x18];
+    virtual void m0(); virtual void m1(); virtual void m2(); virtual void m3();
+    virtual void m4(); virtual void m5(); virtual void m6(); virtual void m7();
+    virtual void m8(); virtual void m9(); virtual void m10(); virtual void m11();
+    virtual void m12(); virtual void m13(); virtual void m14(); virtual void m15();
+    virtual u32 m16(f32 *);
+};
 
 struct Craw_80308F8C {
     u8 pad0[0x38];
@@ -20,6 +27,8 @@ struct Craw_80308F8C {
 
 extern "C" {
 void *create_particle_emitter(void *pos, s32 id);
+s32 sub_80308688__14TBoss7CrawfishFv(void *);
+void update_prev_position__9TObjEnemyFv(void *);
 
 extern const f32 lbl_805DF0F8;
 
@@ -47,6 +56,32 @@ void TBoss7Crawfish::update_attack_state() {
     if (*(s32 *)((s8 *)this->bodies + 0x18) & 0x02000000) {
         register_attack_hits();
     }
+}
+s32 TBoss7Crawfish__sub_80308ED8(void *self, f32 *pos) {
+    f32 buf[3];
+    int new_var2;
+    s32 hit;
+    f32 p0 = pos[0];
+    f32 p1 = pos[1];
+    f32 p2 = pos[2];
+    new_var2 = 1;
+    buf[0] = (*((f32 *)(((u8 *)self) + 0x38))) + p0;
+    buf[new_var2] = p1 + (*((f32 *)(((u8 *)self) + 0x3c)));
+    buf[2] = p2 + (*((f32 *)(((u8 *)self) + 0x40)));
+    if (1)
+        if (((CrawV_18_405891 *)self)->m16(buf) != 0) {
+            if (sub_80308688__14TBoss7CrawfishFv(self)) {
+                *((f32 *)(((u8 *)self) + 0x38)) = buf[0];
+                *((f32 *)(((u8 *)self) + 0x40)) = buf[2];
+                hit = 1;
+            } else {
+                hit = 0;
+            }
+        } else {
+            hit = 0;
+        }
+    update_prev_position__9TObjEnemyFv(self);
+    return hit;
 }
 void TBoss7Crawfish::change_state(s32 state) {
     Craw_80308F8C *o = (Craw_80308F8C *)this;
