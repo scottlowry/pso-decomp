@@ -52,6 +52,8 @@ void THunterGuildWarning__sub_80211774(void *selfv) {
         u16 id = (u16)raw;
         if (((!self) && (!self)) && (!self)) {
         }
+        if (!self) {
+        }
         if (get_player_by_client_id(id) != 0) {
             self->w[(u16)raw] = (u32)create_message_window__6TLobbyFllUls(get_window_layout_position(0x31), &pair, 1, id);
         }
@@ -86,7 +88,7 @@ void THunterGuildWarning__sub_80211774(void *selfv) {
         s32 vm = (0, msg);
         s32 i;
         for (i = 0; i < 4; i++) {
-            if ((u16)raw == i) {
+            if ((u16)(raw & 0xFFFFFFFFFFFFFFFFu) == i) {
                 continue;
             }
             if (get_player_by_client_id(i) != 0) {
