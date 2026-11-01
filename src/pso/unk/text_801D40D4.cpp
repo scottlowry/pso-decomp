@@ -127,7 +127,7 @@ s32 export_inventory_entry__10TObjPlayerFiPv(s32 arg0, u8 *arg1) {
 }
 
 s32 is_item_valid__9TItemListFl(void *);
-u8 *alloc__23TAdSinglePlyChrSelectGCFv(s32);
+u8 *__nw__FUl(u32);
 
 s32 TObjPlayer__sub_801D4368(TObjPlayer *arg0) {
     u8 *obj;
@@ -152,7 +152,7 @@ s32 TObjPlayer__sub_801D4368(TObjPlayer *arg0) {
     if (*(s16 *)((s8 *)arg0 + 0x1c) > 0x1e || *(s16 *)((s8 *)arg0 + 0x1c) < 1) {
         return 0;
     }
-    obj = alloc__23TAdSinglePlyChrSelectGCFv(8);
+    obj = __nw__FUl(8);
     if (obj != NULL) {
         obj = TObjPlayer__sub_801D46D4(obj, *(s16 *)((s8 *)arg0 + 0x1c));
     }
