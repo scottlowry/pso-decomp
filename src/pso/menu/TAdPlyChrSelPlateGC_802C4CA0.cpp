@@ -1,6 +1,8 @@
 #include "types.h"
 #include "pso/misc/TWindowSubSymbolChatPartsSet.h"
 #include "pso/TAdPlyChrSelPlateGC.h"
+#include "pso/TMainTask.h"
+#include "pso/system/ModelDrawContext.h"
 struct O_802C4D5C { u8 pad[0x2a8]; f32 v[1]; };
 
 typedef struct Q_802C4D88 { s8 b[4]; } Q_802C4D88;
@@ -121,5 +123,36 @@ void TAdPlyChrSelPlateGC::run_task() {
     }
 }
 #pragma pop
+typedef struct V_802C4CA0 { f32 x, y; } V_802C4CA0;
+
+typedef struct S_802C4CA0 {
+    u8 pad0[0x1C];
+    V_802C4CA0 v1C[32];
+    V_802C4CA0 v11C[32];
+    s32 pad21C[2];
+    s32 f224;
+    s32 a[32];
+    f32 fl[32];
+    s32 cw[32];
+} S_802C4CA0;
+
+void TAdEnterSerialAccessGC__sub_802C4B64(void *, void *, void *, int);
+void TAdPlyChrSelPlateGC::render() {
+    S_802C4CA0 *self = (S_802C4CA0 *)this;
+    s32 w;
+    u32 i;
+    if (TMainTask::get_render_pass() != 1) {
+        set_color_blending_mode(0, 8);
+        set_color_blending_mode(1, 10);
+        for (i = 0; i < (u32)self->f224; i++) {
+            if (self->a[i] != 0) {
+                w = self->cw[i];
+                TAdEnterSerialAccessGC__sub_802C4B64(self, &self->v1C[i], &w, i);
+            }
+        }
+        set_color_blending_mode(0, 8);
+        set_color_blending_mode(1, 6);
+    }
+}
 
 }
