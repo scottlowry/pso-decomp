@@ -1,0 +1,15 @@
+orig words=15 ours words=15
+positional raw-byte EXACT: 7/15
+reloc-pending (resolve-at-link class): 8/15 -> [2, 4, 5, 6, 7, 8, 9, 10]
+hard byte-level positional fails: 0 
+  [ 2] R_PPC_ADDR16_HA TPlyCharData__global_character_data        linked=0x3c608051 orig=0x3c608051 MATCH
+  [ 4] R_PPC_ADDR16_LO TPlyCharData__global_character_data        linked=0x3863ddec orig=0x3863ddec MATCH
+  [ 5] R_PPC_REL24     __ct__12TPlyCharDataFv                     linked=0x4bece581 orig=0x4bece581 MATCH
+  [ 6] R_PPC_ADDR16_HA __dt__12TPlyCharDataFv                     linked=0x3c808007 orig=0x3c808007 MATCH
+  [ 7] R_PPC_ADDR16_HA TPlyCharData__global_destructor_registration linked=0x3ca08051 orig=0x3ca08051 MATCH
+  [ 8] R_PPC_ADDR16_LO __dt__12TPlyCharDataFv                     linked=0x38841dfc orig=0x38841dfc MATCH
+  [ 9] R_PPC_ADDR16_LO TPlyCharData__global_destructor_registration linked=0x38a5dde0 orig=0x38a5dde0 MATCH
+  [10] R_PPC_REL24     __register_global_object                   linked=0x481f2a55 orig=0x481f2a55 MATCH
+linked-word proof: 8/8 MATCH  =>  FULL 15/15 RAW-WORD EQUAL AT LINK
+content multiset identical: 15/15  orig-only={}  ours-only={}
+normalized-token positional LCS: 15/15
