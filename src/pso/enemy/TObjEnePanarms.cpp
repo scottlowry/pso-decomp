@@ -1564,6 +1564,194 @@ Obj_800E24A4 *fn_800E24A4(Obj_800E24A4 *arg0, s16 arg1) {
     return arg0;
 }
 
+extern "C" {
+s32 __ct__9TObjEnemyFP7TObject(s32, s32);
+void __construct_array(void *, void *, void *, s32, s32);
+void __ct__15RenderFadeStateFv(void *);
+s32 init_collision_body_parts(void *, void *, s32);
+s32 TObjFish__sub_8001EDB0(void *, s32);
+void *get_bml_model(void *, u32);
+void *VecCopy__FP3VecPC3Vec(void *, void *);
+s32 set_field_d8__10TObjMotionFl(void *, s32);
+s32 set_field_dc__10TObjMotionFl(void *, s32);
+s32 set_animation__10TObjMotionFs(void *, s16);
+void reset_photon_effect__12TBoss3VoloptFv(void *);
+s32 TObjFish__sub_800E3124(u8 *, s32);
+extern s32 lbl_8043CD38[];
+extern s32 lbl_805D2AB8;
+}
+
+struct VBase_18_252c { char pad[0x18]; };
+
+struct VObj_18_252c : VBase_18_252c {
+    virtual void m0(); virtual void m1(); virtual void m2(); virtual void m3(); virtual void m4(); virtual void m5();
+    virtual void m6(); virtual void m7(); virtual void m8(); virtual void m9(); virtual void m10(); virtual void m11();
+    virtual void m12(); virtual void m13(); virtual void m14(); virtual void m15(); virtual void m16(); virtual void m17();
+    virtual void m18(); virtual void m19(); virtual void m20(); virtual void m21(); virtual void m22(); virtual void m23();
+    virtual void m24(); virtual void m25(); virtual void m26(); virtual void m27(); virtual void m28(); virtual void m29();
+    virtual void m30(); virtual void m31(); virtual void m32(); virtual void m33(); virtual void m34(); virtual void m35();
+    virtual void m36(); virtual void m37(); virtual void m38(); virtual void m39(); virtual void m40(); virtual void m41();
+    virtual void m42(); virtual void m43(); virtual void m44(); virtual void m45(); virtual void m46(); virtual void m47();
+    virtual void m48(); virtual void m49(); virtual void m50(); virtual void m51(); virtual void m52(); virtual void m53();
+    virtual void m54(); virtual void m55(); virtual void m56(); virtual void m57(); virtual void m58(); virtual void m59();
+    virtual void m60(); virtual void m61(); virtual void m62(); virtual void m63(); virtual void m64(); virtual void m65();
+    virtual void m66(); virtual void m67(); virtual void m68(); virtual void m69(); virtual void m70(); virtual void m71();
+    virtual void m72(); virtual void m73(); virtual void m74(); virtual void m75(); virtual void m76(); virtual void m77();
+    virtual void m78();
+    virtual void m79(s32 *);
+};
+
+struct BARA_800E252C {
+    s32 f00;
+    u8 pad1[0x18 - 0x04];
+    void *vt;
+    u8 pad2[0x24 - 0x1C];
+    s32 f24;
+    u8 pad2b[0x34 - 0x28];
+    s32 f34;
+    u8 v38[0xC];
+    u8 v44[0xC];
+    u8 v50[0xC];
+    u8 pad3[0x74 - 0x5C];
+    u8 v74[0xC];
+    u8 pad4[0x2A8 - 0x80];
+    s32 f2A8;
+    u8 pad5[0x2FC - 0x2AC];
+    u8 v2FC[0xC];
+    f32 f308;
+    f32 f30C;
+    f32 f310;
+    u8 pad6[0x32C - 0x314];
+    s16 f32C;
+    u8 pad7[0x33E - 0x32E];
+    s16 f33E;
+    u8 pad8[0x350 - 0x340];
+    s32 f350;
+    u8 pad9[0x374 - 0x354];
+    s32 f374;
+    s32 f378;
+    s32 f37C;
+    s32 f380;
+    u8 pad10[0x3A4 - 0x384];
+    u8 v3A4[0xC];
+    f32 f3B0;
+    u8 pad11[0x3C4 - 0x3B4];
+    s32 f3C4;
+    u8 pad12[0x3DC - 0x3C8];
+    u32 f3DC;
+    u8 v3E0[0xC];
+    u8 f3EC[4][0x1C];
+    u8 pad13[0x460 - 0x45C];
+    f32 f460;
+    f32 f464;
+    f32 f468;
+    f32 f46C;
+};
+
+typedef char BARA_800E252C_size[sizeof(BARA_800E252C) == 0x470 ? 1 : -1];
+
+struct Key_800E252C { s32 a; s16 b; s16 c; s32 d; s32 e; s32 f; s32 g; };
+
+/* Blob window at .data 0x80495458: collision-part table (0x000), effect desc
+ * (0x49C), per-subtype model ids (0x4BC), fade-model vtable (0x4DC). */
+struct Blob_80495458 {
+    u8 parts[0x49C];
+    u8 desc[0x20];
+    s32 model_ids[8];
+    u8 vtbl[4];
+};
+
+extern "C" Blob_80495458 lbl_80495458;
+
+#pragma push
+#pragma opt_common_subs off
+#pragma opt_propagation off
+#define self ((BARA_800E252C *)arg0)
+s32 TObjEnePanBARA__ct(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    Blob_80495458 *blob = &lbl_80495458;
+    Key_800E252C key;
+    s32 i;
+
+    __ct__9TObjEnemyFP7TObject(arg0, arg1);
+    self->vt = (void *)blob->vtbl;
+    __construct_array((void *)self->f3EC, (void *)__ct__15RenderFadeStateFv, (void *)__dt__15RenderFadeStateFv, 0x1C, 4);
+    self->f00 = lbl_805D2AB8;
+    ((TObjChara *)self)->add_flags_2e4(2);
+    ((VObj_18_252c *)self)->m79((s32 *)arg2);
+    if (((TObjEnemy *)self)->exchange_object_state((s32)&key, (s16)1) != 0) {
+        key.a = 0;
+        key.c = 0;
+        ((TObjEnemy *)self)->exchange_object_state((s32)&key, (s16)0);
+    }
+    self->f380 = arg3;
+    self->f24 = TObjFish__sub_8001EDB0((void *)TObjEnePanarms__entry_params_resource, lbl_8043CD38[self->f380]);
+    self->f34 = (s32)get_bml_model((void *)TObjEnePanarms__entry_params_resource, (u32)lbl_8043CD38[self->f380]);
+    VecCopy__FP3VecPC3Vec(self->v44, VecCopy__FP3VecPC3Vec(self->v50, VecCopy__FP3VecPC3Vec(self->v74, self->v38)));
+    self->f37C = init_collision_body_parts(self, (void *)blob->parts, 1);
+    set_field_d8__10TObjMotionFl(self, blob->model_ids[self->f380]);
+    set_field_dc__10TObjMotionFl(self, *(s32 *)(TObjEnePanarms__entry_params_resource + 0x430));
+    set_animation__10TObjMotionFs(self, 0);
+    set_field_b8__10TObjMotionFs(self, 0);
+    VecCopy__FP3VecPC3Vec(self->v2FC, self->v38);
+    self->f308 = self->f30C = self->f310 = (f32)TObjEnePanarms__data_805DA524;
+    self->f2A8 = 0;
+    switch (self->f380) {
+    case 0:
+        ((TObjEnemy *)self)->bind_enemy_combat_stats((u8 *)TLobby::register_boss(0x32), (u8 *)TLobby::dispatch_shared_handler_b(0x32), (u8 *)TLobby::register_object(0x32));
+        break;
+    case 1:
+        ((TObjEnemy *)self)->bind_enemy_combat_stats((u8 *)TLobby::register_boss(0x33), (u8 *)TLobby::dispatch_shared_handler_b(0x33), (u8 *)TLobby::register_object(0x33));
+        break;
+    default:
+        return (s32)arg0;
+    }
+    self->f33E = self->f32C;
+    reset_photon_effect__12TBoss3VoloptFv(self);
+    self->f350 = 0;
+    if (self->f380 == 0) {
+        ((TObjEnemy *)self)->set_param(0x17);
+    } else {
+        ((TObjEnemy *)self)->set_param(0x16);
+    }
+    self->f3DC = (u32)TObjFish__sub_800E3124((u8 *)blob->desc, (s32)self->v3E0);
+    if (self->f3DC == 0) {
+        return (s32)arg0;
+    }
+    self->f3B0 = (f32)TObjEnePanarms__data_805DA524;
+    self->f3C4 = 0;
+    if (self->f380 == 0) {
+        self->f460 = *(f32 *)TLobby::dispatch_shared_handler_a(0x32);
+        self->f464 = *(f32 *)((u8 *)TLobby::dispatch_shared_handler_a(0x32) + 4);
+    } else {
+        self->f460 = *(f32 *)TLobby::dispatch_shared_handler_a(0x33);
+        self->f468 = *(f32 *)((u8 *)TLobby::dispatch_shared_handler_a(0x33) + 4);
+        if (self->f468 < (f32)TObjEnePanarms__data_805DA524) {
+            self->f468 = (f32)TObjEnePanarms__data_805DA524;
+        } else if (self->f468 > (f32)TObjEnePanarms__data_805DA530) {
+            self->f468 = (f32)TObjEnePanarms__data_805DA530;
+        }
+        self->f46C = *(f32 *)((u8 *)TLobby::dispatch_shared_handler_a(0x33) + 8);
+        if (self->f46C < (f32)TObjEnePanarms__data_805DA524) {
+            self->f46C = (f32)TObjEnePanarms__data_805DA524;
+        } else if (self->f46C > (f32)TObjEnePanarms__data_805DA530) {
+            self->f46C = (f32)TObjEnePanarms__data_805DA530;
+        }
+        if (self->f468 + self->f46C > (f32)TObjEnePanarms__data_805DA530) {
+            self->f46C = (f32)TObjEnePanarms__data_805DA530 - self->f468;
+        }
+    }
+    VecCopy__FP3VecPC3Vec(self->v3A4, self->v38);
+    for (i = 0; i < 4; i++) {
+        ((RenderFadeState *)(self->f3EC[i]))->activate_and_dispatch();
+    }
+    self->f378 = 0;
+    self->f374 = 0;
+    TObjEnePanarms__sub_800E1C98(self, 0);
+    return (s32)arg0;
+}
+#undef self
+#pragma pop
+
 s32 TObjEnePanarms::create_bara(s32 arg0, s32 arg1) {
     s32 var_r31;
     s32 var_r4;
