@@ -20,11 +20,11 @@ extern u8 *tl_05;
 void fn_80049FD8(TObjVoloptPillar *pillar) {
     BmlModelEntry *models = boss3_volopt_resources->models;
     TObjChipParams params = volopt_pillar_chip_params;
-    f32 x = pillar->position.x;
-    f32 y = pillar->position.y;
     f32 z = pillar->position.z;
-    s32 model = models[0xE].model;
+    f32 y = pillar->position.y;
+    f32 x = pillar->position.x;
     s32 textures = models[0xE].m_c;
+    s32 model = models[0xE].model;
     params.pos[0] = x;
     params.pos[1] = y;
     params.pos[2] = z;
