@@ -23,8 +23,9 @@ void fn_80049FD8(TObjVoloptPillar *pillar) {
     f32 z = pillar->position.z;
     f32 y = pillar->position.y;
     f32 x = pillar->position.x;
-    s32 textures = models[0xE].m_c;
+    s32 textures;
     s32 model = models[0xE].model;
+    textures = models[0xE].m_c;
     params.pos[0] = x;
     params.pos[1] = y;
     params.pos[2] = z;
