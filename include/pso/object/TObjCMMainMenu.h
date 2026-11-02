@@ -42,6 +42,14 @@ public:
     static s32 get_current_char_flag();
     static u8 is_state_4();
     static u8 is_state_3();
+    // Era-mangled members referenced as pointer-to-member constants by the
+    // boot-seed ctor's action table (definitions carry the mangled names).
+    void open_assign_menu(void *);
+    void open_hair_menu(void *);
+    void open_proportion_menu(void *);
+    void open_name_menu(void *);
+    void open_auto_mk_menu(void *);
+    void confirm_selection(void *);
     static void *create_fade(void *arg0, void *arg1);
     static void *create_fade_effect(void *arg0, void *arg1);
     static s32 try_pay_fee();

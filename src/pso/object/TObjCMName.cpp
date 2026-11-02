@@ -487,27 +487,35 @@ extern void *lbl_804DBA88[6];
 extern void *lbl_804DBAA0[2];
 extern void *lbl_804DBAA8[3];
 extern void *lbl_804DBAB4[5];
-void *TObjCMMainMenu__data_804DB950[30] = {
-    (void *)0x0, (void *)0xffffffff, (void *)&open_assign_menu__14TObjCMMainMenuFPv, (void *)0x0,
-    (void *)0xffffffff, (void *)&open_assign_menu__14TObjCMMainMenuFPv, (void *)0x0, (void *)0xffffffff,
-    (void *)&open_hair_menu__14TObjCMMainMenuFPv, (void *)0x0, (void *)0xffffffff, (void *)&open_assign_menu__14TObjCMMainMenuFPv,
-    (void *)0x0, (void *)0xffffffff, (void *)&open_assign_menu__14TObjCMMainMenuFPv, (void *)0x0,
-    (void *)0xffffffff, (void *)&open_assign_menu__14TObjCMMainMenuFPv, (void *)0x0, (void *)0xffffffff,
-    (void *)&open_proportion_menu__14TObjCMMainMenuFPv, (void *)0x0, (void *)0xffffffff, (void *)&open_name_menu__14TObjCMMainMenuFPv,
-    (void *)0x0, (void *)0xffffffff, (void *)&open_auto_mk_menu__14TObjCMMainMenuFPv, (void *)0x0,
-    (void *)0xffffffff, (void *)&confirm_selection__14TObjCMMainMenuFPv,
+// Boot seed for the creation-menu main action table. A file-scope array of
+// {mode id, pointer-to-member-function} entries cannot be statically emitted:
+// CFront gathers the 10 constant PMF words into a dense .data template image
+// (the 0x78-byte blob at 0x804DB950, ten {delta, marker, fnptr} triples) and
+// synthesizes the ctor (era TObjCMMainMenu__sub_80298DE0, registered in
+// .ctors at 0x80433FC0) that copies each triple over the zeroed PMF slot of
+// the instance (0x804DB9C8, stride 0x10, +0x4..0xC; the id word is baked).
+// Consumers: TObjCMMainMenu creation-menu dispatch reads id at +0x10*i
+// (select_char_menu / AssignMenu create) and calls the action at +0x10*i+4.
+typedef void (TObjCMMainMenu::*CreationMenuAction)(void *);
+
+struct CreationMenuActionEntry {
+    s32 menu_mode;
+    CreationMenuAction action;
 };
-void *TObjCMMainMenu__data_804DB9C8[40] = {
-    (void *)0x3, (void *)0x0, (void *)0x0, (void *)0x0,
-    (void *)0x2, (void *)0x0, (void *)0x0, (void *)0x0,
-    (void *)0x4, (void *)0x0, (void *)0x0, (void *)0x0,
-    (void *)0x0, (void *)0x0, (void *)0x0, (void *)0x0,
-    (void *)0x1, (void *)0x0, (void *)0x0, (void *)0x0,
-    (void *)0x1, (void *)0x0, (void *)0x0, (void *)0x0,
-    (void *)0xffffffff, (void *)0x0, (void *)0x0, (void *)0x0,
-    (void *)0xffffffff, (void *)0x0, (void *)0x0, (void *)0x0,
-    (void *)0xffffffff, (void *)0x0, (void *)0x0, (void *)0x0,
-    (void *)0xffffffff, (void *)0x0, (void *)0x0, (void *)0x0,
+
+typedef char CreationMenuActionEntrySize[sizeof(CreationMenuActionEntry) == 0x10 ? 1 : -1];
+
+CreationMenuActionEntry TObjCMMainMenu__data_804DB9C8[10] = {
+    {3, &TObjCMMainMenu::open_assign_menu},
+    {2, &TObjCMMainMenu::open_assign_menu},
+    {4, &TObjCMMainMenu::open_hair_menu},
+    {0, &TObjCMMainMenu::open_assign_menu},
+    {1, &TObjCMMainMenu::open_assign_menu},
+    {1, &TObjCMMainMenu::open_assign_menu},
+    {-1, &TObjCMMainMenu::open_proportion_menu},
+    {-1, &TObjCMMainMenu::open_name_menu},
+    {-1, &TObjCMMainMenu::open_auto_mk_menu},
+    {-1, &TObjCMMainMenu::confirm_selection},
 };
 void *lbl_804DBA68[8] = {
     (void *)0x1, (void *)0x2, (void *)0x3, (void *)0x4,
