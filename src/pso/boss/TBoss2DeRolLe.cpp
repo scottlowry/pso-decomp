@@ -3768,46 +3768,57 @@ static inline u32 swap_80033684(u32 x) {
     t = __rlwimi(t, x, 16, 8, 15);
     return t;
 }
-void update_pulsing_colors__13TBoss2DeRolLeFPv(u8 *arg0) {
-    s32 i;
-    f32 t;
-    u8 v;
-    u32 c;
-    f32 add;
-    f32 mul;
-    f32 scale;
-    f32 half;
-    f32 wrap;
-    f32 step;
-    f32 ph;
-    t = *(f32 *)((s8 *)arg0 + 0x6D4);
-    if (t > TBoss2DeRolLe__data_805D82BC) {
-        t = TBoss2DeRolLe__data_805D82A0 - t;
+static inline u32 inline_fn(int arg0, u8 arg1, int arg2, u8 arg3)
+{
+  return pack_80033684(arg0, arg1, arg2, arg3);
+}
+void update_pulsing_colors__13TBoss2DeRolLeFPv(u8 *arg0)
+{
+  s32 i;
+  f32 t;
+  u8 v;
+  u32 c;
+  f32 add;
+  f32 mul;
+  f32 scale;
+  f32 half;
+  f32 wrap;
+  f32 step;
+  f32 ph;
+  t = *((f32 *) (((s8 *) arg0) + 0x6D4));
+  if (t > TBoss2DeRolLe__data_805D82BC)
+  {
+    t = TBoss2DeRolLe__data_805D82A0 - t;
+  }
+  v = __cvt_fp2unsigned(lbl_805D842C * ((TBoss2DeRolLe__data_805D8328 * t) + TBoss2DeRolLe__data_805D8334));
+  c = swap_80033684(inline_fn(0xFF, v, 0, v >> 2));
+  *boss2_derolle_primary_color_targets[0] = c;
+  *boss2_derolle_primary_color_targets[2] = c;
+  c = swap_80033684(inline_fn(0xFF, v, 0, v >> 2));
+  *boss2_derolle_primary_color_targets[1] = swap_80033684(inline_fn(0xFF, v, v, 0));
+  ph = *((f32 *) (((s8 *) arg0) + 0x6D4));
+  step = TBoss2DeRolLe__data_805D8300;
+  wrap = TBoss2DeRolLe__data_805D82A0;
+  half = TBoss2DeRolLe__data_805D82BC;
+  scale = lbl_805D842C;
+  mul = TBoss2DeRolLe__data_805D8328;
+  add = TBoss2DeRolLe__data_805D8334;
+  for (i = 0; i < 10; i++)
+  {
+    ph += step;
+    if (ph > wrap)
+    {
+      ph -= wrap;
     }
-    v = __cvt_fp2unsigned(lbl_805D842C * (TBoss2DeRolLe__data_805D8328 * t + TBoss2DeRolLe__data_805D8334));
-    c = swap_80033684(pack_80033684(0xFF, v, 0, v >> 2));
-    *boss2_derolle_primary_color_targets[0] = c;
-    *boss2_derolle_primary_color_targets[2] = c;
-    *boss2_derolle_primary_color_targets[1] = swap_80033684(pack_80033684(0xFF, v, v, 0));
-    step = TBoss2DeRolLe__data_805D8300;
-    wrap = TBoss2DeRolLe__data_805D82A0;
-    half = TBoss2DeRolLe__data_805D82BC;
-    scale = lbl_805D842C;
-    mul = TBoss2DeRolLe__data_805D8328;
-    ph = *(f32 *)((s8 *)arg0 + 0x6D4);
-    add = TBoss2DeRolLe__data_805D8334;
-    for (i = 0; i < 10; i++) {
-        ph += step;
-        if (ph > wrap) {
-            ph -= wrap;
-        }
-        t = ph;
-        if (ph > half) {
-            t = TBoss2DeRolLe__data_805D82A0 - ph;
-        }
-        v = __cvt_fp2unsigned(scale * (mul * t + add));
-        *boss2_derolle_segment_color_targets[i] = swap_80033684(pack_80033684(0xFF, v, v, 0));
+    t = ph;
+    if (ph > half)
+    {
+      t = TBoss2DeRolLe__data_805D82A0 - ph;
     }
+    v = __cvt_fp2unsigned(scale * ((mul * t) + add));
+    *boss2_derolle_segment_color_targets[i] = swap_80033684(inline_fn(0xFF, v, v, 0));
+  }
+
 }
 #pragma pop
 
