@@ -2688,6 +2688,16 @@ s32 TLobby__sub_803CB844(void) {
     return lbl_805D7590 != 0;
 }
 
+// Thread/stack storage defined above first use: the era object computed the
+// anchor-relative symbol differences at compile time (plain-displacement
+// addressing); extern-only visibility forces @ha/@l pairs per symbol.
+OSThread adxm_worker_thread;
+OSThread adxm_vblank_thread;
+OSThread adxm_busy_wait_thread;
+u8 adxm_worker_stack[ADXM_WORKER_STACK_BYTES];
+u8 adxm_vblank_stack[ADXM_VBLANK_STACK_BYTES];
+u8 adxm_busy_wait_stack[ADXM_BUSY_WAIT_STACK_BYTES];
+
 void TLobby__sub_803CB858(s32 *arg0) {
     u8 *pool = (u8 *)&adxm_worker_thread;
     lbl_805E0D78;
@@ -2814,10 +2824,4 @@ RecoveredGlobal_803C6830_lbl_80573AC0 adx_encoder_context_pool;
 RecoveredGlobal_803C90B0_lbl_80575140 adx_stream_read_requests;
 Ch_803CB5C4 adx_decoder_channel_pool[16];
 
-OSThread adxm_worker_thread;
-OSThread adxm_vblank_thread;
-OSThread adxm_busy_wait_thread;
-u8 adxm_worker_stack[ADXM_WORKER_STACK_BYTES];
-u8 adxm_vblank_stack[ADXM_VBLANK_STACK_BYTES];
-u8 adxm_busy_wait_stack[ADXM_BUSY_WAIT_STACK_BYTES];
 typedef char AdxmOriginalThreadSize[sizeof(OSThread)==0x310 ? 1 : -1];
