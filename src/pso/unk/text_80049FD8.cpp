@@ -1,1 +1,46 @@
+#include "pso/unk/text_80049FD8.h"
 
+#include "pso/boss/TBoss3Volopt.h"
+#include "pso/object/TObjVoloptPillar.h"
+#include "pso/system/BmlResource.h"
+
+extern "C" {
+s32 __nw__7TObjectFUl(s32);
+extern u8 *tl_05;
+}
+
+// The three debris chips a Vol Opt pillar bursts into when its pre-crash
+// timer expires: the shared chip template, moved to the pillar's current
+// position and tagged with the boss03 model/texture entry 0xE.
+void fn_80049FD8(TObjVoloptPillar *pillar) {
+    BmlModelEntry *models = boss3_volopt_resources->models;
+    TObjChipParams params = volopt_pillar_chip_params;
+    f32 x = pillar->position.x;
+    f32 y = pillar->position.y;
+    f32 z = pillar->position.z;
+    s32 model = models[0xE].model;
+    s32 textures = models[0xE].m_c;
+    params.pos[0] = x;
+    params.pos[1] = y;
+    params.pos[2] = z;
+    params.model = model;
+    params.textures = textures;
+    {
+        u8 *o = (u8 *)__nw__7TObjectFUl(0x234);
+        if (o != NULL) {
+            __ct__8TObjChipFP7TObjectP14TObjChipParams(o, tl_05, (u8 *)&params);
+        }
+    }
+    {
+        u8 *o = (u8 *)__nw__7TObjectFUl(0x234);
+        if (o != NULL) {
+            __ct__8TObjChipFP7TObjectP14TObjChipParams(o, tl_05, (u8 *)&params);
+        }
+    }
+    {
+        u8 *o = (u8 *)__nw__7TObjectFUl(0x234);
+        if (o != NULL) {
+            __ct__8TObjChipFP7TObjectP14TObjChipParams(o, tl_05, (u8 *)&params);
+        }
+    }
+}
