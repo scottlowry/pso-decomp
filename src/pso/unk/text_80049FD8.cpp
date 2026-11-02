@@ -12,6 +12,11 @@ extern u8 *tl_05;
 // The three debris chips a Vol Opt pillar bursts into when its pre-crash
 // timer expires: the shared chip template, moved to the pillar's current
 // position and tagged with the boss03 model/texture entry 0xE.
+// opt_propagation off: stops the two models-pointer loads from being
+// copy-propagated ahead of the template-copy block (fixes the f2/f0
+// position-store role pair; scheduler hoist itself is spelling-invariant).
+#pragma push
+#pragma opt_propagation off
 void fn_80049FD8(TObjVoloptPillar *pillar) {
     BmlModelEntry *models = boss3_volopt_resources->models;
     TObjChipParams params = volopt_pillar_chip_params;
@@ -44,3 +49,4 @@ void fn_80049FD8(TObjVoloptPillar *pillar) {
         }
     }
 }
+#pragma pop
