@@ -1,0 +1,7 @@
+orig words=858 ours words=858
+positional raw-byte EXACT: 854/858; resolve-at-link class: 4; hard fails: 0
+linked-word proof: 4/4 MATCH (0 diff)
+content multiset: 856/858  orig-only=2 ours-only=2
+  orig-only sample: [('lis r3 lbl_804dfc50@ha', 1), ('addi r4 r3 lbl_804dfc50@l', 1)]
+  ours-only sample: [('lis r3 ...data.0@ha', 1), ('addi r4 r3 ...data.0@l', 1)]
+positional LCS: 856/858
