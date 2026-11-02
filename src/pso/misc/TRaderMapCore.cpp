@@ -1058,6 +1058,61 @@ void TRaderMapCore::update_follow_projection(s32 mode) {
 
 void TRaderMapCore::copy_transform(void* q) { *(f32 *)&this->m_name = *(f32*)((char*)q + 0x0); *(f32 *)&this->m_flags = *(f32*)((char*)q + 0x4); *(f32 *)&this->m_prev = *(f32*)((char*)q + 0x8); *(f32 *)&this->m_next = *(f32*)((char*)q + 0xc); *(f32 *)&this->m_up = *(f32*)((char*)q + 0x10); *(f32 *)&this->m_down = *(f32*)((char*)q + 0x14); *(u32*)((char*)this + 0x18) = *(u32*)((char*)q + 0x18); *(u32 *)&this->entity_id = *(u32*)((char*)q + 0x1c); *(f32 *)&this->m_20 = *(f32*)((char*)q + 0x20); *(f32 *)&this->texlist = *(f32*)((char*)q + 0x24); }
 
+extern u32 TRaderMapCore__data_805D5F4C;
+
+// TRaderMapCore::draw_compass() per the symbol map, but the executable body
+// takes the radar view mode in r4; spelled with the map's mangled name.
+struct CompassState_801FA7E8 {
+    f32 x;
+    f32 y;
+    f32 unk8;
+    f32 sx;
+    f32 sy;
+    s32 rot;
+    u32 unk18;
+    RadarSpriteFrame_801FA6CC *sprs;
+};
+
+extern "C" {
+s32 apply_compass_param__13TRaderMapCoreFv(TRaderMapCore *radar);
+
+void draw_compass__13TRaderMapCoreFv(TRaderMapCore *self, s32 mode) {
+    u32 new_var;
+    CompassState_801FA7E8 state;
+    u32 color;
+
+    new_var = ~0xFF000000;
+    if (apply_compass_param__13TRaderMapCoreFv((TRaderMapCore *)&self->m_90) == 0) {
+        return;
+    }
+    f32 b = TRaderMapCore__data_805DC534;
+    f32 a = TRaderMapCore__data_805DC528;
+    state.x = a;
+    state.y = a;
+    state.unk8 = a;
+    state.sx = b;
+    state.sy = b;
+    state.rot = 0;
+    state.unk18 = TRaderMapCore__data_805D5F4C;
+    state.sprs = lbl_804C87E4;
+    color = -1;
+    TParticleCtrl::begin_effect_render();
+    f32 *tbl = lbl_804C87B4[mode];
+    state.x = tbl[2] + (f32)lbl_804C87E4[1].x;
+    state.y = tbl[3] + (f32)lbl_804C87E4[1].y;
+    self->m_19c = self->m_19c;
+    set_default_alpha_blend();
+    ((u8 *)&color)[3] = (u8)(s32)self->m_19c;
+    ((TObjPlayer *)&state)->draw_compass_sprite(1, (s32)((((((color >> 0x10U) & new_var) | ((color << 0x10) & 0xFF000000)) & (~0xFF0000)) | ((color << 0x10) & 0xFF0000))), 0x21, TRaderMapCore__data_805DC58C);
+    state.x = tbl[0] + (f32)lbl_804C87E4[0].x;
+    state.y = tbl[1] + (f32)lbl_804C87E4[0].y;
+    state.rot = self->m_174;
+    set_additive_blend();
+    ((TObjPlayer *)&state)->draw_compass_sprite(0, -1, 0x21, TRaderMapCore__data_805DC58C);
+    TParticleCtrl::end_effect_render();
+}
+}
+
 Color_801FAAEC radar_map_backdrop_color = { 1.0f, 0.3f, 0.3f, 0.3f };
 RadarViewRect_801FA9D8 radar_map_view_rect_table[3] = {
     { 544.0f, 128.0f, 640.0f, 480.0f, 500.0f },
