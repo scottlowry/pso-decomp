@@ -250,7 +250,7 @@ void TObjFish::destroy_child() {
 }
 
 extern "C" {
-s32 TBoss7DeRolLeC__try_spawn_pattern_crawfish(void *, s32, s32);
+void TBoss7DeRolLeC__try_spawn_pattern_crawfish(void *, s32, s32);
 void TBoss7DeRolLeC__handle_crawfish_spawn_state(u8 *arg0, u32 arg1, s32 arg2);
 }
 
@@ -566,6 +566,82 @@ void TObjFish__sub_802E7B94(Fish_802E7B94* o) {
         }
     }
 }
+
+extern "C" {
+extern s32 game_difficulty_selection;
+s16 TObjFish__sub_802E7CC4(void *self);
+void TObjFish__sub_802E7D70(void *self, s16 arg1, void *arg2, void *arg3, s32 arg4);
+}
+
+struct PlanRow_802E7BE8 { u32 a; u32 b; };
+
+struct SpawnTbls_804E3BF0 {
+    u8 pad[0x3c];
+    const PlanRow_802E7BE8 *plan[4];
+    const u8 *vec[4];
+    const u32 *mid[4];
+};
+
+extern const SpawnTbls_804E3BF0 lbl_804E3BF0;
+
+#pragma push
+#pragma opt_common_subs off
+#pragma opt_propagation off
+#pragma opt_dead_assignments off
+void TBoss7DeRolLeC__try_spawn_pattern_crawfish(void *self, s32 variant, s32 index) {
+    u32 pos[3];
+    const u8 *paramBase;
+    const PlanRow_802E7BE8 *planRow;
+    const u8 *e;
+    const u32 *midPtr;
+    const u8 *vecPtr;
+    const u32 *dfltPos;
+    u32 d1;
+    u32 d2;
+    s32 patternId;
+    bool single;
+    s16 slot;
+    s32 ioff;
+    s32 phase;
+    s32 poff;
+    s32 diffv;
+    s32 p8;
+    s32 varRow;
+    u32 sub;
+    u32 d0;
+    s32 voff;
+
+    paramBase = (const u8 *)&lbl_804E3BF0;
+    ioff = index * 4;
+    d2 = 0x3c;
+    phase = *(const s32 *)((const s8 *)self + 0x6b4);
+    diffv = game_difficulty_selection;
+    poff = diffv * 4;
+    { const u8 *pa = paramBase + d2; planRow = *(const PlanRow_802E7BE8 **)(pa + poff); }
+    p8 = phase << 3;
+    e = (const u8 *)planRow + p8;
+    varRow = ((const s32 *)e)[1];
+    { const u8 *rp = (const u8 *)lbl_80473844 + varRow * 0x24; patternId = *(const s32 *)(rp + ioff); }
+    if (patternId == 0) {
+        return;
+    }
+    sub = 1 - (u32)patternId;
+    dfltPos = (const u32 *)&lbl_80473F9C;
+    voff = variant * 4;
+    { const u8 *ma = paramBase + 0x5c; midPtr = *(const u32 **)(ma + voff); }
+    d1 = dfltPos[1];
+    d0 = dfltPos[0];
+    { const u8 *va = paramBase + 0x4c; vecPtr = *(const u8 **)(va + voff); }
+    d2 = dfltPos[2];
+    single = sub == 0;
+    pos[0] = d0;
+    pos[2] = d2;
+    pos[1] = d1;
+    { s32 mval = *(const s32 *)((const u8 *)midPtr + ioff); pos[1] = mval; }
+    slot = TObjFish__sub_802E7CC4(self);
+    TObjFish__sub_802E7D70(self, slot, (void *)(vecPtr + index * 0xc), (void *)pos, single);
+}
+#pragma pop
 
 
 extern "C" {
