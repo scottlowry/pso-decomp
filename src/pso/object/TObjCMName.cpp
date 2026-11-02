@@ -464,7 +464,7 @@ extern const f32 lbl_805DDB34;
 extern const f32 lbl_805DDB38;
 extern const f32 lbl_805DDB3C;
 extern const f32 lbl_805DDB40;
-void TObjCMHairMenu__sub_801E3F54(void *p, void *q);
+void *TObjCMHairMenu__sub_801E3F54(void *p, void *q);
 extern s32 lbl_804DBDA8[];
 extern RecoveredGlobal_80298F08_lbl_8050E3B8 controller_physical_port_bank;
 extern RecoveredGlobal_80298DD4_lbl_8051C07C character_creation_name_buffer;
@@ -1086,7 +1086,7 @@ void TObjCMHairMenu::render() {
     f32 xb;
     f32 roff;
 
-    hair = this->appearance->hair;
+    hair = this->hair;
     scale = 0.25f * sin_table_lookup(this->ticks << 10) + 1.0f;
     if (scale > 1.0f) {
         scale = 1.0f;
@@ -1219,10 +1219,7 @@ void TObjCMHairMenu::render() {
     prim.colors = colors;
     prim.start = 0;
     ((u8 *)&colorG)[3] = (int)a255;
-    TObjCMHairMenu__sub_801E3F54(&colors[3], &colorG);
-    TObjCMHairMenu__sub_801E3F54(&colors[2], &colors[3]);
-    TObjCMHairMenu__sub_801E3F54(&colors[1], &colors[2]);
-    TObjCMHairMenu__sub_801E3F54(&colors[0], &colors[1]);
+    TObjCMHairMenu__sub_801E3F54(&colors[0], TObjCMHairMenu__sub_801E3F54(&colors[1], TObjCMHairMenu__sub_801E3F54(&colors[2], TObjCMHairMenu__sub_801E3F54(&colors[3], &colorG))));
     for (i = 0; i < 3; i++) {
         ((TObjCMHairMenu *)&prim)->draw_tri_fan_2d(4, 6, -2.4375f);
         p[0].y += yoff;
@@ -1244,10 +1241,7 @@ void TObjCMHairMenu::render() {
             }
             colorF = lbl_804650F4[i];
             ((u8 *)&colorF)[3] = (int)a255;
-            TObjCMHairMenu__sub_801E3F54(&colors[3], &colorF);
-            TObjCMHairMenu__sub_801E3F54(&colors[2], &colors[3]);
-            TObjCMHairMenu__sub_801E3F54(&colors[1], &colors[2]);
-            TObjCMHairMenu__sub_801E3F54(&colors[0], &colors[1]);
+            TObjCMHairMenu__sub_801E3F54(&colors[0], TObjCMHairMenu__sub_801E3F54(&colors[1], TObjCMHairMenu__sub_801E3F54(&colors[2], TObjCMHairMenu__sub_801E3F54(&colors[3], &colorF))));
             ((TObjCMHairMenu *)&prim)->draw_tri_fan_2d(4, 6, -2.4375f);
         }
     }

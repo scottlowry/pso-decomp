@@ -9,7 +9,8 @@ public:
     CharacterAppearanceFields* appearance;
     s32 initialized, selection, count, ticks, active;
     f32 fade;
-    s32 trailing[3];
+    s32 trailing[2];
+    s16 hair;
     virtual ~TObjCMHairMenu();
     virtual void render();
     virtual void run_task();
