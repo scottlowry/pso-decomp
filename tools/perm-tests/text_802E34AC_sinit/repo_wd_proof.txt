@@ -1,0 +1,32 @@
+orig words=398 ours words=398
+HARD [7] 0x802e34c8 orig=C0 E5 00 00 'lfs f7, 0x0(r5)' ours=82 03 00 18 'lwz     r16,24(r3)'
+HARD [9] 0x802e34d0 orig=C0 02 EC 08 'lfs f0, lbl_805DE908@sda21(r0)' ours=38 03 00 08 'addi    r0,r3,8'
+HARD [10] 0x802e34d4 orig=EC 61 38 28 'fsubs f3, f1, f7' ours=C0 24 00 04 'lfs     f1,4(r4)'
+HARD [11] 0x802e34d8 orig=C0 24 00 04 'lfs f1, 0x4(r4)' ours=3A 63 02 64 'addi    r19,r3,612'
+HARD [12] 0x802e34dc orig=38 03 00 08 'addi r0, r3, 0x8' ours=80 83 00 80 'lwz     r4,128(r3)'
+HARD [13] 0x802e34e0 orig=80 83 00 80 'lwz r4, 0x80(r3)' ours=C0 E5 00 00 'lfs     f7,0(r5)'
+HARD [14] 0x802e34e4 orig=EC 47 00 28 'fsubs f2, f7, f0' ours=C0 05 00 04 'lfs     f0,4(r5)'
+HARD [15] 0x802e34e8 orig=C0 05 00 04 'lfs f0, 0x4(r5)' ours=90 01 00 08 'stw     r0,8(r1)'
+HARD [16] 0x802e34ec orig=ED 01 00 2A 'fadds f8, f1, f0' ours=38 03 00 10 'addi    r0,r3,16'
+HARD [17] 0x802e34f0 orig=90 01 00 08 'stw r0, 0x8(r1)' ours=EC 01 00 2A 'fadds   f0,f1,f0'
+HARD [19] 0x802e34f8 orig=C0 C2 EB E8 'lfs f6, lbl_805DE8E8@sda21(r0)' ours=90 01 00 0C 'stw     r0,12(r1)'
+HARD [20] 0x802e34fc orig=90 01 00 0C 'stw r0, 0xc(r1)' ours=EC 42 38 28 'fsubs   f2,f2,f7'
+HARD [21] 0x802e3500 orig=3A 63 02 64 'addi r19, r3, 0x264' ours=80 03 00 74 'lwz     r0,116(r3)'
+HARD [22] 0x802e3504 orig=EC A6 00 F2 'fmuls f5, f6, f3' ours=90 81 00 70 'stw     r4,112(r1)'
+positional raw-byte EXACT: 354/398; resolve-at-link class: 13; hard fails: 31
+  LINKDIFF [2] 0x802e34b4 R_PPC_ADDR16_HA ...data.0: exp=0x3c60804e orig=0x3c608047
+  LINKDIFF [3] 0x802e34b8 R_PPC_ADDR16_HA lbl_80472930: exp=0x3c808047 orig=0x3c80804e
+  LINKDIFF [4] 0x802e34bc R_PPC_ADDR16_LO ...data.0: exp=0x38633040 orig=0x38a32930
+  LINKDIFF [5] 0x802e34c0 R_PPC_EMB_SDA21 @57: exp=0xc0400e60 orig=0xc022ebfc
+  LINKDIFF [6] 0x802e34c4 R_PPC_ADDR16_LO lbl_80472930: exp=0x38a42930 orig=0x38643040
+  LINKDIFF [18] 0x802e34f4 R_PPC_EMB_SDA21 @59: exp=0xc020edb0 orig=0x38030010
+  LINKDIFF [25] 0x802e3510 R_PPC_EMB_SDA21 @56: exp=0xc0c0ed98 orig=0x80830084
+  LINKDIFF [36] 0x802e353c R_PPC_EMB_SDA21 @58: exp=0xc080eda4 orig=0x80010010
+  LINKDIFF [37] 0x802e3540 R_PPC_EMB_SDA21 @60: exp=0xc0400e6c orig=0xec61402a
+  LINKDIFF [38] 0x802e3544 R_PPC_EMB_SDA21 @61: exp=0xc000edbc orig=0xc002ec0c
+  LINKDIFF [76] 0x802e35dc R_PPC_EMB_SDA21 lbl_805D68E0: exp=0xd0406be0 orig=0xd04dc2e0
+linked-word proof: 2/13 MATCH (11 diff)
+content multiset: 380/398  orig-only=18 ours-only=17
+  orig-only sample: [('lis r3 lbl_80472930@ha', 1), ('lis r4 lbl_804e3040@ha', 1), ('addi r5 r3 lbl_80472930@l', 1), ('lfs f1 lbl_805de8fc@sda21 r0', 1), ('addi r3 r4 lbl_804e3040@l', 1), ('lfs f0 lbl_805de908@sda21 r0', 1), ('fsubs f3 f1 f7', 1), ('fsubs f2 f7 f0', 1), ('fadds f8 f1 f0', 1), ('lfs f6 lbl_805de8e8@sda21 r0', 1)]
+  ours-only sample: [('lis r3 ...data.0@ha', 1), ('lis r4 lbl_80472930@ha', 1), ('addi r3 r3 ...data.0@l', 1), ('lfs f2 0 0', 2), ('addi r5 r4 lbl_80472930@l', 1), ('fadds f0 f1 f0', 1), ('lfs f1 0 0', 1), ('fsubs f2 f2 f7', 1), ('fadds f3 f1 f0', 1), ('lfs f6 0 0', 1)]
+positional LCS: 373/398
