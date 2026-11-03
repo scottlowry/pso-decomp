@@ -3807,6 +3807,8 @@ s32 TQuestVmDownLoadServer::sum_entry_sizes(s32 start, s32 n) {
     return sum;
 }
 
+#pragma push
+#pragma opt_propagation off
 s32 TQuestVmDownLoadServer__sub_803EDC20(u8 *text) {
     u8 (*p)[8];
     u8 (*rec)[8];
@@ -3816,13 +3818,16 @@ s32 TQuestVmDownLoadServer__sub_803EDC20(u8 *text) {
     s32 count;
     s32 width;
     s32 code;
+    u8 (*out)[8];
 
+    p = (u8 (*)[8])&quest_download_entry_table;
     pending = 0;
-    i = 0;
+    i = pending;
     rec = (u8 (*)[8])lbl_805D78C8;
     bcur = (u8 *)lbl_805D78BC;
     count = lbl_805D78C0;
-    for (p = (u8 (*)[8])&quest_download_entry_table; p < rec; p = p + 1) {
+    out = rec;
+    for (; p < rec; p = p + 1) {
         if (*(u16 *)p[0] & 0xFF00) {
             i = i + 2;
         } else {
@@ -3838,16 +3843,16 @@ s32 TQuestVmDownLoadServer__sub_803EDC20(u8 *text) {
                 if (count >= 36) {
                     return -1;
                 }
-                if (width + 2 <= 79) {
-                    *(u16 *)rec[0] = code;
-                    *(s32 *)&rec[0][4] = 2;
-                    rec = rec + 1;
+                if (width >= 78) {
+                    return -1;
+                } else {
+                    *(u16 *)out[0] = code;
+                    *(s32 *)&out[0][4] = 2;
+                    out = out + 1;
                     *bcur = TQuestVmDownLoadServer__sub_803EC8D8(code);
                     bcur = bcur + 1;
                     count = count + 1;
                     width = width + 2;
-                } else {
-                    return -1;
                 }
             }
             pending = 0;
@@ -3858,29 +3863,30 @@ s32 TQuestVmDownLoadServer__sub_803EDC20(u8 *text) {
                 if (count >= 36) {
                     return -1;
                 }
-                if (width + 1 <= 79) {
-                    *(u16 *)rec[0] = *text;
-                    *(s32 *)&rec[0][4] = 1;
+                if (width >= 79) {
+                    return -1;
+                } else {
+                    *(u16 *)out[0] = *text;
+                    *(s32 *)&out[0][4] = 1;
                     pending = 0;
                     count = count + 1;
                     width = width + 1;
-                    *bcur = 0;
+                    *bcur = pending;
                     bcur = bcur + 1;
-                    rec = rec + 1;
-                } else {
-                    return -1;
+                    out = out + 1;
                 }
             }
         }
         text = text + 1;
     }
-    lbl_805D78C8 = (s32 *)rec;
-    lbl_805D78C4 = (s32 *)rec;
+    lbl_805D78C8 = (s32 *)out;
+    lbl_805D78C4 = (s32 *)out;
     lbl_805D78BC = (s32 *)bcur;
     lbl_805D78B8 = (s32 *)bcur;
     lbl_805D78C0 = count;
     return count;
 }
+#pragma pop
 
 u8 *TQuestVmDownLoadServer::find_keyword_entry(u16 *start, u16 *end) {
     u8 c;
