@@ -3086,6 +3086,64 @@ u16 TQuestVmDownLoadServer::jis_to_sjis(u16 arg0) {
     return (hi << 8) | lo;
 }
 
+#pragma push
+#pragma dont_inline off
+#pragma inline_depth(2)
+inline s32 is_jis_byte(u8 c) {
+    s32 r = 0;
+    if (c >= 0x21 && c <= 0x7E) {
+        r = 1;
+    }
+    return r;
+}
+
+inline s32 is_jis_code(u16 code) {
+    s32 r = 0;
+    u8 hi = code >> 8;
+    u8 lo = code;
+    if (is_jis_byte(hi) && is_jis_byte(lo)) {
+        r = 1;
+    }
+    return r;
+}
+
+s32 TQuestVmDownLoadServer__sub_803EC71C(u16 *src, u8 *dst, s32 len) {
+    s32 i;
+    u16 *cur;
+    char *out;
+    out = (char *)dst;
+    i = 0;
+    while (i < len) {
+        u16 d;
+        u16 c = *(cur = src);
+        s32 attr = (c >> 8) & 0xF;
+        if (attr == 0) {
+            *out = c;
+            src++;
+            out++;
+            i++;
+        } else if (attr & 1) {
+            d = *++src;
+            u16 code = c << 8;
+            i++;
+            if (((d >> 8) & 0xF) == attr + 1) {
+                code |= (u8)d;
+                src++;
+                i++;
+                if (is_jis_code(code)) {
+                    code = TQuestVmDownLoadServer::jis_to_sjis(code);
+                }
+                out[0] = code >> 8;
+                out[1] = code;
+                out += 2;
+            }
+        }
+    }
+    *out = 0;
+    return out - (char *)dst;
+}
+#pragma pop
+
 s32 TQuestVmDownLoadServer::is_valid_sjis_code(u16 arg0) {
     s32 var_r0;
     if ((arg0 >= 0x2120U) && (arg0 < 0x3020U)) {
