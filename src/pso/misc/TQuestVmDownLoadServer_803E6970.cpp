@@ -3853,7 +3853,7 @@ s32 TQuestVmDownLoadServer__sub_803EDF64(u16 *text, s32 n, u16 *out, s32 *flag) 
     const u8 *e;
     u16 w;
     u16 w1;
-    u8 b0;
+    u16 b0;
     u16 b1;
     u16 c1;
     u16 tag;
@@ -3905,10 +3905,10 @@ dispatch10:
     }
     w1 = text[1];
     p = text + 1;
-    b1 = (u8)w1;
+    b1 = w1 & 0xFF;
     c1 = b1;
-    b0 = (u8)*text;
-    if (b0 == (u8)w1) {
+    b0 = *text & 0xFF;
+    if (b0 == (w1 & 0xFF)) {
         if (kind == 12) {
             return 2;
         }
@@ -3940,20 +3940,27 @@ dispatch10:
     if (kind == 6) {
         if (tag >= 2) {
             *out += 1;
-            if ((u8)*text == 0xB3) {
+            if ((*text & 0xFF) == 0xB3) {
                 *out = TQuestVmDownLoadServer__sub_803E719C(0x74, *p);
             }
             return 2;
         }
     }
     if (tag >= 2) {
-        return 1;
+        goto ret_one;
     }
-    if (kind >= 6 && kind <= 14) {
-        if (tag == 1) {
-            return 1;
-        }
+    if (kind <= 5) {
+        goto loop_head;
     }
+    if (kind > 14) {
+        goto loop_head;
+    }
+    if (tag != 1) {
+        goto loop_head;
+    }
+ret_one:
+    return 1;
+loop_head:
     iter = 2;
     for (;;) {
         if (kind <= 5) {
@@ -3976,12 +3983,11 @@ emit:
             }
             return iter;
         }
-        if (iter >= n) {
+        if (iter++ >= n) {
             return 0;
         }
-        iter++;
         w = *p++;
-        kind = lbl_8047F8B8[(u8)w] & 0xF;
+        kind = lbl_8047F8B8[w & 0xFF] & 0xF;
         if (kind >= 6 && kind <= 12) {
             goto loop_bad;
         }
