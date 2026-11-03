@@ -14,10 +14,10 @@ void TLobby__sub_8020B47C(void *self)
   s16 t1;
   s16 t2;
   u8 *cur;
+  s32 n1;
+  s32 i1;
   s32 off;
   u32 a;
-  s32 i1;
-  s32 n1;
   s32 n2;
   s32 j1;
   s32 i2;
