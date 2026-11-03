@@ -301,6 +301,7 @@ s32 TAdPlayerLoadGC__sub_803F2A4C(s32);
 #pragma opt_propagation off
 s32 TAdPlayerLoadGC__sub_803F2F1C(void) {
     u8 *base;
+    s32 off2;
     u8 *p;
     CardInfo_803F31D8 *ci;
     s32 *px;
@@ -390,9 +391,9 @@ s32 TAdPlayerLoadGC__sub_803F2F1C(void) {
         off += 0xC;
     }
     card_channel = 0;
-    off = 0;
+    off2 = 0;
     while (card_channel < 2) {
-        p = base + off;
+        p = base + off2;
         stv = *(s32 *)(p + 0x64);
         p = p + 0x20;
         switch (stv) {
@@ -427,7 +428,7 @@ s32 TAdPlayerLoadGC__sub_803F2F1C(void) {
             break;
         }
         card_channel++;
-        off += 0x68;
+        off2 += 0x68;
     }
     lbl_805D7944--;
     return 0;
