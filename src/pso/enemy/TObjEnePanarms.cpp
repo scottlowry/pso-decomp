@@ -1688,6 +1688,8 @@ s32 TObjEnePanBARA__ct(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     }
     self->f380 = arg3;
     self->f24 = TObjFish__sub_8001EDB0((void *)TObjEnePanarms__entry_params_resource, lbl_8043CD38[self->f380]);
+    pp++;
+    pp--;
     self->f34 = (s32)get_bml_model((void *)TObjEnePanarms__entry_params_resource, (u32)lbl_8043CD38[self->f380]);
     VecCopy__FP3VecPC3Vec(self->v44, VecCopy__FP3VecPC3Vec(self->v50, VecCopy__FP3VecPC3Vec(self->v74, self->v38)));
     self->f37C = init_collision_body_parts(self, pp, 1);
