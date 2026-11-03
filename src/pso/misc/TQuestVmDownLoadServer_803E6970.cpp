@@ -3811,7 +3811,8 @@ u8 *TQuestVmDownLoadServer__sub_803EDDA4(u16 *arg0, u16 *arg1) {
     s32 len;
     s32 ch0;
     s32 idx;
-    u8 c;
+    s32 c;
+    s32 k;
     const u8 (*const *q)[11];
     const u8 (*base)[11];
     const u8 (*end)[11];
@@ -3839,13 +3840,14 @@ u8 *TQuestVmDownLoadServer__sub_803EDDA4(u16 *arg0, u16 *arg1) {
             end = q[1];
             q = q + 1;
         } while (end == 0);
+        k = arg0[1] & 0xFF;
         c = (u8)arg0[1];
-        if ((u8)arg0[1] >= 0x61U && (u8)arg0[1] <= 0x7AU) {
+        if (k >= 0x61U && k <= 0x7AU) {
             c -= 0x20;
         }
         p = base + 1;
         while (p < end) {
-            if (p[0][0] == c) {
+            if (p[0][0] == (c & 0xFF)) {
                 return (u8 *)p + 1;
             }
             p = p + 1;
