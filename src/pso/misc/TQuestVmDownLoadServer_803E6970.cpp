@@ -3901,15 +3901,15 @@ void TQuestVmDownLoadServer__sub_803EE2F4(s32 arg0, s32 arg1) {
     Req_803EEF2C req;
     u8 *tail;
     char *p2;
-    i = arg0;
     s = (u8 *)&lbl_8058DC98;
-    d = (char *)&lbl_8058DC98;
-    t = (char *)&lbl_8058DC98;
     b = (char *)&lbl_8058DC48;
-    b2 = (u8 *)&lbl_8058DC48;
     o = lbl_805A0340;
-    o2 = lbl_805A0340;
-    o3 = lbl_805A0340;
+    i = arg0;
+    o2 = o;
+    o3 = o;
+    d = (char *)s;
+    t = (char *)s;
+    b2 = (u8 *)b;
     blob = (u8 *)&lbl_805A0470;
     for (; i < arg1 && (n = TQuestVmDownLoadServer__sub_803E9F54(i)) != 0; i += n) {
         slot = (u8 *)quest_download_slot_chain_table + i * 0x1C;
