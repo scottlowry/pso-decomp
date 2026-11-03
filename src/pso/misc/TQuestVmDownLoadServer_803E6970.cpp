@@ -3840,10 +3840,7 @@ s32 TQuestVmDownLoadServer__sub_803EDC20(u8 *text) {
             code = ((u16)pending << 8) | *text;
             code = TQuestVmDownLoadServer__sub_803EC69C(code);
             if ((u16)code != 0) {
-                if (count >= 36) {
-                    return -1;
-                }
-                if (width >= 78) {
+                if (count >= 36 || width >= 78) {
                     return -1;
                 } else {
                     *(u16 *)out[0] = code;
@@ -3860,15 +3857,11 @@ s32 TQuestVmDownLoadServer__sub_803EDC20(u8 *text) {
             pending = *text;
         } else {
             if ((*text >= 0x20 && *text < 0x7F) || (*text >= 0xA0 && *text < 0xE0)) {
-                if (count >= 36) {
-                    return -1;
-                }
-                if (width >= 79) {
+                if (count >= 36 || width >= 79) {
                     return -1;
                 } else {
                     *(u16 *)out[0] = *text;
                     *(s32 *)&out[0][4] = 1;
-                    pending = 0;
                     count = count + 1;
                     width = width + 1;
                     *bcur = pending;
