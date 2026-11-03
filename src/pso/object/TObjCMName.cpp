@@ -1046,208 +1046,254 @@ u8 *TObjCMAutoMkData__ct(u8 *arg0) {
 #pragma push
 #pragma fp_contract on
 #pragma opt_common_subs off
-void TObjCMHairMenu::render() {
-    vec2f pos;
-    vec2f scl;
-    vec2f pos2;
-    vec2f pos3;
-    vec2f pos5;
-    vec2f p[4];
-    u32 colors[4];
-    u32 colorF;
-    u32 colorG;
-    Prim_80297DB8 prim;
-    s16 *rgb;
-    const f32 *d4;
-    s32 hair;
-    s32 idx;
-    s32 i;
-    s32 j;
-    s32 idoff;
-    f32 scale;
-    f32 base;
-    f32 t;
-    f32 w;
-    f32 w0;
-    f32 alpha;
-    f32 sq;
-    f32 s;
-    f32 a1;
-    f32 a2;
-    f32 yoff;
-    f32 scaleF;
-    f32 a255;
-    f32 yin;
-    f32 yout;
-    f32 dy;
-    f32 dx;
-    f32 dx2;
-    f32 tv;
-    f32 xa;
-    f32 xb;
-    f32 roff;
+void TObjCMHairMenu::render()
+{
+  vec2f pos;
+  vec2f scl;
+  vec2f pos2;
+  vec2f pos3;
+  vec2f pos5;
+  vec2f p[4];
+  u32 colors[4];
+  u32 colorF;
+  u32 colorG;
+  Prim_80297DB8 prim;
+  s16 *rgb;
+  const f32 *d4;
+  s32 hair;
+  s32 idx;
+  s32 i;
+  s32 j;
+  s32 idoff;
+  f32 scale;
+  f32 base;
+  f32 t;
+  f32 w;
+  f32 w0;
+  f32 alpha;
+  f32 sq;
+  f32 s;
+  f32 a1;
+  f32 a2;
+  f32 yoff;
+  f32 scaleF;
+  f32 a255;
+  f32 yin;
+  f32 yout;
+  f32 dy;
+  f32 dx;
+  f32 dx2;
+  f32 tv;
+  f32 xa;
+  f32 xb;
+  f32 roff;
+  hair = this->appearance->hair;
+  scale = (0.25f * sin_table_lookup(this->ticks << 10)) + 1.0f;
+  if (scale > 1.0f)
+  {
+    scale = 1.0f;
+  }
+  idx = this->count - 1;
+  if (idx < 0)
+  {
+    idx = 0;
+  }
+  else
+    if (idx >= 10)
+  {
+    idx = 9;
+  }
+  base = lbl_8046509C[idx];
+  if (!(this->fade <= 0.33f))
+  {
+    if (this->fade >= 0.66f)
+    {
+      t = 1.0f;
+    }
+    else
+    {
+      t = (this->fade - 0.33f) / 0.33f;
+    }
+    scl.y = 1.0f;
+    pos.y = 146.0f;
+    w0 = (t * (base - 75.0f)) + 75.0f;
+    for (i = 0; i < 4; i++)
+    {
+      idoff = 0;
+      if (i == 0)
+      {
+        w = w0;
+      }
+      else
+      {
+        w = (t * (lbl_804650C4[i] - 75.0f)) + 75.0f;
+      }
+      pos.x = 75.0f;
+      if (i == this->selection)
+      {
+        idoff = 2;
+        pos.x = (9.0f * sin_table_lookup(this->ticks << 10)) + pos.x;
+      }
+      scl.x = (w - pos.x) / 48.0f;
+      draw_ui_sprite_opaque(idoff + 6, &pos, &scl, -2.75f);
+      pos.x = w;
+      scl.x = 1.0f;
+      draw_ui_sprite_opaque(idoff + 7, &pos, &scl, -2.75f);
+      pos.y += 44.0f;
+    }
 
-    hair = this->appearance->hair;
-    scale = 0.25f * sin_table_lookup(this->ticks << 10) + 1.0f;
-    if (scale > 1.0f) {
-        scale = 1.0f;
+  }
+  if (!(this->fade <= 0.0f))
+  {
+    if (this->fade >= 0.66f)
+    {
+      alpha = 1.0f;
     }
-    idx = this->count - 1;
-    if (idx < 0) {
-        idx = 0;
-    } else if (idx >= 10) {
-        idx = 9;
+    else
+    {
+      alpha = this->fade / 0.66f;
     }
-    base = lbl_8046509C[idx];
-    if (!(this->fade <= 0.33f)) {
-        if (this->fade >= 0.66f) {
-            t = 1.0f;
-        } else {
-            t = (this->fade - 0.33f) / 0.33f;
-        }
-        scl.y = 1.0f;
-        pos.y = 146.0f;
-        w0 = t * (base - 75.0f) + 75.0f;
-        for (i = 0; i < 4; i++) {
-            idoff = 0;
-            if (i == 0) {
-                w = w0;
-            } else {
-                w = t * (lbl_804650C4[i] - 75.0f) + 75.0f;
-            }
-            pos.x = 75.0f;
-            if (i == this->selection) {
-                idoff = 2;
-                pos.x = 9.0f * sin_table_lookup(this->ticks << 10) + pos.x;
-            }
-            scl.x = (w - pos.x) / 48.0f;
-            draw_ui_sprite_opaque(idoff + 6, &pos, &scl, -2.75f);
-            pos.x = w;
-            scl.x = 1.0f;
-            draw_ui_sprite_opaque(idoff + 7, &pos, &scl, -2.75f);
-            pos.y += 44.0f;
-        }
+    pos2.x = 56.0f;
+    pos2.y = 146.0f;
+    for (i = 0; i < 4; i++)
+    {
+      idoff = 0;
+      if (i == this->selection)
+      {
+        idoff = -1;
+      }
+      draw_ui_sprite(idoff + 1, &pos2, -2.4375f, alpha);
+      pos2.y += 44.0f;
     }
-    if (!(this->fade <= 0.0f)) {
-        if (this->fade >= 0.66f) {
-            alpha = 1.0f;
-        } else {
-            alpha = this->fade / 0.66f;
-        }
-        pos2.x = 56.0f;
-        pos2.y = 146.0f;
-        for (i = 0; i < 4; i++) {
-            idoff = 0;
-            if (i == this->selection) {
-                idoff = -1;
-            }
-            draw_ui_sprite(idoff + 1, &pos2, -2.4375f, alpha);
-            pos2.y += 44.0f;
-        }
+
+  }
+  if (this->fade <= 0.66f)
+  {
+    return;
+  }
+  t = (this->fade - 0.66f) / 0.33999997f;
+  sq = t * t;
+  pos3.x = 103.0f;
+  pos3.y = 150.0f;
+  for (i = 0; i < this->count; i++)
+  {
+    s = sq;
+    if (this->selection != 0)
+    {
+      s = 0.6f * sq;
     }
-    if (this->fade <= 0.66f) {
-        return;
+    idoff = 0x1F;
+    if (i == hair)
+    {
+      idoff = 0x20;
+      if (creation_resource_ready_state != 2)
+      {
+        s = s * ((0.2f * fabs_float(sin_table_lookup(this->ticks << 12))) + 0.2f);
+      }
+      else
+        if (this->selection == 0)
+      {
+        s = s * scale;
+      }
     }
-    t = (this->fade - 0.66f) / 0.33999997f;
-    sq = t * t;
-    pos3.x = 103.0f;
-    pos3.y = 150.0f;
-    for (i = 0; i < this->count; i++) {
-        s = sq;
-        if (this->selection != 0) {
-            s = 0.6f * sq;
-        }
-        idoff = 0x1F;
-        if (i == hair) {
-            idoff = 0x20;
-            if (creation_resource_ready_state != 2) {
-                s = s * (0.2f * fabs_float(sin_table_lookup(this->ticks << 12)) + 0.2f);
-            } else if (this->selection == 0) {
-                s = s * scale;
-            }
-        }
-        draw_ui_sprite(idoff, &pos3, -2.4375f, s);
-        pos3.x += 17.0f;
+    draw_ui_sprite(idoff, &pos3, -2.4375f, s);
+    pos3.x += 17.0f;
+  }
+
+  w = base - 347.0f;
+  a2 = sq;
+  if (this->selection == 0)
+  {
+    a1 = sq * scale;
+  }
+  else
+  {
+    a1 = sq * 0.6f;
+    a2 = a1;
+  }
+  pos5.x = 299.0f + w;
+  pos5.y = 149.0f;
+  draw_ui_sprite(hair + 0x14, &pos5, -2.4375f, a1);
+  pos5.x = 305.0f + w;
+  pos5.y = 150.0f;
+  draw_ui_sprite(0x1E, &pos5, -2.4375f, a2);
+  pos5.x = 324.0f + w;
+  pos5.y = 167.0f;
+  draw_ui_sprite(this->count + 0x13, &pos5, -2.4375f, a2);
+  for (i = 1; i < 4; i++)
+  {
+    if (i == this->selection)
+    {
+      s = sq * scale;
     }
-    w = base - 347.0f;
-    a2 = sq;
-    if (this->selection == 0) {
-        a1 = sq * scale;
-    } else {
-        a1 = sq * 0.6f;
-        a2 = a1;
+    else
+    {
+      s = sq * 0.6f;
     }
-    pos5.x = 299.0f + w;
-    pos5.y = 149.0f;
-    draw_ui_sprite(hair + 0x14, &pos5, -2.4375f, a1);
-    pos5.x = 305.0f + w;
-    pos5.y = 150.0f;
-    draw_ui_sprite(0x1E, &pos5, -2.4375f, a2);
-    pos5.x = 324.0f + w;
-    pos5.y = 167.0f;
-    draw_ui_sprite(this->count + 0x13, &pos5, -2.4375f, a2);
-    for (i = 1; i < 4; i++) {
-        if (i == this->selection) {
-            s = sq * scale;
-        } else {
-            s = sq * 0.6f;
-        }
-        draw_ui_sprite(i + 15, &lbl_804DBCD0[i - 1], -2.4375f, s);
+    draw_ui_sprite(i + 15, &lbl_804DBCD0[i - 1], -2.4375f, s);
+  }
+
+  TCameraCtrl::restore_full_screen_view();
+  scaleF = TObjCMMainMenu::get_scale();
+  d4 = lbl_804650D4;
+  a255 = 255.0f * t;
+  colorG = lbl_804650F4[3];
+  dy = d4[3] - d4[1];
+  yin = (dy * 0.1f) + d4[1];
+  yout = (dy * 1.1f) + d4[1];
+  dx2 = d4[4] - d4[6];
+  dx = d4[2] - d4[0];
+  p[3].y = yin;
+  p[0].y = yin;
+  p[2].y = yout;
+  p[1].y = yout;
+  yoff = 44.0f * scaleF;
+  p[0].x = (dx * 0.1f) + d4[0];
+  p[1].x = (dx * 1.1f) + d4[0];
+  p[2].x = (dx2 * 1.1f) + d4[6];
+  p[3].x = (dx2 * 0.1f) + d4[6];
+  p[0].y = yin * scaleF;
+  p[1].y += yoff;
+  p[1].y = yout * scaleF;
+  p[2].y = yout * scaleF;
+  p[3].y = yin * scaleF;
+  prim.pts = p;
+  prim.colors = colors;
+  prim.start = 0;
+  ((u8 *) (&colorG))[3] = (int) a255;
+  TObjCMHairMenu__sub_801E3F54(&colors[0], TObjCMHairMenu__sub_801E3F54(&colors[1], TObjCMHairMenu__sub_801E3F54(&colors[2], TObjCMHairMenu__sub_801E3F54(&colors[3], &colorG))));
+  for (i = 0; i < 3; i++)
+  {
+    ((TObjCMHairMenu *)&prim)->draw_tri_fan_2d(4, 6, -2.4375f);
+    p[0].y += yoff;
+    p[2].y += yoff;
+    p[3].y += yoff;
+  }
+
+  for (i = 0; i < 3; i++)
+  {
+    rgb = &this->appearance->red;
+    tv = ((f32) rgb[i]) / 255.0f;
+    if (tv != 0.0f)
+    {
+      p[0].x = lbl_804650D4[0];
+      p[1].x = d4[2];
+      p[2].x = d4[2] + ((d4[4] - d4[2]) * tv);
+      p[3].x = lbl_804650D4[0] + ((d4[6] - lbl_804650D4[0]) * tv);
+      roff = ((f32) i) * yoff;
+      for (j = 0; j < 4; j++)
+      {
+        p[j].y = (d4[(j * 2) + 1] * scaleF) + roff;
+      }
+
+      colorF = lbl_804650F4[i];
+      ((u8 *) (&colorF))[3] = ((u8 *) (&colorG))[3];
+      TObjCMHairMenu__sub_801E3F54(&colors[0], TObjCMHairMenu__sub_801E3F54(&colors[1], TObjCMHairMenu__sub_801E3F54(&colors[2], TObjCMHairMenu__sub_801E3F54(&colors[3], &colorF))));
+      ((TObjCMHairMenu *)&prim)->draw_tri_fan_2d(4, 6, -2.4375f);
     }
-    TCameraCtrl::restore_full_screen_view();
-    scaleF = TObjCMMainMenu::get_scale();
-    d4 = lbl_804650D4;
-    a255 = 255.0f * t;
-    colorG = lbl_804650F4[3];
-    dy = d4[3] - d4[1];
-    yin = dy * 0.1f + d4[1];
-    yout = dy * 1.1f + d4[1];
-    dx = d4[2] - d4[0];
-    dx2 = d4[4] - d4[6];
-    p[3].y = yin;
-    p[0].y = yin;
-    p[2].y = yout;
-    p[1].y = yout;
-    yoff = 44.0f * scaleF;
-    p[0].x = dx * 0.1f + d4[0];
-    p[1].x = dx * 1.1f + d4[0];
-    p[2].x = dx2 * 1.1f + d4[6];
-    p[3].x = dx2 * 0.1f + d4[6];
-    p[0].y = yin * scaleF;
-    p[1].y = yout * scaleF;
-    p[2].y = yout * scaleF;
-    p[3].y = yin * scaleF;
-    prim.pts = p;
-    prim.colors = colors;
-    prim.start = 0;
-    ((u8 *)&colorG)[3] = (int)a255;
-    TObjCMHairMenu__sub_801E3F54(&colors[0], TObjCMHairMenu__sub_801E3F54(&colors[1], TObjCMHairMenu__sub_801E3F54(&colors[2], TObjCMHairMenu__sub_801E3F54(&colors[3], &colorG))));
-    for (i = 0; i < 3; i++) {
-        ((TObjCMHairMenu *)&prim)->draw_tri_fan_2d(4, 6, -2.4375f);
-        p[0].y += yoff;
-        p[1].y += yoff;
-        p[2].y += yoff;
-        p[3].y += yoff;
-    }
-    for (i = 0; i < 3; i++) {
-        rgb = &this->appearance->red;
-        tv = (f32)rgb[i] / 255.0f;
-        if (tv != 0.0f) {
-            p[0].x = lbl_804650D4[0];
-            p[1].x = d4[2];
-            p[2].x = d4[2] + (d4[4] - d4[2]) * tv;
-            p[3].x = lbl_804650D4[0] + (d4[6] - lbl_804650D4[0]) * tv;
-            roff = (f32)i * yoff;
-            for (j = 0; j < 4; j++) {
-                p[j].y = d4[j * 2 + 1] * scaleF + roff;
-            }
-            colorF = lbl_804650F4[i];
-            ((u8 *)&colorF)[3] = ((u8 *)&colorG)[3];
-            TObjCMHairMenu__sub_801E3F54(&colors[0], TObjCMHairMenu__sub_801E3F54(&colors[1], TObjCMHairMenu__sub_801E3F54(&colors[2], TObjCMHairMenu__sub_801E3F54(&colors[3], &colorF))));
-            ((TObjCMHairMenu *)&prim)->draw_tri_fan_2d(4, 6, -2.4375f);
-        }
-    }
-    TCameraCtrl__sub_80068EF0();
+  }
+
+  TCameraCtrl__sub_80068EF0();
 }
 #pragma pop
 
