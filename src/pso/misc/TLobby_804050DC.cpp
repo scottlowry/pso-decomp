@@ -9423,14 +9423,13 @@ s16 TLobby__sub_80417494(void *msg, u8 *addr, s16 id) {
     r = g->rtrs;
     while (n > 0) {
         if (r->state == 1 && NetMemcmp(r->addr, addr, 0x10) == 0) {
-            break;
+            goto r_found;
         }
         n--;
         r++;
     }
-    if (n <= 0) {
-        r = NULL;
-    }
+    r = NULL;
+r_found:
     if (r == NULL) {
         if (*(u16 *)((s8 *)msg + 6) != 0) {
             TLobby__sub_80418734(addr, msg, id);
@@ -9441,14 +9440,13 @@ s16 TLobby__sub_80417494(void *msg, u8 *addr, s16 id) {
             q = g->nbrs;
             while (n > 0) {
                 if (q->state == 1 && NetMemcmp(q->addr, addr, 0x10) == 0) {
-                    break;
+                    goto q_found1;
                 }
                 n--;
                 q++;
             }
-            if (n <= 0) {
-                q = NULL;
-            }
+            q = NULL;
+q_found1:
             if (q != NULL) {
                 q->flags &= ~0x80;
             }
@@ -9474,14 +9472,13 @@ s16 TLobby__sub_80417494(void *msg, u8 *addr, s16 id) {
         q = g->nbrs;
         while (n > 0) {
             if (q->state == 1 && NetMemcmp(q->addr, addr, 0x10) == 0) {
-                break;
+                goto q_found2;
             }
             n--;
             q++;
         }
-        if (n <= 0) {
-            q = NULL;
-        }
+        q = NULL;
+q_found2:
         if (q != NULL) {
             q->flags &= ~0x80;
         }
