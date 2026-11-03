@@ -30,16 +30,85 @@ struct Src_803209F0 { s32 a; u8 *p; };
 
 struct Obj_803209F0 { s32 f0; u8 pad[0x14]; void *vt; Src_803209F0 *arr; Src_803209F0 *last; s32 n; s32 m; };
 
+struct Obj_803205C4 { u8 pad[0x1C]; Src_80320534 *arr; Src_80320534 *last; s32 n; s32 m; };
+typedef struct { f32 *pos; u8 *col; s32 a; s32 n; } Desc_803205C4;
+
 extern "C" {
 void VecCopy__FP3VecPC3Vec(void *, void *);
 void mem_free(void *);
 void run_task__11TBoss6ZanzoFv(Obj_803208CC *arg0);
 void *mem_alloc(u32 size);
 extern s32 TBoss6Zanzo__name;
-int TBoss6Zanzo__sub_803205C4(void*);
+s32 TBoss6Zanzo__sub_803205C4(TBoss6Zanzo *);
 int set_depth_buffer_settings_1__Fv(void*);
 
 s32 fn_803204B0(void* p) { return *(s32*)((char*)p + 0x4); }
+
+s32 TBoss6Zanzo__sub_803205C4(TBoss6Zanzo *self_) {
+    Obj_803205C4 *o = (Obj_803205C4 *)self_;
+    f32 pos[12];
+    u8 col[16];
+    Desc_803205C4 desc;
+    Src_80320534 *end;
+    Src_80320534 *p;
+    Src_80320534 *prev;
+    u8 *b;
+    f32 step;
+    f32 fade;
+    f32 a0;
+    f32 a1;
+    s32 drawn;
+    s32 j;
+    s32 idx;
+
+    p = o->arr;
+    end = p + o->m;
+    step = 1.0f / (f32)o->m;
+    fade = 1.0f;
+    drawn = 0;
+    while (p < end) {
+        if (p == o->arr || p->a == 0 || prev->a == 0) {
+            drawn = 0;
+        } else {
+            if (drawn == 0) {
+                a0 = 0.0f;
+            }
+            a1 = fade;
+            if (p == end - 1 || (p + 1)->a == 0) {
+                a1 = 0.0f;
+            }
+            desc.col = col;
+            desc.a = 0;
+            desc.n = 4;
+            desc.pos = pos;
+            for (j = 0, idx = 0; j < o->n - 1; j++, idx += 0x10) {
+                b = prev->p + idx;
+                ((TAdChrMoveEffectGC *)col)->copy4(b);
+                col[3] = (u8)((s32)(a0 * b[3]));
+                VecCopy__FP3VecPC3Vec(pos, b + 4);
+                b = prev->p + idx + 0x10;
+                ((TAdChrMoveEffectGC *)(col + 4))->copy4(b);
+                col[7] = (u8)((s32)(a0 * b[3]));
+                VecCopy__FP3VecPC3Vec(&pos[3], b + 4);
+                b = p->p + idx + 0x10;
+                ((TAdChrMoveEffectGC *)(col + 8))->copy4(b);
+                col[11] = (u8)((s32)(a1 * b[3]));
+                VecCopy__FP3VecPC3Vec(&pos[6], b + 4);
+                b = p->p + idx;
+                ((TAdChrMoveEffectGC *)(col + 12))->copy4(b);
+                col[15] = (u8)((s32)(a1 * b[3]));
+                VecCopy__FP3VecPC3Vec(&pos[9], b + 4);
+                ((TObjPlayer *)(&desc))->draw_tri_fan_3d(4, 7);
+            }
+            drawn = 1;
+        }
+        a0 = fade;
+        prev = p;
+        fade -= step;
+        p = p + 1;
+    }
+    return drawn;
+}
 
 void TBoss6Type1::set_effect_points(f32 *a, u32 *b) {
     Ef_803204B8 *o = (Ef_803204B8 *)this;
