@@ -1393,7 +1393,6 @@ u16 TLobby__sub_80406BD8(void *arg0, s16 arg1) {
     Seg_80406BD8 *p;
     u32 *wp;
     u8 *ptr;
-    u8 *row;
     s32 cnt;
     s16 n;
     s32 i;
@@ -1405,6 +1404,7 @@ u16 TLobby__sub_80406BD8(void *arg0, s16 arg1) {
     u8 kind;
     u32 w;
     u32 addr;
+    u8 *row;
     union { u16 s; u8 c[2]; } su;
 
     sum = 0;
