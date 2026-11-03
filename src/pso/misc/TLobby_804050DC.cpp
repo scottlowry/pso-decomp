@@ -9367,6 +9367,151 @@ s16 NetIPv6HandleRouterAdvertisement(u8 *arg0, u8 *arg1, s32 arg2, void *arg3) {
     return TLobby__sub_80417494(sp18, arg1, arg3);
 }
 
+typedef struct Ndr_80417494 {
+    u8 pad0[3];
+    u8 state;
+    s16 id;
+    s16 f6;
+    s16 lifetime;
+    u8 padA[2];
+    s32 reachable_time;
+    s32 retrans_timer;
+    u8 addr[0x10];
+} Ndr_80417494;
+typedef struct Nbc_80417494 {
+    u8 pad0[3];
+    u8 state;
+    u8 pad4[8];
+    u8 flags;
+    u8 padD[9];
+    u8 addr[0x10];
+    u8 pad26[0x22];
+} Nbc_80417494;
+typedef struct G_80417494 {
+    u8 pad0[2];
+    s16 nnbr;
+    s16 nrtr;
+    u8 pad6[6];
+    Nbc_80417494 *nbrs;
+    Ndr_80417494 *rtrs;
+    u8 pad14[0x10];
+    s16 reachable_time;
+    s16 retrans_timer;
+    s16 f2A;
+} G_80417494;
+typedef struct Evt3_80417494 { u8 *p; u8 b; } Evt3_80417494;
+typedef struct Evt7_80417494 { u8 *p; u8 *q; } Evt7_80417494;
+
+s16 TLobby__sub_80417494(void *msg, u8 *addr, s16 id) {
+    s32 TLobby__sub_80411604(s16, int, void *);
+    s32 TLobby__sub_80418734(u8 *, void *, s16);
+    G_80417494 *g;
+    Ndr_80417494 *r;
+    Ndr_80417494 *e;
+    Ndr_80417494 *last;
+    Nbc_80417494 *q;
+    Nbc_80417494 *nb;
+    Evt3_80417494 e3;
+    Evt7_80417494 e7;
+    u8 *slot;
+    s16 n;
+
+    g = (G_80417494 *)&ipv6_neighbor_discovery_state;
+    e = NULL;
+    n = g->nrtr;
+    r = g->rtrs;
+    while (n > 0) {
+        if (r->state == 1 && NetMemcmp(r->addr, addr, 0x10) == 0) {
+            e = r;
+            break;
+        }
+        n--;
+        r++;
+    }
+    if (e == NULL) {
+        if (*(u16 *)((s8 *)msg + 6) != 0) {
+            TLobby__sub_80418734(addr, msg, id);
+            slot = addr;
+            TLobby__sub_80411604(id, 5, &slot);
+        } else {
+            nb = NULL;
+            n = g->nnbr;
+            q = g->nbrs;
+            while (n > 0) {
+                if (q->state == 1 && NetMemcmp(q->addr, addr, 0x10) == 0) {
+                    nb = q;
+                    break;
+                }
+                n--;
+                q++;
+            }
+            if (nb != NULL) {
+                nb->flags &= ~0x80;
+            }
+            slot = addr;
+            TLobby__sub_80411604(id, 6, &slot);
+        }
+    } else if (*(u16 *)((s8 *)msg + 6) != 0) {
+        slot = addr;
+        TLobby__sub_80411604(id, 5, &slot);
+        e->id = id;
+        e->lifetime = *(s16 *)((s8 *)msg + 6);
+        if (*(s32 *)((s8 *)msg + 8) != 0) {
+            e->reachable_time = *(s32 *)((s8 *)msg + 8);
+            g->reachable_time = (s16)(e->reachable_time / 1000);
+        }
+        if (*(s32 *)((s8 *)msg + 12) != 0) {
+            e->retrans_timer = *(s32 *)((s8 *)msg + 12);
+            g->retrans_timer = (s16)(e->retrans_timer / 1000);
+            g->f2A = e->retrans_timer / 1000 + 1;
+        }
+    } else {
+        nb = NULL;
+        n = g->nnbr;
+        q = g->nbrs;
+        while (n > 0) {
+            if (q->state == 1 && NetMemcmp(q->addr, addr, 0x10) == 0) {
+                nb = q;
+                break;
+            }
+            n--;
+            q++;
+        }
+        if (nb != NULL) {
+            nb->flags &= ~0x80;
+        }
+        last = NULL;
+        n = g->nrtr;
+        r = g->rtrs;
+        while (n > 0) {
+            if (r->state == 1) {
+                if (NetMemcmp(r->addr, addr, 0x10) != 0) {
+                    last = r;
+                } else {
+                    r->state = 0;
+                    r->f6 = 0;
+                }
+            }
+            n--;
+            r++;
+        }
+        if (last == NULL) {
+            slot = addr;
+            TLobby__sub_80411604(id, 6, &slot);
+        } else {
+            e7.p = addr;
+            e7.q = last->addr;
+            TLobby__sub_80411604(id, 7, &e7);
+        }
+    }
+    if (*(u8 *)((s8 *)msg + 4) != 0) {
+        e3.p = addr;
+        e3.b = *(u8 *)((s8 *)msg + 4);
+        TLobby__sub_80411604(id, 3, &e3);
+    }
+    return 0;
+}
+
 typedef struct Hdr_804177A0 {
     s16 len;
     u8 pad[2];
