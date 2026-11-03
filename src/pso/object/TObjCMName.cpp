@@ -1063,11 +1063,11 @@ void TObjCMHairMenu::render()
   s32 idx;
   Prim_80297DB8 prim;
   s32 hair;
+  f32 base;
   s32 i;
   s32 j;
   s32 idoff;
   f32 scale;
-  f32 base;
   f32 w;
   f32 alpha;
   u32 *new_var;
@@ -1269,6 +1269,9 @@ void TObjCMHairMenu::render()
   for (i = 0; i < 3; i++)
   {
     ((TObjCMHairMenu *)&prim)->draw_tri_fan_2d(4, 6, -2.4375f);
+    if ((this && this) && this)
+    {
+    }
     p[0].y += yoff;
     p[2].y += yoff;
     p[3].y += yoff;
