@@ -1286,16 +1286,15 @@ typedef struct Lobby_804061FC {
     u8 sub[0x140];
 } Lobby_804061FC;
 
-#pragma push
 s32 TLobby__sub_804061FC(s32 arg0) {
     Lobby_804061FC *l;
     u8 *p;
 
     l = (Lobby_804061FC *)lbl_805C0038;
-    p = lbl_805C0038;
     lbl_805D7ADC = 0;
     NetMemset(l, 0, 0x144);
     l->state = 0;
+    p = lbl_805C0038;
     TLobby__sub_8040059C(p);
     TLobby__sub_80402CE0(p);
     TLobby__sub_803FC318(p);
@@ -1307,7 +1306,6 @@ s32 TLobby__sub_804061FC(s32 arg0) {
     TLobby__sub_803FD958(l->sub);
     return 0;
 }
-#pragma pop
 
 s32 TLobby__sub_804062A0(s16 arg0) {
     Lobby_804062A0 *l = (Lobby_804062A0 *)lbl_805C0038;
