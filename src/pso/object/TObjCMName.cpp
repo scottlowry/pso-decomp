@@ -1067,15 +1067,15 @@ void TObjCMHairMenu::render()
   s32 idoff;
   f32 scale;
   f32 base;
-  f32 t;
   f32 w;
   f32 w0;
-  u32 *new_var;
   f32 alpha;
+  u32 *new_var;
   f32 sq;
   f32 s;
   f32 a1;
   f32 a2;
+  f32 t;
   f32 scaleF;
   f32 a255;
   f32 yin;
@@ -1086,8 +1086,8 @@ void TObjCMHairMenu::render()
   f32 xa;
   f32 yout;
   f32 xb;
-  f32 yoff;
   f32 roff;
+  f32 yoff;
   hair = this->appearance->hair;
   scale = (0.25f * sin_table_lookup(this->ticks << 10)) + 1.0f;
   if (scale > 1.0f)
@@ -1276,6 +1276,9 @@ void TObjCMHairMenu::render()
   for (i = 0; i < 3; i++)
   {
     rgb = &this->appearance->red;
+    if (this)
+    {
+    }
     tv = ((f32) rgb[i]) / 255.0f;
     if (tv != 0.0f)
     {
