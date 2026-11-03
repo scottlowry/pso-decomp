@@ -3109,13 +3109,12 @@ inline s32 is_jis_code(u16 code) {
 
 s32 TQuestVmDownLoadServer__sub_803EC71C(u16 *src, u8 *dst, s32 len) {
     s32 i;
-    u16 *cur;
     char *out;
     out = (char *)dst;
     i = 0;
     while (i < len) {
         u16 d;
-        u16 c = *(cur = src);
+        u16 c = *src;
         s32 attr = (c >> 8) & 0xF;
         if (attr == 0) {
             *out = c;
