@@ -1809,7 +1809,6 @@ void TQuestVmDownLoadServer__sub_803E95BC(void);
 #pragma push
 #pragma dont_inline off
 #pragma inline_depth(1)
-#pragma opt_common_subs off
 inline s32 Hash_803E8DA0(char *s) {
     s32 h;
     u8 c = s[0];
@@ -1829,7 +1828,6 @@ s32 TQuestVmDownLoadServer__sub_803E8DA0(char *name, Req_803EEF2C *req, s32 arg2
     Ent_803E8DA0 *e;
     u8 *base;
     s32 h;
-    s16 len;
     u8 blen;
     s32 r;
     s32 off;
@@ -1837,20 +1835,19 @@ s32 TQuestVmDownLoadServer__sub_803E8DA0(char *name, Req_803EEF2C *req, s32 arg2
     s32 tag;
     u8 *rec;
     u8 *p;
-    u8 unused[0x20];
+    u8 unused[0x28];
 
     lbl_805D7868 = 1;
-    h = Hash_803E8DA0(name);
-    len = req->len;
-    prev = NULL;
     base = (u8 *)&lbl_80591EC8.value;
+    h = Hash_803E8DA0(name);
+    prev = NULL;
     n = *(Node_803E8DA0 **)(base + (h << 2) + 0x2000);
     while (n != NULL) {
         e = n->ent;
         blen = e->len;
         r = strncmp(e->name, name, (s16)blen);
         if (r == 0) {
-            if (len == (s16)blen) {
+            if (req->len == (s16)blen) {
                 break;
             }
         } else if (r > 0) {
@@ -1907,7 +1904,6 @@ s32 TQuestVmDownLoadServer__sub_803E8DA0(char *name, Req_803EEF2C *req, s32 arg2
     }
     TQuestVmDownLoadServer::copy_sjis_string(req->text, p);
     h = Hash_803E8DA0(name);
-    len = req->len;
     prev = NULL;
     n = *(Node_803E8DA0 **)(base + (h << 2) + 0x2000);
     while (n != NULL) {
@@ -1915,7 +1911,7 @@ s32 TQuestVmDownLoadServer__sub_803E8DA0(char *name, Req_803EEF2C *req, s32 arg2
         blen = e->len;
         r = strncmp(e->name, name, (s16)blen);
         if (r == 0) {
-            if (len == (s16)blen) {
+            if (req->len == (s16)blen) {
                 break;
             }
         } else if (r > 0) {
