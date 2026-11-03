@@ -1216,7 +1216,6 @@ void TObjCMHairMenu::render()
   pos5.y = 149.0f;
   draw_ui_sprite(hair + 0x14, &pos5, -2.4375f, a1);
   pos5.x = 305.0f + w;
-  pos5.y = 150.0f;
   draw_ui_sprite(0x1E, &pos5, -2.4375f, a2);
   pos5.x = 324.0f + w;
   pos5.y = 167.0f;
@@ -1229,6 +1228,7 @@ void TObjCMHairMenu::render()
     }
     else
     {
+      pos5.y = 150.0f;
       s = sq * 0.6f;
     }
     draw_ui_sprite(i + 15, &lbl_804DBCD0[i - 1], -2.4375f, s);
