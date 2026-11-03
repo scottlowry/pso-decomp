@@ -77,11 +77,12 @@ s32 TBoss6Zanzo__sub_803205C4(TBoss6Zanzo *self_) {
             if (p == end - 1 || (p + 1)->a == 0) {
                 a1 = 0.0f;
             }
+            idx = j = 0;
             desc.col = col;
-            desc.a = 0;
+            desc.a = idx;
             desc.n = 4;
             desc.pos = pos;
-            for (j = 0, idx = 0; j < o->n - 1; j++, idx += 0x10) {
+            for (; j < o->n - 1; j++, idx += 0x10) {
                 b = prev->p + idx;
                 ((TAdChrMoveEffectGC *)col)->copy4(b);
                 col[3] = (u8)((s32)(a0 * b[3]));
