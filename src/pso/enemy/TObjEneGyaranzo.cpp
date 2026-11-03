@@ -161,6 +161,10 @@ extern const f32 lbl_805DA270;
 
 u8 *__ct__8TObjChipFP7TObjectP14TObjChipParams(u8 *arg0, u8 *arg1, u8 *arg2);
 extern Params_800D2900 lbl_8043C35C;
+extern Params_800D2900 lbl_8043C278;
+extern Params_800D2900 lbl_8043C2C4;
+extern Params_800D2900 lbl_8043C310;
+extern const f32 lbl_805DA264;
 u32 *gyaranzo_model_resources[0x16];
 u8 *gyaranzo_resource_ptrs[13];
 EnemyTargetCandidate TObjGyaranzoMissile_target_slots[4];
@@ -1169,6 +1173,51 @@ void TObjEneGyaranzo::sub_800D2900() {
                 }
             }
         }
+    }
+}
+
+s32 fn_800D2A68(void *arg0) {
+    TObjEneGyaranzo *self = (TObjEneGyaranzo *)arg0;
+    Vec_800D2900 v;
+    void *obj;
+    v.x = self->position.x;
+    v.y = self->position.y + lbl_805DA264;
+    v.z = self->position.z;
+    Params_800D2900 pa = lbl_8043C278;
+    s32 *rp = (s32 *)((*(Outer_800D2900 * *)&gyaranzo_bml_resource)->p42c);
+    pa.pos.x = v.x;
+    pa.pos.y = v.y;
+    pa.pos.z = v.z;
+    pa.x38 = self->position.y;
+    pa.x40 = rp[2];
+    pa.x44 = rp[3];
+    Params_800D2900 pb = lbl_8043C2C4;
+    rp = (s32 *)((*(Outer_800D2900 * *)&gyaranzo_bml_resource)->p42c);
+    pb.pos.x = v.x;
+    pb.pos.y = v.y;
+    pb.pos.z = v.z;
+    pb.x38 = self->position.y;
+    pb.x40 = rp[6];
+    pb.x44 = rp[7];
+    Params_800D2900 pc = lbl_8043C310;
+    rp = (s32 *)((*(Outer_800D2900 * *)&gyaranzo_bml_resource)->p42c);
+    pc.pos.x = v.x;
+    pc.pos.y = v.y;
+    pc.pos.z = v.z;
+    pc.x38 = self->position.y;
+    pc.x40 = rp[10];
+    pc.x44 = rp[11];
+    obj = __nw__7TObjectFUl(0x234);
+    if (obj != NULL) {
+        __ct__8TObjChipFP7TObjectP14TObjChipParams((u8 *)obj, tl_05, (u8 *)&pa);
+    }
+    obj = __nw__7TObjectFUl(0x234);
+    if (obj != NULL) {
+        __ct__8TObjChipFP7TObjectP14TObjChipParams((u8 *)obj, tl_05, (u8 *)&pb);
+    }
+    obj = __nw__7TObjectFUl(0x234);
+    if (obj != NULL) {
+        __ct__8TObjChipFP7TObjectP14TObjChipParams((u8 *)obj, tl_05, (u8 *)&pc);
     }
 }
 
