@@ -2457,10 +2457,14 @@ s32 TQuestVmDownLoadServer__sub_803EB420(s32 start, s32 count, Node_803EB420 *ar
     return n + TQuestVmDownLoadServer__sub_803E6970((s32)(start + arg2->len), (s32)(count - arg2->len), buf, 0);
 }
 
+#pragma push
+#pragma opt_common_subs off
 void TQuestVmDownLoadServer__sub_803EB4D4(void) {
     u8 *p;
     Node_803EB420 *n;
     s32 cnt;
+    s32 h;
+    s32 t;
     u16 *entry;
     u16 *cur;
     Node_803EB420 *head;
@@ -2487,14 +2491,16 @@ void TQuestVmDownLoadServer__sub_803EB4D4(void) {
     if (cnt < 0) {
         cnt = 0;
     }
-    if (cnt / 100 != 0) {
-        *p++ = (u8)(cnt / 100 + '0');
+    h = cnt / 100;
+    if (h != 0) {
+        *p++ = (u8)(h + '0');
     } else {
         *p++ = ' ';
     }
     cnt = cnt - (cnt / 100) * 100;
-    if (cnt / 10 != 0 || (u32)p[-1] != (u32)' ') {
-        *p++ = (u8)(cnt / 10 + '0');
+    t = cnt / 10;
+    if (t != 0 || (u32)p[-1] != (u32)' ') {
+        *p++ = (u8)(t + '0');
     } else {
         *p++ = ' ';
     }
@@ -2550,6 +2556,7 @@ void TQuestVmDownLoadServer__sub_803EB4D4(void) {
         total++;
     }
 }
+#pragma pop
 
 Node_803EB794 *advance_nodes__22TQuestVmDownLoadServerFPvi(Node_803EB794 *p, s32 n) {
     s32 i;
