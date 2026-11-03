@@ -1,0 +1,11 @@
+### mwcceppc.exe Compiler:
+#    File: tools\perm-tests\dcpol_f7\variants10\c08_declare_flags_short_chain.cpp
+# -----------------------------------------------------------------------------
+#     526: }
+# Warning: ^
+#   return value expected
+### mwcceppc.exe Compiler:
+#     854: }
+# Warning: ^
+#   return value expected
+wrote /Users/scott/Hermes/pso-decomp/pso-decomp-f7/tools/perm-tests/dcpol_f7/out2/c08_declare_flags_short_chain

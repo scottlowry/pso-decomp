@@ -1,0 +1,19 @@
+[1/2] ORIG_ASM build/GPOE8P/asm
+[2/2] MWCC build/GPOE8P/src/pso/unk/text_803E2D70.o
+FAILED: [code=2] build/GPOE8P/src/pso/unk/text_803E2D70.o 
+build/tools/wibo build/compilers/GC/2.6/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -RTTI off -str reuse -maxerrors 1 -nosyspath -i build/GPOE8P/include -i include -i src -i libs/dolphin/include -i libs/dolphin/include/dolphin -char signed -use_lmw_stmw on -O3,p -inline off -opt nopeephole -lang=c++ -MMD -c src/pso/unk/text_803E2D70.cpp -o build/GPOE8P/src/pso/unk && "/Library/Developer/CommandLineTools/usr/bin/python3" tools/transform_dep.py build/GPOE8P/src/pso/unk/text_803E2D70.d build/GPOE8P/src/pso/unk/text_803E2D70.d
+### mwcceppc.exe Compiler:
+#    File: src\pso\unk\text_803E2D70.cpp
+# --------------------------------------
+#     526: }
+# Warning: ^
+#   return value expected
+### mwcceppc.exe Compiler:
+#     697: draw_strip_pos_normal(list, (Vtx_803E46FC *)buffer, info);
+#   Error:                                                         ^
+#   undefined identifier 'draw_strip_pos_normal'
+#   Too many errors printed, aborting program
+
+User break, cancelled...
+ninja: build stopped: subcommand failed.
+RC=2

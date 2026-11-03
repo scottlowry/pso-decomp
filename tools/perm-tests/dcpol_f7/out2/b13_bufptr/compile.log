@@ -1,0 +1,16 @@
+### mwcceppc.exe Compiler:
+#    File: tools\perm-tests\dcpol_f7\variants6\b13_bufptr.cpp
+# -----------------------------------------------------------
+#     526: }
+# Warning: ^
+#   return value expected
+### mwcceppc.exe Compiler:
+#     701: draw_strip_pos_normal__10TObjPlayerFPvPvUi(list, buffer, info);
+#   Error:                                                              ^
+#   function call 'draw_strip_pos_normal__10TObjPlayerFPvPvUi(short *, void *, 
+#   long)' does not match
+#   'draw_strip_pos_normal__10TObjPlayerFPvPvUi(short *, Vtx_803E46FC *, 
+#   unsigned long)'
+#   Too many errors printed, aborting program
+
+User break, cancelled...

@@ -1,0 +1,11 @@
+### mwcceppc.exe Compiler:
+#    File: tools\perm-tests\dcpol_f7\probe.cpp
+# --------------------------------------------
+#     526: }
+# Warning: ^
+#   return value expected
+### mwcceppc.exe Compiler:
+#     849: }
+# Warning: ^
+#   return value expected
+wrote tools/perm-tests/dcpol_f7/pout

@@ -1,0 +1,335 @@
+matched_functions: 27223 -> 27315 (+92)
+matched_code: 4101056 -> 4142236 (+41180)
+matched_data: 1275463 -> 1503192 (+227729)
+complete_code: 3189224 -> 3357212 (+167988)
+complete_data: 919991 -> 1157268 (+237277)
+total_functions: 27572 -> 27572 (+0)
+total_code: 4353092 -> 4353092 (+0)
+total_data: 1761415 -> 1760492 (-923)
+New exact functions: 92; regressions: 0
+source_bearing_units: 3732 -> 3504 (-228)
+linked_units: 3539 -> 3357 (-182)
+Renamed functions: 359. Unit counts and renames describe report structure; they do not prove semantic naming or recovery of original translation units.
+  + 0x8004E6D0 __ct__11TObjDFDemo1FP7TObjectPC3Vecl
+  + 0x8004FE20 __ct__11TObjDFDemo5FP7TObjectPC3Vecl
+  + 0x80068EF0 TCameraCtrl__sub_80068EF0
+  + 0x80075DFC TObjTombstone__sub_80075DFC
+  + 0x80150EC4 deliver_partner_action__10TNpcPlayerFv
+  + 0x8015434C TObjPlayer__sub_8015434C
+  + 0x801589E8 run_task__11TOBoss4RockFv
+  + 0x80158FB4 __ct__11TOBoss4RockFPv
+  + 0x801A8CF0 deliver_photon_blast_results_animated
+  + 0x801A92B0 deliver_photon_blast_results_delayed
+  + 0x801D4368 TObjPlayer__sub_801D4368
+  + 0x801E1944 TAdPlayerLoadGC__sub_801E1944
+  + 0x801E26DC TAdPlayerLoadGC__sub_801E26DC
+  + 0x801E38A0 TLobby__sub_801E38A0
+  + 0x801F9914 add_radar_scaled_gate
+  + 0x8025DBDC TWindowKeyBoardSoft__sub_8025DBDC
+  + 0x8026FC5C draw_photon_blast_fan
+  + 0x8028F6A0 blend_shape_chunk_vertices
+  + 0x802979BC sub_802979BC__14TObjCMMainMenuFv
+  + 0x80298DE0 __sinit_TObjCMName_cpp
+  + 0x802A88B0 run_task__16TEffIndirectCtrlFv
+  + 0x802AD040 TWindowEffectLight__sub_802AD040
+  + 0x802B0A44 __sinit_text_802B0A44_cpp
+  + 0x802B626C TBoss6Type1__sub_802B626C
+  + 0x802BBE20 TBoss6Type2__sub_802BBE20
+  + 0x802BFBF4 __sinit_text_802BFBF4_cpp
+  + 0x802C5F1C TAdMultiPlyChrSelectGC__sub_802C5F1C
+  + 0x802D5B78 TObjPlayer__sub_802D5B78
+  + 0x802EFD08 TBoss7TentacleNeedle__ct
+  + 0x802F0D30 TObjPlayer__sub_802F0D30
+  + 0x802F28E0 run_task__13TUnk_804E4B3CFv
+  + 0x802FC060 TBoss8Dragon__sub_802FC060
+  + 0x802FDA78 TBoss8Dragon__sub_802FDA78
+  + 0x80322B54 run_task__15TAdLdQuestPrtGCFv
+  + 0x80322F20 __ct__15TAdLdQuestPrtGCFP7TObject
+  + 0x80324F4C TBoss5GryphonLightning__ct
+  + 0x803367F4 __sinit_TLobby_803360CC_cpp
+  + 0x8033A41C __sinit_TSaveChCr_cpp
+  + 0x8034A254 __ct__20TAdLoadQuestPrtTxtGCFP7TObjectl
+  + 0x80354188 TBoss6Rock__sub_80354188
+  + 0x8035F768 receive_direct_attack__18TObjEneEpsilonBodyFPv19DirectAttackPayloadPvll
+  + 0x8036EBEC __sinit_TAdMultiChgGameModeGC_8036DE10_cpp
+  + 0x803D0714 TLobby__sub_803D0714
+  + 0x803D64C0 sin_table_lookup
+  + 0x803D64DC cos_table_lookup
+  + 0x803D7FE0 convert_color_f32_to_u8
+  + 0x803D8008 convert_color_u8_to_f32
+  + 0x803D85D8 render_debug_text
+  + 0x803D8910 vec3_add_to
+  + 0x803D89C0 vec3_dot
+  + 0x803D8A18 vec3_cross
+  + 0x803D8BD8 vector_length
+  + 0x803D8CA8 matrix_identity
+  + 0x803D9370 subtract_vector
+  + 0x803D9650 matrix_apply_translation
+  + 0x803D97B4 normalize_vector
+  + 0x803D9884 transform_point_by_current_matrix
+  + 0x803D9990 rotate_vector_by_current_matrix
+  + 0x803D99F8 rotate_matrix_by_node_angles
+  + 0x803D9B2C push_matrix
+  + 0x803D9BA0 scale_current_matrix
+  + 0x803D9C00 post_translate_matrix
+  + 0x803E1C40 translate_current_matrix_ps
+  + 0x803E1CA4 TObjPlayer__sub_803E1CA4
+  + 0x803E1CC4 rotate_current_matrix_x_ps
+  + 0x803E1E74 reorder_current_matrix_ps
+  + 0x803E1F60 TObjPlayer__sub_803E1F60
+  + 0x803E3110 GXSetVtxAttrFmtv
+  + 0x803E3390 transform_chunk_vertices_pos_normal
+  + 0x803FABDC TLobby__sub_803FABDC
+  + 0x803FB7A4 TLobby__sub_803FB7A4
+  + 0x80407F20 TLobby__sub_80407F20
+  + 0x8040F454 TLobby__sub_8040F454
+  + 0x80412058 TLobby__sub_80412058
+  + 0x804167C8 NetIPv6HandleNeighborAdvertisement
+  + 0x80418C40 TLobby__sub_80418C40
+  + 0x80424E44 TLobby__sub_80424E44
+  + 0x80426D80 TLobby__sub_80426D80
+  + 0x804281DC TLobby__sub_804281DC
+  + 0x80428DC8 TLobby__sub_80428DC8
+  + 0x8042BF6C TAdSinglePlyChrSelectGC__sub_8042BF6C
+  + 0x8042C124 TAdSinglePlyChrSelectGC__sub_8042C124
+  + 0x8042C2E4 TAdSinglePlyChrSelectGC__sub_8042C2E4
+  + 0x8042D49C TAdSinglePlyChrSelectGC__sub_8042D49C
+  + 0x8042D6A4 TAdSinglePlyChrSelectGC__sub_8042D6A4
+  + 0x8042DF4C TAdSinglePlyChrSelectGC__sub_8042DF4C
+  + 0x8042E184 TAdSinglePlyChrSelectGC__sub_8042E184
+  + 0x8042E320 TAdSinglePlyChrSelectGC__sub_8042E320
+  + 0x8042E488 TAdSinglePlyChrSelectGC__sub_8042E488
+  + 0x8042E8C4 LaunchDol
+  + 0x8042E9FC pad_03_8042E9FC_text
+  + 0x8042EC14 TAdTrialModemChkGC__sub_8042EC14
+  padding left coverage: psov3 .bss 0x80540A34 +4 bytes
+  padding left coverage: psov3 .bss 0x80541E54 +4 bytes
+  padding left coverage: psov3 .bss 0x80542E74 +4 bytes
+  padding left coverage: psov3 .bss 0x80542E8C +4 bytes
+  padding left coverage: psov3 .data 0x8048202C +4 bytes
+  padding left coverage: psov3 .data 0x804832FC +4 bytes
+  padding left coverage: psov3 .data 0x80485674 +4 bytes
+  padding left coverage: psov3 .data 0x8048E164 +4 bytes
+  padding left coverage: psov3 .data 0x8048F9E4 +4 bytes
+  padding left coverage: psov3 .data 0x804909FC +4 bytes
+  padding left coverage: psov3 .data 0x804944CC +4 bytes
+  padding left coverage: psov3 .data 0x80496C4C +4 bytes
+  padding left coverage: psov3 .data 0x80497DC4 +4 bytes
+  padding left coverage: psov3 .data 0x8049CA6C +4 bytes
+  padding left coverage: psov3 .data 0x8049EF54 +4 bytes
+  padding left coverage: psov3 .data 0x804A7E9C +4 bytes
+  padding left coverage: psov3 .data 0x804AFCE4 +4 bytes
+  padding left coverage: psov3 .data 0x804B2124 +4 bytes
+  padding left coverage: psov3 .data 0x804B2EB4 +4 bytes
+  padding left coverage: psov3 .data 0x804B40EC +4 bytes
+  padding left coverage: psov3 .data 0x804B5954 +4 bytes
+  padding left coverage: psov3 .data 0x804B7094 +4 bytes
+  padding left coverage: psov3 .data 0x804B790C +4 bytes
+  padding left coverage: psov3 .data 0x804B7B9C +4 bytes
+  padding left coverage: psov3 .data 0x804B7C54 +4 bytes
+  padding left coverage: psov3 .data 0x804B7F1C +4 bytes
+  padding left coverage: psov3 .data 0x804C9D4C +4 bytes
+  padding left coverage: psov3 .data 0x804D0FA4 +4 bytes
+  padding left coverage: psov3 .data 0x804D35D4 +4 bytes
+  padding left coverage: psov3 .data 0x804DC094 +4 bytes
+  padding left coverage: psov3 .data 0x804DC0F4 +4 bytes
+  padding left coverage: psov3 .data 0x804DDF34 +4 bytes
+  padding left coverage: psov3 .data 0x804DFC4C +4 bytes
+  padding left coverage: psov3 .data 0x804E2824 +4 bytes
+  padding left coverage: psov3 .data 0x804E752C +4 bytes
+  padding left coverage: psov3 .data 0x804E764C +4 bytes
+  padding left coverage: psov3 .data 0x804E7834 +4 bytes
+  padding left coverage: psov3 .data 0x804EC3EC +4 bytes
+  padding left coverage: psov3 .data 0x804ED9BC +4 bytes
+  padding left coverage: psov3 .data 0x804EFFA4 +4 bytes
+  padding left coverage: psov3 .data 0x804FC744 +4 bytes
+  padding left coverage: psov3 .rodata 0x804492DC +4 bytes
+  padding left coverage: psov3 .sbss 0x805D4B44 +4 bytes
+  padding left coverage: psov3 .sbss 0x805D4DCC +4 bytes
+  padding left coverage: psov3 .sbss 0x805D4EDC +4 bytes
+  padding left coverage: psov3 .sbss 0x805D511C +4 bytes
+  padding left coverage: psov3 .sbss 0x805D512C +4 bytes
+  padding left coverage: psov3 .sbss 0x805D58AC +4 bytes
+  padding left coverage: psov3 .sbss 0x805D5A7C +4 bytes
+  padding left coverage: psov3 .sbss 0x805D5E5C +4 bytes
+  padding left coverage: psov3 .sbss 0x805D5EE4 +4 bytes
+  padding left coverage: psov3 .sbss 0x805D6224 +4 bytes
+  padding left coverage: psov3 .sbss 0x805D644C +4 bytes
+  padding left coverage: psov3 .sbss 0x805D65AC +4 bytes
+  padding left coverage: psov3 .sbss 0x805D65B4 +4 bytes
+  padding left coverage: psov3 .sbss 0x805D65CC +4 bytes
+  padding left coverage: psov3 .sbss 0x805D66D4 +4 bytes
+  padding left coverage: psov3 .sbss 0x805D66E4 +4 bytes
+  padding left coverage: psov3 .sbss 0x805D690C +4 bytes
+  padding left coverage: psov3 .sbss 0x805D6A4C +4 bytes
+  padding left coverage: psov3 .sbss 0x805D6C3D +3 bytes
+  padding left coverage: psov3 .sbss 0x805D6DA4 +4 bytes
+  padding left coverage: psov3 .sbss 0x805D6EBC +4 bytes
+  padding left coverage: psov3 .sbss 0x805D6F24 +4 bytes
+  padding left coverage: psov3 .sbss 0x805D7004 +4 bytes
+  padding left coverage: psov3 .sbss 0x805D7024 +4 bytes
+  padding left coverage: psov3 .sbss 0x805D77B4 +4 bytes
+  padding left coverage: psov3 .sbss 0x805D7934 +4 bytes
+  padding left coverage: psov3 .sbss 0x805D7CCC +4 bytes
+  padding left coverage: psov3 .sdata 0x805D26EC +4 bytes
+  padding left coverage: psov3 .sdata 0x805D276C +4 bytes
+  padding left coverage: psov3 .sdata 0x805D2784 +4 bytes
+  padding left coverage: psov3 .sdata 0x805D2B5C +4 bytes
+  padding left coverage: psov3 .sdata 0x805D2D64 +4 bytes
+  padding left coverage: psov3 .sdata 0x805D2FE4 +4 bytes
+  padding left coverage: psov3 .sdata 0x805D2FF4 +4 bytes
+  padding left coverage: psov3 .sdata 0x805D3E2C +4 bytes
+  padding left coverage: psov3 .sdata 0x805D3E4C +4 bytes
+  padding left coverage: psov3 .sdata 0x805D3EEC +4 bytes
+  padding left coverage: psov3 .sdata 0x805D441C +4 bytes
+  padding left coverage: psov3 .sdata 0x805D442C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805D7E7C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805D7EC4 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805D8104 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805D8124 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805D8564 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805D89B4 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805D8EE4 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805D8EF4 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805D8F1C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805D8F64 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805D93A4 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805D93B4 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805D9474 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805D957C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805D9E5C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DA154 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DA48C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DA8E4 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DAA7C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DAAA4 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DAB0C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DAB3C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DAB44 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DAB5C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DAB94 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DABEC +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DAC6C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DACB4 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DAD0C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DAD1C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DAD24 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DAD64 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DAD6C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DADBC +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DADCC +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DADDC +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DADFC +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DAE44 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DAE74 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DAEF4 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DAEFC +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DAF1C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DAF24 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DAFCC +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DAFEC +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DB004 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DB084 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DB1E4 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DB2A4 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DB2D4 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DB8D4 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DB97C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DBA0C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DBA34 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DBACC +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DBB9C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DBDF4 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DBECC +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DBF9C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DC074 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DC0A4 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DC0AC +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DC1DC +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DC25C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DC304 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DC444 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DC44C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DC46C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DC47C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DC48C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DC5CC +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DC62C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DC6C4 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DC6D4 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DC6DC +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DC6F4 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DC6FC +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DC70C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DC714 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DC73C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DC7FC +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DC83C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DC87C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DC98C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DCB5C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DCBAC +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DCBD4 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DCC5C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DCE14 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DD064 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DD074 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DD2E4 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DD2EC +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DD41C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DD634 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DD6C4 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DD8FC +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DD904 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DD90C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DD914 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DD924 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DD9FC +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DDCAC +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DDCF4 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DDD0C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DDD14 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DDDC4 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DDDFC +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DDF34 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DE1E4 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DE1F4 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DE22C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DE4F4 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DE52C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DE7A4 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DE8A4 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DED3C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DEF1C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DEF3C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DEF9C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DF0BC +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DF0C4 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DF164 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DF1E4 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DF21C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DF24C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DF5E4 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DF714 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DF724 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DF7B4 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DF90C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DFAD4 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DFDD4 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DFDE4 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DFEC4 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DFECC +4 bytes
+  padding left coverage: psov3 .sdata2 0x805E0094 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805E028C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805E036C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805E037C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805E0384 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805E03B4 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805E043C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805E0DE4 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805E0DEC +4 bytes
+  padding left coverage: psov3 .sdata2 0x805E0DFC +4 bytes
+  padding left coverage: psov3 .sdata2 0x805E0E0C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805E0FC4 +4 bytes
+  padding left coverage: psov3 .sdata2 0x805E0FCC +4 bytes
+  padding left coverage: psov3 .sdata2 0x805E10BC +4 bytes

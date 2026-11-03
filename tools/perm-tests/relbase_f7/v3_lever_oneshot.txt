@@ -1,0 +1,80 @@
+ORIG  TLobby__sub_803CB858                                    match=91.35714 size=448
+OURS  TLobby__sub_803CB858                                    match=91.35714 size=460
+rows: orig 112 ours 115
+  slot  2 O: lis r5, adxm_worker_thread@ha              N: lis r5, ...bss.0@ha                       
+  slot  6 O: addi r31, r5, adxm_worker_thread@l         N: addi r31, r5, ...bss.0@l                  
+  slot 11 O: bne 0x5f54                                 N: bne 0x4b98                                
+  slot 22 O: bne 0x5e48                                 N: bne 0x4a80                                
+  slot 35 O: b 0x5e74                                   N: b 0x4aac                                  
+  slot 36 O: lwz r3, 0x0(r30)                           N: lwz r4, 0x4(r30)                          
+  slot 37 O: lis r4, lbl_804F9D80@ha                    N: lis r3, lbl_804F9D80@ha                   
+  slot 38 O: lwz r0, 0x4(r30)                           N: lwz r0, 0x0(r30)                          
+  slot 39 O: stwu r3, lbl_804F9D80@l(r4)                N: stwu r0, lbl_804F9D80@l(r3)               
+  slot 40 O: stw r0, 0x4(r4)                            N: stw r4, 0x4(r3)                           
+  slot 41 O: lwz r3, 0x8(r30)                           N: lwz r4, 0xc(r30)                          
+  slot 42 O: lwz r0, 0xc(r30)                           N: lwz r0, 0x8(r30)                          
+  slot 43 O: stw r3, 0x8(r4)                            N: stw r0, 0x8(r3)                           
+  slot 44 O: stw r0, 0xc(r4)                            N: stw r4, 0xc(r3)                           
+  slot 46 O: stw r0, 0x10(r4)                           N: stw r0, 0x10(r3)                          
+  slot 49 O: addi r3, r3, lbl_804F9D80@l                N: addi r5, r3, lbl_804F9D80@l               
+  slot 51 O: lwz r8, 0x4(r3)                            N: addi r3, r31, 0x0                         
+  slot 52 O: addi r4, r4, wait_for_lock_release__6TLobbyFv@l N: lwz r8, 0x4(r5)                           
+  slot 53 O: addi r3, r31, 0x620                        N: addi r4, r4, wait_for_lock_release__6TLobbyFv@l
+  slot 57 O: addi r6, r6, 0x1000                        N: addi r3, r3, 0x620                        
+  slot 58 O: bl OSCreateThread                          N: addi r6, r6, 0x1000                       
+  slot 59 O: lis r3, lbl_804F9D80@ha                    N: bl OSCreateThread                         
+  slot 60 O: lis r4, TLobby__sub_803CBB14@ha            N: lis r3, lbl_804F9D80@ha                   
+  slot 61 O: addi r3, r3, lbl_804F9D80@l                N: addi r30, r31, 0x0                        
+  slot 62 O: addi r6, r31, 0x2930                       N: addi r3, r3, lbl_804F9D80@l               
+  slot 63 O: lwz r8, 0x8(r3)                            N: lis r4, TLobby__sub_803CBB14@ha           
+  slot 64 O: addi r4, r4, TLobby__sub_803CBB14@l        N: addi r6, r31, 0x2930                      
+  slot 65 O: addi r3, r31, 0x310                        N: lwz r8, 0x8(r3)                           
+  slot 66 O: li r5, 0x0                                 N: addi r30, r30, 0x310                      
+  slot 67 O: li r7, 0x2000                              N: addi r4, r4, TLobby__sub_803CBB14@l       
+  slot 68 O: li r9, 0x1                                 N: mr r3, r30                                
+  slot 69 O: addi r6, r6, 0x2000                        N: li r5, 0x0                                
+  slot 70 O: bl OSCreateThread                          N: li r7, 0x2000                             
+  slot 71 O: lis r3, lbl_804F9D80@ha                    N: li r9, 0x1                                
+  slot 72 O: lis r4, worker_thread_loop__6TLobbyFv@ha   N: addi r6, r6, 0x2000                       
+  slot 73 O: addi r3, r3, lbl_804F9D80@l                N: bl OSCreateThread                         
+  slot 74 O: addi r6, r31, 0x930                        N: lis r3, lbl_804F9D80@ha                   
+  slot 75 O: lwz r8, 0x10(r3)                           N: lis r4, worker_thread_loop__6TLobbyFv@ha  
+  slot 76 O: addi r4, r4, worker_thread_loop__6TLobbyFv@l N: addi r3, r3, lbl_804F9D80@l               
+  slot 77 O: addi r3, r31, 0x0                          N: addi r6, r31, 0x930                       
+  slot 78 O: li r5, 0x0                                 N: lwz r8, 0x10(r3)                          
+  slot 79 O: li r7, 0x2000                              N: addi r4, r4, worker_thread_loop__6TLobbyFv@l
+  slot 80 O: li r9, 0x1                                 N: addi r3, r31, 0x0                         
+  slot 81 O: addi r6, r6, 0x2000                        N: li r5, 0x0                                
+  slot 82 O: bl OSCreateThread                          N: li r7, 0x2000                             
+  slot 83 O: bl OSGetCurrentThread                      N: li r9, 0x1                                
+  slot 84 O: li r4, 0x1                                 N: addi r6, r6, 0x2000                       
+  slot 85 O: li r0, 0x0                                 N: bl OSCreateThread                         
+  slot 86 O: stw r3, lbl_805D75A8@sda21                 N: bl OSGetCurrentThread                     
+  slot 87 O: addi r3, r31, 0x310                        N: li r0, 0x0                                
+  slot 88 O: stw r4, lobby_worker_thread_run_flag@sda21 N: li r4, 0x1                                
+  slot 89 O: stw r4, lbl_805D75B8@sda21                 N: stw r3, lbl_805D75A8@sda21                
+  slot 90 O: stw r4, lbl_805D75C8@sda21                 N: mr r3, r30                                
+  slot 91 O: stw r0, lbl_805D75BC@sda21                 N: stw r4, lobby_worker_thread_run_flag@sda21
+  slot 92 O: stw r0, lbl_805D75B4@sda21                 N: stw r4, lbl_805D75B8@sda21                
+  slot 93 O: stw r0, lbl_805D75C4@sda21                 N: stw r4, lbl_805D75C8@sda21                
+  slot 94 O: stw r0, lbl_805D75B0@sda21                 N: stw r0, lbl_805D75BC@sda21                
+  slot 95 O: bl OSResumeThread                          N: stw r0, lbl_805D75B4@sda21                
+  slot 96 O: addi r3, r31, 0x0                          N: stw r0, lbl_805D75C4@sda21                
+  slot 97 O: bl OSResumeThread                          N: stw r0, lbl_805D75B0@sda21                
+  slot 98 O: lis r4, adxm_goto_mwidle_border__6TLobbyFv@ha N: bl OSResumeThread                         
+  slot 99 O: li r3, 0x5                                 N: addi r3, r31, 0x0                         
+  slot100 O: addi r4, r4, adxm_goto_mwidle_border__6TLobbyFv@l N: bl OSResumeThread                         
+  slot101 O: li r5, 0x0                                 N: lis r4, adxm_goto_mwidle_border__6TLobbyFv@ha
+  slot102 O: bl TLobby__sub_803D34B0                    N: li r3, 0x5                                
+  slot103 O: lwz r3, lbl_805D7590@sda21                 N: addi r4, r4, adxm_goto_mwidle_border__6TLobbyFv@l
+  slot104 O: addi r0, r3, 0x1                           N: li r5, 0x0                                
+  slot105 O: stw r0, lbl_805D7590@sda21                 N: bl TLobby__sub_803D34B0                   
+  slot106 O: lwz r31, 0xc(r1)                           N: lwz r3, lbl_805D7590@sda21                
+  slot107 O: lwz r30, 0x8(r1)                           N: addi r0, r3, 0x1                          
+  slot108 O: lwz r0, 0x14(r1)                           N: stw r0, lbl_805D7590@sda21                
+  slot109 O: mtlr r0                                    N: lwz r31, 0xc(r1)                          
+  slot110 O: addi r1, r1, 0x10                          N: lwz r30, 0x8(r1)                          
+  slot111 O: blr                                        N: lwz r0, 0x14(r1)                          
+  slot112 O: <none>                                     N: mtlr r0                                   
+  slot113 O: <none>                                     N: addi r1, r1, 0x10                         
+  slot114 O: <none>                                     N: blr                                       

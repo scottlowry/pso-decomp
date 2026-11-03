@@ -1,0 +1,21 @@
+1.0	COMPILE_FAIL	rc=2			
+1.1	COMPILE_FAIL	rc=2			
+1.1p1	COMPILE_FAIL	rc=2			
+1.2.5	COMPILE_FAIL	rc=2			
+1.2.5n	COMPILE_FAIL	rc=2			
+1.3	size=00000130	ps-ops=0	insn=0	rc=0
+1.3.2	size=00000130	ps-ops=0	insn=0	rc=0
+1.3.2r	size=00000130	ps-ops=0	insn=0	rc=0
+2.0	size=00000130	ps-ops=0	insn=0	rc=0
+2.0p1	size=00000130	ps-ops=0	insn=0	rc=0
+2.5	size=00000130	ps-ops=0	insn=0	rc=0
+2.6	size=00000130	ps-ops=0	insn=0	rc=0
+2.7	size=00000130	ps-ops=0	insn=0	rc=0
+3.0a3	size=00000130	ps-ops=0	insn=0	rc=0
+3.0a3.2	size=00000130	ps-ops=0	insn=0	rc=0
+3.0a3.3	size=00000130	ps-ops=0	insn=0	rc=0
+3.0a3.4	size=00000130	ps-ops=0	insn=0	rc=0
+3.0a3p1	size=00000130	ps-ops=0	insn=0	rc=0
+3.0a5	size=00000130	ps-ops=0	insn=0	rc=0
+3.0a5.2	size=00000130	ps-ops=0	insn=0	rc=0
+SURVEY_RC=0

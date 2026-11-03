@@ -1,0 +1,21 @@
+1.0	NO_O
+1.1	NO_O
+1.1p1	NO_O
+1.2.5	NO_O
+1.2.5n	NO_O
+1.3	ours[col:r9-> pos:r8-> ]	stws[stw     r9,28(r1) stw     r8,24(r1) ]
+1.3.2	ours[col:r9-> pos:r8-> ]	stws[stw     r9,28(r1) stw     r8,24(r1) ]
+1.3.2r	ours[col:r9-> pos:r8-> ]	stws[stw     r9,28(r1) stw     r8,24(r1) ]
+2.0	ours[col:r9-> pos:r8-> ]	stws[stw     r9,28(r1) stw     r8,24(r1) ]
+2.0p1	ours[col:r9-> pos:r8-> ]	stws[stw     r9,28(r1) stw     r8,24(r1) ]
+2.5	ours[col:r9-> pos:r8-> ]	stws[stw     r9,28(r1) stw     r8,24(r1) ]
+2.6	ours[col:r9-> pos:r8-> ]	stws[stw     r9,28(r1) stw     r8,24(r1) ]
+2.7	ours[col:r9-> pos:r8-> ]	stws[stw     r9,28(r1) stw     r8,24(r1) ]
+3.0a3	ours[col:r9-> pos:r8-> ]	stws[stw     r9,28(r1) stw     r8,24(r1) ]
+3.0a3.2	ours[col:r9-> pos:r8-> ]	stws[stw     r9,28(r1) stw     r8,24(r1) ]
+3.0a3.3	ours[col:r9-> pos:r8-> ]	stws[stw     r9,28(r1) stw     r8,24(r1) ]
+3.0a3.4	ours[col:r9-> pos:r8-> ]	stws[stw     r9,28(r1) stw     r8,24(r1) ]
+3.0a3p1	ours[col:r9-> pos:r8-> ]	stws[stw     r9,28(r1) stw     r8,24(r1) ]
+3.0a5	ours[col:r9-> pos:r8-> ]	stws[stw     r9,28(r1) stw     r8,24(r1) ]
+3.0a5.2	ours[col:r9-> pos:r8-> ]	stws[stw     r9,28(r1) stw     r8,24(r1) ]
+ERA 	[col:r8 pos:r9]	stw r8,28(r1) stw r9,24(r1) 

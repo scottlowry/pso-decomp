@@ -1,0 +1,15 @@
+matched_functions: 27236 -> 27239 (+3)
+matched_code: 4105832 -> 4106548 (+716)
+matched_data: 1277179 -> 1277191 (+12)
+complete_code: 3198340 -> 3198340 (+0)
+complete_data: 920755 -> 920755 (+0)
+total_functions: 27572 -> 27572 (+0)
+total_code: 4353092 -> 4353092 (+0)
+total_data: 1761399 -> 1761399 (+0)
+New exact functions: 3; regressions: 0
+source_bearing_units: 3731 -> 3731 (+0)
+linked_units: 3540 -> 3540 (+0)
+Renamed functions: 0. Unit counts and renames describe report structure; they do not prove semantic naming or recovery of original translation units.
+  + 0x802D5B78 TObjPlayer__sub_802D5B78
+  + 0x80324F4C TBoss5GryphonLightning__ct
+  + 0x803E3390 transform_chunk_vertices_pos_normal

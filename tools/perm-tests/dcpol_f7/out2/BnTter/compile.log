@@ -1,0 +1,13 @@
+### mwcceppc.exe Compiler:
+#    File: tools\perm-tests\dcpol_f7\variants5\BnTter.cpp
+# -------------------------------------------------------
+#     526: }
+# Warning: ^
+#   return value expected
+### mwcceppc.exe Compiler:
+#     719: draw_chunk_color_tex_strips(list, (void *)buffer, info, (op == 0x42) ? 1 : 0));
+#   Error:                                                                              ^
+#   ';' expected
+#   Too many errors printed, aborting program
+
+User break, cancelled...

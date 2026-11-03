@@ -1,0 +1,10 @@
+### mwcceppc.exe Compiler:
+#    File: src\pso\unk\text_803E2D70.cpp
+# --------------------------------------
+#     547: } 
+# Warning: ^
+#   return value expected
+### mwcceppc.exe Compiler:
+#     772: } 
+# Warning: ^
+#   return value expected

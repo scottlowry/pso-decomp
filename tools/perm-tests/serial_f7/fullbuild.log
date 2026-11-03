@@ -1,0 +1,289 @@
+[1/89] ORIG_ASM build/GPOE8P/asm
+[2/89] MWCC build/GPOE8P/src/pso/object/TObjDFUsoTower.o
+[3/89] MWCC build/GPOE8P/src/pso/boss/TBoss4Zanzo.o
+[4/89] MWCC build/GPOE8P/src/pso/boss/TBoss4Type3.o
+[5/89] MWCC build/GPOE8P/src/pso/misc/TQuestVmDownLoadServer_8006FC34.o
+[6/89] MWCC build/GPOE8P/src/pso/misc/ChallengeMode.o
+[7/89] MWCC build/GPOE8P/src/pso/misc/TLobby_80070A00.o
+[8/89] MWCC build/GPOE8P/src/pso/object/TObjTombstone.o
+[9/89] MWCC build/GPOE8P/src/pso/enemy/TObjEneMerillLia.o
+### mwcceppc.exe Compiler:
+#    File: src\pso\enemy\TObjEneMerillLia.cpp
+# -------------------------------------------
+#     751: static NpcSpawnMotions merill_lia_spawn_motions = {0, lbl_80494570, 2, 0xC0000};
+# Warning:                                                                                ^
+#   'RW' object 'merill_lia_spawn_motions' is being put into section '.rodata' 
+#   with access permission 'R';
+#   section's access permission will be changed to 'RW'
+### mwcceppc.exe Compiler:
+#    1086: }
+# Warning: ^
+#   return value expected
+### mwcceppc.exe Compiler:
+#    1146: }
+# Warning: ^
+#   return value expected
+[10/89] MWCC build/GPOE8P/src/pso/item/TItem.o
+[11/89] MWCC build/GPOE8P/src/pso/misc/TLobby_800F795C.o
+[12/89] MWCC build/GPOE8P/src/pso/misc/TOBoss4Rock.o
+[13/89] MWCC build/GPOE8P/src/pso/misc/TOBarrierEnergy01.o
+[14/89] MWCC build/GPOE8P/src/pso/misc/TOBoss4.o
+[15/89] MWCC build/GPOE8P/src/pso/misc/TODoorAncient01.o
+[16/89] MWCC build/GPOE8P/src/pso/misc/TODoorAncient03.o
+[17/89] MWCC build/GPOE8P/src/pso/misc/TODoorAncient04.o
+[18/89] MWCC build/GPOE8P/src/pso/misc/TODoorAncient05.o
+[19/89] MWCC build/GPOE8P/src/pso/misc/TODoorAncient06.o
+[20/89] MWCC build/GPOE8P/src/pso/misc/TODoorAncient07.o
+[21/89] MWCC build/GPOE8P/src/pso/misc/TODoorAncient08.o
+[22/89] MWCC build/GPOE8P/src/pso/misc/TODoorAncient09.o
+[23/89] MWCC build/GPOE8P/src/pso/misc/TODoorCave01.o
+[24/89] MWCC build/GPOE8P/src/pso/misc/TODoorCave02.o
+[25/89] MWCC build/GPOE8P/src/pso/misc/TODoorMachine01.o
+[26/89] MWCC build/GPOE8P/src/pso/misc/TODoorMachine02.o
+[27/89] MWCC build/GPOE8P/src/pso/misc/TODoorVS2Door01.o
+[28/89] MWCC build/GPOE8P/src/pso/misc/TODragonflyCave01.o
+[29/89] MWCC build/GPOE8P/src/pso/misc/TOFenceAncient01.o
+[30/89] MWCC build/GPOE8P/src/pso/misc/TOFenceAncient02.o
+[31/89] MWCC build/GPOE8P/src/pso/misc/TOFenceAncient03.o
+[32/89] MWCC build/GPOE8P/src/pso/misc/TOFenceAncient04.o
+[33/89] MWCC build/GPOE8P/src/pso/misc/TOKeyAncient01.o
+[34/89] MWCC build/GPOE8P/src/pso/misc/TOKeyAncient02.o
+[35/89] MWCC build/GPOE8P/src/pso/misc/TOKeyAncient03.o
+[36/89] MWCC build/GPOE8P/src/pso/misc/TOKeyCave01.o
+[37/89] MWCC build/GPOE8P/src/pso/misc/TOKeyGenericSw.o
+[38/89] MWCC build/GPOE8P/src/pso/misc/TOSensorAncient01.o
+[39/89] MWCC build/GPOE8P/src/pso/misc/TOKeyMachine01.o
+[40/89] MWCC build/GPOE8P/src/pso/misc/TOSensorGeneral01.o
+[41/89] MWCC build/GPOE8P/src/pso/map/FloorLifecycleTables.o
+[42/89] MWCC build/GPOE8P/src/pso/object/ObjectFactoryTables.o
+[43/89] MWCC build/GPOE8P/src/pso/quest/QuestOpcodeHandlers.o
+[44/89] MWCC build/GPOE8P/src/pso/quest/TQuestThread.o
+[45/89] MWCC build/GPOE8P/src/pso/misc/TOBiwaMushi.o
+[46/89] MWCC build/GPOE8P/src/pso/unk/text_802AA8FC.o
+[47/89] MWCC build/GPOE8P/src/pso/misc/TPlayerFootStamp_802B01D8.o
+[48/89] MWCC build/GPOE8P/src/pso/boss/TBoss6PlotFalz.o
+[49/89] MWCC build/GPOE8P/src/pso/misc/TPlayerFootStamp_802B02B0.o
+[50/89] MWCC build/GPOE8P/src/pso/misc/TPlayerFootStamp_802B03F4.o
+[51/89] MWCC build/GPOE8P/src/pso/misc/TPlayerFootStamp_802B0770.o
+[52/89] MWCC build/GPOE8P/src/pso/misc/TPlayerFootStamp_802B0808.o
+[53/89] MWCC build/GPOE8P/src/pso/boss/TBoss6EmptyWarp_802B0E2C.o
+[54/89] MWCC build/GPOE8P/src/pso/boss/TBoss6Tube_802B1020.o
+[55/89] MWCC build/GPOE8P/src/pso/boss/TBoss6Type1_802B20C0.o
+[56/89] MWCC build/GPOE8P/src/pso/boss/TBoss6Kakusan.o
+[57/89] MWCC build/GPOE8P/src/pso/boss/TBoss6Type2.o
+### mwcceppc.exe Compiler:
+#    File: src\pso\boss\TBoss6Type2.cpp
+# -------------------------------------
+#    1538: }
+# Warning: ^
+#   return value expected
+[58/89] MWCC build/GPOE8P/src/pso/boss/TBoss6GravBall.o
+[59/89] MWCC build/GPOE8P/src/pso/boss/TBoss6Mine.o
+[60/89] MWCC build/GPOE8P/src/pso/boss/TBoss6Type2_8032E708.o
+[61/89] MWCC build/GPOE8P/src/pso/boss/Boss6Type1Appearance.o
+### mwcceppc.exe Compiler:
+#    File: src\pso\boss\Boss6Type1Appearance.cpp
+# ----------------------------------------------
+#     216: ec(section ".rodata") s32 lbl_80477DEC[] = {0x00000000, 0x41C80000, 0x42960000};
+# Warning:                                                                                ^
+#   'RW' object 'lbl_80477DEC' is being put into section '.rodata' with access 
+#   permission 'R';
+#   section's access permission will be changed to 'RW'
+### mwcceppc.exe Compiler:
+#     217: 000000, 0x00000000, 0x00000000, 0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000};
+# Warning:                                                                                ^
+#   'RW' object 'boss6_type1_appear_node_desc' is being put into section 
+#   '.rodata' with access permission 'R';
+#   section's access permission will be changed to 'RW'
+### mwcceppc.exe Compiler:
+#     218: rs[] = {0x00000003, 0x00000001, 0x00000000, 0x00000006, 0x00000001, 0x00000000};
+# Warning:                                                                                ^
+#   'RW' object 'boss6_type1_appear_model_node_descriptors' is being put into 
+#   section '.rodata' with access permission 'R';
+#   section's access permission will be changed to 'RW'
+### mwcceppc.exe Compiler:
+#     219: ec(section ".rodata") s32 lbl_80477E30[] = {0x00000000, 0x00000000, 0x00000000};
+# Warning:                                                                                ^
+#   'RW' object 'lbl_80477E30' is being put into section '.rodata' with access 
+#   permission 'R';
+#   section's access permission will be changed to 'RW'
+### mwcceppc.exe Compiler:
+#     220: ec(section ".rodata") s32 lbl_80477E3C[] = {0x01020000, 0x00000000, 0x3F333333};
+# Warning:                                                                                ^
+#   'RW' object 'lbl_80477E3C' is being put into section '.rodata' with access 
+#   permission 'R';
+#   section's access permission will be changed to 'RW'
+[62/89] MWCC build/GPOE8P/src/pso/boss/Boss6Type2Appearance.o
+[63/89] MWCC build/GPOE8P/src/pso/boss/Boss6Type2Death.o
+[64/89] MWCC build/GPOE8P/src/pso/unk/text_8033FF78.o
+[65/89] MWCC build/GPOE8P/src/pso/boss/TBoss6Rock.o
+[66/89] MWCC build/GPOE8P/src/pso/boss/TBoss6SwordShot.o
+### mwcceppc.exe Compiler:
+#    File: src\pso\boss\TBoss6SwordShot.cpp
+# -----------------------------------------
+#     268: }
+# Warning: ^
+#   return value expected
+### mwcceppc.exe Compiler:
+#     310: }
+# Warning: ^
+#   return value expected
+### mwcceppc.exe Compiler:
+#     369: }
+# Warning: ^
+#   return value expected
+[67/89] MWCC build/GPOE8P/src/pso/unk/text_80357058.o
+[68/89] MWCC build/GPOE8P/src/pso/boss/TBoss6CrushRock_80359FC4.o
+[69/89] MWCC build/GPOE8P/src/pso/boss/TBoss6CrushRock.o
+[70/89] MWCC build/GPOE8P/src/pso/misc/TOBoss4Rock_8035A7FC.o
+[71/89] MWCC build/GPOE8P/src/pso/boss/TBoss6Thanks.o
+[72/89] MWCC build/GPOE8P/src/pso/unk/text_8035D2EC.o
+[73/89] MWCC build/GPOE8P/src/pso/boss/TBoss6DPB.o
+[74/89] MWCC build/GPOE8P/src/pso/boss/TBoss6MagMine.o
+[75/89] AS build/GPOE8P/src/TRK_MINNOW_DOLPHIN/targsupp.o
+[76/89] AS build/GPOE8P/src/TRK_MINNOW_DOLPHIN/exception.o
+[77/89] MWCC build/GPOE8P/src/pso/boss/TBoss6RockChase.o
+### mwcceppc.exe Compiler:
+#    File: src\pso\boss\TBoss6RockChase.cpp
+# -----------------------------------------
+#      93: __declspec(section ".rodata") char lbl_8047ACD8[] = "TBoss6RockChase"; 
+# Warning:                                                                       ^
+#   'RW' object 'lbl_8047ACD8' is being put into section '.rodata' with access 
+#   permission 'R';
+#   section's access permission will be changed to 'RW'
+### mwcceppc.exe Compiler:
+#      96: };
+# Warning:  ^
+#   'RW' object 'boss6_rock_chase_model_radius_table' is being put into 
+#   section '.rodata' with access permission 'R';
+#   section's access permission will be changed to 'RW'
+### mwcceppc.exe Compiler:
+#     158: }
+# Warning: ^
+#   return value expected
+[78/89] MWCC build/GPOE8P/src/pso/boss/TBoss4Type1.o
+[79/89] MWCC build/GPOE8P/src/pso/boss/TBoss6Type1.o
+### mwcceppc.exe Compiler:
+#    File: src\pso\boss\TBoss6Type1.cpp
+# -------------------------------------
+#     906: }
+# Warning: ^
+#   return value expected
+### mwcceppc.exe Compiler:
+#    2349: }
+# Warning: ^
+#   return value expected
+[80/89] MWCC build/GPOE8P/src/pso/unk/text_802BFBF4.o
+[81/89] MWCC build/GPOE8P/src/pso/ui/TAdSelectGameModeGC_802C4748.o
+[82/89] MWCC build/GPOE8P/src/pso/object/TObjFish_8033CCC8.o
+### mwcceppc.exe Compiler:
+#    File: src\pso\object\TObjFish_8033CCC8.cpp
+# ---------------------------------------------
+#     186: __declspec(section ".rodata") double lbl_80477F08 = 4503601774854144.0;
+# Warning:                                                                       ^
+#   'RW' object 'lbl_80477F08' is being put into section '.rodata' with access 
+#   permission 'R';
+#   section's access permission will be changed to 'RW'
+[83/89] MWCC build/GPOE8P/src/pso/misc/TLobby_80428374.o
+[84/89] MWCC build/GPOE8P/src/pso/unk/text_8042E9FC.o
+[85/89] REPORT
+ INFO Loading project .
+ INFO Generating report for 4845 units (using 28 threads)
+ INFO Report generated in 0.560s
+ INFO Writing to build/GPOE8P/report.json
+[86/89] LINK build/GPOE8P/psov3.elf
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol '@14' is either not a global symbol or doesn't exist.  
+#   Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol '@4' is either not a global symbol or doesn't exist.  
+#   Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol '@891' is either not a global symbol or doesn't exist.  
+#   Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol '@990' is either not a global symbol or doesn't exist.  
+#   Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'AlarmQueue' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'ArenaEnd' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'ArenaStart' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'Down' is either not a global symbol or doesn't exist.  
+#   Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'ErrorTable' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'HeapArray' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'HoldDown' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'HoldUp' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'InterruptHandlerTable' is either not a global symbol 
+#   or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'InterruptPrioTable' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'LastState' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'NumHeaps' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'ResetCallback' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'ResetFunctionQueue' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'SetInterruptMask' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TRK_mainError' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'WaitingQueue' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol '__OSArenaHi' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol '__OSArenaLo' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'c2r$433' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'fragmentinfo' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'gTRKFramingState' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+[87/89] DOL build/GPOE8P/psov3.dol
+[88/89] CHECK config/GPOE8P/psov3/build.sha1
+build/GPOE8P/psov3.dol: OK
+[89/89] PROGRESS
+Progress:
+  All: 95.16% matched, 77.12% linked (3357 / 4845 files)
+    Code: 4142236 / 4353092 bytes (27315 / 27572 functions)
+    Data: 1503192 / 1760492 bytes (85.38%)
+  PSO Game Code: 94.87% matched, 75.78% linked (3189 / 4671 files)
+    Code: 3900500 / 4111356 bytes (26327 / 26584 functions)
+    Data: 1462423 / 1719699 bytes (85.04%)
+  Dolphin SDK: 100.00% matched, 100.00% linked (113 / 113 files)
+    Code: 190380 / 190380 bytes (847 / 847 functions)
+    Data: 34429 / 34429 bytes (100.00%)
+  Runtime: 100.00% matched, 100.00% linked (55 / 55 files)
+    Code: 51356 / 51356 bytes (141 / 141 functions)
+    Data: 6340 / 6340 bytes (100.00%)

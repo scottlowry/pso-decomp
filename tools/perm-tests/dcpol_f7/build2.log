@@ -1,0 +1,12 @@
+[1/2] ORIG_ASM build/GPOE8P/asm
+[2/2] MWCC build/GPOE8P/src/pso/unk/text_803E2D70.o
+### mwcceppc.exe Compiler:
+#    File: src\pso\unk\text_803E2D70.cpp
+# --------------------------------------
+#     526: }
+# Warning: ^
+#   return value expected
+### mwcceppc.exe Compiler:
+#     849: }
+# Warning: ^
+#   return value expected

@@ -1,0 +1,10 @@
+### mwcceppc.exe Compiler:
+#      In: include\pso\player\TObjPlayer.h
+#    From: src\pso\unk\text_803E2D70.cpp
+# --------------------------------------
+#    1644: };
+#   Error:  ^
+#   cannot construct base class 'TObjChara'
+#   Too many errors printed, aborting program
+
+User break, cancelled...

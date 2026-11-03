@@ -1,0 +1,40 @@
+== report_delta.py --check
+matched_functions: 27223 -> 27239 (+16)
+matched_code: 4101056 -> 4106548 (+5492)
+matched_data: 1275463 -> 1277191 (+1728)
+complete_code: 3189224 -> 3198340 (+9116)
+complete_data: 919991 -> 920755 (+764)
+total_functions: 27572 -> 27572 (+0)
+total_code: 4353092 -> 4353092 (+0)
+total_data: 1761415 -> 1761399 (-16)
+New exact functions: 16; regressions: 0
+source_bearing_units: 3732 -> 3731 (-1)
+linked_units: 3539 -> 3540 (+1)
+Renamed functions: 124. Unit counts and renames describe report structure; they do not prove semantic naming or recovery of original translation units.
+  + 0x80068EF0 TCameraCtrl__sub_80068EF0
+  + 0x801D4368 TObjPlayer__sub_801D4368
+  + 0x801E1944 TAdPlayerLoadGC__sub_801E1944
+  + 0x8025DBDC TWindowKeyBoardSoft__sub_8025DBDC
+  + 0x8026FC5C draw_photon_blast_fan
+  + 0x802AD040 TWindowEffectLight__sub_802AD040
+  + 0x802BBE20 TBoss6Type2__sub_802BBE20
+  + 0x802C5F1C TAdMultiPlyChrSelectGC__sub_802C5F1C
+  + 0x802D5B78 TObjPlayer__sub_802D5B78
+  + 0x802F0D30 TObjPlayer__sub_802F0D30
+  + 0x802FC060 TBoss8Dragon__sub_802FC060
+  + 0x80324F4C TBoss5GryphonLightning__ct
+  + 0x803D0714 TLobby__sub_803D0714
+  + 0x803E3390 transform_chunk_vertices_pos_normal
+  + 0x80426D80 TLobby__sub_80426D80
+  + 0x804281DC TLobby__sub_804281DC
+  padding left coverage: psov3 .data 0x8049EF54 +4 bytes
+  padding left coverage: psov3 .data 0x804C9D4C +4 bytes
+  padding left coverage: psov3 .sdata 0x805D2B5C +4 bytes
+  padding left coverage: psov3 .sdata2 0x805DAA7C +4 bytes
+== link_units.py check
+link_units check: OK (3540 linked units all exact)
+== link_units.py scan
+exact-by-objdiff but NOT linkable (28): compiled object emits sections/symbols the split does not own -> missing:20, section:.data:5, alignment:2, order:1
+  details: config/GPOE8P/psov3/linked_units_blocked.json (section: claim the data range into the unit's split; missing: tools/localize_split_globals.py)
+linked now: 3540   exact candidates to add: 2   regressed (drop): 0   skipped (known link-breakers): 0
+PASS

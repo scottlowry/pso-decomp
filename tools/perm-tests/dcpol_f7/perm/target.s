@@ -1,0 +1,218 @@
+.include "macros.inc"
+.text
+.globl dispatch_chunk_polygon_list
+.type dispatch_chunk_polygon_list,@function
+dispatch_chunk_polygon_list:
+/* 803E3F2C 003D6E0C  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 803E3F30 003D6E10  7C 08 02 A6 */	mflr r0
+/* 803E3F34 003D6E14  90 01 00 24 */	stw r0, 0x24(r1)
+/* 803E3F38 003D6E18  39 61 00 20 */	addi r11, r1, 0x20
+/* 803E3F3C 003D6E1C  4B FB 2C 61 */	bl _savegpr_26
+/* 803E3F40 003D6E20  7C 7B 1B 78 */	mr r27, r3
+/* 803E3F44 003D6E24  7C 9C 23 78 */	mr r28, r4
+/* 803E3F48 003D6E28  48 00 02 C0 */	b .L_803E4208
+.L_803E3F4C:
+/* 803E3F4C 003D6E2C  57 40 06 3E */	clrlwi r0, r26, 24
+/* 803E3F50 003D6E30  7C 1D 07 34 */	extsh r29, r0
+/* 803E3F54 003D6E34  2C 1D 00 08 */	cmpwi r29, 0x8
+/* 803E3F58 003D6E38  40 80 00 8C */	bge .L_803E3FE4
+/* 803E3F5C 003D6E3C  2C 1D 00 04 */	cmpwi r29, 0x4
+/* 803E3F60 003D6E40  41 82 00 2C */	beq .L_803E3F8C
+/* 803E3F64 003D6E44  40 80 00 10 */	bge .L_803E3F74
+/* 803E3F68 003D6E48  2C 1D 00 01 */	cmpwi r29, 0x1
+/* 803E3F6C 003D6E4C  41 82 00 14 */	beq .L_803E3F80
+/* 803E3F70 003D6E50  48 00 02 98 */	b .L_803E4208
+.L_803E3F74:
+/* 803E3F74 003D6E54  2C 1D 00 06 */	cmpwi r29, 0x6
+/* 803E3F78 003D6E58  40 80 02 90 */	bge .L_803E4208
+/* 803E3F7C 003D6E5C  48 00 00 38 */	b .L_803E3FB4
+.L_803E3F80:
+/* 803E3F80 003D6E60  7F 43 D3 78 */	mr r3, r26
+/* 803E3F84 003D6E64  4B FF F9 79 */	bl set_chunk_blend__FUl
+/* 803E3F88 003D6E68  48 00 02 80 */	b .L_803E4208
+.L_803E3F8C:
+/* 803E3F8C 003D6E6C  57 40 C6 3E */	extrwi r0, r26, 8, 16
+/* 803E3F90 003D6E70  7C 00 07 34 */	extsh r0, r0
+/* 803E3F94 003D6E74  54 00 10 3A */	slwi r0, r0, 2
+/* 803E3F98 003D6E78  3C 60 80 59 */	lis r3, chunk_polygon_list_cache@ha
+/* 803E3F9C 003D6E7C  38 63 D6 68 */	addi r3, r3, chunk_polygon_list_cache@l
+/* 803E3FA0 003D6E80  7F 63 01 2E */	stwx r27, r3, r0
+/* 803E3FA4 003D6E84  80 6D D1 98 */	lwz r3, lbl_805D7798@sda21(r0)
+/* 803E3FA8 003D6E88  38 03 00 01 */	addi r0, r3, 0x1
+/* 803E3FAC 003D6E8C  90 0D D1 98 */	stw r0, lbl_805D7798@sda21(r0)
+/* 803E3FB0 003D6E90  48 00 02 68 */	b .L_803E4218
+.L_803E3FB4:
+/* 803E3FB4 003D6E94  57 40 C6 3E */	extrwi r0, r26, 8, 16
+/* 803E3FB8 003D6E98  7C 00 07 34 */	extsh r0, r0
+/* 803E3FBC 003D6E9C  54 00 10 3A */	slwi r0, r0, 2
+/* 803E3FC0 003D6EA0  3C 60 80 59 */	lis r3, chunk_polygon_list_cache@ha
+/* 803E3FC4 003D6EA4  38 63 D6 68 */	addi r3, r3, chunk_polygon_list_cache@l
+/* 803E3FC8 003D6EA8  7C 63 00 2E */	lwzx r3, r3, r0
+/* 803E3FCC 003D6EAC  7F 84 E3 78 */	mr r4, r28
+/* 803E3FD0 003D6EB0  4B FF FF 5D */	bl dispatch_chunk_polygon_list
+/* 803E3FD4 003D6EB4  80 6D D1 98 */	lwz r3, lbl_805D7798@sda21(r0)
+/* 803E3FD8 003D6EB8  38 03 FF FF */	subi r0, r3, 0x1
+/* 803E3FDC 003D6EBC  90 0D D1 98 */	stw r0, lbl_805D7798@sda21(r0)
+/* 803E3FE0 003D6EC0  48 00 02 28 */	b .L_803E4208
+.L_803E3FE4:
+/* 803E3FE4 003D6EC4  2C 1D 00 10 */	cmpwi r29, 0x10
+/* 803E3FE8 003D6EC8  40 80 00 18 */	bge .L_803E4000
+/* 803E3FEC 003D6ECC  7F 43 D3 78 */	mr r3, r26
+/* 803E3FF0 003D6ED0  A8 9B 00 00 */	lha r4, 0x0(r27)
+/* 803E3FF4 003D6ED4  4B FF F9 21 */	bl apply_chunk_texture_command__Fll
+/* 803E3FF8 003D6ED8  3B 7B 00 02 */	addi r27, r27, 0x2
+/* 803E3FFC 003D6EDC  48 00 02 0C */	b .L_803E4208
+.L_803E4000:
+/* 803E4000 003D6EE0  2C 1D 00 40 */	cmpwi r29, 0x40
+/* 803E4004 003D6EE4  40 80 00 2C */	bge .L_803E4030
+/* 803E4008 003D6EE8  AB BB 00 00 */	lha r29, 0x0(r27)
+/* 803E400C 003D6EEC  3B 7B 00 02 */	addi r27, r27, 0x2
+/* 803E4010 003D6EF0  7F 43 D3 78 */	mr r3, r26
+/* 803E4014 003D6EF4  4B FF F8 E9 */	bl set_chunk_blend__FUl
+/* 803E4018 003D6EF8  7F 43 D3 78 */	mr r3, r26
+/* 803E401C 003D6EFC  7F 64 DB 78 */	mr r4, r27
+/* 803E4020 003D6F00  4B FF F7 89 */	bl submit_chunk_material_color__FUcPs
+/* 803E4024 003D6F04  57 A0 08 3C */	slwi r0, r29, 1
+/* 803E4028 003D6F08  7F 7B 02 14 */	add r27, r27, r0
+/* 803E402C 003D6F0C  48 00 01 DC */	b .L_803E4208
+.L_803E4030:
+/* 803E4030 003D6F10  A3 FB 00 00 */	lhz r31, 0x0(r27)
+/* 803E4034 003D6F14  A8 1B 00 02 */	lha r0, 0x2(r27)
+/* 803E4038 003D6F18  3B 7B 00 04 */	addi r27, r27, 0x4
+/* 803E403C 003D6F1C  7C 1E 03 78 */	mr r30, r0
+/* 803E4040 003D6F20  80 0D D1 8C */	lwz r0, model_render_flags@sda21(r0)
+/* 803E4044 003D6F24  54 00 05 28 */	rlwinm r0, r0, 0, 20, 20
+/* 803E4048 003D6F28  28 00 00 00 */	cmplwi r0, 0x0
+/* 803E404C 003D6F2C  41 82 00 1C */	beq .L_803E4068
+/* 803E4050 003D6F30  80 0D D1 84 */	lwz r0, chunk_polygon_flags_and_mask@sda21(r0)
+/* 803E4054 003D6F34  7F 40 00 38 */	and r0, r26, r0
+/* 803E4058 003D6F38  7C 1A 07 34 */	extsh r26, r0
+/* 803E405C 003D6F3C  80 0D D1 80 */	lwz r0, chunk_polygon_flags_or_mask@sda21(r0)
+/* 803E4060 003D6F40  7F 40 03 78 */	or r0, r26, r0
+/* 803E4064 003D6F44  7C 1A 07 34 */	extsh r26, r0
+.L_803E4068:
+/* 803E4068 003D6F48  7F 40 46 70 */	srawi r0, r26, 8
+/* 803E406C 003D6F4C  7C 1A 07 34 */	extsh r26, r0
+/* 803E4070 003D6F50  80 0D D1 D0 */	lwz r0, chunk_previous_strip_flags@sda21(r0)
+/* 803E4074 003D6F54  7F 43 02 78 */	xor r3, r26, r0
+/* 803E4078 003D6F58  80 0D D1 D4 */	lwz r0, chunk_strip_dirty_flags@sda21(r0)
+/* 803E407C 003D6F5C  7C 63 03 78 */	or r3, r3, r0
+/* 803E4080 003D6F60  93 4D D1 D0 */	stw r26, chunk_previous_strip_flags@sda21(r0)
+/* 803E4084 003D6F64  38 00 00 00 */	li r0, 0x0
+/* 803E4088 003D6F68  90 0D D1 D4 */	stw r0, chunk_strip_dirty_flags@sda21(r0)
+/* 803E408C 003D6F6C  54 60 07 FE */	clrlwi r0, r3, 31
+/* 803E4090 003D6F70  28 00 00 00 */	cmplwi r0, 0x0
+/* 803E4094 003D6F74  41 82 00 0C */	beq .L_803E40A0
+/* 803E4098 003D6F78  7F 43 D3 78 */	mr r3, r26
+/* 803E409C 003D6F7C  4B FF F9 D1 */	bl set_strip_lighting_chan_ctrl__FUl
+.L_803E40A0:
+/* 803E40A0 003D6F80  2C 1D 00 40 */	cmpwi r29, 0x40
+/* 803E40A4 003D6F84  41 82 00 14 */	beq .L_803E40B8
+/* 803E40A8 003D6F88  41 80 01 54 */	blt .L_803E41FC
+/* 803E40AC 003D6F8C  2C 1D 00 43 */	cmpwi r29, 0x43
+/* 803E40B0 003D6F90  40 80 01 4C */	bge .L_803E41FC
+/* 803E40B4 003D6F94  48 00 00 74 */	b .L_803E4128
+.L_803E40B8:
+/* 803E40B8 003D6F98  57 40 06 72 */	rlwinm r0, r26, 0, 25, 25
+/* 803E40BC 003D6F9C  2C 00 00 00 */	cmpwi r0, 0x0
+/* 803E40C0 003D6FA0  41 82 00 44 */	beq .L_803E4104
+/* 803E40C4 003D6FA4  7F 43 D3 78 */	mr r3, r26
+/* 803E40C8 003D6FA8  38 80 00 01 */	li r4, 0x1
+/* 803E40CC 003D6FAC  4B FF FA A1 */	bl set_chunk_blend_depth_mode__Fll
+/* 803E40D0 003D6FB0  4B FF F9 1D */	bl setup_chunk_tev_stages__Fv
+/* 803E40D4 003D6FB4  38 60 00 00 */	li r3, 0x0
+/* 803E40D8 003D6FB8  38 80 00 00 */	li r4, 0x0
+/* 803E40DC 003D6FBC  38 A0 00 01 */	li r5, 0x1
+/* 803E40E0 003D6FC0  38 C0 00 2A */	li r6, 0x2a
+/* 803E40E4 003D6FC4  38 E0 00 00 */	li r7, 0x0
+/* 803E40E8 003D6FC8  39 00 00 7D */	li r8, 0x7d
+/* 803E40EC 003D6FCC  4B FA 5B 81 */	bl GXSetTexCoordGen2
+/* 803E40F0 003D6FD0  7F 63 DB 78 */	mr r3, r27
+/* 803E40F4 003D6FD4  7F 84 E3 78 */	mr r4, r28
+/* 803E40F8 003D6FD8  7F C5 F3 78 */	mr r5, r30
+/* 803E40FC 003D6FDC  48 00 06 01 */	bl draw_strip_pos_normal__10TObjPlayerFPvPvUi
+/* 803E4100 003D6FE0  48 00 00 FC */	b .L_803E41FC
+.L_803E4104:
+/* 803E4104 003D6FE4  7F 43 D3 78 */	mr r3, r26
+/* 803E4108 003D6FE8  38 80 00 00 */	li r4, 0x0
+/* 803E410C 003D6FEC  4B FF FA 61 */	bl set_chunk_blend_depth_mode__Fll
+/* 803E4110 003D6FF0  4B FF F8 91 */	bl setup_tev_passclr__10TObjPlayerFv
+/* 803E4114 003D6FF4  7F 63 DB 78 */	mr r3, r27
+/* 803E4118 003D6FF8  7F 84 E3 78 */	mr r4, r28
+/* 803E411C 003D6FFC  7F C5 F3 78 */	mr r5, r30
+/* 803E4120 003D7000  4B FF F5 A5 */	bl draw_strip_list_pos_nrm__10TObjPlayerFPvPvUi
+/* 803E4124 003D7004  48 00 00 D8 */	b .L_803E41FC
+.L_803E4128:
+/* 803E4128 003D7008  7F 43 D3 78 */	mr r3, r26
+/* 803E412C 003D700C  38 80 00 01 */	li r4, 0x1
+/* 803E4130 003D7010  4B FF FA 3D */	bl set_chunk_blend_depth_mode__Fll
+/* 803E4134 003D7014  57 40 06 72 */	rlwinm r0, r26, 0, 25, 25
+/* 803E4138 003D7018  2C 00 00 00 */	cmpwi r0, 0x0
+/* 803E413C 003D701C  41 82 00 38 */	beq .L_803E4174
+/* 803E4140 003D7020  4B FF F8 AD */	bl setup_chunk_tev_stages__Fv
+/* 803E4144 003D7024  38 60 00 00 */	li r3, 0x0
+/* 803E4148 003D7028  38 80 00 00 */	li r4, 0x0
+/* 803E414C 003D702C  38 A0 00 01 */	li r5, 0x1
+/* 803E4150 003D7030  38 C0 00 2A */	li r6, 0x2a
+/* 803E4154 003D7034  38 E0 00 00 */	li r7, 0x0
+/* 803E4158 003D7038  39 00 00 7D */	li r8, 0x7d
+/* 803E415C 003D703C  4B FA 5B 11 */	bl GXSetTexCoordGen2
+/* 803E4160 003D7040  7F 63 DB 78 */	mr r3, r27
+/* 803E4164 003D7044  7F 84 E3 78 */	mr r4, r28
+/* 803E4168 003D7048  7F C5 F3 78 */	mr r5, r30
+/* 803E416C 003D704C  48 00 06 75 */	bl draw_triangle_strips__10TObjPlayerFPvPvUi
+/* 803E4170 003D7050  48 00 00 8C */	b .L_803E41FC
+.L_803E4174:
+/* 803E4174 003D7054  80 0D D1 E0 */	lwz r0, chunk_has_vertex_colors@sda21(r0)
+/* 803E4178 003D7058  28 00 00 00 */	cmplwi r0, 0x0
+/* 803E417C 003D705C  41 82 00 44 */	beq .L_803E41C0
+/* 803E4180 003D7060  4B FF F8 6D */	bl setup_chunk_tev_stages__Fv
+/* 803E4184 003D7064  38 60 00 00 */	li r3, 0x0
+/* 803E4188 003D7068  38 80 00 01 */	li r4, 0x1
+/* 803E418C 003D706C  38 A0 00 04 */	li r5, 0x4
+/* 803E4190 003D7070  38 C0 00 3C */	li r6, 0x3c
+/* 803E4194 003D7074  38 E0 00 00 */	li r7, 0x0
+/* 803E4198 003D7078  39 00 00 7D */	li r8, 0x7d
+/* 803E419C 003D707C  4B FA 5A D1 */	bl GXSetTexCoordGen2
+/* 803E41A0 003D7080  7F 63 DB 78 */	mr r3, r27
+/* 803E41A4 003D7084  7F 84 E3 78 */	mr r4, r28
+/* 803E41A8 003D7088  7F C5 F3 78 */	mr r5, r30
+/* 803E41AC 003D708C  20 1D 00 42 */	subfic r0, r29, 0x42
+/* 803E41B0 003D7090  7C 00 00 34 */	cntlzw r0, r0
+/* 803E41B4 003D7094  54 06 D9 7E */	srwi r6, r0, 5
+/* 803E41B8 003D7098  48 00 12 E5 */	bl draw_chunk_color_tex_strips
+/* 803E41BC 003D709C  48 00 00 40 */	b .L_803E41FC
+.L_803E41C0:
+/* 803E41C0 003D70A0  4B FF F8 2D */	bl setup_chunk_tev_stages__Fv
+/* 803E41C4 003D70A4  38 60 00 00 */	li r3, 0x0
+/* 803E41C8 003D70A8  38 80 00 01 */	li r4, 0x1
+/* 803E41CC 003D70AC  38 A0 00 04 */	li r5, 0x4
+/* 803E41D0 003D70B0  38 C0 00 3C */	li r6, 0x3c
+/* 803E41D4 003D70B4  38 E0 00 00 */	li r7, 0x0
+/* 803E41D8 003D70B8  39 00 00 7D */	li r8, 0x7d
+/* 803E41DC 003D70BC  4B FA 5A 91 */	bl GXSetTexCoordGen2
+/* 803E41E0 003D70C0  7F 63 DB 78 */	mr r3, r27
+/* 803E41E4 003D70C4  7F 84 E3 78 */	mr r4, r28
+/* 803E41E8 003D70C8  7F C5 F3 78 */	mr r5, r30
+/* 803E41EC 003D70CC  20 1D 00 42 */	subfic r0, r29, 0x42
+/* 803E41F0 003D70D0  7C 00 00 34 */	cntlzw r0, r0
+/* 803E41F4 003D70D4  54 06 D9 7E */	srwi r6, r0, 5
+/* 803E41F8 003D70D8  4B FF F3 35 */	bl draw_chunk_textured_strips
+.L_803E41FC:
+/* 803E41FC 003D70DC  38 1F FF FF */	subi r0, r31, 0x1
+/* 803E4200 003D70E0  54 00 08 3C */	slwi r0, r0, 1
+/* 803E4204 003D70E4  7F 7B 02 14 */	add r27, r27, r0
+.L_803E4208:
+/* 803E4208 003D70E8  AB 5B 00 00 */	lha r26, 0x0(r27)
+/* 803E420C 003D70EC  3B 7B 00 02 */	addi r27, r27, 0x2
+/* 803E4210 003D70F0  2C 1A 00 FF */	cmpwi r26, 0xff
+/* 803E4214 003D70F4  40 82 FD 38 */	bne .L_803E3F4C
+.L_803E4218:
+/* 803E4218 003D70F8  39 61 00 20 */	addi r11, r1, 0x20
+/* 803E421C 003D70FC  4B FB 29 CD */	bl _restgpr_26
+/* 803E4220 003D7100  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 803E4224 003D7104  7C 08 03 A6 */	mtlr r0
+/* 803E4228 003D7108  38 21 00 20 */	addi r1, r1, 0x20
+/* 803E422C 003D710C  4E 80 00 20 */	blr
+
+.size dispatch_chunk_polygon_list, . - dispatch_chunk_polygon_list
