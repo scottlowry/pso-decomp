@@ -71,7 +71,6 @@ void TBoss5GryphonSnarl__sub_80066E88(void);
 void load_f512_inazuma__Fv(void);
 
 void TBoss8Dragon__sub_80065C90(void) {
-    s32 i;
     RecoveredGlobal_80065C90_lbl_80487848 *dv = &lbl_80487848;
     switch (TBoss8Dragon__sub_8005D700()) {
     case 0:
@@ -88,19 +87,20 @@ void TBoss8Dragon__sub_80065C90(void) {
     boss5_gryphon_bone_capture_output = 0;
     boss5_gryphon_render_flags = 0;
     boss5_gryphon_instance = 0;
-    for (i = 0; i < 1; i++) {
+    for (s32 i = 0; i < 1; i++) {
         boss5_gryphon_base_params[i] = register_boss__6TLobbyFl(lbl_805D27F8);
     }
-    for (i = 0; i < 5; i++) {
-        boss5_gryphon_attack_params[i] =
-            dispatch_shared_handler_b__6TLobbyFl(((s32 *)((s8 *)(&dv->value) + 0x28))[i]);
+    s32 *s5 = (s32 *)((s8 *)(&dv->value) + 0x28);
+    s32 *d5 = boss5_gryphon_attack_params;
+    for (s32 i = 0; i < 5; i++) {
+        d5[i] = dispatch_shared_handler_b__6TLobbyFl(s5[i]);
     }
-    for (i = 0; i < 1; i++) {
+    for (s32 i = 0; i < 1; i++) {
         boss5_gryphon_resistance_params[i] = register_object__6TLobbyFl(lbl_805D27FC);
     }
-    for (i = 0; i < 3; i++) {
-        (&boss5_gryphon_behavior_params.value)[i] =
-            dispatch_shared_handler_a__6TLobbyFl(((s32 *)((s8 *)(&dv->value) + 0x3c))[i]);
+    for (s32 j = 0; j < 3; j++) {
+        (&boss5_gryphon_behavior_params.value)[j] =
+            dispatch_shared_handler_a__6TLobbyFl(((s32 *)((s8 *)(&dv->value) + 0x3c))[j]);
     }
     init_all_slots__11TWindowCtrlFv();
     set_default_on_state0__12TBoss8DragonFv();
