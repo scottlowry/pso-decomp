@@ -1,0 +1,192 @@
+
+/tmp/rosetta6bd8/G1_2.6.o:     file format elf32-powerpc
+
+
+Disassembly of section .text:
+
+00000000 <TLobby__sub_80406BD8>:
+   0:	94 21 ff d0 	stwu    r1,-48(r1)
+   4:	7c 08 02 a6 	mflr    r0
+   8:	90 01 00 34 	stw     r0,52(r1)
+   c:	7c 80 07 34 	extsh   r0,r4
+  10:	38 80 00 00 	li      r4,0
+  14:	bf 21 00 14 	stmw    r25,20(r1)
+  18:	2c 00 00 01 	cmpwi   r0,1
+  1c:	3b a0 00 00 	li      r29,0
+  20:	3b 20 00 00 	li      r25,0
+  24:	b0 81 00 08 	sth     r4,8(r1)
+  28:	83 63 00 04 	lwz     r27,4(r3)
+  2c:	40 82 01 48 	bne     174 <TLobby__sub_80406BD8+0x174>
+  30:	1c 1b 00 0c 	mulli   r0,r27,12
+  34:	3c 80 00 00 	lis     r4,0
+  38:	3b e4 00 00 	addi    r31,r4,0
+  3c:	7f c3 02 14 	add     r30,r3,r0
+  40:	48 00 01 18 	b       158 <TLobby__sub_80406BD8+0x158>
+  44:	88 1e 00 08 	lbz     r0,8(r30)
+  48:	38 7e 00 04 	addi    r3,r30,4
+  4c:	3b de ff f4 	addi    r30,r30,-12
+  50:	3b 7b ff ff 	addi    r27,r27,-1
+  54:	2c 00 00 03 	cmpwi   r0,3
+  58:	41 82 00 84 	beq     dc <TLobby__sub_80406BD8+0xdc>
+  5c:	40 80 00 14 	bge     70 <TLobby__sub_80406BD8+0x70>
+  60:	2c 00 00 01 	cmpwi   r0,1
+  64:	41 82 00 14 	beq     78 <TLobby__sub_80406BD8+0x78>
+  68:	40 80 00 18 	bge     80 <TLobby__sub_80406BD8+0x80>
+  6c:	48 00 00 74 	b       e0 <TLobby__sub_80406BD8+0xe0>
+  70:	2c 00 00 05 	cmpwi   r0,5
+  74:	40 80 00 6c 	bge     e0 <TLobby__sub_80406BD8+0xe0>
+  78:	83 83 00 00 	lwz     r28,0(r3)
+  7c:	48 00 00 64 	b       e0 <TLobby__sub_80406BD8+0xe0>
+  80:	80 a3 00 00 	lwz     r5,0(r3)
+  84:	3c 60 00 00 	lis     r3,0
+  88:	a8 03 00 00 	lha     r0,0(r3)
+  8c:	54 a4 46 3e 	srwi    r4,r5,24
+  90:	7c 83 07 34 	extsh   r3,r4
+  94:	7c 00 18 00 	cmpw    r0,r3
+  98:	40 80 00 0c 	bge     a4 <TLobby__sub_80406BD8+0xa4>
+  9c:	38 60 00 00 	li      r3,0
+  a0:	48 00 02 30 	b       2d0 <TLobby__sub_80406BD8+0x2d0>
+  a4:	54 a0 86 3e 	rlwinm  r0,r5,16,24,31
+  a8:	80 df 00 04 	lwz     r6,4(r31)
+  ac:	1c 83 00 3c 	mulli   r4,r3,60
+  b0:	54 a3 04 3e 	clrlwi  r3,r5,16
+  b4:	7c 00 07 34 	extsh   r0,r0
+  b8:	7c c6 22 14 	add     r6,r6,r4
+  bc:	1c 00 00 06 	mulli   r0,r0,6
+  c0:	80 86 00 00 	lwz     r4,0(r6)
+  c4:	7c 83 22 14 	add     r4,r3,r4
+  c8:	7c 60 32 14 	add     r3,r0,r6
+  cc:	a0 03 00 0e 	lhz     r0,14(r3)
+  d0:	7c 84 02 14 	add     r4,r4,r0
+  d4:	7c 9c 23 78 	mr      r28,r4
+  d8:	48 00 00 08 	b       e0 <TLobby__sub_80406BD8+0xe0>
+  dc:	83 9e 00 10 	lwz     r28,16(r30)
+  e0:	7f 20 07 35 	extsh.  r0,r25
+  e4:	a8 9e 00 0c 	lha     r4,12(r30)
+  e8:	41 82 00 1c 	beq     104 <TLobby__sub_80406BD8+0x104>
+  ec:	88 1c 00 00 	lbz     r0,0(r28)
+  f0:	3b 9c 00 01 	addi    r28,r28,1
+  f4:	38 84 ff ff 	addi    r4,r4,-1
+  f8:	98 01 00 09 	stb     r0,9(r1)
+  fc:	a0 01 00 08 	lhz     r0,8(r1)
+ 100:	7f bd 02 14 	add     r29,r29,r0
+ 104:	7c 83 07 34 	extsh   r3,r4
+ 108:	54 60 07 ff 	clrlwi. r0,r3,31
+ 10c:	41 82 00 24 	beq     130 <TLobby__sub_80406BD8+0x130>
+ 110:	38 63 ff ff 	addi    r3,r3,-1
+ 114:	38 00 00 00 	li      r0,0
+ 118:	7c 7c 18 ae 	lbzx    r3,r28,r3
+ 11c:	3b 20 00 01 	li      r25,1
+ 120:	98 01 00 09 	stb     r0,9(r1)
+ 124:	38 84 ff ff 	addi    r4,r4,-1
+ 128:	98 61 00 08 	stb     r3,8(r1)
+ 12c:	48 00 00 10 	b       13c <TLobby__sub_80406BD8+0x13c>
+ 130:	38 00 00 00 	li      r0,0
+ 134:	3b 20 00 00 	li      r25,0
+ 138:	b0 01 00 08 	sth     r0,8(r1)
+ 13c:	7c 80 07 34 	extsh   r0,r4
+ 140:	7f 83 e3 78 	mr      r3,r28
+ 144:	7c 00 0e 70 	srawi   r0,r0,1
+ 148:	7c 04 07 34 	extsh   r4,r0
+ 14c:	48 00 00 01 	bl      14c <TLobby__sub_80406BD8+0x14c>
+ 150:	54 60 04 3e 	clrlwi  r0,r3,16
+ 154:	7f bd 02 14 	add     r29,r29,r0
+ 158:	2c 1b 00 00 	cmpwi   r27,0
+ 15c:	40 82 fe e8 	bne     44 <TLobby__sub_80406BD8+0x44>
+ 160:	7f 20 07 35 	extsh.  r0,r25
+ 164:	41 82 01 4c 	beq     2b0 <TLobby__sub_80406BD8+0x2b0>
+ 168:	a0 01 00 08 	lhz     r0,8(r1)
+ 16c:	7f bd 02 14 	add     r29,r29,r0
+ 170:	48 00 01 40 	b       2b0 <TLobby__sub_80406BD8+0x2b0>
+ 174:	3c 80 00 00 	lis     r4,0
+ 178:	3b c3 00 0c 	addi    r30,r3,12
+ 17c:	3b e4 00 00 	addi    r31,r4,0
+ 180:	3b 40 00 01 	li      r26,1
+ 184:	48 00 01 14 	b       298 <TLobby__sub_80406BD8+0x298>
+ 188:	88 1e 00 14 	lbz     r0,20(r30)
+ 18c:	2c 00 00 03 	cmpwi   r0,3
+ 190:	41 82 00 84 	beq     214 <TLobby__sub_80406BD8+0x214>
+ 194:	40 80 00 14 	bge     1a8 <TLobby__sub_80406BD8+0x1a8>
+ 198:	2c 00 00 01 	cmpwi   r0,1
+ 19c:	41 82 00 14 	beq     1b0 <TLobby__sub_80406BD8+0x1b0>
+ 1a0:	40 80 00 18 	bge     1b8 <TLobby__sub_80406BD8+0x1b8>
+ 1a4:	48 00 00 74 	b       218 <TLobby__sub_80406BD8+0x218>
+ 1a8:	2c 00 00 05 	cmpwi   r0,5
+ 1ac:	40 80 00 6c 	bge     218 <TLobby__sub_80406BD8+0x218>
+ 1b0:	83 9e 00 10 	lwz     r28,16(r30)
+ 1b4:	48 00 00 64 	b       218 <TLobby__sub_80406BD8+0x218>
+ 1b8:	80 be 00 10 	lwz     r5,16(r30)
+ 1bc:	3c 60 00 00 	lis     r3,0
+ 1c0:	a8 03 00 00 	lha     r0,0(r3)
+ 1c4:	54 a4 46 3e 	srwi    r4,r5,24
+ 1c8:	7c 83 07 34 	extsh   r3,r4
+ 1cc:	7c 00 18 00 	cmpw    r0,r3
+ 1d0:	40 80 00 0c 	bge     1dc <TLobby__sub_80406BD8+0x1dc>
+ 1d4:	38 60 00 00 	li      r3,0
+ 1d8:	48 00 00 f8 	b       2d0 <TLobby__sub_80406BD8+0x2d0>
+ 1dc:	54 a0 86 3e 	rlwinm  r0,r5,16,24,31
+ 1e0:	80 df 00 04 	lwz     r6,4(r31)
+ 1e4:	1c 83 00 3c 	mulli   r4,r3,60
+ 1e8:	54 a3 04 3e 	clrlwi  r3,r5,16
+ 1ec:	7c 00 07 34 	extsh   r0,r0
+ 1f0:	7c c6 22 14 	add     r6,r6,r4
+ 1f4:	1c 00 00 06 	mulli   r0,r0,6
+ 1f8:	80 86 00 00 	lwz     r4,0(r6)
+ 1fc:	7c 83 22 14 	add     r4,r3,r4
+ 200:	7c 60 32 14 	add     r3,r0,r6
+ 204:	a0 03 00 0e 	lhz     r0,14(r3)
+ 208:	7c 84 02 14 	add     r4,r4,r0
+ 20c:	7c 9c 23 78 	mr      r28,r4
+ 210:	48 00 00 08 	b       218 <TLobby__sub_80406BD8+0x218>
+ 214:	83 9e 00 10 	lwz     r28,16(r30)
+ 218:	7f 20 07 35 	extsh.  r0,r25
+ 21c:	a8 9e 00 0c 	lha     r4,12(r30)
+ 220:	41 82 00 1c 	beq     23c <TLobby__sub_80406BD8+0x23c>
+ 224:	88 1c 00 00 	lbz     r0,0(r28)
+ 228:	3b 9c 00 01 	addi    r28,r28,1
+ 22c:	38 84 ff ff 	addi    r4,r4,-1
+ 230:	98 01 00 09 	stb     r0,9(r1)
+ 234:	a0 01 00 08 	lhz     r0,8(r1)
+ 238:	7f bd 02 14 	add     r29,r29,r0
+ 23c:	7c 83 07 34 	extsh   r3,r4
+ 240:	54 60 07 ff 	clrlwi. r0,r3,31
+ 244:	41 82 00 24 	beq     268 <TLobby__sub_80406BD8+0x268>
+ 248:	38 63 ff ff 	addi    r3,r3,-1
+ 24c:	38 00 00 00 	li      r0,0
+ 250:	7c 7c 18 ae 	lbzx    r3,r28,r3
+ 254:	3b 20 00 01 	li      r25,1
+ 258:	98 01 00 09 	stb     r0,9(r1)
+ 25c:	38 84 ff ff 	addi    r4,r4,-1
+ 260:	98 61 00 08 	stb     r3,8(r1)
+ 264:	48 00 00 10 	b       274 <TLobby__sub_80406BD8+0x274>
+ 268:	38 00 00 00 	li      r0,0
+ 26c:	3b 20 00 00 	li      r25,0
+ 270:	b0 01 00 08 	sth     r0,8(r1)
+ 274:	7c 80 07 34 	extsh   r0,r4
+ 278:	7f 83 e3 78 	mr      r3,r28
+ 27c:	7c 00 0e 70 	srawi   r0,r0,1
+ 280:	7c 04 07 34 	extsh   r4,r0
+ 284:	48 00 00 01 	bl      284 <TLobby__sub_80406BD8+0x284>
+ 288:	54 60 04 3e 	clrlwi  r0,r3,16
+ 28c:	3b 5a 00 01 	addi    r26,r26,1
+ 290:	7f bd 02 14 	add     r29,r29,r0
+ 294:	3b de 00 0c 	addi    r30,r30,12
+ 298:	7c 1a d8 00 	cmpw    r26,r27
+ 29c:	41 80 fe ec 	blt     188 <TLobby__sub_80406BD8+0x188>
+ 2a0:	7f 20 07 35 	extsh.  r0,r25
+ 2a4:	41 82 00 0c 	beq     2b0 <TLobby__sub_80406BD8+0x2b0>
+ 2a8:	a0 01 00 08 	lhz     r0,8(r1)
+ 2ac:	7f bd 02 14 	add     r29,r29,r0
+ 2b0:	57 a0 00 1f 	clrrwi. r0,r29,16
+ 2b4:	41 82 00 18 	beq     2cc <TLobby__sub_80406BD8+0x2cc>
+ 2b8:	57 a3 84 3e 	srwi    r3,r29,16
+ 2bc:	57 a0 04 3e 	clrlwi  r0,r29,16
+ 2c0:	7f a3 02 14 	add     r29,r3,r0
+ 2c4:	57 a0 84 3e 	srwi    r0,r29,16
+ 2c8:	7f bd 02 14 	add     r29,r29,r0
+ 2cc:	57 a3 04 3e 	clrlwi  r3,r29,16
+ 2d0:	bb 21 00 14 	lmw     r25,20(r1)
+ 2d4:	80 01 00 34 	lwz     r0,52(r1)
+ 2d8:	7c 08 03 a6 	mtlr    r0
+ 2dc:	38 21 00 30 	addi    r1,r1,48
+ 2e0:	4e 80 00 20 	blr
