@@ -4097,7 +4097,8 @@ s32 TLobby__sub_8040BA38(F_8040A45C *req, u8 *pkt, s32 len) {
         return len;
     }
     cur += rl;
-    if (hdr.ver == 1) {
+    switch (hdr.ver) {
+    case 1:
         switch (hdr.cmd) {
         case 1:
             q = (D_8040A45C *)req->f38;
@@ -4190,6 +4191,7 @@ s32 TLobby__sub_8040BA38(F_8040A45C *req, u8 *pkt, s32 len) {
             e->f1C = hdr.f4;
             break;
         }
+        break;
     }
 done:
     return cur;
