@@ -144,7 +144,8 @@ void handle_box_drop_directive(void *arg0) {
         init__9TItemDataFv(&item);
         ((u8 *)&item)[0] = b0;
         ((u8 *)&item)[1] = b1;
-        drop_meseta_from_slot__10TObjPlayerFll((long)(s8)*(u8 *)((s8 *)arg0 + 0x14), (long)&item);
+        s8 ms = *(s8 *)((s8 *)arg0 + 0x14);
+        drop_meseta_from_slot__10TObjPlayerFll((long)ms, (long)&item);
     }
     item.id = id;
     if (((TItemData *)&item)->isValidGroundDrop() != 0) {
