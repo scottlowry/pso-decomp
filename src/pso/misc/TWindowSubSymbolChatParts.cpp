@@ -378,29 +378,32 @@ void fn_80285314(Win_802857C4 *self, Rect_802857C4 *ctx) {
 #pragma push
 #pragma fp_contract on
 extern const f32 lbl_805DD7F8;
+extern const f32 lbl_805DD808;
 
 void fn_802855C4(Win_802857C4 *arg0, Rect_802857C4 *ctx) {
+    s32 i;
+    s32 row;
+    s32 j;
     Part_80285314 *e1;
     Part_80285314 *e2;
     Part_80285314 *e0;
-    s32 j;
-    s32 row;
-    s32 i;
     f32 y;
     f32 off;
     f32 x;
     f32 h;
+    f32 k;
 
     row = 0;
     e1 = (Part_80285314 *)((TWindowBase *)arg0)->get_array_entry(1);
     e2 = (Part_80285314 *)((TWindowBase *)arg0)->get_array_entry(2);
     e0 = (Part_80285314 *)((TWindowBase *)arg0)->get_array_entry(0);
+    k = lbl_805DD808;
     h = lbl_805DD7F8;
     for (i = 0; i < arg0->count; row++) {
         off = 40.0f * (f32)row;
         y = ctx->y;
         y = y + off;
-        if ((h + y + 8.0f) < ctx->top || y - 8.0f > ctx->bottom) {
+        if (h + y + k < ctx->top || y - k > ctx->bottom) {
             i += 4;
         } else {
             x = 9.0f + off;
