@@ -4064,6 +4064,138 @@ s32 TLobby::build_dns_query_a(u8 *name, s16 len) {
 }
 #pragma pop
 
+struct O_8040C4B0;
+struct N_8040C4B0;
+
+s32 TLobby__sub_8040BD40(F_8040A45C *req, void *data, s32 len, void *out);
+C_8040A45C *TLobby__sub_8040C248(D_8040A45C *q);
+s32 append_to_list__6TLobbyFPvPv(O_8040C4B0 *o, N_8040C4B0 *n);
+
+#pragma push
+#pragma opt_propagation off
+s32 TLobby__sub_8040BA38(F_8040A45C *req, u8 *pkt, s32 len) {
+    struct Hdr_8040BA38 { u16 cmd; u16 ver; u32 f4; u16 rlen; } hdr;
+    struct Key_8040BA38 { u8 pad0[4]; u32 f4; u8 f8[0x10]; u16 f18; u8 gap[0xC]; } key;
+    D_8040A45C *q;
+    E_8040A45C *rec;
+    C_8040A45C *node;
+    C_8040A45C *e;
+    G_8040A45C *g;
+    s32 cur;
+    u16 rl;
+    s16 i;
+
+    cur = TLobby__sub_8040BD40(req, pkt, len, NULL);
+    pkt += (s16)cur;
+    if ((s16)len < (s16)cur + 10) {
+        return len;
+    }
+    NetMemcpy(&hdr, pkt, 10);
+    rl = hdr.rlen;
+    cur += 10;
+    if ((s16)len < (s16)cur + (s16)rl) {
+        return len;
+    }
+    cur += rl;
+    if (hdr.ver == 1) {
+        switch (hdr.cmd) {
+        case 1:
+            q = (D_8040A45C *)req->f38;
+            if (q == NULL) {
+                goto done;
+            }
+            key.f18 = 1;
+            key.f4 = 4;
+            NetMemcpy(key.f8, pkt + 0xA, 4);
+            node = q->f208;
+            g = &dns_resolver_state;
+            if (q != NULL && (void *)&key != NULL) {
+                for (i = 0; node != NULL && i < g->nc; node = node->f20, i++) {
+                    if (TLobby__sub_8040C9E0((u8 *)node, (u8 *)&key) == 0) {
+                        goto found_1;
+                    }
+                }
+                node = NULL;
+            } else {
+                node = NULL;
+            }
+        found_1:
+            e = node;
+            if (e == NULL) {
+                e = TLobby__sub_8040C248(q);
+                if (e == NULL) {
+                    goto done;
+                }
+                e->f0 = 1;
+                *(u16 *)((s8 *)e + 0x18) = 1;
+                e->f4.f0 = 4;
+                NetMemcpy(e->f4.addr, pkt + 0xA, 4);
+                e->f24 = q;
+                append_to_list__6TLobbyFPvPv((O_8040C4B0 *)q, (N_8040C4B0 *)e);
+            }
+            e->f1C = hdr.f4;
+            break;
+        case 5:
+            q = (D_8040A45C *)req->f38;
+            if (q == NULL) {
+                goto done;
+            }
+            if (q->f104 != 0) {
+                goto done;
+            }
+            TLobby__sub_8040BD40(req, pkt + 0xA, rl, (void *)&q->f104);
+            break;
+        case 12:
+            rec = req->f2C;
+            if (rec == NULL) {
+                goto done;
+            }
+            rec->f18 = hdr.f4;
+            TLobby__sub_8040BD40(req, pkt + 0xA, rl, &rec->f1C);
+            break;
+        case 28:
+            q = (D_8040A45C *)req->f38;
+            if (q == NULL) {
+                goto done;
+            }
+            key.f18 = 0x1C;
+            key.f4 = 6;
+            NetMemcpy(key.f8, pkt + 0xA, 16);
+            node = q->f208;
+            g = &dns_resolver_state;
+            if (q != NULL && (void *)&key != NULL) {
+                for (i = 0; node != NULL && i < g->nc; node = node->f20, i++) {
+                    if (TLobby__sub_8040C9E0((u8 *)node, (u8 *)&key) == 0) {
+                        goto found_28;
+                    }
+                }
+                node = NULL;
+            } else {
+                node = NULL;
+            }
+        found_28:
+            e = node;
+            if (e == NULL) {
+                e = TLobby__sub_8040C248(q);
+                if (e == NULL) {
+                    goto done;
+                }
+                e->f0 = 1;
+                *(u16 *)((s8 *)e + 0x18) = 0x1C;
+                e->f4.f0 = 6;
+                NetMemcpy(e->f4.addr, pkt + 0xA, 16);
+                e->f24 = q;
+                append_to_list__6TLobbyFPvPv((O_8040C4B0 *)q, (N_8040C4B0 *)e);
+            }
+            e->f1C = hdr.f4;
+            break;
+        }
+    }
+done:
+    return cur;
+}
+#pragma pop
+
 void TLobby__sub_8040BE40(F_8040A45C *req, s16 err, s16 arg);
 
 
