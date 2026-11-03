@@ -36,6 +36,79 @@ extern RecoveredGlobal_80065DB4_lbl_804FF5B4_80065C90 boss5_gryphon_behavior_par
 extern const f32 lbl_805D8D5C;
 extern RecoveredGlobal_80065F08_lbl_80437938_80065C90 lbl_80437938;
 
+struct RecoveredGlobal_80065C90_lbl_80487848 {
+    s32 value;
+    u8 remaining[0xC];
+};
+
+extern RecoveredGlobal_80065C90_lbl_80487848 lbl_80487848;
+s32 boss5_gryphon_attack_params[5];
+RecoveredGlobal_80065DB4_lbl_804FF5B4_80065C90 boss5_gryphon_behavior_params;
+f32 boss5_gryphon_bone_capture_origin[3];
+extern const char lbl_80437ED0[];
+extern s32 boss5_gryphon_body_bml_resource;
+extern s32 boss5_gryphon_bml_resource;
+extern s32 boss5_gryphon_texture_list;
+extern s32 boss5_gryphon_render_node_index;
+extern s32 lbl_805D27F8;
+extern s32 boss5_gryphon_base_params[1];
+extern s32 boss5_gryphon_bone_capture_index;
+extern s32 boss5_gryphon_bone_capture_output;
+extern s32 boss5_gryphon_render_flags;
+extern s32 boss5_gryphon_resistance_params[1];
+extern s32 lbl_805D27FC;
+int TBoss8Dragon__sub_8005D700(void);
+s32 load_enemy_bml_resource(u8 *arg0);
+u8 *load_gvm_texture_file(s32 arg0);
+s32 register_boss__6TLobbyFl(int);
+s32 register_object__6TLobbyFl(int);
+s32 dispatch_shared_handler_a__6TLobbyFl(s32);
+s32 dispatch_shared_handler_b__6TLobbyFl(int);
+void init_all_slots__11TWindowCtrlFv(void);
+void set_default_on_state0__12TBoss8DragonFv(void);
+void TBoss8Dragon__sub_80355A20(void);
+void TBoss5GryphonSnarl__sub_80066E88(void);
+void load_f512_inazuma__Fv(void);
+
+void TBoss8Dragon__sub_80065C90(void) {
+    s32 i;
+    RecoveredGlobal_80065C90_lbl_80487848 *dv = &lbl_80487848;
+    switch (TBoss8Dragon__sub_8005D700()) {
+    case 0:
+        boss5_gryphon_body_bml_resource = load_enemy_bml_resource((u8 *)((s8 *)(&dv->value) + 0x2c4));
+        boss5_gryphon_bml_resource = load_enemy_bml_resource((u8 *)((s8 *)(&dv->value) + 0x18));
+        boss5_gryphon_texture_list = (s32)load_gvm_texture_file((s32)lbl_80437ED0);
+        break;
+    }
+    boss5_gryphon_render_node_index = 0;
+    boss5_gryphon_bone_capture_origin[0] = lbl_805D8D5C;
+    boss5_gryphon_bone_capture_origin[1] = lbl_805D8D5C;
+    boss5_gryphon_bone_capture_origin[2] = lbl_805D8D5C;
+    boss5_gryphon_bone_capture_index = 0;
+    boss5_gryphon_bone_capture_output = 0;
+    boss5_gryphon_render_flags = 0;
+    boss5_gryphon_instance = 0;
+    for (i = 0; i < 1; i++) {
+        boss5_gryphon_base_params[i] = register_boss__6TLobbyFl(lbl_805D27F8);
+    }
+    for (i = 0; i < 5; i++) {
+        boss5_gryphon_attack_params[i] =
+            dispatch_shared_handler_b__6TLobbyFl(((s32 *)((s8 *)(&dv->value) + 0x28))[i]);
+    }
+    for (i = 0; i < 1; i++) {
+        boss5_gryphon_resistance_params[i] = register_object__6TLobbyFl(lbl_805D27FC);
+    }
+    for (i = 0; i < 3; i++) {
+        (&boss5_gryphon_behavior_params.value)[i] =
+            dispatch_shared_handler_a__6TLobbyFl(((s32 *)((s8 *)(&dv->value) + 0x3c))[i]);
+    }
+    init_all_slots__11TWindowCtrlFv();
+    set_default_on_state0__12TBoss8DragonFv();
+    TBoss8Dragon__sub_80355A20();
+    TBoss5GryphonSnarl__sub_80066E88();
+    load_f512_inazuma__Fv();
+}
+
 typedef char RecoveredGlobal_80065EA0_lbl_80487CCC_size[sizeof(RecoveredGlobal_80065EA0_lbl_80487CCC_80065C90) == 0xC ? 1 : -1];
 typedef char RecoveredGlobal_80065EA0_lbl_80487CD8_size[sizeof(RecoveredGlobal_80065EA0_lbl_80487CD8_80065C90) == 0x354 ? 1 : -1];
 
