@@ -3086,6 +3086,32 @@ u16 TQuestVmDownLoadServer::jis_to_sjis(u16 arg0) {
     return (hi << 8) | lo;
 }
 
+s32 TQuestVmDownLoadServer__sub_803EC69C(int arg0) {
+    u8 hi;
+    s32 lo;
+    u8 tr;
+    s32 ld;
+    lo = (u8)arg0;
+    hi = arg0 >> 8;
+    if (lo < 0x40 || lo > 0xFC || lo == 0x7F) {
+        return 0;
+    }
+    if (hi >= 0xE0) {
+        hi -= 0x40;
+    }
+    tr = (u8)lo;
+    ld = ((hi - 0x81) << 1) + 0x21;
+    if (tr >= 0x9F) {
+        ld++;
+        tr = (u8)(lo - 0x7E);
+    } else if (tr >= 0x80) {
+        tr = (u8)(lo - 0x20);
+    } else {
+        tr = (u8)(lo - 0x1F);
+    }
+    return (ld << 8) | tr;
+}
+
 s32 TQuestVmDownLoadServer::is_valid_sjis_code(u16 arg0) {
     s32 var_r0;
     if ((arg0 >= 0x2120U) && (arg0 < 0x3020U)) {
