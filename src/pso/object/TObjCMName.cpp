@@ -1055,8 +1055,8 @@ void TObjCMHairMenu::render()
   vec2f pos5;
   vec2f p[4];
   u32 colors[4];
-  u32 colorF;
   u32 colorG;
+  u32 colorF;
   Prim_80297DB8 prim;
   s16 *rgb;
   const f32 *d4;
