@@ -302,6 +302,9 @@ s32 TAdPlayerLoadGC__sub_803F2A4C(s32);
 s32 TAdPlayerLoadGC__sub_803F2F1C(void) {
     u8 *base;
     u8 *p;
+    CardInfo_803F31D8 *ci;
+    s32 *px;
+    s32 *py;
         s32 stv;
     s32 memCardSize;
     s32 errorBits;
@@ -356,13 +359,16 @@ s32 TAdPlayerLoadGC__sub_803F2F1C(void) {
         case 0:
             p = base + off;
             p = p + 0x3610;
-            if (stat != *(s32 *)p) {
-                *(s32 *)p = stat;
-                *(s32 *)(p + 4) = memCardSize;
-                *(s32 *)(p + 8) = errorBits;
+            ci = (CardInfo_803F31D8 *)p;
+            if (stat != ci->state) {
+                ci->state = stat;
+                px = (s32 *)(p + 4);
+                py = (s32 *)(p + 8);
+                ci->f4 = memCardSize;
+                ci->sector_size = errorBits;
                 if (lbl_805D7948 != 0) {
                     level = OSDisableInterrupts();
-                    lbl_805D7948(card_channel, *(s32 *)(p + 4), *(s32 *)(p + 8));
+                    lbl_805D7948(card_channel, *px, *py);
                     OSRestoreInterrupts(level);
                 }
             }
