@@ -1384,6 +1384,144 @@ s32 TLobby__sub_80406B6C(O_80406B6C *o) {
     return -1;
 }
 
+struct Seg_80406BD8 { s16 len; u16 f2; u32 word; u8 kind; u8 pad[2]; };
+struct BufPool_80406BD8 { s16 count; s16 size; void *rows; };
+u16 TUdpSocket__sub_80419864(void *buf, s16 len);
+
+u16 TLobby__sub_80406BD8(void *arg0, s16 arg1) {
+    u32 sum;
+    Seg_80406BD8 *p;
+    u32 *wp;
+    u8 *ptr;
+    u8 *row;
+    s32 cnt;
+    s16 n;
+    s32 i;
+    s16 lim;
+    s16 tbl;
+    s32 b1;
+    s16 pairs;
+    s16 carry;
+    u8 kind;
+    u32 w;
+    u32 addr;
+    union { u16 s; u8 c[2]; } su;
+
+    sum = 0;
+    carry = 0;
+    cnt = *(s32 *)((s8 *)arg0 + 4);
+    su.s = 0;
+    if (arg1 == 1) {
+        p = (Seg_80406BD8 *)((s8 *)arg0 + 12 * cnt);
+        while (cnt != 0) {
+            kind = p->kind;
+            wp = &p->word;
+            p = (Seg_80406BD8 *)((s8 *)p - 12);
+            cnt--;
+            switch (kind) {
+            case 1:
+            case 4:
+                ptr = (u8 *)*wp;
+                break;
+            case 2:
+                w = *wp;
+                lim = ((BufPool_80406BD8 *)&network_buffer_pool_state)->count;
+                tbl = (s16)(w >> 24);
+                if (lim < tbl) {
+                    return 0;
+                }
+                b1 = (w >> 16) & 0xFF;
+                row = (u8 *)((BufPool_80406BD8 *)&network_buffer_pool_state)->rows + 60 * tbl;
+                addr = *(u32 *)row;
+                addr += (w & 0xFFFF);
+                addr += *(u16 *)(row + 6 * (s16)b1 + 14);
+                ptr = (u8 *)addr;
+                break;
+            case 3:
+                ptr = (u8 *)p[1].word;
+                break;
+            }
+            n = p[1].len;
+            if (carry) {
+                su.c[1] = ptr[0];
+                ptr = ptr + 1;
+                n--;
+                sum += su.s;
+            }
+            if (n & 1) {
+                su.c[0] = ptr[n - 1];
+                su.c[1] = 0;
+                carry = 1;
+                n--;
+            } else {
+                su.s = 0;
+                carry = 0;
+            }
+            pairs = (s16)(n >> 1);
+            sum += TUdpSocket__sub_80419864(ptr, pairs);
+        }
+        if (carry) {
+            sum += su.s;
+        }
+    } else {
+        p = (Seg_80406BD8 *)((s8 *)arg0 + 12);
+        for (i = 1; i < cnt; i++) {
+            kind = p[1].kind;
+            wp = &p[1].word;
+            switch (kind) {
+            case 1:
+            case 4:
+                ptr = (u8 *)*wp;
+                break;
+            case 2:
+                w = *wp;
+                lim = ((BufPool_80406BD8 *)&network_buffer_pool_state)->count;
+                tbl = (s16)(w >> 24);
+                if (lim < tbl) {
+                    return 0;
+                }
+                b1 = (w >> 16) & 0xFF;
+                row = (u8 *)((BufPool_80406BD8 *)&network_buffer_pool_state)->rows + 60 * tbl;
+                addr = *(u32 *)row;
+                addr += (w & 0xFFFF);
+                addr += *(u16 *)(row + 6 * (s16)b1 + 14);
+                ptr = (u8 *)addr;
+                break;
+            case 3:
+                ptr = (u8 *)p[1].word;
+                break;
+            }
+            n = p[1].len;
+            if (carry) {
+                su.c[1] = ptr[0];
+                ptr = ptr + 1;
+                n--;
+                sum += su.s;
+            }
+            if (n & 1) {
+                su.c[0] = ptr[n - 1];
+                su.c[1] = 0;
+                carry = 1;
+                n--;
+            } else {
+                su.s = 0;
+                carry = 0;
+            }
+            pairs = (s16)(n >> 1);
+            sum += TUdpSocket__sub_80419864(ptr, pairs);
+            p = (Seg_80406BD8 *)((s8 *)p + 12);
+        }
+        if (carry) {
+            sum += su.s;
+        }
+    }
+    if (sum & 0xFFFF0000) {
+        sum = (sum >> 16) + (sum & 0xFFFF);
+        sum += sum >> 16;
+    }
+    return (u16)sum;
+}
+
 void TLobby__sub_80406EB8(NetBufferRef *ref, s32 n) {
     switch (ref->kind) {
     case 4:
