@@ -4622,15 +4622,17 @@ s32 TLobby__sub_8040CB44(u8 *arg0, u32 arg1, u32 arg2) {
     Fields_arg0 *c;
     NetBufferRef ref;
     u8 hdr[8];
-    u8 buf20[20];
+    u8 buf20[24];
     u8 buf8[8];
     s32 word;
     u8 *p;
     NetPacket *pkt;
     Frag_8040CB44 *f;
     s32 r;
-    s16 i;
+    u32 i;
     u32 gw;
+    u32 dstv;
+    u32 mskv;
 
     c = (Fields_arg0 *)arg0;
     p = arg0 + 0x18;
@@ -4655,17 +4657,18 @@ s32 TLobby__sub_8040CB44(u8 *arg0, u32 arg1, u32 arg2) {
             f--;
         }
         r = TLobby__sub_8040CFE8(0, 0, arg2, arg1, pkt);
-        ((TUdpSocket *)pkt)->release_entry();
         if ((s16)r < 0) {
+            ((TUdpSocket *)pkt)->release_entry();
             return r;
         }
+        ((TUdpSocket *)pkt)->release_entry();
         return 0;
     case 3:
         TLobby__sub_80406EB8((NetBufferRef *)(p + 4), 8);
         ((TLobby *)&ref)->set_value_and_enable((s32)buf20);
         TLobby__sub_80406FD8(&ref, p + 4, 20);
-        TLobby__sub_80406EB8((NetBufferRef *)(p + 4), ((u32)hdr[0] << 2) & 0x3C);
-        switch (hdr[1]) {
+        TLobby__sub_80406EB8((NetBufferRef *)(p + 4), ((u32)buf20[0] << 2) & 0x3C);
+        switch (buf20[9]) {
         case 17:
             ((TLobby *)&ref)->set_value_and_enable((s32)buf8);
             TLobby__sub_80406FD8(&ref, p + 4, 8);
@@ -4686,10 +4689,24 @@ s32 TLobby__sub_8040CB44(u8 *arg0, u32 arg1, u32 arg2) {
             NetMemcpy(&word, hdr + 4, 4);
             gw = *(u32 *)(buf20 + 16);
             if ((gw & 0x7FFFFFFF) == 0) {
-                TLobby__sub_8040F8A4(gw & 0xFF, word, ~0xFFu, 2, arg1);
+                dstv = gw & 0xFFFFFF;
+            } else if ((gw & 0x3FFFFFFF) == 0x80000000) {
+                dstv = gw & 0xFFFF;
+            } else if ((gw & 0x1FFFFFFF) == 0xC0000000) {
+                dstv = gw & 0xFF;
             } else {
-                TLobby__sub_8040F8A4(0, word, 0, 2, arg1);
+                dstv = 0;
             }
+            if ((gw & 0x7FFFFFFF) == 0) {
+                mskv = ~0xFFFFFF;
+            } else if ((gw & 0x3FFFFFFF) == 0x80000000) {
+                mskv = ~0;
+            } else if ((gw & 0x1FFFFFFF) == 0xC0000000) {
+                mskv = ~0xFF;
+            } else {
+                mskv = 0;
+            }
+            TLobby__sub_8040F8A4(dstv, word, mskv, 2, arg1);
             break;
         case 1:
         case 3:
