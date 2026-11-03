@@ -1669,8 +1669,11 @@ extern "C" Blob_80495458 lbl_80495458;
 #define self ((BARA_800E252C *)arg0)
 s32 TObjEnePanBARA__ct(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     Blob_80495458 *blob = &lbl_80495458;
+    u8 *pp = blob->parts;
     Key_800E252C key;
     s32 i;
+    s32 ret;
+    s32 *ids;
 
     __ct__9TObjEnemyFP7TObject(arg0, arg1);
     self->vt = (void *)blob->vtbl;
@@ -1687,14 +1690,16 @@ s32 TObjEnePanBARA__ct(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     self->f24 = TObjFish__sub_8001EDB0((void *)TObjEnePanarms__entry_params_resource, lbl_8043CD38[self->f380]);
     self->f34 = (s32)get_bml_model((void *)TObjEnePanarms__entry_params_resource, (u32)lbl_8043CD38[self->f380]);
     VecCopy__FP3VecPC3Vec(self->v44, VecCopy__FP3VecPC3Vec(self->v50, VecCopy__FP3VecPC3Vec(self->v74, self->v38)));
-    self->f37C = init_collision_body_parts(self, (void *)blob->parts, 1);
-    set_field_d8__10TObjMotionFl(self, blob->model_ids[self->f380]);
+    self->f37C = init_collision_body_parts(self, pp, 1);
+    ids = blob->model_ids;
+    set_field_d8__10TObjMotionFl(self, ids[self->f380]);
     set_field_dc__10TObjMotionFl(self, *(s32 *)(TObjEnePanarms__entry_params_resource + 0x430));
     set_animation__10TObjMotionFs(self, 0);
     set_field_b8__10TObjMotionFs(self, 0);
     VecCopy__FP3VecPC3Vec(self->v2FC, self->v38);
     self->f308 = self->f30C = self->f310 = (f32)TObjEnePanarms__data_805DA524;
     self->f2A8 = 0;
+    ret = (s32)arg0;
     switch (self->f380) {
     case 0:
         ((TObjEnemy *)self)->bind_enemy_combat_stats((u8 *)TLobby::register_boss(0x32), (u8 *)TLobby::dispatch_shared_handler_b(0x32), (u8 *)TLobby::register_object(0x32));
@@ -1703,7 +1708,7 @@ s32 TObjEnePanBARA__ct(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
         ((TObjEnemy *)self)->bind_enemy_combat_stats((u8 *)TLobby::register_boss(0x33), (u8 *)TLobby::dispatch_shared_handler_b(0x33), (u8 *)TLobby::register_object(0x33));
         break;
     default:
-        return (s32)arg0;
+        return ret;
     }
     self->f33E = self->f32C;
     reset_photon_effect__12TBoss3VoloptFv(self);
