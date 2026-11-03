@@ -304,8 +304,8 @@ s32 TAdPlayerLoadGC__sub_803F2F1C(void) {
     s32 off2;
     u8 *p;
     CardInfo_803F31D8 *ci;
-    s32 *px;
     s32 *py;
+    s32 *px;
         s32 stv;
     s32 memCardSize;
     s32 errorBits;
@@ -375,8 +375,8 @@ s32 TAdPlayerLoadGC__sub_803F2F1C(void) {
             ci = (CardInfo_803F31D8 *)p;
             if (stat != ci->state) {
                 ci->state = stat;
-                px = (s32 *)(p + 4);
                 py = (s32 *)(p + 8);
+                px = (s32 *)(p + 4);
                 ci->f4 = memCardSize;
                 ci->sector_size = errorBits;
                 if (lbl_805D7948 != 0) {
