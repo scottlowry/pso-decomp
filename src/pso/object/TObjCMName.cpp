@@ -1242,7 +1242,7 @@ void TObjCMHairMenu::render() {
                 p[j].y = d4[j * 2 + 1] * scaleF + roff;
             }
             colorF = lbl_804650F4[i];
-            ((u8 *)&colorF)[3] = (int)a255;
+            ((u8 *)&colorF)[3] = ((u8 *)&colorG)[3];
             TObjCMHairMenu__sub_801E3F54(&colors[0], TObjCMHairMenu__sub_801E3F54(&colors[1], TObjCMHairMenu__sub_801E3F54(&colors[2], TObjCMHairMenu__sub_801E3F54(&colors[3], &colorF))));
             ((TObjCMHairMenu *)&prim)->draw_tri_fan_2d(4, 6, -2.4375f);
         }
