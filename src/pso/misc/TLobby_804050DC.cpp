@@ -4659,13 +4659,13 @@ s32 TLobby__sub_8040CB44(u8 *arg0, u32 arg1, u32 arg2) {
     u8 buf8[8];
     s32 word;
     u8 *p;
-    NetPacket *pkt;
     Frag_8040CB44 *f;
     s32 r;
     u32 i;
     u32 gw;
     u32 dstv;
     u32 mskv;
+    NetPacket *pkt;
     u8 pad[12];
 
     p = arg0 + 0x18;
