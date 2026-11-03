@@ -1086,7 +1086,7 @@ void TObjCMHairMenu::render() {
     f32 xb;
     f32 roff;
 
-    hair = this->hair;
+    hair = this->appearance->hair;
     scale = 0.25f * sin_table_lookup(this->ticks << 10) + 1.0f;
     if (scale > 1.0f) {
         scale = 1.0f;
