@@ -1,0 +1,18 @@
+6328 VISIT-2 PARK RECEIPT (fleet/f4, card-lobby-6328-v2 @39539984, base 7008688d)
+================================================================
+STATE: v6 body, 94.696335, size 0x2F4 (756) vs gate 0x2FC (764) = -2W. Control probe reproduced.
+
+RESIDUAL WORDS (era-only): addis r0,r5,0 (@60, wide-test copy) ; li r6,33 (b1 arm) ; li r6,33 (b2 arm) ; addi r30,r6,0 (tail copy)
+OURS-ONLY: lwz r3,8(r1) x2 (arg0 reloads @29,@71 that era skips via r3-liveness). Net -2W, 10 mismatched row-classes.
+
+ROSETTA (20 installed versions, verbatim TU flags, faithful mini-TU rows=189 size=gate-2):
+  extsh-target: 1.0/1.1/1.2.5/1.2.5n(PIN) -> extsh r4,r4 CMPWI r4 | 1.3,1.3.2,1.3.2r,2.0,2.0p1,2.5,2.6,2.7 -> extsh r5,r4 CMPWI r5 | 3.0a3-all -> NO extsh (cmpwi r4 raw)
+  seed li rX,33: ALL versions r30 home; NONE emit era li r6,33 pre-stwu; arg0 slot: ALL 8(r1) from P0 (never 0x40).
+  => era head fingerprint (extsh r5 + li r6@4 + stw r3,64) = 1.3-2.7-class bind + additional era-source/frame specifics; PINNED 1.2.5n CANNOT reach extsh->r5 from ANY spelling (consistent with prior 17-spelling v1 sweep inert). VERSION PIN / era-object-layout ASK — no v1 source lever.
+  Quirk row: 1.1p1 emits stwu -80 (frame 0x50, others 0x58) — first frame-size divergence in bind-timing family.
+
+SPELLINGS TRIED VISIT-2 (mini-TU, v1): P1 named lobby local / P2 lobby+cmd / P3 +code s32 / P4 pad0x34 / P5-P7 combos / P8 struct{p[0x38];lobby}@0x48 / P12 #pragma pack 4. ALL inert on the four era rows; P1+ blow frame to 0x60 (size gate KILLED: struct/array locals always land scalar BELOW array in v1, can't stack lobby at 0x40 over a 0x38 pad). P0 (= landed body) remains max-row champ.
+61FC-lever transfer test (def-order zero-store flip / named-temp hoist): does NOT transfer to 6328 — v1 puts named locals below arrays and keeps r3-memory-class even when param is not address-taken via struct-member alias.
+
+SIBLING SAFETY: no source edits this visit (all probes in TMPDIR mini-TU); tree byte-state == 39539984.
+NEXT-VISIT: only routes = compiler-version 1.3-2.7 config ASK for this unit (integrator decision, would change whole-TU rows -- not lane-authorized) or accept 94.696 v6 as shipped body.
