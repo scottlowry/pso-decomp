@@ -2465,20 +2465,20 @@ void TQuestVmDownLoadServer__sub_803EB4D4(void) {
     s32 cnt;
     s32 h;
     s32 t;
+    s32 total;
+    s32 i;
+    s32 st;
+    s32 ec;
+    s32 size;
     u16 *entry;
     u16 *cur;
     Node_803EB420 *head;
     Node_803EB420 *q;
-    s32 total;
-    s32 i;
     s32 j;
-    s32 st;
-    s32 ec;
-    s32 size;
     u8 unused[16];
 
-    p = &lbl_80596258[5];
     cnt = 0;
+    p = lbl_80596258 + 5;
     n = (Node_803EB420 *)lbl_805D78A0;
     while (n != NULL) {
         while (n->flags & 1) {
