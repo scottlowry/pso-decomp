@@ -550,7 +550,7 @@ void NetIPv6ApplyNeighborDiscoveryDefaults(u8 *arg0);
 void TLobby__sub_803F89A4(u8 *arg0);
 void TLobby__sub_803FD85C(void *);
 s32 TLobby__sub_804062A0(s16);
-s32 TLobby__sub_80406328(TLobby *, s32);
+s32 TLobby__sub_80406328(TLobby *, s16);
 s16 TLobby__sub_804048E8(void *, TLobby **, u8);
 s32 TLobby__sub_804066D8(Strm_80405A74 *);
 extern s32 lbl_805D7A90;
@@ -1313,18 +1313,17 @@ s32 TLobby__sub_804062A0(s16 arg0) {
     }                                                                      \
     return TLobby__sub_804066D8(t);
 
-s32 TLobby__sub_80406328(TLobby *arg0, s32 arg1) {
+s32 TLobby__sub_80406328(TLobby *arg0, s16 arg1) {
     u8 *G;
     Strm_80405A74 *t;
     u8 *p;
     u8 *q;
     u16 code;
-    s16 cmd;
     s16 c;
+    u8 pad[0x38];
 
-    cmd = (s16)arg1;
     code = 0x21;
-    if (cmd == -0x7923) {
+    if (arg1 == -0x7923) {
         G = lbl_805C0038;
         if (*(u8 *)((s8 *)G + 0xD4) != 5) {
             (*(s16 *)((s8 *)G + 0x122))++;
@@ -1338,7 +1337,7 @@ s32 TLobby__sub_80406328(TLobby *arg0, s32 arg1) {
             (*(s16 *)((s8 *)G + 0x122))++;
             return -1;
         }
-        if ((u32)cmd == 0x86DD) {
+        if ((u32)arg1 == 0x86DD) {
             code = 0x57;
             REPLY_80406328()
         }
