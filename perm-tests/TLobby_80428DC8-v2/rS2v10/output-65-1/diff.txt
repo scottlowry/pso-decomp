@@ -1,0 +1,11 @@
+--- before
++++ after
+@@ -56,7 +56,7 @@
+     entry = 0;
+     while ((ch = text[i]) != 0)
+     {
+-      entry = (entry * 10) + ch;
++      entry = (entry * 10) + (ch = ch);
+       entry = entry - '0';
+       i++;
+     }

@@ -1,0 +1,13 @@
+=== W1 start Sat Oct 31 18:24:05 PDT 2026
+rS3v44 rc=124 t0=1793496245 logmt=1793497745 iters=27652 harvests=0(prev=0) fresh=0 PROOF=YES
+rS4m4 rc=124 t0=1793496245 logmt=1793497745 iters=27606 harvests=0(prev=0) fresh=0 PROOF=YES
+=== W1 done Sat Oct 31 18:49:05 PDT 2026
+=== W2 start Sat Oct 31 18:49:05 PDT 2026
+rS3w04 rc=124 t0=1793497745 logmt=1793498945 iters=28485 harvests=0(prev=0) fresh=0 PROOF=YES
+rS1v41 rc=124 t0=1793497745 logmt=1793498945 iters=28525 harvests=3(prev=0) fresh=0 PROOF=YES
+=== W2 done Sat Oct 31 19:09:06 PDT 2026
+=== W3 start Sat Oct 31 19:09:06 PDT 2026
+rS4m4_stack rc=124 t0=1793498946 logmt=1793499546 iters=3288 harvests=0(prev=0) fresh=0 PROOF=YES
+rS2v10 rc=124 t0=1793498946 logmt=1793499846 iters=8523 harvests=1(prev=0) fresh=0 PROOF=YES
+=== W3 done Sat Oct 31 19:24:06 PDT 2026
+=== ALL-WAVES-F3-DONE

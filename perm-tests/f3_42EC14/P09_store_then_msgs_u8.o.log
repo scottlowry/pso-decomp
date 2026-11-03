@@ -1,0 +1,10 @@
+### mwcceppc.exe Compiler:
+#    File: .cache\giprobe\f3ec14_61519.cpp
+# ----------------------------------------
+#      85: sprintf((char *) (lbl_805D7CC4 + 4), msgs + 0x30);
+#   Error:                                                 ^
+#   function call 'sprintf(char *, unsigned char *)' does not match
+#   'sprintf(char *, const char *, ...)'
+#   Too many errors printed, aborting program
+
+User break, cancelled...

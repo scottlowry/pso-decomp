@@ -1,0 +1,635 @@
+f3 p7 ROW MAP @ champ 4cf63208 (460w gate-exact 0x730, stmw r23, one_shot 84.097824)
+official slot rows=291: a=22 b=32 c=213 (shift 203 / TRUE 10) d=24
+aligner LCS(reg-masked) crosscheck=328: pool/display~84 value/order~107 @ha/@l~24, color invisible under masking
+
+--- COLOR CENSUS era->ours (same-mnemonic rows, excl @ha/@l) ---
+    4x r26->r27
+    3x f27->f29
+    3x f26->f27
+    3x f28->f30
+    3x f29->f31
+    3x f0->f1
+    2x r27->r26
+    2x f31->f28
+    2x f30->f26
+    2x f1->f2
+    1x f26->f30
+    1x f2->f0
+    1x r4->r3
+    1x r1->r26
+    1x f3->f0
+    1x r0->r4
+    1x r3->r7
+    1x r3->r1
+    1x f10->f11
+    1x f9->f7
+    1x f2->f10
+    1x f2->f6
+    1x f7->f8
+    1x f12->f0
+    1x f11->f2
+    1x f4->f1
+    1x f3->f6
+    1x f2->f5
+    1x f1->f4
+    1x f0->f3
+    1x f0->f2
+    1x f1->f0
+    1x r4->r23
+    1x r0->r31
+    1x r3->r5
+    1x r1->r6
+    1x f2->f4
+    1x r3->r0
+
+######## CLASS a n=22 ########
+[reg-color-only] O- 25 lha      r27, 0x40(r3)
+          N- 25 lha      r26,64(r3)  r=None
+[reg-color-only] O- 30 fmadds   f27, f2, f1, f0
+          N- 30 fmadds   f29,f2,f1,f0  r=None
+[reg-color-only] O- 31 fcmpo    cr0, f27, f0
+          N- 31 fcmpo    cr0,f29,f0  r=None
+[reg-color-only] O- 33 fmr      f27, f0
+          N- 33 fmr      f29,f0  r=None
+[reg-color-only] O- 48 lfsx     f31, r3, r0
+          N- 48 lfsx     f28,r3,r0  r=None
+[reg-color-only] O- 58 fdivs    f26, f0, f1
+          N- 58 fdivs    f27,f0,f1  r=None
+[reg-color-only] O- 63 fsubs    f0, f31, f28
+          N- 63 fsubs    f0,f28,f30  r=None
+[reg-color-only] O- 65 stfs     f29, 0x2c(r1)
+          N- 65 stfs     f31,44(r1)  r=None
+[reg-color-only] O- 67 fmadds   f30, f26, f0, f28
+          N- 67 fmadds   f26,f27,f0,f30  r=None
+[reg-color-only] O- 71 li       r26, 0x0
+          N- 71 li       r27,0  r=None
+[reg-color-only] O- 73 fmr      f23, f30
+          N- 73 fmr      f23,f26  r=None
+[reg-color-only] O- 80 fmadds   f23, f26, f0, f1
+          N- 80 fmadds   f23,f27,f0,f1  r=None
+[reg-color-only] O- 81 stfs     f28, 0x30(r1)
+          N- 81 stfs     f30,48(r1)  r=None
+[reg-color-only] O- 86 li       r26, 0x2
+          N- 86 li       r27,2  r=None
+[reg-color-only] O- 94 addi     r3, r26, 0x6
+          N- 94 addi     r3,r27,6  r=None
+[reg-color-only] O-103 addi     r3, r26, 0x7
+          N-103 addi     r3,r27,7  r=None
+[reg-color-only] O-106 stfs     f29, 0x28(r1)
+          N-106 stfs     f31,40(r1)  r=None
+[reg-color-only] O-160 fdivs    f26, f3, f2
+          N-160 fdivs    f30,f3,f0  r=None
+[reg-color-only] O-173 cmpw     r23, r27
+          N-173 cmpw     r23,r26  r=None
+[reg-color-only] O-257 add      r4, r23, r0
+          N-257 add      r4,r23,r4  r=None
+[reg-color-only] O-345 fadds    f1, f1, f26
+          N-345 fadds    f2,f2,f26  r=None
+[reg-color-only] O-346 fadds    f0, f0, f26
+          N-346 fadds    f1,f1,f26  r=None
+
+######## CLASS b n=32 ########
+[pool-name-only(@405)] O- 28 lfs      f2, lbl_805DDAFC@sda21(r0)
+          N- 28 lfs      f2,0(0)  r=('R_PPC_EMB_SDA21', '@405')
+[pool-name-only(@56)] O- 29 lfs      f0, lbl_805DDA70@sda21(r0)
+          N- 29 lfs      f0,0(0)  r=('R_PPC_EMB_SDA21', '@56')
+[pool-name-only(@85)] O- 44 lfs      f1, lbl_805DDA6C@sda21(r0)
+          N- 44 lfs      f1,0(0)  r=('R_PPC_EMB_SDA21', '@85')
+[pool-name-only(@86)] O- 51 lfs      f0, lbl_805DDA74@sda21(r0)
+          N- 51 lfs      f0,0(0)  r=('R_PPC_EMB_SDA21', '@86')
+[pool-name-only(@56)] O- 55 lfs      f26, lbl_805DDA70@sda21(r0)
+          N- 55 lfs      f27,0(0)  r=('R_PPC_EMB_SDA21', '@56')
+[pool-name-only(@118)] O- 59 lfs      f28, lbl_805DDAC0@sda21(r0)
+          N- 59 lfs      f30,0(0)  r=('R_PPC_EMB_SDA21', '@118')
+[pool-name-only(@56)] O- 61 lfs      f29, lbl_805DDA70@sda21(r0)
+          N- 61 lfs      f31,0(0)  r=('R_PPC_EMB_SDA21', '@56')
+[pool-name-only(@406)] O- 64 lfs      f1, lbl_805DDB04@sda21(r0)
+          N- 64 lfs      f1,0(0)  r=('R_PPC_EMB_SDA21', '@406')
+[pool-name-only(@91)] O- 66 lfs      f24, lbl_805DDA88@sda21(r0)
+          N- 66 lfs      f24,0(0)  r=('R_PPC_EMB_SDA21', '@91')
+[pool-name-only(@407)] O- 69 lfs      f25, lbl_805DDB08@sda21(r0)
+          N- 69 lfs      f25,0(0)  r=('R_PPC_EMB_SDA21', '@407')
+[pool-name-only(@118)] O- 76 lfs      f1, lbl_805DDAC0@sda21(r0)
+          N- 76 lfs      f1,0(0)  r=('R_PPC_EMB_SDA21', '@118')
+[pool-name-only(@90)] O- 89 lfs      f2, lbl_805DDA84@sda21(r0)
+          N- 89 lfs      f2,0(0)  r=('R_PPC_EMB_SDA21', '@90')
+[pool-name-only(@92)] O- 95 lfs      f1, lbl_805DDA8C@sda21(r0)
+          N- 95 lfs      f1,0(0)  r=('R_PPC_EMB_SDA21', '@92')
+[pool-name-only(@92)] O-104 lfs      f1, lbl_805DDA8C@sda21(r0)
+          N-104 lfs      f1,0(0)  r=('R_PPC_EMB_SDA21', '@92')
+[pool-name-only(@54)] O-117 lfs      f0, lbl_805DDA90@sda21(r0)
+          N-117 lfs      f0,0(0)  r=('R_PPC_EMB_SDA21', '@54')
+[pool-name-only(@86)] O-121 lfs      f0, lbl_805DDA6C@sda21(r0)
+          N-121 lfs      f0,0(0)  r=('R_PPC_EMB_SDA21', '@86')
+[pool-name-only(@56)] O-125 lfs      f23, lbl_805DDA70@sda21(r0)
+          N-125 lfs      f23,0(0)  r=('R_PPC_EMB_SDA21', '@56')
+[pool-name-only(@408)] O-128 lfs      f1, lbl_805DDB0C@sda21(r0)
+          N-128 lfs      f1,0(0)  r=('R_PPC_EMB_SDA21', '@408')
+[pool-name-only(@406)] O-130 lfs      f0, lbl_805DDB04@sda21(r0)
+          N-130 lfs      f0,0(0)  r=('R_PPC_EMB_SDA21', '@406')
+[pool-name-only(@407)] O-132 lfs      f26, lbl_805DDB08@sda21(r0)
+          N-132 lfs      f26,0(0)  r=('R_PPC_EMB_SDA21', '@407')
+[pool-name-only(@93)] O-140 lfs      f1, lbl_805DDA94@sda21(r0)
+          N-140 lfs      f1,0(0)  r=('R_PPC_EMB_SDA21', '@93')
+[pool-name-only(@86)] O-151 lfs      f0, lbl_805DDA74@sda21(r0)
+          N-151 lfs      f0,0(0)  r=('R_PPC_EMB_SDA21', '@86')
+[pool-name-only(@409)] O-156 lfs      f2, lbl_805DDB10@sda21(r0)
+          N-156 lfs      f0,0(0)  r=('R_PPC_EMB_SDA21', '@409')
+[pool-name-only(@410)] O-157 lfs      f1, lbl_805DDB14@sda21(r0)
+          N-157 lfs      f2,0(0)  r=('R_PPC_EMB_SDA21', '@410')
+[pool-name-only(@122)] O-159 lfs      f0, lbl_805DDAD0@sda21(r0)
+          N-159 lfs      f1,0(0)  r=('R_PPC_EMB_SDA21', '@122')
+[pool-name-only(@415)] O-215 lfs      f0, lbl_805DDB2C@sda21(r0)
+          N-215 lfs      f1,0(0)  r=('R_PPC_EMB_SDA21', '@415')
+[pool-name-only(@417)] O-224 lfs      f0, lbl_805DDAD0@sda21(r0)
+          N-224 lfs      f1,0(0)  r=('R_PPC_EMB_SDA21', '@417')
+[pool-name-only(@418)] O-234 lfs      f0, lbl_805DDB38@sda21(r0)
+          N-234 lfs      f1,0(0)  r=('R_PPC_EMB_SDA21', '@418')
+[pool-name-only(@93)] O-254 lfs      f1, lbl_805DDA94@sda21(r0)
+          N-254 lfs      f1,0(0)  r=('R_PPC_EMB_SDA21', '@93')
+[pool-name-only(@422)] O-353 lfs      f30, TObjCMMainMenu__data_805DDB44@sda21(r0)
+          N-353 lfs      f28,0(0)  r=('R_PPC_EMB_SDA21', '@422')
+[pool-name-only(@54)] O-354 lfs      f31, lbl_805DDA90@sda21(r0)
+          N-354 lfs      f27,0(0)  r=('R_PPC_EMB_SDA21', '@54')
+[pool-name-only(@93)] O-426 lfs      f1, lbl_805DDA94@sda21(r0)
+          N-426 lfs      f1,0(0)  r=('R_PPC_EMB_SDA21', '@93')
+
+######## CLASS d n=24 ########
+[@ha/@l] O-243 lis      r3, lbl_804DBCD0@ha
+          N-243 addi     r3,r3,19  r=None
+[@ha/@l] O-245 addi     r23, r3, lbl_804DBCD0@l
+          N-245 lfs      f0,0(0)  r=('R_PPC_EMB_SDA21', '@411')
+[@ha/@l] O-246 li       r24, 0x1
+          N-246 lis      r3,0  r=('R_PPC_ADDR16_HA', 'lbl_804DBCD0')
+[@ha/@l] O-248 cmpw     r24, r0
+          N-248 addi     r23,r3,0  r=('R_PPC_ADDR16_LO', 'lbl_804DBCD0')
+[@ha/@l] O-264 lis      r3, lbl_804650D4@ha
+          N-264 cmpwi    r24,4  r=None
+[@ha/@l] O-266 addi     r30, r3, lbl_804650D4@l
+          N-266 bl       1554 <render__14TObjCMHairMenuFv+0x428>  r=('R_PPC_REL24', 'restore_full_screen_view__11TCameraCtrlFv')
+[@ha/@l] O-267 lis      r3, lbl_804650F4@ha
+          N-267 bl       1558 <render__14TObjCMHairMenuFv+0x42c>  r=('R_PPC_REL24', 'get_scale__14TObjCMMainMenuFv')
+[@ha/@l] O-268 lfs      f2, 0x4(r30)
+          N-268 lis      r3,0  r=('R_PPC_ADDR16_HA', 'lbl_804650D4')
+[@ha/@l] O-270 lfs      f0, 0xc(r30)
+          N-270 addi     r30,r3,0  r=('R_PPC_ADDR16_LO', 'lbl_804650D4')
+[@ha/@l+color] O-271 addi     r3, r3, lbl_804650F4@l
+          N-271 addi     r7,r1,88  r=None
+[@ha/@l] O-277 lfs      f5, lbl_805DDB40@sda21(r0)
+          N-277 lis      r3,0  r=('R_PPC_ADDR16_HA', 'lbl_804650F4')
+[@ha/@l] O-286 li       r5, 0x0
+          N-286 addi     r3,r3,0  r=('R_PPC_ADDR16_LO', 'lbl_804650F4')
+[@ha/@l] O-352 lis      r3, lbl_80465140@ha
+          N-352 lis      r3,0  r=('R_PPC_ADDR16_HA', '@268')
+[@ha/@l+color] O-356 lfd      f29, lbl_80465140@l(r3)
+          N-356 lfd      f31,0(r3)  r=('R_PPC_ADDR16_LO', '@268')
+[@ha/@l] O-371 lis      r3, lbl_804650D4@ha
+          N-371 fdivs    f6,f0,f28  r=None
+[@ha/@l] O-373 addi     r7, r3, lbl_804650D4@l
+          N-373 beq      17e8 <render__14TObjCMHairMenuFv+0x6bc>  r=None
+[@ha/@l] O-374 lis      r3, 0x4330
+          N-374 lis      r3,0  r=('R_PPC_ADDR16_HA', 'lbl_804650D4')
+[@ha/@l] O-376 lis      r4, lbl_80465140@ha
+          N-376 addi     r4,r3,0  r=('R_PPC_ADDR16_LO', 'lbl_804650D4')
+[@ha/@l] O-378 addi     r6, r4, lbl_80465140@l
+          N-378 lfs      f5,0(r4)  r=None
+[@ha/@l] O-379 lfs      f1, 0x10(r30)
+          N-379 lis      r4,0  r=('R_PPC_ADDR16_HA', '@268')
+[@ha/@l] O-381 lfs      f0, 0x18(r30)
+          N-381 addi     r6,r4,0  r=('R_PPC_ADDR16_LO', '@268')
+[@ha/@l] O-407 lis      r3, lbl_804650F4@ha
+          N-407 bdnz     1774 <render__14TObjCMHairMenuFv+0x648>  r=None
+[@ha/@l] O-408 addi     r4, r3, lbl_804650F4@l
+          N-408 lis      r3,0  r=('R_PPC_ADDR16_HA', 'lbl_804650F4')
+[@ha/@l] O-410 lwzx     r0, r4, r24
+          N-410 addi     r4,r3,0  r=('R_PPC_ADDR16_LO', 'lbl_804650F4')
+
+######## CLASS c_true n=10 ########
+[TRUE value diff] O-188 bne      .L_80295D18
+          N-188 lwz      r0,36(r25)  r=None
+[TRUE value diff] O-209 b        .L_80295D74
+          N-209 bne      147c <render__14TObjCMHairMenuFv+0x350>  r=None
+[TRUE value diff] O-261 blt      .L_80295DFC
+          N-261 fmr      f2,f25  r=None
+[TRUE value diff] O-298 fmadds   f4, f5, f10, f9
+          N-298 fmadds   f4,f5,f11,f7  r=None
+[TRUE value diff] O-302 fmadds   f2, f7, f12, f11
+          N-302 fmadds   f6,f8,f0,f2  r=None
+[TRUE value diff] O-351 blt      .L_80295F50
+          N-351 blt      1668 <render__14TObjCMHairMenuFv+0x53c>  r=None
+[TRUE value diff] O-413 stw      r0, 0x8(r1)
+          N-413 addi     r4,r1,12  r=None
+[TRUE value diff] O-414 lwz      r0, 0x7c(r1)
+          N-414 stw      r5,12(r1)  r=None
+[TRUE value diff] O-415 stb      r0, 0xb(r1)
+          N-415 stb      r0,15(r1)  r=None
+[TRUE value diff] O-435 blt      .L_80295FC0
+          N-435 blt      16d8 <render__14TObjCMHairMenuFv+0x5ac>  r=None
+
+######## CLASS c_shift n=203 ########
+[order/window-shift(near-match +-12)] O-161 stfs     f1, 0x18(r1)
+          N-161 lfs      f0,0(0)  r=('R_PPC_EMB_SDA21', '@411')
+[order/window-shift(near-match +-12)] O-162 lfs      f29, TObjCMAssignMenu__data_805DDB20@sda21(r0)
+          N-162 stfs     f2,24(r1)  r=None
+[order/window-shift(near-match +-12)] O-163 stfs     f0, 0x1c(r1)
+          N-163 lfs      f27,0(0)  r=('R_PPC_EMB_SDA21', '@413')
+[order/window-shift(near-match +-12)] O-164 fmuls    f28, f26, f26
+          N-164 stfs     f1,28(r1)  r=None
+[order/window-shift(near-match +-12)] O-165 b        .L_80295D3C
+          N-165 fmuls    f26,f30,f30  r=None
+[order/window-shift(near-match +-12)] O-166 lwz      r3, 0x24(r25)
+          N-166 fmuls    f24,f0,f26  r=None
+[order/window-shift(near-match +-12)] O-167 fmr      f23, f28
+          N-167 b        1450 <render__14TObjCMHairMenuFv+0x324>  r=None
+[order/window-shift(near-match +-12)] O-168 li       r24, 0x1f
+          N-168 lwz      r0,36(r25)  r=None
+[order/window-shift(near-match +-12)] O-169 cmpwi    r3, 0x0
+          N-169 fmr      f23,f26  r=None
+[order/window-shift(near-match +-12)] O-170 beq      .L_80295CD4
+          N-170 cmpwi    r0,0  r=None
+[order/window-shift(near-match +-12)] O-171 lfs      f0, lbl_805DDB18@sda21(r0)
+          N-171 beq      13e0 <render__14TObjCMHairMenuFv+0x2b4>  r=None
+[order/window-shift(near-match +-12)] O-172 fmuls    f23, f28, f0
+          N-172 fmr      f23,f24  r=None
+[order/window-shift(near-match +-12)] O-174 bne      .L_80295D18
+          N-174 li       r24,31  r=None
+[order/window-shift(near-match +-12)] O-175 lwz      r0, creation_resource_ready_state@sda21(r0)
+          N-175 bne      142c <render__14TObjCMHairMenuFv+0x300>  r=None
+[order/window-shift(near-match +-12)] O-176 li       r24, 0x20
+          N-176 lwz      r0,0(0)  r=('R_PPC_EMB_SDA21', 'creation_resource_ready_state')
+[order/window-shift(near-match +-12)] O-177 cmpwi    r0, 0x2
+          N-177 li       r24,32  r=None
+[order/window-shift(near-match +-12)] O-178 beq      .L_80295D0C
+          N-178 cmpwi    r0,2  r=None
+[order/window-shift(near-match +-12)] O-179 lwz      r0, 0x2c(r25)
+          N-179 beq      141c <render__14TObjCMHairMenuFv+0x2f0>  r=None
+[order/window-shift(near-match +-12)] O-180 slwi     r3, r0, 12
+          N-180 lwz      r0,44(r25)  r=None
+[order/window-shift(near-match +-12)] O-181 bl       sin_table_lookup
+          N-181 slwi     r3,r0,12  r=None
+[order/window-shift(near-match +-12)] O-182 bl       fabs_float
+          N-182 bl       1404 <render__14TObjCMHairMenuFv+0x2d8>  r=('R_PPC_REL24', 'sin_table_lookup')
+[order/window-shift(near-match +-12)] O-183 lfs      f0, lbl_805DDB1C@sda21(r0)
+          N-183 bl       1408 <render__14TObjCMHairMenuFv+0x2dc>  r=('R_PPC_REL24', 'fabs_float')
+[order/window-shift(near-match +-12)] O-184 fmadds   f0, f0, f1, f0
+          N-184 lfs      f0,0(0)  r=('R_PPC_EMB_SDA21', '@412')
+[order/window-shift(near-match +-12)] O-185 fmuls    f23, f23, f0
+          N-185 fmadds   f0,f0,f1,f0  r=None
+[order/window-shift(near-match +-12)] O-186 b        .L_80295D18
+          N-186 fmuls    f23,f23,f0  r=None
+[order/window-shift(near-match +-12)] O-187 cmpwi    r3, 0x0
+          N-187 b        142c <render__14TObjCMHairMenuFv+0x300>  r=None
+[order/window-shift(near-match +-12)] O-189 fmuls    f23, f23, f27
+          N-189 cmpwi    r0,0  r=None
+[order/window-shift(near-match +-12)] O-190 fmr      f2, f23
+          N-190 bne      142c <render__14TObjCMHairMenuFv+0x300>  r=None
+[order/window-shift(near-match +-12)] O-191 lfs      f1, lbl_805DDA94@sda21(r0)
+          N-191 fmuls    f23,f23,f29  r=None
+[order/window-shift(near-match +-12)] O-192 mr       r3, r24
+          N-192 fmr      f2,f23  r=None
+[order/window-shift(near-match +-12)] O-193 addi     r4, r1, 0x18
+          N-193 lfs      f1,0(0)  r=('R_PPC_EMB_SDA21', '@93')
+[order/window-shift(near-match +-12)] O-194 bl       draw_ui_sprite
+          N-194 mr       r3,r24  r=None
+[order/window-shift(near-match +-12)] O-195 lfs      f0, 0x18(r1)
+          N-195 addi     r4,r1,24  r=None
+[order/window-shift(near-match +-12)] O-196 addi     r23, r23, 0x1
+          N-196 bl       143c <render__14TObjCMHairMenuFv+0x310>  r=('R_PPC_REL24', 'draw_ui_sprite')
+[order/window-shift(near-match +-12)] O-197 fadds    f0, f0, f29
+          N-197 lfs      f0,24(r1)  r=None
+[order/window-shift(near-match +-12)] O-198 stfs     f0, 0x18(r1)
+          N-198 addi     r23,r23,1  r=None
+[order/window-shift(near-match +-12)] O-199 lwz      r0, 0x28(r25)
+          N-199 fadds    f0,f0,f27  r=None
+[order/window-shift(near-match +-12)] O-200 cmpw     r23, r0
+          N-200 stfs     f0,24(r1)  r=None
+[order/window-shift(near-match +-12)] O-201 blt      .L_80295CB8
+          N-201 lwz      r0,40(r25)  r=None
+[order/window-shift(near-match +-12)] O-202 lfs      f0, lbl_805DDB24@sda21(r0)
+          N-202 cmpw     r23,r0  r=None
+[order/window-shift(near-match +-12)] O-203 fmr      f24, f28
+          N-203 blt      13cc <render__14TObjCMHairMenuFv+0x2a0>  r=None
+[order/window-shift(near-match +-12)] O-204 lwz      r0, 0x24(r25)
+          N-204 lfs      f0,0(0)  r=('R_PPC_EMB_SDA21', '@414')
+[order/window-shift(near-match +-12)] O-205 fsubs    f23, f31, f0
+          N-205 fmr      f23,f26  r=None
+[order/window-shift(near-match +-12)] O-206 cmpwi    r0, 0x0
+          N-206 lwz      r0,36(r25)  r=None
+[order/window-shift(near-match +-12)] O-207 bne      .L_80295D68
+          N-207 fsubs    f24,f28,f0  r=None
+[order/window-shift(near-match +-12)] O-208 fmuls    f2, f28, f27
+          N-208 cmpwi    r0,0  r=None
+[order/window-shift(near-match +-12)] O-210 lfs      f0, lbl_805DDB18@sda21(r0)
+          N-210 fmuls    f2,f26,f29  r=None
+[order/window-shift(near-match +-12)] O-211 fmuls    f2, f28, f0
+          N-211 b        1488 <render__14TObjCMHairMenuFv+0x35c>  r=None
+[order/window-shift(near-match +-12)] O-212 fmr      f24, f2
+          N-212 lfs      f0,0(0)  r=('R_PPC_EMB_SDA21', '@411')
+[order/window-shift(near-match +-12)] O-213 lfs      f1, lbl_805DDB28@sda21(r0)
+          N-213 fmuls    f2,f0,f26  r=None
+[order/window-shift(near-match +-12)] O-214 addi     r3, r27, 0x14
+          N-214 fmr      f23,f2  r=None
+[order/window-shift(near-match +-12)] O-216 addi     r4, r1, 0x10
+          N-216 addi     r3,r26,20  r=None
+[order/window-shift(near-match +-12)] O-217 fadds    f3, f1, f23
+          N-217 lfs      f0,0(0)  r=('R_PPC_EMB_SDA21', '@416')
+[order/window-shift(near-match +-12)] O-218 lfs      f1, lbl_805DDA94@sda21(r0)
+          N-218 addi     r4,r1,16  r=None
+[order/window-shift(near-match +-12)] O-219 stfs     f0, 0x14(r1)
+          N-219 fadds    f3,f1,f24  r=None
+[order/window-shift(near-match +-12)] O-220 stfs     f3, 0x10(r1)
+          N-220 lfs      f1,0(0)  r=('R_PPC_EMB_SDA21', '@93')
+[order/window-shift(near-match +-12)] O-221 bl       draw_ui_sprite
+          N-221 stfs     f0,20(r1)  r=None
+[order/window-shift(near-match +-12)] O-222 lfs      f1, lbl_805DDB30@sda21(r0)
+          N-222 stfs     f3,16(r1)  r=None
+[order/window-shift(near-match +-12)] O-223 fmr      f2, f24
+          N-223 bl       14a8 <render__14TObjCMHairMenuFv+0x37c>  r=('R_PPC_REL24', 'draw_ui_sprite')
+[order/window-shift(near-match +-12)] O-225 addi     r4, r1, 0x10
+          N-225 fmr      f2,f23  r=None
+[order/window-shift(near-match +-12)] O-226 fadds    f3, f1, f23
+          N-226 lfs      f0,0(0)  r=('R_PPC_EMB_SDA21', '@122')
+[order/window-shift(near-match +-12)] O-227 lfs      f1, lbl_805DDA94@sda21(r0)
+          N-227 addi     r4,r1,16  r=None
+[order/window-shift(near-match +-12)] O-228 stfs     f0, 0x14(r1)
+          N-228 fadds    f3,f1,f24  r=None
+[order/window-shift(near-match +-12)] O-229 li       r3, 0x1e
+          N-229 lfs      f1,0(0)  r=('R_PPC_EMB_SDA21', '@93')
+[order/window-shift(near-match +-12)] O-230 stfs     f3, 0x10(r1)
+          N-230 stfs     f0,20(r1)  r=None
+[order/window-shift(near-match +-12)] O-231 bl       draw_ui_sprite
+          N-231 li       r3,30  r=None
+[order/window-shift(near-match +-12)] O-232 lfs      f1, lbl_805DDB34@sda21(r0)
+          N-232 stfs     f3,16(r1)  r=None
+[order/window-shift(near-match +-12)] O-233 fmr      f2, f24
+          N-233 bl       14d0 <render__14TObjCMHairMenuFv+0x3a4>  r=('R_PPC_REL24', 'draw_ui_sprite')
+[order/window-shift(near-match +-12)] O-235 addi     r4, r1, 0x10
+          N-235 fmr      f2,f23  r=None
+[order/window-shift(near-match +-12)] O-236 fadds    f3, f1, f23
+          N-236 lfs      f0,0(0)  r=('R_PPC_EMB_SDA21', '@419')
+[order/window-shift(near-match +-12)] O-237 lfs      f1, lbl_805DDA94@sda21(r0)
+          N-237 addi     r4,r1,16  r=None
+[order/window-shift(near-match +-12)] O-238 stfs     f0, 0x14(r1)
+          N-238 fadds    f3,f1,f24  r=None
+[order/window-shift(near-match +-12)] O-239 stfs     f3, 0x10(r1)
+          N-239 lfs      f1,0(0)  r=('R_PPC_EMB_SDA21', '@93')
+[order/window-shift(near-match +-12)] O-240 lwz      r3, 0x28(r25)
+          N-240 stfs     f0,20(r1)  r=None
+[order/window-shift(near-match +-12)] O-241 addi     r3, r3, 0x13
+          N-241 stfs     f3,16(r1)  r=None
+[order/window-shift(near-match +-12)] O-242 bl       draw_ui_sprite
+          N-242 lwz      r3,40(r25)  r=None
+[order/window-shift(near-match +-12)] O-244 lfs      f29, lbl_805DDB18@sda21(r0)
+          N-244 bl       14fc <render__14TObjCMHairMenuFv+0x3d0>  r=('R_PPC_REL24', 'draw_ui_sprite')
+[order/window-shift(near-match +-12)] O-247 lwz      r0, 0x24(r25)
+          N-247 fmuls    f24,f26,f29  r=None
+[order/window-shift(near-match +-12)] O-249 bne      .L_80295E10
+          N-249 fmuls    f25,f0,f26  r=None
+[order/window-shift(near-match +-12)] O-250 fmuls    f2, f28, f27
+          N-250 li       r24,1  r=None
+[order/window-shift(near-match +-12)] O-251 b        .L_80295E14
+          N-251 lwz      r0,36(r25)  r=None
+[order/window-shift(near-match +-12)] O-252 fmuls    f2, f28, f29
+          N-252 addi     r3,r24,-1  r=None
+[order/window-shift(near-match +-12)] O-253 subi     r0, r24, 0x1
+          N-253 slwi     r4,r3,3  r=None
+[order/window-shift(near-match +-12)] O-255 slwi     r0, r0, 3
+          N-255 cmpw     r24,r0  r=None
+[order/window-shift(near-match +-12)] O-258 bl       draw_ui_sprite
+          N-258 bne      1540 <render__14TObjCMHairMenuFv+0x414>  r=None
+[order/window-shift(near-match +-12)] O-259 addi     r24, r24, 0x1
+          N-259 fmr      f2,f24  r=None
+[order/window-shift(near-match +-12)] O-260 cmpwi    r24, 0x4
+          N-260 b        1544 <render__14TObjCMHairMenuFv+0x418>  r=None
+[order/window-shift(near-match +-12)] O-262 bl       restore_full_screen_view__11TCameraCtrlFv
+          N-262 bl       1544 <render__14TObjCMHairMenuFv+0x418>  r=('R_PPC_REL24', 'draw_ui_sprite')
+[order/window-shift(near-match +-12)] O-263 bl       get_scale__14TObjCMMainMenuFv
+          N-263 addi     r24,r24,1  r=None
+[order/window-shift(near-match +-12)] O-265 lfs      f0, TObjCMMainMenu__data_805DDB44@sda21(r0)
+          N-265 blt      1518 <render__14TObjCMHairMenuFv+0x3ec>  r=None
+[order/window-shift(near-match +-12)] O-269 fmuls    f27, f0, f26
+          N-269 lfs      f0,0(0)  r=('R_PPC_EMB_SDA21', '@422')
+[order/window-shift(near-match +-12)] O-272 lwz      r4, 0xc(r3)
+          N-272 lfs      f2,12(r30)  r=None
+[order/window-shift(near-match +-12)] O-273 addi     r7, r1, 0x58
+          N-273 fmuls    f0,f0,f30  r=None
+[order/window-shift(near-match +-12)] O-274 fsubs    f4, f0, f2
+          N-274 lfs      f3,4(r30)  r=None
+[order/window-shift(near-match +-12)] O-275 lfs      f7, lbl_805DDB3C@sda21(r0)
+          N-275 fmr      f30,f1  r=None
+[order/window-shift(near-match +-12)] O-276 fctiwz   f0, f27
+          N-276 lfs      f1,0(0)  r=('R_PPC_EMB_SDA21', '@407')
+[order/window-shift(near-match +-12)] O-278 fmr      f28, f1
+          N-278 fsubs    f4,f2,f3  r=None
+[order/window-shift(near-match +-12)] O-279 fmadds   f3, f7, f4, f2
+          N-279 lfs      f5,0(0)  r=('R_PPC_EMB_SDA21', '@421')
+[order/window-shift(near-match +-12)] O-280 fmadds   f2, f5, f4, f2
+          N-280 fctiwz   f0,f0  r=None
+[order/window-shift(near-match +-12)] O-281 stfd     f0, 0x78(r1)
+          N-281 lfs      f8,0(0)  r=('R_PPC_EMB_SDA21', '@420')
+[order/window-shift(near-match +-12)] O-282 lfs      f8, lbl_805DDB08@sda21(r0)
+          N-282 fmuls    f26,f1,f30  r=None
+[order/window-shift(near-match +-12)] O-283 addi     r6, r1, 0x48
+          N-283 fmadds   f10,f5,f4,f3  r=None
+[order/window-shift(near-match +-12)] O-284 lfs      f9, 0x0(r30)
+          N-284 fmadds   f9,f8,f4,f3  r=None
+[order/window-shift(near-match +-12)] O-285 lfs      f0, 0x8(r30)
+          N-285 stfd     f0,120(r1)  r=None
+[order/window-shift(near-match +-12)] O-287 addi     r29, r1, 0x54
+          N-287 lfs      f2,16(r30)  r=None
+[order/window-shift(near-match +-12)] O-288 fsubs    f10, f0, f9
+          N-288 lfs      f7,24(r30)  r=None
+[order/window-shift(near-match +-12)] O-289 lfs      f11, 0x18(r30)
+          N-289 lwz      r3,12(r3)  r=None
+[order/window-shift(near-match +-12)] O-290 lfs      f4, 0x10(r30)
+          N-290 fsubs    f11,f2,f7  r=None
+[order/window-shift(near-match +-12)] O-291 fmuls    f1, f3, f28
+          N-291 lfs      f3,8(r30)  r=None
+[order/window-shift(near-match +-12)] O-292 stfs     f3, 0x74(r1)
+          N-292 lfs      f2,0(r30)  r=None
+[order/window-shift(near-match +-12)] O-293 fmuls    f0, f2, f28
+          N-293 addi     r6,r1,72  r=None
+[order/window-shift(near-match +-12)] O-294 fsubs    f12, f4, f11
+          N-294 stw      r3,8(r1)  r=None
+[order/window-shift(near-match +-12)] O-295 stfs     f3, 0x5c(r1)
+          N-295 li       r5,0  r=None
+[order/window-shift(near-match +-12)] O-296 fmadds   f6, f7, f10, f9
+          N-296 fsubs    f0,f3,f2  r=None
+[order/window-shift(near-match +-12)] O-299 stfs     f2, 0x6c(r1)
+          N-299 stfs     f10,100(r1)  r=None
+[order/window-shift(near-match +-12)] O-300 fmadds   f3, f5, f12, f11
+          N-300 fadds    f1,f10,f26  r=None
+[order/window-shift(near-match +-12)] O-301 stfs     f2, 0x64(r1)
+          N-301 addi     r3,r1,84  r=None
+[order/window-shift(near-match +-12)] O-303 mr       r3, r29
+          N-303 stfs     f9,116(r1)  r=None
+[order/window-shift(near-match +-12)] O-304 stw      r4, 0xc(r1)
+          N-304 fmadds   f5,f5,f0,f2  r=None
+[order/window-shift(near-match +-12)] O-305 fmuls    f26, f8, f28
+          N-305 addi     r4,r1,8  r=None
+[order/window-shift(near-match +-12)] O-306 stw      r7, 0x38(r1)
+          N-306 fmadds   f3,f8,f11,f7  r=None
+[order/window-shift(near-match +-12)] O-307 addi     r4, r1, 0xc
+          N-307 stfs     f9,92(r1)  r=None
+[order/window-shift(near-match +-12)] O-308 stw      r6, 0x3c(r1)
+          N-308 fmuls    f2,f9,f30  r=None
+[order/window-shift(near-match +-12)] O-309 stw      r5, 0x40(r1)
+          N-309 stfs     f10,108(r1)  r=None
+[order/window-shift(near-match +-12)] O-310 stfs     f6, 0x58(r1)
+          N-310 fmuls    f0,f10,f30  r=None
+[order/window-shift(near-match +-12)] O-311 stfs     f4, 0x60(r1)
+          N-311 stfs     f1,100(r1)  r=None
+[order/window-shift(near-match +-12)] O-312 stfs     f3, 0x68(r1)
+          N-312 stfs     f6,88(r1)  r=None
+[order/window-shift(near-match +-12)] O-313 stfs     f2, 0x70(r1)
+          N-313 stfs     f5,96(r1)  r=None
+[order/window-shift(near-match +-12)] O-314 stfs     f1, 0x5c(r1)
+          N-314 stfs     f4,104(r1)  r=None
+[order/window-shift(near-match +-12)] O-315 stfs     f0, 0x64(r1)
+          N-315 stfs     f3,112(r1)  r=None
+[order/window-shift(near-match +-12)] O-316 stfs     f0, 0x6c(r1)
+          N-316 stfs     f2,92(r1)  r=None
+[order/window-shift(near-match +-12)] O-317 stfs     f1, 0x74(r1)
+          N-317 stfs     f0,100(r1)  r=None
+[order/window-shift(near-match +-12)] O-318 stb      r0, 0xf(r1)
+          N-318 stfs     f0,108(r1)  r=None
+[order/window-shift(near-match +-12)] O-319 bl       TObjCMHairMenu__sub_801E3F54
+          N-319 stfs     f2,116(r1)  r=None
+[order/window-shift(near-match +-12)] O-320 addi     r28, r1, 0x50
+          N-320 stw      r7,56(r1)  r=None
+[order/window-shift(near-match +-12)] O-321 mr       r4, r3
+          N-321 stw      r6,60(r1)  r=None
+[order/window-shift(near-match +-12)] O-322 mr       r3, r28
+          N-322 stw      r5,64(r1)  r=None
+[order/window-shift(near-match +-12)] O-323 bl       TObjCMHairMenu__sub_801E3F54
+          N-323 stb      r0,11(r1)  r=None
+[order/window-shift(near-match +-12)] O-324 addi     r27, r1, 0x4c
+          N-324 bl       163c <render__14TObjCMHairMenuFv+0x510>  r=('R_PPC_REL24', 'TObjCMHairMenu__sub_801E3F54')
+[order/window-shift(near-match +-12)] O-326 mr       r3, r27
+          N-326 addi     r3,r1,80  r=None
+[order/window-shift(near-match +-12)] O-329 addi     r3, r1, 0x48
+          N-329 addi     r3,r1,76  r=None
+[order/window-shift(near-match +-12)] O-331 li       r23, 0x0
+          N-331 mr       r4,r3  r=None
+[order/window-shift(near-match +-12)] O-332 lfs      f1, lbl_805DDA8C@sda21(r0)
+          N-332 addi     r3,r1,72  r=None
+[order/window-shift(near-match +-12)] O-333 addi     r3, r1, 0x38
+          N-333 bl       1660 <render__14TObjCMHairMenuFv+0x534>  r=('R_PPC_REL24', 'TObjCMHairMenu__sub_801E3F54')
+[order/window-shift(near-match +-12)] O-334 li       r4, 0x4
+          N-334 li       r23,0  r=None
+[order/window-shift(near-match +-12)] O-335 li       r5, 0x6
+          N-335 lfs      f1,0(0)  r=('R_PPC_EMB_SDA21', '@93')
+[order/window-shift(near-match +-12)] O-336 bl       draw_tri_fan_2d__14TObjCMHairMenuFllf
+          N-336 addi     r3,r1,56  r=None
+[order/window-shift(near-match +-12)] O-337 lfs      f0, 0x5c(r1)
+          N-337 li       r4,4  r=None
+[order/window-shift(near-match +-12)] O-338 addi     r23, r23, 0x1
+          N-338 li       r5,6  r=None
+[order/window-shift(near-match +-12)] O-339 lfs      f2, 0x64(r1)
+          N-339 bl       1678 <render__14TObjCMHairMenuFv+0x54c>  r=('R_PPC_REL24', 'draw_tri_fan_2d__14TObjCMHairMenuFllf')
+[order/window-shift(near-match +-12)] O-340 cmpwi    r23, 0x3
+          N-340 lfs      f2,92(r1)  r=None
+[order/window-shift(near-match +-12)] O-341 fadds    f3, f0, f26
+          N-341 addi     r23,r23,1  r=None
+[order/window-shift(near-match +-12)] O-343 lfs      f0, 0x74(r1)
+          N-343 cmpwi    r23,3  r=None
+[order/window-shift(near-match +-12)] O-344 fadds    f2, f2, f26
+          N-344 lfs      f0,116(r1)  r=None
+[order/window-shift(near-match +-12)] O-347 stfs     f3, 0x5c(r1)
+          N-347 fadds    f0,f0,f26  r=None
+[order/window-shift(near-match +-12)] O-348 stfs     f2, 0x64(r1)
+          N-348 stfs     f2,92(r1)  r=None
+[order/window-shift(near-match +-12)] O-355 li       r26, 0x0
+          N-355 addi     r29,r1,84  r=None
+[order/window-shift(near-match +-12)] O-357 li       r24, 0x0
+          N-357 addi     r28,r1,80  r=None
+[order/window-shift(near-match +-12)] O-358 li       r23, 0x0
+          N-358 addi     r27,r1,76  r=None
+[order/window-shift(near-match +-12)] O-359 lis      r31, 0x4330
+          N-359 li       r26,0  r=None
+[order/window-shift(near-match +-12)] O-360 lwz      r3, 0x1c(r25)
+          N-360 li       r24,0  r=None
+[order/window-shift(near-match +-12)] O-361 addi     r0, r23, 0x42
+          N-361 li       r23,0  r=None
+[order/window-shift(near-match +-12)] O-362 stw      r31, 0x78(r1)
+          N-362 lis      r31,17200  r=None
+[order/window-shift(near-match +-12)] O-363 lhax     r0, r3, r0
+          N-363 lwz      r3,28(r25)  r=None
+[order/window-shift(near-match +-12)] O-364 xoris    r0, r0, 0x8000
+          N-364 addi     r0,r23,66  r=None
+[order/window-shift(near-match +-12)] O-365 stw      r0, 0x7c(r1)
+          N-365 stw      r31,120(r1)  r=None
+[order/window-shift(near-match +-12)] O-366 lfd      f0, 0x78(r1)
+          N-366 lhax     r0,r3,r0  r=None
+[order/window-shift(near-match +-12)] O-367 fsubs    f0, f0, f29
+          N-367 xoris    r0,r0,32768  r=None
+[order/window-shift(near-match +-12)] O-368 fdivs    f6, f0, f30
+          N-368 stw      r0,124(r1)  r=None
+[order/window-shift(near-match +-12)] O-369 fcmpu    cr0, f31, f6
+          N-369 lfd      f0,120(r1)  r=None
+[order/window-shift(near-match +-12)] O-370 beq      .L_802960DC
+          N-370 fsubs    f0,f0,f31  r=None
+[order/window-shift(near-match +-12)] O-372 xoris    r5, r26, 0x8000
+          N-372 fcmpu    cr0,f27,f6  r=None
+[order/window-shift(near-match +-12)] O-375 lfs      f5, 0x0(r7)
+          N-375 xoris    r5,r26,32768  r=None
+[order/window-shift(near-match +-12)] O-377 lfs      f4, 0x8(r30)
+          N-377 lis      r3,17200  r=None
+[order/window-shift(near-match +-12)] O-380 li       r0, 0x4
+          N-380 lfs      f4,8(r30)  r=None
+[order/window-shift(near-match +-12)] O-382 addi     r4, r1, 0x58
+          N-382 lfs      f1,16(r30)  r=None
+[order/window-shift(near-match +-12)] O-383 fsubs    f3, f1, f4
+          N-383 li       r0,4  r=None
+[order/window-shift(near-match +-12)] O-384 stw      r5, 0x7c(r1)
+          N-384 lfs      f0,24(r30)  r=None
+[order/window-shift(near-match +-12)] O-385 fsubs    f2, f0, f5
+          N-385 addi     r4,r1,88  r=None
+[order/window-shift(near-match +-12)] O-386 lfd      f1, 0x0(r6)
+          N-386 fsubs    f3,f1,f4  r=None
+[order/window-shift(near-match +-12)] O-387 stw      r3, 0x78(r1)
+          N-387 stw      r5,124(r1)  r=None
+[order/window-shift(near-match +-12)] O-388 li       r3, 0x0
+          N-388 fsubs    f2,f0,f5  r=None
+[order/window-shift(near-match +-12)] O-389 lfd      f0, 0x78(r1)
+          N-389 lfd      f1,0(r6)  r=None
+[order/window-shift(near-match +-12)] O-390 fmadds   f3, f6, f3, f4
+          N-390 stw      r3,120(r1)  r=None
+[order/window-shift(near-match +-12)] O-391 fmadds   f2, f6, f2, f5
+          N-391 li       r3,0  r=None
+[order/window-shift(near-match +-12)] O-392 stfs     f5, 0x58(r1)
+          N-392 lfd      f0,120(r1)  r=None
+[order/window-shift(near-match +-12)] O-393 fsubs    f0, f0, f1
+          N-393 fmadds   f3,f6,f3,f4  r=None
+[order/window-shift(near-match +-12)] O-394 stfs     f4, 0x60(r1)
+          N-394 fmadds   f2,f6,f2,f5  r=None
+[order/window-shift(near-match +-12)] O-395 fmuls    f1, f0, f26
+          N-395 stfs     f5,88(r1)  r=None
+[order/window-shift(near-match +-12)] O-396 stfs     f3, 0x68(r1)
+          N-396 fsubs    f0,f0,f1  r=None
+[order/window-shift(near-match +-12)] O-397 stfs     f2, 0x70(r1)
+          N-397 stfs     f4,96(r1)  r=None
+[order/window-shift(near-match +-12)] O-398 mtctr    r0
+          N-398 fmuls    f1,f0,f26  r=None
+[order/window-shift(near-match +-12)] O-399 add      r5, r7, r3
+          N-399 stfs     f3,104(r1)  r=None
+[order/window-shift(near-match +-12)] O-400 addi     r0, r3, 0x4
+          N-400 stfs     f2,112(r1)  r=None
+[order/window-shift(near-match +-12)] O-401 lfs      f0, 0x4(r5)
+          N-401 mtctr    r0  r=None
+[order/window-shift(near-match +-12)] O-402 addi     r3, r3, 0x8
+          N-402 addi     r0,r3,4  r=None
+[order/window-shift(near-match +-12)] O-403 fmadds   f0, f28, f0, f1
+          N-403 addi     r3,r3,8  r=None
+[order/window-shift(near-match +-12)] O-404 stfsx    f0, r4, r0
+          N-404 lfsx     f0,r30,r0  r=None
+[order/window-shift(near-match +-12)] O-405 bdnz     .L_8029605C
+          N-405 fmadds   f0,f30,f0,f1  r=None
+[order/window-shift(near-match +-12)] O-406 fctiwz   f0, f27
+          N-406 stfsx    f0,r4,r0  r=None
+[order/window-shift(near-match +-12)] O-409 mr       r3, r29
+          N-409 lbz      r0,11(r1)  r=None
+[order/window-shift(near-match +-12)] O-411 addi     r4, r1, 0x8
+          N-411 mr       r3,r29  r=None
+[order/window-shift(near-match +-12)] O-412 stfd     f0, 0x78(r1)
+          N-412 lwzx     r5,r4,r24  r=None

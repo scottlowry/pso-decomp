@@ -1,0 +1,35 @@
+--- before
++++ after
+@@ -54,6 +54,7 @@
+ void draw_compass_sprite__10TObjPlayerFlllf(void *, s32, s32, s32, f32);
+ void draw_compass__13TRaderMapCoreFv(RM *self, s32 mode)
+ {
++  u32 new_var2;
+   u32 new_var;
+   CS state;
+   u32 color;
+@@ -64,6 +65,7 @@
+   }
+   f32 b = TRaderMapCore__data_805DC534;
+   f32 a = TRaderMapCore__data_805DC528;
++  f32 *tbl = lbl_804C87B4[mode];
+   state.x = a;
+   state.y = a;
+   state.z = a;
+@@ -73,14 +75,14 @@
+   state.unk18 = TRaderMapCore__data_805D5F4C;
+   state.sprs = lbl_804C87E4;
+   color = -1;
+-  f32 *tbl = lbl_804C87B4[mode];
+   begin_effect_render__13TParticleCtrlFv();
+   state.x = tbl[2] + ((f32) lbl_804C87E4[1].x);
+   state.y = tbl[3] + ((f32) lbl_804C87E4[1].y);
+   self->m_19c = self->m_19c;
+   set_default_alpha_blend__Fv();
+   ((u8 *) (&color))[3] = (u8) ((s32) self->m_19c);
+-  draw_compass_sprite__10TObjPlayerFlllf((void *) (&state), 1, (s32) (((((color >> 0x10U) & new_var) | ((color << 0x10) & 0xFF000000)) & (~0xFF0000)) | ((color << 0x10) & 0xFF0000)), 0x21, TRaderMapCore__data_805DC58C);
++  new_var2 = color << 0x10;
++  draw_compass_sprite__10TObjPlayerFlllf((void *) (&state), 1, (s32) (((~0xFF0000) & (((color >> 0x10U) & new_var) | (new_var2 & 0xFF000000))) | (new_var2 & 0xFF0000)), 0x21, TRaderMapCore__data_805DC58C);
+   state.x = tbl[0] + ((f32) lbl_804C87E4[0].x);
+   state.y = tbl[1] + ((f32) lbl_804C87E4[0].y);
+   state.rot = self->m_174;

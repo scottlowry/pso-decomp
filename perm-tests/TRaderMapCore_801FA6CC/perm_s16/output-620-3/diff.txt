@@ -1,0 +1,23 @@
+--- before
++++ after
+@@ -57,6 +57,7 @@
+   u32 new_var;
+   CS state;
+   u32 color;
++  self->m_19c = self->m_19c;
+   new_var = ~0xFF000000;
+   if (apply_compass_param__13TRaderMapCoreFv((void *) (&self->m_90)) == 0)
+   {
+@@ -73,9 +74,11 @@
+   state.unk18 = TRaderMapCore__data_805D5F4C;
+   state.sprs = lbl_804C87E4;
+   color = -1;
++  if (lbl_804C87E4[0].x)
++  {
++  }
+   begin_effect_render__13TParticleCtrlFv();
+   f32 *tbl = lbl_804C87B4[mode];
+-  self->m_19c = self->m_19c;
+   state.x = tbl[2] + ((f32) lbl_804C87E4[1].x);
+   state.y = tbl[3] + ((f32) lbl_804C87E4[1].y);
+   set_default_alpha_blend__Fv();

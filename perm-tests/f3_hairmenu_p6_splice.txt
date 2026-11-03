@@ -1,0 +1,3 @@
+{"dir": "output-6540-1", "stage": "REPO", "size": "0x734", "size_words": 461, "poke_ok": true, "score": 81.406525, "gate": false}
+{"dir": "output-7105-1", "stage": "REPO", "size": "0x730", "size_words": 460, "poke_ok": true, "score": 84.097824, "gate": true}
+CHAMP-RESTORED size=00000734 score=80.660866

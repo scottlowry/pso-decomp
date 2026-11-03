@@ -1,0 +1,926 @@
+era rows=460 ours rows=465 surplus=5
+
+== replace era[0:1] ours[0:1]  net +0
+  O-  0 80295A20: stwu     r1, -0x140(r1)
+  N-  0 112c: stwu     r1,-320(r1)
+
+== replace era[2:398] ours[2:406]  net +8
+  O-  2 80295A28: stw      r0, 0x144(r1)
+  O-  3 80295A2C: stfd     f31, 0x130(r1)
+  O-  4 80295A30: psq_st   f31, 0x138(r1), 0, qr0
+  O-  5 80295A34: stfd     f30, 0x120(r1)
+  O-  6 80295A38: psq_st   f30, 0x128(r1), 0, qr0
+  O-  7 80295A3C: stfd     f29, 0x110(r1)
+  O-  8 80295A40: psq_st   f29, 0x118(r1), 0, qr0
+  O-  9 80295A44: stfd     f28, 0x100(r1)
+  O- 10 80295A48: psq_st   f28, 0x108(r1), 0, qr0
+  O- 11 80295A4C: stfd     f27, 0xf0(r1)
+  O- 12 80295A50: psq_st   f27, 0xf8(r1), 0, qr0
+  O- 13 80295A54: stfd     f26, 0xe0(r1)
+  O- 14 80295A58: psq_st   f26, 0xe8(r1), 0, qr0
+  O- 15 80295A5C: stfd     f25, 0xd0(r1)
+  O- 16 80295A60: psq_st   f25, 0xd8(r1), 0, qr0
+  O- 17 80295A64: stfd     f24, 0xc0(r1)
+  O- 18 80295A68: psq_st   f24, 0xc8(r1), 0, qr0
+  O- 19 80295A6C: stfd     f23, 0xb0(r1)
+  O- 20 80295A70: psq_st   f23, 0xb8(r1), 0, qr0
+  O- 21 80295A74: stmw     r23, 0x8c(r1)
+  O- 22 80295A78: mr       r25, r3
+  O- 23 80295A7C: lwz      r3, 0x1c(r3)
+  O- 24 80295A80: lwz      r0, 0x2c(r25)
+  O- 25 80295A84: lha      r27, 0x40(r3)
+  O- 26 80295A88: slwi     r3, r0, 10
+  O- 27 80295A8C: bl       sin_table_lookup
+  O- 28 80295A90: lfs      f2, lbl_805DDAFC@sda21(r0)
+  O- 29 80295A94: lfs      f0, lbl_805DDA70@sda21(r0)
+  O- 30 80295A98: fmadds   f27, f2, f1, f0
+  O- 31 80295A9C: fcmpo    cr0, f27, f0
+  O- 32 80295AA0: ble      .L_80295AA8
+  O- 33 80295AA4: fmr      f27, f0
+  O- 34 80295AA8: lwz      r3, 0x28(r25)
+  O- 35 80295AAC: subic.   r0, r3, 0x1
+  O- 36 80295AB0: bge      .L_80295ABC
+  O- 37 80295AB4: li       r0, 0x0
+  O- 38 80295AB8: b        .L_80295AC8
+  O- 39 80295ABC: cmpwi    r0, 0xa
+  O- 40 80295AC0: blt      .L_80295AC8
+  O- 41 80295AC4: li       r0, 0x9
+  O- 42 80295AC8: lfs      f2, 0x34(r25)
+  O- 43 80295ACC: lis      r3, lbl_8046509C@ha
+  O- 44 80295AD0: lfs      f1, lbl_805DDA6C@sda21(r0)
+  O- 45 80295AD4: slwi     r0, r0, 2
+  O- 46 80295AD8: addi     r3, r3, lbl_8046509C@l
+  O- 47 80295ADC: fcmpo    cr0, f2, f1
+  O- 48 80295AE0: lfsx     f31, r3, r0
+  O- 49 80295AE4: cror     eq, lt, eq
+  O- 50 80295AE8: beq      .L_80295BF0
+  O- 51 80295AEC: lfs      f0, lbl_805DDA74@sda21(r0)
+  O- 52 80295AF0: fcmpo    cr0, f2, f0
+  O- 53 80295AF4: cror     eq, gt, eq
+  O- 54 80295AF8: bne      .L_80295B04
+  O- 55 80295AFC: lfs      f26, lbl_805DDA70@sda21(r0)
+  O- 56 80295B00: b        .L_80295B0C
+  O- 57 80295B04: fsubs    f0, f2, f1
+  O- 58 80295B08: fdivs    f26, f0, f1
+  O- 59 80295B0C: lfs      f28, lbl_805DDAC0@sda21(r0)
+  O- 60 80295B10: li       r24, 0x0
+  O- 61 80295B14: lfs      f29, lbl_805DDA70@sda21(r0)
+  O- 62 80295B18: li       r23, 0x0
+  O- 63 80295B1C: fsubs    f0, f31, f28
+  O- 64 80295B20: lfs      f1, lbl_805DDB04@sda21(r0)
+  O- 65 80295B24: stfs     f29, 0x2c(r1)
+  O- 66 80295B28: lfs      f24, lbl_805DDA88@sda21(r0)
+  O- 67 80295B2C: fmadds   f30, f26, f0, f28
+  O- 68 80295B30: stfs     f1, 0x34(r1)
+  O- 69 80295B34: lfs      f25, lbl_805DDB08@sda21(r0)
+  O- 70 80295B38: cmpwi    r24, 0x0
+  O- 71 80295B3C: li       r26, 0x0
+  O- 72 80295B40: bne      .L_80295B4C
+  O- 73 80295B44: fmr      f23, f30
+  O- 74 80295B48: b        .L_80295B64
+  O- 75 80295B4C: lis      r3, lbl_804650C4@ha
+  O- 76 80295B50: lfs      f1, lbl_805DDAC0@sda21(r0)
+  O- 77 80295B54: addi     r3, r3, lbl_804650C4@l
+  O- 78 80295B58: lfsx     f0, r3, r23
+  O- 79 80295B5C: fsubs    f0, f0, f1
+  O- 80 80295B60: fmadds   f23, f26, f0, f1
+  O- 81 80295B64: stfs     f28, 0x30(r1)
+  O- 82 80295B68: lwz      r0, 0x24(r25)
+  O- 83 80295B6C: cmpw     r24, r0
+  O- 84 80295B70: bne      .L_80295B94
+  O- 85 80295B74: lwz      r0, 0x2c(r25)
+  O- 86 80295B78: li       r26, 0x2
+  O- 87 80295B7C: slwi     r3, r0, 10
+  O- 88 80295B80: bl       sin_table_lookup
+  O- 89 80295B84: lfs      f2, lbl_805DDA84@sda21(r0)
+  O- 90 80295B88: lfs      f0, 0x30(r1)
+  O- 91 80295B8C: fmadds   f0, f2, f1, f0
+  O- 92 80295B90: stfs     f0, 0x30(r1)
+  O- 93 80295B94: lfs      f0, 0x30(r1)
+  O- 94 80295B98: addi     r3, r26, 0x6
+  O- 95 80295B9C: lfs      f1, lbl_805DDA8C@sda21(r0)
+  O- 96 80295BA0: addi     r4, r1, 0x30
+  O- 97 80295BA4: fsubs    f0, f23, f0
+  O- 98 80295BA8: addi     r5, r1, 0x28
+  O- 99 80295BAC: fdivs    f0, f0, f24
+  O-100 80295BB0: stfs     f0, 0x28(r1)
+  O-101 80295BB4: bl       draw_ui_sprite_opaque
+  O-102 80295BB8: stfs     f23, 0x30(r1)
+  O-103 80295BBC: addi     r3, r26, 0x7
+  O-104 80295BC0: lfs      f1, lbl_805DDA8C@sda21(r0)
+  O-105 80295BC4: addi     r4, r1, 0x30
+  O-106 80295BC8: stfs     f29, 0x28(r1)
+  O-107 80295BCC: addi     r5, r1, 0x28
+  O-108 80295BD0: bl       draw_ui_sprite_opaque
+  O-109 80295BD4: lfs      f0, 0x34(r1)
+  O-110 80295BD8: addi     r24, r24, 0x1
+  O-111 80295BDC: cmpwi    r24, 0x4
+  O-112 80295BE0: addi     r23, r23, 0x4
+  O-113 80295BE4: fadds    f0, f0, f25
+  O-114 80295BE8: stfs     f0, 0x34(r1)
+  O-115 80295BEC: blt      .L_80295B38
+  O-116 80295BF0: lfs      f1, 0x34(r25)
+  O-117 80295BF4: lfs      f0, lbl_805DDA90@sda21(r0)
+  O-118 80295BF8: fcmpo    cr0, f1, f0
+  O-119 80295BFC: cror     eq, lt, eq
+  O-120 80295C00: beq      .L_80295C78
+  O-121 80295C04: lfs      f0, lbl_805DDA6C@sda21(r0)
+  O-122 80295C08: fcmpo    cr0, f1, f0
+  O-123 80295C0C: cror     eq, gt, eq
+  O-124 80295C10: bne      .L_80295C1C
+  O-125 80295C14: lfs      f23, lbl_805DDA70@sda21(r0)
+  O-126 80295C18: b        .L_80295C20
+  O-127 80295C1C: fdivs    f23, f1, f0
+  O-128 80295C20: lfs      f1, lbl_805DDB0C@sda21(r0)
+  O-129 80295C24: li       r23, 0x0
+  O-130 80295C28: lfs      f0, lbl_805DDB04@sda21(r0)
+  O-131 80295C2C: stfs     f1, 0x20(r1)
+  O-132 80295C30: lfs      f26, lbl_805DDB08@sda21(r0)
+  O-133 80295C34: stfs     f0, 0x24(r1)
+  O-134 80295C38: lwz      r0, 0x24(r25)
+  O-135 80295C3C: li       r3, 0x0
+  O-136 80295C40: cmpw     r23, r0
+  O-137 80295C44: bne      .L_80295C4C
+  O-138 80295C48: li       r3, -0x1
+  O-139 80295C4C: fmr      f2, f23
+  O-140 80295C50: lfs      f1, lbl_805DDA94@sda21(r0)
+  O-141 80295C54: addi     r3, r3, 0x1
+  O-142 80295C58: addi     r4, r1, 0x20
+  O-143 80295C5C: bl       draw_ui_sprite
+  O-144 80295C60: lfs      f0, 0x24(r1)
+  O-145 80295C64: addi     r23, r23, 0x1
+  O-146 80295C68: cmpwi    r23, 0x4
+  O-147 80295C6C: fadds    f0, f0, f26
+  O-148 80295C70: stfs     f0, 0x24(r1)
+  O-149 80295C74: blt      .L_80295C38
+  O-150 80295C78: lfs      f1, 0x34(r25)
+  O-151 80295C7C: lfs      f0, lbl_805DDA74@sda21(r0)
+  O-152 80295C80: fcmpo    cr0, f1, f0
+  O-153 80295C84: cror     eq, lt, eq
+  O-154 80295C88: beq      .L_802960F4
+  O-155 80295C8C: fsubs    f3, f1, f0
+  O-156 80295C90: lfs      f2, lbl_805DDB10@sda21(r0)
+  O-157 80295C94: lfs      f1, lbl_805DDB14@sda21(r0)
+  O-158 80295C98: li       r23, 0x0
+  O-159 80295C9C: lfs      f0, lbl_805DDAD0@sda21(r0)
+  O-160 80295CA0: fdivs    f26, f3, f2
+  O-161 80295CA4: stfs     f1, 0x18(r1)
+  O-162 80295CA8: lfs      f29, TObjCMAssignMenu__data_805DDB20@sda21(r0)
+  O-163 80295CAC: stfs     f0, 0x1c(r1)
+  O-164 80295CB0: fmuls    f28, f26, f26
+  O-165 80295CB4: b        .L_80295D3C
+  O-166 80295CB8: lwz      r3, 0x24(r25)
+  O-167 80295CBC: fmr      f23, f28
+  O-168 80295CC0: li       r24, 0x1f
+  O-169 80295CC4: cmpwi    r3, 0x0
+  O-170 80295CC8: beq      .L_80295CD4
+  O-171 80295CCC: lfs      f0, lbl_805DDB18@sda21(r0)
+  O-172 80295CD0: fmuls    f23, f28, f0
+  O-173 80295CD4: cmpw     r23, r27
+  O-174 80295CD8: bne      .L_80295D18
+  O-175 80295CDC: lwz      r0, creation_resource_ready_state@sda21(r0)
+  O-176 80295CE0: li       r24, 0x20
+  O-177 80295CE4: cmpwi    r0, 0x2
+  O-178 80295CE8: beq      .L_80295D0C
+  O-179 80295CEC: lwz      r0, 0x2c(r25)
+  O-180 80295CF0: slwi     r3, r0, 12
+  O-181 80295CF4: bl       sin_table_lookup
+  O-182 80295CF8: bl       fabs_float
+  O-183 80295CFC: lfs      f0, lbl_805DDB1C@sda21(r0)
+  O-184 80295D00: fmadds   f0, f0, f1, f0
+  O-185 80295D04: fmuls    f23, f23, f0
+  O-186 80295D08: b        .L_80295D18
+  O-187 80295D0C: cmpwi    r3, 0x0
+  O-188 80295D10: bne      .L_80295D18
+  O-189 80295D14: fmuls    f23, f23, f27
+  O-190 80295D18: fmr      f2, f23
+  O-191 80295D1C: lfs      f1, lbl_805DDA94@sda21(r0)
+  O-192 80295D20: mr       r3, r24
+  O-193 80295D24: addi     r4, r1, 0x18
+  O-194 80295D28: bl       draw_ui_sprite
+  O-195 80295D2C: lfs      f0, 0x18(r1)
+  O-196 80295D30: addi     r23, r23, 0x1
+  O-197 80295D34: fadds    f0, f0, f29
+  O-198 80295D38: stfs     f0, 0x18(r1)
+  O-199 80295D3C: lwz      r0, 0x28(r25)
+  O-200 80295D40: cmpw     r23, r0
+  O-201 80295D44: blt      .L_80295CB8
+  O-202 80295D48: lfs      f0, lbl_805DDB24@sda21(r0)
+  O-203 80295D4C: fmr      f24, f28
+  O-204 80295D50: lwz      r0, 0x24(r25)
+  O-205 80295D54: fsubs    f23, f31, f0
+  O-206 80295D58: cmpwi    r0, 0x0
+  O-207 80295D5C: bne      .L_80295D68
+  O-208 80295D60: fmuls    f2, f28, f27
+  O-209 80295D64: b        .L_80295D74
+  O-210 80295D68: lfs      f0, lbl_805DDB18@sda21(r0)
+  O-211 80295D6C: fmuls    f2, f28, f0
+  O-212 80295D70: fmr      f24, f2
+  O-213 80295D74: lfs      f1, lbl_805DDB28@sda21(r0)
+  O-214 80295D78: addi     r3, r27, 0x14
+  O-215 80295D7C: lfs      f0, lbl_805DDB2C@sda21(r0)
+  O-216 80295D80: addi     r4, r1, 0x10
+  O-217 80295D84: fadds    f3, f1, f23
+  O-218 80295D88: lfs      f1, lbl_805DDA94@sda21(r0)
+  O-219 80295D8C: stfs     f0, 0x14(r1)
+  O-220 80295D90: stfs     f3, 0x10(r1)
+  O-221 80295D94: bl       draw_ui_sprite
+  O-222 80295D98: lfs      f1, lbl_805DDB30@sda21(r0)
+  O-223 80295D9C: fmr      f2, f24
+  O-224 80295DA0: lfs      f0, lbl_805DDAD0@sda21(r0)
+  O-225 80295DA4: addi     r4, r1, 0x10
+  O-226 80295DA8: fadds    f3, f1, f23
+  O-227 80295DAC: lfs      f1, lbl_805DDA94@sda21(r0)
+  O-228 80295DB0: stfs     f0, 0x14(r1)
+  O-229 80295DB4: li       r3, 0x1e
+  O-230 80295DB8: stfs     f3, 0x10(r1)
+  O-231 80295DBC: bl       draw_ui_sprite
+  O-232 80295DC0: lfs      f1, lbl_805DDB34@sda21(r0)
+  O-233 80295DC4: fmr      f2, f24
+  O-234 80295DC8: lfs      f0, lbl_805DDB38@sda21(r0)
+  O-235 80295DCC: addi     r4, r1, 0x10
+  O-236 80295DD0: fadds    f3, f1, f23
+  O-237 80295DD4: lfs      f1, lbl_805DDA94@sda21(r0)
+  O-238 80295DD8: stfs     f0, 0x14(r1)
+  O-239 80295DDC: stfs     f3, 0x10(r1)
+  O-240 80295DE0: lwz      r3, 0x28(r25)
+  O-241 80295DE4: addi     r3, r3, 0x13
+  O-242 80295DE8: bl       draw_ui_sprite
+  O-243 80295DEC: lis      r3, lbl_804DBCD0@ha
+  O-244 80295DF0: lfs      f29, lbl_805DDB18@sda21(r0)
+  O-245 80295DF4: addi     r23, r3, lbl_804DBCD0@l
+  O-246 80295DF8: li       r24, 0x1
+  O-247 80295DFC: lwz      r0, 0x24(r25)
+  O-248 80295E00: cmpw     r24, r0
+  O-249 80295E04: bne      .L_80295E10
+  O-250 80295E08: fmuls    f2, f28, f27
+  O-251 80295E0C: b        .L_80295E14
+  O-252 80295E10: fmuls    f2, f28, f29
+  O-253 80295E14: subi     r0, r24, 0x1
+  O-254 80295E18: lfs      f1, lbl_805DDA94@sda21(r0)
+  O-255 80295E1C: slwi     r0, r0, 3
+  O-256 80295E20: addi     r3, r24, 0xf
+  O-257 80295E24: add      r4, r23, r0
+  O-258 80295E28: bl       draw_ui_sprite
+  O-259 80295E2C: addi     r24, r24, 0x1
+  O-260 80295E30: cmpwi    r24, 0x4
+  O-261 80295E34: blt      .L_80295DFC
+  O-262 80295E38: bl       restore_full_screen_view__11TCameraCtrlFv
+  O-263 80295E3C: bl       get_scale__14TObjCMMainMenuFv
+  O-264 80295E40: lis      r3, lbl_804650D4@ha
+  O-265 80295E44: lfs      f0, TObjCMMainMenu__data_805DDB44@sda21(r0)
+  O-266 80295E48: addi     r30, r3, lbl_804650D4@l
+  O-267 80295E4C: lis      r3, lbl_804650F4@ha
+  O-268 80295E50: lfs      f2, 0x4(r30)
+  O-269 80295E54: fmuls    f27, f0, f26
+  O-270 80295E58: lfs      f0, 0xc(r30)
+  O-271 80295E5C: addi     r3, r3, lbl_804650F4@l
+  O-272 80295E60: lwz      r4, 0xc(r3)
+  O-273 80295E64: addi     r7, r1, 0x58
+  O-274 80295E68: fsubs    f4, f0, f2
+  O-275 80295E6C: lfs      f7, lbl_805DDB3C@sda21(r0)
+  O-276 80295E70: fctiwz   f0, f27
+  O-277 80295E74: lfs      f5, lbl_805DDB40@sda21(r0)
+  O-278 80295E78: fmr      f28, f1
+  O-279 80295E7C: fmadds   f3, f7, f4, f2
+  O-280 80295E80: fmadds   f2, f5, f4, f2
+  O-281 80295E84: stfd     f0, 0x78(r1)
+  O-282 80295E88: lfs      f8, lbl_805DDB08@sda21(r0)
+  O-283 80295E8C: addi     r6, r1, 0x48
+  O-284 80295E90: lfs      f9, 0x0(r30)
+  O-285 80295E94: lfs      f0, 0x8(r30)
+  O-286 80295E98: li       r5, 0x0
+  O-287 80295E9C: addi     r29, r1, 0x54
+  O-288 80295EA0: fsubs    f10, f0, f9
+  O-289 80295EA4: lfs      f11, 0x18(r30)
+  O-290 80295EA8: lfs      f4, 0x10(r30)
+  O-291 80295EAC: fmuls    f1, f3, f28
+  O-292 80295EB0: stfs     f3, 0x74(r1)
+  O-293 80295EB4: fmuls    f0, f2, f28
+  O-294 80295EB8: fsubs    f12, f4, f11
+  O-295 80295EBC: stfs     f3, 0x5c(r1)
+  O-296 80295EC0: fmadds   f6, f7, f10, f9
+  O-297 80295EC4: lwz      r0, 0x7c(r1)
+  O-298 80295EC8: fmadds   f4, f5, f10, f9
+  O-299 80295ECC: stfs     f2, 0x6c(r1)
+  O-300 80295ED0: fmadds   f3, f5, f12, f11
+  O-301 80295ED4: stfs     f2, 0x64(r1)
+  O-302 80295ED8: fmadds   f2, f7, f12, f11
+  O-303 80295EDC: mr       r3, r29
+  O-304 80295EE0: stw      r4, 0xc(r1)
+  O-305 80295EE4: fmuls    f26, f8, f28
+  O-306 80295EE8: stw      r7, 0x38(r1)
+  O-307 80295EEC: addi     r4, r1, 0xc
+  O-308 80295EF0: stw      r6, 0x3c(r1)
+  O-309 80295EF4: stw      r5, 0x40(r1)
+  O-310 80295EF8: stfs     f6, 0x58(r1)
+  O-311 80295EFC: stfs     f4, 0x60(r1)
+  O-312 80295F00: stfs     f3, 0x68(r1)
+  O-313 80295F04: stfs     f2, 0x70(r1)
+  O-314 80295F08: stfs     f1, 0x5c(r1)
+  O-315 80295F0C: stfs     f0, 0x64(r1)
+  O-316 80295F10: stfs     f0, 0x6c(r1)
+  O-317 80295F14: stfs     f1, 0x74(r1)
+  O-318 80295F18: stb      r0, 0xf(r1)
+  O-319 80295F1C: bl       TObjCMHairMenu__sub_801E3F54
+  O-320 80295F20: addi     r28, r1, 0x50
+  O-321 80295F24: mr       r4, r3
+  O-322 80295F28: mr       r3, r28
+  O-323 80295F2C: bl       TObjCMHairMenu__sub_801E3F54
+  O-324 80295F30: addi     r27, r1, 0x4c
+  O-325 80295F34: mr       r4, r3
+  O-326 80295F38: mr       r3, r27
+  O-327 80295F3C: bl       TObjCMHairMenu__sub_801E3F54
+  O-328 80295F40: mr       r4, r3
+  O-329 80295F44: addi     r3, r1, 0x48
+  O-330 80295F48: bl       TObjCMHairMenu__sub_801E3F54
+  O-331 80295F4C: li       r23, 0x0
+  O-332 80295F50: lfs      f1, lbl_805DDA8C@sda21(r0)
+  O-333 80295F54: addi     r3, r1, 0x38
+  O-334 80295F58: li       r4, 0x4
+  O-335 80295F5C: li       r5, 0x6
+  O-336 80295F60: bl       draw_tri_fan_2d__14TObjCMHairMenuFllf
+  O-337 80295F64: lfs      f0, 0x5c(r1)
+  O-338 80295F68: addi     r23, r23, 0x1
+  O-339 80295F6C: lfs      f2, 0x64(r1)
+  O-340 80295F70: cmpwi    r23, 0x3
+  O-341 80295F74: fadds    f3, f0, f26
+  O-342 80295F78: lfs      f1, 0x6c(r1)
+  O-343 80295F7C: lfs      f0, 0x74(r1)
+  O-344 80295F80: fadds    f2, f2, f26
+  O-345 80295F84: fadds    f1, f1, f26
+  O-346 80295F88: fadds    f0, f0, f26
+  O-347 80295F8C: stfs     f3, 0x5c(r1)
+  O-348 80295F90: stfs     f2, 0x64(r1)
+  O-349 80295F94: stfs     f1, 0x6c(r1)
+  O-350 80295F98: stfs     f0, 0x74(r1)
+  O-351 80295F9C: blt      .L_80295F50
+  O-352 80295FA0: lis      r3, lbl_80465140@ha
+  O-353 80295FA4: lfs      f30, TObjCMMainMenu__data_805DDB44@sda21(r0)
+  O-354 80295FA8: lfs      f31, lbl_805DDA90@sda21(r0)
+  O-355 80295FAC: li       r26, 0x0
+  O-356 80295FB0: lfd      f29, lbl_80465140@l(r3)
+  O-357 80295FB4: li       r24, 0x0
+  O-358 80295FB8: li       r23, 0x0
+  O-359 80295FBC: lis      r31, 0x4330
+  O-360 80295FC0: lwz      r3, 0x1c(r25)
+  O-361 80295FC4: addi     r0, r23, 0x42
+  O-362 80295FC8: stw      r31, 0x78(r1)
+  O-363 80295FCC: lhax     r0, r3, r0
+  O-364 80295FD0: xoris    r0, r0, 0x8000
+  O-365 80295FD4: stw      r0, 0x7c(r1)
+  O-366 80295FD8: lfd      f0, 0x78(r1)
+  O-367 80295FDC: fsubs    f0, f0, f29
+  O-368 80295FE0: fdivs    f6, f0, f30
+  O-369 80295FE4: fcmpu    cr0, f31, f6
+  O-370 80295FE8: beq      .L_802960DC
+  O-371 80295FEC: lis      r3, lbl_804650D4@ha
+  O-372 80295FF0: xoris    r5, r26, 0x8000
+  O-373 80295FF4: addi     r7, r3, lbl_804650D4@l
+  O-374 80295FF8: lis      r3, 0x4330
+  O-375 80295FFC: lfs      f5, 0x0(r7)
+  O-376 80296000: lis      r4, lbl_80465140@ha
+  O-377 80296004: lfs      f4, 0x8(r30)
+  O-378 80296008: addi     r6, r4, lbl_80465140@l
+  O-379 8029600C: lfs      f1, 0x10(r30)
+  O-380 80296010: li       r0, 0x4
+  O-381 80296014: lfs      f0, 0x18(r30)
+  O-382 80296018: addi     r4, r1, 0x58
+  O-383 8029601C: fsubs    f3, f1, f4
+  O-384 80296020: stw      r5, 0x7c(r1)
+  O-385 80296024: fsubs    f2, f0, f5
+  O-386 80296028: lfd      f1, 0x0(r6)
+  O-387 8029602C: stw      r3, 0x78(r1)
+  O-388 80296030: li       r3, 0x0
+  O-389 80296034: lfd      f0, 0x78(r1)
+  O-390 80296038: fmadds   f3, f6, f3, f4
+  O-391 8029603C: fmadds   f2, f6, f2, f5
+  O-392 80296040: stfs     f5, 0x58(r1)
+  O-393 80296044: fsubs    f0, f0, f1
+  O-394 80296048: stfs     f4, 0x60(r1)
+  O-395 8029604C: fmuls    f1, f0, f26
+  O-396 80296050: stfs     f3, 0x68(r1)
+  O-397 80296054: stfs     f2, 0x70(r1)
+  N-  2 1134: stw      r0,324(r1)
+  N-  3 1138: stfd     f31,304(r1)
+  N-  4 113c: xxsel    vs31,vs1,vs0,vs36
+  N-  5 1140: stfd     f30,288(r1)
+  N-  6 1144: psq_st   f30,296(r1),0,0
+  N-  7 1148: stfd     f29,272(r1)
+  N-  8 114c: psq_st   f29,280(r1),0,0
+  N-  9 1150: stfd     f28,256(r1)
+  N- 10 1154: xsmaddadp vs28,vs1,vs0
+  N- 11 1158: stfd     f27,240(r1)
+  N- 12 115c: xxsel    vs27,vs1,vs0,vs35
+  N- 13 1160: stfd     f26,224(r1)
+  N- 14 1164: psq_st   f26,232(r1),0,0
+  N- 15 1168: stfd     f25,208(r1)
+  N- 16 116c: psq_st   f25,216(r1),0,0
+  N- 17 1170: stfd     f24,192(r1)
+  N- 18 1174: xsmsubmsp vs24,vs1,vs0
+  N- 19 1178: stfd     f23,176(r1)
+  N- 20 117c: xxsel    vs23,vs1,vs0,vs34
+  N- 21 1180: stmw     r22,136(r1)
+  N- 22 1184: mr       r24,r3
+  N- 23 1188: lwz      r0,44(r3)
+  N- 24 118c: lha      r25,64(r3)
+  N- 25 1190: slwi     r3,r0,10
+  N- 26 1194: bl       1194
+  N- 27 1198: lfs      f2,0(0)
+  N- 28 119c: lfs      f0,0(0)
+  N- 29 11a0: fmadds   f29,f2,f1,f0
+  N- 30 11a4: fcmpo    cr0,f29,f0
+  N- 31 11a8: ble      11b0
+  N- 32 11ac: fmr      f29,f0
+  N- 33 11b0: lwz      r3,40(r24)
+  N- 34 11b4: addic.   r0,r3,-1
+  N- 35 11b8: bge      11c4
+  N- 36 11bc: li       r0,0
+  N- 37 11c0: b        11d0
+  N- 38 11c4: cmpwi    r0,10
+  N- 39 11c8: blt      11d0
+  N- 40 11cc: li       r0,9
+  N- 41 11d0: lfs      f2,52(r24)
+  N- 42 11d4: lis      r3,0
+  N- 43 11d8: lfs      f1,0(0)
+  N- 44 11dc: slwi     r0,r0,2
+  N- 45 11e0: addi     r3,r3,0
+  N- 46 11e4: fcmpo    cr0,f2,f1
+  N- 47 11e8: lfsx     f28,r3,r0
+  N- 48 11ec: cror     eq,lt,eq
+  N- 49 11f0: beq      12f8
+  N- 50 11f4: lfs      f0,0(0)
+  N- 51 11f8: fcmpo    cr0,f2,f0
+  N- 52 11fc: cror     eq,gt,eq
+  N- 53 1200: bne      120c
+  N- 54 1204: lfs      f27,0(0)
+  N- 55 1208: b        1214
+  N- 56 120c: fsubs    f0,f2,f1
+  N- 57 1210: fdivs    f27,f0,f1
+  N- 58 1214: lfs      f30,0(0)
+  N- 59 1218: li       r23,0
+  N- 60 121c: lfs      f31,0(0)
+  N- 61 1220: li       r22,0
+  N- 62 1224: fsubs    f0,f28,f30
+  N- 63 1228: lfs      f1,0(0)
+  N- 64 122c: stfs     f31,44(r1)
+  N- 65 1230: lfs      f24,0(0)
+  N- 66 1234: fmadds   f26,f27,f0,f30
+  N- 67 1238: stfs     f1,52(r1)
+  N- 68 123c: lfs      f25,0(0)
+  N- 69 1240: cmpwi    r23,0
+  N- 70 1244: li       r26,0
+  N- 71 1248: bne      1254
+  N- 72 124c: fmr      f23,f26
+  N- 73 1250: b        126c
+  N- 74 1254: lis      r3,0
+  N- 75 1258: lfs      f1,0(0)
+  N- 76 125c: addi     r3,r3,0
+  N- 77 1260: lfsx     f0,r3,r22
+  N- 78 1264: fsubs    f0,f0,f1
+  N- 79 1268: fmadds   f23,f27,f0,f1
+  N- 80 126c: stfs     f30,48(r1)
+  N- 81 1270: lwz      r0,36(r24)
+  N- 82 1274: cmpw     r23,r0
+  N- 83 1278: bne      129c
+  N- 84 127c: lwz      r0,44(r24)
+  N- 85 1280: li       r26,2
+  N- 86 1284: slwi     r3,r0,10
+  N- 87 1288: bl       1288
+  N- 88 128c: lfs      f2,0(0)
+  N- 89 1290: lfs      f0,48(r1)
+  N- 90 1294: fmadds   f0,f2,f1,f0
+  N- 91 1298: stfs     f0,48(r1)
+  N- 92 129c: lfs      f0,48(r1)
+  N- 93 12a0: addi     r3,r26,6
+  N- 94 12a4: lfs      f1,0(0)
+  N- 95 12a8: addi     r4,r1,48
+  N- 96 12ac: fsubs    f0,f23,f0
+  N- 97 12b0: addi     r5,r1,40
+  N- 98 12b4: fdivs    f0,f0,f24
+  N- 99 12b8: stfs     f0,40(r1)
+  N-100 12bc: bl       12bc
+  N-101 12c0: stfs     f23,48(r1)
+  N-102 12c4: addi     r3,r26,7
+  N-103 12c8: lfs      f1,0(0)
+  N-104 12cc: addi     r4,r1,48
+  N-105 12d0: stfs     f31,40(r1)
+  N-106 12d4: addi     r5,r1,40
+  N-107 12d8: bl       12d8
+  N-108 12dc: lfs      f0,52(r1)
+  N-109 12e0: addi     r23,r23,1
+  N-110 12e4: cmpwi    r23,4
+  N-111 12e8: addi     r22,r22,4
+  N-112 12ec: fadds    f0,f0,f25
+  N-113 12f0: stfs     f0,52(r1)
+  N-114 12f4: blt      1240
+  N-115 12f8: lfs      f1,52(r24)
+  N-116 12fc: lfs      f0,0(0)
+  N-117 1300: fcmpo    cr0,f1,f0
+  N-118 1304: cror     eq,lt,eq
+  N-119 1308: beq      1380
+  N-120 130c: lfs      f0,0(0)
+  N-121 1310: fcmpo    cr0,f1,f0
+  N-122 1314: cror     eq,gt,eq
+  N-123 1318: bne      1324
+  N-124 131c: lfs      f23,0(0)
+  N-125 1320: b        1328
+  N-126 1324: fdivs    f23,f1,f0
+  N-127 1328: lfs      f1,0(0)
+  N-128 132c: li       r22,0
+  N-129 1330: lfs      f0,0(0)
+  N-130 1334: stfs     f1,32(r1)
+  N-131 1338: lfs      f26,0(0)
+  N-132 133c: stfs     f0,36(r1)
+  N-133 1340: lwz      r0,36(r24)
+  N-134 1344: li       r3,0
+  N-135 1348: cmpw     r22,r0
+  N-136 134c: bne      1354
+  N-137 1350: li       r3,-1
+  N-138 1354: fmr      f2,f23
+  N-139 1358: lfs      f1,0(0)
+  N-140 135c: addi     r3,r3,1
+  N-141 1360: addi     r4,r1,32
+  N-142 1364: bl       1364
+  N-143 1368: lfs      f0,36(r1)
+  N-144 136c: addi     r22,r22,1
+  N-145 1370: cmpwi    r22,4
+  N-146 1374: fadds    f0,f0,f26
+  N-147 1378: stfs     f0,36(r1)
+  N-148 137c: blt      1340
+  N-149 1380: lfs      f1,52(r24)
+  N-150 1384: lfs      f0,0(0)
+  N-151 1388: fcmpo    cr0,f1,f0
+  N-152 138c: cror     eq,lt,eq
+  N-153 1390: beq      1814
+  N-154 1394: fsubs    f3,f1,f0
+  N-155 1398: lfs      f0,0(0)
+  N-156 139c: lfs      f2,0(0)
+  N-157 13a0: li       r22,0
+  N-158 13a4: lfs      f1,0(0)
+  N-159 13a8: fdivs    f30,f3,f0
+  N-160 13ac: lfs      f0,0(0)
+  N-161 13b0: stfs     f2,24(r1)
+  N-162 13b4: lfs      f27,0(0)
+  N-163 13b8: stfs     f1,28(r1)
+  N-164 13bc: fmuls    f26,f30,f30
+  N-165 13c0: fmuls    f24,f0,f26
+  N-166 13c4: b        144c
+  N-167 13c8: lwz      r0,36(r24)
+  N-168 13cc: fmr      f23,f26
+  N-169 13d0: cmpwi    r0,0
+  N-170 13d4: beq      13dc
+  N-171 13d8: fmr      f23,f24
+  N-172 13dc: cmpw     r22,r25
+  N-173 13e0: li       r23,31
+  N-174 13e4: bne      1428
+  N-175 13e8: lwz      r0,0(0)
+  N-176 13ec: li       r23,32
+  N-177 13f0: cmpwi    r0,2
+  N-178 13f4: beq      1418
+  N-179 13f8: lwz      r0,44(r24)
+  N-180 13fc: slwi     r3,r0,12
+  N-181 1400: bl       1400
+  N-182 1404: bl       1404
+  N-183 1408: lfs      f0,0(0)
+  N-184 140c: fmadds   f0,f0,f1,f0
+  N-185 1410: fmuls    f23,f23,f0
+  N-186 1414: b        1428
+  N-187 1418: lwz      r0,36(r24)
+  N-188 141c: cmpwi    r0,0
+  N-189 1420: bne      1428
+  N-190 1424: fmuls    f23,f23,f29
+  N-191 1428: fmr      f2,f23
+  N-192 142c: lfs      f1,0(0)
+  N-193 1430: mr       r3,r23
+  N-194 1434: addi     r4,r1,24
+  N-195 1438: bl       1438
+  N-196 143c: lfs      f0,24(r1)
+  N-197 1440: addi     r22,r22,1
+  N-198 1444: fadds    f0,f0,f27
+  N-199 1448: stfs     f0,24(r1)
+  N-200 144c: lwz      r0,40(r24)
+  N-201 1450: cmpw     r22,r0
+  N-202 1454: blt      13c8
+  N-203 1458: lfs      f0,0(0)
+  N-204 145c: fmr      f23,f26
+  N-205 1460: lwz      r0,36(r24)
+  N-206 1464: fsubs    f24,f28,f0
+  N-207 1468: cmpwi    r0,0
+  N-208 146c: bne      1478
+  N-209 1470: fmuls    f2,f26,f29
+  N-210 1474: b        1484
+  N-211 1478: lfs      f0,0(0)
+  N-212 147c: fmuls    f2,f0,f26
+  N-213 1480: fmr      f23,f2
+  N-214 1484: lfs      f1,0(0)
+  N-215 1488: addi     r3,r25,20
+  N-216 148c: lfs      f0,0(0)
+  N-217 1490: addi     r4,r1,16
+  N-218 1494: fadds    f3,f1,f24
+  N-219 1498: lfs      f1,0(0)
+  N-220 149c: stfs     f0,20(r1)
+  N-221 14a0: stfs     f3,16(r1)
+  N-222 14a4: bl       14a4
+  N-223 14a8: lfs      f1,0(0)
+  N-224 14ac: fmr      f2,f23
+  N-225 14b0: lfs      f0,0(0)
+  N-226 14b4: addi     r4,r1,16
+  N-227 14b8: fadds    f3,f1,f24
+  N-228 14bc: lfs      f1,0(0)
+  N-229 14c0: stfs     f0,20(r1)
+  N-230 14c4: li       r3,30
+  N-231 14c8: stfs     f3,16(r1)
+  N-232 14cc: bl       14cc
+  N-233 14d0: lfs      f1,0(0)
+  N-234 14d4: fmr      f2,f23
+  N-235 14d8: lfs      f0,0(0)
+  N-236 14dc: addi     r4,r1,16
+  N-237 14e0: fadds    f3,f1,f24
+  N-238 14e4: lfs      f1,0(0)
+  N-239 14e8: stfs     f0,20(r1)
+  N-240 14ec: stfs     f3,16(r1)
+  N-241 14f0: lwz      r3,40(r24)
+  N-242 14f4: addi     r3,r3,19
+  N-243 14f8: bl       14f8
+  N-244 14fc: lfs      f0,0(0)
+  N-245 1500: lis      r3,0
+  N-246 1504: fmuls    f24,f26,f29
+  N-247 1508: addi     r22,r3,0
+  N-248 150c: fmuls    f25,f0,f26
+  N-249 1510: li       r23,1
+  N-250 1514: lwz      r0,36(r24)
+  N-251 1518: addi     r3,r23,-1
+  N-252 151c: slwi     r4,r3,3
+  N-253 1520: lfs      f1,0(0)
+  N-254 1524: cmpw     r23,r0
+  N-255 1528: addi     r3,r23,15
+  N-256 152c: add      r4,r22,r4
+  N-257 1530: bne      153c
+  N-258 1534: fmr      f2,f24
+  N-259 1538: b        1540
+  N-260 153c: fmr      f2,f25
+  N-261 1540: bl       1540
+  N-262 1544: addi     r23,r23,1
+  N-263 1548: cmpwi    r23,4
+  N-264 154c: blt      1514
+  N-265 1550: bl       1550
+  N-266 1554: bl       1554
+  N-267 1558: lis      r3,0
+  N-268 155c: lfs      f2,0(0)
+  N-269 1560: addi     r3,r3,0
+  N-270 1564: lis      r4,0
+  N-271 1568: fmuls    f27,f2,f30
+  N-272 156c: lfs      f0,12(r3)
+  N-273 1570: lfs      f2,4(r3)
+  N-274 1574: addi     r4,r4,0
+  N-275 1578: lwz      r4,12(r4)
+  N-276 157c: addi     r7,r1,88
+  N-277 1580: fsubs    f3,f0,f2
+  N-278 1584: lfs      f8,0(0)
+  N-279 1588: lfs      f7,0(0)
+  N-280 158c: fctiwz   f0,f27
+  N-281 1590: lfs      f4,0(r3)
+  N-282 1594: fmr      f30,f1
+  N-283 1598: fmadds   f5,f8,f3,f2
+  N-284 159c: lfs      f6,24(r3)
+  N-285 15a0: fmadds   f9,f7,f3,f2
+  N-286 15a4: lfs      f3,8(r3)
+  N-287 15a8: lfs      f2,0(0)
+  N-288 15ac: addi     r6,r1,72
+  N-289 15b0: stfd     f0,120(r1)
+  N-290 15b4: fsubs    f10,f3,f4
+  N-291 15b8: lfs      f3,16(r3)
+  N-292 15bc: fmuls    f26,f2,f30
+  N-293 15c0: stw      r4,8(r1)
+  N-294 15c4: li       r5,0
+  N-295 15c8: fsubs    f2,f3,f6
+  N-296 15cc: lwz      r0,124(r1)
+  N-297 15d0: fmuls    f1,f5,f30
+  N-298 15d4: stfs     f5,116(r1)
+  N-299 15d8: fmuls    f0,f9,f30
+  N-300 15dc: fmadds   f3,f7,f2,f6
+  N-301 15e0: stfs     f5,92(r1)
+  N-302 15e4: fmadds   f5,f8,f10,f4
+  N-303 15e8: fmadds   f4,f7,f10,f4
+  N-304 15ec: addi     r3,r1,84
+  N-305 15f0: fmadds   f2,f8,f2,f6
+  N-306 15f4: stfs     f9,108(r1)
+  N-307 15f8: addi     r4,r1,8
+  N-308 15fc: stfs     f9,100(r1)
+  N-309 1600: stfs     f5,88(r1)
+  N-310 1604: stfs     f4,96(r1)
+  N-311 1608: stfs     f3,104(r1)
+  N-312 160c: stfs     f2,112(r1)
+  N-313 1610: stfs     f1,92(r1)
+  N-314 1614: stfs     f0,100(r1)
+  N-315 1618: stfs     f0,108(r1)
+  N-316 161c: stfs     f1,116(r1)
+  N-317 1620: stw      r7,56(r1)
+  N-318 1624: stw      r6,60(r1)
+  N-319 1628: stw      r5,64(r1)
+  N-320 162c: stb      r0,11(r1)
+  N-321 1630: bl       1630
+  N-322 1634: mr       r4,r3
+  N-323 1638: addi     r3,r1,80
+  N-324 163c: bl       163c
+  N-325 1640: mr       r4,r3
+  N-326 1644: addi     r3,r1,76
+  N-327 1648: bl       1648
+  N-328 164c: mr       r4,r3
+  N-329 1650: addi     r3,r1,72
+  N-330 1654: bl       1654
+  N-331 1658: li       r22,0
+  N-332 165c: lfs      f1,0(0)
+  N-333 1660: addi     r3,r1,56
+  N-334 1664: li       r4,4
+  N-335 1668: li       r5,6
+  N-336 166c: bl       166c
+  N-337 1670: lfs      f0,92(r1)
+  N-338 1674: addi     r22,r22,1
+  N-339 1678: lfs      f2,100(r1)
+  N-340 167c: cmpwi    r22,3
+  N-341 1680: fadds    f3,f0,f26
+  N-342 1684: lfs      f1,108(r1)
+  N-343 1688: lfs      f0,116(r1)
+  N-344 168c: fadds    f2,f2,f26
+  N-345 1690: fadds    f1,f1,f26
+  N-346 1694: fadds    f0,f0,f26
+  N-347 1698: stfs     f3,92(r1)
+  N-348 169c: stfs     f2,100(r1)
+  N-349 16a0: stfs     f1,108(r1)
+  N-350 16a4: stfs     f0,116(r1)
+  N-351 16a8: blt      165c
+  N-352 16ac: fctiwz   f0,f27
+  N-353 16b0: lis      r3,0
+  N-354 16b4: lis      r4,0
+  N-355 16b8: lfd      f31,0(r3)
+  N-356 16bc: lfs      f28,0(0)
+  N-357 16c0: addi     r30,r4,0
+  N-358 16c4: stfd     f0,120(r1)
+  N-359 16c8: addi     r28,r1,84
+  N-360 16cc: lfs      f27,0(0)
+  N-361 16d0: addi     r27,r1,80
+  N-362 16d4: lwz      r29,124(r1)
+  N-363 16d8: addi     r26,r1,76
+  N-364 16dc: li       r25,0
+  N-365 16e0: li       r23,0
+  N-366 16e4: li       r22,0
+  N-367 16e8: lis      r31,17200
+  N-368 16ec: lwz      r3,28(r24)
+  N-369 16f0: addi     r0,r22,66
+  N-370 16f4: stw      r31,120(r1)
+  N-371 16f8: lhax     r0,r3,r0
+  N-372 16fc: xoris    r0,r0,32768
+  N-373 1700: stw      r0,124(r1)
+  N-374 1704: lfd      f0,120(r1)
+  N-375 1708: fsubs    f0,f0,f31
+  N-376 170c: fdivs    f6,f0,f28
+  N-377 1710: fcmpu    cr0,f27,f6
+  N-378 1714: beq      17fc
+  N-379 1718: lis      r3,0
+  N-380 171c: xoris    r5,r25,32768
+  N-381 1720: addi     r7,r3,0
+  N-382 1724: lis      r4,0
+  N-383 1728: lis      r3,17200
+  N-384 172c: lfs      f5,0(r7)
+  N-385 1730: lfs      f4,8(r30)
+  N-386 1734: addi     r6,r4,0
+  N-387 1738: lfs      f1,16(r30)
+  N-388 173c: li       r0,4
+  N-389 1740: lfs      f0,24(r30)
+  N-390 1744: addi     r4,r1,88
+  N-391 1748: fsubs    f3,f1,f4
+  N-392 174c: stw      r3,120(r1)
+  N-393 1750: fsubs    f2,f0,f5
+  N-394 1754: lfd      f1,0(r6)
+  N-395 1758: stw      r5,124(r1)
+  N-396 175c: li       r3,0
+  N-397 1760: lfd      f0,120(r1)
+  N-398 1764: fmadds   f3,f6,f3,f4
+  N-399 1768: fmadds   f2,f6,f2,f5
+  N-400 176c: stfs     f5,88(r1)
+  N-401 1770: fsubs    f0,f0,f1
+  N-402 1774: stfs     f4,96(r1)
+  N-403 1778: fmuls    f1,f0,f26
+  N-404 177c: stfs     f3,104(r1)
+  N-405 1780: stfs     f2,112(r1)
+
+== replace era[399:457] ours[407:462]  net -3
+  O-399 8029605C: add      r5, r7, r3
+  O-400 80296060: addi     r0, r3, 0x4
+  O-401 80296064: lfs      f0, 0x4(r5)
+  O-402 80296068: addi     r3, r3, 0x8
+  O-403 8029606C: fmadds   f0, f28, f0, f1
+  O-404 80296070: stfsx    f0, r4, r0
+  O-405 80296074: bdnz     .L_8029605C
+  O-406 80296078: fctiwz   f0, f27
+  O-407 8029607C: lis      r3, lbl_804650F4@ha
+  O-408 80296080: addi     r4, r3, lbl_804650F4@l
+  O-409 80296084: mr       r3, r29
+  O-410 80296088: lwzx     r0, r4, r24
+  O-411 8029608C: addi     r4, r1, 0x8
+  O-412 80296090: stfd     f0, 0x78(r1)
+  O-413 80296094: stw      r0, 0x8(r1)
+  O-414 80296098: lwz      r0, 0x7c(r1)
+  O-415 8029609C: stb      r0, 0xb(r1)
+  O-416 802960A0: bl       TObjCMHairMenu__sub_801E3F54
+  O-417 802960A4: mr       r4, r3
+  O-418 802960A8: mr       r3, r28
+  O-419 802960AC: bl       TObjCMHairMenu__sub_801E3F54
+  O-420 802960B0: mr       r4, r3
+  O-421 802960B4: mr       r3, r27
+  O-422 802960B8: bl       TObjCMHairMenu__sub_801E3F54
+  O-423 802960BC: mr       r4, r3
+  O-424 802960C0: addi     r3, r1, 0x48
+  O-425 802960C4: bl       TObjCMHairMenu__sub_801E3F54
+  O-426 802960C8: lfs      f1, lbl_805DDA94@sda21(r0)
+  O-427 802960CC: addi     r3, r1, 0x38
+  O-428 802960D0: li       r4, 0x4
+  O-429 802960D4: li       r5, 0x6
+  O-430 802960D8: bl       draw_tri_fan_2d__14TObjCMHairMenuFllf
+  O-431 802960DC: addi     r26, r26, 0x1
+  O-432 802960E0: addi     r23, r23, 0x2
+  O-433 802960E4: cmpwi    r26, 0x3
+  O-434 802960E8: addi     r24, r24, 0x4
+  O-435 802960EC: blt      .L_80295FC0
+  O-436 802960F0: bl       TCameraCtrl__sub_80068EF0
+  O-437 802960F4: psq_l    f31, 0x138(r1), 0, qr0
+  O-438 802960F8: lfd      f31, 0x130(r1)
+  O-439 802960FC: psq_l    f30, 0x128(r1), 0, qr0
+  O-440 80296100: lfd      f30, 0x120(r1)
+  O-441 80296104: psq_l    f29, 0x118(r1), 0, qr0
+  O-442 80296108: lfd      f29, 0x110(r1)
+  O-443 8029610C: psq_l    f28, 0x108(r1), 0, qr0
+  O-444 80296110: lfd      f28, 0x100(r1)
+  O-445 80296114: psq_l    f27, 0xf8(r1), 0, qr0
+  O-446 80296118: lfd      f27, 0xf0(r1)
+  O-447 8029611C: psq_l    f26, 0xe8(r1), 0, qr0
+  O-448 80296120: lfd      f26, 0xe0(r1)
+  O-449 80296124: psq_l    f25, 0xd8(r1), 0, qr0
+  O-450 80296128: lfd      f25, 0xd0(r1)
+  O-451 8029612C: psq_l    f24, 0xc8(r1), 0, qr0
+  O-452 80296130: lfd      f24, 0xc0(r1)
+  O-453 80296134: psq_l    f23, 0xb8(r1), 0, qr0
+  O-454 80296138: lfd      f23, 0xb0(r1)
+  O-455 8029613C: lmw      r23, 0x8c(r1)
+  O-456 80296140: lwz      r0, 0x144(r1)
+  N-407 1788: add      r5,r7,r3
+  N-408 178c: addi     r0,r3,4
+  N-409 1790: lfs      f0,4(r5)
+  N-410 1794: addi     r3,r3,8
+  N-411 1798: fmadds   f0,f30,f0,f1
+  N-412 179c: stfsx    f0,r4,r0
+  N-413 17a0: bdnz     1788
+  N-414 17a4: lis      r4,0
+  N-415 17a8: mr       r3,r28
+  N-416 17ac: addi     r4,r4,0
+  N-417 17b0: lwzx     r0,r4,r23
+  N-418 17b4: addi     r4,r1,12
+  N-419 17b8: stw      r0,12(r1)
+  N-420 17bc: stb      r29,15(r1)
+  N-421 17c0: bl       17c0
+  N-422 17c4: mr       r4,r3
+  N-423 17c8: mr       r3,r27
+  N-424 17cc: bl       17cc
+  N-425 17d0: mr       r4,r3
+  N-426 17d4: mr       r3,r26
+  N-427 17d8: bl       17d8
+  N-428 17dc: mr       r4,r3
+  N-429 17e0: addi     r3,r1,72
+  N-430 17e4: bl       17e4
+  N-431 17e8: lfs      f1,0(0)
+  N-432 17ec: addi     r3,r1,56
+  N-433 17f0: li       r4,4
+  N-434 17f4: li       r5,6
+  N-435 17f8: bl       17f8
+  N-436 17fc: addi     r25,r25,1
+  N-437 1800: addi     r22,r22,2
+  N-438 1804: cmpwi    r25,3
+  N-439 1808: addi     r23,r23,4
+  N-440 180c: blt      16ec
+  N-441 1810: bl       1810
+  N-442 1814: psq_l    f31,312(r1),0,0
+  N-443 1818: lfd      f31,304(r1)
+  N-444 181c: lq       r30,288(r1)
+  N-445 1820: lfd      f30,288(r1)
+  N-446 1824: psq_l    f29,280(r1),0,0
+  N-447 1828: lfd      f29,272(r1)
+  N-448 182c: lq       r28,256(r1)
+  N-449 1830: lfd      f28,256(r1)
+  N-450 1834: psq_l    f27,248(r1),0,0
+  N-451 1838: lfd      f27,240(r1)
+  N-452 183c: lq       r26,224(r1)
+  N-453 1840: lfd      f26,224(r1)
+  N-454 1844: psq_l    f25,216(r1),0,0
+  N-455 1848: lfd      f25,208(r1)
+  N-456 184c: lq       r24,192(r1)
+  N-457 1850: lfd      f24,192(r1)
+  N-458 1854: psq_l    f23,184(r1),0,0
+  N-459 1858: lfd      f23,176(r1)
+  N-460 185c: lmw      r22,136(r1)
+  N-461 1860: lwz      r0,324(r1)
+
+== replace era[458:459] ours[463:464]  net +0
+  O-458 80296148: addi     r1, r1, 0x140
+  N-463 1868: addi     r1,r1,320

@@ -1,0 +1,34 @@
+# p9 hand-fuse log — era-0xb tail-staging onto p8 champ (9854f581, 86.38043@460w)
+# CONTROL-PROBE: rm .o; ninja -j3 -> md5 05906e42f9938b29e74488f9354b8c4e (reproducible),
+#   official one_shot 86.38043 @1840B (perm-tests/f3_hairmenu_p9_score_base.txt). GREEN.
+#
+# 4c803a10 family anatomy (kit output-7020-2/3/4, .o md5 4c803a10839756861eca39c6cfd30829):
+# object delta vs base_direct.o = STACK-HOME SWAP of colorG (base: 8/11) and colorF (base: 12/15):
+#   site A (colorG staging before first sub_801E3F54): stw r3,8 -> 12; addi r4,r1,8 -> 12; stb r0,11 -> 15
+#   site B (i-loop tail, colorF poke): lbz r0,11 -> 15; addi r4,r1,12 -> 8; stw r5,12 -> 8; stb r0,15 -> 11
+#   (earlier diff lines 63-88 = FPR 26/27 ring noise, same in all members)
+# = era tail trio (8029609C: addi r4,r1,8 + stw r5,8 + stb r0,0xb) with lwz r0,7c remat still absent.
+# Three INDEPENDENT source spellings reach this object in harness:
+#   7020-2: hoist ((u8*)(&colorG))[3]=(int)a255; above new_var=&colors[1];
+#   7020-3: move u32 colorF; decl AFTER colorG (plus w0/xb reorder, commuted compare — perm noise)
+#   7020-4: d4/hair decl swap + new_var2 temp + a2=sq retime + (&colorF)[3] cast-corruption spelling
+# p8 spliced ONLY 7020-2 -> repo tie 85.42391 (inert). p9 tests remaining levers on top of 6930-6.
+#
+# BUILD 1 (poke-hoist spelling on HEAD): .o md5 05906e42f9938b29e74488f9354b8c4e = BYTE-IDENTICAL
+#   to champ control. INERT in member context (p8 tie explained: no object change at all).
+#   => pos5.y tempo context does NOT unlock the poke-order lever. Reverted.
+# BUILD 2 (decl-swap spelling: u32 colorG; moved BEFORE u32 colorF; 7020-3 lever, never
+#   spliced at p8): .o md5 254d3a31cd1bad013a2943f4f624a1eb; span 0x112c..0x185c = 0x730 (460w);
+#   site A colorG home 12/15 (stw r3,12 + addi r4,r1,12 + stb r0,15); site B i-loop tail
+#   colorF home 8/11 (lbz r0,15 read-back + addi r4,r1,8 + stw r5,8 + stb r0,11) = ERA
+#   tail-staging achieved at rows 413-415. stmw r23,140(r1) era-exact. Poke-faithful: two stb
+#   pokes, no stw corruption. Official one_shot 86.391304 > champ 86.38043 (+0.010874).
+#   classify4 rows 288->287; TRUE-value 10->6 (era trio 413-415 + one shifted row paired);
+#   surplus +0 unchanged. Per-symbol normalized objdump diff: only render changed in unit;
+#   full ninja rc=0, DOL 51356/51356 141/141, zero sibling units recompiled (word-identical).
+#   WIN — committed on card-render-p9.
+# INTERACTION DATUM: at p8 the 4c803a10 family was only ever spliced via 7020-2 (poke-hoist) =
+#   inert; the decl-order lever was the member-context-active spelling. The era-0xb staging
+#   does NOT require the pos5.y tempo as context (fuse win is additive: +0.0109 on top of
+#   86.38043 baseline, surplus/rows deltas independent). Poke ORDER is member-context-dead;
+#   decl ORDER is member-context-live (free-fn harness: order-live, as p6-p8 showed).

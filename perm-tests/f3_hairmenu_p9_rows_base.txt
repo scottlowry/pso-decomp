@@ -1,0 +1,33 @@
+one_shot rows=288 (parsed 288)
+  (a) pure-color      =  21
+  (b) @NNN/pool/disp  =  32  (hybrids incl 0)
+  (c) value/order     = 209  [shift=199 TRUE=10]
+  (d) link @ha/@l     =  26
+
+COLOR CENSUS (era->ours):
+GPR: {('r4', 'r3'): 1, ('r1', 'r27'): 1, ('r3', 'r7'): 1, ('r3', 'r1'): 1, ('r3', 'r4'): 1, ('r27', 'r3'): 1, ('r5', 'r23'): 1, ('r0', 'r31'): 1, ('r3', 'r5'): 1, ('r1', 'r6'): 1, ('r3', 'r0'): 1, ('r27', 'r26'): 1, ('r26', 'r27'): 3}
+FPR: {('f27', 'f29'): 3, ('f26', 'f27'): 3, ('f28', 'f30'): 3, ('f0', 'f1'): 3, ('f31', 'f28'): 2, ('f29', 'f31'): 2, ('f30', 'f26'): 2, ('f2', 'f6'): 2, ('f1', 'f2'): 2, ('f0', 'f2'): 2, ('f26', 'f30'): 1, ('f2', 'f0'): 1, ('f3', 'f0'): 1, ('f24', 'f23'): 1, ('f23', 'f24'): 1, ('f10', 'f11'): 1, ('f9', 'f7'): 1, ('f2', 'f10'): 1, ('f7', 'f8'): 1, ('f12', 'f0'): 1, ('f11', 'f2'): 1, ('f3', 'f1'): 1, ('f1', 'f5'): 1, ('f0', 'f4'): 1, ('f0', 'f3'): 1, ('f2', 'f4'): 1}
+
+wrote perm-tests/f3_hairmenu_p7_rows_WIN.txt
+
+--- TRUE VALUE-DIFF ROWS (each = ASK/claim datum) ---
+O-188 bne      .L_80295D18
+           N-188 lwz      r0,36(r25)  r=None
+O-209 b        .L_80295D74
+           N-209 bne      147c <render__14TObjCMHairMenuFv+0x350>  r=None
+O-253 subi     r0, r24, 0x1
+           N-253 fmr      f2,f24  r=None
+O-298 fmadds   f4, f5, f10, f9
+           N-298 fmadds   f4,f5,f11,f7  r=None
+O-302 fmadds   f2, f7, f12, f11
+           N-302 fmadds   f6,f8,f0,f2  r=None
+O-324 addi     r27, r1, 0x4c
+           N-324 stb      r0,11(r1)  r=None
+O-413 stw      r0, 0x8(r1)
+           N-413 addi     r4,r1,12  r=None
+O-414 lwz      r0, 0x7c(r1)
+           N-414 stw      r5,12(r1)  r=None
+O-415 stb      r0, 0xb(r1)
+           N-415 stb      r0,15(r1)  r=None
+O-435 blt      .L_80295FC0
+           N-435 blt      16d8 <render__14TObjCMHairMenuFv+0x5ac>  r=None

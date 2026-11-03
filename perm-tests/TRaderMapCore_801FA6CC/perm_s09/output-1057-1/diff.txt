@@ -1,0 +1,25 @@
+--- before
++++ after
+@@ -57,6 +57,7 @@
+   u32 new_var;
+   CS state;
+   u32 color;
++  unsigned int new_var2;
+   new_var = ~0xFF000000;
+   if (apply_compass_param__13TRaderMapCoreFv((void *) (&self->m_90)) == 0)
+   {
+@@ -75,12 +76,13 @@
+   color = -1;
+   f32 *tbl = lbl_804C87B4[mode];
+   begin_effect_render__13TParticleCtrlFv();
++  new_var2 = color << 0x10;
+   state.x = tbl[2] + ((f32) lbl_804C87E4[1].x);
+   state.y = tbl[3] + ((f32) lbl_804C87E4[1].y);
+   self->m_19c = self->m_19c;
+   set_default_alpha_blend__Fv();
+   ((u8 *) (&color))[3] = (u8) ((s32) self->m_19c);
+-  draw_compass_sprite__10TObjPlayerFlllf((void *) (&state), 1, (s32) (((((color >> 0x10U) & new_var) | ((color << 0x10) & 0xFF000000)) & (~0xFF0000)) | ((color << 0x10) & 0xFF0000)), 0x21, TRaderMapCore__data_805DC58C);
++  draw_compass_sprite__10TObjPlayerFlllf((void *) (&state), 1, (s32) (((((color >> 0x10U) & new_var) | ((color << 0x10) & 0xFF000000)) & (~0xFF0000)) | (new_var2 & 0xFF0000)), 0x21, TRaderMapCore__data_805DC58C);
+   state.x = tbl[0] + ((f32) lbl_804C87E4[0].x);
+   state.y = tbl[1] + ((f32) lbl_804C87E4[0].y);
+   state.rot = self->m_174;

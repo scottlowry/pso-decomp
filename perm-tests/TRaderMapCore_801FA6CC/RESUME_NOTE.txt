@@ -1,0 +1,19 @@
+CLOSED (f3 draw_compass visit-3, RETIRE @00bda022, tree UNCHANGED):
+1. visit-2's 'weights exhausted' claim was VOID ([mwcc] section silently ignored — fork
+   reads only flat [weight_overrides], src/main.py:334). FIXED profile this visit and
+   re-proved honestly: 4 rotation-state-seeded --stack-diffs rounds (champ 31,095 /
+   q15 31,040 / q16 19,732 / q09 19,663 iters = 101,530 total), ALL basins bottom AT
+   champ (score 10 = 2xREGALLOC), zero harvests <10; final sweep 108 dirs, 94
+   size+symtab-pass, ZERO above 99.633026. 21 new manual probes (fillers x8, comma x3,
+   temps/decl/position) all fold or regress; home {r6} unreachable in ~46 cumulative
+   spellings. Mirror-class v2 CONFIRMED. Post-mortem: fixed profile changed the search
+   (ladder intermediates 18/28/40/45/70/190 mapped, all harvests size-pure) but NOT the
+   floor. See FINDINGS_v3.md.
+2. Data gate unchanged: pool slot 0x8044A7A8 outside split [A0,A8), DOL identical.
+   config ask unchanged: extend unit .rodata end 0x8044A7A8->0x8044A7B0 +
+   auto_06_8044A7A8_rodata start ->0x8044A7B0 (draw_window_uv geometry). Tree is
+   carve-ready; even post-carve objdiff reads 99.633026 (2 RA-tiebreak rows stand).
+3. Kit: perm-tests/TRaderMapCore_801FA6CC — settings.toml FIXED; base.c=champ;
+   BASE-VERIFY re-passed (109/109, 0 word-diff); probe_score calib 99.633026 EXACT
+   (85.899 was the stale visit-1 champ); seed dirs perm_s15/s16/s09 armed with state
+   bodies; rank_all_v3.py + output banked; visit-1/2 harvests = perm/r1-output-*.

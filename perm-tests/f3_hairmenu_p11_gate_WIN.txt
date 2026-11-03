@@ -1,0 +1,15 @@
+PASS words=460
+PASS span 0x730
+PASS stmw r23
+PASS lha hair r27
+PASS poke stb r0,11
+PASS poke stb r0,15
+PASS no stw-20 corrupt
+PASS era trio addi r4,r1,8
+PASS era trio stw r5,8
+PASS lbz readback 15
+md5: fb76e186fada02a5b6f3609859adb16a
+tail-counter sites: 17e8:addi r27,r27,1; 17ec:addi r23,r23,2; 17f0:cmpwi r27,3; 17f4:addi r24,r24,4; 1854:addi r1,r1,320
+staging mr sites: 17b0:mr r4,r3; 17b4:mr r3,r28; 17bc:mr r4,r3; 17c0:mr r3,r26; 17c8:mr r4,r3
+FPR dest hist: {'f0': 17, 'f2': 9, 'f23': 7, 'f3': 6, 'f29': 2, 'f30': 2, 'f4': 2, 'f1': 2, 'f6': 2, 'f27': 1, 'f26': 1, 'f24': 1, 'f10': 1, 'f9': 1, 'f11': 1, 'f5': 1}
+VERDICT: GATE-PASS

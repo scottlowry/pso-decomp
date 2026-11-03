@@ -1,0 +1,26 @@
+--- before
++++ after
+@@ -60,20 +60,20 @@
+   new_var = ~0xFF000000;
+   if (apply_compass_param__13TRaderMapCoreFv((void *) (&self->m_90)) == 0)
+   {
+-    return;
++ do { return; } while (0);
+   }
++  f32 *tbl = lbl_804C87B4[mode];
+   f32 b = TRaderMapCore__data_805DC534;
+   f32 a = TRaderMapCore__data_805DC528;
+   state.x = a;
+   state.y = a;
+   state.z = a;
++  state.sy = b;
+   state.sx = b;
+-  state.sy = b;
+   state.rot = 0;
+   state.unk18 = TRaderMapCore__data_805D5F4C;
+   state.sprs = lbl_804C87E4;
+   color = -1;
+-  f32 *tbl = lbl_804C87B4[mode];
+   begin_effect_render__13TParticleCtrlFv();
+   state.x = tbl[2] + ((f32) lbl_804C87E4[1].x);
+   state.y = tbl[3] + ((f32) lbl_804C87E4[1].y);

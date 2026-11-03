@@ -1,0 +1,25 @@
+--- before
++++ after
+@@ -56,9 +56,11 @@
+ {
+   u32 new_var;
+   CS state;
+-  u32 color;
++  s32 *new_var2;
++  long color;
+   new_var = ~0xFF000000;
+-  if (apply_compass_param__13TRaderMapCoreFv((void *) (&self->m_90)) == 0)
++  new_var2 = &self->m_90;
++  if (apply_compass_param__13TRaderMapCoreFv((void *) new_var2) == 0)
+   {
+     return;
+   }
+@@ -74,7 +76,7 @@
+   state.sprs = lbl_804C87E4;
+   color = -1;
+   begin_effect_render__13TParticleCtrlFv();
+-  f32 *tbl = lbl_804C87B4[mode];
++  f32 *tbl = lbl_804C87B4[((((mode & 0xFFFFu) & 0xFFFFu) & 0xFFFFu) & 0xFFFFu) & 0xFFFFu];
+   state.x = tbl[2] + ((f32) lbl_804C87E4[1].x);
+   state.y = tbl[3] + ((f32) lbl_804C87E4[1].y);
+   set_default_alpha_blend__Fv();

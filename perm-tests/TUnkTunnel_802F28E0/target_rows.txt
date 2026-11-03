@@ -1,0 +1,53 @@
+stwu r1, -0x20(r1)
+mflr r0
+lis r4 boss2_tunnel_effect_name_table
+stw r0, 0x24(r1)
+stmw r30, 0x18(r1)
+mr r31, r3
+addi r30, r4 boss2_tunnel_effect_name_table
+bl update_phase_motion__13TUnk_804E4B3CFv
+lbz r0 lbl_805D6971
+extsb. r0, r0
+bne
+lwz r12, 0xe4(r30)
+li r0, 1
+lwz r11, 0xe8(r30)
+addi r9, r30, 0x108
+lwz r10, 0xec(r30)
+lwz r8, 0xf0(r30)
+lwz r7, 0xf4(r30)
+lwz r6, 0xf8(r30)
+lwz r5, 0xfc(r30)
+lwz r4, 0x100(r30)
+lwz r3, 0x104(r30)
+stw r12, 0x108(r30)
+stw r11, 0x10c(r30)
+stw r10, 0x110(r30)
+stw r8, 0xc(r9)
+stw r7, 0x10(r9)
+stw r6, 0x14(r9)
+stw r5, 0x18(r9)
+stw r4, 0x1c(r9)
+stw r3, 0x20(r9)
+stb r0 lbl_805D6971
+lwz r4, 0x1c(r31)
+addi r0, r30, 0x108
+mr r3, r31
+addi r12, r1, 0x8
+mulli r4, r4, 0xc
+add r6, r0, r4
+lwz r5, 0x0(r6)
+lwz r4, 0x4(r6)
+lwz r0, 0x8(r6)
+stw r5, 0x8(r1)
+stw r4, 0xc(r1)
+stw r0, 0x10(r1)
+bl __ptmf_scall
+nop
+mr r3, r31
+bl TObjBoss2Tunnel__sub_802F273C
+lmw r30, 0x18(r1)
+lwz r0, 0x24(r1)
+mtlr r0
+addi r1, r1, 0x20
+blr

@@ -1,0 +1,9 @@
+### mwcceppc.exe Compiler:
+#    File: .cache\giprobe\f3ec14_60465.cpp
+# ----------------------------------------
+#      67: msgs = lbl_80480240;
+#   Error: ^^^^
+#   undefined identifier 'msgs'
+#   Too many errors printed, aborting program
+
+User break, cancelled...

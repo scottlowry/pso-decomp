@@ -1,0 +1,14 @@
+screening 13 harvests (jobs=4)...
+SIZE histogram: Counter({'0x730GATE': 7, '0x734': 4, '0x73c': 1, '0x760': 1})
+COMPILE-FAILs: 0
+
+dir                  perm      size       bank      flags  rows     disp%
+output-6855-1        6855 0x730GATE   r23f3 +0         OK   324  82.53261
+output-6810-1        6810 0x730GATE   r23f3 +0         OK   324  82.53261
+output-6765-2        6765 0x730GATE   r23f3 +0         OK   324  82.53261
+output-6540-1        6540 0x730GATE   r23f3 +0         OK   324  82.53261
+output-7105-1        7105 0x730GATE   r23f3 +0         OK   328      84.0
+output-7100-2        7100 0x730GATE   r23f3 +0         OK   328      84.0
+output-7100-3        7100 0x730GATE   r23f3 +0         OK   328      84.0
+
+GATE-PASS (0x730+r23+clean incl UB/NEWSYM flags shown): 7 ; full gate pass: 7

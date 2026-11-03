@@ -1,0 +1,18 @@
+sweeping 108 candidate dirs
+compile-fails=0 ranked=108
+size+symtab-gate PASS: 94
+--- TOP 12 (any) ---
+  99.633026  perm_s09/output-10-5  OK
+  99.633026  perm_s09/output-10-2  OK
+  99.633026  perm_s09/output-10-3  OK
+  99.633026  perm_s09/output-10-4  OK
+  99.633026  perm_s09/output-10-1  OK
+  99.633026  perm_s15/output-10-5  OK
+  99.633026  perm_s15/output-10-2  OK
+  99.633026  perm_s15/output-10-3  OK
+  99.633026  perm_s15/output-10-4  OK
+  99.633026  perm_s15/output-10-1  OK
+  99.633026  perm_s15/output-10-6  OK
+  99.633026  perm_s16/output-10-5  OK
+--- size-gate-passing above champ ---
+winners=0

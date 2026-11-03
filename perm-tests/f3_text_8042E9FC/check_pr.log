@@ -1,0 +1,26 @@
+== ninja
+build/GPOE8P/psov3.dol: OK
+== report_delta.py --check
+matched_functions: 27224 -> 27227 (+3)
+matched_code: 4101412 -> 4102204 (+792)
+matched_data: 1275455 -> 1275455 (+0)
+complete_code: 3189224 -> 3189224 (+0)
+complete_data: 919991 -> 919991 (+0)
+total_functions: 27572 -> 27572 (+0)
+total_code: 4353092 -> 4353092 (+0)
+total_data: 1761415 -> 1761415 (+0)
+New exact functions: 3; regressions: 0
+source_bearing_units: 3732 -> 3732 (+0)
+linked_units: 3539 -> 3539 (+0)
+Renamed functions: 0. Unit counts and renames describe report structure; they do not prove semantic naming or recovery of original translation units.
+  + 0x803D0714 TLobby__sub_803D0714
+  + 0x8042E8C4 fn_8042E8C4
+  + 0x8042E9FC pad_03_8042E9FC_text
+== link_units.py check
+link_units check: OK (3539 linked units all exact)
+== link_units.py scan
+exact-by-objdiff but NOT linkable (25): compiled object emits sections/symbols the split does not own -> missing:17, section:.data:5, alignment:2, order:1
+  details: config/GPOE8P/psov3/linked_units_blocked.json (section: claim the data range into the unit's split; missing: tools/localize_split_globals.py)
+linked now: 3539   exact candidates to add: 2   regressed (drop): 0   skipped (known link-breakers): 0
+PASS
+RC=0

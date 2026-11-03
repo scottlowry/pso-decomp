@@ -1,0 +1,693 @@
+##### TWindowSubComCard__sub_80245320
+  ...
+  fmuls f0, f1, f0
+  fmuls f0, f2, f0
+  fctiwz f0, f0
+  stfd f0, 0xa0(r1)
+  lwz r0, 0xa4(r1)
+  b .L_80245404
+  ...
+  fmuls f0, f0, f3
+  fmuls f0, f1, f0
+  fctiwz f0, f0
+  stfd f0, 0xa8(r1)
+  lwz r0, 0xac(r1)
+  .L_80245404:
+  SRC /Users/scott/Hermes/pso-decomp/pso-decomp-f3/src/pso/misc/TWindowSubComCard_80244774.cpp
+    |void TWindowSubComCard__sub_80245320(Quad_802455CC *q, Rect_802455CC *r) {
+    |    ProjectedStripVertex v[6];
+    |    f32 z;
+    |    f32 t;
+    |    f32 mx;
+    |    f32 mu;
+    |    s32 alpha;
+    |    u32 color;
+    |    switch (window_ui_theme_index) {
+    |    case 0:
+    |    case 1:
+    |        return;
+    |    }
+    |    z = -1.0f / r->depth;
+    |    t = ((5.0f * lbl_805D63F6 - 100.0f) - r->x) / r->w;
+    |    mx = t * (q->x1 - q->x0) + q->x0;
+    |    mu = t * (q->u1 - q->u0) + q->u0;
+    |    if (t > 0.5f) {
+    |        alpha = 2.0f * (160.0f * (1.0f - t));
+    |    } else {
+    |        alpha = 160.0f * (2.0f * t);
+    |    }
+    |    color = ((u8)alpha << 24) | 0xFFFFFF;
+    |    v[0].x = q->x0;
+    |    v[0].y = q->y0;
+    |    v[0].z = z;
+    |    v[0].u = q->u0;
+    |    v[0].v = q->v0;
+    |    v[0].color = 0xFFFFFF;
+    |    v[1].x = q->x0;
+    |    v[1].y = q->y1;
+    |    v[1].z = z;
+    |    v[1].u = q->u0;
+    |    v[1].v = q->v1;
+    |    v[1].color = 0xFFFFFF;
+    |    v[2].x = mx;
+    |    v[2].y = q->y0;
+    |    v[2].z = z;
+    |    v[2].u = mu;
+    |    v[2].v = q->v0;
+    |    v[2].color = color;
+    |    v[3].x = mx;
+    |    v[3].y = q->y1;
+    |    v[3].z = z;
+    |    v[3].u = mu;
+    |    v[3].v = q->v1;
+    |    v[3].color = color;
+    |    v[4].x = q->x1;
+    |    v[4].y = q->y0;
+    |    v[4].z = z;
+    |    v[4].u = q->u1;
+    |    v[4].v = q->v0;
+    |    v[4].color = 0xFFFFFF;
+    |    v[5].x = q->x1;
+    |    v[5].y = q->y1;
+    |    v[5].z = z;
+    |    v[5].u = q->u1;
+    |    v[5].v = q->v1;
+    |    v[5].color = 0xFFFFFF;
+    |    draw_projected_textured_strip(v, 6);
+
+##### roll_shop_weapon_grind
+  ...
+  fsubs f0, f0, f1
+  fmuls f0, f0, f2
+  fctiwz f0, f0
+  stfd f0, 0x18(r1)
+  lwz r4, 0x1c(r1)
+  clrlwi r3, r4, 24
+  ...
+  fsubs f0, f0, f1
+  fmuls f0, f0, f2
+  fctiwz f0, f0
+  stfd f0, 0x8(r1)
+  lwz r4, 0xc(r1)
+  clrlwi r3, r4, 24
+  SRC /Users/scott/Hermes/pso-decomp/pso-decomp-f3/src/pso/misc/ShopWeaponStock.cpp
+    |void roll_shop_weapon_grind(Item_80225064 *it) {
+    |    Range_80225064 *lo;
+    |    Range_80225064 *hi;
+    |    s32 b;
+    |    u8 v;
+    |    u8 m;
+    |    lo = ((Tbl_80225064 *)lobby_weapon_random_tables_ptr)->lo;
+    |    hi = ((Tbl_80225064 *)lobby_weapon_random_tables_ptr)->hi;
+    |    b = TLobby::classify_level_bracket_narrow(shop_weapon_stock_level);
+    |    if (b != -1) {
+    |        if (section_id_favored_grind_table[lbl_805D6238] != -1 && it->f1 == section_id_favored_grind_table[lbl_805D6238]) {
+    |            v = (hi[b].max + 1) * ((1.0f / 32768.0f) * (f32)rand());
+    |            if (v < hi[b].min) {
+    |                v = hi[b].min;
+    |            }
+    |        } else {
+    |            v = (lo[b].max + 1) * ((1.0f / 32768.0f) * (f32)rand());
+    |            if (v < lo[b].min) {
+    |                v = lo[b].min;
+    |            }
+    |        }
+    |        it->f3 = v;
+    |    }
+    |    m = get_entry_field16__9TItemDataFv(it);
+    |    if (it->f3 > m) {
+    |        it->f3 = m;
+    |    }
+    |}
+    |#pragma pop
+    |
+    |void TLobby__sub_80225238(int a0, int a1) { shop_weapon_stock_level = a1; generate_shop_weapon_stock(a0); }
+    |}
+    |s32 create_named_object(s32 arg0);
+    |typedef char RecoveredGlobal_8022559C_lbl_80513F50_size[sizeof(RecoveredGlobal_8022559C_lbl_80513F50) == 0x10 ? 1 : -1];
+    |
+    |#pragma push
+    |#pragma optimization_level 1
+    |#pragma dont_inline on
+    |typedef struct Ent_8022525C Ent_8022525C;
+    |typedef struct Hdr_8022525C Hdr_8022525C;
+    |typedef struct Item_8022525C Item_8022525C;
+    |typedef struct Pair_8022525C Pair_8022525C;
+    |typedef struct Pool_8022525C Pool_8022525C;
+    |typedef struct Tier_8022525C Tier_8022525C;
+    |s32 shop_weapon_stock_target_counts[4];
+    |Cnt_80224B7C shop_weapon_stock_counts[4];
+    |RecoveredGlobal_8022559C_lbl_80513F50 shop_weapon_stock_generated_flags;
+    |G_80225550 shop_weapon_stock_buffers;
+    |void generate_shop_weapon_stock(s32 tbl) {
+    |  long long new_var;
+    |  Item_8022525C item;
+    |  Pool_8022525C pool;
+    |  u8 *buf;
+    |  s32 n;
+    |  Ent_8022525C *e;
+    |  s32 i;
+    |  u8 c;
+    |  s32 id;
+    |  Tier_8022525C *t;
+    |  Ent_8022525C *ents;
+
+##### fn_8034D3D0
+  ...
+  fsubs f0, f2, f0
+  lfd f2, lbl_80478C48@l(r8)
+  fctiwz f0, f0
+  stfd f0, 0x8(r1)
+  lwz r0, 0xc(r1)
+  xoris r0, r0, 0x8000
+  ...
+  lis r8, lbl_80478C48@ha
+  stw r0, 0x20(r1)
+  lfd f2, lbl_80478C48@l(r8)
+  stfd f0, 0x18(r1)
+  lwz r0, 0x1c(r1)
+  xoris r0, r0, 0x8000
+  SRC /Users/scott/Hermes/pso-decomp/pso-decomp-f3/src/pso/unk/text_8034D3D0.cpp
+    |s32 fn_8034D3D0(Entry_8034D3D0 *e, s32 n, s32 arg2, s32 closed, s32 arg4, f32 scale) {
+    |    f32 sum;
+    |    f32 total;
+    |    f32 ratio;
+    |    s32 i;
+    |
+    |    if (e == NULL || n <= 1) {
+    |        return 0;
+    |    }
+    |    sum = 0.0f;
+    |    for (i = 0; i < n; i++) {
+    |        sum += e[i].weight;
+    |    }
+    |    if (0.0f == sum) {
+    |        return 0;
+    |    }
+    |    if (closed == 0) {
+    |        total = (s32) (sum - e[n - 1].weight);
+    |    } else {
+    |        total = (s32) sum;
+    |    }
+    |    ratio = scale * arg2; ratio /= total;
+    |    if (ratio >= 1.0f) {
+    |        return 1;
+    |    }
+    |    return eval_bezier_curve__12TBoss8DragonFPviiPvf((Vec4_8034D500 *)e, n, closed, (Vec3_8034D500 *)arg4, ratio);
+    |}
+    |
+    |#pragma push
+    |#pragma fp_contract on
+    |s32 eval_bezier_curve__12TBoss8DragonFPviiPvf(Vec4_8034D500 *pts, s32 count, s32 closed, Vec3_8034D500 *out, f32 t) {
+    |    s32 n;
+    |    s32 i;
+    |    s32 m;
+    |    f32 u;
+    |    f32 w;
+    |    f32 a;
+    |    f32 b;
+    |    s32 k;
+    |    if (count <= 2) {
+    |        return 0;
+    |    }
+    |    n = count - 1;
+    |    u = (1.0f) - t;
+    |    out->z = out->y = out->x = (0.0f);
+    |    if (closed == 0) {
+    |        for (i = 0; i <= n; i++) {
+    |            k = calc_binomial_coefficient__12TBoss8DragonFll(n, i);
+    |            a = TBoss8Dragon__sub_8008072C(t, (f32)i);
+    |            b = TBoss8Dragon__sub_8008072C(u, (f32)(n - i));
+    |            w = ((f32)k * a) * b;
+    |            out->x += w * pts[i].x;
+    |            out->y += w * pts[i].y;
+    |            out->z += w * pts[i].z;
+    |        }
+    |    } else {
+    |        m = n + 1;
+    |        for (i = 0; i <= n; i++) {
+    |            k = calc_binomial_coefficient__12TBoss8DragonFll(m, i);
+    |            a = TBoss8Dragon__sub_8008072C(t, (f32)i);
+
+##### TObjBoss2CeilJunk__ct
+  ...
+  fmuls f1, f1, f2
+  fmuls f0, f0, f1
+  fctiwz f0, f0
+  stfd f0, 0x10(r1)
+  lwz r0, 0x14(r1)
+  stw r0, 0xac(r31)
+  ...
+  fmuls f1, f0, f1
+  lfs f0, lbl_805D856C@sda21(r0)
+  fctiwz f1, f1
+  stfd f1, 0x10(r1)
+  lwz r4, 0x14(r1)
+  stw r4, 0x5c(r31)
+  SRC /Users/scott/Hermes/pso-decomp/pso-decomp-f3/src/pso/boss/TObjBoss2CeilJunk.cpp
+    |u8 *TObjBoss2CeilJunk__ct(struct RecoveredFields_8003A6F4_arg0 *arg0, s32 arg1, s32 arg2) {
+    |    f32 temp_f1;
+    |    f32 temp_f2;
+    |    __ct__8TObjBaseFP7TObject();
+    |    arg0->unk18 = &(*(RecoveredGlobal_8003A6F4___vt__17TObjBoss2CeilJunk *)&__vt__17TObjBoss2CeilJunk).value;
+    |    arg0->field_0 = TObjBoss2CeilJunk__name;
+    |    VecCopy((Vec *)&arg0->unknown_1C[0x1C], (const Vec *)arg2);
+    |    temp_f2 = (f32) rand();
+    |    temp_f1 = (3.0517578e-05f) * temp_f2;
+    |    arg0->field_AC = (s32) (*(const volatile f32 *)&lbl_805D85A0 * temp_f1);
+    |    if (spawn_effect__15TObjBoss2TunnelFlPvPv(&arg0->unknown_1C[0x1C], &arg0->unknown_1C[0x28], arg0->unknown_9C, temp_f1, temp_f2) == 0) {
+    |        arg0->field_A8 = 0;
+    |    } else {
+    |        arg0->field_A8 = 2;
+    |        arg0->field_54 = arg0->field_48 + *(f32 *)((s8 *)((u8 *)&TObjBoss2CeilJunk__height_offset_table.value + (arg0->field_AC * 4)) + 0);
+    |    }
+    |    arg0->field_60 = TObjPlayer::calc_random_scaled();
+    |    arg0->field_5C = (s32) ((4096.0f) * rand_signed_unit());
+    |    arg0->field_90 = (0.0f);
+    |    arg0->field_94 = (0.0f);
+    |    arg0->field_98 = (0.0f);
+    |    arg0->field_B0 = 0;
+    |    arg0->field_B4 = (1.0f);
+    |    return (unsigned char *) (arg0);
+    |}
+    |#pragma pop
+    |
+    |}
+
+##### TObjEneSaver__ct
+  ...
+  lfs f1, 0x354(r30)
+  fadds f1, f2, f1
+  fctiwz f1, f1
+  stfd f1, 0x8(r1)
+  lwz r0, 0xc(r1)
+  sth r0, 0x388(r30)
+  ...
+  lfs f0, 0x358(r30)
+  lwz r6, 0x378(r30)
+  fctiwz f0, f0
+  stfd f0, 0x8(r1)
+  lwz r0, 0xc(r1)
+  slw r0, r5, r0
+  SRC /Users/scott/Hermes/pso-decomp/pso-decomp-f3/src/pso/enemy/SaverLifecycle.cpp
+    |u8 *TObjEneSaver__ct(TObjEneSaver *arg0, void *arg1, void *arg2) {
+    |    s16 t;
+    |    void *p;
+    |    __ct__9TObjEnemyFP7TObject(arg0, arg1, arg2);
+    |    *(u8 **)((s8 *)arg0 + 0x18) = (u8 *)TObjEneSaver__vtable;
+    |    __ct__13TUnk_80490470Fv(((u8 *)arg0 + 0x3A4));
+    |    *(s32 *)((s8 *)arg0 + 0) = TObjEneSaver__class_name;
+    |    arg0->apply_set_data(arg2);
+    |    ((TObjPlayer *)arg0)->init_position_vectors();
+    |    *(f32 *)((s8 *)arg0 + 0x70) = 1.0f;
+    |    arg0->scale.y = 1.0f;
+    |    arg0->scale.x = 1.0f;
+    |    t = (s16)(100.0f + *(f32 *)((s8 *)arg0 + 0x354));
+    |    *(s16 *)((s8 *)arg0 + 0x388) = t;
+    |    *(s16 *)((s8 *)arg0 + 0x38A) = t;
+    |    if (*(f32 *)((s8 *)arg0 + 0x358) < 0.0f) {
+    |        *(f32 *)((s8 *)arg0 + 0x358) = 0.0f;
+    |    } else if (8.0f < *(f32 *)((s8 *)arg0 + 0x358)) {
+    |        *(f32 *)((s8 *)arg0 + 0x358) = 8.0f;
+    |    }
+    |    *(s32 *)((s8 *)arg0 + 0x378) = 0;
+    |    *(s32 *)((s8 *)arg0 + 0x378) |= 1 << (s32)*(f32 *)((s8 *)arg0 + 0x358);
+    |    arg0->mode = 0;
+    |    arg0->phase = 0;
+    |    arg0->variant = 0;
+    |    ((TObjEnemy *)arg0)->set_param(0x1E);
+    |    arg0->subtype = 0;
+    |    arg0->sub_800A7734(arg0->variant);
+    |    arg0->action_table = saver_action_table;
+    |    ((TObjMotion *)arg0)->set_field_d8((s32)arg0->action_table);
+    |    *(s32 *)((s8 *)arg0 + 0xDC) = *(s32 *)((s8 *)(*(u8 * *)&saver_bml_resource) + 0x430);
+    |    arg0->requested_action = 0;
+    |    ((TObjMotion *)arg0)->set_animation(arg0->requested_action);
+    |    ((TObjMotion *)arg0)->set_field_b8(arg0->requested_action);
+    |    init_collision_body_parts(arg0, (u8 *)saver_collision_body_part_table, 1);
+    |    *(s16 *)((s8 *)arg0 + 0x37C) = 0;
+    |    *(s16 *)((s8 *)arg0 + 0x37E) = 0;
+    |    ((TObjEnemy *)arg0)->bind_enemy_combat_stats((u8 *)saver_boss_stat_handle, (u8 *)(player_object_ptr_array[*(s16 *)((s8 *)arg0 + 0x37C)]), (u8 *)saver_object_stat_handle);
+    |    arg0->movementParameters = (u8*)lbl_80490B28;
+    |    arg0->referenceHp = arg0->hp;
+    |    ((TObjEnemy *)arg0)->update_prev_position();
+    |    copy_position__20TBoss3VoloptHiraisinFv((s32)arg0);
+    |    initialize_enemy_photon_effect(arg0);
+    |    *(s32 *)((s8 *)arg0 + 0x374) = 1;
+    |    *(s32 *)((s8 *)arg0 + 0x38C) = 0;
+    |    VecCopy((Vec *)((u8 *)arg0 + 0x390), (const Vec *)((u8 *)arg0 + 0x2FC));
+    |    *(s32 *)((s8 *)arg0 + 0x39C) = 0;
+    |    ((TObjChara *)arg0)->add_flags_2e4(8);
+    |    arg0->actorFlags |= 0x06040000;
+    |    arg0->m_380 = 0x101;
+    |    arg0->m_384 = 0x101;
+    |    p = __nw__7TObjectFUl(0xC4);
+    |    if (p != NULL) {
+    |        p = TEneParticleCtrl__ct((u8 *)p, (s32)arg0, arg0->m_380);
+    |    }
+    |    *(void **)((s8 *)arg0 + 0x3A0) = p;
+    |    *(s32 *)((s8 *)arg0 + 0x3C0) = create__13TUnk_80494968FUlUl(0xA0303030, 0xFFFF0088);
+    |    *(s32 *)((s8 *)arg0 + 0x3C4) = create__13TUnk_80494968FUlUl(0xA0303030, 0xFFFF0088);
+    |    *(s32 *)((s8 *)arg0 + 0x3C8) = create__13TUnk_80494968FUlUl(0xA0303030, 0xFF303030);
+    |    arg0->clear_lobby_object_state();
+
+##### vfunc_74__9TObjEnemyFl
+  ...
+  fsubs f1, f2, f1
+  fmuls f0, f0, f1
+  fctiwz f0, f0
+  stfd f0, 0x20(r1)
+  lwz r0, 0x24(r1)
+  stb r0, 0x11(r1)
+  ...
+  fsubs f1, f2, f1
+  fmuls f0, f0, f1
+  fctiwz f0, f0
+  stfd f0, 0x18(r1)
+  lwz r0, 0x1c(r1)
+  stb r0, 0x13(r1)
+
+##### calc_stat_threshold__10TObjPlayerFPv
+  ...
+  fsub f1, f1, f2
+  fmul f0, f1, f0
+  fctiwz f0, f0
+  stfd f0, 0x10(r1)
+  lwz r31, 0x14(r1)
+  subfic r3, r31, 0x5a
+  ...
+  fsub f1, f1, f2
+  fmul f0, f1, f0
+  fctiwz f0, f0
+  stfd f0, 0x8(r1)
+  lwz r31, 0xc(r1)
+  subfic r3, r31, 0x3c
+  SRC /Users/scott/Hermes/pso-decomp/pso-decomp-f3/src/pso/player/TObjPlayer_801AF2F0.cpp
+    |s32 calc_stat_threshold__10TObjPlayerFPv(void *arg0) {
+    |    s32 var_r31;
+    |    var_r31 = ((VObj_801AF2F0*)arg0)->m14();
+    |    if (var_r31 > 0x63) {
+    |        var_r31 = 0x63;
+    |    }
+    |    if (((TObjPlayer *)arg0)->is_newman() != 0) {
+    |        var_r31 *= lbl_80446F38;
+    |        return 0x5A - var_r31;
+    |    }
+    |    var_r31 *= lbl_80446F40;
+    |    return 0x3C - var_r31;
+    |}
+    |
+    |void TObjPlayer::update_facing_from_lock() {
+    |    if (((VObj_801AF3C4 *)*(void **)((s8 *)this + 0x380))->m8() != 0) {
+    |        this->set_field_dc(((VObj_801AF3C4 *)*(void **)((s8 *)this + 0x380))->m75(1));
+    |        return;
+    |    }
+    |    this->set_field_dc(((VObj_801AF3C4 *)*(void **)((s8 *)this + 0x380))->m75(0));
+    |}
+    |
+    |void TObjPlayer::sub_801AF454(s32 x) {
+    |    if (((O_801AF454 *)this)->obj) {
+    |        ((O_801AF454 *)this)->obj->m3(x);
+    |    }
+    |}
+    |
+    |f32 TObjPlayer::get_battle_value(s32 arg0, int arg1, s32 arg2) {
+    |    if (((u32 (*)(u16))get_player_by_client_id)((u16)arg1) == 0U) {
+    |        return (*(f32 *)&TObjPlayer__data_805DC278);
+    |    }
+    |    return get_class_technique_boost(((s32 (*)(s32))get_class_index__10TObjPlayerFv)(arg0), arg2);
+    |}
+    |
+    |void handle_6x9B_level_up_all_techniques(void *arg0) {
+    |    Msg_801CD6BC m;
+    |    u8 *p;
+    |    ((TFontSmallLobby *)(&m))->init_packet_6x9b_level_up();
+    |    TFontSmallLobby__sub_801C01DC(&m, arg0);
+    |    TFontSmallLobby__sub_801C01BC(&m);
+    |    if (validate_6x9B_level_up_all_techniques((G_ClientIDHeader *)&m) != 0) {
+    |        p = ((u8 * (*)(u16))get_player_by_client_id)(m.id);
+    |        if (p != NULL) {
+    |            ((TObjPlayer *)(p + 0x428))->level_up_all_techniques(m.level);
+    |        }
+    |    }
+    |}
+    |
+    |void TObjPlayer__sub_801AF554(void *arg0, s8 arg1) {
+    |    L_801AF554 sp8;
+    |    if (arg0 == 0 || ((s32 (*)(void *))obj_isState2_324__9TObjCharaFv)(arg0) == 0) {
+    |        ((TFontSmallLobby *)(&sp8))->init_packet_6x9b_level_up();
+    |        sp8.f2 = get_entity_id(arg0);
+    |        sp8.f4 = arg1;
+    |        TFontSmallLobby__sub_801C029C(&sp8);
+    |    }
+    |}
+    |
+    |void play_voice_pair__10TObjPlayerFPv(TObjPlayer *arg0) {
+
+##### update_extension__18TOTrapChainSawEdgeFv
+  ...
+  fsubs f1, f1, f2
+  fmuls f0, f1, f0
+  fctiwz f0, f0
+  stfd f0, 0x10(r1)
+  lwz r0, 0x14(r1)
+  stw r0, 0xd0(r3)
+  ...
+  fsubs f1, f1, f2
+  fmuls f0, f1, f0
+  fctiwz f0, f0
+  stfd f0, 0x8(r1)
+  lwz r0, 0xc(r1)
+  stw r0, 0xd0(r3)
+
+##### TBoss4Type1__ct
+  ...
+  bl dispatch_shared_handler_a__6TLobbyFl
+  lfs f0, 0x0(r3)
+  fctiwz f0, f0
+  stfd f0, 0x8(r1)
+  lwz r0, 0xc(r1)
+  stw r0, 0x3cc(r31)
+  ...
+  fsubs f1, f1, f2
+  fmuls f0, f1, f0
+  fctiwz f0, f0
+  stfd f0, 0x10(r1)
+  lwz r0, 0x14(r1)
+  stw r0, 0x3cc(r31)
+  SRC /Users/scott/Hermes/pso-decomp/pso-decomp-f3/src/pso/boss/TBoss4Type1.cpp
+    |Self_80054A1C *TBoss4Type1__ct(Self_80054A1C *self, s32 parent, s32 *arg2) {
+    |    s32 i;
+    |    s32 j;
+    |
+    |    __ct__9TObjEnemyFP7TObject(self, (void*)parent);
+    |    self->vt = __vt__11TBoss4Type1;
+    |    self->f0 = TBoss4Type1__name;
+    |    ((TObjChara *)self)->add_flags_2e4(8);
+    |    self->f38C = arg2[0];
+    |    ((VObj_80054A1C *)self)->m79(arg2 + 1);
+    |    ((VObj_80054A1C *)self)->m80();
+    |    self->f390 = TBoss4Uro::get_instance_count();
+    |    self->f24 = 0;
+    |    self->f34 = 0;
+    |    VecCopy__FP3VecPC3Vec(self->v38, lbl_80486150);
+    |    self->f60 = 0;
+    |    ((void *(*)(void *, void *))VecCopy__FP3VecPC3Vec)(self->v44,
+    |        ((void *(*)(void *, void *))VecCopy__FP3VecPC3Vec)(self->v50,
+    |            ((void *(*)(void *, void *))VecCopy__FP3VecPC3Vec)(self->v74, self->v38)));
+    |    self->f394 = init_collision_body_parts(self, lbl_80485E2C, 3);
+    |    VecCopy__FP3VecPC3Vec(self->v2FC, self->v38);
+    |    self->f308 = self->f30C = self->f310 = lbl_805D8B20;
+    |    self->f2A8 = 0;
+    |    ((TObjEnemy *)self)->bind_enemy_combat_stats((u8 *)(TLobby::register_boss(0x36)), (u8 *)(TLobby::dispatch_shared_handler_b(0x36)), (u8 *)(TLobby::register_object(0x36)));
+    |    self->f33E = self->f32C;
+    |    ((TBoss3Volopt *)self)->reset_photon_effect();
+    |    ((TObjEnemy *)self)->set_param(0x2F);
+    |    self->f3EC = lbl_805D8B84;
+    |    for (i = 0; i < 3; i++) {
+    |        self->a42C[i] = TObjFish__sub_800E3124((u8 *)lbl_804860F0, (s32)&self->a438[i]);
+    |    }
+    |    self->f480 = TObjFish__sub_800E3124((u8 *)lbl_80486120, (s32)self->v484);
+    |    for (j = 0; j < 8; j++) {
+    |        self->a3F8[j] = (s32)create_particle_emitter(self->v38, boss4_type1_emitter_id_table[j]);
+    |    }
+    |    for (; j < 13; j++) {
+    |        self->a3F8[j] = 0;
+    |    }
+    |    init_model_node_tables(self->f378, boss4_type1_model_node_table, 7);
+    |    self->f3A4 = 0;
+    |    self->f3A0 = 0;
+    |    self->f3AC = 1;
+    |    self->f3A8 = 1;
+    |    self->f3CC = *(f32 *)dispatch_shared_handler_a__6TLobbyFl(0x36);
+    |    if (self->f3CC < 1 || self->f3CC > 60) {
+    |        self->f3CC = 25;
+    |    }
+    |    self->f3CC = (f32)self->f3CC * lbl_805D8B78;
+    |    self->f3C4 = *(s32 *)(dispatch_shared_handler_a__6TLobbyFl(0x39) + 0x18);
+    |    if (self->f3C4 < 1) {
+    |        self->f3C4 = 1;
+    |    } else if (self->f3C4 > 6) {
+    |        self->f3C4 = 6;
+    |    }
+    |    self->f3C8 = 0;
+    |    self->f3D0 = 5;
+    |    self->f3D4 = 0;
+    |    self->f3D8 = self->f32C / 2;
+    |    self->f3DC = lbl_805D8B20;
+    |    self->f3E0 = lbl_805D8B18;
+
+##### TBoss2DeRolLe__sub_80030DFC
+  ...
+  fsubs f2, f2, f3
+  fadds f1, f2, f1
+  fctiwz f1, f1
+  stfd f1, 0x10(r1)
+  lwz r0, 0x14(r1)
+  stw r0, 0x6f4(r31)
+  ...
+  fsubs f1, f1, f2
+  fmuls f0, f1, f0
+  fctiwz f0, f0
+  stfd f0, 0x10(r1)
+  lwz r0, 0x14(r1)
+  stw r0, 0x64(r31)
+  SRC /Users/scott/Hermes/pso-decomp/pso-decomp-f3/src/pso/boss/TBoss2DeRolLe.cpp
+    |void TBoss2DeRolLe__sub_80030DFC(void *arg0_, void *arg1_, int arg2) {
+    |    switch ((u32)arg1_) {
+    |    case 4:
+    |        TBoss2DeRolLe__sub_800341F0((Obj_800341F0 *)arg0);
+    |        F(s32, 0x3C0) |= 4;
+    |        F(s32, 0x3C0) &= ~0x100;
+    |        F(s32, 0x654) = arg2;
+    |        set_move_direction__13TBoss2DeRolLeFPv(arg0, F(s32, 0x654));
+    |        if (F(s32, 0x654) == 0) {
+    |            F(f32, 0x700) = TBoss2DeRolLe__data_805D832C;
+    |            F(s16, 0xB8) = 9;
+    |        } else {
+    |            F(f32, 0x700) = TBoss2DeRolLe__data_805D82BC;
+    |            F(s16, 0xB8) = 10;
+    |        }
+    |        F(s32, 0x6E0) = 0;
+    |        F(s32, 0x6E4) = 0;
+    |        F(f32, 0x6FC) = TBoss2DeRolLe__data_805D827C;
+    |        F(f32, 0x708) = TBoss2DeRolLe__data_805D832C;
+    |        F(f32, 0x704) = TBoss2DeRolLe__data_805D827C;
+    |        F(s32, 0x6F4) = 0x500;
+    |        TObjBoss2Tunnel::clear_global_flag_3000();
+    |        break;
+    |    case 2:
+    |        if (F(s32, 0x6E0) == 2) {
+    |            set_state_and_send__13TBoss2DeRolLeFPvi((Obj_80034034 *)arg0, 2);
+    |        }
+    |        break;
+    |    case 9:
+    |        if (F(s32, 0x6E0) == 2) {
+    |            advance_action_sequence__13TBoss2DeRolLeFPv((Obj_80034034 *)arg0);
+    |        }
+    |        break;
+    |    case 0:
+    |        ((TObjMotion *)arg0)->advance_animation();
+    |        switch (F(s32, 0x6E0)) {
+    |        case 0:
+    |            F(f32, 0x704) += TBoss2DeRolLe__data_805D8300;
+    |            F(f32, 0x40) -= F(f32, 0x704);
+    |            F(f32, 0x6FC) += TBoss2DeRolLe__data_805D8330;
+    |            F(f32, 0x38) += F(f32, 0x6FC) * F(f32, 0x700);
+    |            F(f32, 0x708) += TBoss2DeRolLe__data_805D8334;
+    |            F(f32, 0x6A4) -= F(f32, 0x708);
+    |            F(s32, 0x6F4) = (s32)((f32)F(s32, 0x6F4) + lbl_805D8338);
+    |            if ((f32)F(s32, 0x6F4) >= lbl_805D833C) {
+    |                F(s32, 0x6F4) = 0x4000;
+    |            }
+    |            F(s32, 0x64) = (s32)((f32)F(s32, 0x6F4) * -F(f32, 0x700));
+    |            if (F(s32, 0x6E4) == 0 && F(s32, 0x6F4) >= 0x2200) {
+    |                F(s32, 0x6E4) = 1;
+    |                play_sound((void *)0x4003AD12, (int)(arg0 + 0x518));
+    |            }
+    |            if (F(f32, 0x6A4) < lbl_805D8308) {
+    |                F(s32, 0x6E0) = 1;
+    |                set_position_index__13TBoss2DeRolLeFPvi(arg0, F(s32, 0x654));
+    |                F(f32, 0x6A4) = lbl_805D8308;
+    |                F(s16, 0xB8) = 1;
+    |                F(f32, 0x708) = TBoss2DeRolLe__data_805D827C;
+    |                F(s32, 0x3C0) &= ~4;
+    |                F(s32, 0x3C0) |= 0x100;
+
+##### TObjFish__sub_802E979C
+  ...
+  fsubs f2, f2, f3
+  fadds f1, f2, f1
+  fctiwz f1, f1
+  stfd f1, 0x10(r1)
+  lwz r0, 0x14(r1)
+  stw r0, 0x73c(r31)
+  ...
+  fsubs f1, f1, f2
+  fmuls f0, f1, f0
+  fctiwz f0, f0
+  stfd f0, 0x10(r1)
+  lwz r0, 0x14(r1)
+  stw r0, 0x64(r31)
+  SRC /Users/scott/Hermes/pso-decomp/pso-decomp-f3/src/pso/boss/Boss7DeRolLeCBehavior.cpp
+    |void TObjFish__sub_802E979C(Fish_802E979C *o, u32 k, s32 dir) {
+    |    switch (k) {
+    |    case 4:
+    |        for (s32 i = 0; i < 4; i++) {
+    |            TBoss7Tentacle__sub_802F0AF0((s32)o->kids[i]);
+    |        }
+    |        TObjFish__sub_802ECBDC((Fish_802ECBDC *)o);
+    |        o->flags |= 4;
+    |        o->flags &= 0xFFFFFEFF;
+    |        o->dir = dir;
+    |        set_swim_direction__8TObjFishFPv(o, o->dir);
+    |        if (o->dir == 0) {
+    |            o->v748 = lbl_805DEA70;
+    |            ((TObjMotion *)o)->set_field_b8(9);
+    |        } else {
+    |            o->v748 = lbl_805DEA18;
+    |            ((TObjMotion *)o)->set_field_b8(0xA);
+    |        }
+    |        o->state = 0;
+    |        o->fired = 0;
+    |        o->v744 = lbl_805DEA10;
+    |        o->v750 = lbl_805DEA70;
+    |        o->v74C = lbl_805DEA10;
+    |        o->angle = 0x500;
+    |        TObjBoss2Tunnel::clear_flags_0x3000();
+    |        o->flags &= 0xFFFFFDFF;
+    |        break;
+    |    case 2:
+    |        if (o->state == 2) {
+    |            set_state_and_send__14TBoss7DeRolLeCFl(o, 2);
+    |        }
+    |        break;
+    |    case 9:
+    |        if (o->state == 2) {
+    |            ((TBoss7DeRolLeC *)o)->advance_action_sequence();
+    |        }
+    |        break;
+    |    case 0:
+    |        ((TObjMotion *)o)->advance_animation();
+    |        switch (o->state) {
+    |        case 0:
+    |            o->v74C += lbl_805DEA74;
+    |            o->y40 -= o->v74C;
+    |            o->v744 += lbl_805DEA78;
+    |            o->x38 += o->v744 * o->v748;
+    |            o->v750 += lbl_805DEA7C;
+    |            o->depth -= o->v750;
+    |            o->angle += lbl_805DEA80;
+    |            if (o->angle >= lbl_805DEA84) {
+    |                o->angle = 0x4000;
+    |            }
+    |            o->rot64 = o->angle * -o->v748;
+    |            if (o->fired == 0 && o->angle >= 0x2200) {
+    |                o->fired = 1;
+    |                TObjFish::set_effect_target_position(o, (void *)0x39906, (u8 *)o + 0x50C);
+    |            }
+    |            if (o->depth < lbl_805DEA88) {
+    |                o->state = 1;
+    |                TObjFish__sub_802ED4AC((u8 *)o, o->dir);
+    |                o->depth = lbl_805DEA88;
+

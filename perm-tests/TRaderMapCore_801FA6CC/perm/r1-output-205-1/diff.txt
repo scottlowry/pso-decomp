@@ -1,0 +1,11 @@
+--- before
++++ after
+@@ -52,7 +52,7 @@
+ void set_default_alpha_blend__Fv(void);
+ void set_additive_blend__Fv(void);
+ void draw_compass_sprite__10TObjPlayerFlllf(void *, s32, s32, s32, f32);
+-void draw_compass__13TRaderMapCoreFv(RM *self, s32 mode)
++void draw_compass__13TRaderMapCoreFv(RM *self, unsigned short mode)
+ {
+   u32 new_var;
+   CS state;

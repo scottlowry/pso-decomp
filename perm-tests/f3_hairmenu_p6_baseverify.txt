@@ -1,0 +1,6 @@
+harness base_direct.o: addr=0x0 size=0x734 words=461
+repo    /Users/scott/Hermes/pso-decomp/pso-decomp-f3/build/GPOE8P/src/pso/object/TObjCMName.o: addr=0x112c size=0x734 words=461
+instruction-word diffs: 0
+reloc harness: ['TCameraCtrl__sub_80068EF0', 'TObjCMHairMenu__sub_801E3F54', 'draw_tri_fan_2d__14TObjCMHairMenuFllf', 'draw_ui_sprite', 'draw_ui_sprite_opaque', 'fabs_float', 'get_scale__14TObjCMMainMenuFv', 'restore_full_screen_view__11TCameraCtrlFv', 'sin_table_lookup']
+reloc repo   : ['TCameraCtrl__sub_80068EF0', 'TObjCMHairMenu__sub_801E3F54', 'draw_tri_fan_2d__14TObjCMHairMenuFllf', 'draw_ui_sprite', 'draw_ui_sprite_opaque', 'fabs_float', 'get_scale__14TObjCMMainMenuFv', 'restore_full_screen_view__11TCameraCtrlFv', 'sin_table_lookup']
+BASE-VERIFY: BYTE-IDENTICAL

@@ -1,0 +1,23 @@
+screen rows=89 full-gate=48
+champ-inert: 11 ['output-6740-2', 'output-6755-1', 'output-6775-3', 'output-6775-4', 'output-6785-1', 'output-6850-1']
+unique objects: 16
+
+   proxy% dir              gate  rows  perm  era  duplicates
+ 87.18696 output-6460-1    FAIL   316  6460    ['output-6460-1', 'output-6495-1']
+ 87.14348 output-6515-1    FAIL   316  6515    
+ 87.11739 output-6805-1    FAIL   316  6805    ['output-6805-1', 'output-6805-2', 'output-6805-3']
+ 87.06087 output-6340-4    FAIL   310  6340    
+ 86.40435 output-6770-5    FAIL   320  6770    ['output-6770-5', 'output-6775-1', 'output-6775-2']
+ 86.40435 output-6880-2    FAIL   320  6880    ['output-6880-2', 'output-6880-3']
+ 86.38261 output-6890-2    FAIL   320  6890    ['output-6890-2', 'output-6890-3', 'output-6890-4']
+ 86.36087 output-6900-3    FAIL   320  6900    ['output-6900-3', 'output-6900-4', 'output-6900-5']
+    86.35 output-6905-6    FAIL   328  6905    
+  86.3413 output-6770-2    FAIL   322  6770    ['output-6770-2', 'output-6770-3']
+86.339134 output-6880-5    FAIL   320  6880    ['output-6880-5', 'output-6880-6', 'output-6880-7']
+86.339134 output-6900-19   FAIL   320  6900    ['output-6900-19', 'output-6900-2', 'output-6900-20']
+86.339134 output-6900-9    FAIL   320  6900    ['output-6900-9', 'output-6905-1', 'output-6905-2']
+ 86.31739 output-6770-1    FAIL   320  6770    
+ 86.30652 output-6640-2    FAIL   350  6640    ['output-6640-2', 'output-6730-1', 'output-6740-1']
+ 84.73044 output-6785-2    FAIL   326  6785    ['output-6785-2', 'output-6785-3', 'output-6795-1']
+
+wrote p12_ranked.json; era-GATE-PASS count: 0

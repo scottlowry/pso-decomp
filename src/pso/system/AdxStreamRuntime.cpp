@@ -2262,8 +2262,7 @@ void TLobby__sub_803CA8B4(Ent_803C9608 *arg0) {
 
     if (self->state == 3) {
         if (TLobby__sub_803C07E8(self->f4) == 3) {
-            s32 n = send_with_offset4__6TLobbyFv(self->f4);
-            s32 i;
+            s32 n = send_with_offset4__6TLobbyFv(self->f4), i;
             lbl_805D7580 = n;
             for (i = 0; i < n; i++) {
                 s32 v = self->f18[i]->vt->avail(self->f18[i], 1);
@@ -2297,8 +2296,8 @@ void TLobby__sub_803CA8B4(Ent_803C9608 *arg0) {
             self->f71 = 1;
         }
         if (TLobby__sub_803C07E8(self->f4) == 3) {
-            s32 cnt = TLobby__sub_803C9740((u8 *)self);
-            s32 size = self->f48 * cnt * 2;
+            s32 cnt = TLobby__sub_803C9740((u8 *)self), size;
+            size = self->f48 * cnt * 2;
             for (s32 i = 0; i < cnt; i++) {
                 Pair_803C8678 pr;
                 Strm_803C8678 *e = self->f18[i];

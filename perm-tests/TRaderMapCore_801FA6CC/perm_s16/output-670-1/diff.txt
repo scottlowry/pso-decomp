@@ -1,0 +1,23 @@
+--- before
++++ after
+@@ -72,10 +72,8 @@
+   state.rot = 0;
+   state.unk18 = TRaderMapCore__data_805D5F4C;
+   state.sprs = lbl_804C87E4;
+-  color = -1;
+   begin_effect_render__13TParticleCtrlFv();
+   f32 *tbl = lbl_804C87B4[mode];
+-  self->m_19c = self->m_19c;
+   state.x = tbl[2] + ((f32) lbl_804C87E4[1].x);
+   state.y = tbl[3] + ((f32) lbl_804C87E4[1].y);
+   set_default_alpha_blend__Fv();
+@@ -85,7 +83,9 @@
+   state.y = tbl[1] + ((f32) lbl_804C87E4[0].y);
+   state.rot = self->m_174;
+   set_additive_blend__Fv();
++  color = -1;
+   draw_compass_sprite__10TObjPlayerFlllf((void *) (&state), 0, -1, 0x21, TRaderMapCore__data_805DC58C);
+   end_effect_render__13TParticleCtrlFv();
++  self->m_19c = self->m_19c;
+ }
+ 

@@ -1,0 +1,27 @@
+--- before
++++ after
+@@ -36,10 +36,11 @@
+ char *NetCopyString(char *destination, const char *source);
+ void TLobby__sub_80428DC8(s16 entry, s16 slot, u8 *text, s16 *cnt, s16 *num_cnt)
+ {
+-  s16 c;
+   s16 n;
+   char *dest;
+   s16 i;
++  s16 c;
++  int new_var;
+   u8 ch;
+   if (lbl_80480138[entry].mode[slot] == 0)
+   {
+@@ -54,9 +55,10 @@
+     n = *num_cnt;
+     i = 0;
+     entry = 0;
++    new_var = '0';
+     while ((ch = text[i]) != 0)
+     {
+-      entry = ((entry * 10) + ch) - '0';
++      entry = (ch + (entry * 10)) - new_var;
+       i++;
+     }
+ 

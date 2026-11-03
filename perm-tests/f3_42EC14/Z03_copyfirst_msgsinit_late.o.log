@@ -1,0 +1,9 @@
+### mwcceppc.exe Compiler:
+#    File: .cache\giprobe\f3ec14_60393.cpp
+# ----------------------------------------
+#      85: sprintf((char *) (lbl_805D7CC4 + 4), msgs + 0x30);
+#   Error:                                      ^^^^
+#   undefined identifier 'msgs'
+#   Too many errors printed, aborting program
+
+User break, cancelled...

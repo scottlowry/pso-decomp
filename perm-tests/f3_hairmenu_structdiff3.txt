@@ -1,0 +1,237 @@
+era 460  ours 465  STRUCTURAL matched 388/460 = 84.35%  (unmatched era 72)
+--- DEL x1 @slot21:
+    E  21 80295A74 bee1008c stmw     r23, 0x8c(r1)
+--- INS x1 @slot21:
+    N  21 1180 bec10088 stmw     r22,136(r1)   [ ]
+--- DEL x1 @slot23:
+    E  23 80295A7C 8063001c lwz      r3, 0x1c(r3)
+--- DEL x1 @slot43:
+    E  43 80295ACC 3c608046 lis      r3, lbl_8046509C@ha
+--- INS x1 @slot42:
+    N  42 11d4 3c600000 lis      r3,0   [ ]
+--- DEL x1 @slot46:
+    E  46 80295AD8 3863509c addi     r3, r3, lbl_8046509C@l
+--- INS x1 @slot45:
+    N  45 11e0 38630000 addi     r3,r3,0   [ ]
+--- DEL x1 @slot75:
+    E  75 80295B4C 3c608046 lis      r3, lbl_804650C4@ha
+--- INS x1 @slot74:
+    N  74 1254 3c600000 lis      r3,0   [ ]
+--- DEL x1 @slot77:
+    E  77 80295B54 386350c4 addi     r3, r3, lbl_804650C4@l
+--- INS x1 @slot76:
+    N  76 125c 38630000 addi     r3,r3,0   [ ]
+--- DEL x1 @slot121:
+    E 121 80295C04 c002dd6c lfs      f0, lbl_805DDA6C@sda21(r0)
+--- INS x1 @slot120:
+    N 120 130c c0000000 lfs      f0,0(0)   [EMB_SDA21 @86]
+--- INS x1 @slot160:
+    N 160 13ac c0000000 lfs      f0,0(0)   [EMB_SDA21 @415]
+--- INS x1 @slot164:
+    N 164 13bc ef5e07b2 fmuls    f26,f30,f30   [ ]
+--- DEL x1 @slot168:
+    E 168 80295CC0 3b00001f li       r24, 0x1f
+--- DEL x2 @slot171:
+    E 171 80295CCC c002de18 lfs      f0, lbl_805DDB18@sda21(r0)
+    E 172 80295CD0 eefc0032 fmuls    f23, f28, f0
+--- INS x1 @slot171:
+    N 171 13d8 fee0c090 fmr      f23,f24   [ ]
+--- INS x1 @slot173:
+    N 173 13e0 3ae0001f li       r23,31   [ ]
+--- INS x1 @slot187:
+    N 187 1418 80180024 lwz      r0,36(r24)   [ ]
+--- DEL x1 @slot189:
+    E 189 80295D14 eef706f2 fmuls    f23, f23, f27
+--- INS x1 @slot190:
+    N 190 1424 eef70772 fmuls    f23,f23,f29   [ ]
+--- DEL x1 @slot208:
+    E 208 80295D60 ec5c06f2 fmuls    f2, f28, f27
+--- INS x1 @slot209:
+    N 209 1470 ec5a0772 fmuls    f2,f26,f29   [ ]
+--- DEL x1 @slot211:
+    E 211 80295D6C ec5c0032 fmuls    f2, f28, f0
+--- INS x1 @slot212:
+    N 212 147c ec4006b2 fmuls    f2,f0,f26   [ ]
+--- DEL x1 @slot243:
+    E 243 80295DEC 3c60804e lis      r3, lbl_804DBCD0@ha
+--- DEL x1 @slot245:
+    E 245 80295DF4 3ae3bcd0 addi     r23, r3, lbl_804DBCD0@l
+--- INS x4 @slot245:
+    N 245 1500 3c600000 lis      r3,0   [ ]
+    N 246 1504 ef1a0772 fmuls    f24,f26,f29   [ ]
+    N 247 1508 3ac30000 addi     r22,r3,0   [ ]
+    N 248 150c ef2006b2 fmuls    f25,f0,f26   [ ]
+--- DEL x5 @slot248:
+    E 248 80295E00 7c180000 cmpw     r24, r0
+    E 249 80295E04 4082000c bne      .L_80295E10
+    E 250 80295E08 ec5c06f2 fmuls    f2, f28, f27
+    E 251 80295E0C 48000008 b        .L_80295E14
+    E 252 80295E10 ec5c0772 fmuls    f2, f28, f29
+--- DEL x1 @slot254:
+    E 254 80295E18 c022dd94 lfs      f1, lbl_805DDA94@sda21(r0)
+--- INS x2 @slot253:
+    N 253 1520 c0200000 lfs      f1,0(0)   [EMB_SDA21 @93]
+    N 254 1524 7c170000 cmpw     r23,r0   [ ]
+--- INS x4 @slot257:
+    N 257 1530 4082000c bne      153c <render__14TObjCMHairMenuFv+0x410>   [ ]
+    N 258 1534 fc40c090 fmr      f2,f24   [ ]
+    N 259 1538 48000008 b        1540 <render__14TObjCMHairMenuFv+0x414>   [ ]
+    N 260 153c fc40c890 fmr      f2,f25   [ ]
+--- DEL x1 @slot264:
+    E 264 80295E40 3c608046 lis      r3, lbl_804650D4@ha
+--- INS x1 @slot267:
+    N 267 1558 3c600000 lis      r3,0   [ ]
+--- DEL x4 @slot266:
+    E 266 80295E48 3bc350d4 addi     r30, r3, lbl_804650D4@l
+    E 267 80295E4C 3c608046 lis      r3, lbl_804650F4@ha
+    E 268 80295E50 c05e0004 lfs      f2, 0x4(r30)
+    E 269 80295E54 ef6006b2 fmuls    f27, f0, f26
+--- INS x3 @slot269:
+    N 269 1560 38630000 addi     r3,r3,0   [ ]
+    N 270 1564 3c800000 lis      r4,0   [ ]
+    N 271 1568 ef6207b2 fmuls    f27,f2,f30   [ ]
+--- DEL x1 @slot271:
+    E 271 80295E5C 386350f4 addi     r3, r3, lbl_804650F4@l
+--- INS x2 @slot273:
+    N 273 1570 c0430004 lfs      f2,4(r3)   [ ]
+    N 274 1574 38840000 addi     r4,r4,0   [ ]
+--- DEL x1 @slot276:
+    E 276 80295E70 fc00d81e fctiwz   f0, f27
+--- INS x2 @slot280:
+    N 280 158c fc00d81e fctiwz   f0,f27   [ ]
+    N 281 1590 c0830000 lfs      f4,0(r3)   [ ]
+--- DEL x3 @slot279:
+    E 279 80295E7C ec67113a fmadds   f3, f7, f4, f2
+    E 280 80295E80 ec45113a fmadds   f2, f5, f4, f2
+    E 281 80295E84 d8010078 stfd     f0, 0x78(r1)
+--- INS x4 @slot283:
+    N 283 1598 eca810fa fmadds   f5,f8,f3,f2   [ ]
+    N 284 159c c0c30018 lfs      f6,24(r3)   [ ]
+    N 285 15a0 ed2710fa fmadds   f9,f7,f3,f2   [ ]
+    N 286 15a4 c0630008 lfs      f3,8(r3)   [ ]
+--- DEL x4 @slot284:
+    E 284 80295E90 c13e0000 lfs      f9, 0x0(r30)
+    E 285 80295E94 c01e0008 lfs      f0, 0x8(r30)
+    E 286 80295E98 38a00000 li       r5, 0x0
+    E 287 80295E9C 3ba10054 addi     r29, r1, 0x54
+--- INS x1 @slot289:
+    N 289 15b0 d8010078 stfd     f0,120(r1)   [ ]
+--- DEL x1 @slot289:
+    E 289 80295EA4 c17e0018 lfs      f11, 0x18(r30)
+--- DEL x3 @slot291:
+    E 291 80295EAC ec230732 fmuls    f1, f3, f28
+    E 292 80295EB0 d0610074 stfs     f3, 0x74(r1)
+    E 293 80295EB4 ec020732 fmuls    f0, f2, f28
+--- INS x3 @slot292:
+    N 292 15bc ef4207b2 fmuls    f26,f2,f30   [ ]
+    N 293 15c0 90810008 stw      r4,8(r1)   [ ]
+    N 294 15c4 38a00000 li       r5,0   [ ]
+--- INS x5 @slot296:
+    N 296 15cc 8001007c lwz      r0,124(r1)   [ ]
+    N 297 15d0 ec2507b2 fmuls    f1,f5,f30   [ ]
+    N 298 15d4 d0a10074 stfs     f5,116(r1)   [ ]
+    N 299 15d8 ec0907b2 fmuls    f0,f9,f30   [ ]
+    N 300 15dc ec6730ba fmadds   f3,f7,f2,f6   [ ]
+--- DEL x1 @slot297:
+    E 297 80295EC4 8001007c lwz      r0, 0x7c(r1)
+--- INS x2 @slot304:
+    N 304 15ec 38610054 addi     r3,r1,84   [ ]
+    N 305 15f0 ec4830ba fmadds   f2,f8,f2,f6   [ ]
+--- DEL x1 @slot300:
+    E 300 80295ED0 ec655b3a fmadds   f3, f5, f12, f11
+--- INS x1 @slot307:
+    N 307 15f8 38810008 addi     r4,r1,8   [ ]
+--- DEL x8 @slot302:
+    E 302 80295ED8 ec475b3a fmadds   f2, f7, f12, f11
+    E 303 80295EDC 7fa3eb78 mr       r3, r29
+    E 304 80295EE0 9081000c stw      r4, 0xc(r1)
+    E 305 80295EE4 ef480732 fmuls    f26, f8, f28
+    E 306 80295EE8 90e10038 stw      r7, 0x38(r1)
+    E 307 80295EEC 3881000c addi     r4, r1, 0xc
+    E 308 80295EF0 90c1003c stw      r6, 0x3c(r1)
+    E 309 80295EF4 90a10040 stw      r5, 0x40(r1)
+--- DEL x1 @slot318:
+    E 318 80295F18 9801000f stb      r0, 0xf(r1)
+--- INS x4 @slot317:
+    N 317 1620 90e10038 stw      r7,56(r1)   [ ]
+    N 318 1624 90c1003c stw      r6,60(r1)   [ ]
+    N 319 1628 90a10040 stw      r5,64(r1)   [ ]
+    N 320 162c 9801000b stb      r0,11(r1)   [ ]
+--- DEL x1 @slot320:
+    E 320 80295F20 3b810050 addi     r28, r1, 0x50
+--- DEL x1 @slot322:
+    E 322 80295F28 7f83e378 mr       r3, r28
+--- INS x1 @slot323:
+    N 323 1638 38610050 addi     r3,r1,80   [ ]
+--- DEL x1 @slot324:
+    E 324 80295F30 3b61004c addi     r27, r1, 0x4c
+--- DEL x1 @slot326:
+    E 326 80295F38 7f63db78 mr       r3, r27
+--- INS x1 @slot326:
+    N 326 1644 3861004c addi     r3,r1,76   [ ]
+--- DEL x1 @slot332:
+    E 332 80295F50 c022dd8c lfs      f1, lbl_805DDA8C@sda21(r0)
+--- INS x1 @slot332:
+    N 332 165c c0200000 lfs      f1,0(0)   [EMB_SDA21 @93]
+--- DEL x1 @slot352:
+    E 352 80295FA0 3c608046 lis      r3, lbl_80465140@ha
+--- INS x4 @slot352:
+    N 352 16ac fc00d81e fctiwz   f0,f27   [ ]
+    N 353 16b0 3c600000 lis      r3,0   [ ]
+    N 354 16b4 3c800000 lis      r4,0   [ ]
+    N 355 16b8 cbe30000 lfd      f31,0(r3)   [ ]
+--- INS x3 @slot357:
+    N 357 16c0 3bc40000 addi     r30,r4,0   [ ]
+    N 358 16c4 d8010078 stfd     f0,120(r1)   [ ]
+    N 359 16c8 3b810054 addi     r28,r1,84   [ ]
+--- INS x3 @slot361:
+    N 361 16d0 3b610050 addi     r27,r1,80   [ ]
+    N 362 16d4 83a1007c lwz      r29,124(r1)   [ ]
+    N 363 16d8 3b41004c addi     r26,r1,76   [ ]
+--- DEL x1 @slot356:
+    E 356 80295FB0 cba35140 lfd      f29, lbl_80465140@l(r3)
+--- DEL x1 @slot371:
+    E 371 80295FEC 3c608046 lis      r3, lbl_804650D4@ha
+--- INS x1 @slot379:
+    N 379 1718 3c600000 lis      r3,0   [ ]
+--- DEL x1 @slot373:
+    E 373 80295FF4 38e350d4 addi     r7, r3, lbl_804650D4@l
+--- INS x2 @slot381:
+    N 381 1720 38e30000 addi     r7,r3,0   [ ]
+    N 382 1724 3c800000 lis      r4,0   [ ]
+--- DEL x1 @slot376:
+    E 376 80296000 3c808046 lis      r4, lbl_80465140@ha
+--- DEL x1 @slot378:
+    E 378 80296008 38c45140 addi     r6, r4, lbl_80465140@l
+--- INS x1 @slot386:
+    N 386 1734 38c40000 addi     r6,r4,0   [ ]
+--- DEL x1 @slot384:
+    E 384 80296020 90a1007c stw      r5, 0x7c(r1)
+--- INS x1 @slot392:
+    N 392 174c 90610078 stw      r3,120(r1)   [ ]
+--- DEL x1 @slot387:
+    E 387 8029602C 90610078 stw      r3, 0x78(r1)
+--- INS x1 @slot395:
+    N 395 1758 90a1007c stw      r5,124(r1)   [ ]
+--- DEL x3 @slot406:
+    E 406 80296078 fc00d81e fctiwz   f0, f27
+    E 407 8029607C 3c608046 lis      r3, lbl_804650F4@ha
+    E 408 80296080 388350f4 addi     r4, r3, lbl_804650F4@l
+--- INS x1 @slot414:
+    N 414 17a4 3c800000 lis      r4,0   [ ]
+--- INS x1 @slot416:
+    N 416 17ac 38840000 addi     r4,r4,0   [ ]
+--- DEL x5 @slot411:
+    E 411 8029608C 38810008 addi     r4, r1, 0x8
+    E 412 80296090 d8010078 stfd     f0, 0x78(r1)
+    E 413 80296094 90010008 stw      r0, 0x8(r1)
+    E 414 80296098 8001007c lwz      r0, 0x7c(r1)
+    E 415 8029609C 9801000b stb      r0, 0xb(r1)
+--- INS x3 @slot418:
+    N 418 17b4 3881000c addi     r4,r1,12   [ ]
+    N 419 17b8 9001000c stw      r0,12(r1)   [ ]
+    N 420 17bc 9ba1000f stb      r29,15(r1)   [ ]
+--- DEL x1 @slot455:
+    E 455 8029613C bae1008c lmw      r23, 0x8c(r1)
+--- INS x1 @slot460:
+    N 460 185c bac10088 lmw      r22,136(r1)   [ ]

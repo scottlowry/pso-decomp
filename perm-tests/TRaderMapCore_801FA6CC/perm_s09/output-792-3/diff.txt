@@ -1,0 +1,14 @@
+--- before
++++ after
+@@ -73,9 +73,10 @@
+   state.unk18 = TRaderMapCore__data_805D5F4C;
+   state.sprs = lbl_804C87E4;
+   color = -1;
+-  f32 *tbl = lbl_804C87B4[mode];
++  f32 *tbl;
+   begin_effect_render__13TParticleCtrlFv();
+   state.x = tbl[2] + ((f32) lbl_804C87E4[1].x);
++  tbl = lbl_804C87B4[mode];
+   state.y = tbl[3] + ((f32) lbl_804C87E4[1].y);
+   self->m_19c = self->m_19c;
+   set_default_alpha_blend__Fv();

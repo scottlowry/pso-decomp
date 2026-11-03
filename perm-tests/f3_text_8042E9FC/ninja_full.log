@@ -1,0 +1,483 @@
+[1/8] ORIG_ASM build/GPOE8P/asm
+[2/8] AS build/GPOE8P/src/TRK_MINNOW_DOLPHIN/targsupp.o
+[3/8] AS build/GPOE8P/src/TRK_MINNOW_DOLPHIN/exception.o
+[4/8] REPORT
+ INFO Loading project .
+ INFO Generating report for 5090 units (using 28 threads)
+ INFO Report generated in 0.545s
+ INFO Writing to build/GPOE8P/report.json
+[5/8] LINK build/GPOE8P/psov3.elf
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol '@14' is either not a global symbol or doesn't exist.  
+#   Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol '@4' is either not a global symbol or doesn't exist.  
+#   Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol '@891' is either not a global symbol or doesn't exist.  
+#   Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol '@990' is either not a global symbol or doesn't exist.  
+#   Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'AlarmQueue' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'ArenaEnd' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'ArenaStart' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'Down' is either not a global symbol or doesn't exist.  
+#   Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'ErrorTable' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'HeapArray' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'HoldDown' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'HoldUp' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'InterruptHandlerTable' is either not a global symbol 
+#   or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'InterruptPrioTable' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'LastState' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'NumHeaps' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'ResetCallback' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'ResetFunctionQueue' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'SetInterruptMask' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TLobby__sub_80351FDC' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TOBiwaMushi__ct' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TOCapsuleAncient01__ct' is either not a global symbol 
+#   or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TOCapsuleLabo__resource_descriptor' is either not a 
+#   global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TOCapsuleMachine01__ct' is either not a global symbol 
+#   or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TOComputerMachine01__ct' is either not a global symbol 
+#   or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TODoorAncient06__ct' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TODoorAncient07__ct' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TODoorAncient08__ct' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TODoorAncient09__ct' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TODoorCave01__ct' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TODoorCave01__resource_descriptor' is either not a 
+#   global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TODoorCave02__ct' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TODoorCave02__resource_descriptor' is either not a 
+#   global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TODoorCave02_resource_descriptor' is either not a 
+#   global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TODoorCave03__ct' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TODoorCave03__resource_descriptor' is either not a 
+#   global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TODoorMachine01__ct' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TODoorMachine02__ct' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TODoorMachine02_resource_descriptor' is either not a 
+#   global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TODoorVS2Door01__ct' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TODoorVoShip__ct' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TODragonflyCave01__ct' is either not a global symbol 
+#   or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TODragonflyCave01__resource_descriptor' is either not 
+#   a global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TOHangerMachine01__ct' is either not a global symbol 
+#   or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TOHealGeneral__ct' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TOKey__sub_80169FB0' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TOMekaFish00__ct' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TOMekaFish00__name' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TOMekaFish00__resource_descriptor' is either not a 
+#   global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TOMekaFish01__ct' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TOMekaFish01__name' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TOMekaFish01__shared_resource_descriptor' is either 
+#   not a global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TOMonitorMachine01__ct' is either not a global symbol 
+#   or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TOMonumentAncient01__ct' is either not a global symbol 
+#   or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TOMonumentAncient02__ct' is either not a global symbol 
+#   or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TORainbowCave01__ct' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TOSignCave01__ct' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TOSignCave02__ct' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TOSignCave03__ct' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TOTrapChainSaw__ct' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TObjCamera__ct' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TObjCurtainLobby__ct' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TObjCurtainLobby__sub_8035B8B4' is either not a global 
+#   symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TObjEneNanoDrago__ct' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TObjKabochaLobby__ct' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TObjLobbyMain__ct' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TObjPlayer__sub_800D9E08' is either not a global 
+#   symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TObjPlayer__sub_800D9F4C' is either not a global 
+#   symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TObjPlayer__sub_800DA414' is either not a global 
+#   symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TObjPlayer__sub_800DA7E4' is either not a global 
+#   symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TObjPlayer__sub_800DAB98' is either not a global 
+#   symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TObjPlayer__sub_800DB0F8' is either not a global 
+#   symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TObjPlayer__sub_800DB390' is either not a global 
+#   symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TObjPlayer__sub_800DBAB8' is either not a global 
+#   symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TObjRainbowLobby__ct' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TObjSeabedSuiso_CH__ct' is either not a global symbol 
+#   or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TObjStendGlassLobby__ct' is either not a global symbol 
+#   or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TObjStendGlassLobby__resource_descriptor' is either 
+#   not a global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TObjStendGlassLobby__sub_803596C0' is either not a 
+#   global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TObjSuisouLobby__ct' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TObjTreeLobby__ct' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TObjTreeLobby_resource_descriptor' is either not a 
+#   global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TObjWeddingLobby__ct' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TObjWeddingLobby__sub_8035BC20' is either not a global 
+#   symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TRK_mainError' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'WaitingQueue' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol '__OSArenaHi' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol '__OSArenaLo' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TUnk_804F0EA8::~TUnk_804F0EA8()' is either not a 
+#   global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TUnk_804F0EA8::__vt' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TObjPlayer::add_target_in_front_arc(void*)' is either 
+#   not a global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'bm_fs_obj_do_doa01_a_model_names' is either not a 
+#   global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'bm_fs_obj_do_doa01_a_motion_names' is either not a 
+#   global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'bm_fs_obj_do_doa01_model_names' is either not a global 
+#   symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'bm_fs_obj_do_doa01_motion_names' is either not a 
+#   global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'bm_fs_obj_do_doa02_a_model_names' is either not a 
+#   global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'bm_fs_obj_do_doa02_a_motion_names' is either not a 
+#   global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'bm_fs_obj_do_doa02_model_names' is either not a global 
+#   symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'bm_fs_obj_do_doa02_motion_names' is either not a 
+#   global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'bm_fs_obj_do_doa03_a_model_names' is either not a 
+#   global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'bm_fs_obj_do_doa03_a_motion_names' is either not a 
+#   global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'bm_fs_obj_do_doa03_model_names' is either not a global 
+#   symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'bm_fs_obj_do_doa03_motion_names' is either not a 
+#   global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'bm_fs_obj_ki_doa2_model_names' is either not a global 
+#   symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'bm_fs_obj_ki_doa2_motion_names' is either not a global 
+#   symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'bm_fs_obj_ki_doa_a_model_names' is either not a global 
+#   symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'bm_fs_obj_ki_doa_a_motion_names' is either not a 
+#   global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'c2r$433' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'cave_door01_resource_descriptor' is either not a 
+#   global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'dragonfly_cave01_resource_descriptor' is either not a 
+#   global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TODoorCave01::draw_door_model(void*,int,int)' is 
+#   either not a global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TODoorAncient09::draw_model()' is either not a global 
+#   symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TObjSeabedSuisoBrakable::draw_model(void*)' is either 
+#   not a global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TODoorMachine01::draw_part_models(unsigned 
+#   char*,long)' is either not a global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TODoorCave02::draw_parts(void*)' is either not a 
+#   global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TOHealGeneral::find_heal_target(void*)' is either not 
+#   a global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TObjPlayer::find_open_direction(void*,void*)' is 
+#   either not a global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'fn_8017F5F0' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'fragmentinfo' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'fs_obj_hanyousu_body1_j_resource_bundle' is either not 
+#   a global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'fs_obj_hanyousu_body1_resource_bundle' is either not a 
+#   global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'fs_obj_hanyousu_light_j_resource_bundle' is either not 
+#   a global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'fs_obj_hanyousu_light_resource_bundle' is either not a 
+#   global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'gTRKFramingState' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TObjMotion::get_anim_entry_value(short)' is either not 
+#   a global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TODragonflyMachine01::initialize(void*)' is either not 
+#   a global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TODoorVS2Door01::is_open()' is either not a global 
+#   symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'lbl_80441648' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'lbl_80441660' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'lbl_80441678' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'lbl_804429E8' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'lbl_80442A00' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'lbl_80442A18' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'lbl_80494C90' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'lobby_curtain_resource_descriptor' is either not a 
+#   global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TObjPlayer::render_enemy_with_fade(void*)' is either 
+#   not a global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TObjPlayer::render_model_transformed()' is either not 
+#   a global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TUnk_804F0EA8::run_task()' is either not a global 
+#   symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TOHealGeneral::set_enable_count(long)' is either not a 
+#   global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TOHealGeneral::set_script_entry(long)' is either not a 
+#   global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TObjPlayer::spawn_directional_particle_at_slot(long)' 
+#   is either not a global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TObjEneNanoDrago::sub_800DA1F4()' is either not a 
+#   global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TObjEneNanoDrago::sub_800DA2A0()' is either not a 
+#   global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TObjEneNanoDrago::sub_800DB970()' is either not a 
+#   global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TODoorAncient09::sub_80160968()' is either not a 
+#   global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'todoormachine01_resource_descriptor' is either not a 
+#   global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TObjPlayer::update_circle_move(void*,void*,float)' is 
+#   either not a global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TObjPlayer::update_death_sequence(void*)' is either 
+#   not a global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TObjPlayer::update_death_state()' is either not a 
+#   global symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TObjChara::update_field_318()' is either not a global 
+#   symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TOBarrierEnergy01::vfunc_20()' is either not a global 
+#   symbol or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'wedding_lobby_resource_descriptor' is either not a 
+#   global symbol or doesn't exist.  Ignored.
+[6/8] DOL build/GPOE8P/psov3.dol
+[7/8] CHECK config/GPOE8P/psov3/build.sha1
+build/GPOE8P/psov3.dol: OK
+[8/8] PROGRESS
+Progress:
+  All: 94.24% matched, 73.26% linked (3539 / 5090 files)
+    Code: 4102204 / 4353092 bytes (27227 / 27572 functions)
+    Data: 1275455 / 1761415 bytes (72.41%)
+  PSO Game Code: 93.90% matched, 71.69% linked (3371 / 4916 files)
+    Code: 3860468 / 4111356 bytes (26239 / 26584 functions)
+    Data: 1234686 / 1720622 bytes (71.76%)
+  Dolphin SDK: 100.00% matched, 100.00% linked (113 / 113 files)
+    Code: 190380 / 190380 bytes (847 / 847 functions)
+    Data: 34429 / 34429 bytes (100.00%)
+  Runtime: 100.00% matched, 100.00% linked (55 / 55 files)
+    Code: 51356 / 51356 bytes (141 / 141 functions)
+    Data: 6340 / 6340 bytes (100.00%)
+NINJA_RC=0

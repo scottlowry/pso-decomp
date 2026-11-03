@@ -1,0 +1,556 @@
+era=460 ours=463 surplus=+3
+
+== replace era[0:1] ours[0:1] net +0
+  O-  0 80295A20: stwu     r1, -0x140(r1)
+  N-  0 112c: stwu     r1,-320(r1)   r=None
+
+== replace era[4:5] ours[4:5] net +0
+  O-  4 80295A30: psq_st   f31, 0x138(r1), 0, qr0
+  N-  4 113c: xxsel    vs31,vs1,vs0,vs36   r=None
+
+== replace era[10:11] ours[10:11] net +0
+  O- 10 80295A48: psq_st   f28, 0x108(r1), 0, qr0
+  N- 10 1154: xsmaddadp vs28,vs1,vs0   r=None
+
+== replace era[12:13] ours[12:13] net +0
+  O- 12 80295A50: psq_st   f27, 0xf8(r1), 0, qr0
+  N- 12 115c: xxsel    vs27,vs1,vs0,vs35   r=None
+
+== replace era[18:19] ours[18:19] net +0
+  O- 18 80295A68: psq_st   f24, 0xc8(r1), 0, qr0
+  N- 18 1174: xsmsubmsp vs24,vs1,vs0   r=None
+
+== replace era[20:22] ours[20:22] net +0
+  O- 20 80295A70: psq_st   f23, 0xb8(r1), 0, qr0
+  O- 21 80295A74: stmw     r23, 0x8c(r1)
+  N- 20 117c: xxsel    vs23,vs1,vs0,vs34   r=None
+  N- 21 1180: stmw     r22,136(r1)   r=None
+
+== replace era[28:30] ours[28:30] net +0
+  O- 28 80295A90: lfs      f2, lbl_805DDAFC@sda21(r0)
+  O- 29 80295A94: lfs      f0, lbl_805DDA70@sda21(r0)
+  N- 28 119c: lfs      f2,0(0)   r=('R_PPC_EMB_SDA21', '@406')
+  N- 29 11a0: lfs      f0,0(0)   r=('R_PPC_EMB_SDA21', '@56')
+
+== replace era[32:33] ours[32:33] net +0
+  O- 32 80295AA0: ble      .L_80295AA8
+  N- 32 11ac: ble      11b4 <render__14TObjCMHairMenuFv+0x88>   r=None
+
+== replace era[35:37] ours[35:37] net +0
+  O- 35 80295AAC: subic.   r0, r3, 0x1
+  O- 36 80295AB0: bge      .L_80295ABC
+  N- 35 11b8: addic.   r0,r3,-1   r=None
+  N- 36 11bc: bge      11c8 <render__14TObjCMHairMenuFv+0x9c>   r=None
+
+== replace era[38:39] ours[38:39] net +0
+  O- 38 80295AB8: b        .L_80295AC8
+  N- 38 11c4: b        11d4 <render__14TObjCMHairMenuFv+0xa8>   r=None
+
+== replace era[40:41] ours[40:41] net +0
+  O- 40 80295AC0: blt      .L_80295AC8
+  N- 40 11cc: blt      11d4 <render__14TObjCMHairMenuFv+0xa8>   r=None
+
+== replace era[43:45] ours[43:45] net +0
+  O- 43 80295ACC: lis      r3, lbl_8046509C@ha
+  O- 44 80295AD0: lfs      f1, lbl_805DDA6C@sda21(r0)
+  N- 43 11d8: lis      r3,0   r=('R_PPC_ADDR16_HA', 'lbl_8046509C')
+  N- 44 11dc: lfs      f1,0(0)   r=('R_PPC_EMB_SDA21', '@85')
+
+== replace era[46:47] ours[46:47] net +0
+  O- 46 80295AD8: addi     r3, r3, lbl_8046509C@l
+  N- 46 11e4: addi     r3,r3,0   r=('R_PPC_ADDR16_LO', 'lbl_8046509C')
+
+== replace era[50:52] ours[50:52] net +0
+  O- 50 80295AE8: beq      .L_80295BF0
+  O- 51 80295AEC: lfs      f0, lbl_805DDA74@sda21(r0)
+  N- 50 11f4: beq      12fc <render__14TObjCMHairMenuFv+0x1d0>   r=None
+  N- 51 11f8: lfs      f0,0(0)   r=('R_PPC_EMB_SDA21', '@86')
+
+== replace era[54:57] ours[54:57] net +0
+  O- 54 80295AF8: bne      .L_80295B04
+  O- 55 80295AFC: lfs      f26, lbl_805DDA70@sda21(r0)
+  O- 56 80295B00: b        .L_80295B0C
+  N- 54 1204: bne      1210 <render__14TObjCMHairMenuFv+0xe4>   r=None
+  N- 55 1208: lfs      f27,0(0)   r=('R_PPC_EMB_SDA21', '@56')
+  N- 56 120c: b        1218 <render__14TObjCMHairMenuFv+0xec>   r=None
+
+== replace era[59:60] ours[59:60] net +0
+  O- 59 80295B0C: lfs      f28, lbl_805DDAC0@sda21(r0)
+  N- 59 1218: lfs      f30,0(0)   r=('R_PPC_EMB_SDA21', '@118')
+
+== replace era[61:62] ours[61:62] net +0
+  O- 61 80295B14: lfs      f29, lbl_805DDA70@sda21(r0)
+  N- 61 1220: lfs      f31,0(0)   r=('R_PPC_EMB_SDA21', '@56')
+
+== replace era[64:65] ours[64:65] net +0
+  O- 64 80295B20: lfs      f1, lbl_805DDB04@sda21(r0)
+  N- 64 122c: lfs      f1,0(0)   r=('R_PPC_EMB_SDA21', '@407')
+
+== replace era[66:67] ours[66:67] net +0
+  O- 66 80295B28: lfs      f24, lbl_805DDA88@sda21(r0)
+  N- 66 1234: lfs      f24,0(0)   r=('R_PPC_EMB_SDA21', '@91')
+
+== replace era[69:70] ours[69:70] net +0
+  O- 69 80295B34: lfs      f25, lbl_805DDB08@sda21(r0)
+  N- 69 1240: lfs      f25,0(0)   r=('R_PPC_EMB_SDA21', '@408')
+
+== replace era[72:73] ours[72:73] net +0
+  O- 72 80295B40: bne      .L_80295B4C
+  N- 72 124c: bne      1258 <render__14TObjCMHairMenuFv+0x12c>   r=None
+
+== replace era[74:78] ours[74:78] net +0
+  O- 74 80295B48: b        .L_80295B64
+  O- 75 80295B4C: lis      r3, lbl_804650C4@ha
+  O- 76 80295B50: lfs      f1, lbl_805DDAC0@sda21(r0)
+  O- 77 80295B54: addi     r3, r3, lbl_804650C4@l
+  N- 74 1254: b        1270 <render__14TObjCMHairMenuFv+0x144>   r=None
+  N- 75 1258: lis      r3,0   r=('R_PPC_ADDR16_HA', 'lbl_804650C4')
+  N- 76 125c: lfs      f1,0(0)   r=('R_PPC_EMB_SDA21', '@118')
+  N- 77 1260: addi     r3,r3,0   r=('R_PPC_ADDR16_LO', 'lbl_804650C4')
+
+== replace era[84:85] ours[84:85] net +0
+  O- 84 80295B70: bne      .L_80295B94
+  N- 84 127c: bne      12a0 <render__14TObjCMHairMenuFv+0x174>   r=None
+
+== replace era[89:90] ours[89:90] net +0
+  O- 89 80295B84: lfs      f2, lbl_805DDA84@sda21(r0)
+  N- 89 1290: lfs      f2,0(0)   r=('R_PPC_EMB_SDA21', '@90')
+
+== replace era[95:96] ours[95:96] net +0
+  O- 95 80295B9C: lfs      f1, lbl_805DDA8C@sda21(r0)
+  N- 95 12a8: lfs      f1,0(0)   r=('R_PPC_EMB_SDA21', '@92')
+
+== replace era[104:105] ours[104:105] net +0
+  O-104 80295BC0: lfs      f1, lbl_805DDA8C@sda21(r0)
+  N-104 12cc: lfs      f1,0(0)   r=('R_PPC_EMB_SDA21', '@92')
+
+== replace era[115:116] ours[115:116] net +0
+  O-115 80295BEC: blt      .L_80295B38
+  N-115 12f8: blt      1244 <render__14TObjCMHairMenuFv+0x118>   r=None
+
+== replace era[117:118] ours[117:118] net +0
+  O-117 80295BF4: lfs      f0, lbl_805DDA90@sda21(r0)
+  N-117 1300: lfs      f0,0(0)   r=('R_PPC_EMB_SDA21', '@54')
+
+== replace era[120:122] ours[120:122] net +0
+  O-120 80295C00: beq      .L_80295C78
+  O-121 80295C04: lfs      f0, lbl_805DDA6C@sda21(r0)
+  N-120 130c: beq      1384 <render__14TObjCMHairMenuFv+0x258>   r=None
+  N-121 1310: lfs      f0,0(0)   r=('R_PPC_EMB_SDA21', '@86')
+
+== replace era[124:127] ours[124:127] net +0
+  O-124 80295C10: bne      .L_80295C1C
+  O-125 80295C14: lfs      f23, lbl_805DDA70@sda21(r0)
+  O-126 80295C18: b        .L_80295C20
+  N-124 131c: bne      1328 <render__14TObjCMHairMenuFv+0x1fc>   r=None
+  N-125 1320: lfs      f23,0(0)   r=('R_PPC_EMB_SDA21', '@56')
+  N-126 1324: b        132c <render__14TObjCMHairMenuFv+0x200>   r=None
+
+== replace era[128:129] ours[128:129] net +0
+  O-128 80295C20: lfs      f1, lbl_805DDB0C@sda21(r0)
+  N-128 132c: lfs      f1,0(0)   r=('R_PPC_EMB_SDA21', '@409')
+
+== replace era[130:131] ours[130:131] net +0
+  O-130 80295C28: lfs      f0, lbl_805DDB04@sda21(r0)
+  N-130 1334: lfs      f0,0(0)   r=('R_PPC_EMB_SDA21', '@407')
+
+== replace era[132:133] ours[132:133] net +0
+  O-132 80295C30: lfs      f26, lbl_805DDB08@sda21(r0)
+  N-132 133c: lfs      f26,0(0)   r=('R_PPC_EMB_SDA21', '@408')
+
+== replace era[137:139] ours[137:139] net +0
+  O-137 80295C44: bne      .L_80295C4C
+  O-138 80295C48: li       r3, -0x1
+  N-137 1350: bne      1358 <render__14TObjCMHairMenuFv+0x22c>   r=None
+  N-138 1354: li       r3,-1   r=None
+
+== replace era[140:141] ours[140:141] net +0
+  O-140 80295C50: lfs      f1, lbl_805DDA94@sda21(r0)
+  N-140 135c: lfs      f1,0(0)   r=('R_PPC_EMB_SDA21', '@93')
+
+== replace era[149:150] ours[149:150] net +0
+  O-149 80295C74: blt      .L_80295C38
+  N-149 1380: blt      1344 <render__14TObjCMHairMenuFv+0x218>   r=None
+
+== replace era[151:152] ours[151:152] net +0
+  O-151 80295C7C: lfs      f0, lbl_805DDA74@sda21(r0)
+  N-151 1388: lfs      f0,0(0)   r=('R_PPC_EMB_SDA21', '@86')
+
+== replace era[154:155] ours[154:155] net +0
+  O-154 80295C88: beq      .L_802960F4
+  N-154 1394: beq      180c <render__14TObjCMHairMenuFv+0x6e0>   r=None
+
+== replace era[156:158] ours[156:158] net +0
+  O-156 80295C90: lfs      f2, lbl_805DDB10@sda21(r0)
+  O-157 80295C94: lfs      f1, lbl_805DDB14@sda21(r0)
+  N-156 139c: lfs      f0,0(0)   r=('R_PPC_EMB_SDA21', '@410')
+  N-157 13a0: lfs      f2,0(0)   r=('R_PPC_EMB_SDA21', '@411')
+
+== replace era[159:160] ours[159:160] net +0
+  O-159 80295C9C: lfs      f0, lbl_805DDAD0@sda21(r0)
+  N-159 13a8: lfs      f1,0(0)   r=('R_PPC_EMB_SDA21', '@122')
+
+== insert era[161:161] ours[161:162] net +1
+  N-161 13b0: lfs      f0,0(0)   r=('R_PPC_EMB_SDA21', '@412')
+
+== replace era[162:163] ours[163:164] net +0
+  O-162 80295CA8: lfs      f29, TObjCMAssignMenu__data_805DDB20@sda21(r0)
+  N-163 13b8: lfs      f27,0(0)   r=('R_PPC_EMB_SDA21', '@414')
+
+== replace era[165:166] ours[166:168] net +1
+  O-165 80295CB4: b        .L_80295D3C
+  N-166 13c4: fmuls    f24,f0,f26   r=None
+  N-167 13c8: b        1450 <render__14TObjCMHairMenuFv+0x324>   r=None
+
+== insert era[168:168] ours[170:174] net +4
+  N-170 13d4: cmpwi    r0,0   r=None
+  N-171 13d8: beq      13e0 <render__14TObjCMHairMenuFv+0x2b4>   r=None
+  N-172 13dc: fmr      f23,f24   r=None
+  N-173 13e0: cmpw     r22,r25   r=None
+
+== replace era[169:176] ours[175:177] net -5
+  O-169 80295CC4: cmpwi    r3, 0x0
+  O-170 80295CC8: beq      .L_80295CD4
+  O-171 80295CCC: lfs      f0, lbl_805DDB18@sda21(r0)
+  O-172 80295CD0: fmuls    f23, f28, f0
+  O-173 80295CD4: cmpw     r23, r27
+  O-174 80295CD8: bne      .L_80295D18
+  O-175 80295CDC: lwz      r0, creation_resource_ready_state@sda21(r0)
+  N-175 13e8: bne      142c <render__14TObjCMHairMenuFv+0x300>   r=None
+  N-176 13ec: lwz      r0,0(0)   r=('R_PPC_EMB_SDA21', 'creation_resource_ready_state')
+
+== replace era[178:179] ours[179:180] net +0
+  O-178 80295CE8: beq      .L_80295D0C
+  N-179 13f8: beq      141c <render__14TObjCMHairMenuFv+0x2f0>   r=None
+
+== replace era[183:184] ours[184:185] net +0
+  O-183 80295CFC: lfs      f0, lbl_805DDB1C@sda21(r0)
+  N-184 140c: lfs      f0,0(0)   r=('R_PPC_EMB_SDA21', '@413')
+
+== replace era[186:187] ours[187:189] net +1
+  O-186 80295D08: b        .L_80295D18
+  N-187 1418: b        142c <render__14TObjCMHairMenuFv+0x300>   r=None
+  N-188 141c: lwz      r0,36(r24)   r=None
+
+== replace era[188:189] ours[190:191] net +0
+  O-188 80295D10: bne      .L_80295D18
+  N-190 1424: bne      142c <render__14TObjCMHairMenuFv+0x300>   r=None
+
+== replace era[191:192] ours[193:194] net +0
+  O-191 80295D1C: lfs      f1, lbl_805DDA94@sda21(r0)
+  N-193 1430: lfs      f1,0(0)   r=('R_PPC_EMB_SDA21', '@93')
+
+== replace era[201:203] ours[203:205] net +0
+  O-201 80295D44: blt      .L_80295CB8
+  O-202 80295D48: lfs      f0, lbl_805DDB24@sda21(r0)
+  N-203 1458: blt      13cc <render__14TObjCMHairMenuFv+0x2a0>   r=None
+  N-204 145c: lfs      f0,0(0)   r=('R_PPC_EMB_SDA21', '@415')
+
+== replace era[207:208] ours[209:210] net +0
+  O-207 80295D5C: bne      .L_80295D68
+  N-209 1470: bne      147c <render__14TObjCMHairMenuFv+0x350>   r=None
+
+== replace era[209:211] ours[211:213] net +0
+  O-209 80295D64: b        .L_80295D74
+  O-210 80295D68: lfs      f0, lbl_805DDB18@sda21(r0)
+  N-211 1478: b        1488 <render__14TObjCMHairMenuFv+0x35c>   r=None
+  N-212 147c: lfs      f0,0(0)   r=('R_PPC_EMB_SDA21', '@412')
+
+== replace era[213:214] ours[215:216] net +0
+  O-213 80295D74: lfs      f1, lbl_805DDB28@sda21(r0)
+  N-215 1488: lfs      f1,0(0)   r=('R_PPC_EMB_SDA21', '@416')
+
+== replace era[215:216] ours[217:218] net +0
+  O-215 80295D7C: lfs      f0, lbl_805DDB2C@sda21(r0)
+  N-217 1490: lfs      f0,0(0)   r=('R_PPC_EMB_SDA21', '@417')
+
+== replace era[218:219] ours[220:221] net +0
+  O-218 80295D88: lfs      f1, lbl_805DDA94@sda21(r0)
+  N-220 149c: lfs      f1,0(0)   r=('R_PPC_EMB_SDA21', '@93')
+
+== replace era[222:223] ours[224:225] net +0
+  O-222 80295D98: lfs      f1, lbl_805DDB30@sda21(r0)
+  N-224 14ac: lfs      f1,0(0)   r=('R_PPC_EMB_SDA21', '@418')
+
+== replace era[224:225] ours[226:227] net +0
+  O-224 80295DA0: lfs      f0, lbl_805DDAD0@sda21(r0)
+  N-226 14b4: lfs      f0,0(0)   r=('R_PPC_EMB_SDA21', '@122')
+
+== replace era[227:228] ours[229:230] net +0
+  O-227 80295DAC: lfs      f1, lbl_805DDA94@sda21(r0)
+  N-229 14c0: lfs      f1,0(0)   r=('R_PPC_EMB_SDA21', '@93')
+
+== replace era[232:233] ours[234:235] net +0
+  O-232 80295DC0: lfs      f1, lbl_805DDB34@sda21(r0)
+  N-234 14d4: lfs      f1,0(0)   r=('R_PPC_EMB_SDA21', '@419')
+
+== replace era[234:235] ours[236:237] net +0
+  O-234 80295DC8: lfs      f0, lbl_805DDB38@sda21(r0)
+  N-236 14dc: lfs      f0,0(0)   r=('R_PPC_EMB_SDA21', '@420')
+
+== replace era[237:238] ours[239:240] net +0
+  O-237 80295DD4: lfs      f1, lbl_805DDA94@sda21(r0)
+  N-239 14e8: lfs      f1,0(0)   r=('R_PPC_EMB_SDA21', '@93')
+
+== replace era[243:246] ours[245:250] net +2
+  O-243 80295DEC: lis      r3, lbl_804DBCD0@ha
+  O-244 80295DF0: lfs      f29, lbl_805DDB18@sda21(r0)
+  O-245 80295DF4: addi     r23, r3, lbl_804DBCD0@l
+  N-245 1500: lfs      f0,0(0)   r=('R_PPC_EMB_SDA21', '@412')
+  N-246 1504: lis      r3,0   r=('R_PPC_ADDR16_HA', 'lbl_804DBCD0')
+  N-247 1508: fmuls    f24,f26,f29   r=None
+  N-248 150c: addi     r22,r3,0   r=('R_PPC_ADDR16_LO', 'lbl_804DBCD0')
+  N-249 1510: fmuls    f25,f0,f26   r=None
+
+== insert era[248:248] ours[252:255] net +3
+  N-252 151c: addi     r3,r23,-1   r=None
+  N-253 1520: slwi     r4,r3,3   r=None
+  N-254 1524: lfs      f1,0(0)   r=('R_PPC_EMB_SDA21', '@93')
+
+== delete era[249:256] ours[256:256] net -7
+  O-249 80295E04: bne      .L_80295E10
+  O-250 80295E08: fmuls    f2, f28, f27
+  O-251 80295E0C: b        .L_80295E14
+  O-252 80295E10: fmuls    f2, f28, f29
+  O-253 80295E14: subi     r0, r24, 0x1
+  O-254 80295E18: lfs      f1, lbl_805DDA94@sda21(r0)
+  O-255 80295E1C: slwi     r0, r0, 3
+
+== insert era[258:258] ours[258:262] net +4
+  N-258 1534: bne      1540 <render__14TObjCMHairMenuFv+0x414>   r=None
+  N-259 1538: fmr      f2,f24   r=None
+  N-260 153c: b        1544 <render__14TObjCMHairMenuFv+0x418>   r=None
+  N-261 1540: fmr      f2,f25   r=None
+
+== replace era[261:262] ours[265:266] net +0
+  O-261 80295E34: blt      .L_80295DFC
+  N-265 1550: blt      1518 <render__14TObjCMHairMenuFv+0x3ec>   r=None
+
+== replace era[264:269] ours[268:272] net -1
+  O-264 80295E40: lis      r3, lbl_804650D4@ha
+  O-265 80295E44: lfs      f0, TObjCMMainMenu__data_805DDB44@sda21(r0)
+  O-266 80295E48: addi     r30, r3, lbl_804650D4@l
+  O-267 80295E4C: lis      r3, lbl_804650F4@ha
+  O-268 80295E50: lfs      f2, 0x4(r30)
+  N-268 155c: lis      r3,0   r=('R_PPC_ADDR16_HA', 'lbl_804650D4')
+  N-269 1560: lfs      f2,0(0)   r=('R_PPC_EMB_SDA21', '@421')
+  N-270 1564: addi     r30,r3,0   r=('R_PPC_ADDR16_LO', 'lbl_804650D4')
+  N-271 1568: addi     r7,r1,88   r=None
+
+== replace era[271:274] ours[274:278] net +1
+  O-271 80295E5C: addi     r3, r3, lbl_804650F4@l
+  O-272 80295E60: lwz      r4, 0xc(r3)
+  O-273 80295E64: addi     r7, r1, 0x58
+  N-274 1574: lfs      f2,4(r30)   r=None
+  N-275 1578: lis      r3,0   r=('R_PPC_ADDR16_HA', 'lbl_804650F4')
+  N-276 157c: addi     r3,r3,0   r=('R_PPC_ADDR16_LO', 'lbl_804650F4')
+  N-277 1580: addi     r6,r1,72   r=None
+
+== replace era[275:276] ours[279:281] net +1
+  O-275 80295E6C: lfs      f7, lbl_805DDB3C@sda21(r0)
+  N-279 1588: lfs      f8,0(0)   r=('R_PPC_EMB_SDA21', '@422')
+  N-280 158c: lfs      f7,0(0)   r=('R_PPC_EMB_SDA21', '@423')
+
+== replace era[277:278] ours[282:283] net +0
+  O-277 80295E74: lfs      f5, lbl_805DDB40@sda21(r0)
+  N-282 1594: lfs      f4,0(r30)   r=None
+
+== insert era[280:280] ours[285:286] net +1
+  N-285 15a0: lfs      f6,24(r30)   r=None
+
+== insert era[281:281] ours[287:290] net +3
+  N-287 15a8: lfs      f3,8(r30)   r=None
+  N-288 15ac: lfs      f2,0(0)   r=('R_PPC_EMB_SDA21', '@408')
+  N-289 15b0: li       r5,0   r=None
+
+== delete era[282:288] ours[291:291] net -6
+  O-282 80295E88: lfs      f8, lbl_805DDB08@sda21(r0)
+  O-283 80295E8C: addi     r6, r1, 0x48
+  O-284 80295E90: lfs      f9, 0x0(r30)
+  O-285 80295E94: lfs      f0, 0x8(r30)
+  O-286 80295E98: li       r5, 0x0
+  O-287 80295E9C: addi     r29, r1, 0x54
+
+== replace era[289:290] ours[292:294] net +1
+  O-289 80295EA4: lfs      f11, 0x18(r30)
+  N-292 15bc: lwz      r3,12(r3)   r=None
+  N-293 15c0: fmuls    f26,f2,f30   r=None
+
+== delete era[293:294] ours[297:297] net -1
+  O-293 80295EB4: fmuls    f0, f2, f28
+
+== insert era[295:295] ours[298:299] net +1
+  N-298 15d4: lwz      r0,124(r1)   r=None
+
+== delete era[297:298] ours[301:301] net -1
+  O-297 80295EC4: lwz      r0, 0x7c(r1)
+
+== insert era[299:299] ours[302:308] net +6
+  N-302 15e4: addi     r4,r1,8   r=None
+  N-303 15e8: fmadds   f3,f7,f2,f6   r=None
+  N-304 15ec: stw      r3,8(r1)   r=None
+  N-305 15f0: fmadds   f2,f8,f2,f6   r=None
+  N-306 15f4: addi     r3,r1,84   r=None
+  N-307 15f8: fmuls    f0,f9,f30   r=None
+
+== delete era[300:301] ours[309:309] net -1
+  O-300 80295ED0: fmadds   f3, f5, f12, f11
+
+== delete era[302:310] ours[310:310] net -8
+  O-302 80295ED8: fmadds   f2, f7, f12, f11
+  O-303 80295EDC: mr       r3, r29
+  O-304 80295EE0: stw      r4, 0xc(r1)
+  O-305 80295EE4: fmuls    f26, f8, f28
+  O-306 80295EE8: stw      r7, 0x38(r1)
+  O-307 80295EEC: addi     r4, r1, 0xc
+  O-308 80295EF0: stw      r6, 0x3c(r1)
+  O-309 80295EF4: stw      r5, 0x40(r1)
+
+== replace era[318:319] ours[318:322] net +3
+  O-318 80295F18: stb      r0, 0xf(r1)
+  N-318 1624: stw      r7,56(r1)   r=None
+  N-319 1628: stw      r6,60(r1)   r=None
+  N-320 162c: stw      r5,64(r1)   r=None
+  N-321 1630: stb      r0,11(r1)   r=None
+
+== insert era[320:320] ours[323:324] net +1
+  N-323 1638: mr       r4,r3   r=None
+
+== insert era[321:321] ours[325:326] net +1
+  N-325 1640: bl       1640 <render__14TObjCMHairMenuFv+0x514>   r=('R_PPC_REL24', 'TObjCMHairMenu__sub_801E3F54')
+
+== delete era[322:324] ours[327:327] net -2
+  O-322 80295F28: mr       r3, r28
+  O-323 80295F2C: bl       TObjCMHairMenu__sub_801E3F54
+
+== delete era[325:327] ours[328:328] net -2
+  O-325 80295F34: mr       r4, r3
+  O-326 80295F38: mr       r3, r27
+
+== replace era[332:333] ours[333:334] net +0
+  O-332 80295F50: lfs      f1, lbl_805DDA8C@sda21(r0)
+  N-333 1660: lfs      f1,0(0)   r=('R_PPC_EMB_SDA21', '@93')
+
+== replace era[351:355] ours[352:362] net +6
+  O-351 80295F9C: blt      .L_80295F50
+  O-352 80295FA0: lis      r3, lbl_80465140@ha
+  O-353 80295FA4: lfs      f30, TObjCMMainMenu__data_805DDB44@sda21(r0)
+  O-354 80295FA8: lfs      f31, lbl_805DDA90@sda21(r0)
+  N-352 16ac: blt      1660 <render__14TObjCMHairMenuFv+0x534>   r=None
+  N-353 16b0: fctiwz   f0,f27   r=None
+  N-354 16b4: lis      r3,0   r=('R_PPC_ADDR16_HA', '@268')
+  N-355 16b8: lfs      f28,0(0)   r=('R_PPC_EMB_SDA21', '@421')
+  N-356 16bc: addi     r28,r1,84   r=None
+  N-357 16c0: lfd      f31,0(r3)   r=('R_PPC_ADDR16_LO', '@268')
+  N-358 16c4: addi     r27,r1,80   r=None
+  N-359 16c8: stfd     f0,120(r1)   r=None
+  N-360 16cc: addi     r26,r1,76   r=None
+  N-361 16d0: lfs      f27,0(0)   r=('R_PPC_EMB_SDA21', '@54')
+
+== replace era[356:357] ours[363:364] net +0
+  O-356 80295FB0: lfd      f29, lbl_80465140@l(r3)
+  N-363 16d8: lwz      r29,124(r1)   r=None
+
+== replace era[370:372] ours[377:379] net +0
+  O-370 80295FE8: beq      .L_802960DC
+  O-371 80295FEC: lis      r3, lbl_804650D4@ha
+  N-377 1710: beq      17f4 <render__14TObjCMHairMenuFv+0x6c8>   r=None
+  N-378 1714: lis      r3,0   r=('R_PPC_ADDR16_HA', 'lbl_804650D4')
+
+== replace era[373:374] ours[380:383] net +2
+  O-373 80295FF4: addi     r7, r3, lbl_804650D4@l
+  N-380 171c: addi     r4,r3,0   r=('R_PPC_ADDR16_LO', 'lbl_804650D4')
+  N-381 1720: lfs      f4,8(r30)   r=None
+  N-382 1724: lfs      f5,0(r4)   r=None
+
+== replace era[375:379] ours[384:385] net -3
+  O-375 80295FFC: lfs      f5, 0x0(r7)
+  O-376 80296000: lis      r4, lbl_80465140@ha
+  O-377 80296004: lfs      f4, 0x8(r30)
+  O-378 80296008: addi     r6, r4, lbl_80465140@l
+  N-384 172c: lis      r4,0   r=('R_PPC_ADDR16_HA', '@268')
+
+== delete era[380:381] ours[386:386] net -1
+  O-380 80296010: li       r0, 0x4
+
+== replace era[382:383] ours[387:388] net +0
+  O-382 80296018: addi     r4, r1, 0x58
+  N-387 1738: addi     r6,r4,0   r=('R_PPC_ADDR16_LO', '@268')
+
+== replace era[384:385] ours[389:390] net +0
+  O-384 80296020: stw      r5, 0x7c(r1)
+  N-389 1740: stw      r3,120(r1)   r=None
+
+== replace era[387:389] ours[392:394] net +0
+  O-387 8029602C: stw      r3, 0x78(r1)
+  O-388 80296030: li       r3, 0x0
+  N-392 174c: stw      r5,124(r1)   r=None
+  N-393 1750: li       r0,4   r=None
+
+== insert era[392:392] ours[397:399] net +2
+  N-397 1760: addi     r4,r1,88   r=None
+  N-398 1764: fsubs    f0,f0,f1   r=None
+
+== replace era[393:394] ours[400:401] net +0
+  O-393 80296044: fsubs    f0, f0, f1
+  N-400 176c: li       r3,0   r=None
+
+== delete era[399:400] ours[406:406] net -1
+  O-399 8029605C: add      r5, r7, r3
+
+== delete era[401:402] ours[407:407] net -1
+  O-401 80296064: lfs      f0, 0x4(r5)
+
+== insert era[403:403] ours[408:409] net +1
+  N-408 178c: lfsx     f0,r30,r0   r=None
+
+== replace era[405:409] ours[411:413] net -2
+  O-405 80296074: bdnz     .L_8029605C
+  O-406 80296078: fctiwz   f0, f27
+  O-407 8029607C: lis      r3, lbl_804650F4@ha
+  O-408 80296080: addi     r4, r3, lbl_804650F4@l
+  N-411 1798: bdnz     1784 <render__14TObjCMHairMenuFv+0x658>   r=None
+  N-412 179c: lis      r4,0   r=('R_PPC_ADDR16_HA', 'lbl_804650F4')
+
+== insert era[410:410] ours[414:415] net +1
+  N-414 17a4: addi     r4,r4,0   r=('R_PPC_ADDR16_LO', 'lbl_804650F4')
+
+== replace era[411:416] ours[416:419] net -2
+  O-411 8029608C: addi     r4, r1, 0x8
+  O-412 80296090: stfd     f0, 0x78(r1)
+  O-413 80296094: stw      r0, 0x8(r1)
+  O-414 80296098: lwz      r0, 0x7c(r1)
+  O-415 8029609C: stb      r0, 0xb(r1)
+  N-416 17ac: addi     r4,r1,12   r=None
+  N-417 17b0: stw      r0,12(r1)   r=None
+  N-418 17b4: stb      r29,15(r1)   r=None
+
+== replace era[426:427] ours[429:430] net +0
+  O-426 802960C8: lfs      f1, lbl_805DDA94@sda21(r0)
+  N-429 17e0: lfs      f1,0(0)   r=('R_PPC_EMB_SDA21', '@93')
+
+== replace era[435:436] ours[438:439] net +0
+  O-435 802960EC: blt      .L_80295FC0
+  N-438 1804: blt      16e8 <render__14TObjCMHairMenuFv+0x5bc>   r=None
+
+== replace era[439:440] ours[442:443] net +0
+  O-439 802960FC: psq_l    f30, 0x128(r1), 0, qr0
+  N-442 1814: lq       r30,288(r1)   r=None
+
+== replace era[443:444] ours[446:447] net +0
+  O-443 8029610C: psq_l    f28, 0x108(r1), 0, qr0
+  N-446 1824: lq       r28,256(r1)   r=None
+
+== replace era[447:448] ours[450:451] net +0
+  O-447 8029611C: psq_l    f26, 0xe8(r1), 0, qr0
+  N-450 1834: lq       r26,224(r1)   r=None
+
+== replace era[451:452] ours[454:455] net +0
+  O-451 8029612C: psq_l    f24, 0xc8(r1), 0, qr0
+  N-454 1844: lq       r24,192(r1)   r=None
+
+== replace era[455:456] ours[458:459] net +0
+  O-455 8029613C: lmw      r23, 0x8c(r1)
+  N-458 1854: lmw      r22,136(r1)   r=None
+
+TOTAL NET +3

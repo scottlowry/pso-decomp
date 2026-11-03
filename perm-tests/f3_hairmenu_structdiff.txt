@@ -1,0 +1,584 @@
+era 460  ours 465  struct-matched 281/460 = 61.09%
+--- DEL x1 @slot4:
+    E 80295A30 psq_st     f31, 0x138(r1), 0, qr0
+--- INS x1 @slot4:
+    N 113c xxsel      vs31,vs1,vs0,vs36   <<>>  poolv=None
+--- DEL x1 @slot10:
+    E 80295A48 psq_st     f28, 0x108(r1), 0, qr0
+--- INS x1 @slot10:
+    N 1154 xsmaddadp  vs28,vs1,vs0   <<>>  poolv=None
+--- DEL x1 @slot12:
+    E 80295A50 psq_st     f27, 0xf8(r1), 0, qr0
+--- INS x1 @slot12:
+    N 115c xxsel      vs27,vs1,vs0,vs35   <<>>  poolv=None
+--- DEL x1 @slot18:
+    E 80295A68 psq_st     f24, 0xc8(r1), 0, qr0
+--- INS x1 @slot18:
+    N 1174 xsmsubmsp  vs24,vs1,vs0   <<>>  poolv=None
+--- DEL x2 @slot20:
+    E 80295A70 psq_st     f23, 0xb8(r1), 0, qr0
+    E 80295A74 stmw       r23, 0x8c(r1)
+--- INS x2 @slot20:
+    N 117c xxsel      vs23,vs1,vs0,vs34   <<>>  poolv=None
+    N 1180 stmw       r22,136(r1)   <<>>  poolv=None
+--- DEL x1 @slot23:
+    E 80295A7C lwz        r3, 0x1c(r3)
+--- DEL x2 @slot28:
+    E 80295A90 lfs        f2, lbl_805DDAFC@sda21(r0)
+    E 80295A94 lfs        f0, lbl_805DDA70@sda21(r0)
+--- INS x2 @slot27:
+    N 1198 lfs        f2,0(0)   <<@409>>  poolv=None
+    N 119c lfs        f0,0(0)   <<@56>>  poolv=None
+--- DEL x1 @slot35:
+    E 80295AAC subic.     r0, r3, 0x1
+--- INS x1 @slot34:
+    N 11b4 addic.     r0,r3,-1   <<>>  poolv=None
+--- DEL x1 @slot37:
+    E 80295AB4 li         r0, 0x0
+--- INS x1 @slot36:
+    N 11bc li         r0,0   <<>>  poolv=None
+--- DEL x1 @slot39:
+    E 80295ABC cmpwi      r0, 0xa
+--- INS x1 @slot38:
+    N 11c4 cmpwi      r0,10   <<>>  poolv=None
+--- DEL x1 @slot41:
+    E 80295AC4 li         r0, 0x9
+--- INS x1 @slot40:
+    N 11cc li         r0,9   <<>>  poolv=None
+--- DEL x1 @slot44:
+    E 80295AD0 lfs        f1, lbl_805DDA6C@sda21(r0)
+--- INS x1 @slot43:
+    N 11d8 lfs        f1,0(0)   <<@85>>  poolv=None
+--- DEL x1 @slot51:
+    E 80295AEC lfs        f0, lbl_805DDA74@sda21(r0)
+--- INS x1 @slot50:
+    N 11f4 lfs        f0,0(0)   <<@86>>  poolv=None
+--- DEL x1 @slot55:
+    E 80295AFC lfs        f26, lbl_805DDA70@sda21(r0)
+--- INS x1 @slot54:
+    N 1204 lfs        f27,0(0)   <<@56>>  poolv=None
+--- DEL x4 @slot59:
+    E 80295B0C lfs        f28, lbl_805DDAC0@sda21(r0)
+    E 80295B10 li         r24, 0x0
+    E 80295B14 lfs        f29, lbl_805DDA70@sda21(r0)
+    E 80295B18 li         r23, 0x0
+--- INS x4 @slot58:
+    N 1214 lfs        f30,0(0)   <<@118>>  poolv=None
+    N 1218 li         r23,0   <<>>  poolv=None
+    N 121c lfs        f31,0(0)   <<@56>>  poolv=None
+    N 1220 li         r22,0   <<>>  poolv=None
+--- DEL x1 @slot64:
+    E 80295B20 lfs        f1, lbl_805DDB04@sda21(r0)
+--- INS x1 @slot63:
+    N 1228 lfs        f1,0(0)   <<@410>>  poolv=None
+--- DEL x1 @slot66:
+    E 80295B28 lfs        f24, lbl_805DDA88@sda21(r0)
+--- INS x1 @slot65:
+    N 1230 lfs        f24,0(0)   <<@91>>  poolv=None
+--- DEL x3 @slot69:
+    E 80295B34 lfs        f25, lbl_805DDB08@sda21(r0)
+    E 80295B38 cmpwi      r24, 0x0
+    E 80295B3C li         r26, 0x0
+--- INS x3 @slot68:
+    N 123c lfs        f25,0(0)   <<@411>>  poolv=None
+    N 1240 cmpwi      r23,0   <<>>  poolv=None
+    N 1244 li         r26,0   <<>>  poolv=None
+--- DEL x1 @slot76:
+    E 80295B50 lfs        f1, lbl_805DDAC0@sda21(r0)
+--- INS x1 @slot75:
+    N 1258 lfs        f1,0(0)   <<@118>>  poolv=None
+--- DEL x1 @slot86:
+    E 80295B78 li         r26, 0x2
+--- INS x1 @slot85:
+    N 1280 li         r26,2   <<>>  poolv=None
+--- DEL x1 @slot89:
+    E 80295B84 lfs        f2, lbl_805DDA84@sda21(r0)
+--- INS x1 @slot88:
+    N 128c lfs        f2,0(0)   <<@90>>  poolv=None
+--- DEL x3 @slot94:
+    E 80295B98 addi       r3, r26, 0x6
+    E 80295B9C lfs        f1, lbl_805DDA8C@sda21(r0)
+    E 80295BA0 addi       r4, r1, 0x30
+--- INS x3 @slot93:
+    N 12a0 addi       r3,r26,6   <<>>  poolv=None
+    N 12a4 lfs        f1,0(0)   <<@92>>  poolv=None
+    N 12a8 addi       r4,r1,48   <<>>  poolv=None
+--- DEL x1 @slot98:
+    E 80295BA8 addi       r5, r1, 0x28
+--- INS x1 @slot97:
+    N 12b0 addi       r5,r1,40   <<>>  poolv=None
+--- DEL x3 @slot103:
+    E 80295BBC addi       r3, r26, 0x7
+    E 80295BC0 lfs        f1, lbl_805DDA8C@sda21(r0)
+    E 80295BC4 addi       r4, r1, 0x30
+--- INS x3 @slot102:
+    N 12c4 addi       r3,r26,7   <<>>  poolv=None
+    N 12c8 lfs        f1,0(0)   <<@92>>  poolv=None
+    N 12cc addi       r4,r1,48   <<>>  poolv=None
+--- DEL x1 @slot107:
+    E 80295BCC addi       r5, r1, 0x28
+--- INS x1 @slot106:
+    N 12d4 addi       r5,r1,40   <<>>  poolv=None
+--- DEL x3 @slot110:
+    E 80295BD8 addi       r24, r24, 0x1
+    E 80295BDC cmpwi      r24, 0x4
+    E 80295BE0 addi       r23, r23, 0x4
+--- INS x3 @slot109:
+    N 12e0 addi       r23,r23,1   <<>>  poolv=None
+    N 12e4 cmpwi      r23,4   <<>>  poolv=None
+    N 12e8 addi       r22,r22,4   <<>>  poolv=None
+--- DEL x1 @slot117:
+    E 80295BF4 lfs        f0, lbl_805DDA90@sda21(r0)
+--- INS x1 @slot116:
+    N 12fc lfs        f0,0(0)   <<@54>>  poolv=None
+--- DEL x1 @slot121:
+    E 80295C04 lfs        f0, lbl_805DDA6C@sda21(r0)
+--- INS x1 @slot120:
+    N 130c lfs        f0,0(0)   <<@86>>  poolv=None
+--- DEL x1 @slot125:
+    E 80295C14 lfs        f23, lbl_805DDA70@sda21(r0)
+--- INS x1 @slot124:
+    N 131c lfs        f23,0(0)   <<@56>>  poolv=None
+--- DEL x3 @slot128:
+    E 80295C20 lfs        f1, lbl_805DDB0C@sda21(r0)
+    E 80295C24 li         r23, 0x0
+    E 80295C28 lfs        f0, lbl_805DDB04@sda21(r0)
+--- INS x3 @slot127:
+    N 1328 lfs        f1,0(0)   <<@412>>  poolv=None
+    N 132c li         r22,0   <<>>  poolv=None
+    N 1330 lfs        f0,0(0)   <<@410>>  poolv=None
+--- DEL x1 @slot132:
+    E 80295C30 lfs        f26, lbl_805DDB08@sda21(r0)
+--- INS x1 @slot131:
+    N 1338 lfs        f26,0(0)   <<@411>>  poolv=None
+--- DEL x1 @slot135:
+    E 80295C3C li         r3, 0x0
+--- INS x1 @slot134:
+    N 1344 li         r3,0   <<>>  poolv=None
+--- DEL x1 @slot138:
+    E 80295C48 li         r3, -0x1
+--- INS x1 @slot137:
+    N 1350 li         r3,-1   <<>>  poolv=None
+--- DEL x3 @slot140:
+    E 80295C50 lfs        f1, lbl_805DDA94@sda21(r0)
+    E 80295C54 addi       r3, r3, 0x1
+    E 80295C58 addi       r4, r1, 0x20
+--- INS x3 @slot139:
+    N 1358 lfs        f1,0(0)   <<@93>>  poolv=None
+    N 135c addi       r3,r3,1   <<>>  poolv=None
+    N 1360 addi       r4,r1,32   <<>>  poolv=None
+--- DEL x2 @slot145:
+    E 80295C64 addi       r23, r23, 0x1
+    E 80295C68 cmpwi      r23, 0x4
+--- INS x2 @slot144:
+    N 136c addi       r22,r22,1   <<>>  poolv=None
+    N 1370 cmpwi      r22,4   <<>>  poolv=None
+--- DEL x1 @slot151:
+    E 80295C7C lfs        f0, lbl_805DDA74@sda21(r0)
+--- INS x1 @slot150:
+    N 1384 lfs        f0,0(0)   <<@86>>  poolv=None
+--- DEL x4 @slot156:
+    E 80295C90 lfs        f2, lbl_805DDB10@sda21(r0)
+    E 80295C94 lfs        f1, lbl_805DDB14@sda21(r0)
+    E 80295C98 li         r23, 0x0
+    E 80295C9C lfs        f0, lbl_805DDAD0@sda21(r0)
+--- INS x4 @slot155:
+    N 1398 lfs        f0,0(0)   <<@413>>  poolv=None
+    N 139c lfs        f2,0(0)   <<@414>>  poolv=None
+    N 13a0 li         r22,0   <<>>  poolv=None
+    N 13a4 lfs        f1,0(0)   <<@122>>  poolv=None
+--- INS x1 @slot160:
+    N 13ac lfs        f0,0(0)   <<@415>>  poolv=None
+--- DEL x1 @slot162:
+    E 80295CA8 lfs        f29, TObjCMAssignMenu__data_805DDB20@sda21(r0)
+--- INS x1 @slot162:
+    N 13b4 lfs        f27,0(0)   <<@417>>  poolv=None
+--- INS x1 @slot165:
+    N 13c0 fmuls      f24,f0,f26   <<>>  poolv=None
+--- DEL x2 @slot168:
+    E 80295CC0 li         r24, 0x1f
+    E 80295CC4 cmpwi      r3, 0x0
+--- INS x1 @slot169:
+    N 13d0 cmpwi      r0,0   <<>>  poolv=None
+--- DEL x2 @slot171:
+    E 80295CCC lfs        f0, lbl_805DDB18@sda21(r0)
+    E 80295CD0 fmuls      f23, f28, f0
+--- INS x1 @slot171:
+    N 13d8 fmr        f23,f24   <<>>  poolv=None
+--- INS x1 @slot173:
+    N 13e0 li         r23,31   <<>>  poolv=None
+--- DEL x3 @slot175:
+    E 80295CDC lwz        r0, creation_resource_ready_state@sda21(r0)
+    E 80295CE0 li         r24, 0x20
+    E 80295CE4 cmpwi      r0, 0x2
+--- INS x3 @slot175:
+    N 13e8 lwz        r0,0(0)   <<creation_resource_ready_state>>  poolv=None
+    N 13ec li         r23,32   <<>>  poolv=None
+    N 13f0 cmpwi      r0,2   <<>>  poolv=None
+--- DEL x1 @slot183:
+    E 80295CFC lfs        f0, lbl_805DDB1C@sda21(r0)
+--- INS x1 @slot183:
+    N 1408 lfs        f0,0(0)   <<@416>>  poolv=None
+--- DEL x1 @slot187:
+    E 80295D0C cmpwi      r3, 0x0
+--- INS x2 @slot187:
+    N 1418 lwz        r0,36(r24)   <<>>  poolv=None
+    N 141c cmpwi      r0,0   <<>>  poolv=None
+--- DEL x1 @slot191:
+    E 80295D1C lfs        f1, lbl_805DDA94@sda21(r0)
+--- INS x1 @slot192:
+    N 142c lfs        f1,0(0)   <<@93>>  poolv=None
+--- DEL x1 @slot193:
+    E 80295D24 addi       r4, r1, 0x18
+--- INS x1 @slot194:
+    N 1434 addi       r4,r1,24   <<>>  poolv=None
+--- DEL x1 @slot196:
+    E 80295D30 addi       r23, r23, 0x1
+--- INS x1 @slot197:
+    N 1440 addi       r22,r22,1   <<>>  poolv=None
+--- DEL x1 @slot202:
+    E 80295D48 lfs        f0, lbl_805DDB24@sda21(r0)
+--- INS x1 @slot203:
+    N 1458 lfs        f0,0(0)   <<@418>>  poolv=None
+--- DEL x1 @slot206:
+    E 80295D58 cmpwi      r0, 0x0
+--- INS x1 @slot207:
+    N 1468 cmpwi      r0,0   <<>>  poolv=None
+--- DEL x1 @slot210:
+    E 80295D68 lfs        f0, lbl_805DDB18@sda21(r0)
+--- INS x1 @slot211:
+    N 1478 lfs        f0,0(0)   <<@415>>  poolv=None
+--- DEL x4 @slot213:
+    E 80295D74 lfs        f1, lbl_805DDB28@sda21(r0)
+    E 80295D78 addi       r3, r27, 0x14
+    E 80295D7C lfs        f0, lbl_805DDB2C@sda21(r0)
+    E 80295D80 addi       r4, r1, 0x10
+--- INS x4 @slot214:
+    N 1484 lfs        f1,0(0)   <<@419>>  poolv=None
+    N 1488 addi       r3,r25,20   <<>>  poolv=None
+    N 148c lfs        f0,0(0)   <<@420>>  poolv=None
+    N 1490 addi       r4,r1,16   <<>>  poolv=None
+--- DEL x1 @slot218:
+    E 80295D88 lfs        f1, lbl_805DDA94@sda21(r0)
+--- INS x1 @slot219:
+    N 1498 lfs        f1,0(0)   <<@93>>  poolv=None
+--- DEL x1 @slot222:
+    E 80295D98 lfs        f1, lbl_805DDB30@sda21(r0)
+--- INS x1 @slot223:
+    N 14a8 lfs        f1,0(0)   <<@421>>  poolv=None
+--- DEL x2 @slot224:
+    E 80295DA0 lfs        f0, lbl_805DDAD0@sda21(r0)
+    E 80295DA4 addi       r4, r1, 0x10
+--- INS x2 @slot225:
+    N 14b0 lfs        f0,0(0)   <<@122>>  poolv=None
+    N 14b4 addi       r4,r1,16   <<>>  poolv=None
+--- DEL x1 @slot227:
+    E 80295DAC lfs        f1, lbl_805DDA94@sda21(r0)
+--- INS x1 @slot228:
+    N 14bc lfs        f1,0(0)   <<@93>>  poolv=None
+--- DEL x1 @slot229:
+    E 80295DB4 li         r3, 0x1e
+--- INS x1 @slot230:
+    N 14c4 li         r3,30   <<>>  poolv=None
+--- DEL x1 @slot232:
+    E 80295DC0 lfs        f1, lbl_805DDB34@sda21(r0)
+--- INS x1 @slot233:
+    N 14d0 lfs        f1,0(0)   <<@422>>  poolv=None
+--- DEL x2 @slot234:
+    E 80295DC8 lfs        f0, lbl_805DDB38@sda21(r0)
+    E 80295DCC addi       r4, r1, 0x10
+--- INS x2 @slot235:
+    N 14d8 lfs        f0,0(0)   <<@423>>  poolv=None
+    N 14dc addi       r4,r1,16   <<>>  poolv=None
+--- DEL x1 @slot237:
+    E 80295DD4 lfs        f1, lbl_805DDA94@sda21(r0)
+--- INS x1 @slot238:
+    N 14e4 lfs        f1,0(0)   <<@93>>  poolv=None
+--- DEL x1 @slot241:
+    E 80295DE4 addi       r3, r3, 0x13
+--- INS x1 @slot242:
+    N 14f4 addi       r3,r3,19   <<>>  poolv=None
+--- INS x1 @slot244:
+    N 14fc lfs        f0,0(0)   <<@415>>  poolv=None
+--- DEL x1 @slot244:
+    E 80295DF0 lfs        f29, lbl_805DDB18@sda21(r0)
+--- INS x1 @slot246:
+    N 1504 fmuls      f24,f26,f29   <<>>  poolv=None
+--- DEL x1 @slot246:
+    E 80295DF8 li         r24, 0x1
+--- INS x2 @slot248:
+    N 150c fmuls      f25,f0,f26   <<>>  poolv=None
+    N 1510 li         r23,1   <<>>  poolv=None
+--- INS x3 @slot251:
+    N 1518 addi       r3,r23,-1   <<>>  poolv=None
+    N 151c slwi       r4,r3,3   <<>>  poolv=None
+    N 1520 lfs        f1,0(0)   <<@93>>  poolv=None
+--- INS x2 @slot255:
+    N 1528 addi       r3,r23,15   <<>>  poolv=None
+    N 152c add        r4,r22,r4   <<>>  poolv=None
+--- DEL x1 @slot250:
+    E 80295E08 fmuls      f2, f28, f27
+--- INS x1 @slot258:
+    N 1534 fmr        f2,f24   <<>>  poolv=None
+--- DEL x6 @slot252:
+    E 80295E10 fmuls      f2, f28, f29
+    E 80295E14 subi       r0, r24, 0x1
+    E 80295E18 lfs        f1, lbl_805DDA94@sda21(r0)
+    E 80295E1C slwi       r0, r0, 3
+    E 80295E20 addi       r3, r24, 0xf
+    E 80295E24 add        r4, r23, r0
+--- INS x1 @slot260:
+    N 153c fmr        f2,f25   <<>>  poolv=None
+--- DEL x2 @slot259:
+    E 80295E2C addi       r24, r24, 0x1
+    E 80295E30 cmpwi      r24, 0x4
+--- INS x2 @slot262:
+    N 1544 addi       r23,r23,1   <<>>  poolv=None
+    N 1548 cmpwi      r23,4   <<>>  poolv=None
+--- DEL x1 @slot265:
+    E 80295E44 lfs        f0, TObjCMMainMenu__data_805DDB44@sda21(r0)
+--- INS x1 @slot268:
+    N 155c lfs        f2,0(0)   <<@424>>  poolv=None
+--- DEL x1 @slot268:
+    E 80295E50 lfs        f2, 0x4(r30)
+--- INS x1 @slot273:
+    N 1570 lfs        f2,4(r3)   <<>>  poolv=None
+--- DEL x1 @slot273:
+    E 80295E64 addi       r7, r1, 0x58
+--- INS x1 @slot276:
+    N 157c addi       r7,r1,88   <<>>  poolv=None
+--- DEL x1 @slot275:
+    E 80295E6C lfs        f7, lbl_805DDB3C@sda21(r0)
+--- INS x2 @slot278:
+    N 1584 lfs        f8,0(0)   <<@425>>  poolv=None
+    N 1588 lfs        f7,0(0)   <<@426>>  poolv=None
+--- DEL x1 @slot277:
+    E 80295E74 lfs        f5, lbl_805DDB40@sda21(r0)
+--- INS x1 @slot281:
+    N 1590 lfs        f4,0(r3)   <<>>  poolv=None
+--- INS x1 @slot284:
+    N 159c lfs        f6,24(r3)   <<>>  poolv=None
+--- DEL x4 @slot281:
+    E 80295E84 stfd       f0, 0x78(r1)
+    E 80295E88 lfs        f8, lbl_805DDB08@sda21(r0)
+    E 80295E8C addi       r6, r1, 0x48
+    E 80295E90 lfs        f9, 0x0(r30)
+--- DEL x2 @slot286:
+    E 80295E98 li         r5, 0x0
+    E 80295E9C addi       r29, r1, 0x54
+--- INS x3 @slot287:
+    N 15a8 lfs        f2,0(0)   <<@411>>  poolv=None
+    N 15ac addi       r6,r1,72   <<>>  poolv=None
+    N 15b0 stfd       f0,120(r1)   <<>>  poolv=None
+--- DEL x1 @slot289:
+    E 80295EA4 lfs        f11, 0x18(r30)
+--- INS x5 @slot293:
+    N 15c0 stw        r4,8(r1)   <<>>  poolv=None
+    N 15c4 li         r5,0   <<>>  poolv=None
+    N 15c8 fsubs      f2,f3,f6   <<>>  poolv=None
+    N 15cc lwz        r0,124(r1)   <<>>  poolv=None
+    N 15d0 fmuls      f1,f5,f30   <<>>  poolv=None
+--- DEL x1 @slot294:
+    E 80295EB8 fsubs      f12, f4, f11
+--- INS x1 @slot300:
+    N 15dc fmadds     f3,f7,f2,f6   <<>>  poolv=None
+--- DEL x1 @slot297:
+    E 80295EC4 lwz        r0, 0x7c(r1)
+--- DEL x1 @slot299:
+    E 80295ECC stfs       f2, 0x6c(r1)
+--- INS x1 @slot304:
+    N 15ec addi       r3,r1,84   <<>>  poolv=None
+--- INS x2 @slot306:
+    N 15f4 stfs       f9,108(r1)   <<>>  poolv=None
+    N 15f8 addi       r4,r1,8   <<>>  poolv=None
+--- DEL x8 @slot302:
+    E 80295ED8 fmadds     f2, f7, f12, f11
+    E 80295EDC mr         r3, r29
+    E 80295EE0 stw        r4, 0xc(r1)
+    E 80295EE4 fmuls      f26, f8, f28
+    E 80295EE8 stw        r7, 0x38(r1)
+    E 80295EEC addi       r4, r1, 0xc
+    E 80295EF0 stw        r6, 0x3c(r1)
+    E 80295EF4 stw        r5, 0x40(r1)
+--- DEL x1 @slot318:
+    E 80295F18 stb        r0, 0xf(r1)
+--- INS x4 @slot317:
+    N 1620 stw        r7,56(r1)   <<>>  poolv=None
+    N 1624 stw        r6,60(r1)   <<>>  poolv=None
+    N 1628 stw        r5,64(r1)   <<>>  poolv=None
+    N 162c stb        r0,11(r1)   <<>>  poolv=None
+--- DEL x1 @slot320:
+    E 80295F20 addi       r28, r1, 0x50
+--- DEL x1 @slot322:
+    E 80295F28 mr         r3, r28
+--- INS x1 @slot323:
+    N 1638 addi       r3,r1,80   <<>>  poolv=None
+--- DEL x1 @slot324:
+    E 80295F30 addi       r27, r1, 0x4c
+--- DEL x1 @slot326:
+    E 80295F38 mr         r3, r27
+--- INS x1 @slot326:
+    N 1644 addi       r3,r1,76   <<>>  poolv=None
+--- DEL x1 @slot329:
+    E 80295F44 addi       r3, r1, 0x48
+--- INS x1 @slot329:
+    N 1650 addi       r3,r1,72   <<>>  poolv=None
+--- DEL x5 @slot331:
+    E 80295F4C li         r23, 0x0
+    E 80295F50 lfs        f1, lbl_805DDA8C@sda21(r0)
+    E 80295F54 addi       r3, r1, 0x38
+    E 80295F58 li         r4, 0x4
+    E 80295F5C li         r5, 0x6
+--- INS x5 @slot331:
+    N 1658 li         r22,0   <<>>  poolv=None
+    N 165c lfs        f1,0(0)   <<@93>>  poolv=None
+    N 1660 addi       r3,r1,56   <<>>  poolv=None
+    N 1664 li         r4,4   <<>>  poolv=None
+    N 1668 li         r5,6   <<>>  poolv=None
+--- DEL x1 @slot338:
+    E 80295F68 addi       r23, r23, 0x1
+--- INS x1 @slot338:
+    N 1674 addi       r22,r22,1   <<>>  poolv=None
+--- DEL x1 @slot340:
+    E 80295F70 cmpwi      r23, 0x3
+--- INS x1 @slot340:
+    N 167c cmpwi      r22,3   <<>>  poolv=None
+--- DEL x8 @slot352:
+    E 80295FA0 lis        r3, lbl_80465140@ha
+    E 80295FA4 lfs        f30, TObjCMMainMenu__data_805DDB44@sda21(r0)
+    E 80295FA8 lfs        f31, lbl_805DDA90@sda21(r0)
+    E 80295FAC li         r26, 0x0
+    E 80295FB0 lfd        f29, lbl_80465140@l(r3)
+    E 80295FB4 li         r24, 0x0
+    E 80295FB8 li         r23, 0x0
+    E 80295FBC lis        r31, 0x4330
+--- INS x16 @slot352:
+    N 16ac fctiwz     f0,f27   <<>>  poolv=None
+    N 16b0 lis        r3,0   <<@268>>  poolv=None
+    N 16b4 lis        r4,0   <<lbl_804650D4>>  poolv=None
+    N 16b8 lfd        f31,0(r3)   <<@268>>  poolv=None
+    N 16bc lfs        f28,0(0)   <<@424>>  poolv=None
+    N 16c0 addi       r30,r4,0   <<lbl_804650D4>>  poolv=None
+    N 16c4 stfd       f0,120(r1)   <<>>  poolv=None
+    N 16c8 addi       r28,r1,84   <<>>  poolv=None
+    N 16cc lfs        f27,0(0)   <<@54>>  poolv=None
+    N 16d0 addi       r27,r1,80   <<>>  poolv=None
+    N 16d4 lwz        r29,124(r1)   <<>>  poolv=None
+    N 16d8 addi       r26,r1,76   <<>>  poolv=None
+    N 16dc li         r25,0   <<>>  poolv=None
+    N 16e0 li         r23,0   <<>>  poolv=None
+    N 16e4 li         r22,0   <<>>  poolv=None
+    N 16e8 lis        r31,17200   <<>>  poolv=None
+--- DEL x1 @slot361:
+    E 80295FC4 addi       r0, r23, 0x42
+--- INS x1 @slot369:
+    N 16f0 addi       r0,r22,66   <<>>  poolv=None
+--- DEL x1 @slot364:
+    E 80295FD0 xoris      r0, r0, 0x8000
+--- INS x1 @slot372:
+    N 16fc xoris      r0,r0,32768   <<>>  poolv=None
+--- DEL x1 @slot372:
+    E 80295FF0 xoris      r5, r26, 0x8000
+--- INS x1 @slot380:
+    N 171c xoris      r5,r25,32768   <<>>  poolv=None
+--- DEL x1 @slot374:
+    E 80295FF8 lis        r3, 0x4330
+--- INS x2 @slot382:
+    N 1724 lis        r4,0   <<@268>>  poolv=None
+    N 1728 lis        r3,17200   <<>>  poolv=None
+--- DEL x1 @slot376:
+    E 80296000 lis        r4, lbl_80465140@ha
+--- DEL x1 @slot378:
+    E 80296008 addi       r6, r4, lbl_80465140@l
+--- INS x1 @slot386:
+    N 1734 addi       r6,r4,0   <<@268>>  poolv=None
+--- DEL x1 @slot380:
+    E 80296010 li         r0, 0x4
+--- INS x1 @slot388:
+    N 173c li         r0,4   <<>>  poolv=None
+--- DEL x1 @slot382:
+    E 80296018 addi       r4, r1, 0x58
+--- INS x1 @slot390:
+    N 1744 addi       r4,r1,88   <<>>  poolv=None
+--- DEL x1 @slot384:
+    E 80296020 stw        r5, 0x7c(r1)
+--- INS x1 @slot392:
+    N 174c stw        r3,120(r1)   <<>>  poolv=None
+--- DEL x2 @slot387:
+    E 8029602C stw        r3, 0x78(r1)
+    E 80296030 li         r3, 0x0
+--- INS x2 @slot395:
+    N 1758 stw        r5,124(r1)   <<>>  poolv=None
+    N 175c li         r3,0   <<>>  poolv=None
+--- DEL x1 @slot400:
+    E 80296060 addi       r0, r3, 0x4
+--- INS x1 @slot408:
+    N 178c addi       r0,r3,4   <<>>  poolv=None
+--- DEL x1 @slot402:
+    E 80296068 addi       r3, r3, 0x8
+--- INS x1 @slot410:
+    N 1794 addi       r3,r3,8   <<>>  poolv=None
+--- DEL x1 @slot406:
+    E 80296078 fctiwz     f0, f27
+--- DEL x1 @slot408:
+    E 80296080 addi       r4, r3, lbl_804650F4@l
+--- INS x1 @slot416:
+    N 17ac addi       r4,r4,0   <<lbl_804650F4>>  poolv=None
+--- DEL x5 @slot411:
+    E 8029608C addi       r4, r1, 0x8
+    E 80296090 stfd       f0, 0x78(r1)
+    E 80296094 stw        r0, 0x8(r1)
+    E 80296098 lwz        r0, 0x7c(r1)
+    E 8029609C stb        r0, 0xb(r1)
+--- INS x3 @slot418:
+    N 17b4 addi       r4,r1,12   <<>>  poolv=None
+    N 17b8 stw        r0,12(r1)   <<>>  poolv=None
+    N 17bc stb        r29,15(r1)   <<>>  poolv=None
+--- DEL x1 @slot424:
+    E 802960C0 addi       r3, r1, 0x48
+--- INS x1 @slot429:
+    N 17e0 addi       r3,r1,72   <<>>  poolv=None
+--- DEL x4 @slot426:
+    E 802960C8 lfs        f1, lbl_805DDA94@sda21(r0)
+    E 802960CC addi       r3, r1, 0x38
+    E 802960D0 li         r4, 0x4
+    E 802960D4 li         r5, 0x6
+--- INS x4 @slot431:
+    N 17e8 lfs        f1,0(0)   <<@93>>  poolv=None
+    N 17ec addi       r3,r1,56   <<>>  poolv=None
+    N 17f0 li         r4,4   <<>>  poolv=None
+    N 17f4 li         r5,6   <<>>  poolv=None
+--- DEL x4 @slot431:
+    E 802960DC addi       r26, r26, 0x1
+    E 802960E0 addi       r23, r23, 0x2
+    E 802960E4 cmpwi      r26, 0x3
+    E 802960E8 addi       r24, r24, 0x4
+--- INS x4 @slot436:
+    N 17fc addi       r25,r25,1   <<>>  poolv=None
+    N 1800 addi       r22,r22,2   <<>>  poolv=None
+    N 1804 cmpwi      r25,3   <<>>  poolv=None
+    N 1808 addi       r23,r23,4   <<>>  poolv=None
+--- DEL x1 @slot439:
+    E 802960FC psq_l      f30, 0x128(r1), 0, qr0
+--- INS x1 @slot444:
+    N 181c lq         r30,288(r1)   <<>>  poolv=None
+--- DEL x1 @slot443:
+    E 8029610C psq_l      f28, 0x108(r1), 0, qr0
+--- INS x1 @slot448:
+    N 182c lq         r28,256(r1)   <<>>  poolv=None
+--- DEL x1 @slot447:
+    E 8029611C psq_l      f26, 0xe8(r1), 0, qr0
+--- INS x1 @slot452:
+    N 183c lq         r26,224(r1)   <<>>  poolv=None
+--- DEL x1 @slot451:
+    E 8029612C psq_l      f24, 0xc8(r1), 0, qr0
+--- INS x1 @slot456:
+    N 184c lq         r24,192(r1)   <<>>  poolv=None
+--- DEL x1 @slot455:
+    E 8029613C lmw        r23, 0x8c(r1)
+--- INS x1 @slot460:
+    N 185c lmw        r22,136(r1)   <<>>  poolv=None
+--- DEL x1 @slot458:
+    E 80296148 addi       r1, r1, 0x140
+--- INS x1 @slot463:
+    N 1868 addi       r1,r1,320   <<>>  poolv=None

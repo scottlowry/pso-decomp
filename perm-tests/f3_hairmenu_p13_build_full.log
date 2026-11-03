@@ -1,0 +1,104 @@
+[1/8] ORIG_ASM build/GPOE8P/asm
+[2/8] AS build/GPOE8P/src/TRK_MINNOW_DOLPHIN/targsupp.o
+[3/8] AS build/GPOE8P/src/TRK_MINNOW_DOLPHIN/exception.o
+[4/8] REPORT
+ INFO Loading project .
+ INFO Generating report for 4866 units (using 28 threads)
+ INFO Report generated in 0.588s
+ INFO Writing to build/GPOE8P/report.json
+[5/8] LINK build/GPOE8P/psov3.elf
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol '@14' is either not a global symbol or doesn't exist.  
+#   Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol '@4' is either not a global symbol or doesn't exist.  
+#   Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol '@891' is either not a global symbol or doesn't exist.  
+#   Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol '@990' is either not a global symbol or doesn't exist.  
+#   Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'AlarmQueue' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'ArenaEnd' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'ArenaStart' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'Down' is either not a global symbol or doesn't exist.  
+#   Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'ErrorTable' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'HeapArray' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'HoldDown' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'HoldUp' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'InterruptHandlerTable' is either not a global symbol 
+#   or doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'InterruptPrioTable' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'LastState' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'NumHeaps' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'ResetCallback' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'ResetFunctionQueue' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'SetInterruptMask' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'TRK_mainError' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'WaitingQueue' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol '__OSArenaHi' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol '__OSArenaLo' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'c2r$433' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'fragmentinfo' is either not a global symbol or doesn't 
+#   exist.  Ignored.
+### mwldeppc.exe Linker Warning:
+#   FORCEACTIVE symbol 'gTRKFramingState' is either not a global symbol or 
+#   doesn't exist.  Ignored.
+[6/8] DOL build/GPOE8P/psov3.dol
+[7/8] CHECK config/GPOE8P/psov3/build.sha1
+build/GPOE8P/psov3.dol: OK
+[8/8] PROGRESS
+Progress:
+  All: 95.03% matched, 76.83% linked (3367 / 4866 files)
+    Code: 4136832 / 4353092 bytes (27308 / 27572 functions)
+    Data: 1501780 / 1760504 bytes (85.30%)
+  PSO Game Code: 94.74% matched, 75.47% linked (3199 / 4692 files)
+    Code: 3895096 / 4111356 bytes (26320 / 26584 functions)
+    Data: 1461011 / 1719711 bytes (84.96%)
+  Dolphin SDK: 100.00% matched, 100.00% linked (113 / 113 files)
+    Code: 190380 / 190380 bytes (847 / 847 functions)
+    Data: 34429 / 34429 bytes (100.00%)
+  Runtime: 100.00% matched, 100.00% linked (55 / 55 files)
+    Code: 51356 / 51356 bytes (141 / 141 functions)
+    Data: 6340 / 6340 bytes (100.00%)

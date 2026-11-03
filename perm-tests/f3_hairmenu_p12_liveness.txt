@@ -1,0 +1,2 @@
+p12 round: PID 80156 launched 00:14:17; cap 900s better-only -j3
+liveness t=300s: iters 2217, harvests 15; t=510s: iters 7262, harvests 42

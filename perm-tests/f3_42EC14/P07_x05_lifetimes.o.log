@@ -1,0 +1,9 @@
+### mwcceppc.exe Compiler:
+#    File: .cache\giprobe\f3ec14_61492.cpp
+# ----------------------------------------
+#      50: #pragma pop
+#   Error:           ^
+#   preceding '#pragma push' is missing
+#   Too many errors printed, aborting program
+
+User break, cancelled...

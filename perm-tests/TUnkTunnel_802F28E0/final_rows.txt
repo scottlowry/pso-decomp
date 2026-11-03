@@ -1,0 +1,45 @@
+ORIG  run_task__13TUnk_804E4B3CFv                             match=96.86793 size=212
+OURS  run_task__13TUnk_804E4B3CFv                             match=96.86793 size=208
+rows: orig 53 ours 52
+  slot 10 O: bne 0x8f0                                  N: bne 0x8ec                                 
+  slot 11 O: lwz r12, 0xe4(r30)                         N: lwz r11, 0xe4(r30)                        
+  slot 13 O: lwz r11, 0xe8(r30)                         N: lwz r10, 0xe8(r30)                        
+  slot 14 O: addi r9, r30, 0x108                        N: lwz r9, 0xec(r30)                         
+  slot 15 O: lwz r10, 0xec(r30)                         N: lwz r8, 0xf0(r30)                         
+  slot 16 O: lwz r8, 0xf0(r30)                          N: lwz r7, 0xf4(r30)                         
+  slot 17 O: lwz r7, 0xf4(r30)                          N: lwz r6, 0xf8(r30)                         
+  slot 18 O: lwz r6, 0xf8(r30)                          N: lwz r5, 0xfc(r30)                         
+  slot 19 O: lwz r5, 0xfc(r30)                          N: lwz r4, 0x100(r30)                        
+  slot 20 O: lwz r4, 0x100(r30)                         N: lwz r3, 0x104(r30)                        
+  slot 21 O: lwz r3, 0x104(r30)                         N: stw r11, 0x108(r30)                       
+  slot 22 O: stw r12, 0x108(r30)                        N: stw r10, 0x10c(r30)                       
+  slot 23 O: stw r11, 0x10c(r30)                        N: stw r9, 0x110(r30)                        
+  slot 24 O: stw r10, 0x110(r30)                        N: stw r8, 0x114(r30)                        
+  slot 25 O: stw r8, 0xc(r9)                            N: stw r7, 0x118(r30)                        
+  slot 26 O: stw r7, 0x10(r9)                           N: stw r6, 0x11c(r30)                        
+  slot 27 O: stw r6, 0x14(r9)                           N: stw r5, 0x120(r30)                        
+  slot 28 O: stw r5, 0x18(r9)                           N: stw r4, 0x124(r30)                        
+  slot 29 O: stw r4, 0x1c(r9)                           N: stw r3, 0x128(r30)                        
+  slot 30 O: stw r3, 0x20(r9)                           N: stb r0, lbl_805D6971@sda21                
+  slot 31 O: stb r0, lbl_805D6971@sda21                 N: lwz r4, 0x1c(r31)                         
+  slot 32 O: lwz r4, 0x1c(r31)                          N: addi r0, r30, 0x108                       
+  slot 33 O: addi r0, r30, 0x108                        N: mr r3, r31                                
+  slot 34 O: mr r3, r31                                 N: addi r12, r1, 0x8                         
+  slot 35 O: addi r12, r1, 0x8                          N: mulli r4, r4, 0xc                         
+  slot 36 O: mulli r4, r4, 0xc                          N: add r6, r0, r4                            
+  slot 37 O: add r6, r0, r4                             N: lwz r5, 0x0(r6)                           
+  slot 38 O: lwz r5, 0x0(r6)                            N: lwz r4, 0x4(r6)                           
+  slot 39 O: lwz r4, 0x4(r6)                            N: lwz r0, 0x8(r6)                           
+  slot 40 O: lwz r0, 0x8(r6)                            N: stw r5, 0x8(r1)                           
+  slot 41 O: stw r5, 0x8(r1)                            N: stw r4, 0xc(r1)                           
+  slot 42 O: stw r4, 0xc(r1)                            N: stw r0, 0x10(r1)                          
+  slot 43 O: stw r0, 0x10(r1)                           N: bl __ptmf_scall                           
+  slot 44 O: bl __ptmf_scall                            N: nop                                       
+  slot 45 O: nop                                        N: mr r3, r31                                
+  slot 46 O: mr r3, r31                                 N: bl TObjBoss2Tunnel__sub_802F273C          
+  slot 47 O: bl TObjBoss2Tunnel__sub_802F273C           N: lmw r30, 0x18(r1)                         
+  slot 48 O: lmw r30, 0x18(r1)                          N: lwz r0, 0x24(r1)                          
+  slot 49 O: lwz r0, 0x24(r1)                           N: mtlr r0                                   
+  slot 50 O: mtlr r0                                    N: addi r1, r1, 0x20                         
+  slot 51 O: addi r1, r1, 0x20                          N: blr                                       
+  slot 52 O: blr                                        N: <none>                                    

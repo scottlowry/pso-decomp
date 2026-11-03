@@ -1,0 +1,11 @@
+screen rows=56 full-gate=30
+champ-inert: 18 ['output-6165-1', 'output-6165-2', 'output-6185-1', 'output-6300-1', 'output-6300-2', 'output-6305-1']
+unique objects: 4
+
+   proxy% dir              gate  rows  perm  era  duplicates
+ 87.10435 output-6320-2    FAIL   310  6320    ['output-6320-2', 'output-6320-3', 'output-6320-4']
+ 87.09565 output-6325-2    FAIL   310  6325    ['output-6325-2', 'output-6325-3', 'output-6330-1']
+ 87.08261 output-6330-10   FAIL   310  6330    ['output-6330-10', 'output-6330-11', 'output-6330-12']
+ 86.95217 output-6335-10   FAIL   310  6335    ['output-6335-10', 'output-6335-11', 'output-6335-12']
+
+wrote p13_ranked.json; era-GATE-PASS count: 0

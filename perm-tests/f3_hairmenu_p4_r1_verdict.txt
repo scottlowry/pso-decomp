@@ -1,0 +1,7 @@
+# p4 r1 harvest verdicts (repo-context re-verification, 2026-11-02)
+CLUSTER-A output-7300-1/7325-1/7330-1/7330-2 (kit 0x730, rows330, disp-proxy 82.42609): REJECT context-fiction.
+  repo build of verbatim print = 0x734; poke line '(&colorG)[3] = (int) a255' lowered stw r0,20(r1) (word) in repo vs stb r0,11(r1) (byte) in kit -> byte-poke corrupted, no repo transfer.
+CLUSTER-B output-7915-16/17 (kit 0x730, rows334, disp-proxy 82.13913): REJECT context-fiction.
+  repo build = 0x734; hair-list-loop fold (extra fmuls f25,f0,f26 remat + lfs reorder) did not survive member-fn context; size +1 word back.
+FLIP SCREEN: 157x 0x734 bank-r23 harvests, lha hair reg: r26 157/157 -> era pair-coloring (hair=r27) UNREACHED in 36,021 iters seeded at era-exact bank state.
+iters=36021 (liveness receipt at 30s: 1064, ALIVE pid 39163; cap 900s fired, exit=timeout-normal; 548 harvests, 261 compile-fail).

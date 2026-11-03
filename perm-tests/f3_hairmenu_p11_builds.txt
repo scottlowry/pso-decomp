@@ -1,0 +1,15 @@
+f3 render PHASE-11 receipts (gen-4 perm round, branch card-render-p11)
+- run_p11.log: 23,135 iters / 900s cap / -j3 / PID 5866 recorded; smoke base perm-score 6925
+- p11_screen: 87 harvest dirs -> 44 full-gate (0x730+r23+pokes+NEWSYM+UB OK) -> 16 champ-inert ->
+  11 unique md5 -> 10 era-gate-PASS (f3_hairmenu_p11_gate.py); best proxy 86.35652 (ALL below champ proxy)
+- REPO SPLICE (splice_p6.py -j3, splice_results_p11.json + splice_p11_out.txt):
+  output-6910-1 -> 86.42609 WIN (+0.034786 vs 86.391304; proxy 86.339 undershot — 2nd datum)
+  output-6730-1 -> 86.38043 tie-below; output-6915-1 -> NINJA-FAIL member ctx (p[4] block-scope hoist)
+- WIN state: f3_hairmenu_p11_score_WIN.txt (86.42609@1840), f3_hairmenu_p11_gate_WIN.txt (ALL-PASS,
+  md5 fb76e186fada02a5b6f3609859adb16a), 69 siblings word-identical (per-symbol compare, changed={render}),
+  full ninja rc=0 Code 51356/51356 141/141 Data 6340/6340, COMMITTED 14d811ba
+- ROWS: f3_hairmenu_p11_rows_WIN.txt — 287 rows, a=21 b=32 c=208 (shift 202 TRUE 6) d=26;
+  TRUE set {188,209,253,298,302,435} unchanged — FPR ring rows 298/302 did not fall (no 6-rotation
+  harvest in gen-4; transposition class only)
+- winner lever (f3_hairmenu_p11_winnersrc_diff.txt): p[2].x = (dx2*1.1f)+d4[6] moved AFTER
+  p[3].x = (dx2*0.1f)+d4[6] (repo ~1223) — tail x-staging statement swap, LCS re-pairing

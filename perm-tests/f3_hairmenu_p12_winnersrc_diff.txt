@@ -1,0 +1,48 @@
+diff --git a/src/pso/object/TObjCMName.cpp b/src/pso/object/TObjCMName.cpp
+index eacf3f65..6b8083dc 100644
+--- a/src/pso/object/TObjCMName.cpp
++++ b/src/pso/object/TObjCMName.cpp
+@@ -1061,6 +1061,6 @@ void TObjCMHairMenu::render()
+   s16 *rgb;
+   const f32 *d4;
+-  s32 hair;
+   s32 idx;
++  s32 hair;
+   s32 i;
+   s32 j;
+@@ -1077,9 +1077,7 @@ void TObjCMHairMenu::render()
+   f32 a1;
+   f32 a2;
+-  f32 yoff;
+   f32 scaleF;
+   f32 a255;
+   f32 yin;
+-  f32 yout;
+   f32 dy;
+   f32 dx;
+@@ -1087,5 +1085,7 @@ void TObjCMHairMenu::render()
+   f32 tv;
+   f32 xa;
++  f32 yout;
+   f32 xb;
++  f32 yoff;
+   f32 roff;
+   hair = this->appearance->hair;
+@@ -1180,7 +1180,8 @@ void TObjCMHairMenu::render()
+   {
+     s = sq;
++    xa = 0.6f * sq;
+     if (this->selection != 0)
+     {
+-      s = 0.6f * sq;
++      s = xa;
+     }
+     idoff = 0x1F;
+@@ -1235,6 +1236,6 @@ void TObjCMHairMenu::render()
+   }
+ 
+-  TCameraCtrl::restore_full_screen_view();
+   scaleF = TObjCMMainMenu::get_scale();
++  TCameraCtrl::restore_full_screen_view();
+   d4 = lbl_804650D4;
+   a255 = 255.0f * t;

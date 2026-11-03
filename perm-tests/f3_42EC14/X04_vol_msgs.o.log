@@ -1,0 +1,10 @@
+### mwcceppc.exe Compiler:
+#    File: .cache\giprobe\f3ec14_55671.cpp
+# ----------------------------------------
+#      66: char *msgs = lbl_80480240;
+#   Error:                          ^
+#   illegal implicit conversion from 'volatile char[]' to
+#   'char *'
+#   Too many errors printed, aborting program
+
+User break, cancelled...

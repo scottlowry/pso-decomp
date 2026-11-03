@@ -1,0 +1,27 @@
+--- before
++++ after
+@@ -65,6 +65,9 @@
+   f32 b = TRaderMapCore__data_805DC534;
+   f32 a = TRaderMapCore__data_805DC528;
+   state.x = a;
++  if (lbl_804C87E4)
++  {
++  }
+   state.y = a;
+   state.z = a;
+   state.sx = b;
+@@ -77,11 +80,12 @@
+   f32 *tbl = lbl_804C87B4[mode];
+   state.x = tbl[2] + ((f32) lbl_804C87E4[1].x);
+   state.y = tbl[3] + ((f32) lbl_804C87E4[1].y);
+-  set_default_alpha_blend__Fv();
+   ((u8 *) (&color))[3] = (u8) ((s32) self->m_19c);
+   draw_compass_sprite__10TObjPlayerFlllf((void *) (&state), 1, (s32) (((((color >> 0x10U) & new_var) | ((color << 0x10) & 0xFF000000)) & (~0xFF0000)) | ((color << 0x10) & 0xFF0000)), 0x21, TRaderMapCore__data_805DC58C);
+   state.x = tbl[0] + ((f32) lbl_804C87E4[0].x);
+-  state.y = tbl[1] + ((f32) lbl_804C87E4[0].y);
++  b = tbl[1];
++  state.y = b + ((f32) lbl_804C87E4[0].y);
++  set_default_alpha_blend__Fv();
+   state.rot = self->m_174;
+   set_additive_blend__Fv();
+   draw_compass_sprite__10TObjPlayerFlllf((void *) (&state), 0, -1, 0x21, TRaderMapCore__data_805DC58C);

@@ -1,0 +1,1 @@
+p13 round: PID 52343, launched 00:46:25, cap 900s (timeout fired ~01:01:25), 20936 iters, 56 harvest dirs; orphans drained to 0 before screening @ 01:02:21

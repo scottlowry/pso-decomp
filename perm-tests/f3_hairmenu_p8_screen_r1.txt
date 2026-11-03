@@ -1,0 +1,69 @@
+screening 166 harvests (jobs=3)...
+SIZE histogram: Counter({'0x730GATE': 62, 'COMPILE-FAIL': 47, '0x72c': 11, '0x734': 9, '0x728': 8, '0x740': 7, '0x738': 6, '0x714': 4, '0x274': 3, '0x6f0': 3, '0x7b4': 3, '0x724': 3})
+COMPILE-FAILs: 47
+
+dir                  perm      size       bank      flags  rows     disp%
+output-7020-2        7020 0x730GATE   r23f2 +0         OK   318  85.38043
+output-7020-3        7020 0x730GATE   r23f2 +0         OK   318  85.38043
+output-7020-4        7020 0x730GATE   r23f2 +0         OK   318  85.38043
+output-6940-1        6940 0x730GATE   r23f3 +0         OK   318  85.33696
+output-6940-2        6940 0x730GATE   r23f3 +0         OK   318  85.33696
+output-6930-9        6930 0x730GATE   r23f3 +0         OK   318  85.33696
+output-7040-9        7040 0x730GATE   r23f3 +0         OK   320   85.3413
+output-6505-1        6505 0x730GATE   r23f3 +0         OK   324 87.065216
+output-6460-1        6460 0x730GATE   r23f3 +0         OK   324 87.065216
+output-6460-2        6460 0x730GATE   r23f3 +0         OK   324 87.065216
+output-7040-1        7040 0x730GATE   r23f3 +0         OK   326 85.347824
+output-7040-10       7040 0x730GATE   r23f3 +0         OK   326 85.347824
+output-7040-14       7040 0x730GATE   r23f3 +0         OK   326  85.33696
+output-7040-15       7040 0x730GATE   r23f3 +0         OK   326  85.33696
+output-7040-16       7040 0x730GATE   r23f3 +0         OK   326  85.33696
+output-7040-3        7040 0x730GATE   r23f3 +0         OK   326 85.304344
+output-7035-4        7035 0x730GATE   r23f3 +0         OK   326  85.32609
+output-7035-5        7035 0x730GATE   r23f3 +0         OK   326  85.32609
+output-7035-6        7035 0x730GATE   r23f3 +0         OK   326  85.32609
+output-7035-7        7035 0x730GATE   r23f3 +0         OK   326 85.347824
+output-7025-1        7025 0x730GATE   r23f3 +0         OK   326  85.32609
+output-7025-10       7025 0x730GATE   r23f3 +0         OK   326  85.32609
+output-7025-11       7025 0x730GATE   r23f3 +0         OK   326  85.32609
+output-6930-6        6930 0x730GATE   r23f3 +0         OK   326  86.29348
+output-6915-1        6915 0x730GATE   r23f3 +0         OK   326  85.32609
+output-6915-2        6915 0x730GATE   r23f3 +0         OK   326  85.32609
+output-6910-5        6910 0x730GATE   r23f3 +0         OK   326  85.32609
+output-6905-12       6905 0x730GATE   r23f3 +0         OK   326  85.32609
+output-6905-13       6905 0x730GATE   r23f3 +0         OK   326  85.32609
+output-6905-14       6905 0x730GATE   r23f3 +0         OK   326  85.32609
+output-6905-5        6905 0x730GATE   r23f3 +0         OK   326  85.32609
+output-6905-6        6905 0x730GATE   r23f3 +0         OK   326  85.32609
+output-6905-7        6905 0x730GATE   r23f3 +0         OK   326  85.32609
+output-6880-1        6880 0x730GATE   r23f3 +0         OK   326  85.32609
+output-6870-1        6870 0x730GATE   r23f3 +0         OK   326  85.32609
+output-6870-2        6870 0x730GATE   r23f3 +0         OK   326  85.32609
+output-7040-4        7040 0x730GATE   r23f3 +0         OK   328 83.910866
+output-7040-5        7040 0x730GATE   r23f3 +0         OK   328 83.910866
+output-6980-2        6980 0x730GATE   r23f2 +0         OK   328  84.10652
+output-6980-3        6980 0x730GATE   r23f2 +0         OK   328  84.10652
+output-6980-4        6980 0x730GATE   r23f2 +0         OK   328  84.10652
+output-6925-1        6925 0x730GATE   r23f3 +0         OK   328  85.37826
+output-6920-5        6920 0x730GATE   r23f3 +0         OK   328  85.37826
+output-6920-6        6920 0x730GATE   r23f3 +0         OK   328  85.37826
+output-6905-1        6905 0x730GATE   r23f3 +0         OK   328  85.32826
+output-6905-10       6905 0x730GATE   r23f3 +0         OK   328  85.32826
+output-6905-11       6905 0x730GATE   r23f3 +0         OK   328  85.32826
+output-7025-12       7025 0x730GATE   r23f3 +0         OK   332  83.60652
+output-7025-2        7025 0x730GATE   r23f3 +0         OK   332  83.60652
+output-7025-3        7025 0x730GATE   r23f3 +0         OK   332  83.60652
+output-6825-1        6825 0x730GATE   r23f3 +0         OK   332  83.26305
+output-6825-2        6825 0x730GATE   r23f3 +0         OK   332  83.26305
+output-6805-6        6805 0x730GATE   r23f3 +0         OK   332  83.26305
+output-7020-1        7020 0x730GATE   r23f3 +0         OK   334 83.910866
+output-7015-1        7015 0x730GATE   r23f3 +0         OK   334 83.910866
+output-7010-7        7010 0x730GATE   r23f3 +0         OK   334 83.910866
+output-6760-1        6760 0x730GATE   r23f0 +0         OK   340  83.63913
+output-6755-1        6755 0x730GATE   r23f0 +0         OK   340  83.63913
+output-6700-2        6700 0x730GATE   r23f0 +0         OK   340  83.63913
+output-6805-3        6805 0x730GATE   r23f3 +0         OK   348  80.86522
+output-6805-4        6805 0x730GATE   r23f3 +0         OK   348  80.86522
+output-6805-5        6805 0x730GATE   r23f3 +0         OK   348  80.86522
+
+GATE-PASS (0x730+r23+clean incl UB/NEWSYM flags shown): 62 ; full gate pass: 62

@@ -1,0 +1,9 @@
+### mwcceppc.exe Compiler:
+#    File: .cache\giprobe\f3ec14_55698.cpp
+# ----------------------------------------
+#      35: if (g == 0) {
+#   Error:     ^
+#   undefined identifier 'g'
+#   Too many errors printed, aborting program
+
+User break, cancelled...

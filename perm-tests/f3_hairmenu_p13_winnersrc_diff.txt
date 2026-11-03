@@ -1,0 +1,20 @@
+22d21
+<   f32 t;
+25d23
+<   u32 *new_var;
+26a25
+>   u32 *new_var;
+30a30
+>   f32 t;
+41d40
+<   f32 yoff;
+42a42
+>   f32 yoff;
+230a231,233
+>     if (this)
+>     {
+>     }
+250,252d252
+< 
+<   TCameraCtrl__sub_80068EF0();
+< }

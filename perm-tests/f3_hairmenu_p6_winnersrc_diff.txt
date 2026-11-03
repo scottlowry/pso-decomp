@@ -1,0 +1,60 @@
+--- 
++++ 
+@@ -1,10 +1,16 @@
+-/* f3 p6 kit (REPO-SEEDED facade; compile.sh restores member context): pure-C mirror of TObjCMName.cpp render__14TObjCMHairMenuFv */
+-/* types.h verbatim (s32=LONG) */
+-typedef signed char s8; typedef unsigned char u8;
+-typedef signed short s16; typedef unsigned short u16;
+-typedef signed long s32; typedef unsigned long u32;
+-typedef signed long long s64; typedef unsigned long long u64;
+-typedef float f32; typedef double f64;
+-/* permbool trick UNNEEDED: body has no bool; and under the extern-C -lang=c++
+-   wrapper `typedef int bool` is a C++ keyword clash that kills MWCC. */
+-struct vec2f_ { f32 x; f32 y; };
++
++typedef signed char s8;
++typedef unsigned char u8;
++typedef signed short s16;
++typedef unsigned short u16;
++typedef signed long s32;
++typedef unsigned long u32;
++typedef signed long long s64;
++typedef unsigned long long u64;
++typedef float f32;
++typedef double f64;
++struct vec2f_
++{
++  f32 x;
++  f32 y;
++};
+@@ -12,2 +18,18 @@
+-typedef struct { u8 name[0x30]; u8 section; s8 classId; u8 flags, spare; u32 classFlags;
+-    s16 costume, skin, face, head, hair, red, green, blue; f32 width, height;
++typedef struct 
++{
++  u8 name[0x30];
++  u8 section;
++  s8 classId;
++  u8 flags;
++  u8 spare;
++  u32 classFlags;
++  s16 costume;
++  s16 skin;
++  s16 face;
++  s16 head;
++  s16 hair;
++  s16 red;
++  s16 green;
++  s16 blue;
++  f32 width;
++  f32 height;
+@@ -15,3 +37,19 @@
+-typedef struct { vec2f *pts; u32 *colors; s32 start; s32 count; } Prim_80297DB8;
+-typedef struct { u8 pad[0x1C]; CharacterAppearanceFields *appearance;
+-    s32 initialized, selection, count, ticks, active; f32 fade; s32 trailing[2]; s16 hair;
++typedef struct 
++{
++  vec2f *pts;
++  u32 *colors;
++  s32 start;
++  s32 count;

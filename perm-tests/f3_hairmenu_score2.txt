@@ -1,0 +1,417 @@
+ORIG  render__14TObjCMHairMenuFv                              match=82.152176 size=1840
+OURS  render__14TObjCMHairMenuFv                              match=82.152176 size=1860
+rows: orig 460 ours 465
+  slot 21 O: stmw r23, 0x8c(r1)                         N: stmw r22, 0x88(r1)                        
+  slot 22 O: mr r25, r3                                 N: mr r24, r3                                
+  slot 23 O: lwz r3, 0x1c(r3)                           N: lwz r0, 0x2c(r3)                          
+  slot 24 O: lwz r0, 0x2c(r25)                          N: lha r25, 0x40(r3)                         
+  slot 25 O: lha r27, 0x40(r3)                          N: slwi r3, r0, 10                           
+  slot 26 O: slwi r3, r0, 10                            N: bl sin_table_lookup                       
+  slot 27 O: bl sin_table_lookup                        N: lfs f2, @409@sda21                        
+  slot 28 O: lfs f2, lbl_805DDAFC@sda21                 N: lfs f0, @56@sda21                         
+  slot 29 O: lfs f0, lbl_805DDA70@sda21                 N: fmadds f29, f2, f1, f0                    
+  slot 30 O: fmadds f27, f2, f1, f0                     N: fcmpo cr0, f29, f0                        
+  slot 31 O: fcmpo cr0, f27, f0                         N: ble 0x11b0                                
+  slot 32 O: ble 0x11b4                                 N: fmr f29, f0                               
+  slot 33 O: fmr f27, f0                                N: lwz r3, 0x28(r24)                         
+  slot 34 O: lwz r3, 0x28(r25)                          N: subic. r0, r3, 0x1                        
+  slot 35 O: subic. r0, r3, 0x1                         N: bge 0x11c4                                
+  slot 36 O: bge 0x11c8                                 N: li r0, 0x0                                
+  slot 37 O: li r0, 0x0                                 N: b 0x11d0                                  
+  slot 38 O: b 0x11d4                                   N: cmpwi r0, 0xa                             
+  slot 39 O: cmpwi r0, 0xa                              N: blt 0x11d0                                
+  slot 40 O: blt 0x11d4                                 N: li r0, 0x9                                
+  slot 41 O: li r0, 0x9                                 N: lfs f2, 0x34(r24)                         
+  slot 42 O: lfs f2, 0x34(r25)                          N: lis r3, lbl_8046509C@ha                   
+  slot 43 O: lis r3, lbl_8046509C@ha                    N: lfs f1, @85@sda21                         
+  slot 44 O: lfs f1, lbl_805DDA6C@sda21                 N: slwi r0, r0, 2                            
+  slot 45 O: slwi r0, r0, 2                             N: addi r3, r3, lbl_8046509C@l               
+  slot 46 O: addi r3, r3, lbl_8046509C@l                N: fcmpo cr0, f2, f1                         
+  slot 47 O: fcmpo cr0, f2, f1                          N: lfsx f28, r3, r0                          
+  slot 48 O: lfsx f31, r3, r0                           N: cror eq, lt, eq                           
+  slot 49 O: cror eq, lt, eq                            N: beq 0x12f8                                
+  slot 50 O: beq 0x12fc                                 N: lfs f0, @86@sda21                         
+  slot 51 O: lfs f0, lbl_805DDA74@sda21                 N: fcmpo cr0, f2, f0                         
+  slot 52 O: fcmpo cr0, f2, f0                          N: cror eq, gt, eq                           
+  slot 53 O: cror eq, gt, eq                            N: bne 0x120c                                
+  slot 54 O: bne 0x1210                                 N: lfs f27, @56@sda21                        
+  slot 55 O: lfs f26, lbl_805DDA70@sda21                N: b 0x1214                                  
+  slot 56 O: b 0x1218                                   N: fsubs f0, f2, f1                          
+  slot 57 O: fsubs f0, f2, f1                           N: fdivs f27, f0, f1                         
+  slot 58 O: fdivs f26, f0, f1                          N: lfs f30, @118@sda21                       
+  slot 59 O: lfs f28, lbl_805DDAC0@sda21                N: li r23, 0x0                               
+  slot 60 O: li r24, 0x0                                N: lfs f31, @56@sda21                        
+  slot 61 O: lfs f29, lbl_805DDA70@sda21                N: li r22, 0x0                               
+  slot 62 O: li r23, 0x0                                N: fsubs f0, f28, f30                        
+  slot 63 O: fsubs f0, f31, f28                         N: lfs f1, @410@sda21                        
+  slot 64 O: lfs f1, lbl_805DDB04@sda21                 N: stfs f31, 0x2c(r1)                        
+  slot 65 O: stfs f29, 0x2c(r1)                         N: lfs f24, @91@sda21                        
+  slot 66 O: lfs f24, lbl_805DDA88@sda21                N: fmadds f26, f27, f0, f30                  
+  slot 67 O: fmadds f30, f26, f0, f28                   N: stfs f1, 0x34(r1)                         
+  slot 68 O: stfs f1, 0x34(r1)                          N: lfs f25, @411@sda21                       
+  slot 69 O: lfs f25, lbl_805DDB08@sda21                N: cmpwi r23, 0x0                            
+  slot 70 O: cmpwi r24, 0x0                             N: li r26, 0x0                               
+  slot 71 O: li r26, 0x0                                N: bne 0x1254                                
+  slot 72 O: bne 0x1258                                 N: fmr f23, f26                              
+  slot 73 O: fmr f23, f30                               N: b 0x126c                                  
+  slot 74 O: b 0x1270                                   N: lis r3, lbl_804650C4@ha                   
+  slot 75 O: lis r3, lbl_804650C4@ha                    N: lfs f1, @118@sda21                        
+  slot 76 O: lfs f1, lbl_805DDAC0@sda21                 N: addi r3, r3, lbl_804650C4@l               
+  slot 77 O: addi r3, r3, lbl_804650C4@l                N: lfsx f0, r3, r22                          
+  slot 78 O: lfsx f0, r3, r23                           N: fsubs f0, f0, f1                          
+  slot 79 O: fsubs f0, f0, f1                           N: fmadds f23, f27, f0, f1                   
+  slot 80 O: fmadds f23, f26, f0, f1                    N: stfs f30, 0x30(r1)                        
+  slot 81 O: stfs f28, 0x30(r1)                         N: lwz r0, 0x24(r24)                         
+  slot 82 O: lwz r0, 0x24(r25)                          N: cmpw r23, r0                              
+  slot 83 O: cmpw r24, r0                               N: bne 0x129c                                
+  slot 84 O: bne 0x12a0                                 N: lwz r0, 0x2c(r24)                         
+  slot 85 O: lwz r0, 0x2c(r25)                          N: li r26, 0x2                               
+  slot 86 O: li r26, 0x2                                N: slwi r3, r0, 10                           
+  slot 87 O: slwi r3, r0, 10                            N: bl sin_table_lookup                       
+  slot 88 O: bl sin_table_lookup                        N: lfs f2, @90@sda21                         
+  slot 89 O: lfs f2, lbl_805DDA84@sda21                 N: lfs f0, 0x30(r1)                          
+  slot 90 O: lfs f0, 0x30(r1)                           N: fmadds f0, f2, f1, f0                     
+  slot 91 O: fmadds f0, f2, f1, f0                      N: stfs f0, 0x30(r1)                         
+  slot 92 O: stfs f0, 0x30(r1)                          N: lfs f0, 0x30(r1)                          
+  slot 93 O: lfs f0, 0x30(r1)                           N: addi r3, r26, 0x6                         
+  slot 94 O: addi r3, r26, 0x6                          N: lfs f1, @92@sda21                         
+  slot 95 O: lfs f1, lbl_805DDA8C@sda21                 N: addi r4, r1, 0x30                         
+  slot 96 O: addi r4, r1, 0x30                          N: fsubs f0, f23, f0                         
+  slot 97 O: fsubs f0, f23, f0                          N: addi r5, r1, 0x28                         
+  slot 98 O: addi r5, r1, 0x28                          N: fdivs f0, f0, f24                         
+  slot 99 O: fdivs f0, f0, f24                          N: stfs f0, 0x28(r1)                         
+  slot100 O: stfs f0, 0x28(r1)                          N: bl draw_ui_sprite_opaque                  
+  slot101 O: bl draw_ui_sprite_opaque                   N: stfs f23, 0x30(r1)                        
+  slot102 O: stfs f23, 0x30(r1)                         N: addi r3, r26, 0x7                         
+  slot103 O: addi r3, r26, 0x7                          N: lfs f1, @92@sda21                         
+  slot104 O: lfs f1, lbl_805DDA8C@sda21                 N: addi r4, r1, 0x30                         
+  slot105 O: addi r4, r1, 0x30                          N: stfs f31, 0x28(r1)                        
+  slot106 O: stfs f29, 0x28(r1)                         N: addi r5, r1, 0x28                         
+  slot107 O: addi r5, r1, 0x28                          N: bl draw_ui_sprite_opaque                  
+  slot108 O: bl draw_ui_sprite_opaque                   N: lfs f0, 0x34(r1)                          
+  slot109 O: lfs f0, 0x34(r1)                           N: addi r23, r23, 0x1                        
+  slot110 O: addi r24, r24, 0x1                         N: cmpwi r23, 0x4                            
+  slot111 O: cmpwi r24, 0x4                             N: addi r22, r22, 0x4                        
+  slot112 O: addi r23, r23, 0x4                         N: fadds f0, f0, f25                         
+  slot113 O: fadds f0, f0, f25                          N: stfs f0, 0x34(r1)                         
+  slot114 O: stfs f0, 0x34(r1)                          N: blt 0x1240                                
+  slot115 O: blt 0x1244                                 N: lfs f1, 0x34(r24)                         
+  slot116 O: lfs f1, 0x34(r25)                          N: lfs f0, @54@sda21                         
+  slot117 O: lfs f0, lbl_805DDA90@sda21                 N: fcmpo cr0, f1, f0                         
+  slot118 O: fcmpo cr0, f1, f0                          N: cror eq, lt, eq                           
+  slot119 O: cror eq, lt, eq                            N: beq 0x1380                                
+  slot120 O: beq 0x1384                                 N: lfs f0, @86@sda21                         
+  slot121 O: lfs f0, lbl_805DDA6C@sda21                 N: fcmpo cr0, f1, f0                         
+  slot122 O: fcmpo cr0, f1, f0                          N: cror eq, gt, eq                           
+  slot123 O: cror eq, gt, eq                            N: bne 0x1324                                
+  slot124 O: bne 0x1328                                 N: lfs f23, @56@sda21                        
+  slot125 O: lfs f23, lbl_805DDA70@sda21                N: b 0x1328                                  
+  slot126 O: b 0x132c                                   N: fdivs f23, f1, f0                         
+  slot127 O: fdivs f23, f1, f0                          N: lfs f1, @412@sda21                        
+  slot128 O: lfs f1, lbl_805DDB0C@sda21                 N: li r22, 0x0                               
+  slot129 O: li r23, 0x0                                N: lfs f0, @410@sda21                        
+  slot130 O: lfs f0, lbl_805DDB04@sda21                 N: stfs f1, 0x20(r1)                         
+  slot131 O: stfs f1, 0x20(r1)                          N: lfs f26, @411@sda21                       
+  slot132 O: lfs f26, lbl_805DDB08@sda21                N: stfs f0, 0x24(r1)                         
+  slot133 O: stfs f0, 0x24(r1)                          N: lwz r0, 0x24(r24)                         
+  slot134 O: lwz r0, 0x24(r25)                          N: li r3, 0x0                                
+  slot135 O: li r3, 0x0                                 N: cmpw r22, r0                              
+  slot136 O: cmpw r23, r0                               N: bne 0x1354                                
+  slot137 O: bne 0x1358                                 N: li r3, -0x1                               
+  slot138 O: li r3, -0x1                                N: fmr f2, f23                               
+  slot139 O: fmr f2, f23                                N: lfs f1, @93@sda21                         
+  slot140 O: lfs f1, lbl_805DDA94@sda21                 N: addi r3, r3, 0x1                          
+  slot141 O: addi r3, r3, 0x1                           N: addi r4, r1, 0x20                         
+  slot142 O: addi r4, r1, 0x20                          N: bl draw_ui_sprite                         
+  slot143 O: bl draw_ui_sprite                          N: lfs f0, 0x24(r1)                          
+  slot144 O: lfs f0, 0x24(r1)                           N: addi r22, r22, 0x1                        
+  slot145 O: addi r23, r23, 0x1                         N: cmpwi r22, 0x4                            
+  slot146 O: cmpwi r23, 0x4                             N: fadds f0, f0, f26                         
+  slot147 O: fadds f0, f0, f26                          N: stfs f0, 0x24(r1)                         
+  slot148 O: stfs f0, 0x24(r1)                          N: blt 0x1340                                
+  slot149 O: blt 0x1344                                 N: lfs f1, 0x34(r24)                         
+  slot150 O: lfs f1, 0x34(r25)                          N: lfs f0, @86@sda21                         
+  slot151 O: lfs f0, lbl_805DDA74@sda21                 N: fcmpo cr0, f1, f0                         
+  slot152 O: fcmpo cr0, f1, f0                          N: cror eq, lt, eq                           
+  slot153 O: cror eq, lt, eq                            N: beq 0x1814                                
+  slot154 O: beq 0x1800                                 N: fsubs f3, f1, f0                          
+  slot155 O: fsubs f3, f1, f0                           N: lfs f0, @413@sda21                        
+  slot156 O: lfs f2, lbl_805DDB10@sda21                 N: lfs f2, @414@sda21                        
+  slot157 O: lfs f1, lbl_805DDB14@sda21                 N: li r22, 0x0                               
+  slot158 O: li r23, 0x0                                N: lfs f1, @122@sda21                        
+  slot159 O: lfs f0, lbl_805DDAD0@sda21                 N: fdivs f30, f3, f0                         
+  slot160 O: fdivs f26, f3, f2                          N: lfs f0, @415@sda21                        
+  slot161 O: stfs f1, 0x18(r1)                          N: stfs f2, 0x18(r1)                         
+  slot162 O: lfs f29, TObjCMAssignMenu__data_805DDB20@sda21 N: lfs f27, @417@sda21                       
+  slot163 O: stfs f0, 0x1c(r1)                          N: stfs f1, 0x1c(r1)                         
+  slot164 O: fmuls f28, f26, f26                        N: fmuls f26, f30, f30                       
+  slot165 O: b 0x1448                                   N: fmuls f24, f0, f26                        
+  slot166 O: lwz r3, 0x24(r25)                          N: b 0x144c                                  
+  slot167 O: fmr f23, f28                               N: lwz r0, 0x24(r24)                         
+  slot168 O: li r24, 0x1f                               N: fmr f23, f26                              
+  slot169 O: cmpwi r3, 0x0                              N: cmpwi r0, 0x0                             
+  slot170 O: beq 0x13e0                                 N: beq 0x13dc                                
+  slot171 O: lfs f0, lbl_805DDB18@sda21                 N: fmr f23, f24                              
+  slot172 O: fmuls f23, f28, f0                         N: cmpw r22, r25                             
+  slot173 O: cmpw r23, r27                              N: li r23, 0x1f                              
+  slot174 O: bne 0x1424                                 N: bne 0x1428                                
+  slot176 O: li r24, 0x20                               N: li r23, 0x20                              
+  slot179 O: lwz r0, 0x2c(r25)                          N: lwz r0, 0x2c(r24)                         
+  slot183 O: lfs f0, lbl_805DDB1C@sda21                 N: lfs f0, @416@sda21                        
+  slot186 O: b 0x1424                                   N: b 0x1428                                  
+  slot187 O: cmpwi r3, 0x0                              N: lwz r0, 0x24(r24)                         
+  slot188 O: bne 0x1424                                 N: cmpwi r0, 0x0                             
+  slot189 O: fmuls f23, f23, f27                        N: bne 0x1428                                
+  slot190 O: fmr f2, f23                                N: fmuls f23, f23, f29                       
+  slot191 O: lfs f1, lbl_805DDA94@sda21                 N: fmr f2, f23                               
+  slot192 O: mr r3, r24                                 N: lfs f1, @93@sda21                         
+  slot193 O: addi r4, r1, 0x18                          N: mr r3, r23                                
+  slot194 O: bl draw_ui_sprite                          N: addi r4, r1, 0x18                         
+  slot195 O: lfs f0, 0x18(r1)                           N: bl draw_ui_sprite                         
+  slot196 O: addi r23, r23, 0x1                         N: lfs f0, 0x18(r1)                          
+  slot197 O: fadds f0, f0, f29                          N: addi r22, r22, 0x1                        
+  slot198 O: stfs f0, 0x18(r1)                          N: fadds f0, f0, f27                         
+  slot199 O: lwz r0, 0x28(r25)                          N: stfs f0, 0x18(r1)                         
+  slot200 O: cmpw r23, r0                               N: lwz r0, 0x28(r24)                         
+  slot201 O: blt 0x13c4                                 N: cmpw r22, r0                              
+  slot202 O: lfs f0, lbl_805DDB24@sda21                 N: blt 0x13c8                                
+  slot203 O: fmr f24, f28                               N: lfs f0, @418@sda21                        
+  slot204 O: lwz r0, 0x24(r25)                          N: fmr f23, f26                              
+  slot205 O: fsubs f23, f31, f0                         N: lwz r0, 0x24(r24)                         
+  slot206 O: cmpwi r0, 0x0                              N: fsubs f24, f28, f0                        
+  slot207 O: bne 0x1474                                 N: cmpwi r0, 0x0                             
+  slot208 O: fmuls f2, f28, f27                         N: bne 0x1478                                
+  slot209 O: b 0x1480                                   N: fmuls f2, f26, f29                        
+  slot210 O: lfs f0, lbl_805DDB18@sda21                 N: b 0x1484                                  
+  slot211 O: fmuls f2, f28, f0                          N: lfs f0, @415@sda21                        
+  slot212 O: fmr f24, f2                                N: fmuls f2, f0, f26                         
+  slot213 O: lfs f1, lbl_805DDB28@sda21                 N: fmr f23, f2                               
+  slot214 O: addi r3, r27, 0x14                         N: lfs f1, @419@sda21                        
+  slot215 O: lfs f0, lbl_805DDB2C@sda21                 N: addi r3, r25, 0x14                        
+  slot216 O: addi r4, r1, 0x10                          N: lfs f0, @420@sda21                        
+  slot217 O: fadds f3, f1, f23                          N: addi r4, r1, 0x10                         
+  slot218 O: lfs f1, lbl_805DDA94@sda21                 N: fadds f3, f1, f24                         
+  slot219 O: stfs f0, 0x14(r1)                          N: lfs f1, @93@sda21                         
+  slot220 O: stfs f3, 0x10(r1)                          N: stfs f0, 0x14(r1)                         
+  slot221 O: bl draw_ui_sprite                          N: stfs f3, 0x10(r1)                         
+  slot222 O: lfs f1, lbl_805DDB30@sda21                 N: bl draw_ui_sprite                         
+  slot223 O: fmr f2, f24                                N: lfs f1, @421@sda21                        
+  slot224 O: lfs f0, lbl_805DDAD0@sda21                 N: fmr f2, f23                               
+  slot225 O: addi r4, r1, 0x10                          N: lfs f0, @122@sda21                        
+  slot226 O: fadds f3, f1, f23                          N: addi r4, r1, 0x10                         
+  slot227 O: lfs f1, lbl_805DDA94@sda21                 N: fadds f3, f1, f24                         
+  slot228 O: stfs f0, 0x14(r1)                          N: lfs f1, @93@sda21                         
+  slot229 O: li r3, 0x1e                                N: stfs f0, 0x14(r1)                         
+  slot230 O: stfs f3, 0x10(r1)                          N: li r3, 0x1e                               
+  slot231 O: bl draw_ui_sprite                          N: stfs f3, 0x10(r1)                         
+  slot232 O: lfs f1, lbl_805DDB34@sda21                 N: bl draw_ui_sprite                         
+  slot233 O: fmr f2, f24                                N: lfs f1, @422@sda21                        
+  slot234 O: lfs f0, lbl_805DDB38@sda21                 N: fmr f2, f23                               
+  slot235 O: addi r4, r1, 0x10                          N: lfs f0, @423@sda21                        
+  slot236 O: fadds f3, f1, f23                          N: addi r4, r1, 0x10                         
+  slot237 O: lfs f1, lbl_805DDA94@sda21                 N: fadds f3, f1, f24                         
+  slot238 O: stfs f0, 0x14(r1)                          N: lfs f1, @93@sda21                         
+  slot239 O: stfs f3, 0x10(r1)                          N: stfs f0, 0x14(r1)                         
+  slot240 O: lwz r3, 0x28(r25)                          N: stfs f3, 0x10(r1)                         
+  slot241 O: addi r3, r3, 0x13                          N: lwz r3, 0x28(r24)                         
+  slot242 O: bl draw_ui_sprite                          N: addi r3, r3, 0x13                         
+  slot243 O: lis r3, lbl_804DBCD0@ha                    N: bl draw_ui_sprite                         
+  slot244 O: lfs f29, lbl_805DDB18@sda21                N: lfs f0, @415@sda21                        
+  slot245 O: addi r23, r3, lbl_804DBCD0@l               N: lis r3, lbl_804DBCD0@ha                   
+  slot246 O: li r24, 0x1                                N: fmuls f24, f26, f29                       
+  slot247 O: lwz r0, 0x24(r25)                          N: addi r22, r3, lbl_804DBCD0@l              
+  slot248 O: cmpw r24, r0                               N: fmuls f25, f0, f26                        
+  slot249 O: bne 0x151c                                 N: li r23, 0x1                               
+  slot250 O: fmuls f2, f28, f27                         N: lwz r0, 0x24(r24)                         
+  slot251 O: b 0x1520                                   N: subi r3, r23, 0x1                         
+  slot252 O: fmuls f2, f28, f29                         N: slwi r4, r3, 3                            
+  slot253 O: subi r0, r24, 0x1                          N: lfs f1, @93@sda21                         
+  slot254 O: lfs f1, lbl_805DDA94@sda21                 N: cmpw r23, r0                              
+  slot255 O: slwi r0, r0, 3                             N: addi r3, r23, 0xf                         
+  slot256 O: addi r3, r24, 0xf                          N: add r4, r22, r4                           
+  slot257 O: add r4, r23, r0                            N: bne 0x153c                                
+  slot258 O: bl draw_ui_sprite                          N: fmr f2, f24                               
+  slot259 O: addi r24, r24, 0x1                         N: b 0x1540                                  
+  slot260 O: cmpwi r24, 0x4                             N: fmr f2, f25                               
+  slot261 O: blt 0x1508                                 N: bl draw_ui_sprite                         
+  slot262 O: bl restore_full_screen_view__11TCameraCtrlFv N: addi r23, r23, 0x1                        
+  slot263 O: bl get_scale__14TObjCMMainMenuFv           N: cmpwi r23, 0x4                            
+  slot264 O: lis r3, lbl_804650D4@ha                    N: blt 0x1514                                
+  slot265 O: lfs f0, TObjCMMainMenu__data_805DDB44@sda21 N: bl restore_full_screen_view__11TCameraCtrlFv
+  slot266 O: addi r30, r3, lbl_804650D4@l               N: bl get_scale__14TObjCMMainMenuFv          
+  slot267 O: lis r3, lbl_804650F4@ha                    N: lis r3, lbl_804650D4@ha                   
+  slot268 O: lfs f2, 0x4(r30)                           N: lfs f2, @424@sda21                        
+  slot269 O: fmuls f27, f0, f26                         N: addi r3, r3, lbl_804650D4@l               
+  slot270 O: lfs f0, 0xc(r30)                           N: lis r4, lbl_804650F4@ha                   
+  slot271 O: addi r3, r3, lbl_804650F4@l                N: fmuls f27, f2, f30                        
+  slot272 O: lwz r4, 0xc(r3)                            N: lfs f0, 0xc(r3)                           
+  slot273 O: addi r7, r1, 0x58                          N: lfs f2, 0x4(r3)                           
+  slot274 O: fsubs f4, f0, f2                           N: addi r4, r4, lbl_804650F4@l               
+  slot275 O: lfs f7, lbl_805DDB3C@sda21                 N: lwz r4, 0xc(r4)                           
+  slot276 O: fctiwz f0, f27                             N: addi r7, r1, 0x58                         
+  slot277 O: lfs f5, lbl_805DDB40@sda21                 N: fsubs f3, f0, f2                          
+  slot278 O: fmr f28, f1                                N: lfs f8, @425@sda21                        
+  slot279 O: fmadds f3, f7, f4, f2                      N: lfs f7, @426@sda21                        
+  slot280 O: fmadds f2, f5, f4, f2                      N: fctiwz f0, f27                            
+  slot281 O: stfd f0, 0x78(r1)                          N: lfs f4, 0x0(r3)                           
+  slot282 O: lfs f8, lbl_805DDB08@sda21                 N: fmr f30, f1                               
+  slot283 O: addi r6, r1, 0x48                          N: fmadds f5, f8, f3, f2                     
+  slot284 O: lfs f9, 0x0(r30)                           N: lfs f6, 0x18(r3)                          
+  slot285 O: lfs f0, 0x8(r30)                           N: fmadds f9, f7, f3, f2                     
+  slot286 O: li r5, 0x0                                 N: lfs f3, 0x8(r3)                           
+  slot287 O: addi r29, r1, 0x54                         N: lfs f2, @411@sda21                        
+  slot288 O: fsubs f10, f0, f9                          N: addi r6, r1, 0x48                         
+  slot289 O: lfs f11, 0x18(r30)                         N: stfd f0, 0x78(r1)                         
+  slot290 O: lfs f4, 0x10(r30)                          N: fsubs f10, f3, f4                         
+  slot291 O: fmuls f1, f3, f28                          N: lfs f3, 0x10(r3)                          
+  slot292 O: stfs f3, 0x74(r1)                          N: fmuls f26, f2, f30                        
+  slot293 O: fmuls f0, f2, f28                          N: stw r4, 0x8(r1)                           
+  slot294 O: fsubs f12, f4, f11                         N: li r5, 0x0                                
+  slot295 O: stfs f3, 0x5c(r1)                          N: fsubs f2, f3, f6                          
+  slot296 O: fmadds f6, f7, f10, f9                     N: lwz r0, 0x7c(r1)                          
+  slot297 O: lwz r0, 0x7c(r1)                           N: fmuls f1, f5, f30                         
+  slot298 O: fmadds f4, f5, f10, f9                     N: stfs f5, 0x74(r1)                         
+  slot299 O: stfs f2, 0x6c(r1)                          N: fmuls f0, f9, f30                         
+  slot300 O: fmadds f3, f5, f12, f11                    N: fmadds f3, f7, f2, f6                     
+  slot301 O: stfs f2, 0x64(r1)                          N: stfs f5, 0x5c(r1)                         
+  slot302 O: fmadds f2, f7, f12, f11                    N: fmadds f5, f8, f10, f4                    
+  slot303 O: mr r3, r29                                 N: fmadds f4, f7, f10, f4                    
+  slot304 O: stw r4, 0xc(r1)                            N: addi r3, r1, 0x54                         
+  slot305 O: fmuls f26, f8, f28                         N: fmadds f2, f8, f2, f6                     
+  slot306 O: stw r7, 0x38(r1)                           N: stfs f9, 0x6c(r1)                         
+  slot307 O: addi r4, r1, 0xc                           N: addi r4, r1, 0x8                          
+  slot308 O: stw r6, 0x3c(r1)                           N: stfs f9, 0x64(r1)                         
+  slot309 O: stw r5, 0x40(r1)                           N: stfs f5, 0x58(r1)                         
+  slot310 O: stfs f6, 0x58(r1)                          N: stfs f4, 0x60(r1)                         
+  slot311 O: stfs f4, 0x60(r1)                          N: stfs f3, 0x68(r1)                         
+  slot312 O: stfs f3, 0x68(r1)                          N: stfs f2, 0x70(r1)                         
+  slot313 O: stfs f2, 0x70(r1)                          N: stfs f1, 0x5c(r1)                         
+  slot314 O: stfs f1, 0x5c(r1)                          N: stfs f0, 0x64(r1)                         
+  slot315 O: stfs f0, 0x64(r1)                          N: stfs f0, 0x6c(r1)                         
+  slot316 O: stfs f0, 0x6c(r1)                          N: stfs f1, 0x74(r1)                         
+  slot317 O: stfs f1, 0x74(r1)                          N: stw r7, 0x38(r1)                          
+  slot318 O: stb r0, 0xf(r1)                            N: stw r6, 0x3c(r1)                          
+  slot319 O: bl TObjCMHairMenu__sub_801E3F54            N: stw r5, 0x40(r1)                          
+  slot320 O: addi r28, r1, 0x50                         N: stb r0, 0xb(r1)                           
+  slot321 O: mr r4, r3                                  N: bl TObjCMHairMenu__sub_801E3F54           
+  slot322 O: mr r3, r28                                 N: mr r4, r3                                 
+  slot323 O: bl TObjCMHairMenu__sub_801E3F54            N: addi r3, r1, 0x50                         
+  slot324 O: addi r27, r1, 0x4c                         N: bl TObjCMHairMenu__sub_801E3F54           
+  slot326 O: mr r3, r27                                 N: addi r3, r1, 0x4c                         
+  slot331 O: li r23, 0x0                                N: li r22, 0x0                               
+  slot332 O: lfs f1, lbl_805DDA8C@sda21                 N: lfs f1, @93@sda21                         
+  slot338 O: addi r23, r23, 0x1                         N: addi r22, r22, 0x1                        
+  slot340 O: cmpwi r23, 0x3                             N: cmpwi r22, 0x3                            
+  slot352 O: lis r3, lbl_80465140@ha                    N: fctiwz f0, f27                            
+  slot353 O: lfs f30, TObjCMMainMenu__data_805DDB44@sda21 N: lis r3, @268@ha                           
+  slot354 O: lfs f31, lbl_805DDA90@sda21                N: lis r4, lbl_804650D4@ha                   
+  slot355 O: li r26, 0x0                                N: lfd f31, @268@l(r3)                       
+  slot356 O: lfd f29, lbl_80465140@l(r3)                N: lfs f28, @424@sda21                       
+  slot357 O: li r24, 0x0                                N: addi r30, r4, lbl_804650D4@l              
+  slot358 O: li r23, 0x0                                N: stfd f0, 0x78(r1)                         
+  slot359 O: lis r31, 0x4330                            N: addi r28, r1, 0x54                        
+  slot360 O: lwz r3, 0x1c(r25)                          N: lfs f27, @54@sda21                        
+  slot361 O: addi r0, r23, 0x42                         N: addi r27, r1, 0x50                        
+  slot362 O: stw r31, 0x78(r1)                          N: lwz r29, 0x7c(r1)                         
+  slot363 O: lhax r0, r3, r0                            N: addi r26, r1, 0x4c                        
+  slot364 O: xoris r0, r0, 0x8000                       N: li r25, 0x0                               
+  slot365 O: stw r0, 0x7c(r1)                           N: li r23, 0x0                               
+  slot366 O: lfd f0, 0x78(r1)                           N: li r22, 0x0                               
+  slot367 O: fsubs f0, f0, f29                          N: lis r31, 0x4330                           
+  slot368 O: fdivs f6, f0, f30                          N: lwz r3, 0x1c(r24)                         
+  slot369 O: fcmpu cr0, f31, f6                         N: addi r0, r22, 0x42                        
+  slot370 O: beq 0x17e8                                 N: stw r31, 0x78(r1)                         
+  slot371 O: lis r3, lbl_804650D4@ha                    N: lhax r0, r3, r0                           
+  slot372 O: xoris r5, r26, 0x8000                      N: xoris r0, r0, 0x8000                      
+  slot373 O: addi r7, r3, lbl_804650D4@l                N: stw r0, 0x7c(r1)                          
+  slot374 O: lis r3, 0x4330                             N: lfd f0, 0x78(r1)                          
+  slot375 O: lfs f5, 0x0(r7)                            N: fsubs f0, f0, f31                         
+  slot376 O: lis r4, lbl_80465140@ha                    N: fdivs f6, f0, f28                         
+  slot377 O: lfs f4, 0x8(r30)                           N: fcmpu cr0, f27, f6                        
+  slot378 O: addi r6, r4, lbl_80465140@l                N: beq 0x17fc                                
+  slot379 O: lfs f1, 0x10(r30)                          N: lis r3, lbl_804650D4@ha                   
+  slot380 O: li r0, 0x4                                 N: xoris r5, r25, 0x8000                     
+  slot381 O: lfs f0, 0x18(r30)                          N: addi r7, r3, lbl_804650D4@l               
+  slot382 O: addi r4, r1, 0x58                          N: lis r4, @268@ha                           
+  slot383 O: fsubs f3, f1, f4                           N: lis r3, 0x4330                            
+  slot384 O: stw r5, 0x7c(r1)                           N: lfs f5, 0x0(r7)                           
+  slot385 O: fsubs f2, f0, f5                           N: lfs f4, 0x8(r30)                          
+  slot386 O: lfd f1, 0x0(r6)                            N: addi r6, r4, @268@l                       
+  slot387 O: stw r3, 0x78(r1)                           N: lfs f1, 0x10(r30)                         
+  slot388 O: li r3, 0x0                                 N: li r0, 0x4                                
+  slot389 O: lfd f0, 0x78(r1)                           N: lfs f0, 0x18(r30)                         
+  slot390 O: fmadds f3, f6, f3, f4                      N: addi r4, r1, 0x58                         
+  slot391 O: fmadds f2, f6, f2, f5                      N: fsubs f3, f1, f4                          
+  slot392 O: stfs f5, 0x58(r1)                          N: stw r3, 0x78(r1)                          
+  slot393 O: fsubs f0, f0, f1                           N: fsubs f2, f0, f5                          
+  slot394 O: stfs f4, 0x60(r1)                          N: lfd f1, 0x0(r6)                           
+  slot395 O: fmuls f1, f0, f26                          N: stw r5, 0x7c(r1)                          
+  slot396 O: stfs f3, 0x68(r1)                          N: li r3, 0x0                                
+  slot397 O: stfs f2, 0x70(r1)                          N: lfd f0, 0x78(r1)                          
+  slot398 O: mtctr r0                                   N: fmadds f3, f6, f3, f4                     
+  slot399 O: add r5, r7, r3                             N: fmadds f2, f6, f2, f5                     
+  slot400 O: addi r0, r3, 0x4                           N: stfs f5, 0x58(r1)                         
+  slot401 O: lfs f0, 0x4(r5)                            N: fsubs f0, f0, f1                          
+  slot402 O: addi r3, r3, 0x8                           N: stfs f4, 0x60(r1)                         
+  slot403 O: fmadds f0, f28, f0, f1                     N: fmuls f1, f0, f26                         
+  slot404 O: stfsx f0, r4, r0                           N: stfs f3, 0x68(r1)                         
+  slot405 O: bdnz 0x1768                                N: stfs f2, 0x70(r1)                         
+  slot406 O: fctiwz f0, f27                             N: mtctr r0                                  
+  slot407 O: lis r3, lbl_804650F4@ha                    N: add r5, r7, r3                            
+  slot408 O: addi r4, r3, lbl_804650F4@l                N: addi r0, r3, 0x4                          
+  slot409 O: mr r3, r29                                 N: lfs f0, 0x4(r5)                           
+  slot410 O: lwzx r0, r4, r24                           N: addi r3, r3, 0x8                          
+  slot411 O: addi r4, r1, 0x8                           N: fmadds f0, f30, f0, f1                    
+  slot412 O: stfd f0, 0x78(r1)                          N: stfsx f0, r4, r0                          
+  slot413 O: stw r0, 0x8(r1)                            N: bdnz 0x1788                               
+  slot414 O: lwz r0, 0x7c(r1)                           N: lis r4, lbl_804650F4@ha                   
+  slot415 O: stb r0, 0xb(r1)                            N: mr r3, r28                                
+  slot416 O: bl TObjCMHairMenu__sub_801E3F54            N: addi r4, r4, lbl_804650F4@l               
+  slot417 O: mr r4, r3                                  N: lwzx r0, r4, r23                          
+  slot418 O: mr r3, r28                                 N: addi r4, r1, 0xc                          
+  slot419 O: bl TObjCMHairMenu__sub_801E3F54            N: stw r0, 0xc(r1)                           
+  slot420 O: mr r4, r3                                  N: stb r29, 0xf(r1)                          
+  slot421 O: mr r3, r27                                 N: bl TObjCMHairMenu__sub_801E3F54           
+  slot422 O: bl TObjCMHairMenu__sub_801E3F54            N: mr r4, r3                                 
+  slot423 O: mr r4, r3                                  N: mr r3, r27                                
+  slot424 O: addi r3, r1, 0x48                          N: bl TObjCMHairMenu__sub_801E3F54           
+  slot425 O: bl TObjCMHairMenu__sub_801E3F54            N: mr r4, r3                                 
+  slot426 O: lfs f1, lbl_805DDA94@sda21                 N: mr r3, r26                                
+  slot427 O: addi r3, r1, 0x38                          N: bl TObjCMHairMenu__sub_801E3F54           
+  slot428 O: li r4, 0x4                                 N: mr r4, r3                                 
+  slot429 O: li r5, 0x6                                 N: addi r3, r1, 0x48                         
+  slot430 O: bl draw_tri_fan_2d__14TObjCMHairMenuFllf   N: bl TObjCMHairMenu__sub_801E3F54           
+  slot431 O: addi r26, r26, 0x1                         N: lfs f1, @93@sda21                         
+  slot432 O: addi r23, r23, 0x2                         N: addi r3, r1, 0x38                         
+  slot433 O: cmpwi r26, 0x3                             N: li r4, 0x4                                
+  slot434 O: addi r24, r24, 0x4                         N: li r5, 0x6                                
+  slot435 O: blt 0x16cc                                 N: bl draw_tri_fan_2d__14TObjCMHairMenuFllf  
+  slot436 O: bl TCameraCtrl__sub_80068EF0               N: addi r25, r25, 0x1                        
+  slot437 O: psq_l f31, 0x138(r1), 0, qr0               N: addi r22, r22, 0x2                        
+  slot438 O: lfd f31, 0x130(r1)                         N: cmpwi r25, 0x3                            
+  slot439 O: psq_l f30, 0x128(r1), 0, qr0               N: addi r23, r23, 0x4                        
+  slot440 O: lfd f30, 0x120(r1)                         N: blt 0x16ec                                
+  slot441 O: psq_l f29, 0x118(r1), 0, qr0               N: bl TCameraCtrl__sub_80068EF0              
+  slot442 O: lfd f29, 0x110(r1)                         N: psq_l f31, 0x138(r1), 0, qr0              
+  slot443 O: psq_l f28, 0x108(r1), 0, qr0               N: lfd f31, 0x130(r1)                        
+  slot444 O: lfd f28, 0x100(r1)                         N: psq_l f30, 0x128(r1), 0, qr0              
+  slot445 O: psq_l f27, 0xf8(r1), 0, qr0                N: lfd f30, 0x120(r1)                        
+  slot446 O: lfd f27, 0xf0(r1)                          N: psq_l f29, 0x118(r1), 0, qr0              
+  slot447 O: psq_l f26, 0xe8(r1), 0, qr0                N: lfd f29, 0x110(r1)                        
+  slot448 O: lfd f26, 0xe0(r1)                          N: psq_l f28, 0x108(r1), 0, qr0              
+  slot449 O: psq_l f25, 0xd8(r1), 0, qr0                N: lfd f28, 0x100(r1)                        
+  slot450 O: lfd f25, 0xd0(r1)                          N: psq_l f27, 0xf8(r1), 0, qr0               
+  slot451 O: psq_l f24, 0xc8(r1), 0, qr0                N: lfd f27, 0xf0(r1)                         
+  slot452 O: lfd f24, 0xc0(r1)                          N: psq_l f26, 0xe8(r1), 0, qr0               
+  slot453 O: psq_l f23, 0xb8(r1), 0, qr0                N: lfd f26, 0xe0(r1)                         
+  slot454 O: lfd f23, 0xb0(r1)                          N: psq_l f25, 0xd8(r1), 0, qr0               
+  slot455 O: lmw r23, 0x8c(r1)                          N: lfd f25, 0xd0(r1)                         
+  slot456 O: lwz r0, 0x144(r1)                          N: psq_l f24, 0xc8(r1), 0, qr0               
+  slot457 O: mtlr r0                                    N: lfd f24, 0xc0(r1)                         
+  slot458 O: addi r1, r1, 0x140                         N: psq_l f23, 0xb8(r1), 0, qr0               
+  slot459 O: blr                                        N: lfd f23, 0xb0(r1)                         
+  slot460 O: <none>                                     N: lmw r22, 0x88(r1)                         
+  slot461 O: <none>                                     N: lwz r0, 0x144(r1)                         
+  slot462 O: <none>                                     N: mtlr r0                                   
+  slot463 O: <none>                                     N: addi r1, r1, 0x140                        
+  slot464 O: <none>                                     N: blr                                       

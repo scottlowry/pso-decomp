@@ -1,0 +1,210 @@
+era=460 ours=465
+
+== insert era[3:3] ours[3:5] net +2
+  N-  3 1138: stfd     f31,304(r1)
+  N-  4 113c: xxsel    vs31,vs1,vs0,vs36
+
+== replace era[8:9] ours[10:13] net +2
+  O-  8 80295A40: psq_st   f29, 0x118(r1), 0, qr0
+  N- 10 1154: xsmaddadp vs28,vs1,vs0
+  N- 11 1158: stfd     f27,240(r1)
+  N- 12 115c: xxsel    vs27,vs1,vs0,vs35
+
+== replace era[14:15] ours[18:19] net +0
+  O- 14 80295A58: psq_st   f26, 0xe8(r1), 0, qr0
+  N- 18 1174: xsmsubmsp vs24,vs1,vs0
+
+== replace era[16:21] ours[20:21] net -4
+  O- 16 80295A60: psq_st   f25, 0xd8(r1), 0, qr0
+  O- 17 80295A64: stfd     f24, 0xc0(r1)
+  O- 18 80295A68: psq_st   f24, 0xc8(r1), 0, qr0
+  O- 19 80295A6C: stfd     f23, 0xb0(r1)
+  O- 20 80295A70: psq_st   f23, 0xb8(r1), 0, qr0
+  N- 20 117c: xxsel    vs23,vs1,vs0,vs34
+
+== delete era[23:24] ours[23:23] net -1
+  O- 23 80295A7C: lwz      r3, 0x1c(r3)
+
+== replace era[35:36] ours[34:35] net +0
+  O- 35 80295AAC: subic.   r0, r3, 0x1
+  N- 34 11b4: addic.   r0,r3,-1
+
+== insert era[161:161] ours[160:161] net +1
+  N-160 13ac: lfs      f0,0(0)
+
+== insert era[165:165] ours[165:166] net +1
+  N-165 13c0: fmuls    f24,f0,f26
+
+== delete era[168:169] ours[169:169] net -1
+  O-168 80295CC0: li       r24, 0x1f
+
+== replace era[171:173] ours[171:172] net -1
+  O-171 80295CCC: lfs      f0, lbl_805DDB18@sda21(r0)
+  O-172 80295CD0: fmuls    f23, f28, f0
+  N-171 13d8: fmr      f23,f24
+
+== insert era[174:174] ours[173:174] net +1
+  N-173 13e0: li       r23,31
+
+== insert era[187:187] ours[187:188] net +1
+  N-187 1418: lwz      r0,36(r24)
+
+== insert era[243:243] ours[244:245] net +1
+  N-244 14fc: lfs      f0,0(0)
+
+== replace era[244:245] ours[246:247] net +0
+  O-244 80295DF0: lfs      f29, lbl_805DDB18@sda21(r0)
+  N-246 1504: fmuls    f24,f26,f29
+
+== insert era[246:246] ours[248:249] net +1
+  N-248 150c: fmuls    f25,f0,f26
+
+== insert era[248:248] ours[251:254] net +3
+  N-251 1518: addi     r3,r23,-1
+  N-252 151c: slwi     r4,r3,3
+  N-253 1520: lfs      f1,0(0)
+
+== delete era[249:256] ours[255:255] net -7
+  O-249 80295E04: bne      .L_80295E10
+  O-250 80295E08: fmuls    f2, f28, f27
+  O-251 80295E0C: b        .L_80295E14
+  O-252 80295E10: fmuls    f2, f28, f29
+  O-253 80295E14: subi     r0, r24, 0x1
+  O-254 80295E18: lfs      f1, lbl_805DDA94@sda21(r0)
+  O-255 80295E1C: slwi     r0, r0, 3
+
+== insert era[258:258] ours[257:261] net +4
+  N-257 1530: bne      153c
+  N-258 1534: fmr      f2,f24
+  N-259 1538: b        1540
+  N-260 153c: fmr      f2,f25
+
+== insert era[268:268] ours[271:272] net +1
+  N-271 1568: fmuls    f27,f2,f30
+
+== delete era[269:270] ours[273:273] net -1
+  O-269 80295E54: fmuls    f27, f0, f26
+
+== insert era[276:276] ours[279:280] net +1
+  N-279 1588: lfs      f7,0(0)
+
+== insert era[280:280] ours[284:285] net +1
+  N-284 159c: lfs      f6,24(r3)
+
+== replace era[281:282] ours[286:287] net +0
+  O-281 80295E84: stfd     f0, 0x78(r1)
+  N-286 15a4: lfs      f3,8(r3)
+
+== replace era[284:288] ours[289:290] net -3
+  O-284 80295E90: lfs      f9, 0x0(r30)
+  O-285 80295E94: lfs      f0, 0x8(r30)
+  O-286 80295E98: li       r5, 0x0
+  O-287 80295E9C: addi     r29, r1, 0x54
+  N-289 15b0: stfd     f0,120(r1)
+
+== replace era[290:291] ours[292:297] net +4
+  O-290 80295EA8: lfs      f4, 0x10(r30)
+  N-292 15bc: fmuls    f26,f2,f30
+  N-293 15c0: stw      r4,8(r1)
+  N-294 15c4: li       r5,0
+  N-295 15c8: fsubs    f2,f3,f6
+  N-296 15cc: lwz      r0,124(r1)
+
+== delete era[294:298] ours[300:300] net -4
+  O-294 80295EB8: fsubs    f12, f4, f11
+  O-295 80295EBC: stfs     f3, 0x5c(r1)
+  O-296 80295EC0: fmadds   f6, f7, f10, f9
+  O-297 80295EC4: lwz      r0, 0x7c(r1)
+
+== insert era[301:301] ours[303:306] net +3
+  N-303 15e8: fmadds   f4,f7,f10,f4
+  N-304 15ec: addi     r3,r1,84
+  N-305 15f0: fmadds   f2,f8,f2,f6
+
+== delete era[302:307] ours[307:307] net -5
+  O-302 80295ED8: fmadds   f2, f7, f12, f11
+  O-303 80295EDC: mr       r3, r29
+  O-304 80295EE0: stw      r4, 0xc(r1)
+  O-305 80295EE4: fmuls    f26, f8, f28
+  O-306 80295EE8: stw      r7, 0x38(r1)
+
+== delete era[308:310] ours[308:308] net -2
+  O-308 80295EF0: stw      r6, 0x3c(r1)
+  O-309 80295EF4: stw      r5, 0x40(r1)
+
+== insert era[318:318] ours[316:320] net +4
+  N-316 161c: stfs     f1,116(r1)
+  N-317 1620: stw      r7,56(r1)
+  N-318 1624: stw      r6,60(r1)
+  N-319 1628: stw      r5,64(r1)
+
+== insert era[320:320] ours[322:323] net +1
+  N-322 1634: mr       r4,r3
+
+== insert era[321:321] ours[324:325] net +1
+  N-324 163c: bl       163c
+
+== delete era[322:324] ours[326:326] net -2
+  O-322 80295F28: mr       r3, r28
+  O-323 80295F2C: bl       TObjCMHairMenu__sub_801E3F54
+
+== delete era[325:327] ours[327:327] net -2
+  O-325 80295F34: mr       r4, r3
+  O-326 80295F38: mr       r3, r27
+
+== insert era[352:352] ours[352:353] net +1
+  N-352 16ac: fctiwz   f0,f27
+
+== insert era[353:353] ours[354:356] net +2
+  N-354 16b4: lis      r4,0
+  N-355 16b8: lfd      f31,0(r3)
+
+== insert era[354:354] ours[357:360] net +3
+  N-357 16c0: addi     r30,r4,0
+  N-358 16c4: stfd     f0,120(r1)
+  N-359 16c8: addi     r28,r1,84
+
+== insert era[355:355] ours[361:364] net +3
+  N-361 16d0: addi     r27,r1,80
+  N-362 16d4: lwz      r29,124(r1)
+  N-363 16d8: addi     r26,r1,76
+
+== delete era[356:357] ours[365:365] net -1
+  O-356 80295FB0: lfd      f29, lbl_80465140@l(r3)
+
+== insert era[375:375] ours[383:384] net +1
+  N-383 1728: lis      r3,17200
+
+== delete era[376:377] ours[385:385] net -1
+  O-376 80296000: lis      r4, lbl_80465140@ha
+
+== delete era[406:407] ours[414:414] net -1
+  O-406 80296078: fctiwz   f0, f27
+
+== insert era[408:408] ours[415:416] net +1
+  N-415 17a8: mr       r3,r28
+
+== delete era[409:410] ours[417:417] net -1
+  O-409 80296084: mr       r3, r29
+
+== delete era[412:413] ours[419:419] net -1
+  O-412 80296090: stfd     f0, 0x78(r1)
+
+== delete era[414:415] ours[420:420] net -1
+  O-414 80296098: lwz      r0, 0x7c(r1)
+
+== replace era[439:440] ours[444:445] net +0
+  O-439 802960FC: psq_l    f30, 0x128(r1), 0, qr0
+  N-444 181c: lq       r30,288(r1)
+
+== replace era[443:444] ours[448:449] net +0
+  O-443 8029610C: psq_l    f28, 0x108(r1), 0, qr0
+  N-448 182c: lq       r28,256(r1)
+
+== replace era[447:448] ours[452:453] net +0
+  O-447 8029611C: psq_l    f26, 0xe8(r1), 0, qr0
+  N-452 183c: lq       r26,224(r1)
+
+== replace era[451:452] ours[456:457] net +0
+  O-451 8029612C: psq_l    f24, 0xc8(r1), 0, qr0
+  N-456 184c: lq       r24,192(r1)

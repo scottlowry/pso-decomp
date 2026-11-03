@@ -1,0 +1,22 @@
+--- before
++++ after
+@@ -62,6 +62,7 @@
+   {
+     return;
+   }
++  f32 *tbl = lbl_804C87B4[mode];
+   f32 b = TRaderMapCore__data_805DC534;
+   f32 a = TRaderMapCore__data_805DC528;
+   state.x = a;
+@@ -73,10 +74,9 @@
+   state.unk18 = TRaderMapCore__data_805D5F4C;
+   state.sprs = lbl_804C87E4;
+   color = -1;
+-  f32 *tbl = lbl_804C87B4[mode];
+   begin_effect_render__13TParticleCtrlFv();
++  state.y = tbl[3] + ((f32) lbl_804C87E4[1].y);
+   state.x = tbl[2] + ((f32) lbl_804C87E4[1].x);
+-  state.y = tbl[3] + ((f32) lbl_804C87E4[1].y);
+   self->m_19c = self->m_19c;
+   set_default_alpha_blend__Fv();
+   ((u8 *) (&color))[3] = (u8) ((s32) self->m_19c);

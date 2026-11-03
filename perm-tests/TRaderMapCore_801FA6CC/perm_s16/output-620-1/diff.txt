@@ -1,0 +1,18 @@
+--- before
++++ after
+@@ -58,6 +58,7 @@
+   CS state;
+   u32 color;
+   new_var = ~0xFF000000;
++  self->m_19c = self->m_19c;
+   if (apply_compass_param__13TRaderMapCoreFv((void *) (&self->m_90)) == 0)
+   {
+     return;
+@@ -75,7 +76,6 @@
+   color = -1;
+   begin_effect_render__13TParticleCtrlFv();
+   f32 *tbl = lbl_804C87B4[mode];
+-  self->m_19c = self->m_19c;
+   state.x = tbl[2] + ((f32) lbl_804C87E4[1].x);
+   state.y = tbl[3] + ((f32) lbl_804C87E4[1].y);
+   set_default_alpha_blend__Fv();
