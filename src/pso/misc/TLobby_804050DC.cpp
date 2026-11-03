@@ -1840,8 +1840,8 @@ void TLobby__sub_80408060(Peer_8040799C *peer, NetPacket *pkt) {
     slot->f4 = 1;
     data = slot->fC;
     for (i = pkt->fragment_count; i > 0; i--) {
-        ((TLobby *)&ref)->set_value_and_enable((s32)data);
-        TLobby__sub_80406FD8(&ref, &pkt->fragments[i - 1].buffer, pkt->fragments[i - 1].length);
+        ((TLobby *)&refbox)->set_value_and_enable((s32)data);
+        TLobby__sub_80406FD8((NetBufferRef *)&refbox, &pkt->fragments[i - 1].buffer, pkt->fragments[i - 1].length);
         data += pkt->fragments[i - 1].length;
         total += pkt->fragments[i - 1].length;
     }
@@ -2818,8 +2818,8 @@ inline s16 copy_packet_80409908(u8 *dst, NetPacket *pkt) {
     p = dst;
     f = &pkt->fragments[n] - 1;
     for (; n > 0; n--) {
-        ((TLobby *)&ref)->set_value_and_enable((s32)p);
-        TLobby__sub_80406FD8(&ref, &pkt->fragments[n - 1].buffer, f->length);
+        ((TLobby *)&refbox)->set_value_and_enable((s32)p);
+        TLobby__sub_80406FD8((NetBufferRef *)&refbox, &pkt->fragments[n - 1].buffer, f->length);
         p += f->length;
         total += f->length;
         f--;
@@ -4619,8 +4619,7 @@ s32 TLobby__sub_8040CB44(u8 *arg0, u32 arg1, u32 arg2) {
     s32 TLobby__sub_8040CFE8(u8 type, u8 code, u32 src, u32 dst, NetPacket *pkt);
     s32 TLobby__sub_8040F8A4(u32 dst, u32 gateway, u32 mask, u16 flags, u32 old_gateway);
     void TLobby__sub_80420D38(u16 port, u8 code);
-    Fields_arg0 *c;
-    NetBufferRef ref;
+    s32 refbox[3];
     u8 hdr[8];
     u8 buf20[24];
     u8 buf8[8];
@@ -4633,11 +4632,11 @@ s32 TLobby__sub_8040CB44(u8 *arg0, u32 arg1, u32 arg2) {
     u32 gw;
     u32 dstv;
     u32 mskv;
+    u8 pad[12];
 
-    c = (Fields_arg0 *)arg0;
     p = arg0 + 0x18;
-    ((TLobby *)&ref)->set_value_and_enable((s32)hdr);
-    TLobby__sub_80406FD8(&ref, p + 4, 8);
+    ((TLobby *)&refbox)->set_value_and_enable((s32)hdr);
+    TLobby__sub_80406FD8((NetBufferRef *)&refbox, p + 4, 8);
     if (((TLobby *)arg0)->calc_ip_checksum(0) != 0) {
         return -1;
     }
@@ -4648,9 +4647,9 @@ s32 TLobby__sub_8040CB44(u8 *arg0, u32 arg1, u32 arg2) {
             return -0x101;
         }
         i = 0;
-        pkt->fragment_count = c->count - 1;
-        pkt->total_bytes = c->lim - c->len;
-        f = (Frag_8040CB44 *)(arg0 + c->count * 12);
+        pkt->fragment_count = ((Fields_arg0 *)arg0)->count - 1;
+        pkt->total_bytes = ((Fields_arg0 *)arg0)->lim - ((Fields_arg0 *)arg0)->len;
+        f = (Frag_8040CB44 *)(arg0 + ((Fields_arg0 *)arg0)->count * 12);
         for (; i < pkt->fragment_count; i++) {
             pkt->fragments[i].length = f->len;
             NetMemcpy(&pkt->fragments[i].buffer, f->data, 8);
@@ -4665,13 +4664,13 @@ s32 TLobby__sub_8040CB44(u8 *arg0, u32 arg1, u32 arg2) {
         return 0;
     case 3:
         TLobby__sub_80406EB8((NetBufferRef *)(p + 4), 8);
-        ((TLobby *)&ref)->set_value_and_enable((s32)buf20);
-        TLobby__sub_80406FD8(&ref, p + 4, 20);
+        ((TLobby *)&refbox)->set_value_and_enable((s32)buf20);
+        TLobby__sub_80406FD8((NetBufferRef *)&refbox, p + 4, 20);
         TLobby__sub_80406EB8((NetBufferRef *)(p + 4), ((u32)buf20[0] << 2) & 0x3C);
         switch (buf20[9]) {
         case 17:
-            ((TLobby *)&ref)->set_value_and_enable((s32)buf8);
-            TLobby__sub_80406FD8(&ref, p + 4, 8);
+            ((TLobby *)&refbox)->set_value_and_enable((s32)buf8);
+            TLobby__sub_80406FD8((NetBufferRef *)&refbox, p + 4, 8);
             TLobby__sub_80420D38(*(u16 *)buf8, hdr[1]);
             break;
         case 6:
@@ -4681,28 +4680,28 @@ s32 TLobby__sub_8040CB44(u8 *arg0, u32 arg1, u32 arg2) {
         return 0;
     case 5:
         TLobby__sub_80406EB8((NetBufferRef *)(p + 4), 8);
-        ((TLobby *)&ref)->set_value_and_enable((s32)buf20);
-        TLobby__sub_80406FD8(&ref, p + 4, 20);
+        ((TLobby *)&refbox)->set_value_and_enable((s32)buf20);
+        TLobby__sub_80406FD8((NetBufferRef *)&refbox, p + 4, 20);
         switch (hdr[1]) {
         case 0:
         case 2:
             NetMemcpy(&word, hdr + 4, 4);
             gw = *(u32 *)(buf20 + 16);
-            if ((gw & 0x7FFFFFFF) == 0) {
-                dstv = gw & 0xFFFFFF;
-            } else if ((gw & 0x3FFFFFFF) == 0x80000000) {
-                dstv = gw & 0xFFFF;
-            } else if ((gw & 0x1FFFFFFF) == 0xC0000000) {
-                dstv = gw & 0xFF;
+            if ((gw & 0x80000000) == 0) {
+                dstv = gw & 0xFF000000;
+            } else if ((gw & 0xC0000000) == 0x80000000) {
+                dstv = gw & 0xFFFF0000;
+            } else if ((gw & 0xE0000000) == 0xC0000000) {
+                dstv = gw & 0xFFFFFF00;
             } else {
                 dstv = 0;
             }
-            if ((gw & 0x7FFFFFFF) == 0) {
-                mskv = ~0xFFFFFF;
-            } else if ((gw & 0x3FFFFFFF) == 0x80000000) {
-                mskv = ~0;
-            } else if ((gw & 0x1FFFFFFF) == 0xC0000000) {
-                mskv = ~0xFF;
+            if ((gw & 0x80000000) == 0) {
+                mskv = 0xFF000000;
+            } else if ((gw & 0xC0000000) == 0x80000000) {
+                mskv = 0xFFFF0000;
+            } else if ((gw & 0xE0000000) == 0xC0000000) {
+                mskv = 0xFFFFFF00;
             } else {
                 mskv = 0;
             }
@@ -4802,8 +4801,8 @@ s32 TLobby__sub_8040CFE8(u8 type, u8 code, u32 src, u32 dst, NetPacket *pkt) {
 
     switch (type) {
     case 0:
-        ((TLobby *)&ref)->set_value_and_enable((s32)&hdr);
-        TLobby__sub_80406FD8(&ref, &pkt->fragments[pkt->fragment_count - 1].buffer, sizeof(hdr));
+        ((TLobby *)&refbox)->set_value_and_enable((s32)&hdr);
+        TLobby__sub_80406FD8((NetBufferRef *)&refbox, &pkt->fragments[pkt->fragment_count - 1].buffer, sizeof(hdr));
         TLobby__sub_80406EB8(&pkt->fragments[pkt->fragment_count - 1].buffer, sizeof(hdr));
         pkt->fragments[pkt->fragment_count - 1].length -= sizeof(hdr);
         pkt->fragments[pkt->fragment_count].length = sizeof(hdr);
@@ -4876,8 +4875,8 @@ s16 NetIPv6HandleIcmpMessage(NetPacket *pkt, u8 *src, u8 *dst, u8 hop_limit, s16
         return -1;
     }
     body = &pkt->fragments[1];
-    ((TLobby *)&ref)->set_value_and_enable((s32)&icmp);
-    TLobby__sub_80406FD8(&ref, &body->buffer, 8);
+    ((TLobby *)&refbox)->set_value_and_enable((s32)&icmp);
+    TLobby__sub_80406FD8((NetBufferRef *)&refbox, &body->buffer, 8);
     switch (icmp.type) {
     case 128:
         reply = (NetPacket *)TLobby::alloc_free_entry();
@@ -4898,13 +4897,13 @@ s16 NetIPv6HandleIcmpMessage(NetPacket *pkt, u8 *src, u8 *dst, u8 hop_limit, s16
         return r;
     case 1:
         TLobby__sub_80406EB8(&body->buffer, 8);
-        ((TLobby *)&ref)->set_value_and_enable((s32)&ip);
-        TLobby__sub_80406FD8(&ref, &body->buffer, sizeof(ip));
+        ((TLobby *)&refbox)->set_value_and_enable((s32)&ip);
+        TLobby__sub_80406FD8((NetBufferRef *)&refbox, &body->buffer, sizeof(ip));
         TLobby__sub_80406EB8(&body->buffer, sizeof(ip));
         switch (ip.next_header) {
         case 17:
-            ((TLobby *)&ref)->set_value_and_enable((s32)&udp);
-            TLobby__sub_80406FD8(&ref, &body->buffer, sizeof(udp));
+            ((TLobby *)&refbox)->set_value_and_enable((s32)&udp);
+            TLobby__sub_80406FD8((NetBufferRef *)&refbox, &body->buffer, sizeof(udp));
             TLobby__sub_80420D38(udp.src_port, icmp.code);
             break;
         case 6:
@@ -4915,8 +4914,8 @@ s16 NetIPv6HandleIcmpMessage(NetPacket *pkt, u8 *src, u8 *dst, u8 hop_limit, s16
         mtu = icmp.pointer;
         if (mtu > 0 && mtu < 0x8000) {
             TLobby__sub_80406EB8(&body->buffer, 8);
-            ((TLobby *)&ref)->set_value_and_enable((s32)&ip);
-            TLobby__sub_80406FD8(&ref, &body->buffer, sizeof(ip));
+            ((TLobby *)&refbox)->set_value_and_enable((s32)&ip);
+            TLobby__sub_80406FD8((NetBufferRef *)&refbox, &body->buffer, sizeof(ip));
             TLobby__sub_80411DEC(&ip.dst, mtu);
         }
         return 0;
@@ -5500,7 +5499,7 @@ s32 TLobby__sub_8040F00C(s16 idx, NetBufferRef *out, s16 len, s32 arg3) {
     rec.addr = ifc->addr;
     rec.mask = ifc->mask;
     rec.broadcast = ifc->broadcast;
-    ((TLobby *)&ref)->set_value_and_enable((s32)&rec);
+    ((TLobby *)&refbox)->set_value_and_enable((s32)&rec);
     TLobby__sub_80406FD8(out, &ref, sizeof(rec));
     TLobby__sub_80406EB8(out, sizeof(rec));
     alias = ifc->aliases;
@@ -5512,7 +5511,7 @@ s32 TLobby__sub_8040F00C(s16 idx, NetBufferRef *out, s16 len, s32 arg3) {
         rec.addr = alias->addr;
         rec.mask = alias->mask;
         rec.broadcast = alias->broadcast;
-        ((TLobby *)&ref)->set_value_and_enable((s32)&rec);
+        ((TLobby *)&refbox)->set_value_and_enable((s32)&rec);
         TLobby__sub_80406FD8(out, &ref, sizeof(rec));
         TLobby__sub_80406EB8(out, sizeof(rec));
         alias = alias->next;
@@ -6899,7 +6898,7 @@ s32 TLobby__sub_80412058(s16 idx, NetBufferRef *out, s16 len, s32 arg3) {
     rec.f14 = ifc->f14;
     rec.f16 = ifc->f1A;
     rec.f18 = ifc->f28;
-    ((TLobby *)&ref)->set_value_and_enable((s32)&rec);
+    ((TLobby *)&refbox)->set_value_and_enable((s32)&rec);
     TLobby__sub_80406FD8(out, &ref, sizeof(rec));
     TLobby__sub_80406EB8(out, sizeof(rec));
     node = ifc->nodes;
@@ -6912,7 +6911,7 @@ s32 TLobby__sub_80412058(s16 idx, NetBufferRef *out, s16 len, s32 arg3) {
         rec.f14 = node->f12;
         rec.f16 = node->f18;
         rec.f18 = 0;
-        ((TLobby *)&ref)->set_value_and_enable((s32)&rec);
+        ((TLobby *)&refbox)->set_value_and_enable((s32)&rec);
         TLobby__sub_80406FD8(out, &ref, sizeof(rec));
         TLobby__sub_80406EB8(out, sizeof(rec));
         node = node->next;
@@ -8675,8 +8674,8 @@ s16 TLobby__sub_80415D0C(NetPacket *pkt, u8 *nexthop, NetIPv6SendParameters *par
                 ret = -0x10E;
                 goto done;
             }
-            ((TLobby *)&ref)->set_value_and_enable((s32)src);
-            TLobby__sub_80406FD8(&ref, &pkt->fragments[n - 1].buffer, l);
+            ((TLobby *)&refbox)->set_value_and_enable((s32)src);
+            TLobby__sub_80406FD8((NetBufferRef *)&refbox, &pkt->fragments[n - 1].buffer, l);
             src += l;
             frag--;
             n--;
@@ -9003,8 +9002,8 @@ s16 NetIPv6HandleRedirect(NetPacket *pkt, u8 *src, void *arg2, s16 iface) {
     if (NetIPv6IsLinkLocal(src) == 0) {
         return -1;
     }
-    ((TLobby *)&ref)->set_value_and_enable((s32)&msg);
-    TLobby__sub_80406FD8(&ref, &frag->buffer, sizeof(Redirect_80416508));
+    ((TLobby *)&refbox)->set_value_and_enable((s32)&msg);
+    TLobby__sub_80406FD8((NetBufferRef *)&refbox, &frag->buffer, sizeof(Redirect_80416508));
     dest = msg.dest.bytes;
     if (NetIPv6IsMulticast(dest) != 0) {
         return -1;
@@ -9104,8 +9103,8 @@ s16 NetIPv6HandleNeighborAdvertisement(NetPacket *pkt, u8 *src, u8 *dst, s16 ifa
     if (len < sizeof(Msg_80416994)) {
         return -1;
     }
-    ((TLobby *)&ref)->set_value_and_enable((s32)&msg);
-    TLobby__sub_80406FD8(&ref, &frag->buffer, sizeof(Msg_80416994));
+    ((TLobby *)&refbox)->set_value_and_enable((s32)&msg);
+    TLobby__sub_80406FD8((NetBufferRef *)&refbox, &frag->buffer, sizeof(Msg_80416994));
     if (NetIPv6IsMulticast(msg.name) != 0) {
         return -1;
     }
