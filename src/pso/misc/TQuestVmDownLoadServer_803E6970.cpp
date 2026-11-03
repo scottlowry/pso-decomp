@@ -3807,6 +3807,53 @@ s32 TQuestVmDownLoadServer::sum_entry_sizes(s32 start, s32 n) {
     return sum;
 }
 
+u8 *TQuestVmDownLoadServer__sub_803EDDA4(u16 *arg0, u16 *arg1) {
+    s32 len;
+    s32 ch0;
+    s32 idx;
+    u8 c;
+    const u8 (*const *q)[11];
+    const u8 (*base)[11];
+    const u8 (*end)[11];
+    const u8 (*p)[11];
+
+    len = arg1 - arg0;
+    if (len == 0) {
+        return (u8 *)lbl_8047F9B8[0] + 1;
+    }
+    if ((u32)len - 1 <= 1) {
+        ch0 = (u8)arg0[0];
+        if (ch0 >= 0x61 && ch0 <= 0x7a) {
+            idx = ch0 - 0x61;
+        } else if (ch0 >= 0x41 && ch0 <= 0x5a) {
+            idx = ch0 - 0x41;
+        } else {
+            return NULL;
+        }
+        q = &lbl_8047FBD4[idx];
+        base = *q;
+        if (len == 1) {
+            return (u8 *)base + 1;
+        }
+        do {
+            end = q[1];
+            q = q + 1;
+        } while (end == 0);
+        c = (u8)arg0[1];
+        if ((u8)arg0[1] >= 0x61U && (u8)arg0[1] <= 0x7AU) {
+            c -= 0x20;
+        }
+        p = base + 1;
+        while (p < end) {
+            if (p[0][0] == c) {
+                return (u8 *)p + 1;
+            }
+            p = p + 1;
+        }
+    }
+    return NULL;
+}
+
 u8 *TQuestVmDownLoadServer::find_keyword_entry(u16 *start, u16 *end) {
     u8 c;
     u8 *p;
