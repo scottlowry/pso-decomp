@@ -1058,6 +1058,7 @@ void TObjCMHairMenu::render() {
     u32 colorG;
     Prim_80297DB8 prim;
     s16 *rgb;
+    const f32 *d4;
     s32 hair;
     s32 idx;
     s32 i;
@@ -1195,22 +1196,23 @@ void TObjCMHairMenu::render() {
     }
     TCameraCtrl::restore_full_screen_view();
     scaleF = TObjCMMainMenu::get_scale();
+    d4 = lbl_804650D4;
     a255 = 255.0f * t;
     colorG = lbl_804650F4[3];
-    dy = lbl_804650D4[3] - lbl_804650D4[1];
-    yin = dy * 0.1f + lbl_804650D4[1];
-    yout = dy * 1.1f + lbl_804650D4[1];
-    dx = lbl_804650D4[2] - lbl_804650D4[0];
-    dx2 = lbl_804650D4[4] - lbl_804650D4[6];
+    dy = d4[3] - d4[1];
+    yin = dy * 0.1f + d4[1];
+    yout = dy * 1.1f + d4[1];
+    dx = d4[2] - d4[0];
+    dx2 = d4[4] - d4[6];
     p[3].y = yin;
     p[0].y = yin;
     p[2].y = yout;
     p[1].y = yout;
     yoff = 44.0f * scaleF;
-    p[0].x = dx * 0.1f + lbl_804650D4[0];
-    p[1].x = dx * 1.1f + lbl_804650D4[0];
-    p[2].x = dx2 * 1.1f + lbl_804650D4[6];
-    p[3].x = dx2 * 0.1f + lbl_804650D4[6];
+    p[0].x = dx * 0.1f + d4[0];
+    p[1].x = dx * 1.1f + d4[0];
+    p[2].x = dx2 * 1.1f + d4[6];
+    p[3].x = dx2 * 0.1f + d4[6];
     p[0].y = yin * scaleF;
     p[1].y = yout * scaleF;
     p[2].y = yout * scaleF;
@@ -1232,12 +1234,12 @@ void TObjCMHairMenu::render() {
         tv = (f32)rgb[i] / 255.0f;
         if (tv != 0.0f) {
             p[0].x = lbl_804650D4[0];
-            p[1].x = lbl_804650D4[2];
-            p[2].x = lbl_804650D4[2] + (lbl_804650D4[4] - lbl_804650D4[2]) * tv;
-            p[3].x = lbl_804650D4[0] + (lbl_804650D4[6] - lbl_804650D4[0]) * tv;
+            p[1].x = d4[2];
+            p[2].x = d4[2] + (d4[4] - d4[2]) * tv;
+            p[3].x = lbl_804650D4[0] + (d4[6] - lbl_804650D4[0]) * tv;
             roff = (f32)i * yoff;
             for (j = 0; j < 4; j++) {
-                p[j].y = lbl_804650D4[j * 2 + 1] * scaleF + roff;
+                p[j].y = d4[j * 2 + 1] * scaleF + roff;
             }
             colorF = lbl_804650F4[i];
             ((u8 *)&colorF)[3] = (int)a255;
