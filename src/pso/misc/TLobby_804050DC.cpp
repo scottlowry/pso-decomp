@@ -1433,8 +1433,8 @@ u16 TLobby__sub_80406BD8(void *arg0, s16 arg1) {
                 b1 = (w >> 16) & 0xFF;
                 row = (u8 *)((BufPool_80406BD8 *)&network_buffer_pool_state)->rows + 60 * tbl;
                 addr = *(u32 *)row;
-                addr += (w & 0xFFFF);
-                addr += *(u16 *)(row + 6 * (s16)b1 + 14);
+                addr = (w & 0xFFFF) + addr;
+                addr = *(u16 *)(row + 6 * (s16)b1 + 14) + addr;
                 ptr = (u8 *)addr;
                 break;
             case 3:
@@ -1483,8 +1483,8 @@ u16 TLobby__sub_80406BD8(void *arg0, s16 arg1) {
                 b1 = (w >> 16) & 0xFF;
                 row = (u8 *)((BufPool_80406BD8 *)&network_buffer_pool_state)->rows + 60 * tbl;
                 addr = *(u32 *)row;
-                addr += (w & 0xFFFF);
-                addr += *(u16 *)(row + 6 * (s16)b1 + 14);
+                addr = (w & 0xFFFF) + addr;
+                addr = *(u16 *)(row + 6 * (s16)b1 + 14) + addr;
                 ptr = (u8 *)addr;
                 break;
             case 3:
