@@ -1,0 +1,33 @@
+ORIG  TLobby__sub_803CC578                                    match=95.30769 size=780
+OURS  TLobby__sub_803CC578                                    match=95.30769 size=780
+rows: orig 195 ours 195
+  slot  2 O: lis r6, lbl_8057B7B0@ha                    N: lis r7, lbl_8057B7D0@ha                   
+  slot  3 O: lis r7, lbl_8057B7D0@ha                    N: lis r6, lbl_8057B7B0@ha                   
+  slot  5 O: lis r9, lbl_8047C818@ha                    N: addi r7, r7, lbl_8057B7D0@l               
+  slot  9 O: mr r28, r4                                 N: li r6, 0x0                                
+  slot 10 O: mr r29, r5                                 N: mr r28, r4                                
+  slot 11 O: addi r30, r9, lbl_8047C818@l               N: mr r29, r5                                
+  slot 18 O: add r6, r0, r8                             N: add r10, r0, r8                           
+  slot 19 O: addi r8, r7, lbl_8057B7D0@l                N: lis r8, lbl_8047C818@ha                   
+  slot 20 O: slwi r0, r6, 4                             N: slwi r0, r10, 4                           
+  slot 21 O: li r7, 0x0                                 N: stw r10, adxf_log_write_index@sda21       
+  slot 22 O: add r10, r8, r0                            N: add r9, r7, r0                            
+  slot 23 O: stw r6, adxf_log_write_index@sda21         N: addi r30, r8, lbl_8047C818@l              
+  slot 25 O: stb r0, 0x0(r10)                           N: stb r0, 0x0(r9)                           
+  slot 27 O: addi r3, r6, 0x1                           N: addi r3, r10, 0x1                         
+  slot 28 O: stb r7, 0x1(r10)                           N: stb r6, 0x1(r9)                           
+  slot 29 O: sth r0, 0x2(r10)                           N: sth r0, 0x2(r9)                           
+  slot 30 O: stw r27, 0x4(r10)                          N: stw r27, 0x4(r9)                          
+  slot 31 O: stw r28, 0x8(r10)                          N: stw r28, 0x8(r9)                          
+  slot 33 O: stw r29, 0xc(r10)                          N: stw r29, 0xc(r9)                          
+  slot 49 O: add r6, r0, r5                             N: add r8, r0, r5                            
+  slot 51 O: slwi r0, r6, 4                             N: slwi r0, r8, 4                            
+  slot 53 O: add r8, r8, r0                             N: add r7, r7, r0                            
+  slot 55 O: stb r4, 0x0(r8)                            N: stb r4, 0x0(r7)                           
+  slot 56 O: addi r0, r6, 0x1                           N: addi r0, r8, 0x1                          
+  slot 57 O: stb r7, 0x1(r8)                            N: stb r6, 0x1(r7)                           
+  slot 58 O: sth r5, 0x2(r8)                            N: sth r5, 0x2(r7)                           
+  slot 59 O: stw r27, 0x4(r8)                           N: stw r27, 0x4(r7)                          
+  slot 60 O: stw r6, adxf_log_write_index@sda21         N: stw r8, adxf_log_write_index@sda21        
+  slot 61 O: stw r3, 0x8(r8)                            N: stw r3, 0x8(r7)                           
+  slot 63 O: stw r3, 0xc(r8)                            N: stw r3, 0xc(r7)                           

@@ -64,6 +64,13 @@ struct Ent_803CC884 {
     s32 f14; u8 pad_18[0x20 - 0x18]; s32 f20; s32 f24; s32 f28; u8 pad_2c[0x138 - 0x2C];
 };
 
+struct LogHdr_803CC578 { u8 pad[0xC]; u16 seq; };
+
+struct Adxf_803CC578 {
+    u8 f0; s8 f1; s8 f2; u8 f3; u32 f4; VObj_803CC980 *f8; s32 f12;
+    u8 pad_10[4]; s32 f14; u8 pad_18[0x20 - 0x18]; s32 f20; s32 f24; s32 f28;
+};
+
 struct Hdr_803CCE9C { u8 used; u8 f1; };
 
 struct LogHdr_803CCE9C { u8 pad[0x6]; u16 seq; };
@@ -75,6 +82,7 @@ s32 TLobby__sub_803CCB98();
 extern RecoveredGlobal_803CCB5C_lbl_8047CA28 lbl_8047CA28;
 extern char lbl_8047C88C[];
 s32 TLobby__sub_803CC4C0(Obj_803CC4C0 *p);
+s32 TLobby__sub_803CC578(Adxf_803CC578 *adxf, s32 offset, s32 type);
 s32 strncpy(void *, void *, int);
 extern s32 adx_afs_partition_id_range_error[];
 extern s32 afs_file_id_out_of_range_error[];
@@ -186,6 +194,108 @@ s32 TLobby__sub_803CC53C(u8 *arg0) {
         return -3;
     }
     return *(s32 *)((s8 *)arg0 + 0xC);
+}
+s32 TLobby__sub_803CC578(Adxf_803CC578 *adxf, s32 offset, s32 type) {
+    s32 base = (s32)lbl_8047C818;
+    s32 sp8;
+    {
+        LogEnt_803CD16C *e;
+        u16 seq;
+        s32 i = adxf_log_write_index % 256;
+        e = &lbl_8057B7D0[i];
+        adxf_log_write_index = i;
+        seq = ((LogHdr_803CC578 *)&lbl_8057B7B0)->seq + 1;
+        e->type = 6;
+        e->phase = 0;
+        e->seq = seq;
+        e->a = (s32)adxf;
+        e->b = offset;
+        ((LogHdr_803CC578 *)&lbl_8057B7B0)->seq = seq;
+        e->c = type;
+        adxf_log_write_index = i + 1;
+    }
+    if (adxf == NULL) {
+        TLobby::notify_error((const char *)(base + 0x174));
+        return -3;
+    }
+    if (adxf->f1 == 2) {
+        {
+            LogEnt_803CD16C *e;
+            s32 i = adxf_log_write_index % 256;
+            u16 seq;
+            e = &lbl_8057B7D0[i];
+            adxf_log_write_index = i;
+            seq = ((LogHdr_803CC980 *)&lbl_8057B7B0)->seq + 1;
+            e->type = 5;
+            e->phase = 0;
+            e->seq = seq;
+            e->a = (s32)adxf;
+            e->b = -1;
+            ((LogHdr_803CC980 *)&lbl_8057B7B0)->seq = seq;
+            e->c = -1;
+            adxf_log_write_index = i + 1;
+        }
+        if (adxf == NULL) {
+            TLobby::notify_error((const char *)(base + 0x198));
+        } else if (((Snd_803CC980 *)adxf)->state == 1) {
+        } else if (((Snd_803CC980 *)adxf)->state == 3) {
+            adxf->f1 = 1;
+        } else if (adxf->f4 == 0) {
+            TLobby::notify_error((const char *)(base + 0x1bc));
+        } else {
+            TLobby::init_once();
+            TLobby__sub_803C89C4((u8 *)adxf->f4);
+            TLobby__sub_803C85AC((u8 *)adxf->f4, &sp8);
+            adxf->f20 = sp8;
+            if (adxf->f8 != NULL && ((Snd_803CC980 *)adxf)->f2 == 0) {
+                if (lbl_805D75E4 == 1) {
+                    invalidate_cache__6TLobbyFv(adxf->f24, adxf->f28);
+                }
+                adxf->f8->vt->fn(adxf->f8);
+                adxf->f8 = NULL;
+            }
+            adxf->f1 = 1;
+            TLobby::release_ref();
+            {
+                s32 i = adxf_log_write_index % 256;
+                LogEnt_803CD16C *e = &lbl_8057B7D0[adxf_log_write_index = i];
+                e->type = 5;
+                e->phase = 1;
+                e->seq = ((LogHdr_803CC980 *)&lbl_8057B7B0)->seq;
+                e->a = (s32)adxf;
+                e->b = -1;
+                e->c = -1;
+                adxf_log_write_index = i + 1;
+            }
+        }
+    }
+    if (type == 0) {
+        adxf->f14 = offset;
+    } else if (type == 1) {
+        adxf->f14 += offset;
+    } else if (type == 2) {
+        adxf->f14 = adxf->f12 + offset;
+    } else {
+        TLobby::notify_error((const char *)(base + 0x1e8));
+        return -3;
+    }
+    if (adxf->f14 < 0) {
+        adxf->f14 = 0;
+    } else if (adxf->f14 > adxf->f12) {
+        adxf->f14 = adxf->f12;
+    }
+    {
+        s32 i = adxf_log_write_index % 256;
+        LogEnt_803CD16C *e = &lbl_8057B7D0[adxf_log_write_index = i];
+        e->type = 6;
+        e->phase = 1;
+        e->seq = ((LogHdr_803CC578 *)&lbl_8057B7B0)->seq;
+        e->a = (s32)adxf;
+        e->b = offset;
+        e->c = type;
+        adxf_log_write_index = i + 1;
+    }
+    return adxf->f14;
 }
 typedef char RecoveredGlobal_803CCB5C_lbl_8047CA28_size[sizeof(RecoveredGlobal_803CCB5C_lbl_8047CA28) == 0x154 ? 1 : -1];
 
