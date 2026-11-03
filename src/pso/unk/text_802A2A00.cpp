@@ -27,8 +27,8 @@ extern vec2f lbl_80466454[];
 extern const f32 lbl_805DDEA8;
 extern const f32 lbl_805DDEAC;
 extern const f32 lbl_805DDEB0;
-extern const f32 lbl_805DDEB4;
-extern const f32 lbl_805DDEB8;
+extern f32 lbl_805DDEB4;
+extern f32 lbl_805DDEB8;
 extern const f32 lbl_805DDEBC;
 extern const f32 lbl_805DDEC0;
 extern const f32 lbl_805DDEC4;
@@ -44,25 +44,31 @@ void fn_802A2A00(void *p) {
         return;
     }
     f32 depth = self->m4() != 0 ? lbl_805DDEAC : lbl_805DDEB0;
-    f32 alpha = prog / lbl_805DDEB4;
+    f32 alpha = lbl_805DDEB4;
+    alpha = prog / alpha;
     alpha = alpha * alpha;
-    if (alpha > lbl_805DDEB8) {
-        alpha = lbl_805DDEB8;
+    f32 cap = lbl_805DDEB8;
+    if (alpha > cap) {
+        alpha = cap;
     }
     vec2f scale;
-    scale.y = lbl_805DDEB8;
-    scale.x = lbl_805DDEB8;
-    if (prog < lbl_805DDEB4) {
-        f32 s = lbl_805DDEBC * ((lbl_805DDEB4 - prog) / lbl_805DDEB4) + lbl_805DDEB8;
-        scale.x = s;
-        scale.y = s;
+    f32 lim = lbl_805DDEB4;
+    f32 sv = lbl_805DDEB8;
+    scale.y = sv;
+    scale.x = sv;
+    if (prog < lim) {
+        f32 k = (lim - prog) / lim;
+        f32 adj = lbl_805DDEBC * k;
+        sv = sv + adj;
+        scale.x = sv;
+        scale.y = sv;
     }
     s32 id = self->f20 < 3 ? self->f20 + 99 : (self->f20 - 3) / 4 + 99;
     draw_ui_sprite_shaded(id, &pos, &scale, depth, alpha, lbl_805DDEB8);
     if (self->m4() == 0) {
         return;
     }
-    if (prog > lbl_805DDEB4) {
+    if (!(prog <= lbl_805DDEB4)) {
         f32 p2 = (prog - lbl_805DDEB4) / lbl_805DDEC0;
         s32 id2 = self->f20 < 3 ? self->f20 + 173 : self->f20 - 3 + 176;
         if (self->m4() != 0) {
