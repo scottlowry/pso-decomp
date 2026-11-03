@@ -550,10 +550,10 @@ void NetIPv6ApplyNeighborDiscoveryDefaults(u8 *arg0);
 void TLobby__sub_803F89A4(u8 *arg0);
 void TLobby__sub_803FD85C(void *);
 s32 TLobby__sub_804062A0(s16);
-s32 TLobby__sub_80406328(TLobby *, s16);
+s32 TLobby__sub_80406328(TLobby *, s32);
 s16 TLobby__sub_804048E8(void *, TLobby **, u8);
 s32 TLobby__sub_804066D8(Strm_80405A74 *);
-extern s32 class_name__16TOFenceAncient04;
+extern s32 lbl_805D7A90;
 s32 TLobby__sub_803F79AC(void *);
 void TLobby__sub_803F79B0(u8 *arg0);
 extern s32 lobby_timer_list_head;
@@ -1313,21 +1313,24 @@ s32 TLobby__sub_804062A0(s16 arg0) {
     }                                                                      \
     return TLobby__sub_804066D8(t);
 
-s32 TLobby__sub_80406328(TLobby *arg0, s16 arg1) {
+s32 TLobby__sub_80406328(TLobby *arg0, s32 arg1) {
     u8 *G;
     Strm_80405A74 *t;
     u8 *p;
     u8 *q;
     u16 code;
+    s16 cmd;
     s16 c;
 
+    cmd = (s16)arg1;
     code = 0x21;
-    if (arg1 == -0x7923) {
+    if (cmd == -0x7923) {
         G = lbl_805C0038;
         if (*(u8 *)((s8 *)G + 0xD4) != 5) {
             (*(s16 *)((s8 *)G + 0x122))++;
             return -1;
         }
+        code = 0x57;
         REPLY_80406328()
     } else {
         G = lbl_805C0038;
@@ -1335,11 +1338,12 @@ s32 TLobby__sub_80406328(TLobby *arg0, s16 arg1) {
             (*(s16 *)((s8 *)G + 0x122))++;
             return -1;
         }
-        if ((u32)arg1 == 0x86DD) {
+        if ((u32)cmd == 0x86DD) {
+            code = 0x57;
             REPLY_80406328()
         }
         q = *(u8 **)((s8 *)G + 0x9C);
-        if (class_name__16TOFenceAncient04 & 2) {
+        if (lbl_805D7A90 & 2) {
             if (*(s16 *)(q + 0x28) & 4) {
                 c = TLobby__sub_804048E8(*(void **)(q + 0x98), &arg0, *(u8 *)(q + 0x84));
                 switch (c) {
