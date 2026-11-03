@@ -9210,8 +9210,8 @@ s16 NetIPv6ApplyNeighborAdvertisement(Msg_80416994 *msg, u8 *name, s16 len, s32 
 }
 #pragma pop
 
-s16 TLobby__sub_80417294(void *, u32, u8 *, void *);
-s16 TLobby__sub_80417494(void *, u8 *, void *);
+s16 TLobby__sub_80417294(void *, u32, u8 *, s16);
+s16 TLobby__sub_80417494(void *, u8 *, s16);
 
 s16 NetIPv6HandleNeighborSolicitation(u8 *arg0, void *arg1, void *arg2, void *arg3) {
     s16 TLobby__sub_80413F0C(void *, void *);
@@ -9336,7 +9336,7 @@ s16 TLobby__sub_80417028(IPv6NeighborSolicitation *ns, u8 *src, u8 *dst, s16 ifa
     return r;
 }
 
-s16 NetIPv6HandleRouterAdvertisement(u8 *arg0, u8 *arg1, s32 arg2, void *arg3) {
+s16 NetIPv6HandleRouterAdvertisement(u8 *arg0, u8 *arg1, s32 arg2, s16 arg3) {
     u8 sp28[8];
     u8 sp18[16];
     u32 n;
@@ -9406,47 +9406,51 @@ s16 TLobby__sub_80417494(void *msg, u8 *addr, s16 id) {
     s32 TLobby__sub_80411604(s16, int, void *);
     s32 TLobby__sub_80418734(u8 *, void *, s16);
     G_80417494 *g;
+    s16 *pn;
+    Ndr_80417494 **pr;
     Ndr_80417494 *r;
-    Ndr_80417494 *e;
     Ndr_80417494 *last;
     Nbc_80417494 *q;
-    Nbc_80417494 *nb;
-    Evt3_80417494 e3;
-    Evt7_80417494 e7;
     u8 *slot;
+    Evt7_80417494 e7;
+    Evt3_80417494 e3;
     s16 n;
 
     g = (G_80417494 *)&ipv6_neighbor_discovery_state;
-    e = NULL;
+    pn = &g->nrtr;
+    pr = &g->rtrs;
     n = g->nrtr;
     r = g->rtrs;
     while (n > 0) {
         if (r->state == 1 && NetMemcmp(r->addr, addr, 0x10) == 0) {
-            e = r;
             break;
         }
         n--;
         r++;
     }
-    if (e == NULL) {
+    if (n <= 0) {
+        r = NULL;
+    }
+    if (r == NULL) {
         if (*(u16 *)((s8 *)msg + 6) != 0) {
             TLobby__sub_80418734(addr, msg, id);
             slot = addr;
             TLobby__sub_80411604(id, 5, &slot);
         } else {
-            nb = NULL;
             n = g->nnbr;
             q = g->nbrs;
             while (n > 0) {
                 if (q->state == 1 && NetMemcmp(q->addr, addr, 0x10) == 0) {
-                    nb = q;
                     break;
                 }
                 n--;
                 q++;
             }
-            if (nb != NULL) {
-                nb->flags &= ~0x80;
+            if (n <= 0) {
+                q = NULL;
+            }
+            if (q != NULL) {
+                q->flags &= ~0x80;
             }
             slot = addr;
             TLobby__sub_80411604(id, 6, &slot);
@@ -9454,42 +9458,43 @@ s16 TLobby__sub_80417494(void *msg, u8 *addr, s16 id) {
     } else if (*(u16 *)((s8 *)msg + 6) != 0) {
         slot = addr;
         TLobby__sub_80411604(id, 5, &slot);
-        e->id = id;
-        e->lifetime = *(s16 *)((s8 *)msg + 6);
-        if (*(s32 *)((s8 *)msg + 8) != 0) {
-            e->reachable_time = *(s32 *)((s8 *)msg + 8);
-            g->reachable_time = (s16)(e->reachable_time / 1000);
+        r->id = id;
+        r->lifetime = *(s16 *)((s8 *)msg + 6);
+        if (*(u32 *)((s8 *)msg + 8) != 0) {
+            r->reachable_time = *(s32 *)((s8 *)msg + 8);
+            g->reachable_time = (s16)(r->reachable_time / 1000);
         }
-        if (*(s32 *)((s8 *)msg + 12) != 0) {
-            e->retrans_timer = *(s32 *)((s8 *)msg + 12);
-            g->retrans_timer = (s16)(e->retrans_timer / 1000);
-            g->f2A = e->retrans_timer / 1000 + 1;
+        if (*(u32 *)((s8 *)msg + 12) != 0) {
+            r->retrans_timer = *(s32 *)((s8 *)msg + 12);
+            g->retrans_timer = (s16)(r->retrans_timer / 1000);
+            g->f2A = r->retrans_timer / 1000 + 1;
         }
     } else {
-        nb = NULL;
         n = g->nnbr;
         q = g->nbrs;
         while (n > 0) {
             if (q->state == 1 && NetMemcmp(q->addr, addr, 0x10) == 0) {
-                nb = q;
                 break;
             }
             n--;
             q++;
         }
-        if (nb != NULL) {
-            nb->flags &= ~0x80;
+        if (n <= 0) {
+            q = NULL;
+        }
+        if (q != NULL) {
+            q->flags &= ~0x80;
         }
         last = NULL;
-        n = g->nrtr;
-        r = g->rtrs;
+        n = *pn;
+        r = *pr;
         while (n > 0) {
             if (r->state == 1) {
-                if (NetMemcmp(r->addr, addr, 0x10) != 0) {
-                    last = r;
-                } else {
+                if (NetMemcmp(r->addr, addr, 0x10) == 0) {
                     r->state = 0;
                     r->f6 = 0;
+                } else {
+                    last = r;
                 }
             }
             n--;
@@ -9499,8 +9504,8 @@ s16 TLobby__sub_80417494(void *msg, u8 *addr, s16 id) {
             slot = addr;
             TLobby__sub_80411604(id, 6, &slot);
         } else {
-            e7.p = addr;
             e7.q = last->addr;
+            e7.p = addr;
             TLobby__sub_80411604(id, 7, &e7);
         }
     }
