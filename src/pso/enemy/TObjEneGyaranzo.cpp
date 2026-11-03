@@ -1178,35 +1178,31 @@ void TObjEneGyaranzo::sub_800D2900() {
 
 s32 fn_800D2A68(void *arg0) {
     TObjEneGyaranzo *self = (TObjEneGyaranzo *)arg0;
-    Vec_800D2900 v;
+    Vec v = self->position;
     void *obj;
-    v.x = self->position.x;
-    v.y = self->position.y + lbl_805DA264;
-    v.z = self->position.z;
+    v.y += lbl_805DA264;
+    Outer_800D2900 *o = *(Outer_800D2900 **)&gyaranzo_bml_resource;
     Params_800D2900 pa = lbl_8043C278;
-    s32 *rp = (s32 *)((*(Outer_800D2900 * *)&gyaranzo_bml_resource)->p42c);
     pa.pos.x = v.x;
     pa.pos.y = v.y;
     pa.pos.z = v.z;
     pa.x38 = self->position.y;
-    pa.x40 = rp[2];
-    pa.x44 = rp[3];
+    pa.x40 = ((s32 *)o->p42c)[2];
+    pa.x44 = ((s32 *)o->p42c)[3];
     Params_800D2900 pb = lbl_8043C2C4;
-    rp = (s32 *)((*(Outer_800D2900 * *)&gyaranzo_bml_resource)->p42c);
     pb.pos.x = v.x;
     pb.pos.y = v.y;
     pb.pos.z = v.z;
     pb.x38 = self->position.y;
-    pb.x40 = rp[6];
-    pb.x44 = rp[7];
+    pb.x40 = ((s32 *)o->p42c)[6];
+    pb.x44 = ((s32 *)o->p42c)[7];
     Params_800D2900 pc = lbl_8043C310;
-    rp = (s32 *)((*(Outer_800D2900 * *)&gyaranzo_bml_resource)->p42c);
     pc.pos.x = v.x;
     pc.pos.y = v.y;
     pc.pos.z = v.z;
     pc.x38 = self->position.y;
-    pc.x40 = rp[10];
-    pc.x44 = rp[11];
+    pc.x40 = ((s32 *)o->p42c)[10];
+    pc.x44 = ((s32 *)o->p42c)[11];
     obj = __nw__7TObjectFUl(0x234);
     if (obj != NULL) {
         __ct__8TObjChipFP7TObjectP14TObjChipParams((u8 *)obj, tl_05, (u8 *)&pa);
