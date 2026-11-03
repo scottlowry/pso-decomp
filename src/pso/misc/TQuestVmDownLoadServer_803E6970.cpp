@@ -3815,7 +3815,6 @@ s32 TQuestVmDownLoadServer__sub_803EDC20(u8 *text) {
     s32 i;
     s32 count;
     s32 width;
-    s32 c;
     s32 code;
 
     pending = 0;
@@ -3831,44 +3830,46 @@ s32 TQuestVmDownLoadServer__sub_803EDC20(u8 *text) {
         }
     }
     width = i;
-    while ((c = *text) != 0) {
+    while (*text != 0) {
         if ((u16)pending != 0) {
-            code = ((u16)pending << 8) | c;
+            code = ((u16)pending << 8) | *text;
             code = TQuestVmDownLoadServer__sub_803EC69C(code);
             if ((u16)code != 0) {
                 if (count >= 36) {
                     return -1;
                 }
-                if (width + 2 > 79) {
+                if (width + 2 <= 79) {
+                    *(u16 *)rec[0] = code;
+                    *(s32 *)&rec[0][4] = 2;
+                    rec = rec + 1;
+                    *bcur = TQuestVmDownLoadServer__sub_803EC8D8(code);
+                    bcur = bcur + 1;
+                    count = count + 1;
+                    width = width + 2;
+                } else {
                     return -1;
                 }
-                *(u16 *)rec[0] = code;
-                *(s32 *)&rec[0][4] = 2;
-                rec = rec + 1;
-                *bcur = TQuestVmDownLoadServer__sub_803EC8D8(code);
-                bcur = bcur + 1;
-                count = count + 1;
-                width = width + 2;
             }
             pending = 0;
-        } else if (TQuestVmDownLoadServer::is_sjis_lead_byte((u8)c) != 0) {
+        } else if (TQuestVmDownLoadServer::is_sjis_lead_byte(*text) != 0) {
             pending = *text;
         } else {
-            if ((c >= 0x20 && c < 0x7F) || (c >= 0xA0 && c < 0xE0)) {
+            if ((*text >= 0x20 && *text < 0x7F) || (*text >= 0xA0 && *text < 0xE0)) {
                 if (count >= 36) {
                     return -1;
                 }
-                if (width + 1 > 79) {
+                if (width + 1 <= 79) {
+                    *(u16 *)rec[0] = *text;
+                    *(s32 *)&rec[0][4] = 1;
+                    pending = 0;
+                    count = count + 1;
+                    width = width + 1;
+                    *bcur = 0;
+                    bcur = bcur + 1;
+                    rec = rec + 1;
+                } else {
                     return -1;
                 }
-                *(u16 *)rec[0] = c;
-                *(s32 *)&rec[0][4] = 1;
-                pending = 0;
-                *bcur = 0;
-                count = count + 1;
-                width = width + 1;
-                bcur = bcur + 1;
-                rec = rec + 1;
             }
         }
         text = text + 1;
