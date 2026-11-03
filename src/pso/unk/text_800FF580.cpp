@@ -61,6 +61,8 @@ extern const f32 lbl_805DAA64;
 void fn_800FF580(void *obj_arg, void *pt_arg, f32 arg3) {
     Vec_800FF8CC *pt = (Vec_800FF8CC *)pt_arg;
     Vec_800FF8CC local;
+    u32 *pw = (u32 *)pt_arg;
+    u32 *lw = (u32 *)&local;
     Vec_800FF8CC npos;
     Node_800FF580 *node;
     f32 base;
@@ -71,7 +73,9 @@ void fn_800FF580(void *obj_arg, void *pt_arg, f32 arg3) {
     f32 dist;
     f32 margin;
     s32 iters;
-    local = *pt;
+    lw[0] = pw[0];
+    lw[1] = pw[1];
+    lw[2] = pw[2];
     iters = 16;
     base = lbl_805DAA64 * arg3;
     zero = lbl_805DAA58;
@@ -91,36 +95,35 @@ void fn_800FF580(void *obj_arg, void *pt_arg, f32 arg3) {
             }
             node++;
         }
-        if (iters > 0 && zero != best) {
-            subtract_vector(&local, &npos);
-            if (zero == vector_length(&local)) {
-                local.x = zero;
-                local.y = lbl_805DAA5C;
-                local.z = zero;
-            } else {
-                normalize_vector(&local);
-            }
-            local.x *= best_thr;
-            local.y *= best_thr;
-            local.z *= best_thr;
-            vec3_add_to(&local, &npos);
-            subtract_vector(&local, pt - 1);
-            if (zero == vector_length(&local)) {
-                local.x = zero;
-                local.y = lbl_805DAA5C;
-                local.z = zero;
-            } else {
-                normalize_vector(&local);
-            }
-            local.x *= arg3;
-            local.y *= arg3;
-            local.z *= arg3;
-            vec3_add_to(&local, pt - 1);
-            iters--;
-        } else {
+        if (!(iters > 0 && zero != best)) {
             VecCopy((Vec *)pt, (const Vec *)&local);
             return;
         }
+        subtract_vector(&local, &npos);
+        if (zero == vector_length(&local)) {
+            local.x = zero;
+            local.y = lbl_805DAA5C;
+            local.z = zero;
+        } else {
+            normalize_vector(&local);
+        }
+        local.x *= best_thr;
+        local.y *= best_thr;
+        local.z *= best_thr;
+        vec3_add_to(&local, &npos);
+        subtract_vector(&local, pt - 1);
+        if (zero == vector_length(&local)) {
+            local.x = zero;
+            local.y = lbl_805DAA5C;
+            local.z = zero;
+        } else {
+            normalize_vector(&local);
+        }
+        local.x *= arg3;
+        local.y *= arg3;
+        local.z *= arg3;
+        vec3_add_to(&local, pt - 1);
+        iters--;
     }
 }
 
