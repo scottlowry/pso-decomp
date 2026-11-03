@@ -321,10 +321,13 @@ s32 TAdPlayerLoadGC__sub_803F2F1C(void) {
         return 0;
     }
     lbl_805D7944++;
-    for (card_channel = 0, off = 0; card_channel < 2; card_channel++, off += 0xC) {
+    card_channel = 0;
+    off = 0;
+    while (card_channel < 2) {
         stat = CARDProbeEx(card_channel, &memCardSize, &errorBits);
         switch (stat) {
-        case -2:
+        case -128:
+        default:
             p = base + off;
             p = p + 0x3610;
             if (stat != *(s32 *)p) {
@@ -354,6 +357,15 @@ s32 TAdPlayerLoadGC__sub_803F2F1C(void) {
                 *(s32 *)(p + 8) = 0;
             }
             break;
+        case -2:
+            p = base + off;
+            p = p + 0x3610;
+            if (stat != *(s32 *)p) {
+                *(s32 *)p = stat;
+                *(s32 *)(p + 4) = 0;
+                *(s32 *)(p + 8) = 0;
+            }
+            break;
         case -1:
             break;
         case 0:
@@ -373,19 +385,13 @@ s32 TAdPlayerLoadGC__sub_803F2F1C(void) {
                 }
             }
             break;
-        case -128:
-        default:
-            p = base + off;
-            p = p + 0x3610;
-            if (stat != *(s32 *)p) {
-                *(s32 *)p = stat;
-                *(s32 *)(p + 4) = 0;
-                *(s32 *)(p + 8) = 0;
-            }
-            break;
         }
+        card_channel++;
+        off += 0xC;
     }
-    for (card_channel = 0, off = 0; card_channel < 2; card_channel++, off += 0x68) {
+    card_channel = 0;
+    off = 0;
+    while (card_channel < 2) {
         p = base + off;
         stv = *(s32 *)(p + 0x64);
         p = p + 0x20;
@@ -420,6 +426,8 @@ s32 TAdPlayerLoadGC__sub_803F2F1C(void) {
             TAdPlayerLoadGC__sub_803F1908(card_channel);
             break;
         }
+        card_channel++;
+        off += 0x68;
     }
     lbl_805D7944--;
     return 0;
