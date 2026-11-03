@@ -1798,6 +1798,141 @@ s32 TQuestVmDownLoadServer__sub_803E8C2C(char *arg0, s16 arg1, Out_803E8C2C *arg
 }
 #pragma pop
 
+struct Ent_803E8DA0 { u8 pad[2]; u8 len; char name[1]; };
+struct Node_803E8DA0 { Ent_803E8DA0 *ent; Node_803E8DA0 *next; };
+
+extern u32 lbl_805D786C;
+extern u32 lbl_805D7870;
+extern Node_803E8DA0 *lbl_805D7878;
+void TQuestVmDownLoadServer__sub_803E95BC(void);
+
+#pragma push
+#pragma dont_inline off
+#pragma inline_depth(1)
+inline s32 Hash_803E8DA0(char *s) {
+    s32 h;
+    u8 c = s[0];
+    if (c >= 0xA0 && c < 0xF0) {
+        h = c - 0xA0;
+    } else {
+        h = 0;
+    }
+    return h;
+}
+
+s32 TQuestVmDownLoadServer__sub_803E8DA0(char *name, Req_803EEF2C *req, s32 arg2) {
+    Node_803E8DA0 **slot;
+    Node_803E8DA0 *n;
+    Node_803E8DA0 *prev;
+    Node_803E8DA0 *newnode;
+    Ent_803E8DA0 *e;
+    s32 h;
+    s16 len;
+    u8 blen;
+    s32 r;
+    s32 off;
+    s32 size;
+    s32 tag;
+    u8 *rec;
+    u8 *p;
+
+    lbl_805D7868 = 1;
+    len = req->len;
+    h = Hash_803E8DA0(name);
+    prev = NULL;
+    n = *(Node_803E8DA0 **)((u8 *)&lbl_80591EC8.value + 0x2000 + (h << 2));
+    while (n != NULL) {
+        e = n->ent;
+        blen = e->len;
+        r = strncmp(e->name, name, (s16)blen);
+        if (r == 0) {
+            if ((s16)blen == len) {
+                break;
+            }
+        } else if (r > 0) {
+            break;
+        }
+        prev = n;
+        n = n->next;
+    }
+    if (prev == NULL) {
+        slot = (Node_803E8DA0 **)((u8 *)&lbl_80591EC8.value + 0x2000 + (h << 2));
+    } else {
+        slot = &prev->next;
+    }
+    e = n->ent;
+    if (e->len == len) {
+        if (strncmp(name, e->name, len) == 0) {
+            e->len = 0;
+            *slot = n->next;
+            off = (u8 *)e - (u8 *)&lbl_80591EC8.value;
+            TQuestVmDownLoadServer::invalidate_entries_by_id(((off / 1024) << 12) | (off % 1024));
+            n->next = lbl_805D7878;
+            lbl_805D7878 = n;
+        }
+    }
+    if (lbl_805D7878 == NULL) {
+        TQuestVmDownLoadServer__sub_803E95BC();
+    }
+    newnode = lbl_805D7878;
+    lbl_805D7878 = newnode->next;
+    if (req->x8 != 0 || req->x7 >= 0x2D) {
+        tag = 3;
+    } else {
+        tag = 2;
+    }
+    size = len + tag + TQuestVmDownLoadServer::calc_sjis_string_width(req->text) + 3;
+    if (lbl_805D7870 > lbl_805D786C - size - 2) {
+        TQuestVmDownLoadServer__sub_803E95BC();
+    }
+    rec = (u8 *)lbl_805D7870;
+    lbl_805D7870 = (s32)(rec + size);
+    p = (u8 *)lbl_805D7870;
+    p[0] = 0;
+    p[1] = 0;
+    rec[0] = size % 256;
+    rec[1] = size / 256;
+    rec[2] = (u8)len;
+    strncpy((char *)(rec + 3), req->name, len);
+    p = rec + 3 + len;
+    p[0] = req->x7;
+    p[1] = (u8)arg2;
+    p += 2;
+    if (req->x8 != 0 || req->x7 >= 0x2D) {
+        *p = req->x8;
+        p += 1;
+    }
+    TQuestVmDownLoadServer::copy_sjis_string(req->text, p);
+    h = Hash_803E8DA0(name);
+    len = req->len;
+    prev = NULL;
+    n = *(Node_803E8DA0 **)((u8 *)&lbl_80591EC8.value + 0x2000 + (h << 2));
+    while (n != NULL) {
+        e = n->ent;
+        blen = e->len;
+        r = strncmp(e->name, name, (s16)blen);
+        if (r == 0) {
+            if ((s16)blen == len) {
+                break;
+            }
+        } else if (r > 0) {
+            break;
+        }
+        prev = n;
+        n = n->next;
+    }
+    if (prev == NULL) {
+        slot = (Node_803E8DA0 **)((u8 *)&lbl_80591EC8.value + 0x2000 + (h << 2));
+    } else {
+        slot = &prev->next;
+    }
+    newnode->ent = (Ent_803E8DA0 *)rec;
+    newnode->next = n;
+    *slot = newnode;
+    return 0;
+}
+#pragma pop
+
 void append_message_text__22TQuestVmDownLoadServerFPviPvUc(u8 *arg0, s32 arg1, Msg_803E90A8 *arg2, u8 arg3) {
     u16 cur;
     s32 v;
