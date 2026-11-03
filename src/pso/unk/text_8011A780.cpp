@@ -118,15 +118,19 @@ void handle_box_drop_directive(void *arg0) {
     u8 blob_8011A868[0x3C];
     Delivery_8011AA68 delivery;
     Item_8011AA68 item;
+    u8 b0;
+    u8 b1;
+    u32 id;
     s16 source = *(s16 *)((s8 *)arg0 + 6);
+    Source_8011AA68 row;
     if (source == -1) {
         return;
     }
-    Source_8011AA68 row = quest_object_entries[source];
+    *(u32 *)&row = ((u32 *)quest_object_entries)[source];
     if (row.claim == 0xFFFF) {
         return;
     }
-    u32 id = build_item_id(row.claim);
+    id = build_item_id(row.claim);
     row.claim = 0xFFFF;
     TLobby::apply_table_entry(source, &row);
     ((BoxRec_8011A868 *)(blob_8011A868 + 0x2C))->f0 = ((BoxRec_8011A868 *)((s8 *)arg0 + 0x18))->f0;
@@ -135,8 +139,8 @@ void handle_box_drop_directive(void *arg0) {
     ((BoxRec_8011A868 *)(blob_8011A868 + 0x2C))->w3 = ((BoxRec_8011A868 *)((s8 *)arg0 + 0x18))->w3;
     ((TItemData *)&item)->unpack_from_item(blob_8011A868);
     if (0.0f == ((BoxRec_8011A868 *)(blob_8011A868 + 0x2C))->f0) {
-        u8 b0 = ((u8 *)&item)[0];
-        u8 b1 = ((u8 *)&item)[1];
+        b0 = ((u8 *)&item)[0];
+        b1 = ((u8 *)&item)[1];
         init__9TItemDataFv(&item);
         ((u8 *)&item)[0] = b0;
         ((u8 *)&item)[1] = b1;
