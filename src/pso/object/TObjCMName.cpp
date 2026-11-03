@@ -1251,8 +1251,8 @@ void TObjCMHairMenu::render()
   yoff = 44.0f * scaleF;
   p[0].x = (dx * 0.1f) + d4[0];
   p[1].x = (dx * 1.1f) + d4[0];
-  p[2].x = (dx2 * 1.1f) + d4[6];
   p[3].x = (dx2 * 0.1f) + d4[6];
+  p[2].x = (dx2 * 1.1f) + d4[6];
   p[0].y = yin * scaleF;
   p[1].y += yoff;
   p[1].y = yout * scaleF;
