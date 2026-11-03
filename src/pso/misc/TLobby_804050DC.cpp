@@ -1273,6 +1273,34 @@ s32 TLobby__sub_804060B8(u8 *data, s32 len, int type) {
 }
 #pragma pop
 
+void TLobby__sub_8040059C(u8 *arg0);
+void TLobby__sub_80402CE0(u8 *arg0);
+void TLobby__sub_803FC318(u8 *arg0);
+void TLobby__sub_803FEF4C(u8 *arg0);
+void TLobby__sub_803F9FAC(u8 *arg0);
+extern s32 lbl_805D7ADC;
+
+s32 TLobby__sub_804061FC(s32 arg0) {
+    u8 *g;
+    u8 *p;
+
+    lbl_805D7ADC = 0;
+    g = lbl_805C0038;
+    p = g;
+    NetMemset(g, 0, 0x144);
+    g[0] = 0;
+    TLobby__sub_8040059C(p);
+    TLobby__sub_80402CE0(p);
+    TLobby__sub_803FC318(p);
+    TLobby__sub_803FEF4C(p);
+    TLobby__sub_803F9FAC(p);
+    if (g[0] == 0) {
+        g[0] = 1;
+    }
+    TLobby__sub_803FD958(g + 4);
+    return 0;
+}
+
 s32 TLobby__sub_804062A0(s16 arg0) {
     Lobby_804062A0 *l = (Lobby_804062A0 *)lbl_805C0038;
 
