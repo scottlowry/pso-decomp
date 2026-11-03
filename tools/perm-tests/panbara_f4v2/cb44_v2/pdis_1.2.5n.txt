@@ -1,0 +1,66 @@
+00000000 <probe_cb44__FPUcUiUi>:
+   0:	7c 08 02 a6 	mflr    r0
+   4:	90 01 00 04 	stw     r0,4(r1)
+   8:	94 21 ff b8 	stwu    r1,-72(r1)
+   c:	bf 01 00 28 	stmw    r24,40(r1)
+  10:	7c 7a 1b 78 	mr      r26,r3
+  14:	3b 04 00 00 	addi    r24,r4,0
+  18:	3b 25 00 00 	addi    r25,r5,0
+  1c:	3b 9a 00 18 	addi    r28,r26,24
+  20:	80 03 00 04 	lwz     r0,4(r3)
+  24:	2c 00 00 00 	cmpwi   r0,0
+  28:	41 82 00 0c 	beq     34 <probe_cb44__FPUcUiUi+0x34>
+  2c:	38 60 ff ff 	li      r3,-1
+  30:	48 00 00 c0 	b       f0 <probe_cb44__FPUcUiUi+0xf0>
+  34:	57 00 06 3e 	clrlwi  r0,r24,24
+  38:	2c 00 00 08 	cmpwi   r0,8
+  3c:	41 82 00 08 	beq     44 <probe_cb44__FPUcUiUi+0x44>
+  40:	48 00 00 ac 	b       ec <probe_cb44__FPUcUiUi+0xec>
+  44:	48 00 00 01 	bl      44 <probe_cb44__FPUcUiUi+0x44>
+  48:	7c 7b 1b 79 	mr.     r27,r3
+  4c:	40 82 00 0c 	bne     58 <probe_cb44__FPUcUiUi+0x58>
+  50:	38 60 fe ff 	li      r3,-257
+  54:	48 00 00 9c 	b       f0 <probe_cb44__FPUcUiUi+0xf0>
+  58:	88 1a 00 04 	lbz     r0,4(r26)
+  5c:	3b 40 00 00 	li      r26,0
+  60:	57 43 08 3c 	slwi    r3,r26,1
+  64:	98 1b 00 04 	stb     r0,4(r27)
+  68:	3b db 00 00 	addi    r30,r27,0
+  6c:	3b fc 00 00 	addi    r31,r28,0
+  70:	3b a3 00 10 	addi    r29,r3,16
+  74:	88 1f 00 00 	lbz     r0,0(r31)
+  78:	7c 7b ea 14 	add     r3,r27,r29
+  7c:	38 9c 00 04 	addi    r4,r28,4
+  80:	98 1e 00 0c 	stb     r0,12(r30)
+  84:	38 a0 00 08 	li      r5,8
+  88:	48 00 00 01 	bl      88 <probe_cb44__FPUcUiUi+0x88>
+  8c:	3b 5a 00 01 	addi    r26,r26,1
+  90:	28 1a 00 03 	cmplwi  r26,3
+  94:	3b de 00 02 	addi    r30,r30,2
+  98:	3b bd 00 02 	addi    r29,r29,2
+  9c:	3b ff 00 01 	addi    r31,r31,1
+  a0:	41 80 ff d4 	blt     74 <probe_cb44__FPUcUiUi+0x74>
+  a4:	38 b9 00 00 	addi    r5,r25,0
+  a8:	38 d8 00 00 	addi    r6,r24,0
+  ac:	38 fb 00 00 	addi    r7,r27,0
+  b0:	38 60 00 00 	li      r3,0
+  b4:	38 80 00 00 	li      r4,0
+  b8:	48 00 00 01 	bl      b8 <probe_cb44__FPUcUiUi+0xb8>
+  bc:	3b 83 00 00 	addi    r28,r3,0
+  c0:	7f 80 07 34 	extsh   r0,r28
+  c4:	7c 00 07 35 	extsh.  r0,r0
+  c8:	40 80 00 14 	bge     dc <probe_cb44__FPUcUiUi+0xdc>
+  cc:	7f 63 db 78 	mr      r3,r27
+  d0:	48 00 00 01 	bl      d0 <probe_cb44__FPUcUiUi+0xd0>
+  d4:	7f 83 e3 78 	mr      r3,r28
+  d8:	48 00 00 18 	b       f0 <probe_cb44__FPUcUiUi+0xf0>
+  dc:	7f 63 db 78 	mr      r3,r27
+  e0:	48 00 00 01 	bl      e0 <probe_cb44__FPUcUiUi+0xe0>
+  e4:	38 60 00 00 	li      r3,0
+  e8:	48 00 00 08 	b       f0 <probe_cb44__FPUcUiUi+0xf0>
+  ec:	88 7c 00 00 	lbz     r3,0(r28)
+  f0:	bb 01 00 28 	lmw     r24,40(r1)
+  f4:	80 01 00 4c 	lwz     r0,76(r1)
+  f8:	38 21 00 48 	addi    r1,r1,72
+  fc:	7c 08 03 a6 	mtlr    r0
+ 100:	4e 80 00 20 	blr

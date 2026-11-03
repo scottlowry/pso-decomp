@@ -1,0 +1,63 @@
+00000000 <probe_cb44__FPUcUiUi>:
+   0:	94 21 ff d0 	stwu    r1,-48(r1)
+   4:	7c 08 02 a6 	mflr    r0
+   8:	90 01 00 34 	stw     r0,52(r1)
+   c:	bf 01 00 10 	stmw    r24,16(r1)
+  10:	7c 78 1b 78 	mr      r24,r3
+  14:	7c 99 23 78 	mr      r25,r4
+  18:	7c ba 2b 78 	mr      r26,r5
+  1c:	80 03 00 04 	lwz     r0,4(r3)
+  20:	2c 00 00 00 	cmpwi   r0,0
+  24:	41 82 00 0c 	beq     30 <probe_cb44__FPUcUiUi+0x30>
+  28:	38 60 ff ff 	li      r3,-1
+  2c:	48 00 00 b8 	b       e4 <probe_cb44__FPUcUiUi+0xe4>
+  30:	57 20 06 3e 	clrlwi  r0,r25,24
+  34:	2c 00 00 08 	cmpwi   r0,8
+  38:	41 82 00 08 	beq     40 <probe_cb44__FPUcUiUi+0x40>
+  3c:	48 00 00 a4 	b       e0 <probe_cb44__FPUcUiUi+0xe0>
+  40:	48 00 00 01 	bl      40 <probe_cb44__FPUcUiUi+0x40>
+  44:	7c 7c 1b 79 	mr.     r28,r3
+  48:	40 82 00 0c 	bne     54 <probe_cb44__FPUcUiUi+0x54>
+  4c:	38 60 fe ff 	li      r3,-257
+  50:	48 00 00 94 	b       e4 <probe_cb44__FPUcUiUi+0xe4>
+  54:	88 18 00 04 	lbz     r0,4(r24)
+  58:	7f 9e e3 78 	mr      r30,r28
+  5c:	3b f8 00 18 	addi    r31,r24,24
+  60:	3b 60 00 00 	li      r27,0
+  64:	98 1c 00 04 	stb     r0,4(r28)
+  68:	3b a0 00 10 	li      r29,16
+  6c:	88 1f 00 00 	lbz     r0,0(r31)
+  70:	7c 7c ea 14 	add     r3,r28,r29
+  74:	38 98 00 1c 	addi    r4,r24,28
+  78:	38 a0 00 08 	li      r5,8
+  7c:	98 1e 00 0c 	stb     r0,12(r30)
+  80:	48 00 00 01 	bl      80 <probe_cb44__FPUcUiUi+0x80>
+  84:	3b 7b 00 01 	addi    r27,r27,1
+  88:	3b bd 00 02 	addi    r29,r29,2
+  8c:	28 1b 00 03 	cmplwi  r27,3
+  90:	3b ff 00 01 	addi    r31,r31,1
+  94:	3b de 00 02 	addi    r30,r30,2
+  98:	41 80 ff d4 	blt     6c <probe_cb44__FPUcUiUi+0x6c>
+  9c:	7f 45 d3 78 	mr      r5,r26
+  a0:	7f 26 cb 78 	mr      r6,r25
+  a4:	7f 87 e3 78 	mr      r7,r28
+  a8:	38 60 00 00 	li      r3,0
+  ac:	38 80 00 00 	li      r4,0
+  b0:	48 00 00 01 	bl      b0 <probe_cb44__FPUcUiUi+0xb0>
+  b4:	7c 7d 1b 78 	mr      r29,r3
+  b8:	7f a0 07 35 	extsh.  r0,r29
+  bc:	40 80 00 14 	bge     d0 <probe_cb44__FPUcUiUi+0xd0>
+  c0:	7f 83 e3 78 	mr      r3,r28
+  c4:	48 00 00 01 	bl      c4 <probe_cb44__FPUcUiUi+0xc4>
+  c8:	7f a3 eb 78 	mr      r3,r29
+  cc:	48 00 00 18 	b       e4 <probe_cb44__FPUcUiUi+0xe4>
+  d0:	7f 83 e3 78 	mr      r3,r28
+  d4:	48 00 00 01 	bl      d4 <probe_cb44__FPUcUiUi+0xd4>
+  d8:	38 60 00 00 	li      r3,0
+  dc:	48 00 00 08 	b       e4 <probe_cb44__FPUcUiUi+0xe4>
+  e0:	88 78 00 18 	lbz     r3,24(r24)
+  e4:	bb 01 00 10 	lmw     r24,16(r1)
+  e8:	80 01 00 34 	lwz     r0,52(r1)
+  ec:	7c 08 03 a6 	mtlr    r0
+  f0:	38 21 00 30 	addi    r1,r1,48
+  f4:	4e 80 00 20 	blr
