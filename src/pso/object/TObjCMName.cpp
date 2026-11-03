@@ -1060,8 +1060,8 @@ void TObjCMHairMenu::render()
   Prim_80297DB8 prim;
   s16 *rgb;
   const f32 *d4;
-  s32 hair;
   s32 idx;
+  s32 hair;
   s32 i;
   s32 j;
   s32 idoff;
@@ -1076,17 +1076,17 @@ void TObjCMHairMenu::render()
   f32 s;
   f32 a1;
   f32 a2;
-  f32 yoff;
   f32 scaleF;
   f32 a255;
   f32 yin;
-  f32 yout;
   f32 dy;
   f32 dx;
   f32 dx2;
   f32 tv;
   f32 xa;
+  f32 yout;
   f32 xb;
+  f32 yoff;
   f32 roff;
   hair = this->appearance->hair;
   scale = (0.25f * sin_table_lookup(this->ticks << 10)) + 1.0f;
@@ -1179,9 +1179,10 @@ void TObjCMHairMenu::render()
   for (i = 0; i < this->count; i++)
   {
     s = sq;
+    xa = 0.6f * sq;
     if (this->selection != 0)
     {
-      s = 0.6f * sq;
+      s = xa;
     }
     idoff = 0x1F;
     if (i == hair)
@@ -1234,8 +1235,8 @@ void TObjCMHairMenu::render()
     draw_ui_sprite(i + 15, &lbl_804DBCD0[i - 1], -2.4375f, s);
   }
 
-  TCameraCtrl::restore_full_screen_view();
   scaleF = TObjCMMainMenu::get_scale();
+  TCameraCtrl::restore_full_screen_view();
   d4 = lbl_804650D4;
   a255 = 255.0f * t;
   colorG = lbl_804650F4[3];
