@@ -1399,7 +1399,7 @@ u16 TLobby__sub_80406BD8(void *arg0, s16 arg1) {
     s32 i;
     s16 lim;
     s16 tbl;
-    s32 b1;
+    s16 b1;
     s16 pairs;
     s16 carry;
     u8 kind;
