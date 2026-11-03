@@ -18,7 +18,7 @@ void TLobby__sub_8020B47C(void *self) {
     s32 n1, n2;
     s32 j1, j2;
     u8 *base1, *base2;
-    Dst_8020B47C *d1, *d2;
+    Dst_8020B47C *new_var[2];
 
     bswap_4_words__6TLobbyFv(self);
 
@@ -31,15 +31,15 @@ void TLobby__sub_8020B47C(void *self) {
         u8 *p = base1 + off;
         n1 = *(s32 *)(p + 0x0);
         if (n1 > 0) {
-            d1 = *(Dst_8020B47C **)(p + 0x10);
+            new_var[1] = *(Dst_8020B47C **)(p + 0x10);
             j1 = 0;
             while (j1 < n1) {
                 t1 = *(s16 *)cur;
                 bswap_16((u16 *)&t1);
                 cur += 2;
                 j1++;
-                d1->f2 = t1;
-                d1++;
+                new_var[1]->f2 = t1;
+                new_var[1]++;
             }
         }
     }
@@ -53,15 +53,15 @@ void TLobby__sub_8020B47C(void *self) {
         u8 *p = base2 + off;
         n2 = *(s32 *)(p + 0x4);
         if (n2 > 0) {
-            d2 = *(Dst_8020B47C **)(p + 0x14);
+            new_var[0] = *(Dst_8020B47C **)(p + 0x14);
             j2 = 0;
             while (j2 < n2) {
                 t2 = *(s16 *)cur;
                 bswap_16((u16 *)&t2);
                 cur += 2;
                 j2++;
-                d2->f2 = t2;
-                d2++;
+                new_var[0]->f2 = t2;
+                new_var[0]++;
             }
         }
     }
