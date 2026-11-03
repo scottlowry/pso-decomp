@@ -42,14 +42,87 @@ struct Obj_800FF788 {
     Vec_800FF788 *out;
 };
 
+struct Node_800FF580 {
+    f32 f0;
+    Vec_800FF8CC pos;
+};
+
 extern "C" {
 void vec3_add_to(Vec_800FF8CC *, Vec_800FF8CC *);
 void fn_800FF580(void *, void *, f32);
 f32 vector_length(void *);
 void subtract_vector(void *, void *);
 void normalize_vector(void *);
+f32 xyz_distance(void *, void *);
 extern const f32 lbl_805DAA58;
 extern const f32 lbl_805DAA5C;
+extern const f32 lbl_805DAA64;
+
+void fn_800FF580(void *obj_arg, void *pt_arg, f32 arg3) {
+    Vec_800FF8CC *pt = (Vec_800FF8CC *)pt_arg;
+    Vec_800FF8CC local;
+    Vec_800FF8CC npos;
+    Node_800FF580 *node;
+    f32 base;
+    f32 zero;
+    f32 best;
+    f32 best_thr;
+    f32 thr;
+    f32 dist;
+    f32 margin;
+    s32 iters;
+    local = *pt;
+    iters = 16;
+    base = lbl_805DAA64 * arg3;
+    zero = lbl_805DAA58;
+    for (;;) {
+        best = lbl_805DAA58;
+        node = (Node_800FF580 *)((TObjEZRopeBase *)obj_arg)->m_28;
+        while (node->f0 >= zero) {
+            thr = base + node->f0;
+            dist = xyz_distance(&local, &node->pos);
+            if (dist < thr) {
+                margin = thr - dist;
+                if (margin > best) {
+                    best = margin;
+                    best_thr = thr;
+                    VecCopy((Vec *)&npos, (const Vec *)&node->pos);
+                }
+            }
+            node++;
+        }
+        if (iters > 0 && zero != best) {
+            subtract_vector(&local, &npos);
+            if (zero == vector_length(&local)) {
+                local.x = zero;
+                local.y = lbl_805DAA5C;
+                local.z = zero;
+            } else {
+                normalize_vector(&local);
+            }
+            local.x *= best_thr;
+            local.y *= best_thr;
+            local.z *= best_thr;
+            vec3_add_to(&local, &npos);
+            subtract_vector(&local, pt - 1);
+            if (zero == vector_length(&local)) {
+                local.x = zero;
+                local.y = lbl_805DAA5C;
+                local.z = zero;
+            } else {
+                normalize_vector(&local);
+            }
+            local.x *= arg3;
+            local.y *= arg3;
+            local.z *= arg3;
+            vec3_add_to(&local, pt - 1);
+            iters--;
+        } else {
+            VecCopy((Vec *)pt, (const Vec *)&local);
+            return;
+        }
+    }
+}
 
 void TObjEZRopeBase::sub_800FF788(void *mtx) {
     Seg_800FF788 *seg;
