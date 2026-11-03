@@ -6,7 +6,14 @@
 extern "C" {
 
 // data pools (owned by other units; referenced only)
-extern u32 lbl_80500930[3]; // true object: 4 s32[3] arrays + 3 f32, contiguous
+struct CanadinFloorState {
+    s32 boss_param_ids[3];
+    s32 handler_b_ids[3];
+    s32 object_param_ids[3];
+    s32 handler_a_ids[3];
+    f32 fade_vals[3];
+};
+extern CanadinFloorState lbl_80500930;
 extern const f32 lbl_805D9898; // 0.0f
 extern const f32 lbl_805D98A4; // 15.0f
 extern const f32 lbl_805D9930; // 8.0f
@@ -39,15 +46,10 @@ void *__nw__FUl(u32);
 s32 init_from_model__11TBreakUpMdlFl(s32, s32);
 void *find_model_node__FUll(void *, s32);
 void TObjPlayer__sub_800F0928();
-s32 spawn_npc_enemy__6TLobbyFsllPvff(s16, s32, s32, void *, s32, s32, f32, f32);
+s32 spawn_npc_enemy__6TLobbyFsllPvff(s16, s32, s32, void *, f32, f32);
 
 void load_resources__17TObjEneMe1CanadinFv(void) {
-    s32 *g = (s32 *)lbl_80500930;
     void *res;
-    s32 *a0;
-    s32 *a1;
-    s32 *a2;
-    s32 *a3;
     s32 i;
     s32 p;
     void *mdl;
@@ -56,24 +58,29 @@ void load_resources__17TObjEneMe1CanadinFv(void) {
     s32 sp[4];
 
     f32 z = lbl_805D9898;
-    ((f32 *)g)[12] = z;
-    ((f32 *)g)[13] = z;
-    ((f32 *)g)[14] = z;
+    f32 *fade = lbl_80500930.fade_vals;
+    lbl_80500930.fade_vals[0] = z;
+    fade[1] = z;
+    fade[2] = z;
     if (check_v2_mode__9TObjEneDDFv() != 0) {
         res = load_enemy_bml_resource_named(bm_ene_me1_mb_resource_descriptor, lbl_8043A3D0);
     } else {
         res = load_enemy_bml_resource(bm_ene_me1_mb_resource_descriptor);
     }
     lbl_805D4FD0 = res;
-    a0 = g;
-    a1 = g + 3;
-    a2 = g + 6;
-    a3 = g + 9;
+    s32 *s0 = lbl_8043A180;
+    s32 *d0 = lbl_80500930.boss_param_ids;
+    s32 *s1 = lbl_8043A18C;
+    s32 *d1 = lbl_80500930.handler_b_ids;
+    s32 *s2 = lbl_8043A198;
+    s32 *d2 = lbl_80500930.object_param_ids;
+    s32 *s3 = lbl_8043A1A4;
+    s32 *d3 = lbl_80500930.handler_a_ids;
     for (i = 0; i < 3; i++) {
-        a0[i] = register_boss__6TLobbyFl(lbl_8043A180[i]);
-        a1[i] = dispatch_shared_handler_b__6TLobbyFl(lbl_8043A18C[i]);
-        a2[i] = register_object__6TLobbyFl(lbl_8043A198[i]);
-        a3[i] = dispatch_shared_handler_a__6TLobbyFl(lbl_8043A1A4[i]);
+        d0[i] = register_boss__6TLobbyFl(s0[i]);
+        d1[i] = dispatch_shared_handler_b__6TLobbyFl(s1[i]);
+        d2[i] = register_object__6TLobbyFl(s2[i]);
+        d3[i] = dispatch_shared_handler_a__6TLobbyFl(s3[i]);
     }
     lbl_805D4FD4 = 0;
     p = (s32)__nw__FUl(0x10);
@@ -107,7 +114,7 @@ void load_resources__17TObjEneMe1CanadinFv(void) {
         spawn_npc_enemy__6TLobbyFsllPvff(((s16 *)&ids)[i],
             *(s32 *)(*(s32 *)((s32)lbl_805D4FD0 + 0x42C) + 8 + i * 0x10),
             *(s32 *)(*(s32 *)((s32)lbl_805D4FD0 + 0x42C) + 0x1C),
-            &sp[0], (s32)lbl_8043A380, ids, lbl_805D9930, lbl_805D98A4);
+            &sp[0], lbl_805D9930, lbl_805D98A4);
     }
 }
 }
