@@ -630,6 +630,16 @@ typedef struct Msg_801CD6BC {
     u8 pad5[3];
 } Msg_801CD6BC;
 
+typedef struct Msg_801CD550 {
+    u8 pad0[2];
+    u16 id;
+    u8 tech;
+    u8 pad5;
+    u8 lv;
+    u8 count;
+    u32 data[11];
+} Msg_801CD550;
+
 struct Pkt_801CDAD8 { u8 cmd; u8 size; u16 player; s16 heading; s16 kind; };
 
 struct Rec_801CDBA0 { u8 pad[0x1C]; f32 pos[3]; u8 pad2[0x2C - 0x28]; };
@@ -1629,6 +1639,7 @@ s32 validate_6x4C_hit_by_enemy(void *);
 s32 validate_6x4B_hit_by_enemy(void *);
 s32 validate_6x48_cast_technique_complete(void *);
 s32 validate_6x8D_set_technique_level_override(void *);
+s32 validate_6x47_cast_technique(u8 *packet);
 s32 validate_6x46_attack_finished(void *);
 s32 validate_6x45_attack(Pkt_801CDAD8 *);
 s32 validate_6x44_attack(Pkt_801CDED4 *);
@@ -4624,6 +4635,59 @@ void TObjPlayer::enter_technique_cast() {
         this->current_action = ((s16 (*)(void))ret_801D26AC)();
     }
     ((void (*)(void *, s16, s16))set_action_state__10TObjPlayerFPvss)(self, 8, ((TObjPlayer *)self)->get_status());
+}
+
+void handle_6x47_cast_technique(void *arg0) {
+    Msg_801CD550 m;
+    s8 slot;
+    u8 ul;
+    u8 *p;
+    s16 tech;
+    s8 valid;
+    s8 count;
+    TechData_801CD424 *src;
+    u32 *dst;
+    s32 i;
+    ((TNpcPlayer *)(&m))->init_cast_technique_cmd();
+    TObjPlayer__sub_801D21CC((u8 *)&m, (u8 *)arg0);
+    ((TNpcPlayer *)(&m))->byteswap_positions();
+    if (validate_6x47_cast_technique((u8 *)&m) == 0) {
+        return;
+    }
+    p = get_player_by_client_id(m.id);
+    if (p == NULL) {
+        return;
+    }
+    if (reset_volopt_state__10TObjPlayerFv(p) == 0) {
+        return;
+    }
+    if (test_action_mask__10TObjPlayerFl(p, 0x8200) != 0) {
+        return;
+    }
+    tech = (s8)m.tech;
+    ((void (*)(void *, s16))set_technique_id__10TObjPlayerFs)(p + 0x428, tech);
+    slot = (s8)m.lv;
+    valid = (s8)((TObjPlayer *)(p + 0x428))->get_valid_technique();
+    if (TObjPlayer::is_valid_technique_slot((u8)valid) == 0) {
+        valid = 0;
+    }
+    if (slot == 0xE) {
+        slot = (s8)(slot + valid);
+    }
+    if (((s32 (*)(void *, s16, u8))check_technique_level__10TObjPlayerFllUc)(p + 0x428, tech, (u8)slot) == 0) {
+        slot = 0;
+    }
+    ul = slot;
+    ((TObjPlayer *)(p + 0x428))->set_technique_id(ul);
+    ((void (*)(void *, u8, s16))clamp_and_set_unit_value__10TObjPlayerFiUci)(p, ul, tech);
+    count = (s8)m.count;
+    ((TObjPlayer *)(p + 0x428))->set_tech_level(count);
+    src = ((TechData_801CD424 * (*)(void *))get_technique_data__10TObjPlayerFPv)(p + 0x428);
+    dst = m.data;
+    for (i = 0; i < count; i++) {
+        copy_tech_params__10TObjPlayerFPvPv(src++, dst++);
+    }
+    ((s32 (*)(void *, s32, s32))run_action_state_phase__10TObjPlayerFisi)(p, 8, 0);
 }
 
 void handle_6x8D_set_technique_level_override(void *arg0) {
