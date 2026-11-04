@@ -24,6 +24,12 @@ typedef char RecoveredGlobal_802C47E8_lbl_8050E3B8_size[sizeof(RecoveredGlobal_8
 
 struct S8_802C4944 { s32 a, b; };
 
+typedef struct Vec2_802C4B64 { f32 x; f32 y; } Vec2_802C4B64;
+
+typedef struct Col_802C4B64 { u32 v; } Col_802C4B64;
+
+struct Desc_802C4B64 { f32 *pos; u32 *col; s32 a; s32 b; };
+
 struct S16_802C4944 { S8_802C4944 x[2]; };
 
 struct T12_802C4944 { s32 a, b, c; };
@@ -56,6 +62,10 @@ extern s32 __vt__19TAdSelectGameModeGC[];
 extern void *TAdSelectGameModeGC__name;
 extern const f32 lbl_805DE538;
 int sync_char_select_state__10TObjPlayerFv(void*);
+void copy4__18TAdChrMoveEffectGCFPv(void *, void *);
+s32 draw_tri_fan_2d__14TObjCMHairMenuFllf(void *, int, int, f32);
+extern const f32 lbl_805DE540;
+extern const f32 lbl_805DE544;
 
 int fn_802C4748(void* p) { return sync_char_select_state__10TObjPlayerFv(p); }
 
@@ -156,5 +166,31 @@ u8 *__ct__19TAdSelectGameModeGCFv(u8 *arg0, void *parent) {
     create_draw_line_ctrl__13TAdMcSelectGCFiif((s32)arg0, 0xA, (f32)lbl_805DE538);
     return arg0;
 }
+
+#pragma push
+#pragma fp_contract on
+void TAdEnterSerialAccessGC__sub_802C4B64(void *self, Vec2_802C4B64 pos, Col_802C4B64 c, u32 i) {
+    f32 verts[8];
+    Desc_802C4B64 d;
+    u32 col[4];
+    d.col = col;
+    d.pos = verts;
+    d.a = 0;
+    d.b = 4;
+    d.pos[0] = pos.x;
+    d.pos[1] = pos.y;
+    copy4__18TAdChrMoveEffectGCFPv(d.col, &c);
+    d.pos[2] = d.pos[0];
+    d.pos[3] = d.pos[1] + *(f32 *)((s8 *)self + 0x220);
+    copy4__18TAdChrMoveEffectGCFPv(d.col + 1, &c);
+    d.pos[4] = d.pos[0] + *(f32 *)((s8 *)self + 0x21C);
+    d.pos[5] = d.pos[1] + *(f32 *)((s8 *)self + 0x220);
+    copy4__18TAdChrMoveEffectGCFPv(d.col + 2, &c);
+    d.pos[6] = d.pos[0] + *(f32 *)((s8 *)self + 0x21C);
+    d.pos[7] = d.pos[1];
+    copy4__18TAdChrMoveEffectGCFPv(d.col + 3, &c);
+    draw_tri_fan_2d__14TObjCMHairMenuFllf(&d, 4, 7, lbl_805DE544 * (f32)i + lbl_805DE540);
+}
+#pragma pop
 
 }
