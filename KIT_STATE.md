@@ -40,6 +40,19 @@ Layouts: ctx (0x90): +0 s8 inuse, +0x14 s32 (rate/bs), +0x88 ptr name. name (0xc
 - Per-branch magic duplication (c7df0): not applicable (no constant divisors in the scan/copy).
 - encode comma-def copy-restorer (0x803C7978 census): available as probe seed for loop-A head copy if walker-init copy missing.
 
-## VISIT-1 LOG
-- v1 skeleton authored from anatomy (this file) — probe result + gate below.
-- probe v1: (fill after control probe: rows, size, match_pct, gate)
+## VISIT-1 LOG (complete — 6 probes)
+- V1 skeleton (plain while-loops): 224 insns — scans rolled.
+- V2 `for(i=0;i<N;i++){if(*p==0)break; p+=S;}` + TAIL-LI negated mark/zero + negated name==0 if/else: **365** — unrolls FIRED (for-break form = era bdnz sets; while-&& form does NOT unroll at 2.6).
+- V3 walker-snapshot temps (`w` hidden walker + per-iter `name = w;` write-back; early `k54/k44` bound readbacks): **397 (0x634)**. Copy-chain/init/slot-scan/chunks ALL region-parity.
+- V4 negated empty-then if/else joins: INERT (folds to 3, same as V3).
+- V5 `name = (i < 16) ? name : 0;` ternary joins: **401 (0x644)** = era tail-layout FIRES (cmpwi; bge TAIL; b; li@tail) +1 `mr r3,r6` copy per site (2 sites).
+- V6 `if(goto arm)/goto join/label:` forward-goto chain: INERT (folds to 3).
+- Champion state = tip (V6==V3 size, 397/399). one_shot (unlinked): **89.2406**, rows orig 399/ours 397.
+- Commits: 84ca1111 V1, (V2), 283031a2 V3, 609dbb6a V5, b95f0425 V6 tip.
+
+## V2+ VISIT-2 FRONTIER (ranked, UPDATED post visit-1)
+1. SIZE +2W close attempt: kill V5's 2 `mr r3,r6` copies. V5 (609dbb6a, 0x644) has the era join layout; V3 (0x634) lacks the 2 `b` arms. Opening play: bind the ternary result to the WALKER register home (era li r8,0 = in-place write to the snapshot reg): spell `w = (i < 16) ? w : 0;` and consume `w` directly (drop separate `name` home in that region) — 1 probe. If INERT → era block-placement layout census (def-binding scheduler kin, LI-ZERO-COPY family), gate floor 0x634 (397/399 = 99.5% size).
+2. Full gates on champion: `ninja && ninja changes && report_delta --check && check_pr.py` + regenerating baseline-report if stale-base hazard (skill).
+3. Color rows @89.24 (one_shot unlinked view): (a) prologue slots 4-6 = our `addi r0+mr r31` vs era in-place `addi r31, r6, @l` = def-binding prologue pin (qvm-edc20 census, documented — do NOT grind decl orders); (b) slot-scan walk materialization: era walks `addi r4,0x9c0` then `lbz 0(r4)`; ours `lbz 0x9c0(r31)` big-disp first tests = scheduler split — screen 2 spellings max (rx-pump lever (2) hoist), census if inert; (c) init region colors (lis r5,1/subi AC44 vs li 44100 — check era's 2-insn form survives our li folding: era shows lis+subi = value materialized wide; ours emitted li@72c — +0/-0 size, COLOR row).
+4. Sibling safety: report_delta regressions must = 0 (family census method: regenerated-base gnm diff).
+5. DO NOT RE-ROLL (closed classes, visit-1 census): while-&& scan form (never unrolls); empty-then negated if/else (folds); forward-goto chain arm (folds); decl-order/prop windows for prologue split (family walls).
