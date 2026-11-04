@@ -568,7 +568,7 @@ void *TObjEneRe2Flower__ct(void *self, void *parent, void *set_data) {
         VecCopy((Vec *)((s8 *)self + (off + 0x3DC)), (const Vec *)((s8 *)self + 0x38));
         *(f32 *)((s8 *)self + (off + 0x3E0)) += lbl_805D9FD8;
     }
-    ((VObj_14_2f517b *)((s8 *)self + 0x3F4))->m3();
+    ((VObj_14_2f517b *)(s8 *)((u32)self + 0x3F4))->m3();
     *(u32 *)((s8 *)self + 0x410) = 0;
     *(u32 *)((s8 *)self + 0x414) = 0;
     *(u32 *)((s8 *)self + 0x418) = 0;
