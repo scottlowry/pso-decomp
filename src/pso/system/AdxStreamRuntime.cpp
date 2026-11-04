@@ -897,7 +897,11 @@ s32 fn_803C8020(AdxEncCtx_803C8020 *ctx, s32 ch_idx) {
             co = (cr + 2340) / 4681;
         }
         t = (co < -8) ? -8 : co;
-        co = (t >= 7) ? 7 : ((co < -8) ? -8 : co);
+        if (t < 7) {
+            co = (co < -8) ? -8 : co;
+        } else {
+            co = 7;
+        }
         b->f58[k] = (s8)co;
         s32 w = co * b->f7C;
         t = (w < -0x8000) ? -0x8000 : w;
