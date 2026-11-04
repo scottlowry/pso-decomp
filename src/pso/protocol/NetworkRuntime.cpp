@@ -17,6 +17,8 @@ struct Ent_803F9B48 {
     u8 pad[4];
 };
 
+struct Ent_803F8D84 { s32 active; s32 unk4; u32 key; };
+
 struct Ent_803F9C78 { s32 active; u32 key; u8 pad[0x318 - 8]; void (*fn)(Ent_803F9C78 *); u8 pad2[0x328 - 0x31C]; };
 
 struct Blk_803FA2A8 { s32 w[6]; };
@@ -45,6 +47,11 @@ u8 *write_network_u16_be(u8 *p, u16 v);
 s32 TLobby__sub_80405304(void *arg0);
 extern u16 lbl_805D7A68;
 extern Ent_803F9B48 *lbl_805D7A6C;
+extern u16 lbl_805D7A60;
+extern Ent_803F8D84 *lbl_805D7A64;
+s16 init_buffer_pool__6TLobbyFv(void);
+s16 initialize_network_packet_pool__Fv(void);
+s16 TLobby__sub_80428360(s32 arg0);
 void TLobby__sub_803FA2A8(P_803FA2A8 *o);
 s32 TLobby__sub_80428358(void);
 
@@ -105,6 +112,90 @@ s32 TLobby::cancel_pending_alarms() {
     TLobby::cancel_alarm_b();
     return 0;
 }
+
+#pragma push
+#pragma pool_data on
+#pragma opt_common_subs on
+s32 TLobby__sub_803F8E9C(void) {
+    s32 i;
+    s32 off;
+    s32 z;
+    Ent_803F9B48 *e;
+    NetworkMutexSlot *mt;
+    NetworkMessageQueueSlot *qs;
+    u16 n1;
+    NetworkAlarmSlot *s;
+    if ((lbl_805D7A6C == 0) || (lbl_805D7A64 == 0)) {
+        return -1;
+    }
+    n1 = lbl_805D7A68;
+    z = 0;
+    for (off = 0, i = n1; i > 0; i--) {
+        *(u32 *)((u8 *)lbl_805D7A6C + off) = z;
+        e = (Ent_803F9B48 *)((u8 *)lbl_805D7A6C + off);
+        e->key = (u32)&e->thread;
+        off += 0x328;
+    }
+
+    for (i = 0; i < 0x40; i++) {
+        s = &lobby_alarm_slot_table[i];
+        s->active = 0;
+        OSInitMessageQueue(&s->queue, &s->message, 1);
+    }
+
+    mt = &network_mutex_slot_table[0];
+    mt->active = 0;
+    mt->handle = (u32)mt + 8;
+    mt = &network_mutex_slot_table[1];
+    mt->active = 0;
+    mt->handle = (u32)mt + 8;
+    mt = &network_mutex_slot_table[2];
+    mt->active = 0;
+    mt->handle = (u32)mt + 8;
+    mt = &network_mutex_slot_table[3];
+    mt->active = 0;
+    mt->handle = (u32)mt + 8;
+    mt = &network_mutex_slot_table[4];
+    mt->active = 0;
+    mt->handle = (u32)mt + 8;
+    if (lbl_805D7A64) {
+    }
+    mt = &network_mutex_slot_table[5];
+    mt->active = 0;
+    mt->handle = (u32)mt + 8;
+    mt = &network_mutex_slot_table[6];
+    mt->active = 0;
+    mt->handle = (u32)mt + 8;
+    mt = &network_mutex_slot_table[7];
+    mt->active = 0;
+    mt->handle = (u32)mt + 8;
+    qs = &network_message_queue_slot_table[0];
+    qs->active = 0;
+    if ((i && i) && i) {
+    }
+    qs->handle = (u32)qs + 8;
+    qs = &network_message_queue_slot_table[1];
+    qs->active = 0;
+    qs->handle = (u32)qs + 8;
+    off = 0;
+    for (i = lbl_805D7A60; i > 0; i--) {
+        *(u32 *)((u8 *)lbl_805D7A64 + off) = 0;
+        off += 0xc;
+    }
+
+    if (init_buffer_pool__6TLobbyFv() < 0) {
+        return -1;
+    }
+    if (initialize_network_packet_pool__Fv() < 0) {
+        return -1;
+    }
+    if (TLobby__sub_80428360(0) < 0) {
+        return -1;
+    }
+    return 0;
+}
+
+#pragma pop
 
 void TLobby::get_time_seconds(s32 *out) {
     s64 t = OSGetTime();
