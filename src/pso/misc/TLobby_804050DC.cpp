@@ -9408,12 +9408,12 @@ s16 TLobby__sub_80417294(void *arg0, u32 len, u8 *addr, s32 arg3) {
     Ent_80416678 *TLobby__sub_804182DC(void *, void *, s16, s32);
     s32 TLobby__sub_80411604(int, int, void *);
     u8 *p0 = (u8 *)arg0;
-    u8 v2[8];
-    u8 buf2[8];
-    u8 v[0x10];
+    NetBufferRef ref;
     u8 buf[0x20];
     u32 pv = (u32)(buf + 0x10);
-    NetBufferRef ref;
+    u8 v[0x10];
+    u8 buf2[8];
+    u8 v2[8];
     s16 size;
     u8 *seen;
     u8 *opt;
@@ -9446,24 +9446,24 @@ s16 TLobby__sub_80417294(void *arg0, u32 len, u8 *addr, s32 arg3) {
             TLobby__sub_80406EB8((NetBufferRef *)(p0 + 4), size);
             break;
         case 3:
-            if (size == 0x20) {
+            if ((u16)size == 0x20) {
                 ((TLobby *)&ref)->set_value_and_enable((s32)buf);
                 TLobby__sub_80406FD8(&ref, p0 + 4, 0x20);
                 *(u32 *)&v[0] = pv;
                 *(u16 *)&v[4] = *(u8 *)&buf[2];
                 *(u32 *)&v[8] = *(u32 *)&buf[8];
                 *(u32 *)&v[0xC] = *(u32 *)&buf[4];
-                TLobby__sub_80411604((s32)arg3, 2, v);
+                TLobby__sub_80411604(arg3, 2, v);
             }
             TLobby__sub_80406EB8((NetBufferRef *)(p0 + 4), size);
             break;
         case 5:
-            if (size == 8) {
+            if ((u16)size == 8) {
                 ((TLobby *)&ref)->set_value_and_enable((s32)buf2);
                 TLobby__sub_80406FD8(&ref, p0 + 4, 8);
                 *(u32 *)&v2[0] = (u32)addr;
                 *(u32 *)&v2[4] = *(u32 *)&buf2[4];
-                TLobby__sub_80411604((s32)arg3, 4, v2);
+                TLobby__sub_80411604(arg3, 4, v2);
             }
             TLobby__sub_80406EB8((NetBufferRef *)(p0 + 4), size);
             break;
