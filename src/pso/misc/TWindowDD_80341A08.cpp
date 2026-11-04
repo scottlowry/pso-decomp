@@ -27,9 +27,8 @@ extern const f32 lbl_805DFB44;
 extern const f32 lbl_805DFCAC;
 extern const f32 TWindowDD__data_805DFB20;
 extern const float TWindowDD__data_805DFCA8;
+extern double TWindowDD__data_80478610;
 }
-
-__declspec(section ".rodata") double TWindowDD__data_80478610 = 4503601774854144.0;
 
 #pragma push
 #pragma fp_contract on
