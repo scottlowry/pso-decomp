@@ -121,6 +121,7 @@ s32 TLobby__sub_803F8E9C(void) {
     s32 off;
     s32 z;
     Ent_803F9B48 *e;
+    s32 new_var;
     NetworkMutexSlot *mt;
     NetworkMessageQueueSlot *qs;
     u16 n1;
@@ -157,7 +158,7 @@ s32 TLobby__sub_803F8E9C(void) {
     mt->handle = (u32)mt + 8;
     mt = &network_mutex_slot_table[4];
     mt->active = 0;
-    mt->handle = (u32)mt + 8;
+    mt->handle = (new_var = (u32)mt + 8);
     if (lbl_805D7A64) {
     }
     mt = &network_mutex_slot_table[5];
