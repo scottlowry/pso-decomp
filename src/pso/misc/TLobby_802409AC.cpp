@@ -800,10 +800,10 @@ void calc_sound_spatial_params(SoundRequestVoice *v) {
                             camvec.y = TLobby__data_805DC9E0;
                             camvec.z = ((const Vec *)((char *)player + 0x38))->z;
                         }
-                    }
-                    f32 d2 = horizontal_distance_squared(&camvec, &targetvec);
-                    if (dist > d2) {
-                        dist = d2;
+                        f32 d2 = horizontal_distance_squared(&camvec, &targetvec);
+                        if (dist > d2) {
+                            dist = d2;
+                        }
                     }
                 }
                 if (lbl_805DC9F8 != dist) {
