@@ -9401,6 +9401,89 @@ s16 NetIPv6HandleRouterAdvertisement(u8 *arg0, u8 *arg1, s32 arg2, void *arg3) {
     return TLobby__sub_80417494(sp18, arg1, arg3);
 }
 
+s16 TLobby__sub_80417294(void *arg0, u32 len, u8 *addr, void *arg3) {
+    u8 *TLobby__sub_80406F0C(void *);
+    void TLobby__sub_80406EB8(NetBufferRef *, s32);
+    void TLobby__sub_80406FD8(void *, void *, s32);
+    Ent_80416678 *TLobby__sub_804182DC(void *, void *, s16, s32);
+    s32 TLobby__sub_80411604(int, int, void *);
+    NetBufferRef ref;
+    u8 buf[0x20];
+    u8 buf2[8];
+    u8 v[0x10];
+    u8 v2[8];
+    u8 *opt;
+    u8 *seen;
+    s16 size;
+    s16 i;
+    B_80415B38 *e;
+    Ent_80416678 *ent;
+
+    seen = 0;
+    while ((s32)len >= 8) {
+        opt = TLobby__sub_80406F0C((u8 *)arg0 + 4);
+        if (opt[1] == 0) {
+            return -0x10E;
+        }
+        size = opt[1] << 3;
+        len -= size;
+        if ((s32)len < 0) {
+            return -0x10E;
+        }
+        switch (opt[0]) {
+        case 1:
+            seen = opt + 2;
+            ent = TLobby__sub_804182DC(addr, seen, size - 2, (s32)arg3);
+            ent->fC |= 0x80;
+            TLobby__sub_80406EB8((NetBufferRef *)((u8 *)arg0 + 4), size);
+            break;
+        case 3:
+            if (size == 0x20) {
+                ((TLobby *)&ref)->set_value_and_enable((s32)buf);
+                TLobby__sub_80406FD8(&ref, (u8 *)arg0 + 4, 0x20);
+                *(u32 *)&v[0] = (u32)(buf + 0x10);
+                *(u16 *)&v[4] = *(u8 *)&buf[2];
+                *(u32 *)&v[8] = *(u32 *)&buf[8];
+                *(u32 *)&v[0xC] = *(u32 *)&buf[4];
+                TLobby__sub_80411604((s32)arg3, 2, v);
+            }
+            TLobby__sub_80406EB8((NetBufferRef *)((u8 *)arg0 + 4), size);
+            break;
+        case 5:
+            if (size == 8) {
+                ((TLobby *)&ref)->set_value_and_enable((s32)buf2);
+                TLobby__sub_80406FD8(&ref, (u8 *)arg0 + 4, 8);
+                *(u32 *)&v2[0] = (u32)addr;
+                *(u32 *)&v2[4] = *(u32 *)&buf2[4];
+                TLobby__sub_80411604((s32)arg3, 4, v2);
+            }
+            TLobby__sub_80406EB8((NetBufferRef *)((u8 *)arg0 + 4), size);
+            break;
+        default:
+            TLobby__sub_80406EB8((NetBufferRef *)((u8 *)arg0 + 4), size);
+            break;
+        }
+    }
+    if (seen == 0) {
+        i = ipv6_neighbor_discovery_state.nb;
+        e = ipv6_neighbor_discovery_state.b;
+        while (i > 0) {
+            if (e->c3 == 1 && NetMemcmp(e->addr, addr, 0x10) == 0) {
+                break;
+            }
+            i--;
+            e++;
+        }
+        if (i <= 0) {
+            e = 0;
+        }
+        if (e != 0) {
+            e->flags |= 0x80;
+        }
+    }
+    return 0;
+}
+
 typedef struct Hdr_804177A0 {
     s16 len;
     u8 pad[2];
