@@ -4317,11 +4317,11 @@ C_8040A45C *TLobby__sub_8040C248(D_8040A45C *q) {
 }
 
 s16 TLobby__sub_8040C340(D_8040A45C *q, C_8040A45C *node) {
-    C_8040A45C *cur;
-    G_8040A45C *state;
-    u8 *node_key;
-    C_8040A45C *prev;
     s32 i;
+    u8 *node_key;
+    G_8040A45C *state;
+    C_8040A45C *prev;
+    C_8040A45C *cur;
     s32 cmp;
 
     if (node == NULL) {
