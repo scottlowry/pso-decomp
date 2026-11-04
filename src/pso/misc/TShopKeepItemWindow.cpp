@@ -286,10 +286,10 @@ s32 TShopKeepItemWindow::handle_deposit_list_select() {
             }
             count = t;
         } else {
-            if (bank_has_free_row__Fl(bank) == 0) {
-                count = 0;
-            } else {
+            if (bank_has_free_row__Fl(bank) != 0) {
                 count = 1;
+            } else {
+                count = 0;
             }
         }
         if (count == 0) {
