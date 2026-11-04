@@ -627,41 +627,60 @@ s32 TAdSinglePlyChrSelectGC__sub_8042DD70(s32 arg0, s32 arg1, s32 arg2) {
 typedef char RecoveredGlobal_8042DE20_lbl_805D1D20_size[sizeof(RecoveredGlobal_8042DE20_lbl_805D1D20) == 0xD8 ? 1 : -1];
 
 void TAdSinglePlyChrSelectGC__sub_8042DE20(void) {
-    RecoveredGlobal_8042DE20_lbl_805D1D20 *conn = (RecoveredGlobal_8042DE20_lbl_805D1D20 *)&modem_connection_info;
-    s8 *base = (s8 *)&conn->value;
-    u32 data;
-    u32 count;
+    RecoveredGlobal_8042DE20_lbl_805D1D20 *conn;
+    s8 *base;
+    s32 *premaining;
+    u32 *ptail;
+    u32 *pbody;
+    u32 *phead;
+    u32 *ptail_length;
+    u32 *pbody_length;
+    s32 data;
+    s32 bound;
+    s32 count;
     u32 end;
     u32 body;
     u32 tail;
     u32 cmd;
 
-    count = ModemMin((s32)*(u32 *)(base + 0xB8), 0x201 - lbl_805D7C90.f2);
-    *(s32 *)(base + 0xB8) -= (s32)count;
+    conn = (RecoveredGlobal_8042DE20_lbl_805D1D20 *)&modem_connection_info;
+    base = (s8 *)&conn->value;
+    premaining = (s32 *)(base + 0xB8);
+    bound = 0x201 - lbl_805D7C90.f2;
+    count = *premaining;
     data = *(u32 *)(base + 0xB4);
+    if (count >= bound) {
+        count = bound;
+    }
+    *premaining -= count;
     end = data + count;
     body = OSRoundUp32B(data);
     tail = OSRoundDown32B(end);
-    *(u32 *)(base + 0xC0) = 0;
+    ptail = (u32 *)(base + 0xD0);
+    pbody = (u32 *)(base + 0xC8);
+    phead = (u32 *)(base + 0xC0);
+    ptail_length = (u32 *)(base + 0xD4);
+    pbody_length = (u32 *)(base + 0xCC);
+    *ptail = 0;
+    *pbody = 0;
+    *phead = 0;
+    *ptail_length = 0;
+    *pbody_length = 0;
     *(u32 *)(base + 0xC4) = 0;
-    *(u32 *)(base + 0xC8) = 0;
-    *(u32 *)(base + 0xCC) = 0;
-    *(u32 *)(base + 0xD0) = 0;
-    *(u32 *)(base + 0xD4) = 0;
     if (body >= tail) {
-        *(u32 *)(base + 0xC0) = data;
+        *phead = data;
         *(u32 *)(base + 0xC4) = count;
     } else {
         if (data != body) {
-            *(u32 *)(base + 0xC0) = data;
+            *phead = data;
             *(u32 *)(base + 0xC4) = body - data;
         }
-        *(u32 *)(base + 0xC8) = body;
-        *(u32 *)(base + 0xCC) = tail - body;
-        DCStoreRange((void *)*(u32 *)(base + 0xC8), *(u32 *)(base + 0xCC));
+        *pbody = body;
+        *pbody_length = tail - body;
+        DCStoreRange((void *)*pbody, *pbody_length);
         if (tail < end) {
-            *(u32 *)(base + 0xD0) = tail;
-            *(u32 *)(base + 0xD4) = end - tail;
+            *ptail = tail;
+            *ptail_length = end - tail;
         }
     }
     EXISelect(0, 2, 4);
