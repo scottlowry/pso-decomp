@@ -6077,11 +6077,8 @@ s16 TLobby__sub_804105E0(u8 *self, u8 *pkt, s16 count, s16 idx) {
     hp->f6 = self[7];
     t = self[6];
     while ((s16)rem < 8) {
-        if (t == 0x2c) {
-            val = *(u16 *)(p + 2) & 0xFFF0;
-            flag = 1;
-            rem = 0;
-        } else if (t == 0) {
+        switch (t) {
+        case 0:
             if (count16 != (s16)rem + 0x28) {
                 err1.type = 4;
                 err1.code = 1;
@@ -6102,8 +6099,13 @@ s16 TLobby__sub_804105E0(u8 *self, u8 *pkt, s16 count, s16 idx) {
             t = p[0];
             p += adv;
             rem -= adv;
-        } else {
+            break;
+        case 0x2c:
+            val = *(u16 *)(p + 2) & 0xFFF0;
+            flag = 1;
+        default:
             rem = 0;
+            break;
         }
     }
     if (hp->f6 != 0) {
