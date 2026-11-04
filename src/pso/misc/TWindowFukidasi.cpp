@@ -253,7 +253,6 @@ s32 render_forward__20TWindowSubStatusDispFPv();
 void apply_context_transform_to_rect(void *, void *);
 void draw_textured_quad_at_depth(f32 *q, f32 depth);
 void set_text_draw_params(s32 arg0, s32 arg1, s32 arg2, f32 farg0, f32 farg1);
-s32 draw_small_font_string_clipped(f32 *pos, const char *s, u32 color, f32 width);
 extern const f64 TWindowFukidasi__data_8044ED68;
 extern const f64 TWindowFukidasi__data_8044ED78;
 extern const f32 lbl_805DCD10;
@@ -272,6 +271,7 @@ extern const f32 lbl_805DCD88;
 extern const f32 lbl_805DCD8C;
 }
 void set_text_entry_string(u8 *arg0, u32 str, s32 arg2);
+s32 draw_small_font_string_clipped(f32 *pos, const char *s, u32 color, f32 width);
 extern "C" {
 s32 strcmp(s32, s32);
 s32 strncpy(s32, s32, s32);
