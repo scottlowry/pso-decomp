@@ -1072,6 +1072,7 @@ void TUnk_804CF0B8::sub_80251DF0(s16 arg1, s32 str, s16 arg3, f32 farg0) {
 
 #pragma push
 #pragma fp_contract on
+#pragma opt_propagation off
 void draw_name_plate__15TWindowFukidasiFv(void *self, View_80252764 *v, u32 color) {
     struct Fuki_80251EC8 *b = (struct Fuki_80251EC8 *)self;
     struct View_80251EC8 *w = (struct View_80251EC8 *)v;
@@ -1079,7 +1080,7 @@ void draw_name_plate__15TWindowFukidasiFv(void *self, View_80252764 *v, u32 colo
     f32 rect[8];
     f32 width;
     f32 depth;
-    f32 eff;
+    f32 x0v;
     s32 alpha;
     u32 a24;
     u32 argb;
@@ -1114,13 +1115,14 @@ void draw_name_plate__15TWindowFukidasiFv(void *self, View_80252764 *v, u32 colo
     rect[7] = TWindowFukidasi__data_805DCCE8;
     apply_context_transform_to_rect(v, rect);
     draw_textured_quad_at_depth(rect, depth);
-    eff = width;
     if (width < TWindowFukidasi__data_805DCCFC) {
-        eff = TWindowFukidasi__data_805DCCFC;
+        x0v = lbl_805DCD78 + ((pt[0] + TWindowFukidasi__data_805DCCFC) - lbl_805DCD68);
+    } else {
+        x0v = lbl_805DCD78 + ((pt[0] + width) - lbl_805DCD68);
     }
-    rect[0] = lbl_805DCD78 + ((pt[0] + eff) - lbl_805DCD68);
+    rect[0] = x0v;
     rect[1] = pt[1];
-    rect[2] = lbl_805DCD68 + rect[0];
+    rect[2] = lbl_805DCD68 + x0v;
     rect[3] = lbl_805DCD10 + pt[1];
     rect[4] = lbl_805DCD7C;
     rect[5] = lbl_805DCD70;
