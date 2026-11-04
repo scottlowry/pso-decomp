@@ -754,6 +754,7 @@ s32 adx_encode_available_blocks(void *arg0p) {
     s32 q;
     s16 *dst[2];
     Strm_803C8678 **pch;
+    Strm_803C8678 **walk;
     Strm_803C8678 *fc;
     EncSub *enc;
     s16 *coef;
@@ -775,9 +776,10 @@ s32 adx_encode_available_blocks(void *arg0p) {
             target = arg0->f44;
         }
         avail = 0;
+        walk = pch;
         i = avail;
-        for (; i < arg0->f58; i++) {
-            avail = (u32)pch[i]->vt->avail(pch[i], 1) >> 1;
+        for (; i < arg0->f58; i++, walk++) {
+            avail = (u32)(*walk)->vt->avail(*walk, 1) >> 1;
             if (avail < target) {
                 avail = 0;
                 goto gate;

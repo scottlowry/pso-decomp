@@ -1,0 +1,98 @@
+ORIG  adx_encode_available_blocks                             match=90.945786 size=664
+OURS  adx_encode_available_blocks                             match=90.945786 size=660
+rows: orig 166 ours 165
+  slot  6 O: li r31, 0x0                                N: li r22, 0x0                               
+  slot  7 O: subi r26, r3, 0x71c7                       N: addi r31, r29, 0x4                        
+  slot  9 O: addi r28, r29, 0xd0                        N: addi r26, r29, 0xd0                       
+  slot 10 O: addi r24, r29, 0x4                         N: subi r28, r3, 0x71c7                      
+  slot 18 O: mulhw r3, r26, r3                          N: mulhw r3, r28, r3                         
+  slot 24 O: ble 0x2158                                 N: ble 0x1988                                
+  slot 31 O: stw r28, 0x14(r1)                          N: stw r26, 0x14(r1)                         
+  slot 32 O: bge 0x1f60                                 N: bge 0x1794                                
+  slot 34 O: li r25, 0x0                                N: mr r23, r31                               
+  slot 35 O: mr r21, r24                                N: li r21, 0x0                               
+  slot 36 O: mr r19, r25                                N: li r19, 0x0                               
+  slot 37 O: b 0x1fa4                                   N: b 0x17d8                                  
+  slot 38 O: lwz r3, 0x0(r21)                           N: lwz r3, 0x0(r23)                          
+  slot 44 O: srwi r25, r3, 1                            N: srwi r21, r3, 1                           
+  slot 45 O: cmpw r25, r20                              N: cmpw r21, r20                             
+  slot 46 O: bge 0x1f9c                                 N: bge 0x17d0                                
+  slot 47 O: li r25, 0x0                                N: li r21, 0x0                               
+  slot 48 O: b 0x204c                                   N: b 0x1880                                  
+  slot 49 O: addi r21, r21, 0x4                         N: addi r19, r19, 0x1                        
+  slot 50 O: addi r19, r19, 0x1                         N: addi r23, r23, 0x4                        
+  slot 53 O: blt 0x1f70                                 N: blt 0x17a4                                
+  slot 54 O: slwi r21, r20, 1                           N: mr r25, r31                               
+  slot 55 O: mr r23, r24                                N: slwi r19, r20, 1                          
+  slot 56 O: addi r22, r1, 0x10                         N: addi r24, r1, 0x10                        
+  slot 57 O: li r19, 0x0                                N: li r23, 0x0                               
+  slot 58 O: b 0x2040                                   N: b 0x1874                                  
+  slot 59 O: li r25, 0x0                                N: li r21, 0x0                               
+  slot 60 O: b 0x202c                                   N: b 0x1860                                  
+  slot 61 O: lwz r3, 0x0(r23)                           N: lwz r3, 0x0(r25)                          
+  slot 62 O: mr r5, r21                                 N: mr r5, r19                                
+  slot 69 O: lwz r3, 0x0(r22)                           N: lwz r3, 0x0(r24)                          
+  slot 70 O: slwi r0, r25, 1                            N: slwi r0, r21, 1                           
+  slot 75 O: lwz r3, 0x0(r23)                           N: lwz r3, 0x0(r25)                          
+  slot 82 O: add r25, r25, r0                           N: add r21, r21, r0                          
+  slot 85 O: cmpw r25, r20                              N: cmpw r21, r20                             
+  slot 86 O: blt 0x1fcc                                 N: blt 0x1800                                
+  slot 87 O: addi r23, r23, 0x4                         N: addi r25, r25, 0x4                        
+  slot 88 O: addi r22, r22, 0x4                         N: addi r24, r24, 0x4                        
+  slot 89 O: addi r19, r19, 0x1                         N: addi r23, r23, 0x1                        
+  slot 91 O: cmpw r19, r0                               N: cmpw r23, r0                              
+  slot 92 O: blt 0x1fc4                                 N: blt 0x17f8                                
+  slot 93 O: cmpwi r25, 0x0                             N: cmpwi r21, 0x0                            
+  slot 94 O: bne 0x205c                                 N: bne 0x1890                                
+  slot 96 O: b 0x2134                                   N: b 0x1964                                  
+  slot 99 O: bge 0x20b0                                 N: bge 0x18e4                                
+  slot100 O: addi r21, r1, 0x10                         N: addi r19, r1, 0x10                        
+  slot101 O: slwi r22, r20, 1                           N: slwi r21, r20, 1                          
+  slot102 O: li r19, 0x0                                N: li r23, 0x0                               
+  slot103 O: b 0x20a4                                   N: b 0x18d8                                  
+  slot104 O: lwz r3, 0x0(r21)                           N: lwz r3, 0x0(r19)                          
+  slot106 O: beq 0x209c                                 N: beq 0x18d0                                
+  slot108 O: add r3, r3, r22                            N: add r3, r3, r21                           
+  slot113 O: addi r21, r21, 0x4                         N: addi r19, r19, 0x4                        
+  slot114 O: addi r19, r19, 0x1                         N: addi r23, r23, 0x1                        
+  slot116 O: cmpw r19, r0                               N: cmpw r23, r0                              
+  slot117 O: blt 0x2078                                 N: blt 0x18ac                                
+  slot119 O: mr r21, r29                                N: mr r19, r29                               
+  slot121 O: mr r22, r29                                N: mr r20, r29                               
+  slot122 O: mr r23, r29                                N: mr r24, r29                               
+  slot126 O: b 0x2124                                   N: b 0x1954                                  
+  slot130 O: lwz r6, 0x80(r21)                          N: lwz r4, 0x80(r24)                         
+  slot132 O: mr r4, r25                                 N: lwz r5, 0x88(r4)                          
+  slot133 O: lwz r5, 0x88(r6)                           N: lha r0, 0x7c(r4)                          
+  slot134 O: lha r0, 0x7c(r6)                           N: sth r0, 0x290(r19)                        
+  slot135 O: sth r0, 0x290(r22)                         N: lfd f0, 0x80(r4)                          
+  slot136 O: lfd f0, 0x80(r6)                           N: stfd f0, 0x298(r20)                       
+  slot137 O: stfd f0, 0x298(r23)                        N: addi r20, r20, 0x8                        
+  slot138 O: lha r6, 0xa(r5)                            N: lha r0, 0x8(r5)                           
+  slot139 O: lha r0, 0x8(r5)                            N: sth r0, 0x88(r19)                         
+  slot140 O: sth r0, 0x88(r22)                          N: lha r0, 0xa(r5)                           
+  slot141 O: sth r6, 0x8c(r22)                          N: sth r0, 0x8c(r19)                         
+  slot142 O: bl TLobby__sub_803C7DF0                    N: addi r19, r19, 0x2                        
+  slot143 O: addi r21, r21, 0x4                         N: bl TLobby__sub_803C7DF0                   
+  slot144 O: addi r22, r22, 0x2                         N: addi r24, r24, 0x4                        
+  slot145 O: addi r23, r23, 0x8                         N: addi r25, r25, 0x1                        
+  slot146 O: addi r25, r25, 0x1                         N: lwz r0, 0x58(r29)                         
+  slot147 O: lwz r0, 0x58(r29)                          N: cmpw r25, r0                              
+  slot148 O: cmpw r25, r0                               N: blt 0x1908                                
+  slot149 O: blt 0x20d4                                 N: lwz r0, 0x44(r29)                         
+  slot150 O: lwz r0, 0x44(r29)                          N: cmpwi r0, 0x0                             
+  slot151 O: cmpwi r0, 0x0                              N: beq 0x1988                                
+  slot152 O: beq 0x2158                                 N: mr r3, r29                                
+  slot153 O: mr r3, r29                                 N: bl adx_write_encoded_blocks               
+  slot154 O: bl adx_write_encoded_blocks                N: lwz r4, 0x30(r29)                         
+  slot155 O: lwz r4, 0x30(r29)                          N: add r22, r22, r3                          
+  slot156 O: add r31, r31, r3                           N: lwz r0, 0x3c(r29)                         
+  slot157 O: lwz r0, 0x3c(r29)                          N: cmpw r4, r0                               
+  slot158 O: cmpw r4, r0                                N: blt 0x173c                                
+  slot159 O: blt 0x1f08                                 N: mr r3, r22                                
+  slot160 O: mr r3, r31                                 N: lmw r19, 0x1c(r1)                         
+  slot161 O: lmw r19, 0x1c(r1)                          N: lwz r0, 0x54(r1)                          
+  slot162 O: lwz r0, 0x54(r1)                           N: mtlr r0                                   
+  slot163 O: mtlr r0                                    N: addi r1, r1, 0x50                         
+  slot164 O: addi r1, r1, 0x50                          N: blr                                       
+  slot165 O: blr                                        N: <none>                                    
