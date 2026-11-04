@@ -7,6 +7,7 @@
 #include "pso/misc/TWindowChoiceSetting.h"
 #include "pso/ui/TAdMultiPlyChrSelectGC.h"
 #include "pso/ui/Language.h"
+#include "pso/object/TObjFish.h"
 
 struct UV_80262038 {
     f32 u;
@@ -99,8 +100,11 @@ void TKeyBoardControl__sub_802613A4(TKeyBoardControl *arg0);
 f32 TWindowKeyBoardSoft__sub_802614DC(u8 *, u8 *, f32, f32, f32, f32);
 s32 TWindowKeyBoardSoft__sub_802616BC(void *, int);
 void TWindowKeyBoardSoft__sub_80261DD8(TWindowKeyBoardSoft *, TWindowKeyBoardSoft *);
-s32 TWindowKeyBoardSoft__sub_8026227C(void *, int);
+void TWindowKeyBoardSoft__sub_8026227C(TWindowKeyBoardSoft *, int);
 s32 get_flag_bit5__19TWindowKeyBoardSoftFv();
+void fn_8026C664(void *, f32, f32, f32, f32, f32, f32);
+void fn_8026C708(void *, f32, f32, f32, f32, f32, f32);
+s32 get_player__20TWindowSubStatusDispFv();
 
 extern RecoveredGlobal_8026062C_TWindowKeyBoardSoft__data_8044F124 TWindowKeyBoardSoft__data_8044F124;
 extern RecoveredGlobal_8026062C_TWindowKeyBoardSoft__data_804CB7C8 TWindowKeyBoardSoft__data_804CB7C8;
@@ -110,6 +114,11 @@ extern const f32 TWindowKeyBoardSoft__data_805DD07C;
 extern const f32 TWindowKeyBoardSoft__data_805DD080;
 extern const f32 TWindowKeyBoardSoft__data_805DD088;
 extern const f32 TWindowKeyBoardSoft__data_805DD094;
+extern const f32 TWindowKeyBoardSoft__data_805DD098;
+extern const f32 lbl_805DD0B8;
+extern const f32 lbl_805DD0CC;
+extern const f32 lbl_805DD0D0;
+extern s32 lbl_805D63F0;
 extern RecoveredGlobal_80260808_lbl_8050E208 controller_input_state;
 extern void *local_client_id;
 extern const f32 lbl_805DD084;
@@ -647,6 +656,80 @@ void TWindowKeyBoardSoft::draw_key_frame(void *self, f32 *rect, u32 color, s32 i
     apply_context_transform_to_rect(rect, &q);
     draw_textured_quad_at_depth((f32 *)&q, scale);
 }
+
+#pragma push
+#pragma fp_contract on
+void TWindowKeyBoardSoft__sub_8026227C(TWindowKeyBoardSoft *self, int arg1) {
+    u8 *res;
+    TWindowKeyBoardSoft *ctx;
+    f32 scale;
+    s32 focus;
+    s32 col;
+    s32 row;
+    s32 key;
+    s32 count;
+    u32 color;
+    s32 spC;
+    s32 sp8;
+    s32 idx;
+    f32 y;
+    f32 w;
+    f32 v;
+
+    ctx = (TWindowKeyBoardSoft *)arg1;
+    res = TWindowKeyBoardSoft__language_text_resources;
+    scale = TWindowKeyBoardSoft__data_805DD098 / ctx->depth;
+    focus = self->sub_802605DC();
+    begin_screen_draw(1);
+    TObjFish::set_global_param(lbl_805D63F0);
+    set_draw_texture_and_color(0, -1);
+    for (row = 0; row < 7; row++) {
+        y = TWindowKeyBoardSoft__data_805DD07C * (f32)row + TWindowKeyBoardSoft__data_805DD094;
+        for (col = 0; col < 16; col += count) {
+            key = ((s32 (*)(void *, s32, s32))calc_key_index__19TWindowKeyBoardSoftFiii)(self, col, row);
+            TWindowKeyBoardSoft__sub_80260760(self, key, &count, &color);
+            w = ((f32 (*)(void *, s32))TWindowKeyBoardSoft::calc_key_coord)(self, count);
+            if (key == focus) {
+                color = 0xFFFFFFFF;
+                idx = 1;
+            } else {
+                idx = 0;
+            }
+            TWindowKeyBoardSoft::draw_key_frame(self, (f32 *)ctx, color, idx,
+                TWindowKeyBoardSoft__data_805DD07C * (f32)col + TWindowKeyBoardSoft__data_805DD078, y, w, scale);
+        }
+    }
+    v = TWindowKeyBoardSoft__sub_802606E0(self);
+    calc_cursor_step__19TWindowKeyBoardSoftFiPvPv((s32)self, &spC, &sp8);
+    for (row = 0; row < res[0]; row++) {
+        if (row == (s8)*(u8 *)((s8 *)self + 0x64)) {
+            color = 0xFFFFFFFF;
+            idx = 2;
+        } else {
+            if (row < spC) {
+                color = 0xFF4D4D4D;
+            } else if (row > sp8) {
+                color = 0xFF4D4D4D;
+            } else {
+                color = 0xFF0C5B38;
+            }
+            idx = 0;
+        }
+        TWindowKeyBoardSoft::draw_key_frame(self, (f32 *)ctx, color, idx, v,
+            TWindowKeyBoardSoft__data_805DD098, (f32)(res[1] + 1), scale);
+        v += (f32)res[1];
+    }
+    set_constant_material_color(ctx->color);
+    v = TWindowKeyBoardSoft__sub_802606E0(self);
+    fn_8026C664(ctx, ctx->x + v - lbl_805DD0CC, lbl_805DD0B8 + (TWindowKeyBoardSoft__data_805DD098 + ctx->y),
+        scale, *(f32 *)((s8 *)self + 0x68), lbl_805DD0CC, ctx->x + v);
+    fn_8026C708(ctx,
+        lbl_805DD0D0 + (ctx->x + (v + (TWindowKeyBoardSoft__data_805DD078 + (f32)(res[0] * res[1])))),
+        lbl_805DD0B8 + (TWindowKeyBoardSoft__data_805DD098 + ctx->y), scale, *(f32 *)((s8 *)self + 0x68),
+        ctx->x, lbl_805DD0D0);
+    get_player__20TWindowSubStatusDispFv();
+}
+#pragma pop
 
 void TWindowKeyBoardSoft::render() {
     s32 temp_r3;
