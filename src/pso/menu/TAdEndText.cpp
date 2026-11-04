@@ -104,10 +104,6 @@ void bind_gvm_texture_list(const char *name, void *data);
 void set_default_alpha_blend__Fv(void);
 void set_texlist__FUl(u32);
 void get_player__20TWindowSubStatusDispFv(void);
-s32 TAdEndText__sub_8001B3BC(u8);
-s32 TAdEndText__sub_8001B3D4(u8);
-s32 TAdEndText__sub_8001B3EC(u8);
-s32 TAdEndText__sub_8001B404(u8);
 void TAdEndText__sub_8001A998(s32, u8 *, f32, f32, f32);
 s32 draw_small_font_text(s32, f32, f32, f32);
 u32 __cvt_fp2unsigned(f32);
@@ -151,6 +147,10 @@ s32 get_end_text_font_loaded_flag(void) {
 }
 
 void TAdEndText__sub_8001A998(s32 color, u8 *str, f32 x, f32 y, f32 scale) {
+    s32 TAdEndText__sub_8001B3BC(s32);
+    s32 TAdEndText__sub_8001B3D4(s32);
+    s32 TAdEndText__sub_8001B3EC(s32);
+    s32 TAdEndText__sub_8001B404(s32);
     f32 box[8];
     f32 yb;
     f32 ty;
