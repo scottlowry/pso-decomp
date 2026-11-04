@@ -158,6 +158,7 @@ struct PlateCtx_802521EC {
     f32 y;
     u8 pad08[0x30 - 0x08];
     s32 name_chars;
+    u8 pad34[4];
     f32 f38;
 };
 
@@ -1091,10 +1092,10 @@ void draw_name_plate__15TWindowFukidasiFv(void *self, View_80252764 *view, u32 c
         return;
     }
     excess = (f32)(u32)get_name_text_width((void *)plate->name);
-    if (ctx->name_chars >= 6) {
-        alpha = 255;
-    } else {
+    if (ctx->name_chars < 6) {
         alpha = (s32)(lbl_805DCD5C * (f32)(ctx->name_chars * 255));
+    } else {
+        alpha = 255;
     }
     text_color = alpha << 24;
     box_color = text_color | (color & 0xFFFFFF);
