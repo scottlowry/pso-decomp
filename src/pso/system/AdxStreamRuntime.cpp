@@ -463,7 +463,6 @@ extern char *lbl_805D4664;
 u8 *TLobby__sub_803C61C4(s32 n, Strm_803C5B50 **arr, Strm_803C5B50 *extra) {
     u8 *pool;
     u8 *slot;
-    u8 *name;
     u8 *ctx;
     s32 i;
     s32 j;
@@ -530,20 +529,13 @@ u8 *TLobby__sub_803C61C4(s32 n, Strm_803C5B50 **arr, Strm_803C5B50 *extra) {
     k54 = *(s32 *)(slot + 0x54);
     w = pool + 0x900;
     for (i = 0; i < 16; i++) {
-        name = w;
-        if (*(s8 *)name == 0) {
+        if (*(s8 *)w == 0) {
             break;
         }
         w = w + 0xc;
     }
-    if (i >= 16) {
-        goto name_busy2;
-    }
-    goto name_ok2;
-name_busy2:
-    name = 0;
-name_ok2:
-    if (name == 0) {
+    w = (i < 16) ? w : 0;
+    if (w == 0) {
         ctx = 0;
     } else {
         wc = pool;
@@ -555,7 +547,7 @@ name_ok2:
             wc = wc + 0x90;
         }
         *(s32 *)(ctx + 0x14) = k54;
-        *(u8 **)(ctx + 0x88) = name;
+        *(u8 **)(ctx + 0x88) = w;
         if (j < 16) {
             *ctx = 1;
         } else {
@@ -566,20 +558,13 @@ name_ok2:
     k44 = *(s32 *)(slot + 0x44);
     w = pool + 0x900;
     for (i = 0; i < 16; i++) {
-        name = w;
-        if (*(s8 *)name == 0) {
+        if (*(s8 *)w == 0) {
             break;
         }
         w = w + 0xc;
     }
-    if (i >= 16) {
-        goto name_busy;
-    }
-    goto name_ok;
-name_busy:
-    name = 0;
-name_ok:
-    if (name == 0) {
+    w = (i < 16) ? w : 0;
+    if (w == 0) {
         ctx = 0;
     } else {
         wc = pool;
@@ -591,7 +576,7 @@ name_ok:
             wc = wc + 0x90;
         }
         *(s32 *)(ctx + 0x14) = k44;
-        *(u8 **)(ctx + 0x88) = name;
+        *(u8 **)(ctx + 0x88) = w;
         if (j < 16) {
             *ctx = 1;
         } else {
