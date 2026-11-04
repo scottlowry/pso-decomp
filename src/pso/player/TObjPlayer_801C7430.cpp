@@ -1639,7 +1639,6 @@ s32 validate_6x4C_hit_by_enemy(void *);
 s32 validate_6x4B_hit_by_enemy(void *);
 s32 validate_6x48_cast_technique_complete(void *);
 s32 validate_6x8D_set_technique_level_override(void *);
-s32 validate_6x47_cast_technique(u8 *packet);
 s32 validate_6x46_attack_finished(void *);
 s32 validate_6x45_attack(Pkt_801CDAD8 *);
 s32 validate_6x44_attack(Pkt_801CDED4 *);
@@ -4637,6 +4636,9 @@ void TObjPlayer::enter_technique_cast() {
     ((void (*)(void *, s16, s16))set_action_state__10TObjPlayerFPvss)(self, 8, ((TObjPlayer *)self)->get_status());
 }
 
+s32 validate_6x47_cast_technique__FPUc(u8 *packet);
+s32 is_valid_technique_slot__10TObjPlayerFUc(u8);
+
 void handle_6x47_cast_technique(void *arg0) {
     Msg_801CD550 m;
     s8 slot;
@@ -4651,7 +4653,7 @@ void handle_6x47_cast_technique(void *arg0) {
     ((TNpcPlayer *)(&m))->init_cast_technique_cmd();
     TObjPlayer__sub_801D21CC((u8 *)&m, (u8 *)arg0);
     ((TNpcPlayer *)(&m))->byteswap_positions();
-    if (validate_6x47_cast_technique((u8 *)&m) == 0) {
+    if (validate_6x47_cast_technique__FPUc((u8 *)&m) == 0) {
         return;
     }
     p = get_player_by_client_id(m.id);
@@ -4668,7 +4670,7 @@ void handle_6x47_cast_technique(void *arg0) {
     ((void (*)(void *, s16))set_technique_id__10TObjPlayerFs)(p + 0x428, tech);
     slot = (s8)m.lv;
     valid = (s8)((TObjPlayer *)(p + 0x428))->get_valid_technique();
-    if (TObjPlayer::is_valid_technique_slot((u8)valid) == 0) {
+    if (((s32 (*)(u8))is_valid_technique_slot__10TObjPlayerFUc)((u8)valid) == 0) {
         valid = 0;
     }
     if (slot == 0xE) {
