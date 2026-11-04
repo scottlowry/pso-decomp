@@ -1,5 +1,7 @@
 # KIT_STATE — TLobby__sub_803C0238 (card t_180a8775, branch card-lobby-c0238-v1, base f4200fcb, tree f3)
 
+**V3 (visit-2 CLOSED): FLOOR-CENSUS 97.718254, gate 0x3F4 +1W = zone-2 def-binding pin (QVM-EDC20 kin). No visit-3 without new mechanism — see STATE LOG closure table.**
+
 GATE: symbols.txt row `.text:0x803C0238; type:function size:0x3F0` = 1008B = **252 insns** (counted, era block lines 365–632 of build/GPOE8P/asm/pso/misc/TLobby_803BFE50.s).
 
 ## CLASS TRIAGE — class B (moderate), NOT hard-wall
@@ -47,6 +49,19 @@ My block shows NO 6328-style extsh head-bind (pointer arg, raw lha loads), NO ma
 
 ## STATE LOG
 - visit-1: triage done (252 insns gate, class B, ps-arith 0, pool-refs 0); skeleton authored; control probe → see git log.
+- visit-2 (CLOSED, FLOOR-CENSUS 97.718254, gate 0x3F4 = +1W): V2 lever list executed in rank order, 5 probes (census-at-5), receipts in git log bb6db915..2d79566c:
+  | # | lever | result | rows moved |
+  |---|---|---|---|
+  | P1 | rec decl-LAST in locals block | **LANDED rec→r27** (era-exact prologue `lwz r27,4(r3)`; zone-2 v/w chain slots 122–128 cleared; 97.54→97.68) | ~9 |
+  | P2 | D3130 out-param decl-swap (locB first) | INERT — slots stay locA@0xc/locB@0x8; GC/2.6 slot-alloc = first-use, era = decl order → RX-PUMP#slot-alloc VERSION-STRATUM, source-inert | 0 |
+  | P3 | v/w decl-order pair-flip | INERT byte-identical (plain-scalar decl-order demotes per MEMBER-DECL-ORDER map) | 0 |
+  | P4 | rings index shift +1 (era disps 0x14/0x18 = **rings[2]/rings[3]**, visit-1's rings[1]/[2] mapping was off-by-one; 8 sites) | LANDED 97.68→97.72, siblings 100.0 stable | 9 |
+  | P5 | lobby-remat `(u8*)self->f4` at 3ABC/3AC4/3B38 + f48/f50 `void*` retype | NEGATIVE 97.72→97.28 (remat pairs land 2 sites but cascade loop-bank rotation) — REVERTED | — |
+- RESIDUAL +1W: zone-2 def-binding hop RELOCATED (not killed) by P1: now at the a4 site `mr r0,r3 / mr r28,r0` (w→r28 staging; era binds w→r29 direct, v→r28). CLASS = DEF-BINDING PROLOGUE PIN (QVM-EDC20/CB44 kin): v/w homes transposed vs era ({v29,w28} vs era {v28,w29}) and inert to decl-swap (P3), slot-swap (P2), and to every spelling the EDC20 family receipt banks (register kw, chain-assign, prop-off — do NOT re-roll).
+- REMAINING ROWS ~130 at tip, partitioned: (A) hop+transposition cluster {v,w,subf,min} ~14 rows; (B) D3130 slot stratum locA@0xc vs era@0x8: arg-prep + f20/unget + loop cb slot-reads ~14 rows (VERSION-STRATUM per P2, cascades (C)); (C) loop bank 3-cycle rotation {n2,p4,p8,i}×{r23,r24,r25,r26} era(n2=23,p4=24,p8=25,i=26) vs ours(p4=23,p8=24,i=25,n2=26) ~30 rows — k-cycle ring, pairwise decl swaps provably cannot reach (MEMBER-DECL-ORDER map); (D) lobby home per-zone: era zone-3 lobby→r26, loop-bound remat `lwz r3,4(r31)` ×2, zone-1 3ABC/3AC4 remat ×2 (P5 proves remat spellings land rows but bank-cascade costs more — net negative) ~10 rows; (E) cmp polarity f48/f50 `cmplwi` era vs our `cmpwi` (s32 decl; void* retype bundled in failed P5 — un-isolated) ~3 rows; (F) branch-target displays = FREE rows (LCS shift from +1W; resolve at gate).
+- VERDICT: FLOOR-CENSUS at 97.718254 (committed tip, clean rebuild: gnm 0x3F4, rows 253/252, 35 siblings 100.0). Campaign RECOMMEND-CLOSE: residual is def-binding + slot-alloc stratum + k-cycle ring — all three are version/pin classes, not spelling gaps. Re-open ONLY on: era MAP file, compiler-pin answer (rosetta at 1.3.2/2.0p1 NOT spent this visit — budget/time; V2 item 2's sweep clause is satisfied-in-class by EDC20/CB44 family receipts, not by a fresh sweep), or a bind mechanism for the {v,w} transposition.
+- Files at close: src/pso/misc/TLobby_803BFE50.cpp (fns body ~282–385; struct rings notes: field usage indices +1 vs V1 anatomy), KIT_STATE.md.
+- Closed-class do-not-re-roll list (visit-2 additions): D3130 decl-swap; v/w decl-swap; combined lobby-remat+retype window; pragma windows / struct spellings / ring kw (V1 list, still closed).
 
 ## V2 FRONTIER (cold-start for visit-2 — measured on committed tip 79ee0e85, clean rebuild)
 - TIP STATE: probe-1 skeleton 0x3F8 (+2W) → probe-2 (era per-site ring reload inline; f3 s8 signed cmpwi) = **0x3F4, 253 insns, gate +1W; one_shot pair 97.53968; 35 siblings 100.0 stable; prologue byte-shape EXACT (stwu -0x40, stw LR 0x44, stmw r23,0x1c, mr r31,r3; epilogue lmw r23 mirror)**.
