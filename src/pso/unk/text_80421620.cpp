@@ -1564,6 +1564,8 @@ s32 dhcp_release_step(void) {
     return dhcp_state;
 }
 
+#pragma push
+#pragma opt_propagation off
 s32 dhcp_request_step(void) {
     u8 *net = lbl_805C1E00;
     u32 delta = 0;
@@ -1664,6 +1666,7 @@ s32 dhcp_request_step(void) {
     }
     return dhcp_state;
 }
+#pragma pop
 
 s32 dhcp_discover_step(void) {
     s32 now;
