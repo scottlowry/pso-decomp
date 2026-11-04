@@ -377,6 +377,8 @@ extern const GunStarLightBlock lbl_804729A8[];
 extern const s32 lbl_804E3530[];
 }
 
+#pragma push
+#pragma opt_propagation off
 void *TItemAttackCol__ct(void *a0, void *owner, void *init_) {
     TItemAttackCol *self = (TItemAttackCol *)a0;
     const AttackColInit *init = (const AttackColInit *)init_;
@@ -475,7 +477,7 @@ void *TItemAttackCol__ct(void *a0, void *owner, void *init_) {
     }
     return self;
 }
-
+#pragma pop
 
 void TItemAttackCol::create(void *arg0, void *arg1) {
     void *o;
