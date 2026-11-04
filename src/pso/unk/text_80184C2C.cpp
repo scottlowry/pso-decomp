@@ -103,7 +103,10 @@ void TLobby__sub_80184DF4(void) {
     s32 e2;
     s32 t;
     s32 res2;
+    s32 ix;
+    s32 w;
     s32* p;
+    s32* p1;
 
     base = lbl_804B5E80;
     TLobby::clear_global_array(base);
@@ -130,13 +133,15 @@ void TLobby__sub_80184DF4(void) {
             res = (s32)load_resource_from_descriptor((void*)res, 1,
                     *(void**)(base + 0x15c + lbl_805D5B30 * 4), 0, 0, 0);
         }
-        city_season_easter_egg_model_table[lbl_805D5B30] = res;
+        ix = lbl_805D5B30;
+        city_season_easter_egg_model_table[ix] = res;
         off = 0;
         cnt = *(s32*)(res + 0x434);
         for (i = 0; i < cnt; i++) {
             e2 = *(s32*)(res + 0x42c);
             if (*(s32*)(e2 + off + 0xc) != 0) {
-                city_season_xmas_model_table[lbl_805D5B30] = *(s32*)(e2 + off + 0xc);
+                e2 = e2 + off;
+                city_season_xmas_model_table[ix] = *(s32*)(e2 + 0xc);
                 break;
             }
             off += 0x10;
@@ -152,7 +157,9 @@ void TLobby__sub_80184DF4(void) {
             p = (s32*)*p;
             p = (s32*)p[1];
             p = (s32*)p[1];
-            *(s16*)(p + 3) &= 0xFFF7FFFF;
+            w = *(s16*)(p + 3);
+            w = w & 0xFFF7FFFF;
+            *(s16*)(p + 3) = w;
         } else if (lbl_805D5B30 == 4) {
             e2 = *(s32*)(*(s32*)(res + 0x42c) + 0x18);
             t = (s32)__nw__FUl(0x14);
@@ -164,7 +171,9 @@ void TLobby__sub_80184DF4(void) {
             p = (s32*)*p;
             p = (s32*)p[1];
             p = (s32*)p[1];
-            *(s16*)(p + 3) &= 0xFFF7FFFF;
+            w = *(s16*)(p + 3);
+            w = w & 0xFFF7FFFF;
+            *(s16*)(p + 3) = w;
         } else {
             lbl_805D5B34 = 0;
         }
@@ -174,21 +183,27 @@ void TLobby__sub_80184DF4(void) {
         if (res2 != 0) {
             res2 = (s32)load_resource_from_descriptor((void*)res2, 1, base + 0x130, 0, 0, 0);
         }
-        lbl_805D5B3C = *(s32*)(*(s32*)(res2 + 0x42c) + 8);
+        p1 = (s32*)*(s32*)(res2 + 0x42c);
+        base = (u8*)res2;
+        lbl_805D5B3C = p1[2];
         lbl_805D5B40 = *(s32*)(*(s32*)(res2 + 0x42c) + 0x18);
     } else if (lbl_805D5B30 == 4) {
         res2 = (s32)__nw__FUl(0x440);
         if (res2 != 0) {
             res2 = (s32)load_resource_from_descriptor((void*)res2, 1, base + 0x14c, 0, 0, 0);
         }
-        lbl_805D5B3C = *(s32*)(*(s32*)(res2 + 0x42c) + 8);
+        p1 = (s32*)*(s32*)(res2 + 0x42c);
+        base = (u8*)res2;
+        lbl_805D5B3C = p1[2];
         lbl_805D5B40 = *(s32*)(*(s32*)(res2 + 0x42c) + 0x18);
     } else {
         res2 = (s32)__nw__FUl(0x440);
         if (res2 != 0) {
             res2 = (s32)load_resource_from_descriptor((void*)res2, 1, base + 0x114, 0, 0, 0);
         }
-        lbl_805D5B3C = *(s32*)(*(s32*)(res2 + 0x42c) + 8);
+        p1 = (s32*)*(s32*)(res2 + 0x42c);
+        base = (u8*)res2;
+        lbl_805D5B3C = p1[2];
         lbl_805D5B40 = *(s32*)(*(s32*)(res2 + 0x42c) + 0x18);
     }
     t = (s32)__nw__FUl(0x14);
@@ -200,13 +215,16 @@ void TLobby__sub_80184DF4(void) {
     p = (s32*)lbl_805D5B3C;
     p = (s32*)p[1];
     p = (s32*)p[1];
-    *(s16*)(p + 3) &= 0xFFFBFFFF;
-    lbl_805D5B38 = (void*)res2;
-    cnt = *(s32*)(res2 + 0x434);
+    w = *(s16*)(p + 3);
+    w = w & 0xFFFBFFFF;
+    *(s16*)(p + 3) = w;
+    lbl_805D5B38 = base;
+    cnt = *(s32*)(base + 0x434);
     for (i = 0; i < cnt; i++) {
-        e2 = *(s32*)(res2 + 0x42c);
+        e2 = *(s32*)(base + 0x42c);
         if (*(s32*)(e2 + off + 0xc) != 0) {
-            lbl_805D5B44 = *(s32*)(e2 + off + 0xc);
+            e2 = e2 + off;
+            lbl_805D5B44 = *(s32*)(e2 + 0xc);
             break;
         }
         off += 0x10;
