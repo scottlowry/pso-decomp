@@ -267,7 +267,7 @@ f32 TWindowDD__sub_80348AD4(f32 farg0, f32 farg1);
 void begin_screen_draw(s32);
 void set_draw_texture_and_color(s32, u32);
 void draw_textured_quad_at_depth(void *, f32);
-void set_global_param__8TObjFishFl(void *, s16, f32);
+void set_global_param__8TObjFishFl(void *);
 void get_player__20TWindowSubStatusDispFv(void);
 s32 reset_entries__9TWindowDDFf(void *, s32);
 
@@ -282,9 +282,10 @@ void TWindowDD__sub_80340A78(void *selfv) {
     E_803403F8 sp28[8];
     f32 *pd;
     const f32 *pt;
-    u8 *rect;
     s32 n;
+    u8 *rect;
     s32 i;
+    f32 depth;
     f32 iy;
     f32 q28;
     f32 sc;
@@ -302,7 +303,6 @@ void TWindowDD__sub_80340A78(void *selfv) {
     f32 fbq;
     f32 sq;
     f32 kd;
-    f32 depth;
     rect = (u8 *)TWindowDD::draw_default_entry((s32)self);
     ((TWindowBase *)self)->calc_inner_rect(rect);
     n = TWindowDD::get_draw_count((void **)lbl_805D63F0);
@@ -351,12 +351,12 @@ void TWindowDD__sub_80340A78(void *selfv) {
         pd[6] = ye;
         pd += 12;
     }
-    kd = lbl_805DFC54 * lbl_805DFB38 * q28;
+    kd = lbl_805DFC54 * lbl_805DFB38 * *(f32 *)(rect + 0x28);
     quad.f8 = top - kd;
     quad.f10 = top + kd;
     ((TWindowDD *)sp28)->draw_transformed_primitive((void *)8, (void *)n, (void *)1);
     depth = TWindowDD__sub_80348AD4(*(f32 *)((s8 *)self + 0x54), lbl_805DFC60);
-    set_global_param__8TObjFishFl((void *)lbl_805D63F0, 8, depth);
+    set_global_param__8TObjFishFl((void *)lbl_805D63F0);
     begin_screen_draw(1);
     set_draw_texture_and_color(0, (u32)-1);
     quad.f1c = lbl_805D6DCC;
