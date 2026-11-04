@@ -1565,16 +1565,16 @@ s32 dhcp_release_step(void) {
 }
 
 s32 dhcp_request_step(void) {
-    s32 now;
     u8 *net;
+    u32 delta;
+    s32 now;
     u32 server;
-    s32 len;
     UdpBuf_80421BAC buf;
     u32 dst[5];
     u32 src[5];
+    s32 len;
     s16 sock;
-    u32 delta;
-    net = lbl_805C1E00;
+    net = &lbl_805C1E00[0];
     TLobby::get_time_ms(&now);
     switch (dhcp_step) {
     case 0:
