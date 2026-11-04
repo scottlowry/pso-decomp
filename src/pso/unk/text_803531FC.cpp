@@ -18,57 +18,55 @@ struct TUnk_804F112C {
     void apply_use_effect();
 };
 
+struct Z108 {
+    u32 w[27];
+};
+
 void TUnk_804F112C::apply_use_effect() {
     union PmfRow {
         UseEffectFn fn;
         u32 w[3];
     };
-    u32 buf[27];
-    u32 d;
-    const u32 *z = lbl_80479100;
+    union Buf27 {
+        Z108 s;
+        u32 w[27];
+    };
+    Buf27 buf;
     const u32 *t = (const u32 *)lbl_804F10C0;
 
-    const u32 *ps = z;
-    u32 *pd = buf;
-    for (d = 0; d < 13; d++) {
-        pd[0] = ps[0];
-        pd[1] = ps[1];
-        ps += 2;
-        pd += 2;
-    }
-    pd[0] = ps[0];
+    buf.s = *(const Z108 *)lbl_80479100;
 
-    buf[0] = t[0];
-    buf[1] = t[1];
-    buf[2] = t[2];
-    buf[3] = t[3];
-    buf[4] = t[4];
-    buf[5] = t[5];
-    buf[6] = t[6];
-    buf[7] = t[7];
-    buf[8] = t[8];
-    buf[9] = t[9];
-    buf[10] = t[10];
-    buf[11] = t[11];
-    buf[12] = t[12];
-    buf[13] = t[13];
-    buf[14] = t[14];
-    buf[15] = t[15];
-    buf[16] = t[16];
-    buf[17] = t[17];
-    buf[18] = t[18];
-    buf[19] = t[19];
-    buf[20] = t[20];
-    buf[21] = t[21];
-    buf[22] = t[22];
-    buf[23] = t[23];
-    buf[24] = t[24];
-    buf[25] = t[25];
-    buf[26] = t[26];
+    buf.w[0] = t[0];
+    buf.w[1] = t[1];
+    buf.w[2] = t[2];
+    buf.w[3] = t[3];
+    buf.w[4] = t[4];
+    buf.w[5] = t[5];
+    buf.w[6] = t[6];
+    buf.w[7] = t[7];
+    buf.w[8] = t[8];
+    buf.w[9] = t[9];
+    buf.w[10] = t[10];
+    buf.w[11] = t[11];
+    buf.w[12] = t[12];
+    buf.w[13] = t[13];
+    buf.w[14] = t[14];
+    buf.w[15] = t[15];
+    buf.w[16] = t[16];
+    buf.w[17] = t[17];
+    buf.w[18] = t[18];
+    buf.w[19] = t[19];
+    buf.w[20] = t[20];
+    buf.w[21] = t[21];
+    buf.w[22] = t[22];
+    buf.w[23] = t[23];
+    buf.w[24] = t[24];
+    buf.w[25] = t[25];
+    buf.w[26] = t[26];
 
     u8 tech = (u8)get_technique__11TItemObjectFv((TItemObject *)this);
     if (tech < 9) {
-        u32 *e = &buf[tech * 3];
+        u32 *e = &buf.w[tech * 3];
         PmfRow row;
         row.w[0] = e[0];
         row.w[1] = e[1];
