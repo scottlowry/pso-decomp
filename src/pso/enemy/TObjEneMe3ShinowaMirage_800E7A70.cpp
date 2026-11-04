@@ -112,14 +112,16 @@ s32 register_object__6TLobbyFl(s32);
 s32 dispatch_shared_handler_a__6TLobbyFl(s32);
 void *init__11TBreakUpMdlFPviif(void *self, s32 arg1, s32 arg2, f32 farg0);
 
-#define mirage_list ((s32 *)&TObjEneMe3ShinowaMirage__data_80500FC0[11])
-#define mirage_s32 ((s32 *)&TObjEneMe3ShinowaMirage__data_80500FC0[0])
-#define mirage_info ((s32 *)&TObjEneMe3ShinowaMirage__data_80500FC0[9])
-#define mirage_spawn (&TObjEneMe3ShinowaMirage__data_80500FC0[13])
-#define mirage_colors ((s32 *)&TObjEneMe3ShinowaMirage__data_80500FC0[16])
+#define mirage_list (sh + 11)
+#define mirage_f32 ((f32 *)sh)
+#define mirage_s32 sh
+#define mirage_info (sh + 9)
+#define mirage_spawn ((f32 *)sh + 13)
+#define mirage_colors (sh + 16)
 s32 spawn_npc_enemy__6TLobbyFsllPvff(s16, s32, s32, void *, f32, f32);
 
 void TObjEneMe3ShinowaMirage__sub_800E7B94(void) {
+    s32 *sh;
     s32 i;
     s32 n;
     s32 idx;
@@ -135,9 +137,10 @@ void TObjEneMe3ShinowaMirage__sub_800E7B94(void) {
     Vec second;
     s32 desc[4];
 
-    TObjEneMe3ShinowaMirage__data_80500FC0[0] = TObjEneMe3ShinowaMirage__data_805DA5B8;
-    TObjEneMe3ShinowaMirage__data_80500FC0[1] = TObjEneMe3ShinowaMirage__data_805DA5B8;
-    TObjEneMe3ShinowaMirage__data_80500FC0[2] = TObjEneMe3ShinowaMirage__data_805DA5B8;
+    sh = (s32 *)TObjEneMe3ShinowaMirage__data_80500FC0;
+    mirage_f32[0] = TObjEneMe3ShinowaMirage__data_805DA5B8;
+    mirage_f32[1] = TObjEneMe3ShinowaMirage__data_805DA5B8;
+    mirage_f32[2] = TObjEneMe3ShinowaMirage__data_805DA5B8;
     if (check_v2_mode__9TObjEneDDFv() != 0) {
         TObjEneMe3ShinowaMirage__data_805D5298 = (void *)load_enemy_bml_resource_named(shinowa_mirage_resource_descriptor, lbl_8043CFE8);
     } else {
@@ -245,6 +248,7 @@ void TObjEneMe3ShinowaMirage__sub_800E7B94(void) {
     spawn_npc_enemy__6TLobbyFsllPvff(0x27, *(s32 *)(res->f42C + 8), (s32)mirage_list, desc, lbl_805DA650, TObjEneMe3ShinowaMirage__data_805DA5B8);
 }
 #undef mirage_list
+#undef mirage_f32
 #undef mirage_s32
 #undef mirage_info
 #undef mirage_spawn
