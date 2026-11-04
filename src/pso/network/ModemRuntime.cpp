@@ -539,7 +539,6 @@ s32 TAdSinglePlyChrSelectGC__sub_8042CD64(void) {
     s32 i;
     s32 idx;
 
-    cmd = 0x23000000 | ((u8)1 << 8);
     state = &modem_command_response_state;
     flag = 0;
     match = 0;
@@ -560,10 +559,7 @@ s32 TAdSinglePlyChrSelectGC__sub_8042CD64(void) {
         EXIDeselect(0);
         idx = state->length;
         state->length = idx + 1;
-        {
-            u8 *p = state->buf + idx;
-            *p = value;
-        }
+        state->buf[idx] = value;
         if (value == lbl_805D487C[match]) {
             match++;
             if (match == 5) {
