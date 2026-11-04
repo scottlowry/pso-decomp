@@ -6044,6 +6044,7 @@ s16 TLobby__sub_804105E0(u8 *self, u8 *pkt, s16 count, s16 idx) {
     s16 NetIPv6IsMulticast(u8 *arg0);
     s16 TLobby__sub_804136AC(s16 arg0);
     AddrHdr_804105E0 hdr;
+    AddrHdr_804105E0 *hp;
     NetIPv6SendParameters params;
     Icmp6ErrorInfo err2;
     Icmp6ErrorInfo err1;
@@ -6069,10 +6070,11 @@ s16 TLobby__sub_804105E0(u8 *self, u8 *pkt, s16 count, s16 idx) {
     p = pkt + 0x28;
     opt = pkt + 6;
     flag = 0;
-    hdr.f0 = *(u32 *)self;
-    hdr.f4 = *(u16 *)self;
-    hdr.f7 = self[6];
-    hdr.f6 = self[7];
+    hp = &hdr;
+    hp->f0 = *(u32 *)self;
+    hp->f4 = *(u16 *)self;
+    hp->f7 = self[6];
+    hp->f6 = self[7];
     t = self[6];
     while ((s16)rem < 8) {
         if (t == 0x2c) {
@@ -6104,9 +6106,9 @@ s16 TLobby__sub_804105E0(u8 *self, u8 *pkt, s16 count, s16 idx) {
             rem = 0;
         }
     }
-    if (hdr.f6 != 0) {
-        d = hdr.f6 - 1;
-        hdr.f6 = (u8)d;
+    if (hp->f6 != 0) {
+        d = hp->f6 - 1;
+        hp->f6 = (u8)d;
         if ((u8)d != 0) {
             goto route;
         }
@@ -6119,8 +6121,8 @@ s16 TLobby__sub_804105E0(u8 *self, u8 *pkt, s16 count, s16 idx) {
     }
     return -1;
 route:
-    count16 = (s16)TLobby__sub_80413264(self + 0x18, (s32)(self + 8));
-    if (count16 == 0) {
+    rt = (Route_804105E0 *)TLobby__sub_80413264(self + 0x18, (s32)(self + 8));
+    if (rt == NULL) {
         if (flag == 0 || val == 0) {
             err2.type = 1;
             err2.code = 0;
@@ -6129,15 +6131,15 @@ route:
         }
         return -1;
     }
-    if ((s32)(Route_804105E0 *)(s32)count16 == 1) {
+    if (rt->type == 1) {
         nexthop = self + 0x18;
     }
-    if ((s32)(Route_804105E0 *)(s32)count16 >= 2) {
-        if ((s32)(Route_804105E0 *)(s32)count16 < 4) {
-            nexthop = ((Route_804105E0 *)(s32)count16)->gateway;
+    if (rt->type >= 2) {
+        if (rt->type < 4) {
+            nexthop = rt->gateway;
         }
     }
-    f26 = TLobby::get_entry_field_26(((Route_804105E0 *)(s32)count16)->iface);
+    f26 = TLobby::get_entry_field_26(rt->iface);
     if ((s16)count > f26) {
         if (flag == 0 || val == 0) {
             err2.type = 2;
