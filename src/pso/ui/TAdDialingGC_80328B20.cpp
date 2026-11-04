@@ -39,22 +39,22 @@ void TAdDialingGC__sub_80328B24(void *arg0, void *arg1) {
     VtxList_80077BC0 vl;
     u32 col[4];
     f32 pos[8];
-    vl.pos = pos;
     vl.col = col;
-    vl.n = 0;
     vl.cap = 4;
+    vl.pos = pos;
+    vl.n = 0;
     pos[0] = start[0];
     pos[1] = start[1];
-    col[0] = 0x8f;
+    vl.col[0] = 0x8f;
     vl.pos[2] = start[0];
     vl.pos[3] = start[0] + delta[1];
-    col[1] = 0x8f;
+    vl.col[1] = 0x8f;
     vl.pos[4] = start[0] + delta[0];
     vl.pos[5] = start[1] + delta[1];
-    col[2] = 0x8f;
+    vl.col[2] = 0x8f;
     vl.pos[6] = start[0] + delta[0];
     vl.pos[7] = start[1];
-    col[3] = 0x8f;
+    vl.col[3] = 0x8f;
     ((TObjCMHairMenu *)(&vl))->draw_tri_fan_2d(4, 7, lbl_805DF6F8);
 }
 #pragma pop
