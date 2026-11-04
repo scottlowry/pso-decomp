@@ -28,11 +28,15 @@ void TUnk_804F112C::apply_use_effect() {
     const u32 *z = lbl_80479100;
     const u32 *t = (const u32 *)lbl_804F10C0;
 
+    const u32 *ps = z;
+    u32 *pd = buf;
     for (d = 0; d < 13; d++) {
-        buf[2 * d] = z[2 * d];
-        buf[2 * d + 1] = z[2 * d + 1];
+        pd[0] = ps[0];
+        pd[1] = ps[1];
+        ps += 2;
+        pd += 2;
     }
-    buf[26] = z[26];
+    pd[0] = ps[0];
 
     buf[0] = t[0];
     buf[1] = t[1];
