@@ -492,13 +492,13 @@ void TObjEneRe2Flower::destroy_instance() {
 }
 
 void *TObjEneRe2Flower__ct(void *self, void *parent, void *set_data) {
-    s32 b;
-    s32 boss_handle;
-    s32 attack_handle;
-    s32 object_handle;
-    s32 off;
-    s32 i;
     u8 *setup_data;
+    s32 b;
+    s32 object_handle;
+    s32 attack_handle;
+    s32 boss_handle;
+    s32 i;
+    s32 off;
 
     setup_data = (u8 *)&TObjEneRe2Flower__setup_data;
 
@@ -523,7 +523,7 @@ void *TObjEneRe2Flower__ct(void *self, void *parent, void *set_data) {
         ((TObjEneDD *)self)->init_model((CollisionBody *)(setup_data + 0x1C), 2);
     }
     ((TObjMotion *)self)->set_field_d8((s32)(setup_data + 0x104));
-    ((TObjMotion *)self)->set_field_dc(*(s32 *)(*(u8 **)(lbl_805D5174 + 0x430)));
+    ((TObjMotion *)self)->set_field_dc(*(s32 *)((u8 *)lbl_805D5174 + 0x430));
     *(s16 *)((s8 *)self + 0xB8) = 1;
     ((TObjMotion *)self)->set_animation(*(s16 *)((s8 *)self + 0xB8));
     ((TObjMotion *)self)->set_field_b8(*(s16 *)((s8 *)self + 0xB8));
@@ -560,24 +560,24 @@ void *TObjEneRe2Flower__ct(void *self, void *parent, void *set_data) {
     *(f32 *)((s8 *)self + 0x37C) = lbl_805D9FBC;
     ((TObjEneDD_ST *)self)->enemy_init_acquire_period(0x1E);
     ((TObjEneDD_ST *)self)->enemy_init_validate_period(0x1E);
-    ((TObjEneRe2Flower *)self)->m_3c0 = *(s32 *)((s8 *)self + 0x60);
+    *(u32 *)((s8 *)self + 0x3C0) = *(s32 *)((s8 *)self + 0x60);
     *(f32 *)((s8 *)self + 0x3C8) = lbl_805D9FAC;
-    ((TObjEneRe2Flower *)self)->m_3cc = 0;
-    ((TObjEneRe2Flower *)self)->m_3d0 = 0;
-    ((TObjEneRe2Flower *)self)->m_3d4 = 0;
-    ((TObjEneRe2Flower *)self)->m_3d8 = 0;
+    *(u32 *)((s8 *)self + 0x3CC) = 0;
+    *(u32 *)((s8 *)self + 0x3D0) = 0;
+    *(u32 *)((s8 *)self + 0x3D4) = 0;
+    *(u32 *)((s8 *)self + 0x3D8) = 0;
     for (off = 0, i = 0; i < 2; i++, off += 0xC) {
         VecCopy((Vec *)((s8 *)self + off + 0x3DC), (const Vec *)((s8 *)self + 0x38));
         *(f32 *)((s8 *)self + off + 0x3E0) += lbl_805D9FD8;
     }
     ((VObj_14_2f517b *)((s8 *)self + 0x3F4))->m0();
-    ((TObjEneRe2Flower *)self)->m_410 = 0;
-    ((TObjEneRe2Flower *)self)->m_414 = 0;
-    ((TObjEneRe2Flower *)self)->m_418 = 0;
-    ((TObjEneRe2Flower *)self)->m_41c = 0;
-    ((TObjEneRe2Flower *)self)->m_420 = 0;
+    *(u32 *)((s8 *)self + 0x410) = 0;
+    *(u32 *)((s8 *)self + 0x414) = 0;
+    *(u32 *)((s8 *)self + 0x418) = 0;
+    *(u32 *)((s8 *)self + 0x41c) = 0;
+    *(u32 *)((s8 *)self + 0x420) = 0;
     *(f32 *)((s8 *)self + 0x424) = lbl_805D9FAC;
-    ((TObjEneRe2Flower *)self)->m_428 = 0;
+    *(u32 *)((s8 *)self + 0x428) = 0;
     ((TObjEneRe2Flower *)self)->sub_800C3DC4();
     ((VObj_18_804931FC *)self)->m88();
     ((TObjEneDD *)self)->transform_part_positions();
