@@ -240,6 +240,61 @@ Budget law: 3+ builds remaining before touching a C-class row.
   * BUILD LEDGER: control, P1, P2, P3, P4, P4-verify(cmp), P5, P6, P7, P8,
     final-confirm = 9 grinds + 1 confirm, budget-exact.
 - V3 FINAL (committed tip 2614927a): match=91.986664, status=visit3-frontier.
+- V4 probe trail (card t_98c68c69, branch card-adxr-c8020-v1, tip a9d427cd start,
+  all clean rebuilds, rm .o + MWCC line):
+  * control probe: 91.986664 / 300 / 300 / gnm 0x4B0 CONFIRMED (receipt c3a1feef).
+  * SCREENS (no builds — law verification on the control .o, per brief scope):
+    (1) LOOP2 HEAD h-copy tempo: batched lha(fA)/lha(f8)/sth(f8)/sth(fA) at slots
+      130-135 = era order EXACT, rows are pure color (r9<->r7 b-home, r6<->r4) —
+      C-class row 3 (copy-before-fill transcription order) CONFIRMED LANDED.
+    (2) LI-ZERO-COPY: fold re-verified at slots 26/139 (ours `li r12,0`/`li r11,0`
+      vs era `mr r12,r29`/`mr r11,r12` hoisted-zero copy), 2 sites x 1 row,
+      size-neutral. Census row, NOT grinded (encode-card fold law).
+    (3) COEF MAGIC PAIR: PER-BRANCH 4681 chains fully emitted per branch (slots
+      216-232: extsh. Rc bge + lis/addi(-2340)/mulhw/srawi/srwi/add + b +
+      lis/addi(+2340) chain — all residuals pure color r6<->r4); TAIL-LI co-clamp
+      mirror (234-244) and stbx coef store `addi r6,r5,0x58; stbx` (245-246,
+      color-only) LANDED. ZERO form rows in the coef region: both in-file laws
+      are VERIFIED APPLIED at tip, nothing left to spell there.
+  * P1 fill-seed order flip (frontier-3, both twins: `*qz=(s16*)b;` before `k=0;`):
+    loop1 EMIT-IDENTICAL (slots 24-26 unchanged — head is scheduler-ordered there);
+    loop2 twin FLIPPED 137/138 AND transposed cursor<->counter REG roles through the
+    fill body (141-145: era cursor r29/counter r12, ours flipped to r12/r29):
+    91.986664 -> 91.886665, +4 rows, gate held. BUST. REVERTED. Datum: era's
+    li-first head tempo is NOT source-order-owned on this unit; the statement-order
+    axis moves register ROLES, not emission order. Frontier 3 CLOSED.
+  * P2 j-seed decl/stmt split (`s32 j;` + `j = 0;` as last pre-store statement):
+    .o diff 204 rows IDENTICAL to champ, 91.986664. INERT (byte-shape).
+    Frontier 2 CLOSED on second axis (P8 decl-move + P2 stmt-split both inert):
+    era `li r8,0` at slot 11 = scheduler-pinned placement.
+  * BUILD LEDGER: control + P1 + P2 + final-confirm = 4 builds of 9+1 budget.
+  * Final confirm on committed tip: 91.986664 / 300 / 300 / gnm 0x4B0 CONFIRMED.
+  * Siblings: body-only probes, both reverted -> stable by construction.
+- V4 FINAL (committed tip): match=91.986664, status=floor-census.
+
+## V5 ENTRY LIST (campaign closure table — residual census COMPLETE, V4)
+Every V1-V4 entry-list class is landed, screened, or closed with a datum. The
+204-row residual at 91.986664 partitions fully into non-source classes:
+| class | rows | slots | status |
+|---|---|---|---|
+| def-binding COLOR ring (b-home r9<->r7, cv r29<->r31, hist r29<->r30 loop2-tail transpose, scratch chains) | ~137 | 1-2,5-6,9-10,14-19,21,23,31-42,50-92,104-135,144-293 (color parts) | RING CLOSED (V3 census 5 rows, both levers spent, reverse-decl byte-identical) |
+| branch-target RENDER (era .L vs ours +offset; display-only) | ~40 | every b*/bl*/beq/ble/bge row | unfixable in source |
+| pool-name display (lbl_805E0D40 vs @549) | 2 | 113, 126 | unlinked-pool naming = config class, not source |
+| j-seed placement era `li r8,0` slot 11 | 3 | 11-13 | scheduler-pinned (P8 decl + V4-P2 stmt both inert) |
+| fill-seed tempo + LI-ZERO-COPY | 4 | 24-26, 137-139 | CLOSED V4-P1 (stmt axis moves reg roles, bust) + V2 FRONTIER-3 census |
+| g-load/magic-addi swap | 2 | 83-84 | scheduler-pinned (V3-P1 inert) |
+| c5 fold stratum (pure-base+big-disp lha/lwz; lwzx/addi fold) | ~12 | 7,12,14,16-17,120-124 | REJECTED V2-c5 (-2.6), do-not-re-roll |
+No unspent form classes remain. Per VISIT PLAN: V5 = "reconstruction tail +
+epilogue; full size gate 300/300" — TAIL-LI rec-clamp landed V3-P7, epilogue
+matches exactly (zero diff rows 294-300), gate EXACT since V2-c2. CAMPAIGN
+STATE: census-complete floor 91.986664 (gate 0x4B0 EXACT, 300/300 rows).
+Remaining gap = def-binding lineage (qvm-edc20/C5ED4 kin) + display classes.
+RETIRE the form-class pursuit; next act for this function = integrator merge of
+the branch as-is, not visit-5. If a future tool/era-map surfaces a def-binding
+mechanism, the 137-color ring is the single reservoir (~92.3 predicted cap
+per V4 entry-list #4 arithmetic, all classes above at their measured floor).
+COLD-START V5: nothing to probe; run control battery once on tip, confirm,
+hand to integrator (kit: rm .o + ninja + one_shot + gnm 0x4B0).
 
 ## V3 ENTRY LIST (frontier, ranked; from c4 tip = 87.92, 300 rows, gate exact)
 Residual anatomy at c4 tip (209 objdiff diff rows): ~25 = branch-target RENDER
