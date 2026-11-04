@@ -11254,7 +11254,7 @@ s32 TLobby__sub_8041D0C8(Dst_8041D0C8 *dst, u8 *p, s16 limit, u8 *arg6) {
     s32 off = 0;
 
     while ((s16)off < limit) {
-        s32 t = p[0];
+        u8 t = p[0];
         if (t == 0) {
             break;
         }
@@ -11263,20 +11263,23 @@ s32 TLobby__sub_8041D0C8(Dst_8041D0C8 *dst, u8 *p, s16 limit, u8 *arg6) {
             len = 1;
         } else {
             len = p[1];
-            if (t == 2) {
+            switch ((s32)t) {
+            case 2:
                 if (len == 4 && (arg6[13] & 2) != 0) {
                     u16 v;
                     NetMemcpy(&v, p + 2, 2);
                     dst->f266 = v;
                 }
-            } else if (t == 4) {
+                break;
+            case 4:
                 if (len == 2) {
                     u8 b = dst->f2e8;
                     if (b & 1) {
                         dst->f2e8 = b | 2;
                     }
                 }
-            } else if (t == 5) {
+                break;
+            case 5: {
                 s32 max = dst->f208;
                 if (((len - 2) % 8) == 0 && len <= 0x22 && len >= 0xa) {
                     s32 cnt = (len - 2) / 8;
@@ -11299,6 +11302,10 @@ s32 TLobby__sub_8041D0C8(Dst_8041D0C8 *dst, u8 *p, s16 limit, u8 *arg6) {
                         dst->f328 = dst->f208;
                     }
                 }
+                break;
+            }
+            default:
+                break;
             }
         }
         off += len;
