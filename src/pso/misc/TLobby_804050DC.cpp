@@ -4660,6 +4660,7 @@ s32 TLobby__sub_8040CB44(u8 *arg0, u32 arg1, u32 arg2) {
     s32 word;
     u8 *p;
     NetPacket *pkt;
+    u8 *fp;
     Frag_8040CB44 *f;
     s32 r;
     u32 i;
@@ -4681,12 +4682,14 @@ s32 TLobby__sub_8040CB44(u8 *arg0, u32 arg1, u32 arg2) {
             return -0x101;
         }
         i = 0;
-        pkt->fragment_count = ((Fields_arg0 *)arg0)->count - 1;
+        pkt->fragment_count = ((Fields_arg0 *)arg0)->len - 1;
         pkt->total_bytes = ((Fields_arg0 *)arg0)->lim - ((Fields_arg0 *)arg0)->len;
         f = (Frag_8040CB44 *)(arg0 + ((Fields_arg0 *)arg0)->count * 12);
+        fp = (u8 *)pkt;
         for (; i < pkt->fragment_count; i++) {
-            pkt->fragments[i].length = f->len;
-            NetMemcpy(&pkt->fragments[i].buffer, f->data, 8);
+            *(s16 *)(fp + 12) = f->len;
+            NetMemcpy(fp + 16, f->data, 8);
+            fp += 12;
             f--;
         }
         r = TLobby__sub_8040CFE8(0, 0, arg2, arg1, pkt);
