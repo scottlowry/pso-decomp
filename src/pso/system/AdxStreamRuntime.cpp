@@ -456,6 +456,134 @@ void TLobby__sub_803C6138(S_803C6138 *arg0) {
     }
 }
 
+extern u32 adx_encoder_channel_work_pools[];
+u32 strlen(const char *);
+extern char *lbl_805D4664;
+
+u8 *TLobby__sub_803C61C4(s32 n, Strm_803C5B50 **arr, Strm_803C5B50 *extra) {
+    u8 *pool;
+    u8 *slot;
+    u8 *name;
+    u8 *ctx;
+    s32 i;
+    s32 j;
+    s32 len;
+    s32 v;
+    s32 t;
+
+    pool = (u8 *)adx_encoder_channel_work_pools;
+    len = strlen(lbl_805D4664);
+    slot = pool + 0x9c0;
+    i = 0;
+    while (i < 8 && *(s8 *)slot != 0) {
+        i = i + 1;
+        slot = slot + 0x2d0;
+    }
+    if (i == 8) {
+        return 0;
+    }
+    slot = pool + 0x9c0 + i * 0x2d0;
+    *(s8 *)(slot + 2) = (s8)n;
+    for (j = 0; j < n; j++) {
+        ((s32 *)slot)[j + 1] = ((s32 *)arr)[j];
+    }
+    *(Strm_803C5B50 **)(slot + 0xc) = extra;
+    *(s8 *)(slot + 1) = 0;
+    *(s32 *)(slot + 0x28) = 0;
+    *(s32 *)(slot + 0x2c) = 0;
+    *(s32 *)(slot + 0x30) = 0;
+    *(s32 *)(slot + 0x34) = 0x7fff;
+    *(s32 *)(slot + 0x48) = len + 0x20;
+    v = *(s32 *)(slot + 0x48);
+    v = ((v + 3) / 4) * 4;
+    *(s32 *)(slot + 0x48) = v;
+    t = *(s32 *)(slot + 0x48) - 4;
+    if (t > 14) {
+        v = t;
+    } else {
+        v = 14;
+    }
+    *(s32 *)(slot + 0x48) = v;
+    *(s32 *)(slot + 0x4c) = 3;
+    *(s32 *)(slot + 0x58) = n;
+    *(s32 *)(slot + 0x5c) = 44100;
+    *(s32 *)(slot + 0x54) = 4;
+    *(s32 *)(slot + 0x50) = 18;
+    *(s32 *)(slot + 0x44) = (*(s32 *)(slot + 0x50) - 2) * 8 / *(s32 *)(slot + 0x54);
+    *(s32 *)(slot + 0x60) = 0x7fff;
+    *(s32 *)(slot + 0x64) = 500;
+    *(s32 *)(slot + 0x68) = 0;
+    *(s32 *)(slot + 0x6c) = 0;
+    *(s32 *)(slot + 0x70) = 0;
+    *(s32 *)(slot + 0x74) = 0;
+    *(s32 *)(slot + 0x78) = 0;
+    *(s32 *)(slot + 0x7c) = 0;
+    *(s32 *)(slot + 0x38) = 0;
+    *(s32 *)(slot + 0x3c) = 0;
+    v = *(s32 *)(slot + 0x44);
+    *(s32 *)(slot + 0x40) = ((*(s32 *)(slot + 0x60) - 1) / v + 1) * v;
+    name = pool + 0x900;
+    i = 0;
+    while (i < 16 && *(s8 *)name != 0) {
+        i = i + 1;
+        name = name + 0xc;
+    }
+    if (i >= 16) {
+        name = 0;
+    }
+    if (name != 0) {
+        ctx = pool;
+        j = 0;
+        while (j < 16 && *(s8 *)ctx != 0) {
+            j = j + 1;
+            ctx = ctx + 0x90;
+        }
+        *(s32 *)(ctx + 0x14) = *(s32 *)(slot + 0x54);
+        *(u8 **)(ctx + 0x88) = name;
+        if (j >= 16) {
+            ctx = 0;
+        } else {
+            *ctx = 1;
+        }
+    } else {
+        ctx = 0;
+    }
+    *(u8 **)(slot + 0x80) = ctx;
+    name = pool + 0x900;
+    i = 0;
+    while (i < 16 && *(s8 *)name != 0) {
+        i = i + 1;
+        name = name + 0xc;
+    }
+    if (i >= 16) {
+        name = 0;
+    }
+    if (name != 0) {
+        ctx = pool;
+        j = 0;
+        while (j < 16 && *(s8 *)ctx != 0) {
+            j = j + 1;
+            ctx = ctx + 0x90;
+        }
+        *(s32 *)(ctx + 0x14) = *(s32 *)(slot + 0x44);
+        *(u8 **)(ctx + 0x88) = name;
+        if (j >= 16) {
+            ctx = 0;
+        } else {
+            *ctx = 1;
+        }
+    } else {
+        ctx = 0;
+    }
+    *(u8 **)(slot + 0x84) = ctx;
+    *(s16 *)(slot + 0x2cc) = 0;
+    *(s16 *)(slot + 0x2c8) = 0;
+    *(s16 *)(slot + 0x2ce) = 0;
+    *(s16 *)(slot + 0x2ca) = 0;
+    *slot = 1;
+    return slot;
+}
+
 void TLobby::clear_net_buffer_1680() {
     memset((void *) (&(*(RecoveredGlobal_803C6800_lbl_80573AC0 *)&adx_encoder_context_pool).value), 0, 0x1680);
 }
