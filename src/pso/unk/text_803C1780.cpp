@@ -8,6 +8,75 @@ struct Obj_803C1A24 { u8 pad[0xAC]; void *fac; };
 extern RecoveredCallback_1268626c296b lbl_805D7514;
 extern s32 (*lbl_805D7510)();
 
+int memcmp(const void *, const void *, unsigned long);
+extern s32 lbl_805D4650;
+extern s32 lbl_805D4654;
+
+s32 TLobby__sub_803C1780(u8 *arg0, s32 arg1, s16 *arg2, u8 *arg3, u8 *arg4,
+                         u8 *arg5, u8 *arg6, u8 *arg7, s32 *arg8, s32 *arg9,
+                         s16 *arg10) {
+    s32 i;
+    for (i = 0; i < arg1; i++) {
+        if (memcmp(arg0 + i, &lbl_805D4650, 4) == 0) {
+            break;
+        }
+    }
+    if (i == arg1) {
+        return -1;
+    }
+    if ((i % 4) != 0) {
+        return -1;
+    }
+    u8 *hdr = arg0 + i;
+    s16 ver = (s16)((u32)hdr[8] | ((u32)hdr[9] << 8));
+    if (ver > 1) {
+        return -1;
+    }
+    for (i = 0; i < arg1; i++) {
+        if (memcmp(arg0 + i, &lbl_805D4654, 4) == 0) {
+            break;
+        }
+    }
+    if (i == arg1) {
+        return -1;
+    }
+    s32 x = (s32)(((u32)hdr[5] << 8) | (u32)hdr[4] | ((u32)hdr[6] << 16) |
+                  ((u32)hdr[7] << 24));
+    *arg2 = (s16)(i + 8);
+    *arg3 = (u8)-1;
+    *(u32 *)(arg7 + x) = (u32)hdr[0xf] | ((u32)hdr[0xe] << 8) |
+                         ((u32)hdr[0xd] << 16) | ((u32)hdr[0xc] << 24);
+    *arg6 = hdr[0xa];
+    *arg4 = hdr[0x16];
+    *arg5 = hdr[0x14];
+    *arg8 = x / (s8)*arg5;
+    *arg9 = 1;
+    if ((s8)*arg4 == 16) {
+        *arg10 = 0;
+    } else if ((s8)*arg4 == 8) {
+        *arg10 = 1;
+    } else if ((s8)*arg4 == 4) {
+        *arg5 = (u8)((s8)*arg6 * 2);
+        *arg9 = 4;
+        *arg8 = (x / 2) / (s8)*arg6;
+        *arg4 = 16;
+        *arg10 = 2;
+    }
+    if ((s8)*arg4 == 0) {
+        return -1;
+    }
+    if ((s8)*arg5 == 0) {
+        return -1;
+    }
+    if ((s8)*arg6 <= 0) {
+        return -1;
+    }
+    if ((s8)*arg6 > 2) {
+        return -1;
+    }
+    return (*(u32 *)arg7 == 0) ? -1 : 0;
+}
+
 void TLobby__sub_803C19D8(void) {
     lbl_805D7510();
 }
