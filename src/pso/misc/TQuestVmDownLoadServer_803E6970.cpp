@@ -3906,7 +3906,11 @@ s32 TQuestVmDownLoadServer__sub_803EDF64(u16 *keys, s32 count, u16 *out, s32 *fl
             kind = 1;
         } else {
             out[0] = TQuestVmDownLoadServer__sub_803E721C(keys[0]);
-            kind = (cls == 10) ? 2 : 3;
+            if (cls == 10) {
+                kind = 2;
+            } else {
+                kind = 3;
+            }
         }
     }
     if (count == 1) {
