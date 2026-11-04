@@ -277,7 +277,7 @@ void TEF_LensFlare::render() {
             point.z = 0.0f;
             VecCopy((Vec *)&pi->pos, (const Vec *)&point);
             item.sx = refl_scale;
-            item.sy = (f32)refl_scale;
+            item.sy = (f32)(f64)refl_scale;
             begin_screen_draw(1);
             layer = &set->layers[element->def_index + 9];
             TObjFish::set_global_param((s32)set->layers[element->def_index + 9].texlist);
