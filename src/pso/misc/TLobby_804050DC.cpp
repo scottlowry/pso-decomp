@@ -1056,6 +1056,152 @@ void TLobby__sub_80405328(u8 *arg0) {
     }
 }
 
+struct Rec_805C04A8 {
+    u32 f0;
+    u8 pad4[0x14];
+    u32 f18;
+    u8 pad1C[0x14];
+};
+extern Rec_805C04A8 lbl_805C04A8;
+extern u16 lbl_805D7A8A;
+extern u32 lbl_805D7A8C;
+extern s32 lbl_805D7A94;
+extern u32 lbl_805D7AE0;
+extern u32 lbl_805D7AE4;
+extern u16 lbl_805D7AE8;
+extern void *ppp_rx_frame_ptr;
+extern u8 lbl_805C18B0[0x200];
+extern u16 lbl_804FD3A8[0x100];
+extern s32 lbl_805D7ADC;
+void ppp_input_packet__6TLobbyFPv(Strm_80405A74 *);
+s32 TLobby__sub_803F812C(s32, void *, u16 *);
+s32 TLobby__sub_803F8090(void);
+s32 TLobby__sub_804290D4(s32);
+u32 get_field_4__6TLobbyFv(void *);
+
+s32 TLobby__sub_80405700(void) {
+    u8 *base = lbl_805C18B0;
+    u16 cnt;
+    if (lbl_805D7A8A == 10) {
+        if ((s16)TLobby__sub_804290D4(0x7fff) == 0) {
+            lbl_805D7A8A = 1;
+        }
+        return 0;
+    }
+    if (lbl_805D7A7A != 0) {
+        Rec_805C04A8 *rec = &lbl_805C04A8;
+        while (1) {
+            ppp_rx_frame_ptr = (void *)rec->f18;
+            *(u32 *)(u32)ppp_rx_frame_ptr =
+                (u32)rec->f18 + ((rec->f0 + 0x83) & ~3);
+            *(u16 *)((u8 *)ppp_rx_frame_ptr + 4) = 0;
+            if (TLobby__sub_803F812C(
+                    0x5d6, ((Strm_80405A74 *)ppp_rx_frame_ptr)->p,
+                    &((Strm_80405A74 *)ppp_rx_frame_ptr)->len) == 0 &&
+                ((Strm_80405A74 *)ppp_rx_frame_ptr)->len >= 1) {
+                TLobby::get_time_ms(&lbl_805D7A94);
+                u8 *data = ((Strm_80405A74 *)ppp_rx_frame_ptr)->p;
+                u8 b0 = data[0];
+                s32 code;
+                if (b0 & 1) {
+                    code = b0;
+                } else {
+                    code = (b0 << 8) | data[1];
+                }
+                ppp_input_packet__6TLobbyFPv(
+                    (Strm_80405A74 *)&ppp_rx_frame_ptr);
+                if ((u16)code != 0x21 && (u16)code != 0x2d &&
+                    (u16)code != 0x2f) {
+                    break;
+                }
+            } else {
+                break;
+            }
+        }
+        if (lbl_805D7A8A == 4 && (u16)TLobby__sub_803F8090() == 0) {
+            lbl_805D7A8A = 5;
+        }
+        return 0;
+    }
+    if (lbl_805D7ADC == 0) {
+        lbl_805D7ADC = (s32)(u32)base;
+        ppp_rx_frame_ptr = 0;
+        lbl_805D7AE8 = 0xFFFF;
+        lbl_805D7AE4 = 0;
+        lbl_805D7AE0 = (s32)(u32)base;
+    }
+    Rec_805C04A8 *rec30 = &lbl_805C04A8;
+    u16 crc_init = 0xFFFF;
+    u16 *tbl = lbl_804FD3A8;
+    while (1) {
+        if (lbl_805D7ADC == lbl_805D7AE0) {
+            s32 r = TLobby__sub_803F812C(0x200, base, &cnt);
+            if (r != 0) {
+                goto fail;
+            }
+            if (cnt < 1) {
+                goto fail;
+            }
+            lbl_805D7ADC = (s32)(u32)base;
+            lbl_805D7AE0 = (s32)((u32)base + cnt);
+        }
+        u32 cur = (u32)lbl_805D7ADC;
+        lbl_805D7ADC = (s32)(cur + 1);
+        u8 b = *(u8 *)cur;
+        if (b == 0x7e) {
+            if (ppp_rx_frame_ptr != 0 &&
+                ((Strm_80405A74 *)ppp_rx_frame_ptr)->len < 0x800 &&
+                lbl_805D7AE8 == 0xF0B8) {
+                TLobby__sub_80401CAC(
+                    (Outer_80401CAC *)&ppp_rx_frame_ptr,
+                    get_field_4__6TLobbyFv(ppp_rx_frame_ptr) - 2);
+                TLobby::get_time_ms(&lbl_805D7A94);
+                ppp_input_packet__6TLobbyFPv(
+                    (Strm_80405A74 *)ppp_rx_frame_ptr);
+                ppp_rx_frame_ptr = 0;
+                return 1;
+            }
+            ppp_rx_frame_ptr = 0;
+            continue;
+        }
+        if (b == 0x7d) {
+            lbl_805D7AE4 |= 1;
+            continue;
+        }
+        if (ppp_rx_frame_ptr == 0) {
+            ppp_rx_frame_ptr = (void *)rec30->f18;
+            *(u32 *)(u32)ppp_rx_frame_ptr =
+                (u32)rec30->f18 + ((rec30->f0 + 0x83) & ~3);
+            *(u16 *)((u8 *)ppp_rx_frame_ptr + 4) = 0;
+            lbl_805D7AE4 = 0;
+            lbl_805D7AE8 = crc_init;
+        }
+        if (lbl_805D7AE4 & 1) {
+            lbl_805D7AE4 &= ~1;
+            b ^= 0x20;
+        }
+        u16 len = ((Strm_80405A74 *)ppp_rx_frame_ptr)->len;
+        if (len >= 0x800) {
+            continue;
+        }
+        ((Strm_80405A74 *)ppp_rx_frame_ptr)->len = len + 1;
+        ((Strm_80405A74 *)ppp_rx_frame_ptr)->p[len] = b;
+        lbl_805D7AE8 = (u16)((lbl_805D7AE8 >> 8) ^
+                             tbl[((lbl_805D7AE8 ^ b) & 0xFF) << 1]);
+    }
+fail:
+    if ((u16)(lbl_805D7A8A - 3) <= 1 &&
+        (u16)TLobby__sub_803F8090() == 0) {
+        if (lbl_805D7A8C != 0 && lbl_805D7A8A == 4) {
+            TUdpSocket::unlock_mutex(lbl_805C18A0.value);
+            ((s32 (*)(s32, s32))lbl_805D7A8C)(-1, 0);
+            TLobby::lock_mutex(lbl_805C18A0.value);
+        }
+        lbl_805D7A8A = 5;
+    }
+    return 0;
+}
+
 typedef struct Lobby_804062A0 {
     u8 state;
     u8 pad[3];
