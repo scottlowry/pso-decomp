@@ -1104,7 +1104,8 @@ s32 TLobby__sub_80405700(void) {
                 Strm_80405A74 *strmA =
                     (Strm_80405A74 *)ppp_rx_frame_ptr;
                 u8 b0 = strmA->p[0];
-                s32 code = b0;
+                s32 code;
+                code = b0;
                 if ((b0 & 1) == 0) {
                     code = (b0 << 8) | strmA->p[1];
                 }
