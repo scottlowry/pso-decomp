@@ -477,12 +477,13 @@ u8 *TLobby__sub_803C61C4(s32 n, Strm_803C5B50 **arr, Strm_803C5B50 *extra) {
 
     pool = (u8 *)adx_encoder_channel_work_pools;
     len = strlen(lbl_805D4664);
-    slot = pool + 0x9c0;
+    w = pool + 0x9c0;
+    slot = w;
     for (i = 0; i < 8; i++) {
-        if (*(s8 *)slot == 0) {
+        if (*(s8 *)w == 0) {
             break;
         }
-        slot = slot + 0x2d0;
+        w = w + 0x2d0;
     }
     if (i == 8) {
         return 0;
