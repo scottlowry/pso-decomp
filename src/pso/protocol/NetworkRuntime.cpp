@@ -116,7 +116,6 @@ s32 TLobby::cancel_pending_alarms() {
 #pragma push
 #pragma pool_data on
 #pragma opt_common_subs on
-#pragma opt_propagation off
 s32 TLobby__sub_803F8E9C(void) {
     s32 i;
     s32 off;
@@ -124,14 +123,12 @@ s32 TLobby__sub_803F8E9C(void) {
     Ent_803F9B48 *e;
     NetworkMutexSlot *mt;
     NetworkMessageQueueSlot *qs;
-    u16 n1;
     NetworkAlarmSlot *s;
     if ((lbl_805D7A6C == 0) || (lbl_805D7A64 == 0)) {
         return -1;
     }
-    n1 = lbl_805D7A68;
     z = 0;
-    for (off = 0, i = n1; i > 0; i--) {
+    for (off = 0, i = lbl_805D7A68; i > 0; i--) {
         *(u32 *)((u8 *)lbl_805D7A6C + off) = z;
         e = (Ent_803F9B48 *)((u8 *)lbl_805D7A6C + off);
         e->key = (u32)&e->thread;
