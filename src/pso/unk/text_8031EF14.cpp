@@ -1,6 +1,7 @@
 #include "types.h"
 #include "pso/enemy/TObjEneRecon.h"
 #include "pso/enemy/TObjEneDD.h"
+#include "pso/object/TObjChip.h"
 struct Obj_8031EF14 { u8 pad[0x410]; s32 count; u8 pad2[4]; u16 ids[6]; };
 
 struct Obj_8031F0F0 { u8 pad[0x410]; s32 count; u8 pad2[4]; u16 ids[6]; };
@@ -71,6 +72,81 @@ s32 TObjEneRecon::is_below_child_limit(u16 arg1) {
         return n < 4;
     }
     return n < 2;
+}
+
+struct Rec_8031F1A8 { u8 pad[0x38]; f32 pos[3]; };
+
+void *spawn_particle_effect_with_flags(void *pos, s32 id, s32 flags);
+s32 __nw__7TObjectFUl(int);
+extern u8 *tl_05;
+extern u8 *TObjEneRecobox__static_instance;
+extern TObjChipParams lbl_804762F0;
+extern TObjChipParams lbl_8047633C;
+extern TObjChipParams lbl_80476388;
+
+void TObjEneRecobox__sub_8031F1A8(u8 *arg0) {
+    Rec_8031F1A8 *self = (Rec_8031F1A8 *)arg0;
+    u8 *inst = TObjEneRecobox__static_instance;
+    f32 *posp;
+    u8 *res;
+    s32 m3;
+    s32 m;
+    f32 p1;
+    s32 t;
+    TObjChipParams a = lbl_804762F0;
+    u8 *obj2;
+    res = *(u8 **)(inst + 0x42C);
+    m = *(s32 *)(res + 0x38);
+    t = *(s32 *)(res + 0x3C);
+    p1 = self->pos[1];
+    a.pos[0] = self->pos[0];
+    a.pos[1] = p1;
+    a.pos[2] = self->pos[2];
+    a.pad_38[0] = a.pos[1];
+    a.model = m;
+    a.textures = t;
+    TObjChipParams b = lbl_8047633C;
+    res = *(u8 **)(inst + 0x42C);
+    m = *(s32 *)(res + 0x48);
+    t = *(s32 *)(res + 0x3C);
+    b.pos[0] = self->pos[0];
+    b.pos[1] = (posp = self->pos)[1];
+    b.pos[2] = posp[2];
+    b.pad_38[0] = b.pos[1];
+    b.model = m;
+    b.textures = t;
+    TObjChipParams c = lbl_80476388;
+    res = *(u8 **)(inst + 0x42C);
+    m3 = *(s32 *)(res + 0x58);
+    m = m3;
+    t = *(s32 *)(res + 0x3C);
+    c.pos[0] = posp[0];
+    c.pos[1] = posp[1];
+    c.pos[2] = posp[2];
+    c.pad_38[0] = c.pos[1];
+    c.model = m;
+    c.textures = t;
+    spawn_particle_effect_with_flags(&self->pos[0], 0x45, 0x40);
+    spawn_particle_effect_with_flags(&self->pos[0], 0x46, 0x40);
+    {
+        u8 *o = (u8 *)__nw__7TObjectFUl(0x234);
+        if (o != NULL) {
+            construct_debris__8TObjChipFPvPvPv(o, tl_05, (u8 *)&a);
+        }
+    }
+    {
+        u8 *o = (u8 *)__nw__7TObjectFUl(0x234);
+        if (o != NULL) {
+            construct_debris__8TObjChipFPvPvPv(o, tl_05, (u8 *)&b);
+        }
+    }
+    {
+        u8 *o = (u8 *)__nw__7TObjectFUl(0x234);
+        if (o != NULL) {
+            obj2 = o;
+            construct_debris__8TObjChipFPvPvPv(obj2, tl_05, (u8 *)&c);
+        }
+    }
 }
 
 }
