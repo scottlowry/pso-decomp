@@ -247,13 +247,16 @@ void vsub__FPvPvPv(void *, void *, void *);
 
 #pragma push
 #pragma fp_contract on
+#pragma opt_propagation off
+#pragma opt_dead_assignments off
 s32 evaluate_ground_triangles(s32 arg0, s32 arg1, u32 *arg2) {
     u8 sp8[12];
+    s32 cleared = 0;
     CsnGroup **gp = (CsnGroup **)arg2;
-    CsnContact *recs = (CsnContact *)lbl_80500140[1];
+    CsnContact *recs;
     CsnVector *org = (CsnVector *)arg0;
     u32 mask = (u32)arg1;
-    s32 *status = lbl_80500140;
+    s32 *status;
     CsnContact *rec;
     f32 cap = lbl_805D91F4;
     f32 px;
@@ -270,7 +273,9 @@ s32 evaluate_ground_triangles(s32 arg0, s32 arg1, u32 *arg2) {
     s32 i;
     Poly_80079F58 *poly;
 
-    lbl_80500140[0] = 0;
+    lbl_80500140[0] = cleared;
+    recs = (CsnContact *)lbl_80500140[1];
+    status = lbl_80500140;
     lbl_8050BF60.x = org->x;
     lbl_8050BF60.y = lbl_805D91F8 + org->y;
     lbl_8050BF60.z = org->z;
