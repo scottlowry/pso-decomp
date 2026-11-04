@@ -112,7 +112,7 @@ struct AudioStreamInputState {
     SjRingBuffer *rings[4];
     u8 pad_1c[0x2C - 0x1C];
     s32 f2c; s32 f30; s32 f34; s32 f38; s32 f3c; s32 f40; s32 f44;
-    s32 f48; s32 f4c; s32 f50; s32 f54;
+    void *f48; s32 f4c; void *f50; s32 f54;
     u8 f58[0x40]; s32 f98;
 };
 
@@ -311,12 +311,12 @@ void TLobby__sub_803C0238(AudioStreamInputState *self) {
             src->vt->unlock(src, 1, (AudioStreamChunk *)&self->rings[2]);
             goto join;
         }
-        if (self->f34 >= TLobby__sub_803C3ABC((u8 *)lobby)) {
+        if (self->f34 >= TLobby__sub_803C3ABC((u8 *)self->f4)) {
             self->state = 3;
             src->vt->unlock(src, 1, (AudioStreamChunk *)&self->rings[2]);
             goto join;
         }
-        v = TLobby__sub_803C3AC4((u8 *)lobby);
+        v = TLobby__sub_803C3AC4((u8 *)self->f4);
         ring = self->rings[0];
         n2 = ((s32 (*)(SjRingBuffer *, s32, s32))ring->interface->get_available)(ring, 0, (s32)ring->interface);
         if (n2 / 2 < v) {
@@ -348,7 +348,7 @@ join:
         p4 = (u8 *)self;
         n2 = v * 2;
         i = 0;
-        while (i < TLobby__sub_803C3B38((int)lobby)) {
+        while (i < TLobby__sub_803C3B38((int)self->f4)) {
             TLobby__sub_803D3130((s32)(p8 + 0x1c), n2, (u8 *)locA, (u8 *)&locB);
             if (self->f50 != 0) {
                 ((void (*)(s32, s32, s32, s32))self->f50)(self->f54, i, locA[0], locA[1]);
