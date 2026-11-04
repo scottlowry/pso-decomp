@@ -1079,8 +1079,8 @@ void draw_name_plate__15TWindowFukidasiFv(void *self, View_80252764 *v, u32 colo
     struct View_80251EC8 *w = (struct View_80251EC8 *)v;
     f32 pt[2];
     f32 rect[8];
-    f32 width;
     f32 depth;
+    f32 width;
     f64 x0v;
     s32 alpha;
     u32 a24;
