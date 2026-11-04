@@ -542,9 +542,9 @@ s32 TAdSinglePlyChrSelectGC__sub_8042CD64(void) {
 
     cmd = 0x23000000 | ((u8)1 << 8);
     state = &modem_command_response_state;
-    pat = lbl_805D487C;
     flag = 0;
     match = 0;
+    pat = lbl_805D487C;
     for (;;) {
         count = ModemReadRegister(5);
         if (count != 0) {
