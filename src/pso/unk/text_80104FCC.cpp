@@ -99,30 +99,6 @@ void send_6x60_standard_drop_item_request(Obj_80105538 *self);
 int roll_weapon_special_channel15(void* p);
 int roll_weapon_special_for_stars(void*);
 
-int check_class_equip_permission(TObjPlayer *player, s32 perm) {
-    s32 t = player->class_flags;
-    if (t & CLASS_FLAG_HUNTER) {
-        if (!(perm & 1)) return 0;
-    } else if (t & CLASS_FLAG_RANGER) {
-        if (!(perm & 2)) return 0;
-    } else if (!(perm & 4)) {
-        return 0;
-    }
-    if (t & CLASS_FLAG_ANDROID) {
-        if (!(perm & 0x10)) return 0;
-    } else if (t & CLASS_FLAG_NEWMAN) {
-        if (!(perm & 0x20)) return 0;
-    } else if (t & CLASS_FLAG_HUMAN) {
-        if (!(perm & 8)) return 0;
-    }
-    if (t & CLASS_FLAG_MALE) {
-        if (!(perm & 0x40)) return 0;
-    } else if (t & CLASS_FLAG_FEMALE) {
-        if (!(perm & 0x80)) return 0;
-    }
-    return 1;
-}
-
 struct VBase_18_80105218 { char pad[0x18]; };
 
 struct VObj_18_80105218 : VBase_18_80105218 {
@@ -321,6 +297,30 @@ s32 check_equip_requirements(void *player, void *item, s32 *requirement) {
         return 1;
     }
     return 0;
+}
+
+int check_class_equip_permission(TObjPlayer *player, s32 perm) {
+    s32 t = player->class_flags;
+    if (t & CLASS_FLAG_HUNTER) {
+        if (!(perm & 1)) return 0;
+    } else if (t & CLASS_FLAG_RANGER) {
+        if (!(perm & 2)) return 0;
+    } else if (!(perm & 4)) {
+        return 0;
+    }
+    if (t & CLASS_FLAG_ANDROID) {
+        if (!(perm & 0x10)) return 0;
+    } else if (t & CLASS_FLAG_NEWMAN) {
+        if (!(perm & 0x20)) return 0;
+    } else if (t & CLASS_FLAG_HUMAN) {
+        if (!(perm & 8)) return 0;
+    }
+    if (t & CLASS_FLAG_MALE) {
+        if (!(perm & 0x40)) return 0;
+    } else if (t & CLASS_FLAG_FEMALE) {
+        if (!(perm & 0x80)) return 0;
+    }
+    return 1;
 }
 
 int roll_weapon_special_channel15(void* p) { return roll_weapon_special_for_stars(p); }
