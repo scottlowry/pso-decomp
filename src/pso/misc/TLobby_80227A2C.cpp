@@ -585,6 +585,8 @@ void TLobby__sub_80228118(void) {
     __register_global_object(reset_sound_owner_state(((char *)&sound_control_state)), (void *)TLobby__sub_80240808, lbl_80514F58);
 }
 
+#pragma push
+#pragma opt_propagation off
 void TLobby__sub_80228154(void *arg0, s32 arg1, s32 arg2, f32 arg3) {
     u32 color;
     f32 v[3];
@@ -618,19 +620,19 @@ void TLobby__sub_80228154(void *arg0, s32 arg1, s32 arg2, f32 arg3) {
     pts[2] = *(f32 *)((s8 *)arg0 + 0x0) + (c4 + c0) * *(f32 *)((s8 *)arg0 + 0xc);
     pts[1] = *(f32 *)((s8 *)arg0 + 0x4) + c6 * *(f32 *)((s8 *)arg0 + 0x10);
     pts[3] = *(f32 *)((s8 *)arg0 + 0x4) + (c6 + c2) * *(f32 *)((s8 *)arg0 + 0x10);
-    pts[4] = -(f32)(s32)e[4] * lbl_805DC770;
+    pts[4] = lbl_805DC770 * (f32)(s32)e[4];
     if (lbl_805DC774 < pts[4]) {
         pts[4] = lbl_805DC774;
     }
-    pts[5] = -(f32)(s32)e[5] * lbl_805DC770;
+    pts[5] = (f32)(s32)e[5] * lbl_805DC770;
     if (lbl_805DC774 < pts[5]) {
         pts[5] = lbl_805DC774;
     }
-    pts[6] = -(f32)(s32)e[6] * lbl_805DC770;
+    pts[6] = (f32)(s32)e[6] * lbl_805DC770;
     if (lbl_805DC774 < pts[6]) {
         pts[6] = lbl_805DC774;
     }
-    pts[7] = -(f32)(s32)e[7] * lbl_805DC770;
+    pts[7] = (f32)(s32)e[7] * lbl_805DC770;
     if (lbl_805DC774 < pts[7]) {
         pts[7] = lbl_805DC774;
     }
@@ -675,6 +677,7 @@ void TLobby__sub_80228154(void *arg0, s32 arg1, s32 arg2, f32 arg3) {
     draw_textured_quad_at_depth(pts, arg3);
     get_player__20TWindowSubStatusDispFv();
 }
+#pragma pop
 
 void TLobby::clear_ready_flag_unless_locked() {
     if (get_current_floor_area() != AREA_LOBBY) {
