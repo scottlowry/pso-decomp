@@ -283,8 +283,8 @@ void TLobby__sub_803C0238(AudioStreamInputState *self) {
     TLobby *lobby;
     AudioStreamSource *src;
     SjRingBuffer *ring;
-    s32 w;
     s32 v;
+    s32 w;
     s32 a0;
     s32 n2;
     s32 i;
