@@ -326,6 +326,157 @@ void *__dt__14TItemAttackColFv(TItemAttackCol *arg0, s16 arg1) {
     return arg0;
 }
 
+
+
+struct GunStarLightBlock {
+    f32 inner_size;
+    f32 outer_size;
+    u8 a, r, g, b;
+    u32 flags;
+    f32 extent;
+};
+
+struct AttackColInit : S_802E451C {
+    s32 f28;
+    f32 f2C[3];
+    f32 f38;
+    f32 f3C;
+    u32 f40;
+    u32 f44;
+    u32 f48;
+    f32 f4C;
+    f32 f50[3];
+    f32 f5C;
+    f32 f60;
+    f32 f64;
+    f32 f68;
+    f32 f6C;
+    u32 f70;
+    u32 f74;
+    s32 f78;
+    s32 f7C;
+};
+
+typedef void (*Cb_802E435C)(s32, void *, void *);
+
+extern "C" {
+u8 *construct_attack_collision(u8 *arg0, s32 arg1, u8 *arg2);
+u32 create_particle_emitter(void *);
+TObject *spawn_star_light_2d__Flll(Vec *pos, const GunStarLightBlock *params, TObject *parent);
+u32 spawn_continuous_particle_effect_with_flags(void *, s32, s32);
+void *set_direction__13TParticleCtrlFPv(void *, void *);
+f32 atan2_float(f32 y, f32 x);
+f32 newton_sqrtf(f32 x);
+f32 sin_table_lookup(s32 angle);
+f32 cos_table_lookup(s32 angle);
+void normalize_vector(void *);
+extern const char *lbl_805D3F88;
+extern const f32 lbl_805DE91C;
+extern const f64 lbl_804729C0;
+extern const GunStarLightBlock lbl_804729A8[];
+extern const s32 lbl_804E3530[];
+}
+
+void *TItemAttackCol__ct(void *a0, void *owner, void *init_) {
+    TItemAttackCol *self = (TItemAttackCol *)a0;
+    const AttackColInit *init = (const AttackColInit *)init_;
+
+    construct_attack_collision((u8 *)a0, (s32)owner, (u8 *)init_);
+    *(s32 **)((s8 *)a0 + 0x18) = __vt__14TItemAttackCol;
+    __ct__8FlagWordFv(&self->m_e0);
+    self->m_name = lbl_805D3F88;
+    VecCopy((Vec *)&self->m_c4, (const Vec *)init_);
+    if (init->f40 & 1) {
+        VecCopy((Vec *)&self->m_d0, (const Vec *)init->f2C);
+        normalize_vector((void *)&self->m_d0);
+        self->m_f0 = -(s32)(lbl_804729C0 * atan2_float(*(f32 *)((s8 *)a0 + 0xD4),
+            newton_sqrtf((*(f32 *)&self->m_d0 * *(f32 *)&self->m_d0) +
+                         (*(f32 *)((s8 *)a0 + 0xD8) * *(f32 *)((s8 *)a0 + 0xD8)))));
+        self->m_f4 = (s32)(lbl_804729C0 * atan2_float(*(f32 *)&self->m_d0, *(f32 *)((s8 *)a0 + 0xD8)));
+        self->m_f8 = 0;
+    } else {
+        *(f32 *)&self->m_d0 = sin_table_lookup(init->f28);
+        *(f32 *)((s8 *)a0 + 0xD4) = lbl_805DE914;
+        *(f32 *)((s8 *)a0 + 0xD8) = cos_table_lookup(init->f28);
+        self->m_f0 = 0;
+        self->m_f4 = init->f28;
+        self->m_f8 = 0;
+    }
+    *(f32 *)&self->m_d0 = *(f32 *)&self->m_d0 * init->f38;
+    *(f32 *)((s8 *)a0 + 0xD4) = *(f32 *)((s8 *)a0 + 0xD4) * init->f38;
+    *(f32 *)((s8 *)a0 + 0xD8) = *(f32 *)((s8 *)a0 + 0xD8) * init->f38;
+    *(u32 *)&self->m_30 = self->m_f4;
+    self->m_dc = init->f3C * init->f3C;
+    self->m_e8 = init->f44;
+    self->m_ec = init->f48;
+    *(f32 *)&self->m_108 = init->f4C;
+    *(f32 *)&self->_pad10C = init->f4C;
+    *(f32 *)((s8 *)a0 + 0x110) = init->f4C;
+    copy_xyz((s8 *)a0 + 0xFC, (void *)init->f50);
+    self->m_114 = 0;
+    self->m_118 = 0;
+    self->m_11c = 0;
+    *(f32 *)((s8 *)a0 + 0x120) = lbl_805DE918;
+    *(f32 *)((s8 *)a0 + 0x124) = lbl_805DE918;
+    *(f32 *)((s8 *)a0 + 0x128) = lbl_805DE918;
+    ((FlagWord *)((s8 *)a0 + 0xE0))->reset();
+    if (init->f40 & 2) {
+        GunStarLightBlock blk = lbl_804729A8[0];
+        f32 vr = lbl_805DE91C * init->f64;
+        f32 vg = lbl_805DE91C * init->f68;
+        f32 vb = lbl_805DE91C * init->f6C;
+        f32 vi = init->f5C;
+        blk.r = (u8)vr;
+        blk.g = (u8)vg;
+        blk.b = (u8)vb;
+        blk.inner_size = vi;
+        self->m_12c = (u32)spawn_star_light_2d__Flll((Vec *)&self->m_24, &blk, (TObject *)self);
+    } else {
+        self->m_12c = 0;
+    }
+    self->m_138 = init->f70;
+    self->m_13c = init->f74;
+    self->m_e4 = init->f40;
+    if (init->f40 & 0x800) {
+        self->check_object_hits();
+        if (self->m_138 != 0) {
+            ((Cb_802E435C)self->m_138)(self->m_ac, &self->m_24, (void *)&self->m_d0);
+        }
+        self->m_130 = 0;
+        self->m_134 = 0;
+        self->m_140 = 0;
+        queue_destruction__7TObjectFv(a0);
+        disallow_rendering__7TObjectFv(a0);
+    } else {
+        ((TUnk_804E355C *)a0)->check_hits();
+        if (init->f78 != -1) {
+            self->m_130 = create_particle_emitter(&self->m_24);
+            if (self->m_130 != 0) {
+                s32 v[3];
+                v[0] = lbl_804E3530[0];
+                v[1] = lbl_804E3530[1];
+                v[2] = lbl_804E3530[2];
+                v[0] += init->f28;
+                set_direction__13TParticleCtrlFPv((void *)self->m_130, v);
+            }
+        } else {
+            self->m_130 = 0;
+        }
+        if (init->f7C != -1) {
+            self->m_134 = create_particle_emitter(&self->m_24);
+        } else {
+            self->m_134 = 0;
+        }
+        if (init->f40 & 0x10) {
+            self->m_140 = spawn_continuous_particle_effect_with_flags(&self->m_24, 0x19E, 0x2000);
+        } else {
+            self->m_140 = 0;
+        }
+    }
+    return self;
+}
+
+
 void TItemAttackCol::create(void *arg0, void *arg1) {
     void *o;
     o = __nw__7TObjectFUl(0x144);
