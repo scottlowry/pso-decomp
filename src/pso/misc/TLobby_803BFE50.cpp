@@ -280,7 +280,6 @@ void process_audio_stream_input(AudioStreamInputState *arg0) {
 #pragma pop
 
 void TLobby__sub_803C0238(AudioStreamInputState *self) {
-    TLobby *rec;
     TLobby *lobby;
     AudioStreamSource *src;
     SjRingBuffer *ring;
@@ -293,6 +292,7 @@ void TLobby__sub_803C0238(AudioStreamInputState *self) {
     u8 *p4;
     s32 locA[2];
     s32 locB;
+    TLobby *rec;
 
     rec = (TLobby *)self->f4;
     if (rec->get_entry_id() == 0) {
