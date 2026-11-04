@@ -108,7 +108,7 @@ struct AudioStreamSourceVtable {
 struct AudioStreamSource { AudioStreamSourceVtable *vt; };
 
 struct AudioStreamInputState {
-    s8 f0; s8 state; u8 f2; u8 f3; u32 f4; AudioStreamSource *f8;
+    s8 f0; s8 state; u8 f2; s8 f3; u32 f4; AudioStreamSource *f8;
     SjRingBuffer *rings[4];
     u8 pad_1c[0x2C - 0x1C];
     s32 f2c; s32 f30; s32 f34; s32 f38; s32 f3c; s32 f40; s32 f44;
@@ -353,9 +353,8 @@ join:
             if (self->f50 != 0) {
                 ((void (*)(s32, s32, s32, s32))self->f50)(self->f54, i, locA[0], locA[1]);
             }
-            ring = *(SjRingBuffer **)(p4 + 0xc);
-            ring->interface->put_chunk(ring, 1, (SjChunk *)locA);
-            ring->interface->unget_chunk(ring, 0, (SjChunk *)&locB);
+            ((SjRingBuffer **)(p4 + 0xc))[0]->interface->put_chunk(((SjRingBuffer **)(p4 + 0xc))[0], 1, (SjChunk *)locA);
+            ((SjRingBuffer **)(p4 + 0xc))[0]->interface->unget_chunk(((SjRingBuffer **)(p4 + 0xc))[0], 0, (SjChunk *)&locB);
             p8 += 8;
             p4 += 4;
             i++;
