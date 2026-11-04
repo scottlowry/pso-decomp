@@ -185,8 +185,8 @@ void TWindowSubStatusDisp__sub_8026E1D4(TWindowSubStatusDisp *self, s32 index, s
         measure_message_text_width((Msg_8026E1D4 *)e10, lbl_805DD358);
         ((Msg_8026E1D4 *)e10)->flags |= 2;
         stack.spC = lbl_805DD35C + (lbl_805DD360 + ((Msg_8026E1D4 *)e10)->width);
-        stack.sp14 = round_away_from_zero__20TWindowSubStatusDispFf(stack.sp14 - lbl_805DD36C * stack.spC);
         stack.sp10 = lbl_805DD364 + (lbl_805DD368 + ((Msg_8026E1D4 *)e10)->height);
+        stack.sp14 = round_away_from_zero__20TWindowSubStatusDispFf(stack.sp14 - lbl_805DD36C * stack.spC);
         stack.sp18 = round_away_from_zero__20TWindowSubStatusDispFf(stack.sp18 - lbl_805DD36C * stack.sp10);
         px = &stack.sp14;
         w = (void *)create_quest_message_window_at__Fll((s32)px, (s32)&stack.spC);
@@ -200,8 +200,8 @@ void TWindowSubStatusDisp__sub_8026E1D4(TWindowSubStatusDisp *self, s32 index, s
         refresh_status_display__9TWindowDDFv((void *)e10);
         ((Msg_8026E1D4 *)e10)->flags |= 2;
         stack.spC = lbl_805DD35C + (lbl_805DD360 + ((Msg_8026E1D4 *)e10)->width);
-        stack.sp14 = round_away_from_zero__20TWindowSubStatusDispFf(stack.sp14 - lbl_805DD36C * stack.spC);
         stack.sp10 = lbl_805DD364 + (lbl_805DD368 + ((Msg_8026E1D4 *)e10)->height);
+        stack.sp14 = round_away_from_zero__20TWindowSubStatusDispFf(stack.sp14 - lbl_805DD36C * stack.spC);
         stack.sp18 = round_away_from_zero__20TWindowSubStatusDispFf(stack.sp18 - lbl_805DD36C * stack.sp10);
         px = &stack.sp14;
         w = (void *)create_quest_message_window_at__Fll((s32)px, (s32)&stack.spC);
