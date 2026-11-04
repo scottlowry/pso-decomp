@@ -1671,6 +1671,8 @@ u32 TLobby__sub_803FEA88(A_80403F4C *out, Strm_80405A74 **src) {
     return hl;
 }
 
+#pragma push
+#pragma opt_propagation off
 u8 *GXLoadTexObjPreLoaded(A_80403F4C *obj, u8 *stream, s32 flag) {
     u8 buf[0x40];
     u8 *bp;
@@ -1729,6 +1731,7 @@ u8 *GXLoadTexObjPreLoaded(A_80403F4C *obj, u8 *stream, s32 flag) {
     NetMemcpy(cp, bp, len);
     return (u8 *)cur;
 }
+#pragma pop
 
 extern s32 lbl_805D7AA0;
 
