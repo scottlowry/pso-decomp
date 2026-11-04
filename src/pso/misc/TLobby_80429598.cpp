@@ -218,6 +218,9 @@ void TLobby__sub_80429648(void) {
         u32 a;
         u16 b;
     } tmp;
+    u32 padD;
+    u32 padE;
+    u32 padF;
     register u16 sw;
     register u16 *tp;
     u16 a;
@@ -245,11 +248,11 @@ void TLobby__sub_80429648(void) {
         EXIDeselect(0);
         w0 = buf[0] | ((buf[1] & 0xF) << 8);
         *(u16 *)&lbl_805D7C5C = w0;
-        w2 = ((buf[1] & 0xF0) >> 4) | (buf[2] << 4);
+        cmd2 = (((base + 0x10) & 0xFFFF) << 8) | 0x80000000;
+        w2 = (buf[1] >> 4) | (buf[2] << 4);
         pd = (u16 *)&lbl_805D7C5C;
         pd[1] = w2;
         *(u8 *)&pd[2] = buf[3];
-        cmd2 = (((base + 0x10) & 0xFFFF) << 8) | 0x80000000;
         tmp.a = lbl_805D7C5C;
         tmp.b = lbl_805D7C60;
         *(u32 *)lbl_805D7C6C = tmp.a;
@@ -268,26 +271,24 @@ void TLobby__sub_80429648(void) {
                 }
                 p++;
             }
-            if (i == count) {
-                lbl_805D7C7A = lbl_805D7C6C[0];
-                continue;
-            }
         }
-        if (lbl_805D7C4C != 0) {
+        if (count <= 0 || i != count) {
             pw = &lbl_805D7C6C[1];
-            lbl_805D7C74 = (u8 *)((u32 (*)(u16, u16, u8))lbl_805D7C4C)(status, *pw, ((u8 *)pw)[1]);
-            if (lbl_805D7C74 != 0) {
-                len = *pw;
-                off = base + 4;
-                if (off + len > 0x1000) {
-                    exi_dma_write_length = base + len - 0xFFC;
-                    exi_dma_read_length = len - exi_dma_write_length;
-                } else {
-                    exi_dma_read_length = len;
-                    exi_dma_write_length = 0;
+            if (lbl_805D7C4C != 0) {
+                lbl_805D7C74 = (u8 *)((u32 (*)(u16, u16, u8))lbl_805D7C4C)(status, *pw, ((u8 *)pw)[2]);
+                if (lbl_805D7C74 != 0) {
+                    len = *pw;
+                    off = base + 4;
+                    if (off + len > 0x1000) {
+                        exi_dma_write_length = base + len - 0xFFC;
+                        exi_dma_read_length = len - exi_dma_write_length;
+                    } else {
+                        exi_dma_read_length = len;
+                        exi_dma_write_length = 0;
+                    }
+                    TLobby::start_exi_dma_read((u16)off);
+                    return;
                 }
-                TLobby::start_exi_dma_read((u16)off);
-                return;
             }
         }
         lbl_805D7C7A = lbl_805D7C6C[0];
