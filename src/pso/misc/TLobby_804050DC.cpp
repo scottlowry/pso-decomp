@@ -6119,8 +6119,8 @@ s16 TLobby__sub_804105E0(u8 *self, u8 *pkt, s16 count, s16 idx) {
     }
     return -1;
 route:
-    rt = (Route_804105E0 *)TLobby__sub_80413264(self + 0x18, (s32)(self + 8));
-    if (rt == NULL) {
+    count16 = (s16)TLobby__sub_80413264(self + 0x18, (s32)(self + 8));
+    if (count16 == 0) {
         if (flag == 0 || val == 0) {
             err2.type = 1;
             err2.code = 0;
@@ -6129,15 +6129,15 @@ route:
         }
         return -1;
     }
-    if (rt->type == 1) {
+    if ((s32)(Route_804105E0 *)(s32)count16 == 1) {
         nexthop = self + 0x18;
     }
-    if (rt->type >= 2) {
-        if (rt->type < 4) {
-            nexthop = rt->gateway;
+    if ((s32)(Route_804105E0 *)(s32)count16 >= 2) {
+        if ((s32)(Route_804105E0 *)(s32)count16 < 4) {
+            nexthop = ((Route_804105E0 *)(s32)count16)->gateway;
         }
     }
-    f26 = TLobby::get_entry_field_26(rt->iface);
+    f26 = TLobby::get_entry_field_26(((Route_804105E0 *)(s32)count16)->iface);
     if ((s16)count > f26) {
         if (flag == 0 || val == 0) {
             err2.type = 2;
