@@ -31,6 +31,8 @@ void TAdDialingGC::render_if_flag_set() {
     }
 }
 
+#pragma push
+#pragma opt_propagation off
 void TAdDialingGC__sub_80328B24(void *arg0, void *arg1) {
     const f32 *start = (const f32 *)arg0;
     const f32 *delta = (const f32 *)arg1;
@@ -55,5 +57,6 @@ void TAdDialingGC__sub_80328B24(void *arg0, void *arg1) {
     col[3] = 0x8f;
     ((TObjCMHairMenu *)(&vl))->draw_tri_fan_2d(4, 7, lbl_805DF6F8);
 }
+#pragma pop
 
 }
