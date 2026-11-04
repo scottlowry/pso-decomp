@@ -82,6 +82,8 @@ extern f32 lbl_805D9C28;
 extern f32 lbl_805D9C2C;
 extern f32 lbl_805D9C5C;
 
+#pragma push
+#pragma opt_propagation off
 void load_resources__11TObjEneMojaFv(void) {
     s8 *desc;
     u8 *r;
@@ -144,7 +146,7 @@ void load_resources__11TObjEneMojaFv(void) {
     stack.sp18 = lbl_8043B0A4[2];
     stack.sp1C = lbl_8043B0A4[3];
     stack.sp8 = lbl_8043B09C[0];
-    *(s16 *)&stack.spC = *(s16 *)(lbl_8043B09C + 1);
+    *(u16 *)&stack.spC = (u16)lbl_8043B09C[1];
     stack.sp10 = *(s32 *)((u8 *)lbl_805D50D8 + 0x430);
     off = 0;
     for (i = 0; i < 3; i++) {
@@ -155,5 +157,6 @@ void load_resources__11TObjEneMojaFv(void) {
         off += 0x10;
     }
 }
+#pragma pop
 
 }
