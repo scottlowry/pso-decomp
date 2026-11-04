@@ -41,10 +41,10 @@ void TAdDialingGC__sub_80328B24(void *arg0, void *arg1) {
     f32 pos[8];
     vl.n = 0;
     vl.cap = 4;
-    vl.col = col;
-    vl.pos = pos;
     pos[0] = start[0];
     pos[1] = start[1];
+    vl.col = col;
+    vl.pos = pos;
     vl.col[0] = 0x8f;
     vl.pos[2] = start[0];
     vl.pos[3] = start[1] + delta[1];
