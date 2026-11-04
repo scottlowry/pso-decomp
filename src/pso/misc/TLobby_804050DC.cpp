@@ -11232,36 +11232,36 @@ u8 * TLobby__sub_8041B5C0(void *arg0) {
     s16 v;
     s32 d;
 
-    if (tcb == 0) {
+    if (tcb != 0) {
+        if ((tcb->fB & 0x80) == 0) {
+            tcb->f6 = 0;
+            tcb->f25c[0] = 0;
+            tcb->f25c[1] = 0;
+            tcb->f25c[2] = 0;
+            tcb->f25c[3] = 0;
+            return (u8 *)tcb;
+        }
+        if ((tcb->fB & 0x20) == 0) {
+            d = (s32)tcb - tcp_protocol_state.value;
+            NetDispatchSocketEvent((s16)(d / 0x544), tcb->f2D0, 3, 3);
+            tcb->fB |= 0x20;
+        }
+        ((TLobby *)tcb)->close_if_open();
+        TLobby__sub_8041EB74((u8 *)tcb);
+        v = tcb->f8;
+        if ((u32)v != 0xffff) {
+            e = (E_805C1D48 *)(tcp_protocol_state.value + v * 0x544);
+            if (e->f4 == 1) {
+                e->f2C6 = (s16)(e->f2C6 - 1);
+            }
+        }
+        d = (s32)tcb - tcp_protocol_state.value;
+        NetDispatchSocketEvent((s16)(d / 0x544), tcb->f2D0, 3, 0xff);
+        tcb->f4 = 0;
+        d = (s32)tcb - tcp_protocol_state.value;
+        g->avail = (s16)(d / 0x544);
         return 0;
     }
-    if ((tcb->fB & 0x80) == 0) {
-        tcb->f6 = 0;
-        tcb->f25c[0] = 0;
-        tcb->f25c[1] = 0;
-        tcb->f25c[2] = 0;
-        tcb->f25c[3] = 0;
-        return (u8 *)tcb;
-    }
-    if ((tcb->fB & 0x20) == 0) {
-        d = (s32)tcb - tcp_protocol_state.value;
-        NetDispatchSocketEvent((s16)(d / 0x544), tcb->f2D0, 3, 3);
-        tcb->fB |= 0x20;
-    }
-    ((TLobby *)tcb)->close_if_open();
-    TLobby__sub_8041EB74((u8 *)tcb);
-    v = tcb->f8;
-    if ((u32)v != 0xffff) {
-        e = (E_805C1D48 *)(tcp_protocol_state.value + v * 0x544);
-        if (e->f4 == 1) {
-            e->f2C6 = (s16)(e->f2C6 - 1);
-        }
-    }
-    d = (s32)tcb - tcp_protocol_state.value;
-    NetDispatchSocketEvent((s16)(d / 0x544), tcb->f2D0, 3, 0xff);
-    tcb->f4 = 0;
-    d = (s32)tcb - tcp_protocol_state.value;
-    g->avail = (s16)(d / 0x544);
     return 0;
 }
 
