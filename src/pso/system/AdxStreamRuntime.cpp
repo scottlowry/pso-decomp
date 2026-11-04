@@ -470,6 +470,10 @@ u8 *TLobby__sub_803C61C4(s32 n, Strm_803C5B50 **arr, Strm_803C5B50 *extra) {
     s32 len;
     s32 v;
     s32 t;
+    s32 k54;
+    s32 k44;
+    u8 *w;
+    u8 *wc;
 
     pool = (u8 *)adx_encoder_channel_work_pools;
     len = strlen(lbl_805D4664);
@@ -523,12 +527,14 @@ u8 *TLobby__sub_803C61C4(s32 n, Strm_803C5B50 **arr, Strm_803C5B50 *extra) {
     *(s32 *)(slot + 0x3c) = 0;
     v = *(s32 *)(slot + 0x44);
     *(s32 *)(slot + 0x40) = ((*(s32 *)(slot + 0x60) - 1) / v + 1) * v;
-    name = pool + 0x900;
+    k54 = *(s32 *)(slot + 0x54);
+    w = pool + 0x900;
     for (i = 0; i < 16; i++) {
+        name = w;
         if (*(s8 *)name == 0) {
             break;
         }
-        name = name + 0xc;
+        w = w + 0xc;
     }
     if (i >= 16) {
         name = 0;
@@ -536,14 +542,15 @@ u8 *TLobby__sub_803C61C4(s32 n, Strm_803C5B50 **arr, Strm_803C5B50 *extra) {
     if (name == 0) {
         ctx = 0;
     } else {
-        ctx = pool;
+        wc = pool;
         for (j = 0; j < 16; j++) {
+            ctx = wc;
             if (*(s8 *)ctx == 0) {
                 break;
             }
-            ctx = ctx + 0x90;
+            wc = wc + 0x90;
         }
-        *(s32 *)(ctx + 0x14) = *(s32 *)(slot + 0x54);
+        *(s32 *)(ctx + 0x14) = k54;
         *(u8 **)(ctx + 0x88) = name;
         if (j < 16) {
             *ctx = 1;
@@ -552,12 +559,14 @@ u8 *TLobby__sub_803C61C4(s32 n, Strm_803C5B50 **arr, Strm_803C5B50 *extra) {
         }
     }
     *(u8 **)(slot + 0x80) = ctx;
-    name = pool + 0x900;
+    k44 = *(s32 *)(slot + 0x44);
+    w = pool + 0x900;
     for (i = 0; i < 16; i++) {
+        name = w;
         if (*(s8 *)name == 0) {
             break;
         }
-        name = name + 0xc;
+        w = w + 0xc;
     }
     if (i >= 16) {
         name = 0;
@@ -565,14 +574,15 @@ u8 *TLobby__sub_803C61C4(s32 n, Strm_803C5B50 **arr, Strm_803C5B50 *extra) {
     if (name == 0) {
         ctx = 0;
     } else {
-        ctx = pool;
+        wc = pool;
         for (j = 0; j < 16; j++) {
+            ctx = wc;
             if (*(s8 *)ctx == 0) {
                 break;
             }
-            ctx = ctx + 0x90;
+            wc = wc + 0x90;
         }
-        *(s32 *)(ctx + 0x14) = *(s32 *)(slot + 0x44);
+        *(s32 *)(ctx + 0x14) = k44;
         *(u8 **)(ctx + 0x88) = name;
         if (j < 16) {
             *ctx = 1;
