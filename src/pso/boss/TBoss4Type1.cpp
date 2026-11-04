@@ -366,7 +366,15 @@ extern const f32 lbl_805D8B74;
 extern const f32 lbl_805D8B78;
 extern const f32 lbl_805D8B7C;
 extern const f32 lbl_805D8B80;
+extern const f32 lbl_805D8B8C;
+extern const f32 lbl_805D8B90;
+extern const f32 lbl_805D8B94;
+extern const f32 lbl_805D8B98;
 extern s32 tl_04;
+extern s32 is_split_screen();
+extern TObjPlayer *get_player_by_client_id(s32 client);
+extern s32 local_client_id;
+extern s32 rand();
 
 #pragma push
 #pragma fp_contract on
@@ -1843,6 +1851,100 @@ void create_all_tenchu_furu__11TBoss4Type2Fi(s32 arg0) {
         var_r31 = (s32 *)((u8 *)var_r31 + (0xC));
     } while (var_r30 < 0x40);
 }
+
+#pragma push
+#pragma fp_contract on
+s32 TBoss4Type2__sub_80054FC0(void *self, f32 range) {
+    Vec_80053914 pos;
+    Vec_80053914 cand;
+    TObjPlayer *players[4];
+    Vec_80053914 *dst;
+    Vec_80053914 *src;
+    Vec_80053914 *cursor;
+    Vec_80053914 *target;
+    TObjPlayer *p;
+    f32 scale;
+    s32 cnt;
+    s32 count;
+    s32 i;
+    s32 j;
+    s32 ang;
+    s32 hit;
+    s32 k;
+
+    dst = (Vec_80053914 *)&TBoss4Type2__tenchu_furu_array;
+    src = (Vec_80053914 *)lbl_80485AE0;
+    cnt = 0;
+    for (; cnt < 0x40; cnt++) {
+        VecCopy__FP3VecPC3Vec(dst, src);
+        dst++;
+        src++;
+    }
+    cnt = 0;
+    cursor = (Vec_80053914 *)&TBoss4Type2__tenchu_furu_array;
+    count = 0;
+    if (is_split_screen() != 0) {
+        count = TLobby::get_game_mode();
+        if (count > 4) {
+            count = 4;
+        }
+        for (i = 0; i < count; i++) {
+            players[i] = TObjPlayer::get_player_data(i);
+            if (players[i] == NULL) {
+                break;
+            }
+        }
+    } else {
+        players[0] = get_player_by_client_id(local_client_id);
+        if (players[0] != NULL) {
+            count = 1;
+        }
+    }
+    scale = lbl_805D8B8C;
+    for (i = 0; i < count; i++) {
+        p = players[i];
+        cursor[cnt].x = *(f32 *)((u8 *)p + 0x38);
+        cursor[cnt].z = *(f32 *)((u8 *)p + 0x40);
+        cnt++;
+        for (ang = 0, j = 0; j < 8; j++, ang += 0x2000) {
+            cursor[cnt].x =
+                scale * sin_table_lookup(ang) + *(f32 *)((u8 *)players[i] + 0x38);
+            cursor[cnt].z =
+                scale * cos_table_lookup(ang) + *(f32 *)((u8 *)players[i] + 0x40);
+            cnt++;
+        }
+    }
+    for (j = 0; j < 0x100 && cnt < 0x40; j++) {
+        cand.x = lbl_805D8B4C * (lbl_805D8B90 * (f32)(f64)(rand() ^ 0x8000) - lbl_805D8B60);
+        cand.y = lbl_805D8B20;
+        cand.z = lbl_805D8B4C * (lbl_805D8B90 * (f32)(f64)(rand() ^ 0x8000) - lbl_805D8B60);
+        if (cand.x * cand.x + cand.z * cand.z >= lbl_805D8B94) {
+            continue;
+        }
+        if (self != NULL) {
+            VecCopy__FP3VecPC3Vec(&pos, self);
+            subtract_vector((Vec_80053D4C *)&pos, (Vec_80053D4C *)&cand);
+            pos.y = lbl_805D8B20;
+            if (vector_length(&pos) <= range) {
+                continue;
+            }
+        }
+        hit = 0;
+        for (target = (Vec_80053914 *)&TBoss4Type2__tenchu_furu_array, k = 0;
+             k < cnt; k++, target++) {
+            if (xyz_distance(&cand, target) <= lbl_805D8B98) {
+                hit = 1;
+                break;
+            }
+        }
+        if (hit == 0) {
+            cursor[cnt].x = cand.x;
+            cursor[cnt].z = cand.z;
+            cnt++;
+        }
+    }
+}
+#pragma pop
 
 void TBoss4Type2__sub_80055300(void) { ((int (*)(s32, f32))TBoss4Type2__sub_80054FC0)(0, lbl_805D8B20); }
 
