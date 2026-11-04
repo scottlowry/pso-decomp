@@ -60,11 +60,12 @@ extern const float lbl_805D8A04;
 extern s32 boss4_zanzo_bml_index_table[];
 extern s32 lbl_80486FB0[3];
 
-// The body motions of the two model groups, then the TObjFish node table for
-// the emitter positions.
-s32 lbl_80485720[17] = {
-    0x12, 0x11, 0x20, 0x21, 0x22, 0x34, 0, 0, 0, 0x35, 0, 0, 0, -1, 0, 0, 0,
-};
+// The body motion ids for the two model groups; the vtable below is the tail
+// of the same data blob.
+s32 lbl_80485720[5] = {0x12, 0x11, 0x20, 0x21, 0x22};
+
+// TObjFish node table for the emitter positions, padded to the vtable.
+s32 lbl_80485734[12] = {0x34, 0, 0, 0, 0x35, 0, 0, 0, -1, 0, 0, 0};
 
 void *__vt__11TObjDFDemo4[13] = {
     (void *)0x0, (void *)0x0, (void *)&__dt__11TObjDFDemo4Fv, (void *)&run_task__11TObjDFDemo4Fv,
@@ -103,7 +104,7 @@ void *TObjDFDemo4__ct(void *arg0, void *parent, const Vec *pos, s32 angle) {
     }
     {
         // The second model group's motions start two ids into the table.
-        s32 *motions = &lbl_80485720[2];
+        s32 *motions = &blob[2];
         for (i = 0; i < 3; i++) {
             s32 t = lbl_80486FB0[i];
             k = t;
@@ -125,7 +126,7 @@ void *TObjDFDemo4__ct(void *arg0, void *parent, const Vec *pos, s32 angle) {
         set_scripted_camera_pose(&self->pos, &self->pos, &angles);
         ((TCameraCtrl *)&playback)->cache_target_and_forward(0x416C);
     }
-    self->node_list = TObjFish__sub_800E3124(&lbl_80485720[5], (s32)self->emitter_positions);
+    self->node_list = TObjFish__sub_800E3124(&blob[5], (s32)self->emitter_positions);
     self->timer = 0;
     return self;
 }
