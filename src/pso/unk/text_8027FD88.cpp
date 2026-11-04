@@ -169,6 +169,7 @@ void vt4__20TWindowSubStatusDispFv(u8 *arg0) {
     u16 *e3;
     s32 *win;
     s32 mode;
+    s32 t;
     s32 v;
 
     if ((f32) *(s32 *)((s8 *)arg0 + 0x5C) > TWindowSubStatusDisp__data_805DD708) {
@@ -176,9 +177,13 @@ void vt4__20TWindowSubStatusDispFv(u8 *arg0) {
     }
     init_window_layout_entries(arg0 + 0x24, TWindowSubStatusDisp__rank_time_records_layout, *(s16 *)((s8 *)arg0 + 0x20));
     get_type__20TWindowSubStatusDispFv(*(s32 *)((s8 *)arg0 + 0x68));
-    mode = (*(s16 *)((s8 *)arg0 + 0x60) == 2) ? 2 : 0;
+    t = 0;
+    if (*(s16 *)((s8 *)arg0 + 0x60) == 2) {
+        t = 2;
+    }
+    mode = t;
     e1 = (u16 *)get_array_entry__11TWindowBaseFi(arg0, 0);
-    if (mode == 0) {
+    if (t == 0) {
         set_text_entry_string((u8 *)e1, get_message_10__20TWindowSubStatusDispFl(0x90), 0);
     } else {
         set_text_entry_string((u8 *)e1, get_message_10__20TWindowSubStatusDispFl(0x93), 0);
@@ -239,7 +244,10 @@ void vt4__20TWindowSubStatusDispFv(u8 *arg0) {
         TWindowSubStatusDisp::append_play_time(v);
         set_text_entry_string((u8 *)e3, get_shared_text_buffer(), 0x20);
     }
-    mode = (*(s16 *)((s8 *)arg0 + 0x60) == 2) ? 3 : 1;
+    mode = 1;
+    if (*(s16 *)((s8 *)arg0 + 0x60) == 2) {
+        mode = 3;
+    }
     e1 = (u16 *)get_array_entry__11TWindowBaseFi(arg0, 0xA);
     e2 = (u16 *)get_array_entry__11TWindowBaseFi(arg0, 0xB);
     e3 = (u16 *)get_array_entry__11TWindowBaseFi(arg0, 0xC);
