@@ -4316,6 +4316,70 @@ C_8040A45C *TLobby__sub_8040C248(D_8040A45C *q) {
     return best;
 }
 
+s16 TLobby__sub_8040C340(D_8040A45C *q, C_8040A45C *node) {
+    C_8040A45C *cur;
+    G_8040A45C *state;
+    u8 *node_key;
+    C_8040A45C *prev;
+    s32 i;
+    s32 cmp;
+
+    if (node == NULL) {
+        return -1;
+    }
+    if (q == NULL) {
+        return -1;
+    }
+    if (q->f0 == 0 || q->f208 == NULL) {
+        return -1;
+    }
+    cur = q->f208;
+    state = &dns_resolver_state;
+    node_key = node->f4.addr;
+    prev = NULL;
+    i = 0;
+    while (cur != NULL && (s16)i < state->nc) {
+        switch (cur->f4.f0) {
+        case 0:
+            cmp = -1;
+            break;
+        case 4:
+            if (node->f4.f0 != 4) {
+                cmp = -1;
+            } else {
+                cmp = NetMemcmp(cur->f4.addr, node_key, 4);
+            }
+            break;
+        case 6:
+            if (node->f4.f0 != 6) {
+                cmp = -1;
+            } else {
+                cmp = NetMemcmp(cur->f4.addr, node_key, 16);
+            }
+            break;
+        default:
+            cmp = -1;
+            break;
+        }
+        if (cmp != 0) {
+            prev = cur;
+            cur = cur->f20;
+            i++;
+            continue;
+        }
+        q->f204 = q->f204 - 1;
+        if (prev == NULL) {
+            q->f208 = cur->f20;
+        } else {
+            prev->f20 = cur->f20;
+        }
+        cur->f0 = 0;
+        cur->f20 = NULL;
+        return 0;
+    }
+    return -1;
+}
+
 s32 append_to_list__6TLobbyFPvPv(O_8040C4B0 *o, N_8040C4B0 *n) {
     s16 i;
     N_8040C4B0 *p;
