@@ -163,6 +163,8 @@ void vt5__20TWindowSubStatusDispFv(u8 *arg0) {
 
 void TWindowSubStatusDisp::vt15() {  }
 
+#pragma push
+#pragma opt_propagation off
 void vt4__20TWindowSubStatusDispFv(u8 *arg0) {
     u16 *e1;
     u16 *e2;
@@ -281,6 +283,7 @@ void vt4__20TWindowSubStatusDispFv(u8 *arg0) {
         set_text_entry_string((u8 *)e3, get_shared_text_buffer(), 0x20);
     }
 }
+#pragma pop
 
 void TWindowSubStatusDisp::vt18() {  }
 
