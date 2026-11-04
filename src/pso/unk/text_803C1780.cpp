@@ -31,7 +31,7 @@ s32 TLobby__sub_803C1780(u8 *arg0, s32 arg1, s16 *arg2, u8 *arg3, u8 *arg4,
     }
     u8 *hdr = arg0 + i;
     u16 tv = *(const u16 *)(hdr + 8);
-    if ((s16)(((tv & 0xFF) << 8) | (tv >> 8)) > 1) {
+    if ((s16)((tv >> 8) | ((tv & 0xFF) << 8)) > 1) {
         return -1;
     }
     for (i = 0; i < arg1; i++) {
@@ -42,8 +42,8 @@ s32 TLobby__sub_803C1780(u8 *arg0, s32 arg1, s16 *arg2, u8 *arg3, u8 *arg4,
     if (i == arg1) {
         return -1;
     }
-    u32 v = *(const u32 *)(hdr + 4);
-    s32 x = (s32)(((v >> 8) & 0xFF00) | ((v >> 24) & 0xFF) | ((v << 8) & 0xFF0000) |
+    u32 v = *(const u32 *)(arg0 + i + 4);
+    s32 x = (s32)(((v >> 24) & 0xFF) | ((v >> 8) & 0xFF00) | ((v << 8) & 0xFF0000) |
                   ((v << 24) & 0xFF000000));
     *arg2 = (s16)(i + 8);
     *arg3 = -1;
@@ -51,11 +51,11 @@ s32 TLobby__sub_803C1780(u8 *arg0, s32 arg1, s16 *arg2, u8 *arg3, u8 *arg4,
     *(u32 *)(arg7 + x) = ((w >> 24) & 0xFF) | ((w >> 8) & 0xFF00) |
                          ((w << 8) & 0xFF0000) | ((w << 24) & 0xFF000000);
     u16 t6 = *(const u16 *)(hdr + 0xa);
-    *arg6 = (u8)(((t6 & 0xFF) << 8) | (t6 >> 8));
+    *arg6 = (u8)((t6 >> 8) | ((t6 & 0xFF) << 8));
     u16 t4 = *(const u16 *)(hdr + 0x16);
-    *arg4 = (u8)(((t4 & 0xFF) << 8) | (t4 >> 8));
+    *arg4 = (u8)((t4 >> 8) | ((t4 & 0xFF) << 8));
     u16 t5 = *(const u16 *)(hdr + 0x14);
-    *arg5 = (u8)(((t5 & 0xFF) << 8) | (t5 >> 8));
+    *arg5 = (u8)((t5 >> 8) | ((t5 & 0xFF) << 8));
     *arg8 = x / (s8)*arg5;
     *arg9 = 1;
     if ((s8)*arg4 == 16) {
