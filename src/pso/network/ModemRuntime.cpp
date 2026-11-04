@@ -551,6 +551,7 @@ s32 TAdSinglePlyChrSelectGC__sub_8042CD64(void) {
         OSYieldThread();
     }
     for (i = 0; i < count; i++) {
+        cmd = 0x23000000 | ((u8)1 << 8);
         EXISelect(0, 2, 4);
         EXIImm(0, &cmd, 4, EXI_WRITE, NULL);
         EXISync(0);
@@ -559,7 +560,10 @@ s32 TAdSinglePlyChrSelectGC__sub_8042CD64(void) {
         EXIDeselect(0);
         idx = state->length;
         state->length = idx + 1;
-        state->buf[idx] = value;
+        {
+            u8 *p = state->buf + idx;
+            *p = value;
+        }
         if (value == lbl_805D487C[match]) {
             match++;
             if (match == 5) {
