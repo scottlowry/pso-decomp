@@ -91,6 +91,8 @@ void TLobby::free_buffers() {
     }
 }
 
+#pragma push
+#pragma opt_common_subs off
 void TLobby__sub_80184DF4(void) {
     u8* base;
     s32 phase;
@@ -150,7 +152,7 @@ void TLobby__sub_80184DF4(void) {
             p = (s32*)*p;
             p = (s32*)p[1];
             p = (s32*)p[1];
-            *(s16*)(p + 3) &= ~0x80000;
+            *(s16*)(p + 3) &= 0xFFF7FFFF;
         } else if (lbl_805D5B30 == 4) {
             e2 = *(s32*)(*(s32*)(res + 0x42c) + 0x18);
             t = (s32)__nw__FUl(0x14);
@@ -162,7 +164,7 @@ void TLobby__sub_80184DF4(void) {
             p = (s32*)*p;
             p = (s32*)p[1];
             p = (s32*)p[1];
-            *(s16*)(p + 3) &= ~0x80000;
+            *(s16*)(p + 3) &= 0xFFF7FFFF;
         } else {
             lbl_805D5B34 = 0;
         }
@@ -198,7 +200,7 @@ void TLobby__sub_80184DF4(void) {
     p = (s32*)lbl_805D5B3C;
     p = (s32*)p[1];
     p = (s32*)p[1];
-    *(s16*)(p + 3) &= ~0x40000;
+    *(s16*)(p + 3) &= 0xFFFBFFFF;
     lbl_805D5B38 = (void*)res2;
     cnt = *(s32*)(res2 + 0x434);
     for (i = 0; i < cnt; i++) {
@@ -210,6 +212,7 @@ void TLobby__sub_80184DF4(void) {
         off += 0x10;
     }
 }
+#pragma pop
 
 void TObjLaboMapWarp::slot4C() {
     Obj_80185160 *self = (Obj_80185160 *)this;
