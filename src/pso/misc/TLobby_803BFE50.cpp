@@ -290,8 +290,8 @@ void TLobby__sub_803C0238(AudioStreamInputState *self) {
     s32 i;
     u8 *p8;
     u8 *p4;
-    s32 locB;
     s32 locA[2];
+    s32 locB;
     TLobby *rec;
 
     rec = (TLobby *)self->f4;
