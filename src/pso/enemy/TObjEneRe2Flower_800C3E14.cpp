@@ -495,8 +495,8 @@ void *TObjEneRe2Flower__ct(void *self, void *parent, void *set_data) {
     s32 b;
     s32 object_handle;
     s32 attack_handle;
-    s32 i;
     s32 off;
+    s32 i;
 
     setup_data = (u8 *)&TObjEneRe2Flower__setup_data;
 
