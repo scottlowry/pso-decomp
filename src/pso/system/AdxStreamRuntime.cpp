@@ -912,7 +912,11 @@ s32 fn_803C8020(AdxEncCtx_803C8020 *ctx, s32 ch_idx) {
             s32 pred = ((hn->f4 * hn->f8) + (hn->f6 * hn->fA)) >> 12;
             s32 rec = wr + pred;
             t = (rec <= -0x8000) ? -0x8000 : rec;
-            rec = (t >= 0x7fff) ? 0x7fff : ((rec <= -0x8000) ? -0x8000 : rec);
+            if (t < 0x7fff) {
+                rec = (rec <= -0x8000) ? -0x8000 : rec;
+            } else {
+                rec = 0x7fff;
+            }
             hn->fA = hn->f8;
             hn->f8 = (s16)rec;
         }
