@@ -497,6 +497,23 @@ extern char lbl_80514F58[];
 void TLobby__sub_80228118(void);
 char *strcpy(char *dst, const char *src);
 void clear_work_buffer(u8 *arg0);
+void set_global_param__8TObjFishFl(s32 arg0);
+void push_matrix_from(void *arg0);
+void rotate_matrix_z(s32 arg0, s32 arg1);
+void rotate_vector_by_matrix(s32 arg0, f32 *arg1, f32 *arg2);
+void pop_matrix(void);
+void begin_screen_draw(s32 arg0);
+void set_draw_texture_and_color(s32 arg0, u32 arg1);
+void draw_textured_quad_at_depth(f32 *arg0, f32 arg1);
+void get_player__20TWindowSubStatusDispFv(void);
+extern u8 identity_matrix[];
+extern u8 model_material_color[];
+extern const f32 lbl_805DC770;
+extern const f32 lbl_805DC774;
+extern const f32 lbl_805DC778;
+extern const f32 lbl_805DC77C;
+extern const f32 lbl_805DC780;
+extern const f32 lbl_805DC784;
 extern char lbl_805DC788[4];
 u32 strlen(const char *s);
 s32 debug_printf_at(u32, void *, ...);
@@ -566,6 +583,103 @@ void TLobby::wait_for_sound_init() {
 
 void TLobby__sub_80228118(void) {
     __register_global_object(reset_sound_owner_state(((char *)&sound_control_state)), (void *)TLobby__sub_80240808, lbl_80514F58);
+}
+
+void TLobby__sub_80228154(void *arg0, s32 arg1, s32 arg2, f32 arg3) {
+    u32 color;
+    f32 v[3];
+    f32 q[4];
+    f32 h[4];
+    f32 c4;
+    f32 c6;
+    f32 c0;
+    f32 c2;
+    f32 ch;
+    f32 A;
+    f32 B;
+    s16 *e;
+    s32 i0;
+    s32 i1;
+    s32 i2;
+    s32 i3;
+    u8 *pb;
+
+    if (arg0 == 0) {
+        return;
+    }
+    if (*(s32 *)((s8 *)arg0 + 0x18) == 0) {
+        return;
+    }
+    set_global_param__8TObjFishFl(*(s32 *)((s8 *)arg0 + 0x18));
+    e = (s16 *)(*(s32 *)((s8 *)arg0 + 0x1c) + arg1 * 0x14);
+    c4 = (f32)-(s32)e[2];
+    c0 = (f32)-(s32)e[0];
+    c6 = (f32)-(s32)e[3];
+    c2 = (f32)-(s32)e[1];
+    q[0] = *(f32 *)((s8 *)arg0 + 0x0) + c4 * *(f32 *)((s8 *)arg0 + 0xc);
+    q[2] = *(f32 *)((s8 *)arg0 + 0x0) + (c4 + c0) * *(f32 *)((s8 *)arg0 + 0xc);
+    q[1] = *(f32 *)((s8 *)arg0 + 0x4) + c6 * *(f32 *)((s8 *)arg0 + 0x10);
+    q[3] = *(f32 *)((s8 *)arg0 + 0x4) + (c6 + c2) * *(f32 *)((s8 *)arg0 + 0x10);
+    ch = (f32)-(s32)e[4];
+    h[0] = ch * lbl_805DC770;
+    if (lbl_805DC774 < h[0]) {
+        h[0] = lbl_805DC774;
+    }
+    ch = (f32)-(s32)e[5];
+    h[1] = ch * lbl_805DC770;
+    if (lbl_805DC774 < h[1]) {
+        h[1] = lbl_805DC774;
+    }
+    ch = (f32)-(s32)e[6];
+    h[2] = ch * lbl_805DC770;
+    if (lbl_805DC774 < h[2]) {
+        h[2] = lbl_805DC774;
+    }
+    ch = (f32)-(s32)e[7];
+    h[3] = ch * lbl_805DC770;
+    if (lbl_805DC774 < h[3]) {
+        h[3] = lbl_805DC774;
+    }
+    color = 0xFFFFFFFF;
+    if (arg2 & 1) {
+        A = (q[2] + q[0]) * lbl_805DC778;
+        B = (q[3] + q[1]) * lbl_805DC778;
+        v[2] = lbl_805DC77C;
+        v[0] = q[0] - A;
+        v[1] = q[1] - B;
+        push_matrix_from(identity_matrix);
+        rotate_matrix_z(0, *(s32 *)((s8 *)arg0 + 0x14));
+        rotate_vector_by_matrix(0, v, v);
+        pop_matrix();
+        q[0] = A + v[0];
+        q[1] = B + v[1];
+        q[2] = A - v[0];
+        q[3] = B - v[1];
+    }
+    if (arg2 & 2) {
+        i3 = (s32)(lbl_805DC780 * ((f32 *)model_material_color)[3]);
+        i2 = (s32)(lbl_805DC780 * ((f32 *)model_material_color)[2]);
+        i1 = (s32)(lbl_805DC780 * ((f32 *)model_material_color)[1]);
+        i0 = (s32)(lbl_805DC780 * ((f32 *)model_material_color)[0]);
+        pb = (u8 *)&color;
+        pb[3] = (u8)i3;
+        pb[2] = (u8)i2;
+        pb[1] = (u8)i1;
+        pb[0] = (u8)i0;
+    }
+    if (arg2 & 4) {
+        h[2] = h[0];
+        h[0] = h[0];
+    }
+    if (arg2 & 8) {
+        h[3] = h[1];
+        h[0] = h[1];
+    }
+    arg3 = lbl_805DC784 / arg3;
+    begin_screen_draw((arg2 & 0x20) != 0);
+    set_draw_texture_and_color(e[8], color);
+    draw_textured_quad_at_depth(q, arg3);
+    get_player__20TWindowSubStatusDispFv();
 }
 
 void TLobby::clear_ready_flag_unless_locked() {
