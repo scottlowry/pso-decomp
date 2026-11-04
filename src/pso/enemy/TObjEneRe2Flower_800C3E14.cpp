@@ -529,10 +529,10 @@ void *TObjEneRe2Flower__ct(void *self, void *parent, void *set_data) {
     if (((TObjEneRe2Flower *)self)->get_flag_11() != 0) {
         b = 2;
     } else {
-        if (((TObjEneRe2Flower *)self)->sub_800C3B8C() == 0) {
-            b = 0;
-        } else {
+        if (((TObjEneRe2Flower *)self)->sub_800C3B8C() != 0) {
             b = 1;
+        } else {
+            b = 0;
         }
     }
     object_handle = register_object__6TLobbyFl(lbl_8043BA94[b]);
@@ -549,10 +549,10 @@ void *TObjEneRe2Flower__ct(void *self, void *parent, void *set_data) {
     if (((TObjEneRe2Flower *)self)->get_flag_11() != 0) {
         ((TObjEneDD *)self)->initialize_enemy_state(0x53);
     } else {
-        if (((TObjEneRe2Flower *)self)->sub_800C3B8C() == 0) {
-            ((TObjEneDD *)self)->initialize_enemy_state(0xD);
-        } else {
+        if (((TObjEneRe2Flower *)self)->sub_800C3B8C() != 0) {
             ((TObjEneDD *)self)->initialize_enemy_state(0xE);
+        } else {
+            ((TObjEneDD *)self)->initialize_enemy_state(0xD);
         }
     }
     *(f32 *)((s8 *)self + 0x37C) = lbl_805D9FBC;
