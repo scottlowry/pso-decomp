@@ -757,28 +757,31 @@ void TLobby__sub_803C7DF0(void *arg0, s32 arg1) {
     };
     u8 *ctx = (u8 *)arg0;
     u8 *p64 = ctx + arg1 * 64;
+    s32 div = 8 / *(s32 *)(ctx + 0x54);
+    s32 cnt = 0;
     u8 *e4 = ctx + arg1 * 4;
+    u8 *pd = ctx + arg1 * 16 + 0x2A7;
     Enc *e = *(Enc **)(e4 + 0x80);
     s16 *pa = (s16 *)(p64 + 0x110);
     s16 *pb = (s16 *)(p64 + 0x190);
+    s16 *sp = (s16 *)e;
     s16 *pc = (s16 *)(p64 + 0x210);
-    u8 *pd = ctx + arg1 * 16 + 0x2A8;
-    s16 *sp = e->samples;
-    s32 div = 8 / *(s32 *)(ctx + 0x54);
-    s32 cnt = 0;
     s32 i;
 
     for (i = 0; i < *(s32 *)(ctx + 0x44); i++) {
-        s32 x = (e != NULL) ? (s32)*sp : 0;
+        s32 x = (e == NULL) ? 0 : (s32)sp[0xC];
         sp = sp + 1;
         *pa = (s16)x;
         s32 q1 = (s32)((double)e->scale * (f64)*pa);
         s32 c1 = (q1 < -32768) ? -32768 : q1;
         s32 y1 = (c1 > 32767) ? 32767 : ((q1 < -32768) ? -32768 : q1);
         *pb = (s16)y1;
-        s32 v = (s32)*pb;
-        s32 m = (v < 0) ? v - 2340 : v + 2340;
-        s32 w = m / 4681;
+        s32 w;
+        if ((s32)*pb < 0) {
+            w = (y1 - 2340) / 4681;
+        } else {
+            w = (y1 + 2340) / 4681;
+        }
         s32 c2 = (w < -8) ? -8 : w;
         s32 j = (c2 > 7) ? 7 : ((w < -8) ? -8 : w);
         s32 q2 = (s32)((double)e->scale * (f64)(j * (s32)e->gain));
@@ -786,16 +789,16 @@ void TLobby__sub_803C7DF0(void *arg0, s32 arg1) {
         s32 y2 = (d2 > 32767) ? 32767 : ((q2 < -32768) ? -32768 : q2);
         *pc = (s16)y2;
         if (i % div == 0) {
-            *++pd = 0;
+            pd[1] = 0;
             cnt = 1;
         }
         s32 f54 = *(s32 *)(ctx + 0x54);
         s32 sh = f54 * (div - cnt);
-        s32 cur = (s32)*pd;
+        s32 cur = pd[0];
         cnt = cnt + 1;
         s32 mh = 8 - f54;
         s32 low = ((j << mh) & 0xFF) >> mh;
-        *pd = (u8)(cur | (s8)(low << sh));
+        pd[0] = (u8)(cur | (s8)(low << sh));
         pa = pa + 1;
         pb = pb + 1;
         pc = pc + 1;
