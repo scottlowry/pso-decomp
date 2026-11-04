@@ -118,6 +118,11 @@ void TWindowHelpItem__set_displayed_item_by_id(u32, s32);
 u32 create_item_list_window(s32, s32, u16);
 void sort_bank_items(s32 slot);
 void __dl__7TObjectFPv(void *);
+s32 lookup_item_def__9TItemDataFPv(void *);
+s32 get_bank_deposit_capacity_for_item(void *, s32);
+s32 bank_has_free_row__Fl(s32);
+void *__nw__7TObjectFUl(u32);
+void *__ct__18TWindowInputNumberFPvllls(void *, void *, s32, s32, s32, s16);
 
 void TShopKeepItemWindow::display_message(const char *text, s32 flags) {
     struct VObj_80221844 *temp_r3;
@@ -233,6 +238,79 @@ void TShopKeepItemWindow::update_number_input() {
         ((TWindowBase *)this->m_38c)->close();
         this->m_38c = 0U;
         set_field_20(3);
+    }
+}
+
+s32 TShopKeepItemWindow::handle_deposit_list_select() {
+    Self_80221F08 *self = (Self_80221F08 *)this;
+    s32 bank;
+    s32 cur;
+    u8 *item;
+    s32 count;
+    s32 stack;
+    void *obj;
+    u16 ent;
+    f32 temp_f31;
+
+    bank = sub_8022397C__15TShopWindowBaseFv(this);
+    if ((u32)this->m_384 != 0U) {
+        cur = get_cursor_value__19TWindowMenuIconLineFv(this->m_384);
+        if ((u32)this->m_390 != 0U && this->m_37c != cur) {
+            TWindowHelpItem__set_displayed_item_by_id(this->m_390, ((TItem *)(self->ents[cur].f0))->get_item_id());
+            this->m_37c = cur;
+        }
+    }
+    if (((TShopSequence *)this)->sub_802239EC()) {
+        set_field_20(5);
+        play_sound_effect(0x52D01, 0, 0, 0);
+        return;
+    }
+    if (((TShopWindowBase *)this)->sub_80223A48() == 0) {
+        return;
+    }
+    cur = get_cursor_value__19TWindowMenuIconLineFv(this->m_384);
+    switch (self->ents[cur].item[0]) {
+    case 3:
+        item = self->ents[cur].item;
+        if (lookup_item_def__9TItemDataFPv(item) != 0) {
+            count = get_bank_deposit_capacity_for_item(item, bank);
+            stack = ((TItemData *)item)->get_stack_count();
+            count = count >= stack ? stack : count;
+        } else {
+            count = bank_has_free_row__Fl(bank) == 0 ? 0 : 1;
+        }
+        if (count == 0) {
+            ((VObj_80221F08 *)this)->m4(0x3C, 1);
+            set_field_20(7);
+            return;
+        }
+        break;
+    default:
+        if (bank_has_free_row__Fl(bank) == 0) {
+            ((VObj_80221F08 *)this)->m4(0x3C, 1);
+            set_field_20(7);
+            return;
+        }
+        count = 1;
+        break;
+    }
+    if (count > 1 && self->f38C == 0U) {
+        obj = new TWindowInputNumber((void *)get_window_layout_position(0x2B), 1, count, 1,
+                                     (s16)((TShopSequence *)this)->get_child_field1c());
+        self->f38C = (u32)obj;
+        if (self->f38C != 0U && TLobby::is_camera_ctrl_active() > 2) {
+            ((TCheckRoomSequence *)(self->f38C))->set_position(0.75f, 0.75f);
+        }
+        set_field_20(4);
+        return;
+    }
+    if (self->f388 == 0U) {
+        ent = get_entity_id(this->m_24);
+        self->f388 = (u32)create_yes_no_window(get_window_layout_position(0x2B), ent, 0, 0);
+        ((TCheckRoomSequence *)(self->f388))->set_ready_flag();
+        temp_f31 = get_scale__15TShopWindowBaseFv(this);
+        ((TWindowAddition *)(self->f388))->set_position_xy(get_scale__15TShopWindowBaseFv(this), temp_f31);
+        set_field_20(2);
     }
 }
 
