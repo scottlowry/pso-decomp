@@ -415,8 +415,10 @@ void TQuestVmDownLoadServer__sub_803EBA98(s32 arg0, Node_803EBA98 *arg1);
 extern u16 lbl_805A02A8[];
 extern s32 lbl_805D7898;
 extern Node_803EB794 *lbl_805D78A0;
+extern s32 lbl_805D78E4;
 extern s32 lbl_805D78E8;
 extern s32 lbl_805D78F0;
+u8 *TQuestVmDownLoadServer__sub_803EDDA4(u16 *start, u16 *cur);
 u8 *get_cached_page__22TQuestVmDownLoadServerFi(s32 page);
 s32 find_symbol_entry__22TQuestVmDownLoadServerFPvsPv(const char *name, s16 len, Info_803F0138 *out);
 void DCInvalidateRange(void *, u32);
@@ -456,7 +458,7 @@ extern const s16 quest_download_lz_match_index_table[];
 extern Ent_803E9DE0 quest_download_lz_match_entry_table[];
 extern u8 lbl_8047F0F8[];
 extern Tok_803E9FFC lbl_8047F8A8[4];
-extern const u8 lbl_8047F9B8[49][11];
+extern const u8 lbl_8047F9B8[11];
 extern const u8 (*const lbl_8047FBD4[27])[11];
 Ent_803E9DE0 *find_longest_match_entry__22TQuestVmDownLoadServerFPviPv(u8 *arg0, s32 arg1, s32 *arg2);
 void build_message_packet__22TQuestVmDownLoadServerFPviPvUc(u8 *arg0, s32 arg1, Msg_803E9190 *arg2, u8 arg3);
@@ -3869,6 +3871,124 @@ u8 *TQuestVmDownLoadServer::find_keyword_entry(u16 *start, u16 *end) {
     }
     return NULL;
 }
+
+#pragma push
+#pragma opt_common_subs off
+s32 TQuestVmDownLoadServer__sub_803EDF64(u16 *keys, s32 count, u16 *out, s32 *flag) {
+    u32 cls;
+    s32 kind;
+    s32 b1;
+    s32 b2;
+    u8 *p;
+    u16 *cur;
+    s32 n;
+
+    cls = lbl_8047F8B8[(u8)keys[0]] & 0xF;
+    *flag = 1;
+    if (cls <= 9) {
+        if (cls <= 5) {
+            cur = keys;
+            p = (u8 *)&lbl_8047F9B8[0] + 1;
+            n = 1;
+            goto add_off;
+        }
+        if (cls > 8 && lbl_805D78E4 != 0) {
+            out[0] = TQuestVmDownLoadServer::map_key_to_code(keys[0]);
+        } else {
+            out[0] = TQuestVmDownLoadServer__sub_803E721C(keys[0]);
+        }
+        return 1;
+    }
+    kind = 0;
+    if (cls <= 12) {
+        if (cls == 12) {
+            out[0] = TQuestVmDownLoadServer__sub_803E719C(0x73, keys[0]);
+            kind = 1;
+        } else {
+            out[0] = TQuestVmDownLoadServer__sub_803E721C(keys[0]);
+            kind = (cls == 10) ? 2 : 3;
+        }
+    }
+    if (count == 1) {
+        if ((u16)kind != 0) {
+            return -1;
+        }
+        return 0;
+    }
+    cur = &keys[1];
+    b2 = (u8)keys[1];
+    b1 = (u8)keys[0];
+    if (b1 == (u8)keys[1]) {
+        if (cls == 12) {
+            return 2;
+        }
+        if (cls == 13) {
+            out[0] = TQuestVmDownLoadServer__sub_803E719C(0x43, cur[0]);
+            return 1;
+        }
+    }
+    if (b1 == 0x78 || b1 == 0x58) {
+        if ((u8)b2 == 0x6e || (u8)b2 == 0x4e) {
+            out[0] = TQuestVmDownLoadServer__sub_803E719C(0x73, cur[0]);
+            return 2;
+        }
+    }
+    if ((u16)kind == 1 && (u8)b2 == 0x27) {
+        return 2;
+    }
+    cls = lbl_8047F8B8[(u8)b2] & 0xF;
+    if ((u8)cls == 7 && (u16)kind == 3) {
+        out[0] = out[0] + 2;
+        return 2;
+    }
+    if ((u8)cls == 6 && (u16)kind >= 2) {
+        out[0] = out[0] + 1;
+        if ((u8)keys[0] == 0xb3) {
+            out[0] = TQuestVmDownLoadServer__sub_803E719C(0x74, cur[0]);
+        }
+        return 2;
+    }
+    if ((u16)kind < 2 && ((u8)cls <= 5 || (u8)cls > 14 || (u16)kind == 1)) {
+        n = 2;
+        for (;;) {
+            if ((u8)cls <= 5) {
+                p = TQuestVmDownLoadServer::find_keyword_entry(keys, cur + 1);
+                if (p == 0) {
+                    p = TQuestVmDownLoadServer__sub_803EDDA4(keys, cur);
+                    if (p == 0) {
+                        return -2;
+                    }
+                add_off:
+                    p += ((u8)cls - 1) * 2;
+                }
+                out[0] = TQuestVmDownLoadServer__sub_803E719C(p[0], cur[0]);
+                p++;
+                out++;
+                if (p[0] != 0) {
+                    out[0] = TQuestVmDownLoadServer__sub_803E719C(p[0], cur[0]);
+                    *flag = 2;
+                }
+                return n;
+            }
+            if (n >= count) {
+                return 0;
+            }
+            n++;
+            cur++;
+            cls = lbl_8047F8B8[(u8)*cur] & 0xF;
+            if ((u8)cls >= 6) {
+                if ((u8)cls <= 12) {
+                    return -2;
+                }
+                if (n > 4) {
+                    return -2;
+                }
+            }
+        }
+    }
+    return 1;
+}
+#pragma pop
 
 void TQuestVmDownLoadServer__sub_803EE2E4(void) {
     lbl_8058DC98.value = 0;
