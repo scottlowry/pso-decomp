@@ -1068,8 +1068,8 @@ u16 TLobby__sub_803FE934(u8 *hdr, void *b, u16 n);
 Strm_80405A74 *TLobby__sub_8040555C(Dst_8040555C *dst, void *buf,
                                     void *a3) {
     u8 stk[60];
+    u8 *hp = stk;
     s32 n = 0;
-    u8 *hp = &stk[0];
     if (dst->f1B != 0 && dst->f1B <= 0x28) {
         n = dst->f1B;
     } else if (dst->f12 != 0) {
@@ -1085,7 +1085,7 @@ Strm_80405A74 *TLobby__sub_8040555C(Dst_8040555C *dst, void *buf,
     *(u16 *)&hp[2] = dst->f2;
     *(u32 *)&hp[4] = dst->f4;
     *(u32 *)&hp[8] = dst->f8;
-    hp[12] = (u8)(((n + 0x14) << 2) & 0x1C000000);
+    hp[12] = (u8)(((n + 0x14) << 2) & 0x07000000);
     s32 m = 0;
     if (dst->f15 != 0) {
         m |= 0x20;
@@ -1112,8 +1112,9 @@ Strm_80405A74 *TLobby__sub_8040555C(Dst_8040555C *dst, void *buf,
     } else {
         *(u16 *)&hp[16] = 0;
     }
+    u16 un = (u16)n;
     *(u16 *)&hp[18] = dst->f10;
-    if ((u16)n > 0) {
+    if (un > 0) {
         NetMemcpy(hp + 0x14, dst->f1C, dst->f1B);
     }
     s32 size = (u16)(n + 0x14);
