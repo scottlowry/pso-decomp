@@ -57,3 +57,32 @@ git branch --show-current  # card-csnquery-964
 rm -f build/GPOE8P/src/pso/map/CsnQuery.o && ninja build/GPOE8P/src/pso/map/CsnQuery.o
 /opt/homebrew/opt/binutils/bin/nm -S build/GPOE8P/src/pso/map/CsnQuery.o | grep evaluate  # 0x3c4
 <venv py3.14> ~/.hermes/profiles/pso-decomp/skills/pso-decomp/scripts/one_shot_diff.py psov3/pso/map/CsnQuery evaluate_ground_triangles
+
+## V2 CAMPAIGN CLOSE (card t_ec3a4d84, branch card-csnquery-v2, base e175bcd9, Nov-4)
+Seed 394a2bbf survival EXACT (83.06224 PAIRED 241/241, gnm 0x3C4, fresh control measure).
+CHAMPION = b3a06cf2 (W2): named-temp crown (named zero-def + deferred store + recs/status
+def-moved BELOW the clear store) + opt_propagation/opt_dead_assignments function window:
+83.3112 (+0.249), gate 0x3C4 exact — status-home `mr r29,r7` lands era-exact def-slot.
+Opener verdicts:
+- pool-read-pragma trio function window (opt_common_subs+prop+dead, crawfish key): INERT
+  against stwu fusion, +2W GATE KILL (0x3CC, 82.36514). Reverted.
+- named-temp crown: PARTIAL WIN (+0.249, committed). stwu fusion itself NOT reached.
+- bank census (one_shot rows): GPR color pairs ~42 rows (recs r22->r30 family=27, poly
+  r23->r19, status r20->r29, gp r19->r31, bits era r28-31+mrest r27 vs ours r23-27) + FPR
+  rank swaps ~27, ~0.5-weight => bank family ~34.5 of 40.8 deficit units; clear-site window
+  slots 12-16 (5 shown rows) + full-value structural ~6. Era bank ascending =
+  gp,status,rec,recs,poly,verts,count,i,mrest,bit8,bit2,bit4,bit16 (reverse-of-2.6-decl law).
+- CLEAR-SITE FUSION SCREEN (stwu li;lis;stwu sym@l class): REPRESENTABLE at pin — repo's own
+  text_803D31A4.cpp init_callback_tables__6TLobbyFv (co-DEFINED global + (s8*)&obj+K store
+  chain) emits the fused shape at THIS profile (build .o: li r0;lis r3;stwu;stw 4(r3);8(r3)).
+  Era corpus: 24 sym@l stwu, multi-field-clear family signature = update feeds disp chain.
+  Transfer probes: typed extern view sized (s32 def) -> SDA21 remat fold (li rD,sym@sda21)
+  -4W GATE DEAD (SIZED-EXTERN SDA21 law fires); in-TU def exact era size 0x8 -> same sda21
+  fold -4W GATE DEAD (MWCC small-object .sbss placement vs era addr 0x80500140 far-sda).
+  Remaining rung: def >8B (e.g. slots[35], 0x94 era-runtime-sized) to escape .sbss window —
+  NOT built (grind cap 4/4 spent; carries data-pairing size risk vs symbols row 0x8).
+  Successor micro (spelled, 1 build): def CsnHit{u32;u32;u32 slots[35]} lbl_80500140; +
+  corpus store-chain spelling; verify matched_data + siblings gnm.
+Campaign close-out: NOT double-negative (crown positive) => park at 83.3112, no v3 grind
+from closed classes; successor exists ONLY as the size-risk def rung above.
+Budget: 4 grind (W1 trio-bust, W2 crown-WIN, G3 typed-extern-bust, G4 def-bust) + 1 confirm.
