@@ -119,6 +119,7 @@ u32 create_item_list_window(s32, s32, u16);
 void sort_bank_items(s32 slot);
 void __dl__7TObjectFPv(void *);
 s32 lookup_item_def__9TItemDataFPv(void *);
+s32 sub_802239EC__13TShopSequenceFv(void *);
 s32 get_bank_deposit_capacity_for_item(void *, s32);
 s32 bank_has_free_row__Fl(s32);
 void *__nw__7TObjectFUl(u32);
@@ -245,9 +246,11 @@ s32 TShopKeepItemWindow::handle_deposit_list_select() {
     Self_80221F08 *self = (Self_80221F08 *)this;
     s32 bank;
     s32 cur;
+    s32 kind;
     u8 *item;
     s32 count;
     s32 stack;
+    s32 t;
     void *obj;
     u16 ent;
     f32 temp_f31;
@@ -255,12 +258,12 @@ s32 TShopKeepItemWindow::handle_deposit_list_select() {
     bank = sub_8022397C__15TShopWindowBaseFv(this);
     if ((u32)this->m_384 != 0U) {
         cur = get_cursor_value__19TWindowMenuIconLineFv(this->m_384);
-        if ((u32)this->m_390 != 0U && this->m_37c != cur) {
+        if ((u32)this->m_390 != 0U && cur != (s32)this->m_37c) {
             TWindowHelpItem__set_displayed_item_by_id(this->m_390, ((TItem *)(self->ents[cur].f0))->get_item_id());
             this->m_37c = cur;
         }
     }
-    if (((TShopSequence *)this)->sub_802239EC()) {
+    if (sub_802239EC__13TShopSequenceFv(this) != 0) {
         set_field_20(5);
         play_sound_effect(0x52D01, 0, 0, 0);
         return;
@@ -269,15 +272,25 @@ s32 TShopKeepItemWindow::handle_deposit_list_select() {
         return;
     }
     cur = get_cursor_value__19TWindowMenuIconLineFv(this->m_384);
-    switch (self->ents[cur].item[0]) {
+    kind = self->ents[cur].item[0];
+    switch (kind) {
     case 3:
         item = self->ents[cur].item;
         if (lookup_item_def__9TItemDataFPv(item) != 0) {
             count = get_bank_deposit_capacity_for_item(item, bank);
             stack = ((TItemData *)item)->get_stack_count();
-            count = count >= stack ? stack : count;
+            if (count >= stack) {
+                t = stack;
+            } else {
+                t = count;
+            }
+            count = t;
         } else {
-            count = bank_has_free_row__Fl(bank) == 0 ? 0 : 1;
+            if (bank_has_free_row__Fl(bank) == 0) {
+                count = 0;
+            } else {
+                count = 1;
+            }
         }
         if (count == 0) {
             ((VObj_80221F08 *)this)->m4(0x3C, 1);
