@@ -1903,21 +1903,23 @@ s32 TBoss4Type2__sub_80054FC0(void *self, f32 range) {
     scale = lbl_805D8B8C;
     for (i = 0; i < count; i++) {
         p = players[i];
-        cursor[cnt].x = *(f32 *)((u8 *)p + 0x38);
-        cursor[cnt].z = *(f32 *)((u8 *)p + 0x40);
+        cursor->x = *(f32 *)((u8 *)p + 0x38);
+        cursor->z = *(f32 *)((u8 *)p + 0x40);
+        cursor++;
         cnt++;
         for (ang = 0, j = 0; j < 8; j++, ang += 0x2000) {
-            cursor[cnt].x =
+            cursor->x =
                 scale * sin_table_lookup(ang) + *(f32 *)((u8 *)players[i] + 0x38);
-            cursor[cnt].z =
+            cursor->z =
                 scale * cos_table_lookup(ang) + *(f32 *)((u8 *)players[i] + 0x40);
+            cursor++;
             cnt++;
         }
     }
     for (j = 0; j < 0x100 && cnt < 0x40; j++) {
-        cand.x = lbl_805D8B4C * (lbl_805D8B90 * (f32)(f64)(rand() ^ 0x8000) - lbl_805D8B60);
+        cand.x = lbl_805D8B4C * (lbl_805D8B90 * (f32)rand() - lbl_805D8B60);
         cand.y = lbl_805D8B20;
-        cand.z = lbl_805D8B4C * (lbl_805D8B90 * (f32)(f64)(rand() ^ 0x8000) - lbl_805D8B60);
+        cand.z = lbl_805D8B4C * (lbl_805D8B90 * (f32)rand() - lbl_805D8B60);
         if (cand.x * cand.x + cand.z * cand.z >= lbl_805D8B94) {
             continue;
         }
@@ -1938,8 +1940,9 @@ s32 TBoss4Type2__sub_80054FC0(void *self, f32 range) {
             }
         }
         if (hit == 0) {
-            cursor[cnt].x = cand.x;
-            cursor[cnt].z = cand.z;
+            cursor->x = cand.x;
+            cursor->z = cand.z;
+            cursor++;
             cnt++;
         }
     }
