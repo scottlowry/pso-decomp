@@ -1189,6 +1189,7 @@ void TObjEneGyaranzo::sub_800D2900() {
 }
 
 void fn_800D2A68(void *arg0) {
+    struct OuterV_800D2A68 { u8 pad[0x42c]; Inner_800D2900 *volatile p42c; };
     Params_800D2900 p1 = lbl_8043C278;
     Params_800D2900 p2 = lbl_8043C2C4;
     Params_800D2900 p3 = lbl_8043C310;
@@ -1197,21 +1198,21 @@ void fn_800D2A68(void *arg0) {
     s32 vx = *(s32 *)((u8 *)arg0 + 0x38);
     *(volatile f32 *)&vy = *(f32 *)&vy + lbl_805DA264;
     Inner_800D2900 *ip;
-    ip = (*(Outer_800D2900 * *)&gyaranzo_bml_resource)->p42c;
+    ip = (*(OuterV_800D2A68 *)&gyaranzo_bml_resource).p42c;
     p1.pos.x = *(f32 *)&vx;
     p1.pos.y = *(volatile f32 *)&vy;
     p1.pos.z = *(f32 *)&vz;
     p1.x38 = *(volatile f32 *)((s8 *)((u8 *)arg0) + 0x3C);
     p1.x40 = ((Inner2_800D2A68 *)ip)->x8;
     p1.x44 = ((Inner2_800D2A68 *)ip)->xc;
-    ip = (*(Outer_800D2900 * *)&gyaranzo_bml_resource)->p42c;
+    ip = (*(OuterV_800D2A68 *)&gyaranzo_bml_resource).p42c;
     p2.pos.x = *(f32 *)&vx;
     p2.pos.y = *(f32 *)&vy;
     p2.pos.z = *(f32 *)&vz;
     p2.x38 = *(volatile f32 *)((s8 *)((u8 *)arg0) + 0x3C);
     p2.x40 = ((Inner2_800D2A68 *)ip)->x18;
     p2.x44 = ((Inner2_800D2A68 *)ip)->x1c;
-    ip = (*(Outer_800D2900 * *)&gyaranzo_bml_resource)->p42c;
+    ip = (*(OuterV_800D2A68 *)&gyaranzo_bml_resource).p42c;
     p3.pos.x = *(f32 *)&vx;
     p3.pos.y = *(f32 *)&vy;
     p3.pos.z = *(f32 *)&vz;
