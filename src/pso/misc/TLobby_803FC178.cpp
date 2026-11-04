@@ -3309,11 +3309,11 @@ extern const char lbl_8047FEE0[9];
 extern const char lbl_8047FEEC[30];
 
 s16 TLobby__sub_80403308(void *self, void *arg2, u32 arg3) {
-    Strm_80405A74 *ps;
-    Strm_80405A74 strm;
+    Ent_80401B20 *ps;
+    Ent_80401B20 strm;
     u8 *selfb;
-    u8 *pool0;
-    u8 *pool1;
+    Ent_80401B20 *pool0;
+    Ent_80401B20 *pool1;
     u8 *dst;
     u8 *p;
     u8 *o;
@@ -3331,29 +3331,29 @@ s16 TLobby__sub_80403308(void *self, void *arg2, u32 arg3) {
     ps = &strm;
     pool0 = 0;
     pool1 = 0;
-    strm.p = (u8 *)arg3;
+    strm.p0 = (u8 *)arg3;
     int rc = TLobby__sub_80401BCC(ps, lbl_805D7AB8, 1);
     n = rc == 1 ? (s16)lbl_805D7AB8[rc] : (s16)-1;
     if (n != -1) {
-        pool0 = (u8 *)lbl_805C0620.value;
-        dst = pool0;
+        pool0 = (Ent_80401B20 *)lbl_805C0620.value;
+        dst = (u8 *)pool0;
         while (n > 0) {
             f4 = 0;
             ok = 0;
             if (ps != 0) {
-                if (strm.p != 0) {
+                if (strm.p0 != 0) {
                     ok = 1;
                 }
             }
             if (ok != 0) {
-                if (strm.len > 1) {
+                if (strm.h4 > 1) {
                     f4 = 1;
                 }
             }
             if (f4 != 0) {
-                strm.len = strm.len - 1;
-                p = strm.p;
-                strm.p = p + 1;
+                strm.h4 = strm.h4 - 1;
+                p = strm.p0;
+                strm.p0 = p + 1;
                 n = (s16)p[0];
             } else {
                 int rc2 = TLobby__sub_80401BCC(ps, lbl_805D7AB8, 1);
@@ -3368,25 +3368,25 @@ s16 TLobby__sub_80403308(void *self, void *arg2, u32 arg3) {
     int rc3 = TLobby__sub_80401BCC(ps, lbl_805D7AB8, 1);
     n = rc3 == 1 ? (s16)lbl_805D7AB8[rc3] : (s16)-1;
     if (n != -1) {
-        pool1 = *(u8 **)lbl_805C0620.remaining;
-        dst = pool1;
+        pool1 = *(Ent_80401B20 **)lbl_805C0620.remaining;
+        dst = (u8 *)pool1;
         while (n > 0) {
             f4 = 0;
             ok = 0;
             if (ps != 0) {
-                if (strm.p != 0) {
+                if (strm.p0 != 0) {
                     ok = 1;
                 }
             }
             if (ok != 0) {
-                if (strm.len > 1) {
+                if (strm.h4 > 1) {
                     f4 = 1;
                 }
             }
             if (f4 != 0) {
-                strm.len = strm.len - 1;
-                p = strm.p;
-                strm.p = p + 1;
+                strm.h4 = strm.h4 - 1;
+                p = strm.p0;
+                strm.p0 = p + 1;
                 n = (s16)p[0];
             } else {
                 int rc4 = TLobby__sub_80401BCC(ps, lbl_805D7AB8, 1);
@@ -3399,7 +3399,7 @@ s16 TLobby__sub_80403308(void *self, void *arg2, u32 arg3) {
         *dst = (u8)n;
     }
     if (*(s32 *)((u8 *)&lbl_805D7A90 + n) & 2) {
-        dec = TLobby__sub_803F7684(pool0);
+        dec = TLobby__sub_803F7684((u8 *)pool0);
         n = -1;
         if (dec != 0) {
             n = NetCompareStrings((const char *)pool1, dec) != 0 ? (s16)-1 : (s16)0;
