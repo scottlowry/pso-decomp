@@ -643,7 +643,6 @@ void submit_chunk_material_color__FUcPs(s32, s16 *);
 #pragma scheduling off
 #pragma use_lmw_stmw off
 void dispatch_chunk_polygon_list(s16 *list, s32 buffer) {
-    void draw_chunk_textured_strips(s16 *, Vtx_803E352C *, u32, bool);
     s32 cmd;
     u32 count;
     s32 info;
