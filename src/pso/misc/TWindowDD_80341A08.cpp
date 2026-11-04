@@ -116,8 +116,7 @@ void TWindowDD__sub_80341674(TWindowDD_WS_Word *self, u8 *entry) {
             p[10] = lw;
             p = p + 12;
         }
-        i = 0;
-        do {
+        for (i = 0; i < n; i++) {
             top = bot + step;
             p = sp8;
             for (k = 0; k < 4; k++) {
@@ -127,8 +126,7 @@ void TWindowDD__sub_80341674(TWindowDD_WS_Word *self, u8 *entry) {
             }
             ((TWindowDD *)sp8)->draw_transformed_primitive((void *)8, ctx, (void *)1);
             bot = top;
-            i = i + 1;
-        } while (i < n);
+        }
     }
     if (TWindowDD__data_805DFCA8 != delta) {
         g = lbl_805DFCA4 * *(f32 *)((s8 *)self + 0x4c);
