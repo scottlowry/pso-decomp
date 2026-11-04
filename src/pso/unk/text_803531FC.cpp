@@ -60,8 +60,11 @@ void TUnk_804F112C::apply_use_effect() {
 
     u8 tech = (u8)get_technique__11TItemObjectFv((TItemObject *)this);
     if (tech < 9) {
+        u32 *e = &buf[tech * 3];
         PmfRow row;
-        row.fn = lbl_804F10C0[tech];
+        row.w[0] = e[0];
+        row.w[1] = e[1];
+        row.w[2] = e[2];
         ((TEndingPic *)this->*(row.fn))(row.w[1], row.w[2]);
     }
 }
