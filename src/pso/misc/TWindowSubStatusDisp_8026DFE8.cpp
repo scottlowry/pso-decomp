@@ -133,6 +133,7 @@ u8 *TWindowSubStatusDisp::construct_item_list(s32 arg1, s32 arg2, s16 arg3) {
 #pragma fp_contract on
 #pragma opt_common_subs off
 void TWindowSubStatusDisp__sub_8026E1D4(TWindowSubStatusDisp *self, s32 index, s32 *chat_shortcut) {
+    s32 mode;
     s32 e0;
     s32 e2;
     s32 e3;
@@ -141,7 +142,6 @@ void TWindowSubStatusDisp__sub_8026E1D4(TWindowSubStatusDisp *self, s32 index, s
     s32 e7;
     s32 e8;
     s32 e10;
-    s32 mode;
     u8 sp9;
     u8 sp8;
     Stack_8026E1D4 stack;
