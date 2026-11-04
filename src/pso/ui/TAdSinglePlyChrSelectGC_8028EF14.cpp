@@ -815,6 +815,21 @@ void TAdSinglePlyChrSelectGC::get_sorted_region_samples(s32 *samples) {
 }
 #pragma push
 #pragma fp_contract on
+void calc_shape_region_coefficients(f32 *point) {
+    s32 region = find_shape_triangle_region((u8 *)point);
+    s32 *sample = &creation_region_sample_index_table[region * 3];
+    creation_shape_blend.region = region;
+    f32 w0 = lbl_804D400C[sample[0]].width;
+    f32 w2 = lbl_804D400C[sample[2]].width;
+    f32 h0 = lbl_804D400C[sample[0]].height;
+    f32 h2 = lbl_804D400C[sample[2]].height;
+    f32 t = (point[0] - w0) / (w2 - w0);
+    f32 h1 = lbl_804D400C[sample[1]].height;
+    creation_shape_blend.weights[2] = t;
+    f32 v = ((point[1] - h0) - (h2 - h0) * t) / (h1 - h0);
+    creation_shape_blend.weights[1] = v;
+    creation_shape_blend.weights[0] = lbl_805DD944 - (v + t);
+}
 s32 clear_creation_shape_eval_masks(f32 *dst, const f32 *a, const f32 *b, const f32 *c) {
     s32 i;
     for (i = 0; i < 3; i++) {
