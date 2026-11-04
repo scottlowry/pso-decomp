@@ -1476,6 +1476,9 @@ extern s32 dhcp_reply_received;
 extern u32 dhcp_send_time;
 extern s32 dhcp_retries_left;
 extern u8 lbl_805C1E00[];
+extern u32 lbl_805D7B8C;
+extern s32 lbl_805D7B90;
+extern u32 lbl_805D7B94;
 s32 TLobby__sub_804250A8(s32);
 s32 TLobby__sub_80424FE0(void);
 
@@ -1554,6 +1557,108 @@ s32 dhcp_release_step(void) {
                 dhcp_step = 0;
                 TLobby__sub_80425288(0xF, 0, NULL);
                 TLobby__sub_80425288(0xE, 0, NULL);
+            }
+        }
+        break;
+    }
+    return dhcp_state;
+}
+
+s32 dhcp_request_step(void) {
+    s32 now;
+    u8 *net;
+    u32 server;
+    s32 len;
+    UdpBuf_80421BAC buf;
+    u32 dst[5];
+    u32 src[5];
+    s16 sock;
+    u32 delta;
+    net = lbl_805C1E00;
+    TLobby::get_time_ms(&now);
+    switch (dhcp_step) {
+    case 0:
+        lbl_805D7B50 = now;
+        if (dhcp_state == 2) {
+            lbl_805D7B90 = dhcp_max_retries;
+        }
+        if (TLobby__sub_80424FE0() != 0) {
+            break;
+        }
+        dhcp_step = 1;
+    case 1:
+        len = ((TLobby *)net)->dhcp_build_packet();
+        dhcp_reply_received = 0;
+        if (dhcp_state == 4) {
+            server = *(u32 *)dhcp_server_id;
+        } else {
+            server = 0xFFFFFFFF;
+        }
+        src[0] = 4;
+        dst[0] = 4;
+        src[1] = 0;
+        dst[1] = server;
+        sock = dhcp_socket;
+        buf.len = len > 300 ? len : 300;
+        buf.data = (s32)net;
+        if (TUdpSocket__sub_80421BAC(sock, src, dst, 0x43, NULL, 1, &buf) < 0) {
+            dhcp_close_socket();
+            dhcp_error = 5;
+            dhcp_step = -1;
+            dhcp_state = -2;
+            break;
+        }
+        lbl_805D7B8C = now;
+        if (dhcp_state == 4) {
+            delta = dhcp_rebinding_time - dhcp_lease_elapsed;
+            if (delta >= 120) {
+                lbl_805D7B94 = delta / 2 * 1000;
+            } else {
+                lbl_805D7B94 = 0;
+            }
+        } else if (dhcp_state == 5) {
+            delta = dhcp_lease_time - dhcp_lease_elapsed;
+            if (delta >= 120) {
+                lbl_805D7B94 = delta / 2 * 1000;
+            } else {
+                lbl_805D7B94 = 0;
+            }
+        }
+        dhcp_step = 2;
+        break;
+    case 2:
+        if (dhcp_reply_received != 0) {
+            if (dhcp_state == 4 || dhcp_state == 5) {
+                ((TLobby *)(net + 0x6c8))->parse_dhcp_lease_times();
+                dhcp_lease_elapsed = 0;
+            }
+            dhcp_close_socket();
+            TLobby__sub_80423440(net + 0x5dc);
+            dhcp_step = 0;
+            dhcp_state = 3;
+        } else if (dhcp_state == 2) {
+            if (now - lbl_805D7B8C >= 3000) {
+                lbl_805D7B90--;
+                if (lbl_805D7B90 <= 0) {
+                    dhcp_close_socket();
+                    dhcp_state = -1;
+                    dhcp_step = -1;
+                    dhcp_error = 7;
+                } else {
+                    dhcp_step = 1;
+                }
+            }
+        } else if (dhcp_state == 4) {
+            if (lbl_805D7B94 != 0 && now - lbl_805D7B8C >= lbl_805D7B94) {
+                dhcp_step = 1;
+            } else {
+                dhcp_error = 8;
+            }
+        } else if (dhcp_state == 5) {
+            if (lbl_805D7B94 != 0 && now - lbl_805D7B8C >= lbl_805D7B94) {
+                dhcp_step = 1;
+            } else {
+                dhcp_error = 9;
             }
         }
         break;
