@@ -724,7 +724,7 @@ void TWindowKeyBoardSoft__sub_8026227C(TWindowKeyBoardSoft *self, int arg1) {
     fn_8026C664(ctx, ctx->x + v - lbl_805DD0CC, lbl_805DD0B8 + (TWindowKeyBoardSoft__data_805DD098 + ctx->y),
         scale, *(f32 *)((s8 *)self + 0x68), lbl_805DD0CC, ctx->x + v);
     fn_8026C708(ctx, res[0], res[1],
-        lbl_805DD0D0 + (ctx->x + (v + (TWindowKeyBoardSoft__data_805DD078 + (f32)(res[0] * res[1])))),
+        lbl_805DD0D0 + (ctx->x + (v + (TWindowKeyBoardSoft__data_805DD078 + (f32)(res[1] * res[0])))),
         lbl_805DD0B8 + (TWindowKeyBoardSoft__data_805DD098 + ctx->y), scale, *(f32 *)((s8 *)self + 0x68),
         ctx->x, lbl_805DD0D0);
     get_player__20TWindowSubStatusDispFv();
