@@ -11252,13 +11252,24 @@ s32 TLobby__sub_8041D0C8(Dst_8041D0C8 *dst, u8 *p, s16 limit, u8 *arg6) {
     void TLobby__sub_8041D584(Dst_8041D0C8 *, u8 *, u8 *, s16);
     u8 *tcp78 = (u8 *)&tcp_protocol_state + 0x78;
     s32 off = 0;
+    s32 t;
+    u8 len;
+    s32 max;
+    s32 cnt;
+    Seg_8041D0C8 *q;
+    u8 *src;
+    s32 i;
+    s16 v;
+    s32 f;
+    u32 w;
+    u8 b;
+    s16 r;
 
     while ((s16)off < limit) {
-        u8 t = p[0];
+        t = p[0];
         if (t == 0) {
             break;
         }
-        u8 len;
         if (t == 1) {
             len = 1;
         } else {
@@ -11266,27 +11277,25 @@ s32 TLobby__sub_8041D0C8(Dst_8041D0C8 *dst, u8 *p, s16 limit, u8 *arg6) {
             switch ((s32)t) {
             case 2:
                 if (len == 4 && (arg6[13] & 2) != 0) {
-                    u16 v;
                     NetMemcpy(&v, p + 2, 2);
                     dst->f266 = v;
                 }
                 break;
             case 4:
                 if (len == 2) {
-                    u8 b = dst->f2e8;
+                    b = dst->f2e8;
                     if (b & 1) {
                         dst->f2e8 = b | 2;
                     }
                 }
                 break;
-            case 5: {
-                s32 max = dst->f208;
+            case 5:
+                max = dst->f208;
                 if (((len - 2) % 8) == 0 && len <= 0x22 && len >= 0xa) {
-                    s32 cnt = (len - 2) / 8;
-                    Seg_8041D0C8 *q = (Seg_8041D0C8 *)tcp78;
-                    u8 *src = p + 2;
-                    for (s32 i = 0; (s16)i < cnt; i++) {
-                        u32 w;
+                    cnt = (len - 2) / 8;
+                    q = (Seg_8041D0C8 *)tcp78;
+                    src = p + 2;
+                    for (i = 0; (s16)i < cnt; i++) {
                         NetMemcpy(&w, src, 4);
                         q->start = w;
                         NetMemcpy(&w, src + 4, 4);
@@ -11303,7 +11312,6 @@ s32 TLobby__sub_8041D0C8(Dst_8041D0C8 *dst, u8 *p, s16 limit, u8 *arg6) {
                     }
                 }
                 break;
-            }
             default:
                 break;
             }
@@ -11311,12 +11319,12 @@ s32 TLobby__sub_8041D0C8(Dst_8041D0C8 *dst, u8 *p, s16 limit, u8 *arg6) {
         off += len;
         p += len;
     }
-    s16 r = TLobby__sub_8041B724((u8 *)dst);
-    if ((s32)dst->f266 >= (s32)r) {
-        dst->maxseg = TLobby__sub_8041B724((u8 *)dst);
-    } else {
-        dst->maxseg = r;
+    r = TLobby__sub_8041B724((u8 *)dst);
+    f = dst->f266;
+    if ((s32)f >= (s32)r) {
+        f = TLobby__sub_8041B724((u8 *)dst);
     }
+    dst->maxseg = (u16)f;
     return 0;
 }
 
