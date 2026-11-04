@@ -139,9 +139,9 @@ void TLobby__sub_80184DF4(void) {
         cnt = *(s32*)(res + 0x434);
         for (i = 0; i < cnt; i++) {
             e2 = *(s32*)(res + 0x42c);
-            if (*(s32*)(e2 + off + 0xc) != 0) {
+            if (*(void**)(e2 + off + 0xc) != 0) {
                 e2 = e2 + off;
-                city_season_xmas_model_table[ix] = *(s32*)(e2 + 0xc);
+                city_season_xmas_model_table[ix] = ((s32*)e2)[3];
                 break;
             }
             off += 0x10;
@@ -222,9 +222,9 @@ void TLobby__sub_80184DF4(void) {
     cnt = *(s32*)(base + 0x434);
     for (i = 0; i < cnt; i++) {
         e2 = *(s32*)(base + 0x42c);
-        if (*(s32*)(e2 + off + 0xc) != 0) {
+        if (*(void**)(e2 + off + 0xc) != 0) {
             e2 = e2 + off;
-            lbl_805D5B44 = *(s32*)(e2 + 0xc);
+            lbl_805D5B44 = ((s32*)e2)[3];
             break;
         }
         off += 0x10;
