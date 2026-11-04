@@ -1080,8 +1080,8 @@ s16 TLobby__sub_804290D4(s32);
 u32 get_field_4__6TLobbyFv(void *);
 
 s32 TLobby__sub_80405700(void) {
-    u8 *base = lbl_805C18B0;
     u16 cnt;
+    register u8 *base = lbl_805C18B0;
     if (lbl_805D7A8A == 10) {
         if (TLobby__sub_804290D4(0x7fff) == 0) {
             lbl_805D7A8A = 1;
@@ -1101,14 +1101,14 @@ s32 TLobby__sub_80405700(void) {
                     &((Strm_80405A74 *)ppp_rx_frame_ptr)->len) == 0 &&
                 ((Strm_80405A74 *)ppp_rx_frame_ptr)->len >= 1) {
                 TLobby::get_time_ms(&lbl_805D7A94);
-                u8 *data = ((Strm_80405A74 *)ppp_rx_frame_ptr)->p;
-                u8 b0 = data[0];
+                Strm_80405A74 *strmA =
+                    (Strm_80405A74 *)ppp_rx_frame_ptr;
+                u8 b0 = strmA->p[0];
                 s32 code = b0;
                 if ((b0 & 1) == 0) {
-                    code = (b0 << 8) | data[1];
+                    code = (b0 << 8) | strmA->p[1];
                 }
-                ppp_input_packet__6TLobbyFPv(
-                    (Strm_80405A74 *)ppp_rx_frame_ptr);
+                ppp_input_packet__6TLobbyFPv(strmA);
                 if ((u16)code != 0x21 && (u16)code != 0x2d &&
                     (u16)code != 0x2f) {
                     break;
