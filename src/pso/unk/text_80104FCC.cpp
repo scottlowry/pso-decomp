@@ -138,6 +138,8 @@ int clear_fields__20TWindowSubStatusDispFv(void *);
 s32 build_player_equipment_requirement_stats(s32, ReqStats_80104FCC *);
 }
 
+#pragma push
+#pragma opt_propagation off
 s32 check_equip_requirements(void *player, void *item, s32 *requirement) {
     TObjPlayer *p = (TObjPlayer *)player;
     u8 *rec;
@@ -268,7 +270,10 @@ s32 check_equip_requirements(void *player, void *item, s32 *requirement) {
         t = *(u8 *)((s8 *)item + 1);
         switch (t) {
         case 2:
-            lim = get_technique_learn_limit(((u8 *)p)[0x88D], ((u8 *)item)[4]);
+            {
+                u8 ib = ((u8 *)item)[4], pb = ((u8 *)p)[0x88D];
+                lim = get_technique_learn_limit(pb, ib);
+            }
             if (lim == 0xFF || lim < *(u8 *)((s8 *)item + 2)) {
                 acc |= 1;
             }
@@ -298,6 +303,7 @@ s32 check_equip_requirements(void *player, void *item, s32 *requirement) {
     }
     return 0;
 }
+#pragma pop
 
 int check_class_equip_permission(TObjPlayer *player, s32 perm) {
     s32 t = player->class_flags;
