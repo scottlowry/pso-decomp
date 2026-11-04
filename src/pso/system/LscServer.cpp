@@ -75,8 +75,9 @@ void lsc_poll(LscStream *lsc_stream) {
                 if (lsc_stream->file_handle == 0) {
                     TLobby::log_printf("E0004: Can not open '%s'", entry->filename);
                 }
-                lsc_stream->file_sector_count = (((TLobby *)lsc_stream->file_handle)->get_field_14() + 0x7FF) / 0x800;
+                s32 sectors = (((TLobby *)lsc_stream->file_handle)->get_field_14() + 0x7FF) / 0x800;
                 lsc_stream->read_started = 0;
+                lsc_stream->file_sector_count = sectors;
                 entry->progress = 0;
             }
             if (lsc_stream->read_started == 0) {
