@@ -717,7 +717,7 @@ void TWindowKeyBoardSoft__sub_8026227C(TWindowKeyBoardSoft *self, int arg1) {
         }
         TWindowKeyBoardSoft::draw_key_frame(self, (f32 *)ctx, color, idx, v,
             TWindowKeyBoardSoft__data_805DD098, (f32)(res[1] + 1), scale);
-        v += (f32)res[1];
+        v += (f32)(s8)res[1];
     }
     set_constant_material_color(ctx->color);
     v = TWindowKeyBoardSoft__sub_802606E0(self);
