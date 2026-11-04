@@ -359,15 +359,15 @@ void *create_timed_particle_emitter_with_angles__FPvPvllll(void *, void *, s32, 
 extern s32 lbl_80446A38[];
 
 void spawn_photon_blast_attachment_effects(void *arg0, s32 arg1) {
-    struct Self_801A7680 *self = (struct Self_801A7680 *)arg0;
     Group_801A7428 *g;
+    struct Self_801A7680 *self = (struct Self_801A7680 *)arg0;
     PhotonAttachmentDef_801A7748 *def;
     u8 *defs;
     s32 *base_dir;
     s32 *rot_z;
-    s32 dir[3];
-    s32 rot[3];
     s32 v[3];
+    s32 rot[3];
+    s32 dir[3];
     s32 a;
     s32 b;
     s32 c;
@@ -397,11 +397,7 @@ void spawn_photon_blast_attachment_effects(void *arg0, s32 arg1) {
         dir[0] = base_dir[0];
         dir[1] = base_dir[1];
         dir[2] = base_dir[2];
-        if (v[2] == 0 && v[0] == 0 && v[1] == 0) {
-            rot[0] = 0;
-            rot[1] = 0;
-            rot[2] = 0;
-        } else {
+        if (v[2] != 0 || v[0] != 0 || v[1] != 0) {
             push_matrix_from(identity_matrix);
             rotate_matrix_z(0, v[2]);
             rotate_matrix_x(0, v[0]);
@@ -414,6 +410,10 @@ void spawn_photon_blast_attachment_effects(void *arg0, s32 arg1) {
             pop_matrices(1);
             direction_to_rotation_xz__FPUcPlPl((u8 *)dir, rot, rot_z);
             rot[1] = 0;
+        } else {
+            rot[0] = 0;
+            rot[1] = 0;
+            rot[2] = 0;
         }
         emitter = create_timed_particle_emitter_with_angles__FPvPvllll((void *)&self->pos, (void *)rot, a, b, c, (u16)u);
         ((struct Eff_801A7748 *)((u8 *)self->effects + off))->obj = emitter;
