@@ -41,7 +41,6 @@ void TChCrTagInformationStr::render() {
     u8 *arg0 = (u8 *)this;
     f32 fade;
     f32 t2;
-    f32 t2b;
     f32 scale;
     u32 color1;
     u32 color2;
@@ -61,13 +60,13 @@ void TChCrTagInformationStr::render() {
     f32 pos[2] = {315.0f, 280.0f};
     t2 = fade * fade;
     color1 = ((u32)(lbl_805DF10C * t2) << 24) | 0x00FFFFFF;
-    t2b = lbl_805DF110 - t2;
+    t2 = lbl_805DF110 - t2;
     color2 = ((u32)(lbl_805DF114 * *(f32 *)((s8 *)arg0 + 0x30) * sin_table_lookup((s32)(lbl_805DF118 * fade))) << 24) | 0x00FFFFFF;
-    scale = lbl_805DF11C * t2b;
+    scale = lbl_805DF11C * t2;
     for (i = 0; i < 7; i++) {
         entry = (const char *)get_localized_text_entry(*(s32 *)((s8 *)arg0 + 0x24), *(s32 *)((s8 *)arg0 + 0x28) + i);
         draw_menu_text(pos[0], pos[1], entry, color1);
-        if (t2b > TChCrTagInformationStr__data_805DF108) {
+        if (t2 > TChCrTagInformationStr__data_805DF108) {
             for (j = 1; j < 5; j++) {
                 step = 0x1000000 / (4 * j);
                 radius = (f32)j * scale;
