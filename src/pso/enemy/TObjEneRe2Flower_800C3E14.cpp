@@ -189,7 +189,7 @@ void queue_destruction__7TObjectFv(void *);
 extern "C" void vfunc_6__8TObjBaseFPsl();
 extern "C" void __ct__12TObjEneDD_STFP7TObject(void *, void *);
 extern "C" void *__ct__13TUnk_80494938Fv(void *);
-extern "C" f32 random_ratio__9TObjCharaFv(void);
+extern "C" f32 random_ratio__9TObjCharaFv(void *self);
 extern "C" void TObjEneRe2Flower__sub_800C3BA8(void *);
 extern "C" void sub_8002AE64__9TObjEnemyFv(void *);
 extern "C" s32 register_object__6TLobbyFl(s32);
@@ -509,7 +509,7 @@ void *TObjEneRe2Flower__ct(void *self, void *parent, void *set_data) {
     *(u32 *)((s8 *)self + 0x3C4) = 0;
     if (get_current_floor_area() == AREA_TOWER) {
         *(u32 *)((s8 *)self + 0x3C4) |= 0x800;
-    } else if (random_ratio__9TObjCharaFv() <= lbl_805D9FFC) {
+    } else if (random_ratio__9TObjCharaFv(self) <= lbl_805D9FFC) {
         *(u32 *)((s8 *)self + 0x3C4) |= 0x400;
     }
     ((TObjEneDD *)self)->init_position_vectors();
