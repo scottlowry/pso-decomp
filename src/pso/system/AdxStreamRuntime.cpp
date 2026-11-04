@@ -220,6 +220,8 @@ extern RecoveredGlobal_803C6830_lbl_80573AC0 adx_encoder_context_pool;
 void TLobby__sub_803C9DB4(u8 *arg0);
 void TLobby__sub_803C5D24(u8 *arg0);
 s32 adx_encode_available_blocks(void *);
+void fn_803C8020(void *, s32);
+void TLobby__sub_803C7DF0(void *);
 void adx_process_encoder_output(u8 *arg0);
 s32 TLobby__sub_803C85AC(u8 *arg0, s32 *arg1);
 void TLobby__sub_803C6138(S_803C6138 *arg0);
@@ -712,6 +714,127 @@ s32 TLobby::write_zero_padded_block(void *arg0p) {
 }
 #undef arg0
 #pragma pop
+
+#define arg0 ((AdxEncCtx *)arg0p)
+s32 adx_encode_available_blocks(void *arg0p) {
+    struct AdxEncCtx {
+        u8 f00[0x4];
+        Strm_803C8678 *ch[2];
+        Strm_803C8678 *fc;
+        u8 pad_10[0x30 - 0x10];
+        s32 f30;
+        u8 pad_34[0x3C - 0x34];
+        s32 f3c;
+        u8 pad_40[0x44 - 0x40];
+        s32 f44;
+        u8 pad_48[0x58 - 0x48];
+        s32 f58;
+        u8 pad_5C[0x80 - 0x5C];
+        void *f80[2];
+        s16 f88h[2];
+        s16 f8ch[2];
+        u8 buf_90[0x40];
+        u8 buf_D0[0x40];
+        u8 pad_110[0x290 - 0x110];
+        s16 f290[2];
+        u8 pad_294[4];
+        double q[2];
+    };
+    struct EncSub {
+        u8 pad_0[0x7C];
+        s16 f7c;
+        u8 pad_7E[2];
+        double f80;
+        void *f88;
+    };
+    s32 total;
+    s32 i;
+    s32 avail;
+    s32 target;
+    s32 w;
+    s32 q;
+    s16 *dst[2];
+    Strm_803C8678 **pch;
+    Strm_803C8678 *fc;
+    Strm_803C8678 *ch;
+    EncSub *enc;
+    s16 *coef;
+    Pair_803C8678 p;
+
+    total = 0;
+    pch = arg0->ch;
+    fc = arg0->fc;
+    for (;;) {
+        s32 n;
+        n = fc->vt->avail(fc, 0);
+        if ((n / 18) / arg0->f58 <= 0) {
+            break;
+        }
+        target = arg0->f3c - arg0->f30;
+        dst[0] = (s16 *)arg0->buf_90;
+        dst[1] = (s16 *)arg0->buf_D0;
+        if (arg0->f44 < target) {
+            target = arg0->f44;
+        }
+        avail = 0;
+        i = avail;
+        for (; i < arg0->f58; i++) {
+            avail = (u32)pch[i]->vt->avail(pch[i], 1) >> 1;
+            if (avail < target) {
+                avail = 0;
+                goto gate;
+            }
+        }
+        q = target * 2;
+        for (i = 0; i < arg0->f58; i++) {
+            avail = 0;
+            while (avail < target) {
+                ch = pch[i];
+                ch->vt->read(ch, 1, q, &p);
+                memcpy(dst[i] + avail, (void *)p.a, p.b);
+                avail += p.b >> 1;
+                ch->vt->submit(ch, 0, &p);
+            }
+        }
+    gate:
+        if (avail == 0) {
+            w = 0;
+        } else {
+            if (target < arg0->f44) {
+                for (i = 0; i < arg0->f58; i++) {
+                    if (dst[i] != 0) {
+                        memset(dst[i] + target, 0, (arg0->f44 - target) * 2);
+                    }
+                }
+            }
+            arg0->f30 = arg0->f30 + arg0->f44;
+            u8 *wp = (u8 *)arg0;
+            u8 *vp = (u8 *)arg0;
+            for (i = 0; i < arg0->f58; i++) {
+                fn_803C8020(arg0, i);
+                enc = (EncSub *)arg0->f80[i];
+                coef = (s16 *)enc->f88;
+                *(s16 *)(wp + 0x290) = enc->f7c;
+                *(double *)(vp + 0x298) = enc->f80;
+                *(s16 *)(wp + 0x88) = coef[4];
+                *(s16 *)(wp + 0x8C) = coef[5];
+                wp += 2;
+                vp += 8;
+                TLobby__sub_803C7DF0(arg0);
+            }
+            w = arg0->f44;
+        }
+        if (w != 0) {
+            total += adx_write_encoded_blocks((Obj_803C7C10 *)arg0);
+            if (arg0->f30 < arg0->f3c) {
+                continue;
+            }
+        }
+        break;
+    }
+    return total;
+}
+#undef arg0
 
 #pragma push
 #pragma inline_depth(4)
