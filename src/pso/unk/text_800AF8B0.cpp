@@ -125,6 +125,7 @@ extern f32 lbl_805D9C64;
 void *TObjEneMoja__ct(void *arg0, void *arg1, void *arg2) {
     s8 *self;
     s8 *desc;
+    s8 *tbl;
     s32 i;
     s32 off;
 
@@ -166,7 +167,8 @@ void *TObjEneMoja__ct(void *arg0, void *arg1, void *arg2) {
         self, (u8 *)((s32 *)lbl_805D50C8)[*(s32 *)(self + 0x368)],
         (u8 *)((s32 *)lbl_805D50CC)[*(s32 *)(self + 0x380) + *(s32 *)(self + 0x368) * 3],
         (u8 *)((s32 *)lbl_805D50D0)[*(s32 *)(self + 0x368)]);
-    *(s32 *)(self + 0x350) = (s32)(desc + 0x130) + *(s32 *)(self + 0x368) * 0x1c;
+    tbl = desc + 0x130;
+    *(s32 *)(self + 0x350) = (s32)tbl + *(s32 *)(self + 0x368) * 0x1c;
     *(s16 *)(self + 0x33e) = *(s16 *)(self + 0x32c);
     update_prev_position__9TObjEnemyFv(self);
     copy_position__20TBoss3VoloptHiraisinFv(self);
@@ -180,7 +182,7 @@ void *TObjEneMoja__ct(void *arg0, void *arg1, void *arg2) {
     *(u32 *)(self + 0x30) |= 0x40000;
     *(f32 *)(self + 0x38c) = lbl_805D9BD8;
     *(s32 *)(self + 0x398) = (s32)create__13TUnk_80494968FUlUl(0xff303030, 0x0a303030);
-    for (i = 0, off = 0; i < 4; i++, off += 0x1c) {
+    for (off = 0, i = 0; i < 4; off += 0x1c, i++) {
         activate_and_dispatch__15RenderFadeStateFv(self + off + 0x39c);
     }
     ((MojaVObj *)self)->clear_lobby_object_state();
