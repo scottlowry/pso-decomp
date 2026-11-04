@@ -225,8 +225,8 @@ void TWindowSubStatusDisp__sub_80257024(Gauge_80257024 *self, Ctx_80257024 *ctx)
     f32 total;
     f32 cap;
     f32 depth;
-    f32 d1;
-    f32 d2;
+    register f32 d1;
+    register f32 d2;
     f32 prod;
     f32 c;
     f32 diff;
