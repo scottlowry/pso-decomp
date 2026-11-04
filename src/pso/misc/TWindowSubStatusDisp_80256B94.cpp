@@ -218,12 +218,13 @@ void TUnk_804CF930::draw_status_gauge_bar(void *ctx, void *pos_arg, f32 depth, f
     }
 }
 
+#pragma push
+#pragma fp_contract on
 void TWindowSubStatusDisp__sub_80257024(Gauge_80257024 *self, Ctx_80257024 *ctx) {
     Pos_80256E0C pos;
     f32 total;
     f32 cap;
     f32 depth;
-    f32 mul_t;
     s32 param = ctx->param;
 
     total = lbl_805DCEC4 *
@@ -241,8 +242,7 @@ void TWindowSubStatusDisp__sub_80257024(Gauge_80257024 *self, Ctx_80257024 *ctx)
     }
     pos.x = ctx->f10 + self->fC;
     pos.y = ctx->f14 + self->f10;
-    mul_t = lbl_805DCEC8 * self->f8;
-    depth = lbl_805DCE60 / (mul_t + ctx->f38);
+    depth = lbl_805DCE60 / (lbl_805DCEC8 * self->f8 + ctx->f38);
     begin_screen_draw(1);
     set_global_param__8TObjFishFl(lbl_805D63F0);
     set_draw_texture_and_color(11, -1);
@@ -257,6 +257,7 @@ void TWindowSubStatusDisp__sub_80257024(Gauge_80257024 *self, Ctx_80257024 *ctx)
     }
     get_player__20TWindowSubStatusDispFv();
 }
+#pragma pop
 
 void step_gauge_bar_width(Gauge_802571B4 *g) {
     f32 target;
