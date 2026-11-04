@@ -11225,44 +11225,48 @@ s32 TLobby__sub_8041A6A4(Tcb_8041A3CC *tcb, s16 timer) {
 }
 #pragma pop
 
+#pragma push
+#pragma pool_data off
 u8 * TLobby__sub_8041B5C0(void *arg0) {
     E_8041A498 *tcb = (E_8041A498 *)arg0;
     G_8041A230 *g = (G_8041A230 *)&tcp_protocol_state;
     E_805C1D48 *e;
+    s16 v;
     s32 d;
 
-    if (tcb == 0) {
+    if (tcb != 0) {
+        if ((tcb->fB & 0x80) == 0) {
+            tcb->f6 = 0;
+            tcb->f25c[0] = 0;
+            tcb->f25c[1] = 0;
+            tcb->f25c[2] = 0;
+            tcb->f25c[3] = 0;
+            return (u8 *)tcb;
+        }
+        if ((tcb->fB & 0x20) == 0) {
+            d = (s32)tcb - tcp_protocol_state.value;
+            NetDispatchSocketEvent((s16)(d / 0x544), tcb->f2D0, 3, 3);
+            tcb->fB |= 0x20;
+        }
+        ((TLobby *)tcb)->close_if_open();
+        TLobby__sub_8041EB74((u8 *)tcb);
+        v = tcb->f8;
+        if ((u32)v != 0xffff) {
+            e = (E_805C1D48 *)(tcp_protocol_state.value + v * 0x544);
+            if (e->f4 == 1) {
+                e->f2C6 = (s16)(e->f2C6 - 1);
+            }
+        }
+        d = (s32)tcb - tcp_protocol_state.value;
+        NetDispatchSocketEvent((s16)(d / 0x544), tcb->f2D0, 3, 0xff);
+        tcb->f4 = 0;
+        d = (s32)tcb - tcp_protocol_state.value;
+        g->avail = (s16)(d / 0x544);
         return 0;
     }
-    if ((tcb->fB & 0x80) == 0) {
-        tcb->f6 = 0;
-        tcb->f25c[0] = 0;
-        tcb->f25c[1] = 0;
-        tcb->f25c[2] = 0;
-        tcb->f25c[3] = 0;
-        return (u8 *)tcb;
-    }
-    if ((tcb->fB & 0x20) == 0) {
-        d = (s32)tcb - tcp_protocol_state.value;
-        NetDispatchSocketEvent((s16)(d / 0x544), tcb->f2D0, 3, 3);
-        tcb->fB |= 0x20;
-    }
-    ((TLobby *)tcb)->close_if_open();
-    TLobby__sub_8041EB74((u8 *)tcb);
-    d = tcb->f8;
-    if ((u32)d != 0xffff) {
-        e = (E_805C1D48 *)(tcp_protocol_state.value + d * 0x544);
-        if (e->f4 == 1) {
-            e->f2C6 = (s16)(e->f2C6 - 1);
-        }
-    }
-    d = (s32)tcb - tcp_protocol_state.value;
-    NetDispatchSocketEvent((s16)(d / 0x544), tcb->f2D0, 3, 0xff);
-    tcb->f4 = 0;
-    d = (s32)tcb - tcp_protocol_state.value;
-    g->avail = (s16)(d / 0x544);
     return 0;
 }
+#pragma pop
 
 struct Tcb_8041B724 { u8 pad0[0x264]; u16 maxseg; u8 pad266[0x16]; u8 remote[0x14]; u8 local[0x14]; };
 
