@@ -4340,9 +4340,6 @@ s16 TLobby__sub_8040C340(D_8040A45C *q, C_8040A45C *node) {
     i = 0;
     while (cur != NULL && (s16)i < state->nc) {
         switch (cur->f4.f0) {
-        case 0:
-            cmp = -1;
-            break;
         case 4:
             if (node->f4.f0 != 4) {
                 cmp = -1;
@@ -4357,25 +4354,26 @@ s16 TLobby__sub_8040C340(D_8040A45C *q, C_8040A45C *node) {
                 cmp = NetMemcmp(cur->f4.addr, node_key, 16);
             }
             break;
+        case 0:
         default:
             cmp = -1;
             break;
         }
         if (cmp != 0) {
             prev = cur;
-            cur = cur->f20;
-            i++;
-            continue;
-        }
-        q->f204 = q->f204 - 1;
-        if (prev == NULL) {
-            q->f208 = cur->f20;
         } else {
-            prev->f20 = cur->f20;
+            q->f204 = q->f204 - 1;
+            if (prev == NULL) {
+                q->f208 = cur->f20;
+            } else {
+                prev->f20 = cur->f20;
+            }
+            cur->f0 = 0;
+            cur->f20 = NULL;
+            return 0;
         }
-        cur->f0 = 0;
-        cur->f20 = NULL;
-        return 0;
+        cur = cur->f20;
+        i++;
     }
     return -1;
 }
