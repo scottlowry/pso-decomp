@@ -1,0 +1,132 @@
+  slot 26 O: bne 0x338                                  N: bne 0x374                                 
+  slot 30 O: b 0x35c                                    N: b 0x398                                   
+  slot 36 O: bne 0x35c                                  N: bne 0x398                                 
+  slot 53 O: beq 0x3a8                                  N: beq 0x3e4                                 
+  slot 58 O: b 0x3b8                                    N: b 0x3f4                                   
+  slot 83 O: beq 0x414                                  N: beq 0x450                                 
+  slot 85 O: b 0x430                                    N: b 0x46c                                   
+  slot 89 O: beq 0x42c                                  N: beq 0x468                                 
+  slot 91 O: b 0x430                                    N: b 0x46c                                   
+  slot 94 O: slwi r27, r0, 2                            N: slwi r29, r0, 2                           
+  slot 96 O: lwzx r3, r3, r27                           N: lwzx r3, r3, r29                          
+  slot 99 O: mr r28, r3                                 N: mr r0, r3                                 
+  slot101 O: lwzx r3, r3, r27                           N: lwzx r3, r3, r29                          
+  slot102 O: bl dispatch_shared_handler_b__6TLobbyFl    N: mr r28, r0                                
+  slot103 O: lis r4, lbl_8043BA7C@ha                    N: bl dispatch_shared_handler_b__6TLobbyFl   
+  slot104 O: mr r29, r3                                 N: lis r4, lbl_8043BA7C@ha                   
+  slot105 O: addi r3, r4, lbl_8043BA7C@l                N: mr r0, r3                                 
+  slot106 O: lwzx r3, r3, r27                           N: addi r3, r4, lbl_8043BA7C@l               
+  slot107 O: bl register_boss__6TLobbyFl                N: lwzx r3, r3, r29                          
+  slot108 O: mr r4, r3                                  N: mr r27, r0                                
+  slot109 O: mr r3, r30                                 N: bl register_boss__6TLobbyFl               
+  slot110 O: mr r5, r29                                 N: mr r4, r3                                 
+  slot111 O: mr r6, r28                                 N: mr r3, r30                                
+  slot112 O: bl reset_hp__9TObjEneDDFPUcPUcPUc          N: mr r5, r27                                
+  slot113 O: lis r3, lbl_8043BAA0@ha                    N: mr r6, r28                                
+  slot114 O: addi r3, r3, lbl_8043BAA0@l                N: bl reset_hp__9TObjEneDDFPUcPUcPUc         
+  slot115 O: lwzx r3, r3, r27                           N: lis r3, lbl_8043BAA0@ha                   
+  slot116 O: bl dispatch_shared_handler_a__6TLobbyFl    N: addi r3, r3, lbl_8043BAA0@l               
+  slot117 O: stw r3, lbl_805D5170@sda21                 N: lwzx r3, r3, r29                          
+  slot118 O: mr r3, r30                                 N: bl dispatch_shared_handler_a__6TLobbyFl   
+  slot119 O: bl get_flag_11__16TObjEneRe2FlowerFv       N: stw r3, lbl_805D5170@sda21                
+  slot120 O: cmpwi r3, 0x0                              N: mr r3, r30                                
+  slot121 O: beq 0x4b0                                  N: bl get_flag_11__16TObjEneRe2FlowerFv      
+  slot122 O: mr r3, r30                                 N: cmpwi r3, 0x0                             
+  slot123 O: bl set_state_8__9TObjEneDDFv               N: beq 0x4f4                                 
+  slot124 O: b 0x4b8                                    N: mr r3, r30                                
+  slot125 O: mr r3, r30                                 N: bl set_state_8__9TObjEneDDFv              
+  slot126 O: bl check_state_flag_2__9TObjEneDDFv        N: b 0x4fc                                   
+  slot127 O: addi r0, r31, 0x0                          N: mr r3, r30                                
+  slot128 O: mr r3, r30                                 N: bl check_state_flag_2__9TObjEneDDFv       
+  slot129 O: stw r0, 0x350(r30)                         N: stw r31, 0x350(r30)                       
+  slot130 O: bl get_flag_11__16TObjEneRe2FlowerFv       N: mr r3, r30                                
+  slot131 O: cmpwi r3, 0x0                              N: bl get_flag_11__16TObjEneRe2FlowerFv      
+  slot132 O: beq 0x4e0                                  N: cmpwi r3, 0x0                             
+  slot133 O: mr r3, r30                                 N: beq 0x520                                 
+  slot134 O: li r4, 0x53                                N: mr r3, r30                                
+  slot135 O: bl initialize_enemy_state__9TObjEneDDFl    N: li r4, 0x53                               
+  slot136 O: b 0x50c                                    N: bl initialize_enemy_state__9TObjEneDDFl   
+  slot137 O: mr r3, r30                                 N: b 0x54c                                   
+  slot138 O: bl sub_800C3B8C__16TObjEneRe2FlowerFv      N: mr r3, r30                                
+  slot139 O: cmpwi r3, 0x0                              N: bl sub_800C3B8C__16TObjEneRe2FlowerFv     
+  slot140 O: beq 0x500                                  N: cmpwi r3, 0x0                             
+  slot141 O: mr r3, r30                                 N: beq 0x540                                 
+  slot142 O: li r4, 0xe                                 N: mr r3, r30                                
+  slot143 O: bl initialize_enemy_state__9TObjEneDDFl    N: li r4, 0xe                                
+  slot144 O: b 0x50c                                    N: bl initialize_enemy_state__9TObjEneDDFl   
+  slot145 O: mr r3, r30                                 N: b 0x54c                                   
+  slot146 O: li r4, 0xd                                 N: mr r3, r30                                
+  slot147 O: bl initialize_enemy_state__9TObjEneDDFl    N: li r4, 0xd                                
+  slot148 O: lfs f0, lbl_805D9FBC@sda21                 N: bl initialize_enemy_state__9TObjEneDDFl   
+  slot149 O: mr r3, r30                                 N: lfs f0, lbl_805D9FBC@sda21                
+  slot150 O: li r4, 0x1e                                N: mr r3, r30                                
+  slot151 O: stfs f0, 0x37c(r30)                        N: li r4, 0x1e                               
+  slot152 O: bl enemy_init_acquire_period__12TObjEneDD_STFl N: stfs f0, 0x37c(r30)                       
+  slot153 O: mr r3, r30                                 N: bl enemy_init_acquire_period__12TObjEneDD_STFl
+  slot154 O: li r4, 0x1e                                N: mr r3, r30                                
+  slot155 O: bl enemy_init_validate_period__12TObjEneDD_STFl N: li r4, 0x1e                               
+  slot156 O: lwz r0, 0x60(r30)                          N: bl enemy_init_validate_period__12TObjEneDD_STFl
+  slot157 O: li r31, 0x0                                N: lwz r3, 0x60(r30)                         
+  slot158 O: lfs f0, lbl_805D9FAC@sda21                 N: li r0, 0x0                                
+  slot159 O: li r27, 0x0                                N: lfs f0, lbl_805D9FAC@sda21                
+  slot160 O: stw r0, 0x3c0(r30)                         N: addi r31, r30, 0x38                       
+  slot161 O: lfs f31, lbl_805D9FD8@sda21                N: stw r3, 0x3c0(r30)                        
+  slot162 O: stfs f0, 0x3c8(r30)                        N: li r27, 0x0                               
+  slot163 O: stw r31, 0x3cc(r30)                        N: lfs f31, lbl_805D9FD8@sda21               
+  slot164 O: stw r31, 0x3d0(r30)                        N: li r28, 0x0                               
+  slot165 O: stw r31, 0x3d4(r30)                        N: stfs f0, 0x3c8(r30)                       
+  slot166 O: stw r31, 0x3d8(r30)                        N: stw r0, 0x3cc(r30)                        
+  slot167 O: addi r3, r31, 0x3dc                        N: stw r0, 0x3d0(r30)                        
+  slot168 O: addi r4, r30, 0x38                         N: stw r0, 0x3d4(r30)                        
+  slot169 O: add r3, r30, r3                            N: stw r0, 0x3d8(r30)                        
+  slot170 O: bl VecCopy__FP3VecPC3Vec                   N: add r3, r27, r30                          
+  slot171 O: addi r0, r31, 0x3e0                        N: mr r4, r31                                
+  slot172 O: addi r27, r27, 0x1                         N: addi r3, r3, 0x3dc                        
+  slot173 O: lfsx f0, r30, r0                           N: bl VecCopy                                
+  slot174 O: cmpwi r27, 0x2                             N: add r3, r27, r30                          
+  slot175 O: addi r31, r31, 0xc                         N: addi r28, r28, 0x1                        
+  slot176 O: fadds f0, f0, f31                          N: lfs f0, 0x3e0(r3)                         
+  slot177 O: stfsx f0, r30, r0                          N: cmpwi r28, 0x2                            
+  slot178 O: blt 0x558                                  N: addi r27, r27, 0xc                        
+  slot179 O: addi r3, r30, 0x3f4                        N: fadds f0, f0, f31                         
+  slot180 O: lwz r12, 0x408(r30)                        N: stfs f0, 0x3e0(r3)                        
+  slot181 O: lwz r12, 0x14(r12)                         N: blt 0x5a0                                 
+  slot182 O: mtctr r12                                  N: addi r3, r30, 0x3f4                       
+  slot183 O: bctrl                                      N: lwz r12, 0x408(r30)                       
+  slot184 O: li r0, 0x0                                 N: lwz r12, 0x14(r12)                        
+  slot185 O: lfs f0, lbl_805D9FAC@sda21                 N: mtctr r12                                 
+  slot186 O: stw r0, 0x410(r30)                         N: bctrl                                     
+  slot187 O: mr r3, r30                                 N: li r0, 0x0                                
+  slot188 O: stw r0, 0x414(r30)                         N: lfs f0, lbl_805D9FAC@sda21                
+  slot189 O: stw r0, 0x418(r30)                         N: stw r0, 0x410(r30)                        
+  slot190 O: stw r0, 0x41c(r30)                         N: mr r3, r30                                
+  slot191 O: stw r0, 0x420(r30)                         N: stw r0, 0x414(r30)                        
+  slot192 O: stfs f0, 0x424(r30)                        N: stw r0, 0x418(r30)                        
+  slot193 O: stw r0, 0x428(r30)                         N: stw r0, 0x41c(r30)                        
+  slot194 O: bl sub_800C3DC4__16TObjEneRe2FlowerFv      N: stw r0, 0x420(r30)                        
+  slot195 O: mr r3, r30                                 N: stfs f0, 0x424(r30)                       
+  slot196 O: lwz r12, 0x18(r30)                         N: stw r0, 0x428(r30)                        
+  slot197 O: lwz r12, 0x160(r12)                        N: bl sub_800C3DC4__16TObjEneRe2FlowerFv     
+  slot198 O: mtctr r12                                  N: mr r3, r30                                
+  slot199 O: bctrl                                      N: lwz r12, 0x18(r30)                        
+  slot200 O: mr r3, r30                                 N: lwz r12, 0x160(r12)                       
+  slot201 O: bl transform_part_positions__9TObjEneDDFv  N: mtctr r12                                 
+  slot202 O: li r0, 0x0                                 N: bctrl                                     
+  slot204 O: sth r0, 0x326(r30)                         N: bl transform_part_positions__9TObjEneDDFv 
+  slot205 O: li r5, 0x4                                 N: li r0, 0x0                                
+  slot206 O: lwz r12, 0x18(r30)                         N: mr r3, r30                                
+  slot207 O: lha r4, 0x326(r30)                         N: sth r0, 0x326(r30)                        
+  slot208 O: lwz r12, 0x15c(r12)                        N: li r5, 0x4                                
+  slot209 O: mtctr r12                                  N: lwz r12, 0x18(r30)                        
+  slot210 O: bctrl                                      N: lha r4, 0x326(r30)                        
+  slot211 O: mr r3, r30                                 N: lwz r12, 0x15c(r12)                       
+  slot212 O: psq_l f31, 0x28(r1), 0, qr0                N: mtctr r12                                 
+  slot213 O: lfd f31, 0x20(r1)                          N: bctrl                                     
+  slot214 O: lmw r27, 0xc(r1)                           N: mr r3, r30                                
+  slot215 O: lwz r0, 0x34(r1)                           N: psq_l f31, 0x28(r1), 0, qr0               
+  slot216 O: mtlr r0                                    N: lfd f31, 0x20(r1)                         
+  slot217 O: addi r1, r1, 0x30                          N: lmw r27, 0xc(r1)                          
+  slot218 O: blr                                        N: lwz r0, 0x34(r1)                          
+  slot219 O: <none>                                     N: mtlr r0                                   
+  slot220 O: <none>                                     N: addi r1, r1, 0x30                         
+  slot221 O: <none>                                     N: blr                                       
