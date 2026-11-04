@@ -9407,14 +9407,15 @@ s16 TLobby__sub_80417294(void *arg0, u32 len, u8 *addr, void *arg3) {
     void TLobby__sub_80406FD8(void *, void *, s32);
     Ent_80416678 *TLobby__sub_804182DC(void *, void *, s16, s32);
     s32 TLobby__sub_80411604(int, int, void *);
-    NetBufferRef ref;
     u8 buf[0x20];
+    u32 pv = (u32)(buf + 0x10);
+    s16 size;
+    u8 *seen;
+    u8 v2[8];
     u8 buf2[8];
     u8 v[0x10];
-    u8 v2[8];
+    NetBufferRef ref;
     u8 *opt;
-    u8 *seen;
-    s16 size;
     s16 i;
     B_80415B38 *e;
     Ent_80416678 *ent;
@@ -9431,9 +9432,15 @@ s16 TLobby__sub_80417294(void *arg0, u32 len, u8 *addr, void *arg3) {
             return -0x10E;
         }
         switch (opt[0]) {
+        default:
+            TLobby__sub_80406EB8((NetBufferRef *)((u8 *)arg0 + 4), size);
+            break;
         case 1:
             seen = opt + 2;
-            ent = TLobby__sub_804182DC(addr, seen, size - 2, (s32)arg3);
+            {
+                s16 l = size - 2;
+                ent = TLobby__sub_804182DC(addr, seen, l, (s32)arg3);
+            }
             ent->fC |= 0x80;
             TLobby__sub_80406EB8((NetBufferRef *)((u8 *)arg0 + 4), size);
             break;
@@ -9441,7 +9448,7 @@ s16 TLobby__sub_80417294(void *arg0, u32 len, u8 *addr, void *arg3) {
             if (size == 0x20) {
                 ((TLobby *)&ref)->set_value_and_enable((s32)buf);
                 TLobby__sub_80406FD8(&ref, (u8 *)arg0 + 4, 0x20);
-                *(u32 *)&v[0] = (u32)(buf + 0x10);
+                *(u32 *)&v[0] = pv;
                 *(u16 *)&v[4] = *(u8 *)&buf[2];
                 *(u32 *)&v[8] = *(u32 *)&buf[8];
                 *(u32 *)&v[0xC] = *(u32 *)&buf[4];
@@ -9457,9 +9464,6 @@ s16 TLobby__sub_80417294(void *arg0, u32 len, u8 *addr, void *arg3) {
                 *(u32 *)&v2[4] = *(u32 *)&buf2[4];
                 TLobby__sub_80411604((s32)arg3, 4, v2);
             }
-            TLobby__sub_80406EB8((NetBufferRef *)((u8 *)arg0 + 4), size);
-            break;
-        default:
             TLobby__sub_80406EB8((NetBufferRef *)((u8 *)arg0 + 4), size);
             break;
         }
