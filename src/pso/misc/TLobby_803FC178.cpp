@@ -1671,6 +1671,60 @@ u32 TLobby__sub_803FEA88(A_80403F4C *out, Strm_80405A74 **src) {
     return hl;
 }
 
+u8 *GXLoadTexObjPreLoaded(A_80403F4C *obj, u8 *stream, s32 flag) {
+    u8 buf[0x40];
+    u16 v;
+    Strm_80405A74 *cur;
+    u8 *cp;
+    u16 fw;
+    s32 n;
+    u32 sum;
+
+    v = (u16)(obj->optlen + 20);
+    if (v > 64) {
+        v = 64;
+    }
+    cur = (Strm_80405A74 *)((TLobby *)stream)->alloc_from_buffer(v);
+    cp = cur->p;
+    buf[0] = (u8)(obj->version << 4 | v >> 2);
+    buf[1] = obj->tos;
+    *(u16 *)(buf + 2) = obj->len;
+    *(u16 *)(buf + 4) = obj->id;
+    fw = (u16)(obj->frag >> 3);
+    if (obj->df != 0) {
+        fw |= 0x4000;
+    }
+    if (obj->mf != 0) {
+        fw |= 0x2000;
+    }
+    *(u16 *)(buf + 6) = fw;
+    buf[8] = obj->ttl;
+    buf[9] = obj->count;
+    if ((u16)flag != 0) {
+        *(u16 *)(buf + 10) = obj->cksum;
+    } else {
+        *(u16 *)(buf + 10) = 0;
+    }
+    *(u32 *)(buf + 12) = obj->src;
+    *(u32 *)(buf + 16) = obj->dst;
+    if (obj->optlen != 0) {
+        n = obj->optlen;
+        if (n >= 44) {
+            n = 44;
+        }
+        NetMemcpy(buf + 20, obj->opts, n);
+    }
+    NetMemcpy(cp, buf, v);
+    if ((u16)flag == 0) {
+        sum = TLobby__sub_803FE9F8(0, (B_803FADA0 *)cur, v);
+        sum = (sum >> 16) + (sum & 0xFFFF);
+        sum += sum >> 16;
+        *(u16 *)(buf + 10) = (u16)~sum;
+    }
+    NetMemcpy(cp, buf, v);
+    return (u8 *)cur;
+}
+
 extern s32 lbl_805D7AA0;
 
 s16 TLobby__sub_803FED78(u8 *conn) {
