@@ -277,7 +277,6 @@ struct U_80340A78 { f32 f8, fc, f10, f14, f18, f1c, f20, f24; };
 #pragma fp_contract on
 #pragma opt_common_subs off
 void TWindowDD__sub_80340A78(void *selfv) {
-    TWindowDD *self = (TWindowDD *)selfv;
     U_80340A78 quad;
     E_803403F8 sp28[8];
     f32 *pd;
@@ -303,10 +302,11 @@ void TWindowDD__sub_80340A78(void *selfv) {
     f32 fbq;
     f32 sq;
     f32 kd;
-    rect = (u8 *)TWindowDD::draw_default_entry((s32)self);
-    ((TWindowBase *)self)->calc_inner_rect(rect);
+    TWindowDD *self;
+    rect = (u8 *)TWindowDD::draw_default_entry((s32)selfv);
+    ((TWindowBase *)selfv)->calc_inner_rect(rect);
     n = TWindowDD::get_draw_count((void **)lbl_805D63F0);
-    TWindowDD__sub_80348AD4(*(f32 *)((s8 *)self + 0x54), lbl_805DFC50);
+    TWindowDD__sub_80348AD4(*(f32 *)((s8 *)selfv + 0x54), lbl_805DFC50);
     reset_entries__9TWindowDDFf(sp28, -1);
     pt = (const f32 *)(TWindowDD__data_805434E8 + 0x180);
     pd = (f32 *)sp28;
@@ -317,9 +317,9 @@ void TWindowDD__sub_80340A78(void *selfv) {
         pt += 2;
         pd += 6;
     }
-    sc = lbl_805DFC54 * *(f32 *)((s8 *)self + 0x4c);
+    sc = lbl_805DFC54 * *(f32 *)((s8 *)selfv + 0x4c);
     hw = sc * iy;
-    ctr = *(f32 *)((s8 *)self + 0x44) + sc;
+    ctr = *(f32 *)((s8 *)selfv + 0x44) + sc;
     lo = ctr - hw;
     hi = ctr + hw;
     if (hw < lbl_805DFB28) {
@@ -339,9 +339,9 @@ void TWindowDD__sub_80340A78(void *selfv) {
     pd[43] = hi;
     pd[37] = hi;
     q28 = *(f32 *)(rect + 0x28);
-    sc2 = lbl_805DFC54 * *(f32 *)((s8 *)self + 0x48);
+    sc2 = lbl_805DFC54 * *(f32 *)((s8 *)selfv + 0x48);
     fbq = lbl_805DFB24 * q28;
-    top = *(f32 *)((s8 *)self + 0x40) + sc2;
+    top = *(f32 *)((s8 *)selfv + 0x40) + sc2;
     sq = sc2 * q28;
     xe = top - sq;
     ye = xe + fbq;
@@ -355,7 +355,7 @@ void TWindowDD__sub_80340A78(void *selfv) {
     quad.f8 = top - kd;
     quad.f10 = top + kd;
     ((TWindowDD *)sp28)->draw_transformed_primitive((void *)8, (void *)n, (void *)1);
-    depth = TWindowDD__sub_80348AD4(*(f32 *)((s8 *)self + 0x54), lbl_805DFC60);
+    depth = TWindowDD__sub_80348AD4(*(f32 *)((s8 *)selfv + 0x54), lbl_805DFC60);
     set_global_param__8TObjFishFl((void *)lbl_805D63F0);
     begin_screen_draw(1);
     set_draw_texture_and_color(0, (u32)-1);
@@ -388,6 +388,7 @@ void TWindowDD__sub_80340A78(void *selfv) {
     top = lbl_805D6DC4 * iy;
     lo2 = lo + top;
     hi2 = hi - top;
+    self = (TWindowDD *)selfv;
     if (*(f32 *)((s8 *)self + 0x64) <= *(f32 *)((s8 *)self + 0x68)) {
         quad.fc = lo2;
         quad.f14 = hi2;
