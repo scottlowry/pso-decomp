@@ -112,6 +112,95 @@ s32 TWindowDD_check_input_mask(void *input_context, s32 arg1) {
   return TWindowShortListCtrl__check_controller_button((void *) (((u8 *)&controller_input_state.value) + 0x20), (void *) arg1) | test_flag_4c__23TAdSinglePlyChrSelectGCFv((void *) (((u8 *)&controller_input_state.value) + 0x160), (void *) arg1);
 }
 extern "C" {
+void *draw_default_entry__9TWindowDDFl(void *);
+void calc_inner_rect__11TWindowBaseFPUc(void *, u8 *);
+f32 TWindowDD__sub_80348AD4(f32, f32);
+void reset_entries__9TWindowDDFf(void *, s32);
+void copy_point_table__9TWindowDDFl(void *, s32);
+void TWindowDD__sub_80348A2C(void *, void *);
+s32 TWindowDD__sub_803489B8(void *, void *, s32);
+s32 get_draw_count__9TWindowDDFPPv(void *);
+void draw_transformed_primitive__9TWindowDDFPvPvPv(void *, s32, void *, s32);
+void begin_render__20TWindowSubStatusDispFl(s32);
+void begin_screen_draw(s32);
+void set_draw_texture_and_color(s32, s32);
+void set_constant_material_color__FUl(u32);
+void draw_textured_quad_at_depth(void *, f32);
+void get_player__20TWindowSubStatusDispFv(void);
+extern u32 lbl_805D63F0;
+extern const f32 lbl_805DFC40;
+extern const f32 lbl_805DFC44;
+extern const f32 lbl_805DFC48;
+extern const f32 TWindowDD__data_805DFB20;
+extern const f32 lbl_805DFB48;
+extern const f32 lbl_805DFB4C;
+
+void TWindowDD__sub_8034055C(void *selfv) {
+    u8 *self = (u8 *)selfv;
+    void *ret = draw_default_entry__9TWindowDDFl(selfv);
+    E_803403F8 q[8];
+    f32 quad[8];
+    s32 i;
+    s32 rr;
+    s32 cond;
+    s32 count;
+    f32 depth;
+    if (*(s32 *)((s8 *)ret + 0x30) >= 0) {
+        calc_inner_rect__11TWindowBaseFPUc(selfv, (u8 *)ret);
+        TWindowDD__sub_80348AD4(*(f32 *)(self + 0x54), lbl_805DFC40);
+        reset_entries__9TWindowDDFf(q, -1);
+        copy_point_table__9TWindowDDFl(q, 0);
+        TWindowDD__sub_80348A2C(ret, q);
+        TWindowDD__sub_803489B8(ret, q, 0);
+        count = get_draw_count__9TWindowDDFPPv((void *)lbl_805D63F0);
+        cond = (*(s32 *)(self + 0x60) == 0) ? *(s32 *)(self + 0x68) : -1;
+        for (i = 0; i < 3; i++) {
+            TWindowDD__sub_803489B8(ret, q, i);
+            if (i == cond) {
+                copy_point_table__9TWindowDDFl(q, 1);
+                draw_transformed_primitive__9TWindowDDFPvPvPv(q, 8, (void *)count, 1);
+                copy_point_table__9TWindowDDFl(q, 0);
+            } else {
+                draw_transformed_primitive__9TWindowDDFPvPvPv(q, 8, (void *)count, 1);
+            }
+        }
+        depth = TWindowDD__sub_80348AD4(*(f32 *)(self + 0x54), lbl_805DFC44);
+        rr = TWindowDD__sub_803489B8(ret, q, 0);
+        f32 v6 = *(f32 *)((s8 *)ret + 0x2c);
+        f32 c40 = lbl_805DFC40;
+        f32 dy = TWindowDD__data_805DFB20 * v6;
+        f32 dx = lbl_805DFB4C * lbl_805DFB48;
+        quad[0] = q[0].a;
+        quad[2] = q[7].a;
+        quad[1] = q[0].b + v6;
+        quad[3] = q[7].b - v6;
+        quad[4] = c40;
+        quad[6] = lbl_805DFC48;
+        quad[5] = c40;
+        quad[7] = dx;
+        begin_render__20TWindowSubStatusDispFl(rr);
+        begin_screen_draw(1);
+        set_draw_texture_and_color(4, -1);
+        for (i = 0; i < 3; i++) {
+            u32 col;
+            if (i == *(s32 *)(self + 0x68) && *(s32 *)(self + 0x60) == 0) {
+                col = 0xff000000;
+            } else if (*(s32 *)(self + 0x64) > i) {
+                col = 0xff808080;
+            } else {
+                col = 0xffffffff;
+            }
+            set_constant_material_color__FUl(col);
+            draw_textured_quad_at_depth(quad, depth);
+            f32 pv = quad[7];
+            quad[5] = pv;
+            quad[7] = pv + dx;
+            quad[1] = quad[1] + dy;
+            quad[3] = quad[3] + dy;
+        }
+        get_player__20TWindowSubStatusDispFv();
+    }
+}
 
 void update_draw__9TWindowDDFPv(void* p) { ((TWindowDD *)p)->initialize_subwindow(); update_fade__11TWindowBaseFv(p); }
 
@@ -161,7 +250,6 @@ void TWindowDD::handle_input() {
 
 void TWindowDD__sub_80340910(void* p) { *(s32*)((char*)p + 0x60) = 1; }
 
-void TWindowDD__sub_8034055C();
 void render_shadows__7TObjectFv();
 __declspec(section ".data") void *TWindowDD__layout_constant_pair[2] = {
     (void *)0x0, (void *)0x0,
