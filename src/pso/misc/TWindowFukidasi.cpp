@@ -236,6 +236,40 @@ void draw_visible_window_entries(void *, void *, View_80252764 *);
 s32 init_window_layout_entries(void *, void *, int);
 s32 reset_float_field__15TWindowHelpItemFv();
 s32 measure_message_text_width(int, f32);
+
+struct Fuki_80251EC8 { u8 pad0[0x78]; u32 name; };
+
+struct View_80251EC8 {
+    f32 x;
+    f32 y;
+    u8 pad8[0x28];
+    s32 count;
+    u8 pad34[4];
+    f32 f38;
+};
+
+int get_name_text_width(void *p);
+s32 render_forward__20TWindowSubStatusDispFPv();
+void apply_context_transform_to_rect(void *, void *);
+void draw_textured_quad_at_depth(f32 *q, f32 depth);
+void set_text_draw_params(s32 arg0, s32 arg1, s32 arg2, f32 farg0, f32 farg1);
+s32 draw_small_font_string_clipped(f32 *pos, const char *s, u32 color, f32 width);
+extern const f64 TWindowFukidasi__data_8044ED68;
+extern const f64 TWindowFukidasi__data_8044ED78;
+extern const f32 lbl_805DCD10;
+extern const f32 lbl_805DCD54;
+extern const f32 lbl_805DCD5C;
+extern const f32 lbl_805DCD60;
+extern const f32 lbl_805DCD64;
+extern const f32 lbl_805DCD68;
+extern const f32 lbl_805DCD6C;
+extern const f32 lbl_805DCD70;
+extern const f32 lbl_805DCD74;
+extern const f32 lbl_805DCD7C;
+extern const f32 lbl_805DCD80;
+extern const f32 lbl_805DCD84;
+extern const f32 lbl_805DCD88;
+extern const f32 lbl_805DCD8C;
 }
 void set_text_entry_string(u8 *arg0, u32 str, s32 arg2);
 extern "C" {
@@ -1035,6 +1069,87 @@ void TUnk_804CF0B8::sub_80251DF0(s16 arg1, s32 str, s16 arg3, f32 farg0) {
     this->clear_flag();
     this->clear_flag2c_bit100();
 }
+
+#pragma push
+#pragma fp_contract on
+void draw_name_plate__15TWindowFukidasiFv(void *self, View_80252764 *v, u32 color) {
+    struct Fuki_80251EC8 *b = (struct Fuki_80251EC8 *)self;
+    struct View_80251EC8 *w = (struct View_80251EC8 *)v;
+    f32 pt[2];
+    f32 rect[8];
+    f32 width;
+    f32 depth;
+    f32 eff;
+    s32 alpha;
+    u32 a24;
+    u32 argb;
+
+    if (b->name == 0) {
+        return;
+    }
+    if (w->count < 0) {
+        return;
+    }
+    width = (f32)(u32)get_name_text_width((void *)b->name);
+    if (w->count < 6) {
+        alpha = (s32)(lbl_805DCD5C * (f64)(w->count * 255));
+    } else {
+        alpha = 255;
+    }
+    a24 = (u32)alpha << 24;
+    argb = a24 | (color & 0xFFFFFF);
+    pt[0] = w->x - lbl_805DCD60;
+    pt[1] = w->y - TWindowFukidasi__data_805DCD1C;
+    depth = TWindowFukidasi__data_805DCD4C / (lbl_805DCD64 + w->f38);
+    begin_screen_draw(1);
+    render_forward__20TWindowSubStatusDispFPv();
+    set_draw_texture_and_color(0, (s32)argb);
+    rect[0] = pt[0];
+    rect[1] = pt[1];
+    rect[2] = lbl_805DCD68 + pt[0];
+    rect[3] = lbl_805DCD10 + pt[1];
+    rect[4] = lbl_805DCD6C;
+    rect[5] = lbl_805DCD70;
+    rect[6] = lbl_805DCD74;
+    rect[7] = TWindowFukidasi__data_805DCCE8;
+    apply_context_transform_to_rect(v, rect);
+    draw_textured_quad_at_depth(rect, depth);
+    eff = width;
+    if (width < TWindowFukidasi__data_805DCCFC) {
+        eff = TWindowFukidasi__data_805DCCFC;
+    }
+    rect[0] = lbl_805DCD78 + ((pt[0] + eff) - lbl_805DCD68);
+    rect[1] = pt[1];
+    rect[2] = lbl_805DCD68 + rect[0];
+    rect[3] = lbl_805DCD10 + pt[1];
+    rect[4] = lbl_805DCD7C;
+    rect[5] = lbl_805DCD70;
+    rect[6] = lbl_805DCD80;
+    rect[7] = TWindowFukidasi__data_805DCCE8;
+    apply_context_transform_to_rect(v, rect);
+    draw_textured_quad_at_depth(rect, depth);
+    if (width > TWindowFukidasi__data_805DCCFC) {
+        rect[0] = lbl_805DCD68 + pt[0];
+        rect[1] = pt[1];
+        rect[2] = lbl_805DCD78 + ((pt[0] + width) - lbl_805DCD68);
+        rect[3] = lbl_805DCD10 + pt[1];
+        rect[4] = lbl_805DCD74;
+        rect[5] = lbl_805DCD70;
+        rect[6] = lbl_805DCD7C;
+        rect[7] = TWindowFukidasi__data_805DCCE8;
+        apply_context_transform_to_rect(v, rect);
+        draw_textured_quad_at_depth(rect, depth);
+    }
+    TWindowSubStatusDisp::get_player();
+    pt[0] = pt[0] + lbl_805DCD84;
+    if (width < TWindowFukidasi__data_805DCCFC) {
+        pt[0] = pt[0] + TWindowFukidasi__data_805DCD0C * (TWindowFukidasi__data_805DCCFC - width);
+    }
+    pt[1] = pt[1] + TWindowFukidasi__data_805DCD28;
+    set_text_draw_params((s32)v, 0, 1, TWindowFukidasi__data_805DCD4C / (lbl_805DCD88 + w->f38), lbl_805DCD8C);
+    draw_small_font_string_clipped(pt, (const char *)b->name, a24, lbl_805DCD54);
+}
+#pragma pop
 
 #pragma push
 #pragma fp_contract on
