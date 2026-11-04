@@ -275,6 +275,7 @@ struct U_80340A78 { f32 f8, fc, f10, f14, f18, f1c, f20, f24; };
 
 #pragma push
 #pragma fp_contract on
+#pragma opt_common_subs off
 void TWindowDD__sub_80340A78(void *selfv) {
     TWindowDD *self = (TWindowDD *)selfv;
     U_80340A78 quad;
