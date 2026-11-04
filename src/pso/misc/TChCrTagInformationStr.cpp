@@ -48,7 +48,6 @@ void TChCrTagInformationStr::render() {
     s32 i;
     s32 j;
     s32 k;
-    s32 step;
     f32 radius;
 
     if (TChCrTagInformationStr__data_805DF108 == *(f32 *)((s8 *)arg0 + 0x30)) {
@@ -68,9 +67,8 @@ void TChCrTagInformationStr::render() {
         draw_menu_text(pos[0], pos[1], entry, color1);
         if (t2 > TChCrTagInformationStr__data_805DF108) {
             for (j = 1; j < 5; j++) {
-                step = 0x1000000 / (4 * j);
                 radius = (f32)j * scale;
-                for (k = 0; k < 0x1000000; k += step) {
+                for (k = 0; k < 0x1000000; k += 0x1000000 / (4 * j)) {
                     f32 rp_sin = radius * sin_table_lookup(k);
                     f32 rp_cos = radius * cos_table_lookup(k);
                     draw_menu_text(pos[0] + rp_sin, pos[1] + rp_cos, entry, color2);
