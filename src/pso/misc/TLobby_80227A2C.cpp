@@ -588,8 +588,7 @@ void TLobby__sub_80228118(void) {
 void TLobby__sub_80228154(void *arg0, s32 arg1, s32 arg2, f32 arg3) {
     u32 color;
     f32 v[3];
-    f32 q[4];
-    f32 h[4];
+    f32 pts[8];
     f32 c4;
     f32 c6;
     f32 c0;
@@ -613,48 +612,48 @@ void TLobby__sub_80228154(void *arg0, s32 arg1, s32 arg2, f32 arg3) {
     set_global_param__8TObjFishFl(*(s32 *)((s8 *)arg0 + 0x18));
     e = (s16 *)(*(s32 *)((s8 *)arg0 + 0x1c) + arg1 * 0x14);
     c4 = (f32)-(s32)e[2];
-    c0 = (f32)-(s32)e[0];
     c6 = (f32)-(s32)e[3];
+    c0 = (f32)-(s32)e[0];
     c2 = (f32)-(s32)e[1];
-    q[0] = *(f32 *)((s8 *)arg0 + 0x0) + c4 * *(f32 *)((s8 *)arg0 + 0xc);
-    q[2] = *(f32 *)((s8 *)arg0 + 0x0) + (c4 + c0) * *(f32 *)((s8 *)arg0 + 0xc);
-    q[1] = *(f32 *)((s8 *)arg0 + 0x4) + c6 * *(f32 *)((s8 *)arg0 + 0x10);
-    q[3] = *(f32 *)((s8 *)arg0 + 0x4) + (c6 + c2) * *(f32 *)((s8 *)arg0 + 0x10);
+    pts[0] = *(f32 *)((s8 *)arg0 + 0x0) + c4 * *(f32 *)((s8 *)arg0 + 0xc);
+    pts[2] = *(f32 *)((s8 *)arg0 + 0x0) + (c4 + c0) * *(f32 *)((s8 *)arg0 + 0xc);
+    pts[1] = *(f32 *)((s8 *)arg0 + 0x4) + c6 * *(f32 *)((s8 *)arg0 + 0x10);
+    pts[3] = *(f32 *)((s8 *)arg0 + 0x4) + (c6 + c2) * *(f32 *)((s8 *)arg0 + 0x10);
     ch = (f32)-(s32)e[4];
-    h[0] = ch * lbl_805DC770;
-    if (lbl_805DC774 < h[0]) {
-        h[0] = lbl_805DC774;
+    pts[4] = ch * lbl_805DC770;
+    if (lbl_805DC774 < pts[4]) {
+        pts[4] = lbl_805DC774;
     }
     ch = (f32)-(s32)e[5];
-    h[1] = ch * lbl_805DC770;
-    if (lbl_805DC774 < h[1]) {
-        h[1] = lbl_805DC774;
+    pts[5] = ch * lbl_805DC770;
+    if (lbl_805DC774 < pts[5]) {
+        pts[5] = lbl_805DC774;
     }
     ch = (f32)-(s32)e[6];
-    h[2] = ch * lbl_805DC770;
-    if (lbl_805DC774 < h[2]) {
-        h[2] = lbl_805DC774;
+    pts[6] = ch * lbl_805DC770;
+    if (lbl_805DC774 < pts[6]) {
+        pts[6] = lbl_805DC774;
     }
     ch = (f32)-(s32)e[7];
-    h[3] = ch * lbl_805DC770;
-    if (lbl_805DC774 < h[3]) {
-        h[3] = lbl_805DC774;
+    pts[7] = ch * lbl_805DC770;
+    if (lbl_805DC774 < pts[7]) {
+        pts[7] = lbl_805DC774;
     }
     color = 0xFFFFFFFF;
     if (arg2 & 1) {
-        A = (q[2] + q[0]) * lbl_805DC778;
-        B = (q[3] + q[1]) * lbl_805DC778;
+        A = (pts[2] + pts[0]) * lbl_805DC778;
+        B = (pts[3] + pts[1]) * lbl_805DC778;
         v[2] = lbl_805DC77C;
-        v[0] = q[0] - A;
-        v[1] = q[1] - B;
+        v[0] = pts[0] - A;
+        v[1] = pts[1] - B;
         push_matrix_from(identity_matrix);
         rotate_matrix_z(0, *(s32 *)((s8 *)arg0 + 0x14));
         rotate_vector_by_matrix(0, v, v);
         pop_matrix();
-        q[0] = A + v[0];
-        q[1] = B + v[1];
-        q[2] = A - v[0];
-        q[3] = B - v[1];
+        pts[0] = A + v[0];
+        pts[1] = B + v[1];
+        pts[2] = A - v[0];
+        pts[3] = B - v[1];
     }
     if (arg2 & 2) {
         i3 = (s32)(lbl_805DC780 * ((f32 *)model_material_color)[3]);
@@ -668,17 +667,17 @@ void TLobby__sub_80228154(void *arg0, s32 arg1, s32 arg2, f32 arg3) {
         pb[0] = (u8)i0;
     }
     if (arg2 & 4) {
-        h[2] = h[0];
-        h[0] = h[0];
+        pts[6] = pts[4];
+        pts[4] = pts[4];
     }
     if (arg2 & 8) {
-        h[3] = h[1];
-        h[0] = h[1];
+        pts[7] = pts[5];
+        pts[4] = pts[5];
     }
     arg3 = lbl_805DC784 / arg3;
     begin_screen_draw((arg2 & 0x20) != 0);
     set_draw_texture_and_color(e[8], color);
-    draw_textured_quad_at_depth(q, arg3);
+    draw_textured_quad_at_depth(pts, arg3);
     get_player__20TWindowSubStatusDispFv();
 }
 
