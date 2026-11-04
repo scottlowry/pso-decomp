@@ -3312,6 +3312,7 @@ s16 TLobby__sub_80403308(void *self, void *arg2, u32 arg3) {
     Ent_80401B20 *ps;
     Ent_80401B20 strm;
     u8 *selfb;
+    u8 *tab;
     Ent_80401B20 *pool0;
     Ent_80401B20 *pool1;
     u8 *dst;
@@ -3328,12 +3329,13 @@ s16 TLobby__sub_80403308(void *self, void *arg2, u32 arg3) {
     Ent_80401B20 *buf;
 
     selfb = (u8 *)self;
+    tab = lbl_805D7AB8;
     ps = &strm;
     pool0 = 0;
     pool1 = 0;
     strm.p0 = (u8 *)arg3;
     int rc = TLobby__sub_80401BCC(ps, lbl_805D7AB8, 1);
-    n = rc == 1 ? (s16)lbl_805D7AB8[rc] : (s16)-1;
+    n = rc == 1 ? (s16)tab[rc] : (s16)-1;
     if (n != -1) {
         pool0 = (Ent_80401B20 *)lbl_805C0620.value;
         dst = (u8 *)pool0;
@@ -3357,7 +3359,7 @@ s16 TLobby__sub_80403308(void *self, void *arg2, u32 arg3) {
                 n = (s16)p[0];
             } else {
                 int rc2 = TLobby__sub_80401BCC(ps, lbl_805D7AB8, 1);
-                n = rc2 == 1 ? (s16)lbl_805D7AB8[rc2] : (s16)-1;
+                n = rc2 == 1 ? (s16)tab[rc2] : (s16)-1;
             }
             *dst = (u8)n;
             dst = dst + 1;
@@ -3366,7 +3368,7 @@ s16 TLobby__sub_80403308(void *self, void *arg2, u32 arg3) {
         *dst = (u8)n;
     }
     int rc3 = TLobby__sub_80401BCC(ps, lbl_805D7AB8, 1);
-    n = rc3 == 1 ? (s16)lbl_805D7AB8[rc3] : (s16)-1;
+    n = rc3 == 1 ? (s16)tab[rc3] : (s16)-1;
     if (n != -1) {
         pool1 = *(Ent_80401B20 **)lbl_805C0620.remaining;
         dst = (u8 *)pool1;
@@ -3390,7 +3392,7 @@ s16 TLobby__sub_80403308(void *self, void *arg2, u32 arg3) {
                 n = (s16)p[0];
             } else {
                 int rc4 = TLobby__sub_80401BCC(ps, lbl_805D7AB8, 1);
-                n = rc4 == 1 ? (s16)lbl_805D7AB8[rc4] : (s16)-1;
+                n = rc4 == 1 ? (s16)tab[rc4] : (s16)-1;
             }
             *dst = (u8)n;
             dst = dst + 1;
