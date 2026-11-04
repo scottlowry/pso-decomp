@@ -91,11 +91,22 @@ struct E_80079580;
 struct V_80079F58 { f32 x, y, z; };
 
 struct Poly_80079F58 {
-    u8 pad0[0x14];
+    u16 idx[3];
+    u16 flags;
+    f32 a;
+    f32 d;
+    f32 c;
     f32 x;
     f32 y;
     f32 z;
     f32 radius;
+};
+
+struct CsnModel {
+    u32 f0;
+    Vec_800798A0 *verts;
+    s32 count;
+    Poly_80079F58 *polys;
 };
 
 struct Mesh_80079F58 {
@@ -227,6 +238,155 @@ s32 calc_segment_xz_distance_sq(Vec_8007A138 *c, Vec_8007A138 *o, Vec_8007A138 *
     }
     return dist <= radius * radius;
 }
+
+extern u8 debug_color_blue[];
+extern const f32 lbl_805D91F4;
+extern const f32 lbl_805D91F8;
+extern const f32 lbl_805D9200;
+void vsub__FPvPvPv(void *, void *, void *);
+
+#pragma push
+#pragma fp_contract on
+s32 evaluate_ground_triangles(s32 arg0, s32 arg1, u32 *arg2) {
+    u8 sp8[12];
+    CsnGroup **gp = (CsnGroup **)arg2;
+    CsnContact *recs = (CsnContact *)lbl_80500140[1];
+    CsnVector *org = (CsnVector *)arg0;
+    u32 mask = (u32)arg1;
+    s32 *status = lbl_80500140;
+    CsnContact *rec;
+    f32 cap = lbl_805D91F4;
+    f32 px;
+    f32 py;
+    f32 pz;
+    u32 bit16;
+    u32 bit4;
+    u32 bit2;
+    u32 bit8;
+    u32 mrest;
+    CsnModel *mesh;
+    Vec_800798A0 *verts;
+    s32 count;
+    s32 i;
+    Poly_80079F58 *poly;
+
+    lbl_80500140[0] = 0;
+    lbl_8050BF60.x = org->x;
+    lbl_8050BF60.y = lbl_805D91F8 + org->y;
+    lbl_8050BF60.z = org->z;
+    vsub__FPvPvPv(org, &lbl_8050BF60, sp8);
+    px = org->x;
+    bit16 = mask & 0x10;
+    py = org->y;
+    bit4 = mask & 0x4;
+    pz = org->z;
+    bit2 = mask & 0x2;
+    bit8 = mask & 0x8;
+    mrest = mask & ~0x1E;
+    for (; *gp != 0; gp++) {
+        mesh = (*gp)->model;
+        for (i = 0, count = mesh->count, poly = mesh->polys, verts = mesh->verts; i < count; poly++, i++) {
+            f32 dz = poly->z - pz;
+            f32 dx = poly->x - px;
+            f32 rad = poly->radius;
+            if ((poly->flags & mask) == 0) {
+                continue;
+            }
+            if (dx * dx + dz * dz > rad * rad) {
+                continue;
+            }
+            f32 d = poly->d;
+            if (d < lbl_805D91FC) {
+                continue;
+            }
+            Vec_800798A0 *v0 = &verts[poly->idx[0]];
+            f32 y0 = v0->y;
+            Vec_800798A0 *v1 = &verts[poly->idx[1]];
+            Vec_800798A0 *v2 = &verts[poly->idx[2]];
+            if (y0 > py && v1->y > py && v2->y > py) {
+                continue;
+            }
+            f32 x0 = v0->x - px;
+            f32 z1 = v1->z - pz;
+            f32 z0 = v0->z - pz;
+            f32 x1 = v1->x - px;
+            f32 eps = lbl_805D9200;
+            if (z0 * x1 - x0 * z1 < eps) {
+                continue;
+            }
+            f32 z2 = v2->z - pz;
+            f32 x2 = v2->x - px;
+            if (z1 * x2 - x1 * z2 < eps) {
+                continue;
+            }
+            if (z2 * x0 - x2 * z0 < eps) {
+                continue;
+            }
+            f32 a = poly->a;
+            f32 c = poly->c;
+            f32 t = -((y0 - py) * d + x0 * a - z0 * c) / (lbl_805D91F8 * d);
+            if (bit16 != 0 && (poly->flags & 0x10) != 0) {
+                *status |= 0x10;
+                rec = recs + 1;
+                rec->point.x = px;
+                rec->point.y = lbl_805D91F8 * t + py;
+                rec->point.z = pz;
+                rec->normal.x = a;
+                rec->normal.y = d;
+                rec->normal.z = c;
+                rec->flags = poly->flags;
+            }
+            if (bit4 != 0 && (poly->flags & 0x4) != 0) {
+                *status |= 0x4;
+                rec = recs + 2;
+                rec->point.x = px;
+                rec->point.y = lbl_805D91F8 * t + py;
+                rec->point.z = pz;
+                rec->normal.x = a;
+                rec->normal.y = d;
+                rec->normal.z = c;
+                rec->flags = poly->flags;
+            }
+            if (bit2 != 0 && (poly->flags & 0x2) != 0) {
+                *status |= 0x2;
+                rec = recs + 3;
+                rec->point.x = px;
+                rec->point.y = lbl_805D91F8 * t + py;
+                rec->point.z = pz;
+                rec->normal.x = a;
+                rec->normal.y = d;
+                rec->normal.z = c;
+                rec->flags = poly->flags;
+            }
+            if (bit8 != 0 && (poly->flags & 0x8) != 0) {
+                *status |= 0x8;
+                rec = recs + 4;
+                rec->point.x = px;
+                rec->point.y = lbl_805D91F8 * t + py;
+                rec->point.z = pz;
+                rec->normal.x = a;
+                rec->normal.y = d;
+                rec->normal.z = c;
+                rec->flags = poly->flags;
+            }
+            if ((poly->flags & mrest) != 0 && t < cap) {
+                *status |= 1;
+                rec = recs;
+                rec->point.x = px;
+                rec->point.y = lbl_805D91F8 * t + py;
+                rec->point.z = pz;
+                rec->normal.x = a;
+                rec->normal.y = d;
+                rec->normal.z = c;
+                rec->flags = poly->flags;
+            }
+            ((void (*)(void *))TObjPlayer__sub_80079110)(status);
+            ((void (*)(void *, void *))TObjPlayer__sub_8007910C)(rec, debug_color_blue);
+        }
+    }
+    return *status & 1;
+}
+#pragma pop
 }
 extern s32 csn_query_map_object[];
 extern s32 lbl_80438988[];
