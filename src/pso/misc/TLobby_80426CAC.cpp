@@ -514,9 +514,9 @@ s16 TLobby__sub_804275B0(s32 arg0, u16 arg1) {
     u8 *payload;
     Ent_80427D40 *e;
     Ent_80427C6C *c;
-    u8 cmd;
-    u16 len;
     u16 x;
+    u16 len;
+    u8 cmd;
     s16 ret = -1;
     pkt = (u8 *)arg0;
     hdr = pkt + 0xE;
@@ -528,74 +528,74 @@ s16 TLobby__sub_804275B0(s32 arg0, u16 arg1) {
         e = TLobby__sub_80427B6C(payload, len);
         if (e == NULL) {
             ret = 0;
-            return ret;
+            break;
         }
         if (e->state != 1) {
             ret = -1;
-            return ret;
+            break;
         }
         e->timeout = 0;
         NetMemcpy(e->rest, (void *)arg0, arg1);
         *(u16 *)((u8 *)e + 0xe10) = arg1;
         ret = TLobby__sub_80427988(e, e->rest + 0x14, len);
-        if (ret <= 0) {
-            return ret;
+        if ((s16)ret <= 0) {
+            break;
         }
         e->m_20 = e->rest + 6;
         e->state = 2;
         ret = TLobby__sub_80426D80(e);
-        if (ret < 0) {
-            return ret;
+        if ((s16)ret < 0) {
+            break;
         }
         ret = ((TLobby *)e->frame)->post_send_message(e->frame_len);
-        if (ret != 0) {
-            return ret;
+        if ((s16)ret != 0) {
+            break;
         }
         e->state = 3;
         restart_timer(e, 2, 3000);
-        return ret;
+        break;
     case 0x65:
         e = TLobby__sub_80427B6C(payload, len);
         if (e == NULL) {
             ret = 0;
-            return ret;
+            break;
         }
         if (e->state != 3) {
             ret = -1;
-            return ret;
+            break;
         }
         e->timeout = 0;
         ret = TLobby__sub_8042787C(e, payload, len);
-        if (ret <= 0) {
-            return ret;
+        if ((s16)ret <= 0) {
+            break;
         }
         NetMemcpy(&x, hdr + 2, 2);
         e->id = x;
         e->state = 4;
-        return ret;
+        break;
     case 0xa7:
         c = TLobby__sub_80427C6C(arg0, arg1);
         if (c == NULL) {
             ret = 0;
-            return ret;
+            break;
         }
         *(s32 *)((u8 *)c + 8) = 0;
         TLobby::parse_tlv_records((s32)c, payload, len);
         if (*(s16 *)c == 4) {
             *(s16 *)c = 5;
             ret = TLobby__sub_80426D80((Ent_80427D40 *)c);
-            if (ret < 0) {
-                return ret;
+            if ((s16)ret < 0) {
+                break;
             }
             ret = ((TLobby *)((u8 *)c + 0x23a))->post_send_message(*(u16 *)((u8 *)c + 0x824));
-            return ret;
+            break;
         }
         if (*(s16 *)c != -1) {
             TLobby__sub_80426574(0);
         }
         *(s16 *)c = -1;
         ret = 0;
-        return ret;
+        break;
     }
     return ret;
 }
