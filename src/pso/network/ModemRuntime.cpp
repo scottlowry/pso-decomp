@@ -530,10 +530,19 @@ void TAdSinglePlyChrSelectGC__sub_8042C8D8(void) {
 }
 
 s32 TAdSinglePlyChrSelectGC__sub_8042CD64(void) {
+    ModemResponseState *state;
+    u32 cmd;
+    u8 value;
     s32 flag;
+    s32 match;
     u8 count;
+    s32 i;
+    s32 idx;
 
+    cmd = 0x23000000 | ((u8)1 << 8);
+    state = &modem_command_response_state;
     flag = 0;
+    match = 0;
     for (;;) {
         count = ModemReadRegister(5);
         if (count != 0) {
@@ -541,40 +550,30 @@ s32 TAdSinglePlyChrSelectGC__sub_8042CD64(void) {
         }
         OSYieldThread();
     }
-    {
-        u8 i;
-        s8 match;
-        u8 value;
-        u32 cmd;
-        s32 idx;
-
-        match = 0;
-        for (i = 0; i < count; i++) {
-            cmd = 0x23000000 | ((u8)1 << 8);
-            EXISelect(0, 2, 4);
-            EXIImm(0, &cmd, 4, EXI_WRITE, NULL);
-            EXISync(0);
-            EXIImm(0, &value, 1, EXI_READ, NULL);
-            EXISync(0);
-            EXIDeselect(0);
-            idx = modem_command_response_state.length;
-            modem_command_response_state.length = idx + 1;
-            modem_command_response_state.buf[idx] = value;
-            if (value == lbl_805D487C[match]) {
-                match++;
-                if (match == 5) {
-                    return -6;
-                }
-            } else {
-                match = 0;
+    for (i = 0; i < count; i++) {
+        EXISelect(0, 2, 4);
+        EXIImm(0, &cmd, 4, EXI_WRITE, NULL);
+        EXISync(0);
+        EXIImm(0, &value, 1, EXI_READ, NULL);
+        EXISync(0);
+        EXIDeselect(0);
+        idx = state->length;
+        state->length = idx + 1;
+        state->buf[idx] = value;
+        if (value == lbl_805D487C[match]) {
+            match++;
+            if (match == 5) {
+                return -6;
             }
-            if (value == 'O') {
-                flag = 1;
-            } else if (flag == 1 && value == 'K') {
-                return 1;
-            } else {
-                flag = 0;
-            }
+        } else {
+            match = 0;
+        }
+        if (value == 'O') {
+            flag = 1;
+        } else if (flag == 1 && value == 'K') {
+            return 1;
+        } else {
+            flag = 0;
         }
     }
     return 1;
