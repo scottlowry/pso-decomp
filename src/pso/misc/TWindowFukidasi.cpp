@@ -1097,7 +1097,8 @@ void draw_name_plate__15TWindowFukidasiFv(void *self, View_80252764 *view, u32 c
         alpha = 255;
     }
     text_color = alpha << 24;
-    box_color = text_color | (color & 0xFFFFFF);
+    box_color = text_color;
+    box_color = box_color | (color & 0xFFFFFF);
     pos[0] = ctx->x - lbl_805DCD60;
     pos[1] = ctx->y - TWindowFukidasi__data_805DCD1C;
     depth = TWindowFukidasi__data_805DCD4C / (lbl_805DCD64 + ctx->f38);
@@ -1121,7 +1122,7 @@ void draw_name_plate__15TWindowFukidasiFv(void *self, View_80252764 *view, u32 c
     }
     q.x = x2b;
     q.y = pos[1];
-    q.x2 = lbl_805DCD68 + x2b;
+    q.x2 = lbl_805DCD68 + (f32)(f64)x2b;
     q.y2 = lbl_805DCD10 + pos[1];
     q.u[0] = lbl_805DCD7C;
     q.u[1] = lbl_805DCD70;
