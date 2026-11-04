@@ -1,4 +1,5 @@
 #include "types.h"
+#include <stddef.h>
 #include "pso/unk/text_800AF56C.h"
 #include "pso/misc/SampledMotionPoints.h"
 struct TObjEnemy;
@@ -18,6 +19,19 @@ struct Stack_800AF56C {
     f32 sp30;
     f32 sp34;
 };
+
+typedef char sp8_offset[(offsetof(Stack_800AF56C, sp8) == 0x0) ? 1 : -1];
+typedef char spC_offset[(offsetof(Stack_800AF56C, spC) == 0x4) ? 1 : -1];
+typedef char sp10_offset[(offsetof(Stack_800AF56C, sp10) == 0x8) ? 1 : -1];
+typedef char sp14_offset[(offsetof(Stack_800AF56C, sp14) == 0xC) ? 1 : -1];
+typedef char sp18_offset[(offsetof(Stack_800AF56C, sp18) == 0x10) ? 1 : -1];
+typedef char sp1C_offset[(offsetof(Stack_800AF56C, sp1C) == 0x14) ? 1 : -1];
+typedef char sp20_offset[(offsetof(Stack_800AF56C, sp20) == 0x18) ? 1 : -1];
+typedef char sp24_offset[(offsetof(Stack_800AF56C, sp24) == 0x1C) ? 1 : -1];
+typedef char sp28_offset[(offsetof(Stack_800AF56C, sp28) == 0x20) ? 1 : -1];
+typedef char sp2C_offset[(offsetof(Stack_800AF56C, sp2C) == 0x24) ? 1 : -1];
+typedef char sp30_offset[(offsetof(Stack_800AF56C, sp30) == 0x28) ? 1 : -1];
+typedef char sp34_offset[(offsetof(Stack_800AF56C, sp34) == 0x2C) ? 1 : -1];
 
 extern "C" {
 void *__dt__9TObjEnemyFv(TObjEnemy *arg0, s16 arg1);
@@ -69,45 +83,44 @@ extern f32 lbl_805D9C2C;
 extern f32 lbl_805D9C5C;
 
 void load_resources__11TObjEneMojaFv(void) {
-    Stack_800AF56C stack;
+    s8 *desc;
     u8 *r;
-    s8 *mp;
-    SampledMotionPoints *smp;
     u8 *res;
     u8 *ents;
     u8 *tbl;
-    Vec pos;
-    Vec dir;
+    s8 *mp;
     s16 *ids;
-    f32 *sp168;
     s32 off;
     s32 i;
+    Stack_800AF56C stack;
 
+    desc = lbl_80491828;
     if (game_difficulty_selection == 3) {
         r = (u8 *)::operator new(0x440);
         if (r != NULL) {
-            r = load_resource_from_descriptor(r, 1, lbl_80491828 + 0x90, 0, 0, 0);
+            r = load_resource_from_descriptor(r, 1, desc + 0x90, 0, 0, 0);
         }
+        lbl_805D50D8 = (s32)r;
     } else {
         r = (u8 *)::operator new(0x440);
         if (r != NULL) {
-            r = load_resource_from_descriptor(r, 1, lbl_80491828 + 0x40, 0, 0, 0);
+            r = load_resource_from_descriptor(r, 1, desc + 0x40, 0, 0, 0);
         }
+        lbl_805D50D8 = (s32)r;
     }
-    lbl_805D50D8 = (s32)r;
-    smp = new SampledMotionPoints(2, lbl_805D9C28, lbl_805D9C2C, lbl_805D9C5C);
-    lbl_805D50DC = (s32)smp;
-    mp = lbl_80491828 + 0xa0;
+    r = (u8 *)new SampledMotionPoints(2, lbl_805D9C28, lbl_805D9C2C, lbl_805D9C5C);
+    lbl_805D50DC = (s32)r;
+    mp = desc + 0xa0;
     res = (u8 *)lbl_805D50D8;
-    pos.x = pos.y = pos.z = lbl_805D9BD8;
-    dir.x = lbl_805D9BF8;
-    dir.y = lbl_805D9BD8;
-    dir.z = lbl_805D9BD8;
+    stack.sp2C = stack.sp30 = stack.sp34 = lbl_805D9BD8;
+    stack.sp20 = lbl_805D9BF8;
+    stack.sp24 = lbl_805D9BD8;
+    stack.sp28 = lbl_805D9BD8;
     ents = *(u8 **)(res + 0x430);
     tbl = *(u8 **)(res + 0x42c);
-    smp->sample_node_offsets((NJS_OBJECT *)*(s32 *)(tbl + 0x18),
-                            (NJS_MOTION *)(*(s32 *)(ents + *(s32 *)(mp + 0x34) * 8 + 4)),
-                            0x26, (const Vec *)&pos, (const Vec *)&dir);
+    ((SampledMotionPoints *)r)->sample_node_offsets((NJS_OBJECT *)*(s32 *)(tbl + 0x18),
+                                                    (NJS_MOTION *)(*(s32 *)(ents + *(s32 *)(mp + 0x34) * 8 + 4)),
+                                                    0x26, (const Vec *)&stack.sp2C, (const Vec *)&stack.sp20);
     lbl_805D50C8 = mem_alloc(8);
     lbl_805D50CC = mem_alloc(0x18);
     lbl_805D50D0 = mem_alloc(8);
@@ -124,6 +137,8 @@ void load_resources__11TObjEneMojaFv(void) {
     ((s32 *)lbl_805D50D0)[1] = register_object__6TLobbyFl(0x49);
     ((s32 *)lbl_805D50D4)[0] = dispatch_shared_handler_a__6TLobbyFl(0x48);
     ((s32 *)lbl_805D50D4)[1] = dispatch_shared_handler_a__6TLobbyFl(0x49);
+    desc = desc + 0x168;
+    ids = (s16 *)&stack;
     stack.sp10 = lbl_8043B0A4[0];
     stack.sp14 = lbl_8043B0A4[1];
     stack.sp18 = lbl_8043B0A4[2];
@@ -131,14 +146,12 @@ void load_resources__11TObjEneMojaFv(void) {
     stack.sp8 = lbl_8043B09C[0];
     *(s16 *)&stack.spC = *(s16 *)(lbl_8043B09C + 1);
     stack.sp10 = *(s32 *)((u8 *)lbl_805D50D8 + 0x430);
-    ids = (s16 *)&stack;
-    sp168 = (f32 *)(lbl_80491828 + 0x168);
     off = 0;
     for (i = 0; i < 3; i++) {
         tbl = *(u8 **)((u8 *)lbl_805D50D8 + 0x42c);
         spawn_npc_enemy__6TLobbyFsllPvff(ids[i], *(s32 *)(tbl + off + 8),
                                         *(s32 *)(tbl + off + 0xc), &stack.sp10,
-                                        sp168[3], lbl_805D9BD8);
+                                        ((f32 *)desc)[3], lbl_805D9BD8);
         off += 0x10;
     }
 }
