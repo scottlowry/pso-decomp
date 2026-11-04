@@ -189,6 +189,57 @@ Budget law: 3+ builds remaining before touching a C-class row.
     2.6; era keeps the mr). 2 sites x 2 rows, SIZE-NEUTRAL (3 rows = 3 rows).
     Encode-card fold law applies: census, don't grind.
 - V2 FINAL (committed tip): match=87.92, status=visit2-frontier.
+- V3 probe trail (card t_ab52ac54->t_ab52ac5c, branch card-adxr-c8020-v1, tip 541b900f start):
+  * control probe: 87.92 / 300 / 300 / gnm 0x4B0 CONFIRMED on committed tip.
+  * P1 g-decl position probe (frontier-3): `s32 g` decl after `s32 m` — INERT
+    (slots 83/84 unchanged: scheduler pins magic-addi `addi rD,rM-hi,0x2493`
+    before the global load; 87.92, 209 rows identical). REVERTED.
+  * P2 rec-clamp if/else-if destructure (no-else form): GATE-BUST 0x4AC (-1 insn:
+    destructure DROPS era's `mr r6,r8` fresh-result copy, emits 283 bgt/li tail
+    with no raw-copy) + 87.58. REVERTED. Law: era rec region = 8-slot tail-li
+    ternary-remat; destructive if/else-if is size-dead.
+  * P3 ring lever (a) decl-order eviction: `cv` declared before `t`/`cl` — INERT
+    (extsh r31 persists at 61; c6-home r29 bind is NOT decl-rank-owned). REVERTED.
+  * P4 ring lever (b) reverse-decl bank: whole temp block reversed — BYTE-IDENTICAL
+    .o to champ (cmp proof). Ring INERT to decl order in both directions.
+  * RING CENSUS COMPLETE (5 rows banked: birth-order V1, decl-eviction P3,
+    reverse-decl P4, clamp-slot-demand V2-c1..c4 (WON), r28-eviction V2-c4 (WON,
+    3 saves now era-matching at tip) — def-binding stratum, do-not-re-roll.
+    Both census-permitted levers spent -> per law the ring is CLOSED.
+  * P5 = c1 (cf582ea6) WIN +1.35: mid-scale region3 tail-li mirror
+    `if (ts > 1) { if (sv < g) g = sv; } else { g = 1; }` (replaces `if(ts<=1)
+    {g=1;} else if`): era ble->tail-li + cmpw remat + bge/mr/b/li-tail pair
+    FULLY; slots 93-102 now color-only. 87.92 -> 89.27, gate held.
+  * P6 = c2 (ed4390d2) WIN +1.37: co-clamp mirror `if (t < 7) { co = (co<-8)?-8:co;
+    } else { co = 7; }` (replaces ternary `(t>=7)?7:remat`): era region 238-244
+    bge-skip/tail-li fully paired. 89.27 -> 90.636665, gate held.
+  * P7 = c3 (2614927a) WIN +1.35: rec-clamp mirror `if (t < 0x7fff) { rec =
+    (rec<=-0x8000)?-0x8000:rec; } else { rec = 0x7fff; }`: era region 280-285
+    fully paired. 90.64 -> 91.986664, gate held.
+  * TAIL-LI CLASS LAW (visit-3 discovery): when era clamp region = `cmp; bge/ble
+    SKIP-to-TAIL-literal; remat-region; tail: li; join:`, spell the OUTER test
+    NEGATED with the literal-assigned arm as `else { }` block:
+    `if (t < K) { x = remat; } else { x = K; }` — the same-armed ternary
+    `x = (t >= K) ? K : remat` emits the INLINE-literal layout (blt + li + b) =
+    7-9 mirror rows per site. Positive-armed-ternary `(t > hi) ? hi : remat` DOES
+    emit era ble-inline form when era is ble-inline (v/w regions: matched in V2) —
+    the polarity of the source test follows the era BRANCH, not the clamp sense.
+  * Residual at tip (204 rows): 137 pure COLOR (r9<->r7 b-home + scratch r6<->r4
+    r0<->r4 r5<->r10 chains + hist r29<->r30/h8 r30<->r29 loop2-tail transpose —
+    def-binding stratum, census above), ~40 branch-target RENDER (display),
+    2 pool-name rows (113/126 lbl_805E0D40 vs @549 = unlinked-pool display),
+    form rows ALL in parked classes: slots 7/11-17/120-124 = c5 REJECTED fold,
+    11-13 = era `li r8,0` j-seed placement (early, before stw r29 + b-load),
+    24-26/137-139 = LI-ZERO-COPY census, 83-84 = P1 g-addi swap (inert).
+  * P8 (grind 9) prologue j-seed decl move (`s32 j=0` before bp decl) — INERT:
+    slots 11-13 unchanged (stw29/lwzx/li), score 91.986664, rows 204 identical.
+    Era's early `li r8,0` is scheduler-pinned placement, decl-inert (like P1).
+    REVERTED; tip rebuilt clean: 91.986664 / 300 / 300 / gnm 0x4B0 CONFIRMED.
+  * Sibling screen (gnm -S on tip .o): 106 T symbols = V2 base 105 + fn_803C8020,
+    sizes per V2 regenerated-base table; edits body-only, no decl/extern/pragma.
+  * BUILD LEDGER: control, P1, P2, P3, P4, P4-verify(cmp), P5, P6, P7, P8,
+    final-confirm = 9 grinds + 1 confirm, budget-exact.
+- V3 FINAL (committed tip 2614927a): match=91.986664, status=visit3-frontier.
 
 ## V3 ENTRY LIST (frontier, ranked; from c4 tip = 87.92, 300 rows, gate exact)
 Residual anatomy at c4 tip (209 objdiff diff rows): ~25 = branch-target RENDER
@@ -227,12 +278,39 @@ Probe ONLY one class per commit; rm .o + ninja + one_shot per rule.
 Budget law: 3+ builds remaining before touching a C-class row (V2 spent all on A).
 Suggested sequence: 2(lever a/b each 1 commit) -> layout probes (2) -> census+park.
 
-## COLD-START COMMANDS (visit-3)
+## V4 ENTRY LIST (frontier, ranked; from tip 2614927a = 91.986664, 204 rows, gate exact)
+The tail-li layout class MOVED +4.07 this visit -> visit-4 exists. Ranking:
+1. TAIL-LI REPLICATION SCREEN (cheap, law already proven): v-clamp (814-815/871-872)
+   and w-clamp (902) already pair era ble-inline form — CONFIRMED matched V2, skip.
+   qq guard + b/h guards = era full-if/else, landed c4. No untried tail-li sites remain.
+2. PROLOGUE j-SEED placement (3 rows: 11/12/13): era emits `li r8,0` (j) at slot 11 =
+   after `mr r4,r7` (pd2 copy), BEFORE `stw r29,0x24` (slot 12) and b-load (13).
+   DECL-MOVE PROBE DONE V3-P8: INERT (scheduler-pinned). Only untried axis: split
+   `s32 j = 0;` into bare decl + statement `j = 0;` as last prologue statement
+   before b->f8 store (statement-position grid, 1 build; low expectation).
+3. FILL-SEED order (2 rows: 24/25, twin 137/138): era loop1 `li r29,0` (k) slot 24
+   then `mr r30,r9` (cursor) 25; ours cursor-first (24) li-second (25). Loop2 twin
+   era 137 `li r12,0` 138 `mr r29,r9` vs ours 137 `mr r29,r7` 138 `li r12,0`.
+   Probe: swap the two statements (k=0 AFTER qz=(s16*)b assignment? NO — era LI
+   FIRST: ours has k=0 before qz (803-804) yet emits mr-first. Reorder to
+   `s16 *qz = (s16*)b; k = 0;` = emit-order probe, 1 build. Slot 26/139 =
+   LI-ZERO-COPY wall (censused, do-not-reroll).
+4. RESIDUAL = def-binding COLOR (137 rows: b-home r9<->r7, hist r29<->r30
+   transpose, scratch r6<->r4/r0<->r4/r5<->r10 chains) + 40 RENDER + 2 pool-display
+   + c5-fold class (REJECTED) + P1 g-addi swap (INERT) -> FLOOR. Ring CLOSED by
+   census law (5 rows banked, both levers spent, reverse-decl byte-identical).
+   If 2/3 inert: census-complete floor ~92.3 expected; document + retire the
+   form-class pursuit, remaining gap is def-binding lineage (qvm-edc20/C5ED4 kin).
+Budget note V4: 2-3 builds suffice for frontiers 2+3 + confirm.
+
+## COLD-START COMMANDS (visit-4)
 cd /Users/scott/Hermes/pso-decomp/pso-decomp-f3
-git log --oneline -3   # tip = visit2 c4 (87.92)
+git log --oneline -3   # tip = visit3 c3 2614927a (91.986664)
 rm -f build/GPOE8P/src/pso/system/AdxStreamRuntime.o
 ninja build/GPOE8P/src/pso/system/AdxStreamRuntime.o   # require MWCC line
 /Users/scott/.hermes/installs/60d8a79da6991a71/environments/28d86d1068e44adc8d1a5d2ca8c63c2c/venv/bin/python3.14 \
   /Users/scott/.hermes/profiles/pso-decomp/skills/pso-decomp/scripts/one_shot_diff.py \
   psov3/pso/system/AdxStreamRuntime fn_803C8020 | head -4
-# expect 87.92 / 300 / 300 / size 1200; then control receipt commit.
+# expect 91.986664 / 300 / 300 / size 1200 (gate 0x4B0); then probe frontier 2.
+# Sibling safety at tip: V3 edits are BODY-ONLY inside fn_803C8020 (no decls,
+# no externs, no pragmas) -> siblings stable by construction; gnm 0x4B0 row.
