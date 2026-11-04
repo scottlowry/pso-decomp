@@ -1873,10 +1873,9 @@ s32 TBoss4Type2__sub_80054FC0(void *self, f32 range) {
     s32 k;
 
     dst = (Vec_80053914 *)&TBoss4Type2__tenchu_furu_array;
-    src = (Vec_80053914 *)lbl_80485AE0;
     cnt = 0;
     for (; cnt < 0x40; cnt++) {
-        VecCopy__FP3VecPC3Vec(dst, src);
+        VecCopy__FP3VecPC3Vec(dst, (Vec_80053914 *)lbl_80485AE0);
         dst++;
     }
     cnt = 0;
