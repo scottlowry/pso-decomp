@@ -3316,7 +3316,6 @@ s16 TLobby__sub_80403308(void *self, void *arg2, u32 arg3) {
     Ent_80401B20 *pool1;
     u8 *dst;
     u8 *p;
-    u8 *o;
     s16 n;
     s32 ok;
     s32 f4;
@@ -3411,8 +3410,7 @@ s16 TLobby__sub_80403308(void *self, void *arg2, u32 arg3) {
         str = lbl_8047FEEC;
         code = 3;
     } else {
-        o = *(u8 **)(selfb + 0xC);
-        *(s32 *)(o + 0x10C) = (s32)pool0;
+        *(s32 *)(*(u8 **)(selfb + 0xC) + 0x10C) = (s32)pool0;
         str = lbl_8047FEE0;
         code = 2;
     }
