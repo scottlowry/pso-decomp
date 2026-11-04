@@ -11234,6 +11234,85 @@ s16 TLobby__sub_8041B724(u8 *tcb) {
     return tp->maxseg < mss ? tp->maxseg : mss;
 }
 
+struct Dst_8041D0C8 {
+    u8 pad0[0x208];
+    s32 f208;
+    u8 pad20C[0x58];
+    u16 maxseg;
+    u16 f266;
+    u8 pad268[0x80];
+    u8 f2e8;
+    u8 pad2E9[0x3F];
+    s32 f328;
+};
+struct Seg_8041D0C8 { s32 start; s32 end; };
+
+s32 TLobby__sub_8041D0C8(Dst_8041D0C8 *dst, u8 *p, s16 limit, u8 *arg6) {
+    s16 TLobby__sub_8041D524(Dst_8041D0C8 *, s32);
+    void TLobby__sub_8041D584(Dst_8041D0C8 *, u8 *, u8 *, s16);
+    u8 *tcp78 = (u8 *)&tcp_protocol_state + 0x78;
+    s32 off = 0;
+
+    while ((s16)off < limit) {
+        s32 t = p[0];
+        if (t == 0) {
+            break;
+        }
+        u8 len;
+        if (t == 1) {
+            len = 1;
+        } else {
+            len = p[1];
+            if (t == 2) {
+                if (len == 4 && (arg6[13] & 2) != 0) {
+                    u16 v;
+                    NetMemcpy(&v, p + 2, 2);
+                    dst->f266 = v;
+                }
+            } else if (t == 4) {
+                if (len == 2) {
+                    u8 b = dst->f2e8;
+                    if (b & 1) {
+                        dst->f2e8 = b | 2;
+                    }
+                }
+            } else if (t == 5) {
+                s32 max = dst->f208;
+                if (((len - 2) % 8) == 0 && len <= 0x22 && len >= 0xa) {
+                    s32 cnt = (len - 2) / 8;
+                    Seg_8041D0C8 *q = (Seg_8041D0C8 *)tcp78;
+                    u8 *src = p + 2;
+                    for (s32 i = 0; (s16)i < cnt; i++) {
+                        u32 w;
+                        NetMemcpy(&w, src, 4);
+                        q->start = w;
+                        NetMemcpy(&w, src + 4, 4);
+                        q->end = w;
+                        if (q->end > max) {
+                            max = q->end;
+                        }
+                        q++;
+                        src += 8;
+                    }
+                    TLobby__sub_8041D584(dst, arg6, tcp78, (s16)cnt);
+                    if (TLobby__sub_8041D524(dst, max) != 0) {
+                        dst->f328 = dst->f208;
+                    }
+                }
+            }
+        }
+        off += len;
+        p += len;
+    }
+    s16 r = TLobby__sub_8041B724((u8 *)dst);
+    if ((s32)dst->f266 >= (s32)r) {
+        dst->maxseg = TLobby__sub_8041B724((u8 *)dst);
+    } else {
+        dst->maxseg = r;
+    }
+    return 0;
+}
+
 struct Tcb_8041B774 {
     u8 pad0[4];
     u16 state;
