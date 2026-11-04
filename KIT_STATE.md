@@ -139,23 +139,100 @@ Budget law: 3+ builds remaining before touching a C-class row.
     byte-stable; only anonymous pool `@NNN` renumber (link-gated class) + our 2 new
     U externs.
 - V1 FINAL (committed tip): match=60.183334, status=visit1-frontier.
+- V2 probe trail (card t_a938d5a4, branch card-adxr-c8020-v1, all clean rebuilds):
+  * control probe on 03553df8: 60.183334 CONFIRMED (receipt commit 7e425fc9).
+  * FRONTIER-1 CLOSED: dual-4681 chains — tip 03553df8 ALREADY emitted BOTH full
+    8-insn per-branch magic chains (verified in .o: neg = lis 14336/addi -2340/addi
+    28673/mulhw/srawi 10/srwi/add + b; pos = same with addi +2340). The 55-insn gap
+    was NOT CSE; it was CLAMP FORMS (below).
+  * c1 (7ffa6640) 60.18 -> 74.28667, 268 rows: era clamp anatomy decoded from .s:
+    era 13-insn "two-site" clamp = MIN SPELLED TWICE:
+    `t = (v < -0x8000) ? -0x8000 : v;  cl = (t > 0x7fff) ? 0x7fff : ((v < -0x8000) ? -0x8000 : v);`
+    (region-3 remat survives at pin; a single fused nested-ternary emits 8, and
+    destructive if-if emits 7). Applied at v(x2)/cv/w sites + abs() spelled twice +
+    bias extsh + qq guard + hn = (AdxEncBlock*)b->f88 per-iter reload.
+  * c2 (642e7268) 74.29 -> 79.09, 300 rows = SIZE GATE EXACT 0x4B0: same two-spelling
+    form at co (with >= 7), rec (<=/>=, bge-layout), mid scale. Era maxabs chain =
+    `if ((cv<0?-cv:cv) > b->f78) b->f78 = (cv<0?-cv:cv);` (srawi/xor/subf remat x2).
+  * c3 79.09 -> 84.473335, 302 (+2 over): era walker forms — fill/resw/qw as b-ALIAS
+    `s16 *qz = (s16*)b; qz[0xC] = z; qz++;` (era sth 0x18(rD) on b-copy, NOT
+    materialized b+24 + zero-disp); prologue bind trio; batched h-copy head
+    (lha fA,lha f8,sth f8,sth fA); loop2-prep RELOAD seeds `sa2/sb2 = cf[4]/cf[0]`
+    (2nd ctx read, era lha 0x8c/0x88(r6)); mid `lwz r8,g` early + `mr r0,r8` seed;
+    unified temps. +2 came from: scale-clamp 2 seed mrs + pd2-binding mr.
+  * c4 (tip) 84.47 -> 87.92, 300, GATE RESTORED. Three fixes: (1) `s16 *pd2 = (pcm
+    expr); s16 *pd = pd2;` — era binds the pcm MATERIALIZATION to loop2-walker r7 and
+    the mr-COPY to loop1-pd (removes loop2-prep `mr r10,r0` copy); (2) mid scale
+    clamp = IN-PLACE g MUTATION, no seeds: `ts = g; if (sv < g) ts = sv;` then
+    `if (ts <= 1) { g = 1; } else if (sv < g) { g = sv; } b->f7C = (s16)g;` (result
+    lands in g's reg = era mr r0,r8 seed @8180 + region-3 cmpw remat + bge/mr/b/li-tail,
+    exactly 11 rows; the ternary spelling adds 2 seed mrs); (3) qq guard = FULL
+    if/else `s32 qq; if (b==0) qq=0; else qq=qw[0xC];` (era 6 rows incl. join b;
+    `s32 qq=0; if(b!=0)` emits 5, missing the b).
+  * c5 REVERTED (87.92 -> 85.35667, size 300): named raw byte-bases
+    `u8 *cb=(u8*)ctx+i4; b=*(cb+0x80); u8 *cw=(u8*)ctx+i2; sa=*(s16*)(cw+0x8C);`
+    (era lha 0x8c(r6)/lwz 0x80(r5) pure-base+big-disp form) REGRESSED 2.6 pts —
+    MWCC 2.6 at pin folds `bp[0x20]`/`cf[4]` (addi-fused base + lwzx/disp-8) on this
+    unit; that fold is a SCHEDULER STRATUM, not a spelling gap. DO NOT RE-ROLL.
+  * Siblings re-check (V2): regenerated d82be2a8 base .o, gnm -S text symbols:
+    base 105, ours 106, diff = ONLY `fn_803C8020 000004b0` added. All siblings stable.
+  * FRONTIER-2 CLOSED: frame 0x30 + stw r29/30/31@0x24-0x2c landed with c1/c2
+    (clamp-form pressure = slot demand, per AdPlayer F2F4 law). Bias per-iter
+    `stw r0,0x8(r1)` on hoisted `lis r0,0x4330` = CONFIRMED emitted (loop2-prep hoist
+    + per-iter store, era 803C8214->803C8328 kin). Residual: OURS homes 4 callee
+    saves (stw r28,0x20) — era 3. Slot 0x20 r28 = 1 def-binding row + epilogue lwz
+    r28 (2 rows); era 0x18-0x20 reserved-dead class = frame-size parity already exact
+    (0x30 = stwu -48). r28 eviction = color ring class (see 5), not slot demand.
+  * FRONTIER-3 CENSUSED (parked): LI-ZERO-COPY — both fill loops emit folded
+    `li;li` zero pair (counter + value, independent lis) where era shows hoisted-zero
+    copy `li r29,0; mr r30,r9; mr r12,r29` (z = (s16)k with k=0 folds to li under
+    2.6; era keeps the mr). 2 sites x 2 rows, SIZE-NEUTRAL (3 rows = 3 rows).
+    Encode-card fold law applies: census, don't grind.
+- V2 FINAL (committed tip): match=87.92, status=visit2-frontier.
 
-## V2 ENTRY LIST (frontier, ranked)
-1. Frame 0x20 vs 0x30: 3 dead reserved slots 0x18/0x1c/0x20 below live saves 0x24-0x2c.
-   All live era slots: 0x8/0xc (bias stw-pair), 0x10/0x14 (fctiwz stfd/lwz). Era frame
-   = max slot demand incl. scheduler-reserved temps: hunt the 3 phantom consumers
-   (PHANTOM-FRAME-SLOT law; f64 temporaries that OUR compiler keeps in regs; era's
-   0x4330 `stw r0,0x8(r1)` per-iter store = bias upper homed, not register — check
-   OUR loop2 bias emission: if OURS folds (double)cast to lfd-from-const, bias
-   materialization is the slot-demand key).
-2. Era homes b(r9),h(r10),resw(r5),pd(r4),j(r8) + loop2 trio r29/30/31 with 3 callee
-   saves stw 0x24/28/2C (NOT stmw, frame 0x30); OURS 245 rows -> 58-insn gap = magic
-   chains (2 mulhw blocks = +6? era lis/addi pair 0x38007001 per-branch: OURS /4681 may
-   CSE to one chain = PER-BRANCH DUPLICATION row: verify OURS emits TWO full chains;
-   if one, split spelling is the lever (c7df0 proven)).
-3. Fill loops: era `li r29,0; mr r30,r9; mr r12,r29` = hoisted-zero via counter-copy
-   (LI-ZERO-COPY loop-IV seed class, banked form); OURS sth li-0 likely (-1 insn/fill).
-4. Mid-section clamp: era min then max with RECOMPUTED cmpw r4,r8 (two-site) = our
-   `if (sv > g) sv = g;` — verify color; fdiv operand spelling f2/(f0-f1) order check.
-5. Color ring (C-class, census kin qvm-edc20/C5ED4): r29/30/31 cross-loop roles —
-   do not re-roll beyond 2 levers; park with receipt.
+## V3 ENTRY LIST (frontier, ranked; from c4 tip = 87.92, 300 rows, gate exact)
+Residual anatomy at c4 tip (209 objdiff diff rows): ~25 = branch-target RENDER
+(era .L_803C vs ours +offset — display-only, unfixable); ~131 = pure COLOR
+(same mnemonic+imm, reg diff); ~25 real form rows.
+1. COLOR RING r29/30/31 + r28 (131 rows = biggest pool): era binds loop1 cv->r29
+   (extsh), fill-IV->r29, hist->r29; cursor->r30; mullw->r31; ours rotates
+   r28/29/30/31. Kin: qvm-edc20/C5ED4 def-binding ring (park-after-2-levers per
+   brief; visit-1 birth-order INERT datum already banked — the 2 levers allowed are
+   NOT yet spent on this terrain: (a) era binds sample raw r0/r6 and keeps cv
+   extsh-home across maxabs remat — ours same shape, colors shift by the r28 save
+   cascade: try evicting r28 with ONE merged temp in cv-chain (unify t/cl/cv names —
+   partially done c3; check `lwz r10,120` scratch), (b) `mr r11,r12` fill value copy
+   — era seeds store-value by COPYING zeroed counter: spell `s16 z = (s16)k;` NOW
+   (c4 has it; c5 regression may have been cb/cw, NOT this — isolate z=(s16)k-only
+   birth tweaks if budget allows). If both inert: PARK as def-binding stratum with
+   receipt, census row contributed.
+2. FORM rows ~25: prologue/loop2-prep cf/bp fold stratum (c5 = REJECTED datum, do
+   not re-roll); scale/co/rec region layout mirrors (bge-skip vs blt-take =
+   scheduler polarity, era region2 `cmpwi t,7; bge tail-li`; ours inlines) —
+   ternary-vs-if/else polarity probes are the remaining class-A candidates:
+   co/rec/v/cv/w clamps all land counts; layout mirror rows pair partially.
+   Era rec region2/3 layout = if/else-if with remat spelled:
+   `if (tr >= 0x7fff) rec = 0x7fff; else if (rec <= -0x8000) rec = -0x8000;`
+   (era tail li at L2 after region3 — probe as ONE site first, gate check, then
+   replicate; +0 => park class).
+3. Era mid `lwz r8,g`@83 BEFORE magic addi (ours 84): g-decl position probe (cheap,
+   batch with 2).
+4. Bias `lis r0`/`mr r10,r0` pair at loop2-prep (ours slot 125 `mr r10,r0` = era
+   slot 124 `lha r6,0x88(r6)` pairing shift): era consumes cw(=r6) at 124; ours
+   pd2 binds r10 — check c4 disasm 1ad0-1af0: if `mr r10,r0` = pd2 copy remains,
+   era binds pd2=pcm to r7 in PROLOGUE — ours prologue 192c `mr r10,r7` ✓ c4 fixed;
+   leftover = color.
+HARD CONSTRAINT: gate is EXACT 0x4B0=300 rows. Any lever must be size-neutral.
+Probe ONLY one class per commit; rm .o + ninja + one_shot per rule.
+Budget law: 3+ builds remaining before touching a C-class row (V2 spent all on A).
+Suggested sequence: 2(lever a/b each 1 commit) -> layout probes (2) -> census+park.
+
+## COLD-START COMMANDS (visit-3)
+cd /Users/scott/Hermes/pso-decomp/pso-decomp-f3
+git log --oneline -3   # tip = visit2 c4 (87.92)
+rm -f build/GPOE8P/src/pso/system/AdxStreamRuntime.o
+ninja build/GPOE8P/src/pso/system/AdxStreamRuntime.o   # require MWCC line
+/Users/scott/.hermes/installs/60d8a79da6991a71/environments/28d86d1068e44adc8d1a5d2ca8c63c2c/venv/bin/python3.14 \
+  /Users/scott/.hermes/profiles/pso-decomp/skills/pso-decomp/scripts/one_shot_diff.py \
+  psov3/pso/system/AdxStreamRuntime fn_803C8020 | head -4
+# expect 87.92 / 300 / 300 / size 1200; then control receipt commit.
