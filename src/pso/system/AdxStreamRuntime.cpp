@@ -831,10 +831,12 @@ s32 fn_803C8020(AdxEncCtx_803C8020 *ctx, s32 ch_idx) {
     if (sv < g) {
         ts = sv;
     }
-    if (ts <= 1) {
+    if (ts > 1) {
+        if (sv < g) {
+            g = sv;
+        }
+    } else {
         g = 1;
-    } else if (sv < g) {
-        g = sv;
     }
     b->f7C = (s16)g;
     m = b->f78;
