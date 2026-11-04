@@ -3236,6 +3236,111 @@ void TLobby::set_active() {
 typedef char RecoveredGlobal_804050DC_lbl_805C18A0_size[sizeof(RecoveredGlobal_804050DC_lbl_805C18A0) == 0x10 ? 1 : -1];
 extern "C" {
 
+extern u8 lbl_805D7AB8[8];
+s16 TLobby__sub_80403308(void *, void *, u32);
+
+void PADRead(void *self, Strm_80405A74 *strm) {
+    Strm_80405A74 *s3;
+    Strm_80405A74 *s2;
+    Hdr_803FC4B4 hdr;
+    u8 *selfb;
+    u8 *obj30;
+    u8 *obj30b;
+    u8 *o;
+    u8 *pool;
+    u8 *pool8;
+    u16 f4;
+    s16 rc;
+    s16 i;
+
+    selfb = (u8 *)self;
+    obj30 = *(u8 **)(selfb + 0x30);
+    if (TLobby__sub_803FE8BC((u8 *)&hdr, &strm) != 0) {
+        return;
+    }
+    hdr.len -= 4;
+    TLobby__sub_80401CAC((Outer_80401CAC *)&strm, hdr.len);
+    switch (hdr.type) {
+    case 1:
+        if (TLobby__sub_80403308(self, &hdr, (u32)strm) != 0) {
+            return;
+        }
+        o = *(u8 **)(selfb + 0xC);
+        selfb[2] = selfb[2] & 0xFFFFFFEF;
+        if ((selfb[2] & 0x30) == 0) {
+            selfb[0] = 5;
+        }
+        TLobby__sub_80405304((void *)(selfb + 0x10));
+        o[2] = o[2] & 0xFFFFFFEF;
+        TLobby__sub_80400ACC((O_80400ACC *)o);
+        return;
+    case 2:
+        s2 = strm;
+        obj30b = *(u8 **)(selfb + 0x30);
+        rc = -1;
+        if (hdr.flag == selfb[1]) {
+            s16 rc2 = TLobby__sub_80401BCC(&s2, lbl_805D7AB8, 1);
+            rc = (s16)rc2 == 1 ? (s16)lbl_805D7AB8[rc2] : -1;
+        }
+        if (rc == -1) {
+            return;
+        }
+        if (rc != 0) {
+            f4 = ((TLobby *)s2)->get_field_4();
+            pool = (u8 *)&lbl_805C0620;
+            pool8 = pool + 8;
+            i = (s16)TLobby__sub_80401ABC((B_803FADA0 *)s2, *(u8 **)(pool8), rc);
+            *(u8 *)(*(u32 *)pool8 + i) = 0;
+            *(u32 *)(obj30b + 8) = *(u32 *)pool8;
+            rc = (i < rc || rc < (s16)f4) ? 1 : 0;
+        }
+        if (rc != 0) {
+            return;
+        }
+        selfb[2] = selfb[2] & 0xFFFFFFDF;
+        o = *(u8 **)(selfb + 0xC);
+        if ((selfb[2] & 0x30) == 0) {
+            selfb[0] = 5;
+        }
+        TLobby__sub_80405304((void *)(selfb + 0x10));
+        o[2] = o[2] & 0xFFFFFFDF;
+        TLobby__sub_80400ACC((O_80400ACC *)o);
+        return;
+    case 3:
+        s3 = strm;
+        obj30b = *(u8 **)(selfb + 0x30);
+        rc = -1;
+        if (hdr.flag == selfb[1]) {
+            s16 rc2 = TLobby__sub_80401BCC(&s3, lbl_805D7AB8, 1);
+            rc = (s16)rc2 == 1 ? (s16)lbl_805D7AB8[rc2] : -1;
+        }
+        if (rc == -1) {
+            return;
+        }
+        if (rc != 0) {
+            f4 = ((TLobby *)s3)->get_field_4();
+            pool = (u8 *)&lbl_805C0620;
+            pool8 = pool + 8;
+            i = (s16)TLobby__sub_80401ABC((B_803FADA0 *)s3, *(u8 **)(pool8), rc);
+            *(u8 *)(*(u32 *)pool8 + i) = 0;
+            *(u32 *)(obj30b + 8) = *(u32 *)pool8;
+            rc = (i < rc || rc < (s16)f4) ? 1 : 0;
+        }
+        if (rc != 0) {
+            return;
+        }
+        TLobby__sub_80405304((void *)(selfb + 0x10));
+        *(u32 *)obj30 = 0;
+        *(u32 *)(obj30 + 4) = 0;
+        *(s16 *)(selfb + 8) = 1;
+        selfb[0] = 0;
+        lbl_805D7A80 = 1;
+        return;
+    default:
+        return;
+    }
+}
+
 s32 TLobby__sub_80403168(u8 *arg0, u8 *arg1, u8 *arg2) {
     Names_80403168 *g;
     u8 **p;
