@@ -53,6 +53,7 @@ extern const f32 lbl_805DE558;
 void TAdEnterSerialAccessGC__sub_802C4B64(void *, void *, Q_802C4E38, int);
 #pragma push
 #pragma opt_propagation off
+#pragma opt_common_subs off
 void TAdPlyChrSelPlateGC::render() {
     S_802C4E38 *self = (S_802C4E38 *)this;
     S_802C4E38 *row;
