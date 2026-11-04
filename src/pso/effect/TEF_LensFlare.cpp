@@ -67,7 +67,7 @@ struct FlareDefLayer {
     s32 texlist_index;
     s32 sprite_type;
 };
-struct FlareDefSet { u8 pad[0x168]; FlareDefLayer layers[9]; };
+struct FlareDefSet { FlareDefLayer layers[9]; };
 
 extern "C" {
 extern FlareDefLayer lbl_804C5820[];
@@ -123,6 +123,7 @@ void TEF_LensFlare::render() {
     u8 halo_color[4];
     u8 refl_color[4];
     s8 *self = (s8 *)this;
+    FlareItem *pi = &item;
     u8 *cam;
     FlareElement *element;
     FlareDefSet *set;
@@ -202,7 +203,7 @@ void TEF_LensFlare::render() {
             point.y = scr.y;
             point.z = 0.0f;
             item.color = *(u32 *)glow_color;
-            VecCopy((Vec *)&item.pos, (const Vec *)&point);
+            VecCopy((Vec *)&pi->pos, (const Vec *)&point);
             item.sy = item.sx = 20.0f * glow_sq;
             begin_screen_draw(1);
             TObjFish::set_global_param((s32)lbl_804C5820[15].texlist);
@@ -239,7 +240,7 @@ void TEF_LensFlare::render() {
         point.y = scr.y;
         point.z = 0.0f;
         item.color = *(u32 *)halo_color;
-        VecCopy((Vec *)&item.pos, (const Vec *)&point);
+        VecCopy((Vec *)&pi->pos, (const Vec *)&point);
         item.sy = item.sx = 1.0f;
         begin_screen_draw(1);
         TObjFish::set_global_param((s32)lbl_804C5820[9].texlist);
@@ -259,7 +260,7 @@ void TEF_LensFlare::render() {
         TWindowSubStatusDisp::get_player();
         element = (FlareElement *)*(void **)(self + 0x90);
         refl_alpha = 1.0f - halo_alpha;
-        set = (FlareDefSet *)&lbl_804C5820[564];
+        set = (FlareDefSet *)lbl_804C5820;
         refl_base = 1.0f;
         for (i = 1; i <= 9; i++, element++) {
             refl_scale = element->size * (refl_base - refl_alpha * element->alpha);
@@ -274,13 +275,13 @@ void TEF_LensFlare::render() {
             point.x = center_dx * element->offset + scr.x;
             point.y = center_dy * element->offset + scr.y;
             point.z = 0.0f;
-            VecCopy((Vec *)&item.pos, (const Vec *)&point);
+            VecCopy((Vec *)&pi->pos, (const Vec *)&point);
             item.sx = refl_scale;
             item.sy = (f32)refl_scale;
             begin_screen_draw(1);
-            layer = &set->layers[element->def_index];
-            TObjFish::set_global_param((s32)set->layers[element->def_index].texlist);
-            set_draw_texture_and_color(set->layers[element->def_index].texture, -1);
+            layer = &set->layers[element->def_index + 9];
+            TObjFish::set_global_param((s32)set->layers[element->def_index + 9].texlist);
+            set_draw_texture_and_color(set->layers[element->def_index + 9].texture, -1);
             half_w = layer->width * (2.0f * item.sx);
             half_h = layer->height * (2.0f * item.sy);
             refl.r = 0.0f;
