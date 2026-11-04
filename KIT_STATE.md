@@ -124,3 +124,38 @@ Budget law: 3+ builds remaining before touching a C-class row.
 - V1 d82be2a8+...: KIT_STATE authored; skeleton in-file (decl @ extern-C block 214,
   structs, body full-transcription draft); control probe score -> record in commit msg.
   ps_screen_count = 0.
+- V1 probe trail (all on clean rebuild, rm .o first, MWCC line required):
+  * f1e2c4e5 indexed draft: 64.973335, 242 rows, frame 0x20. LATER FOUND WRONG:
+    loop-1 store target. Era slot 8 `add r5,r3,r0` (ctx+i*4) is REASSIGNED at slot 17
+    `mr r5,r9` = b BEFORE the first store -> loop-1 residual stream lands at
+    b+0x18+2j (b->f18), NOT ctx+0x18+i*4. ctx+0x18 is never written. Indexed draft's
+    64.97 = row-pairing artifact of the wrong 38-insn-shorter head; score truth =
+    semantic-first (no lies in code).
+  * walker draft (pd/resw/pd2/qw + fill-walkers, loop1->b->f18 fix): 60.183334, 245
+    rows, size 0x3D4 (gate 0x4B0, -58 insns).
+  * Walker birth-order reorder (pcm,pd,b,h,resw = era slots 6-17): +0.01, INERT —
+    C5ED4 birth-order lever measured non-transferable on this unit (per-unit law).
+  * Siblings: gnm -S per-symbol vs REGENERATED d82be2a8 base .o: ALL function sizes
+    byte-stable; only anonymous pool `@NNN` renumber (link-gated class) + our 2 new
+    U externs.
+- V1 FINAL (committed tip): match=60.183334, status=visit1-frontier.
+
+## V2 ENTRY LIST (frontier, ranked)
+1. Frame 0x20 vs 0x30: 3 dead reserved slots 0x18/0x1c/0x20 below live saves 0x24-0x2c.
+   All live era slots: 0x8/0xc (bias stw-pair), 0x10/0x14 (fctiwz stfd/lwz). Era frame
+   = max slot demand incl. scheduler-reserved temps: hunt the 3 phantom consumers
+   (PHANTOM-FRAME-SLOT law; f64 temporaries that OUR compiler keeps in regs; era's
+   0x4330 `stw r0,0x8(r1)` per-iter store = bias upper homed, not register — check
+   OUR loop2 bias emission: if OURS folds (double)cast to lfd-from-const, bias
+   materialization is the slot-demand key).
+2. Era homes b(r9),h(r10),resw(r5),pd(r4),j(r8) + loop2 trio r29/30/31 with 3 callee
+   saves stw 0x24/28/2C (NOT stmw, frame 0x30); OURS 245 rows -> 58-insn gap = magic
+   chains (2 mulhw blocks = +6? era lis/addi pair 0x38007001 per-branch: OURS /4681 may
+   CSE to one chain = PER-BRANCH DUPLICATION row: verify OURS emits TWO full chains;
+   if one, split spelling is the lever (c7df0 proven)).
+3. Fill loops: era `li r29,0; mr r30,r9; mr r12,r29` = hoisted-zero via counter-copy
+   (LI-ZERO-COPY loop-IV seed class, banked form); OURS sth li-0 likely (-1 insn/fill).
+4. Mid-section clamp: era min then max with RECOMPUTED cmpw r4,r8 (two-site) = our
+   `if (sv > g) sv = g;` — verify color; fdiv operand spelling f2/(f0-f1) order check.
+5. Color ring (C-class, census kin qvm-edc20/C5ED4): r29/30/31 cross-loop roles —
+   do not re-roll beyond 2 levers; park with receipt.
