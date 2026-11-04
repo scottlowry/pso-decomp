@@ -3813,6 +3813,53 @@ void TLobby__sub_8040AFE0(void) {
         req++;
     }
 }
+
+void TLobby__sub_8040B1C4(F_8040A45C *req) {
+    G_8040A45C *g;
+    Rec_8040B33C *rec;
+    s16 *fc;
+    s32 i;
+    UdpBuf_8040AFE0 buf;
+    s16 r;
+
+    g = &dns_resolver_state;
+    rec = NULL;
+    for (i = 0; i < g->nb;) {
+        rec = (Rec_8040B33C *)((u8 *)g->b + ((req->f14 + req->f10) % g->nb) * sizeof(Rec_8040B33C));
+        if (rec->f0 == 0) {
+            req->f10++;
+            i++;
+            rec = NULL;
+            continue;
+        }
+        if (req->f10 >= g->lim) {
+            rec = NULL;
+            break;
+        }
+        break;
+    }
+    if (rec == NULL) {
+        TLobby__sub_8040BE40(req, -0x44, 0);
+        return;
+    }
+    g->f18 = req->f10 % g->nb;
+    fc = g->fC;
+    req->fA = fc[req->f10 / g->nb];
+    buf.len = req->f18->len;
+    buf.data = req->f18->data;
+    r = TUdpSocket__sub_80421BAC(req->f4, NULL, (u32 *)rec, 0, NULL, 1, &buf);
+    if (r < 0) {
+        put_tag_8040AFE0(req, 1);
+        req->f10++;
+        return;
+    }
+    if (req->f8 == 1 && req->f20 == 0) {
+        put_tag_8040AFE0(req, 2);
+        req->f12 = 1;
+        return;
+    }
+    req->f10++;
+}
 #pragma pop
 
 
