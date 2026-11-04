@@ -3277,7 +3277,6 @@ void PADRead(void *self, Strm_80405A74 *strm) {
     case 2:
         s2 = strm;
         obj30b = *(u8 **)(selfb + 0x30);
-        rc = -1;
         if (hdr.flag == selfb[1]) {
             s16 rc2 = TLobby__sub_80401BCC(&s2, lbl_805D7AB8, 1);
             s16 out = rc2 == 1 ? (s16)lbl_805D7AB8[rc2] : (s16)-1;
@@ -3294,6 +3293,8 @@ void PADRead(void *self, Strm_80405A74 *strm) {
                 *(u32 *)(obj30b + 8) = *(u32 *)pool8;
                 rc = (i < out || out < (s16)f4) ? 1 : i;
             }
+        } else {
+            rc = -1;
         }
         if (rc != 0) {
             return;
@@ -3310,7 +3311,6 @@ void PADRead(void *self, Strm_80405A74 *strm) {
     case 3:
         s3 = strm;
         obj30b = *(u8 **)(selfb + 0x30);
-        rc = -1;
         if (hdr.flag == selfb[1]) {
             s16 rc2 = TLobby__sub_80401BCC(&s3, lbl_805D7AB8, 1);
             s16 out = rc2 == 1 ? (s16)lbl_805D7AB8[rc2] : (s16)-1;
@@ -3327,6 +3327,8 @@ void PADRead(void *self, Strm_80405A74 *strm) {
                 *(u32 *)(obj30b + 8) = *(u32 *)pool8;
                 rc = (i < out || out < (s16)f4) ? 1 : i;
             }
+        } else {
+            rc = -1;
         }
         if (rc != 0) {
             return;
