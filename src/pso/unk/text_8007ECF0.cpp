@@ -184,6 +184,8 @@ void fn_8007F27C(Obj_8007F0E4 *self, void *a, void *b) {
     f32 dy;
     f32 fx;
     f32 fy;
+    f32 s1;
+    f32 s2;
     f32 *p;
     f32 *q;
 
@@ -197,9 +199,11 @@ void fn_8007F27C(Obj_8007F0E4 *self, void *a, void *b) {
     d.col = col;
     col[0] = col[1] = col[2] = col[3] = 0xff;
     dx = p[0] - lbl_805D92A8;
+    s1 = p[0] + q[0];
+    s2 = p[1] + q[1];
+    fx = lbl_805D92A8 + s1;
     dy = p[1] - lbl_805D92A8;
-    fx = lbl_805D92A8 + (p[0] + q[0]);
-    fy = lbl_805D92A8 + (p[1] + q[1]);
+    fy = lbl_805D92A8 + s2;
     pos[6] = dx;
     pos[0] = dx;
     pos[4] = fx;
