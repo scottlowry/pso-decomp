@@ -144,6 +144,7 @@ void TWindowSubStatusDisp__sub_8026E1D4(TWindowSubStatusDisp *self, s32 index, s
     u8 sp9;
     u8 sp8;
     Stack_8026E1D4 stack;
+    f32 *px;
     f32 *pt;
     s32 v;
     void *w;
@@ -187,7 +188,8 @@ void TWindowSubStatusDisp__sub_8026E1D4(TWindowSubStatusDisp *self, s32 index, s
         stack.sp14 = round_away_from_zero__20TWindowSubStatusDispFf(stack.sp14 - lbl_805DD36C * stack.spC);
         stack.sp10 = lbl_805DD364 + (lbl_805DD368 + ((Msg_8026E1D4 *)e10)->height);
         stack.sp18 = round_away_from_zero__20TWindowSubStatusDispFf(stack.sp18 - lbl_805DD36C * stack.sp10);
-        w = (void *)create_quest_message_window_at__Fll((s32)&stack.sp14, (s32)&stack.spC);
+        px = &stack.sp14;
+        w = (void *)create_quest_message_window_at__Fll((s32)px, (s32)&stack.spC);
         self->m_64 = (u32)w;
         dispatch_message_window_text__FPvii((void *)self->m_64, v, 0x402);
         ((TWindowBase *)self->m_64)->set_depth(lbl_805DD370);
@@ -201,7 +203,8 @@ void TWindowSubStatusDisp__sub_8026E1D4(TWindowSubStatusDisp *self, s32 index, s
         stack.sp14 = round_away_from_zero__20TWindowSubStatusDispFf(stack.sp14 - lbl_805DD36C * stack.spC);
         stack.sp10 = lbl_805DD364 + (lbl_805DD368 + ((Msg_8026E1D4 *)e10)->height);
         stack.sp18 = round_away_from_zero__20TWindowSubStatusDispFf(stack.sp18 - lbl_805DD36C * stack.sp10);
-        w = (void *)create_quest_message_window_at__Fll((s32)&stack.sp14, (s32)&stack.spC);
+        px = &stack.sp14;
+        w = (void *)create_quest_message_window_at__Fll((s32)px, (s32)&stack.spC);
         self->m_64 = (u32)w;
         dispatch_message_window_text__FPvii((void *)self->m_64, (s32)get_shared_text_buffer(), 2);
         ((TWindowBase *)self->m_64)->set_depth(lbl_805DD370);
@@ -215,7 +218,8 @@ void TWindowSubStatusDisp__sub_8026E1D4(TWindowSubStatusDisp *self, s32 index, s
         stack.sp10 = lbl_805DD378;
         w = __nw__7TObjectFUl(0x68);
         if (w != 0) {
-            w = (void *)TWindowChatSymbol__ct((TWindowChatSymbol *)w, (s32)&stack.sp14, (s32)&stack.spC);
+            px = &stack.sp14;
+            w = (void *)TWindowChatSymbol__ct((TWindowChatSymbol *)w, (s32)px, (s32)&stack.spC);
         }
         self->m_68 = (u32)w;
         set_selection__28TWindowSubSymbolChatPartsSetFUl((void *)self->m_68, (u32)v);
