@@ -1673,13 +1673,16 @@ u32 TLobby__sub_803FEA88(A_80403F4C *out, Strm_80405A74 **src) {
 
 u8 *GXLoadTexObjPreLoaded(A_80403F4C *obj, u8 *stream, s32 flag) {
     u8 buf[0x40];
+    u8 *bp;
     u16 v;
     Strm_80405A74 *cur;
     u8 *cp;
+    s32 len;
     u16 fw;
     s32 n;
     u32 sum;
 
+    bp = buf;
     v = (u16)(obj->optlen + 20);
     if (v > 64) {
         v = 64;
@@ -1712,16 +1715,17 @@ u8 *GXLoadTexObjPreLoaded(A_80403F4C *obj, u8 *stream, s32 flag) {
         if (n >= 44) {
             n = 44;
         }
-        NetMemcpy(buf + 20, obj->opts, n);
+        NetMemcpy(bp + 20, obj->opts, n);
     }
-    NetMemcpy(cp, buf, v);
+    len = v;
+    NetMemcpy(cp, bp, len);
     if ((u16)flag == 0) {
         sum = TLobby__sub_803FE9F8(0, (B_803FADA0 *)cur, v);
         sum = (sum >> 16) + (sum & 0xFFFF);
         sum += sum >> 16;
         *(u16 *)(buf + 10) = (u16)~sum;
     }
-    NetMemcpy(cp, buf, v);
+    NetMemcpy(cp, bp, len);
     return (u8 *)cur;
 }
 
