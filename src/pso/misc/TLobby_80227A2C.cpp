@@ -586,7 +586,7 @@ void TLobby__sub_80228118(void) {
 }
 
 #pragma push
-#pragma opt_propagation off
+#pragma opt_common_subs off
 void TLobby__sub_80228154(void *arg0, s32 arg1, s32 arg2, f32 arg3) {
     u32 color;
     f32 v[3];
@@ -672,7 +672,7 @@ void TLobby__sub_80228154(void *arg0, s32 arg1, s32 arg2, f32 arg3) {
         pts[4] = pts[5];
     }
     arg3 = lbl_805DC784 / arg3;
-    begin_screen_draw((arg2 & 0x20) == 0x20);
+    begin_screen_draw((arg2 & 0x20) != 0);
     set_draw_texture_and_color(e[8], color);
     draw_textured_quad_at_depth(pts, arg3);
     get_player__20TWindowSubStatusDispFv();
