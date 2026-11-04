@@ -151,6 +151,18 @@ struct Prim_802521E8 {
     s32 count;
 };
 
+struct PlateSelf_802521EC { u8 pad0[0x78]; u32 name; };
+
+struct PlateCtx_802521EC {
+    f32 x;
+    f32 y;
+    u8 pad08[0x30 - 0x08];
+    s32 name_chars;
+    f32 f38;
+};
+
+struct Quad_802521EC { f32 x, y, x2, y2, u[4]; };
+
 struct Slice_80252558 { f32 x, y, z, width, f10, lean, rowHeight, f1c, u, v, uw, f2c, f30, vh, pad[4]; };
 
 struct Fukidasi_80252558 { u8 pad[0x40]; f32 position[2]; f32 size[2]; };
@@ -253,6 +265,12 @@ void pop_matrix();
 void begin_screen_draw(s32 arg0);
 void DVDConvertEntrynumToPath(f32 *q);
 void set_draw_texture_and_color(s32 idx, s32 arg1);
+s32 get_name_text_width(void *p);
+void render_forward__20TWindowSubStatusDispFPv();
+void apply_context_transform_to_rect(s32, void *);
+void draw_textured_quad_at_depth(void *, f32);
+void set_text_draw_params(s32, s32, s32, f32, f32, f32);
+s32 draw_small_font_string_clipped__FPfPCcUlf(f32 *pos, const char *s, u32 color, f32 width);
 
 extern Cam_802511E4 TCameraCtrl__data_804FF634;
 extern const f32 TWindowFukidasi__data_805DCCF4;
@@ -271,6 +289,7 @@ extern const f32 lbl_805DCCF0;
 extern const f32 lbl_805DCCF8;
 extern f32 lbl_805DCD00;
 extern f32 lbl_805DCD04;
+extern const f32 lbl_805DCD10;
 extern const f32 lbl_805DCD34;
 extern const f32 lbl_805DCD38;
 extern const f32 lbl_805DCD3C;
@@ -278,8 +297,21 @@ extern const f32 lbl_805DCD40;
 extern const f32 lbl_805DCD44;
 extern const f32 lbl_805DCD48;
 extern const f32 lbl_805DCD50;
+extern const f32 lbl_805DCD54;
 extern const f32 lbl_805DCD58;
+extern const f32 lbl_805DCD5C;
+extern const f32 lbl_805DCD60;
+extern const f32 lbl_805DCD64;
+extern const f32 lbl_805DCD68;
+extern const f32 lbl_805DCD6C;
+extern const f32 lbl_805DCD70;
+extern const f32 lbl_805DCD74;
 extern const f32 lbl_805DCD78;
+extern const f32 lbl_805DCD7C;
+extern const f32 lbl_805DCD80;
+extern const f32 lbl_805DCD84;
+extern const f32 lbl_805DCD88;
+extern const f32 lbl_805DCD8C;
 extern const f32 lbl_805DCD90;
 extern const f32 lbl_805DCD94;
 extern const f32 lbl_805DCD98;
@@ -1035,6 +1067,91 @@ void TUnk_804CF0B8::sub_80251DF0(s16 arg1, s32 str, s16 arg3, f32 farg0) {
     this->clear_flag();
     this->clear_flag2c_bit100();
 }
+
+#pragma push
+#pragma fp_contract on
+void draw_name_plate__15TWindowFukidasiFv(void *self, View_80252764 *view, u32 color) {
+    PlateSelf_802521EC *plate;
+    PlateCtx_802521EC *ctx;
+    Quad_802521EC q;
+    f32 pos[2];
+    f32 excess;
+    f32 cap;
+    f32 x2b;
+    f32 depth;
+    s32 alpha;
+    u32 box_color;
+    u32 text_color;
+    plate = (PlateSelf_802521EC *)self;
+    ctx = (PlateCtx_802521EC *)view;
+    if (plate->name == 0) {
+        return;
+    }
+    if (ctx->name_chars < 0) {
+        return;
+    }
+    excess = (f32)(u32)get_name_text_width((void *)plate->name);
+    if (ctx->name_chars >= 6) {
+        alpha = 255;
+    } else {
+        alpha = (s32)(lbl_805DCD5C * (f32)(ctx->name_chars * 255));
+    }
+    text_color = alpha << 24;
+    box_color = text_color | (color & 0xFFFFFF);
+    pos[0] = ctx->x - lbl_805DCD60;
+    pos[1] = ctx->y - TWindowFukidasi__data_805DCD1C;
+    depth = TWindowFukidasi__data_805DCD4C / (lbl_805DCD64 + ctx->f38);
+    begin_screen_draw(1);
+    render_forward__20TWindowSubStatusDispFPv();
+    set_draw_texture_and_color(0, (s32)box_color);
+    q.x = pos[0];
+    q.y = pos[1];
+    q.x2 = lbl_805DCD68 + pos[0];
+    q.y2 = lbl_805DCD10 + pos[1];
+    q.u[0] = lbl_805DCD6C;
+    q.u[1] = lbl_805DCD70;
+    q.u[2] = lbl_805DCD74;
+    q.u[3] = TWindowFukidasi__data_805DCCE8;
+    apply_context_transform_to_rect((s32)ctx, &q);
+    draw_textured_quad_at_depth(&q, depth);
+    cap = excess;
+    if (excess < TWindowFukidasi__data_805DCCFC) {
+        cap = TWindowFukidasi__data_805DCCFC;
+    }
+    x2b = (f32)(lbl_805DCD78 + (cap + pos[0] - lbl_805DCD68));
+    q.x = x2b;
+    q.y = pos[1];
+    q.x2 = lbl_805DCD68 + x2b;
+    q.y2 = lbl_805DCD10 + pos[1];
+    q.u[0] = lbl_805DCD7C;
+    q.u[1] = lbl_805DCD70;
+    q.u[2] = lbl_805DCD80;
+    q.u[3] = TWindowFukidasi__data_805DCCE8;
+    apply_context_transform_to_rect((s32)ctx, &q);
+    draw_textured_quad_at_depth(&q, depth);
+    if (excess > TWindowFukidasi__data_805DCCFC) {
+        q.x = lbl_805DCD68 + pos[0];
+        q.y = pos[1];
+        q.x2 = lbl_805DCD78 + (pos[0] + excess - lbl_805DCD68);
+        q.y2 = lbl_805DCD10 + pos[1];
+        q.u[0] = lbl_805DCD74;
+        q.u[1] = lbl_805DCD70;
+        q.u[2] = lbl_805DCD7C;
+        q.u[3] = TWindowFukidasi__data_805DCCE8;
+        apply_context_transform_to_rect((s32)ctx, &q);
+        draw_textured_quad_at_depth(&q, depth);
+    }
+    TWindowSubStatusDisp::get_player();
+    pos[0] = pos[0] + lbl_805DCD84;
+    if (excess < TWindowFukidasi__data_805DCCFC) {
+        pos[0] = TWindowFukidasi__data_805DCD0C * (TWindowFukidasi__data_805DCCFC - excess) + pos[0];
+    }
+    pos[1] = pos[1] + TWindowFukidasi__data_805DCD28;
+    set_text_draw_params((s32)ctx, 0, 1, TWindowFukidasi__data_805DCD4C / (lbl_805DCD88 + ctx->f38), lbl_805DCD8C,
+                         TWindowFukidasi__data_805DCD4C);
+    draw_small_font_string_clipped__FPfPCcUlf(pos, (char *)plate->name, text_color, lbl_805DCD54);
+}
+#pragma pop
 
 #pragma push
 #pragma fp_contract on
