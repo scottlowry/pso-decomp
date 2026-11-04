@@ -145,7 +145,7 @@ void * reset_selection__20TWindowSubStatusDispFv(void *, Vec2_80285D38 *);
 s32 sub_80283974__25TWindowSubSymbolChatPartsFv();
 s32 calc_symbol_index__25TWindowSubSymbolChatPartsFv(void *arg0);
 void fn_80285314(Win_802857C4 *, Rect_802857C4 *);
-s32 fn_802855C4(void *, s32);
+void fn_802855C4(Win_802857C4 *arg0, Rect_802857C4 *arg1);
 void setup_part_sprites__28TWindowSubSymbolChatPartsSetFPvPvPvUsiiii(void *, void *, void *, u16, s32, s32, s32, s32);
 Parts_80285D38 * TWindowSubSymbolChatParts__ct(Parts_80285D38 *arg0, void *arg1, s32 arg2, s32 arg3);
 s32 forward_render__20TWindowSubStatusDispFv(s32, s32);
@@ -378,6 +378,50 @@ void fn_80285314(Win_802857C4 *self, Rect_802857C4 *ctx) {
 #pragma push
 #pragma fp_contract on
 extern const f32 lbl_805DD7F8;
+extern const f32 lbl_805DD808;
+
+void fn_802855C4(Win_802857C4 *arg0, Rect_802857C4 *ctx) {
+    s32 i;
+    s32 row;
+    s32 j;
+    Part_80285314 *e1;
+    Part_80285314 *e2;
+    Part_80285314 *e0;
+    f32 y;
+    f32 off;
+    f32 x;
+    f32 h;
+    f32 k;
+
+    row = 0;
+    e1 = (Part_80285314 *)((TWindowBase *)arg0)->get_array_entry(1);
+    e2 = (Part_80285314 *)((TWindowBase *)arg0)->get_array_entry(2);
+    e0 = (Part_80285314 *)((TWindowBase *)arg0)->get_array_entry(0);
+    k = lbl_805DD808;
+    h = lbl_805DD7F8;
+    for (i = 0; i < arg0->count; row++) {
+        off = 40.0f * (f32)row;
+        y = ctx->y;
+        y = y + off;
+        if (h + y + k < ctx->top || y - k > ctx->bottom) {
+            i += 4;
+        } else {
+            x = 9.0f + off;
+            for (j = 0; j < 4; j++, i++) {
+                if (i >= arg0->count) break;
+                e1->x = 40.0f * (f32)j + 10.0f;
+                e1->y = x;
+                setup_part_sprites__28TWindowSubSymbolChatPartsSetFPvPvPvUsiiii(e1, e2, e0, (u16)i, (s8)*arg0->p78, *arg0->p7C, *arg0->p80, 0);
+                draw_visible_window_entries(arg0, arg0->sub, ctx);
+            }
+        }
+    }
+}
+#pragma pop
+
+#pragma push
+#pragma fp_contract on
+extern const f32 lbl_805DD7F8;
 
 void fn_802857C4(Win_802857C4 *arg0, Rect_802857C4 *ctx) {
     s32 i;
@@ -463,7 +507,7 @@ void render__25TWindowSubSymbolChatPartsFv(u8 *window_sub_symbol_chat_parts) {
         fn_802857C4((Win_802857C4 *)(window_sub_symbol_chat_parts), (Rect_802857C4 *)(temp_r3));
         break;
     case 1:
-        fn_802855C4(window_sub_symbol_chat_parts, temp_r3);
+        fn_802855C4((Win_802857C4 *)(window_sub_symbol_chat_parts), (Rect_802857C4 *)(temp_r3));
         break;
     case 2:
         fn_80285314((Win_802857C4 *)(window_sub_symbol_chat_parts), (Rect_802857C4 *)(temp_r3));
