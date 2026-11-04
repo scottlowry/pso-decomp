@@ -103,7 +103,7 @@ void TWindowKeyBoardSoft__sub_80261DD8(TWindowKeyBoardSoft *, TWindowKeyBoardSof
 void TWindowKeyBoardSoft__sub_8026227C(TWindowKeyBoardSoft *, int);
 s32 get_flag_bit5__19TWindowKeyBoardSoftFv();
 void fn_8026C664(void *, f32, f32, f32, f32, f32, f32);
-void fn_8026C708(void *, f32, f32, f32, f32, f32, f32);
+void fn_8026C708(void *, s32, s32, f32, f32, f32, f32, f32, f32);
 s32 get_player__20TWindowSubStatusDispFv();
 
 extern RecoveredGlobal_8026062C_TWindowKeyBoardSoft__data_8044F124 TWindowKeyBoardSoft__data_8044F124;
@@ -723,7 +723,7 @@ void TWindowKeyBoardSoft__sub_8026227C(TWindowKeyBoardSoft *self, int arg1) {
     v = TWindowKeyBoardSoft__sub_802606E0(self);
     fn_8026C664(ctx, ctx->x + v - lbl_805DD0CC, lbl_805DD0B8 + (TWindowKeyBoardSoft__data_805DD098 + ctx->y),
         scale, *(f32 *)((s8 *)self + 0x68), lbl_805DD0CC, ctx->x + v);
-    fn_8026C708(ctx,
+    fn_8026C708(ctx, res[0], res[1],
         lbl_805DD0D0 + (ctx->x + (v + (TWindowKeyBoardSoft__data_805DD078 + (f32)(res[0] * res[1])))),
         lbl_805DD0B8 + (TWindowKeyBoardSoft__data_805DD098 + ctx->y), scale, *(f32 *)((s8 *)self + 0x68),
         ctx->x, lbl_805DD0D0);
