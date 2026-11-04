@@ -748,15 +748,13 @@ s32 adx_encode_available_blocks(void *arg0p) {
         void *f88;
     };
     s32 total;
-    s32 i;
-    s32 avail;
+    s32 avail = 0, i = avail;
     s32 target;
     s32 w;
     s32 q;
     s16 *dst[2];
     Strm_803C8678 **pch;
     Strm_803C8678 *fc;
-    Strm_803C8678 *ch;
     EncSub *enc;
     s16 *coef;
     Pair_803C8678 p;
@@ -789,11 +787,10 @@ s32 adx_encode_available_blocks(void *arg0p) {
         for (i = 0; i < arg0->f58; i++) {
             avail = 0;
             while (avail < target) {
-                ch = pch[i];
-                ch->vt->read(ch, 1, q, &p);
+                pch[i]->vt->read(pch[i], 1, q, &p);
                 memcpy(dst[i] + avail, (void *)p.a, p.b);
                 avail += p.b >> 1;
-                ch->vt->submit(ch, 0, &p);
+                pch[i]->vt->submit(pch[i], 0, &p);
             }
         }
     gate:
