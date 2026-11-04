@@ -768,16 +768,15 @@ void clamp_params__6TLobbyFPv(void *arg0) {
 }
 
 void calc_sound_spatial_params(SoundRequestVoice *v) {
-    TCameraCtrl *cam = (TCameraCtrl *)camera_ctrl_instance;
     Vec camvec;
     s32 vol = 0;
     s32 pan = 0;
     s32 surround = 0;
 
-    if (cam != NULL) {
-        camvec.x = cam->pos_x;
+    if (camera_ctrl_instance != NULL) {
+        camvec.x = ((TCameraCtrl *)camera_ctrl_instance)->pos_x;
         camvec.y = TLobby__data_805DC9E0;
-        camvec.z = cam->pos_z;
+        camvec.z = ((TCameraCtrl *)camera_ctrl_instance)->pos_z;
         if (v->position != NULL) {
             Vec targetvec;
             f32 far = lbl_805DC9F0;
@@ -792,7 +791,7 @@ void calc_sound_spatial_params(SoundRequestVoice *v) {
             if (is_split_screen() != 0) {
                 dist = lbl_805DC9F8;
                 for (s32 i = 0; i < TCameraCtrl::get_camera_id(); i++) {
-                    u16 player_id = TCameraCtrl::get_nth_view_player_id(i);
+                    s32 player_id = TCameraCtrl::get_nth_view_player_id(i);
                     if (player_id < 12) {
                         void *player = get_player_by_client_id(player_id);
                         if (player != NULL) {
@@ -802,11 +801,11 @@ void calc_sound_spatial_params(SoundRequestVoice *v) {
                         }
                     }
                     f32 d2 = horizontal_distance_squared(&camvec, &targetvec);
-                    if (d2 < dist) {
+                    if (dist > d2) {
                         dist = d2;
                     }
                 }
-                if (dist != lbl_805DC9F8) {
+                if (lbl_805DC9F8 != dist) {
                     dist = newton_sqrtf(dist);
                 }
             } else {
@@ -820,14 +819,21 @@ void calc_sound_spatial_params(SoundRequestVoice *v) {
                 }
                 dist = PSVECDistance(&camvec, &targetvec);
             }
-            if (is_split_screen() == 0 && (v->flags & 2) != 0 && dist > TLobby__data_805DC9E0) {
-                f32 angle = atan2_float(((const Vec *)v->position)->z - cam->pos_z, ((const Vec *)v->position)->x - cam->pos_x);
-                pan = (s8)(lbl_805DC9EC * -sin_table_lookup(cam->yaw + 0x4000 + (s32)(10430.38043493439 * angle)));
+            if (is_split_screen() == 0 && (v->flags & 2) != 0) {
+                if (dist > TLobby__data_805DC9E0) {
+                    f32 angle = atan2_float(((const Vec *)v->position)->z - ((TCameraCtrl *)camera_ctrl_instance)->pos_z, ((const Vec *)v->position)->x - ((TCameraCtrl *)camera_ctrl_instance)->pos_x);
+                    pan = (s8)(lbl_805DC9EC * -sin_table_lookup((((TCameraCtrl *)camera_ctrl_instance)->yaw + 0x4000) + (s32)(10430.38043493439 * angle)));
+                }
+            } else {
+                pan = 0;
             }
             if (is_split_screen() == 0 && (v->flags & 8) != 0) {
                 f32 angle2 = atan2_float(((const Vec *)v->position)->z - camvec.z, ((const Vec *)v->position)->x - camvec.x);
+                s32 angle2_int = (((TCameraCtrl *)camera_ctrl_instance)->yaw - 0x4000) + (s32)(10430.38043493439 * angle2);
                 f32 field2a4 = get_field_2a4__6TLobbyFPv(v->owner);
-                surround = (s32)(dist * (cos_table_lookup(cam->yaw - 0x4000 + (s32)(10430.38043493439 * angle2)) * field2a4));
+                surround = (s32)(dist * (cos_table_lookup(angle2_int) * field2a4));
+            } else {
+                surround = 0;
             }
             if ((v->flags & 4) != 0) {
                 f32 t = (dist - lbl_805DC9FC) / (far - lbl_805DC9FC);
@@ -835,6 +841,8 @@ void calc_sound_spatial_params(SoundRequestVoice *v) {
                     t = TLobby__data_805DC9E0;
                 }
                 vol = -(s32)(t * lbl_805DC9EC);
+            } else {
+                vol = 0;
             }
         }
     }
