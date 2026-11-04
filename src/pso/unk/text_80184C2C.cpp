@@ -10,8 +10,12 @@ struct Obj_80185160 { u8 pad[0x8C]; s32 dest; };
 extern int lbl_8050DC20[];
 extern s32 lobby_event_theme_id_table[];
 extern s32 TLobby__event_theme_id;
+extern u8 lbl_804B5E80[];
 extern "C" {
 void debug_printf_at(s32 id, const char *fmt, ...);
+s32 get_main_phase(void);
+u8* load_resource_from_descriptor(void *, s32, void *, s32, s32, s32);
+u8* __nw__FUl(u32);
 extern const char lbl_804449C0[];
 extern const char lbl_804449D0[];
 extern const char lbl_804449E0[];
@@ -84,6 +88,126 @@ void TLobby::free_buffers() {
         }
         city_season_easter_egg_model_table[i] = 0;
         city_season_xmas_model_table[i] = 0;
+    }
+}
+
+void TLobby__sub_80184DF4(void) {
+    u8* base;
+    s32 phase;
+    s32 i;
+    s32 res;
+    s32 off;
+    s32 cnt;
+    s32 e2;
+    s32 t;
+    s32 res2;
+    s32* p;
+
+    base = lbl_804B5E80;
+    TLobby::clear_global_array(base);
+    phase = get_main_phase();
+    if (phase == 15) {
+        TLobby__sub_80184C80((void*)phase);
+    } else {
+        TLobby__sub_80184CE0((void*)phase);
+    }
+    lbl_805D5B30 = -1;
+    for (i = 0; i < 6; i++) {
+        if (TLobby__sub_80184C6C(i) != 0) {
+            lbl_805D5B30 = i;
+            break;
+        }
+    }
+    if (lbl_805D5B30 != -1) {
+        for (i = 0; i < 6; i++) {
+            city_season_easter_egg_model_table[i] = 0;
+            city_season_xmas_model_table[i] = 0;
+        }
+        res = (s32)__nw__FUl(0x440);
+        if (res != 0) {
+            res = (s32)load_resource_from_descriptor((void*)res, 1,
+                    *(void**)(base + 0x15c + lbl_805D5B30 * 4), 0, 0, 0);
+        }
+        city_season_easter_egg_model_table[lbl_805D5B30] = res;
+        off = 0;
+        cnt = *(s32*)(res + 0x434);
+        for (i = 0; i < cnt; i++) {
+            e2 = *(s32*)(res + 0x42c);
+            if (*(s32*)(e2 + off + 0xc) != 0) {
+                city_season_xmas_model_table[lbl_805D5B30] = *(s32*)(e2 + off + 0xc);
+                break;
+            }
+            off += 0x10;
+        }
+        if (lbl_805D5B30 == 0) {
+            e2 = *(s32*)(*(s32*)(res + 0x42c) + 0x18);
+            t = (s32)__nw__FUl(0x14);
+            if (t != 0) {
+                t = (s32)((TLobby*)t)->alloc_tables(e2, 3);
+            }
+            lbl_805D5B34 = (void*)t;
+            p = (s32*)(e2 + 0x2c);
+            p = (s32*)*p;
+            p = (s32*)p[1];
+            p = (s32*)p[1];
+            *(s16*)(p + 3) &= ~0x80000;
+        } else if (lbl_805D5B30 == 4) {
+            e2 = *(s32*)(*(s32*)(res + 0x42c) + 0x18);
+            t = (s32)__nw__FUl(0x14);
+            if (t != 0) {
+                t = (s32)((TLobby*)t)->alloc_tables(e2, 0);
+            }
+            lbl_805D5B34 = (void*)t;
+            p = (s32*)(e2 + 0x2c);
+            p = (s32*)*p;
+            p = (s32*)p[1];
+            p = (s32*)p[1];
+            *(s16*)(p + 3) &= ~0x80000;
+        } else {
+            lbl_805D5B34 = 0;
+        }
+    }
+    if (lbl_805D5B30 == 2) {
+        res2 = (s32)__nw__FUl(0x440);
+        if (res2 != 0) {
+            res2 = (s32)load_resource_from_descriptor((void*)res2, 1, base + 0x130, 0, 0, 0);
+        }
+        lbl_805D5B3C = *(s32*)(*(s32*)(res2 + 0x42c) + 8);
+        lbl_805D5B40 = *(s32*)(*(s32*)(res2 + 0x42c) + 0x18);
+    } else if (lbl_805D5B30 == 4) {
+        res2 = (s32)__nw__FUl(0x440);
+        if (res2 != 0) {
+            res2 = (s32)load_resource_from_descriptor((void*)res2, 1, base + 0x14c, 0, 0, 0);
+        }
+        lbl_805D5B3C = *(s32*)(*(s32*)(res2 + 0x42c) + 8);
+        lbl_805D5B40 = *(s32*)(*(s32*)(res2 + 0x42c) + 0x18);
+    } else {
+        res2 = (s32)__nw__FUl(0x440);
+        if (res2 != 0) {
+            res2 = (s32)load_resource_from_descriptor((void*)res2, 1, base + 0x114, 0, 0, 0);
+        }
+        lbl_805D5B3C = *(s32*)(*(s32*)(res2 + 0x42c) + 8);
+        lbl_805D5B40 = *(s32*)(*(s32*)(res2 + 0x42c) + 0x18);
+    }
+    t = (s32)__nw__FUl(0x14);
+    if (t != 0) {
+        t = (s32)((TLobby*)t)->alloc_tables(lbl_805D5B3C, 2);
+    }
+    lbl_805D5B48 = (void*)t;
+    off = 0;
+    p = (s32*)lbl_805D5B3C;
+    p = (s32*)p[1];
+    p = (s32*)p[1];
+    *(s16*)(p + 3) &= ~0x40000;
+    lbl_805D5B38 = (void*)res2;
+    cnt = *(s32*)(res2 + 0x434);
+    for (i = 0; i < cnt; i++) {
+        e2 = *(s32*)(res2 + 0x42c);
+        if (*(s32*)(e2 + off + 0xc) != 0) {
+            lbl_805D5B44 = *(s32*)(e2 + off + 0xc);
+            break;
+        }
+        off += 0x10;
     }
 }
 
