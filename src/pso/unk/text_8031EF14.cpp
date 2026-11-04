@@ -131,20 +131,20 @@ void TObjEneRecobox__sub_8031F1A8(u8 *arg0) {
     {
         u8 *o = (u8 *)__nw__7TObjectFUl(0x234);
         if (o != NULL) {
-            construct_debris__8TObjChipFPvPvPv(o, tl_05, (u8 *)&a);
+            __ct__8TObjChipFP7TObjectP14TObjChipParams(o, tl_05, (u8 *)&a);
         }
     }
     {
         u8 *o = (u8 *)__nw__7TObjectFUl(0x234);
         if (o != NULL) {
-            construct_debris__8TObjChipFPvPvPv(o, tl_05, (u8 *)&b);
+            __ct__8TObjChipFP7TObjectP14TObjChipParams(o, tl_05, (u8 *)&b);
         }
     }
     {
         u8 *o = (u8 *)__nw__7TObjectFUl(0x234);
         if (o != NULL) {
             obj2 = o;
-            construct_debris__8TObjChipFPvPvPv(obj2, tl_05, (u8 *)&c);
+            __ct__8TObjChipFP7TObjectP14TObjChipParams(obj2, tl_05, (u8 *)&c);
         }
     }
 }
