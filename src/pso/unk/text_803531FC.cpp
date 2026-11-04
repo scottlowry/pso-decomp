@@ -68,9 +68,9 @@ void TUnk_804F112C::apply_use_effect() {
     if (tech < 9) {
         u32 *e = &buf.w[tech * 3];
         PmfRow row;
-        u32 w0 = e[0];
-        u32 w1 = e[1];
         u32 w2 = e[2];
+        u32 w1 = e[1];
+        u32 w0 = e[0];
         row.w[0] = w0;
         row.w[1] = w1;
         row.w[2] = w2;
