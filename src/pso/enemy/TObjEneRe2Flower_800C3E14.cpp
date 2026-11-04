@@ -26,6 +26,7 @@ struct VObj_14_2f517b : VBase_14_2f517b {
     virtual void m0();
     virtual void m1();
     virtual s32 m2();
+    virtual void m3();
 };
 
 struct VBase_18_804931FC { char pad[0x18]; };
@@ -116,10 +117,8 @@ struct VObj_18_804931FC : VBase_18_804931FC {
     virtual void m82();
     virtual void m83();
     virtual void m84();
-    virtual void m85();
+    virtual s32 m85(s16, s32);
     virtual void m86();
-    virtual s32 m87(s16, s32);
-    virtual void m88();
 };
 
 struct Stack_800C44C4 {
@@ -569,7 +568,7 @@ void *TObjEneRe2Flower__ct(void *self, void *parent, void *set_data) {
         VecCopy((Vec *)((s8 *)self + off + 0x3DC), (const Vec *)((s8 *)self + 0x38));
         *(f32 *)((s8 *)self + off + 0x3E0) += lbl_805D9FD8;
     }
-    ((VObj_14_2f517b *)((s8 *)self + 0x3F4))->m0();
+    ((VObj_14_2f517b *)((s8 *)self + 0x3F4))->m3();
     *(u32 *)((s8 *)self + 0x410) = 0;
     *(u32 *)((s8 *)self + 0x414) = 0;
     *(u32 *)((s8 *)self + 0x418) = 0;
@@ -578,10 +577,10 @@ void *TObjEneRe2Flower__ct(void *self, void *parent, void *set_data) {
     *(f32 *)((s8 *)self + 0x424) = lbl_805D9FAC;
     *(u32 *)((s8 *)self + 0x428) = 0;
     ((TObjEneRe2Flower *)self)->sub_800C3DC4();
-    ((VObj_18_804931FC *)self)->m88();
+    ((VObj_18_804931FC *)self)->m86();
     ((TObjEneDD *)self)->transform_part_positions();
     *(s16 *)((s8 *)self + 0x326) = 0;
-    ((VObj_18_804931FC *)self)->m87(*(s16 *)((s8 *)self + 0x326), 4);
+    ((VObj_18_804931FC *)self)->m85(*(s16 *)((s8 *)self + 0x326), 4);
     return self;
 }
 
