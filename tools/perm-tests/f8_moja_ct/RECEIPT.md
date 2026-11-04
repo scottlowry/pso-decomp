@@ -53,3 +53,20 @@ SUCCESSOR: replace 2-induction spelling with single-IV stride spelling:
   for (i = 0; i < 4; i++) { activate_and_dispatch__15RenderFadeStateFv(self + i * 0x1c + 0x39c); }
 (one build, 4 rows at stake, era binding proven emitted at this pin).
 Remaining ring-adjacent closed classes above bound ~5.9 pts absent a bind mechanism.
+
+## SUCCESSOR PLAY v2 (card t_907b8fcd) — PARTIAL LAND +0.19 -> FLOOR 94.27215
+Single-IV strength-reduction spelling (twin Bm5GibonU__ct form; `off` decl dropped
+under prop-off phantom-slot law) landed at cand4 f7b63377: loop-IV ring slots
+140-145 ALL pair (era li r29/li r31 -> cmpwi r29,4 emitted byte-identical,
+i->r29 ascending proven at real-TU scale). Official scorer 94.082275 -> 94.27215:
+ring family = 2 scorer rows (27->25), NOT ~6 — the +2.0 expectation was
+slot-count-inflated (slots != rows on the weighted scorer).
+Gates on committed tip: gnm T 0x278; 158/158; full ninja rc=0; report_delta vs
+baseline-e175bcd9.json regressions 0 (New exact 19 = whole-branch cumulative);
+check_pr PASS; link_units check OK (3309).
+Residual 25 slots = 3 closed families (prologue lis {r4<->r6}; FPR pool-hoist +
+{f2/f1/f0} mirror 30-37/46-51/130-134; {r0<->r4} operand roles 102-106) —
+def-binding lineage. Budget 2 grind + 1 confirm: used 1 grind + 1 confirm;
+grind 2 deliberately SPARED (closed-class law, no open plays).
+Unit linkage: pso/unk/text_800AF8B0 NOT complete (symbol pair 94.27215) — no
+linked_units row, 3309 stands. Campaign CLOSED at floor 94.27215.
