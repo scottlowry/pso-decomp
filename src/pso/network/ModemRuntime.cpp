@@ -538,8 +538,11 @@ s32 TAdSinglePlyChrSelectGC__sub_8042CD64(void) {
     u8 count;
     s32 i;
     s32 idx;
+    const char *pat;
 
+    cmd = 0x23000000 | ((u8)1 << 8);
     state = &modem_command_response_state;
+    pat = lbl_805D487C;
     flag = 0;
     match = 0;
     for (;;) {
@@ -550,7 +553,6 @@ s32 TAdSinglePlyChrSelectGC__sub_8042CD64(void) {
         OSYieldThread();
     }
     for (i = 0; i < count; i++) {
-        cmd = 0x23000000 | ((u8)1 << 8);
         EXISelect(0, 2, 4);
         EXIImm(0, &cmd, 4, EXI_WRITE, NULL);
         EXISync(0);
@@ -560,7 +562,7 @@ s32 TAdSinglePlyChrSelectGC__sub_8042CD64(void) {
         idx = state->length;
         state->length = idx + 1;
         state->buf[idx] = value;
-        if (value == lbl_805D487C[match]) {
+        if (value == pat[match]) {
             match++;
             if (match == 5) {
                 return -6;
