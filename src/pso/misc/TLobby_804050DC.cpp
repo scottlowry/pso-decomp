@@ -4646,6 +4646,153 @@ s32 TLobby__sub_8040C9E0(u8 *arg0, u8 *arg1) {
     }
 }
 
+struct View_8040CB44 {
+    u32 f0;
+    s32 count;
+    u32 total;
+    s16 code;
+};
+struct NetInfo_8040CB44 {
+    u8 b0;
+    u8 pad_1[8];
+    u8 b9;
+    u8 pad_A[6];
+    u32 gateway;
+};
+struct Head_8040CB44 {
+    u8 type;
+    u8 code;
+    u16 len;
+    u32 gateway;
+};
+
+s16 TLobby__sub_8040CB44(NetPacket *pkt, u32 arg1, u32 arg2) {
+    void NetMemcpy(void *, void *, int);
+    s32 TLobby__sub_8040F8A4(u32 dst, u32 gateway, u32 mask, u16 flags, u32 old_gateway);
+    s32 TLobby__sub_8040CFE8(u8 type, u8 code, u32 src, u32 dst, NetPacket *pkt);
+    void TLobby__sub_80420D38(u16 port, u8 code);
+    u32 pad_0[6];
+    u32 gw;
+    u8 xbuf[8];
+    NetInfo_8040CB44 payload;
+    Head_8040CB44 head;
+    NetBufferRef ref;
+    u8 *q;
+    NetBufferRef *rp;
+    NetPacket *reply;
+    u8 *p;
+    u8 *d;
+    u32 i;
+    u32 gw2;
+    u32 netmask;
+    u32 bcast;
+    s32 res;
+
+    q = (u8 *)&pkt->fragments[0].buffer.kind;
+    rp = (NetBufferRef *)(q + 4);
+    ((TLobby *)&ref)->set_value_and_enable((s32)&head);
+    TLobby__sub_80406FD8(&ref, rp, 8);
+    if (((TLobby *)pkt)->calc_ip_checksum(0) & 0xFFFF) {
+        return -1;
+    }
+    switch (head.type) {
+    case 1:
+    case 2:
+    case 6:
+    case 7:
+    case 9:
+    case 10:
+    case 15:
+    case 16:
+    default:
+        return -1;
+    case 0:
+    case 4:
+    case 11:
+    case 12:
+    case 13:
+    case 14:
+    case 17:
+    case 18:
+        return 0;
+    case 3:
+        TLobby__sub_80406EB8(rp, 8);
+        ((TLobby *)&ref)->set_value_and_enable((s32)xbuf);
+        TLobby__sub_80406FD8(&ref, rp, 0x14);
+        TLobby__sub_80406EB8(rp, (payload.b0 & 0xF) * 4);
+        switch (payload.b9) {
+        case 6:
+            break;
+        case 0x11:
+            ((TLobby *)&ref)->set_value_and_enable((s32)xbuf);
+            TLobby__sub_80406FD8(&ref, rp, 8);
+            TLobby__sub_80420D38(*(s16 *)xbuf, head.code);
+            break;
+        }
+        return 0;
+    case 5:
+        TLobby__sub_80406EB8(rp, 8);
+        ((TLobby *)&ref)->set_value_and_enable((s32)&payload);
+        TLobby__sub_80406FD8(&ref, rp, 0x14);
+        switch (head.code) {
+        case 0:
+        case 2:
+            NetMemcpy(&gw, &head.gateway, 4);
+            gw2 = payload.gateway;
+            if ((gw2 & 0x80000000u) == 0) {
+                netmask = gw2 & 0xFF000000u;
+            } else if ((gw2 & 0xC0000000u) + 0x80000000u == 0) {
+                netmask = gw2 & 0xFFFF0000u;
+            } else if ((gw2 & 0xE0000000u) + 0x40000000u == 0) {
+                netmask = gw2 & 0xFFFFFF00u;
+            } else {
+                netmask = 0;
+            }
+            if ((gw2 & 0x80000000u) == 0) {
+                bcast = 0xFF000000u;
+            } else if ((gw2 & 0xC0000000u) + 0x80000000u == 0) {
+                bcast = 0xFFFF0000u;
+            } else if ((gw2 & 0xE0000000u) + 0x40000000u == 0) {
+                bcast = 0xFFFFFF00u;
+            } else {
+                bcast = 0;
+            }
+            TLobby__sub_8040F8A4(netmask, gw, bcast, 2, arg1);
+            break;
+        case 1:
+        case 3:
+            NetMemcpy(&gw, &head.gateway, 4);
+            TLobby__sub_8040F8A4(payload.gateway, gw, -1, 6, arg1);
+            break;
+        }
+        return 0;
+    case 8:
+        reply = (NetPacket *)TLobby::alloc_free_entry();
+        if (reply == NULL) {
+            return -0x101;
+        }
+        ((View_8040CB44 *)reply)->count = ((View_8040CB44 *)pkt)->count - 1;
+        ((View_8040CB44 *)reply)->total =
+            ((View_8040CB44 *)pkt)->total - ((View_8040CB44 *)pkt)->code;
+        p = (u8 *)pkt + 12 * ((View_8040CB44 *)pkt)->count;
+        d = (u8 *)reply;
+        for (i = 0; i < (u32)((View_8040CB44 *)reply)->count; i++) {
+            *(s16 *)(d + 0xc) = *(s16 *)p;
+            NetMemcpy(d + 0x10, p + 4, 8);
+            p -= 12;
+            d += 12;
+        }
+        res = TLobby__sub_8040CFE8(0, 0, arg2, arg1, reply);
+        if ((s16)res < 0) {
+            ((TUdpSocket *)reply)->release_entry();
+            return (s16)res;
+        }
+        ((TUdpSocket *)reply)->release_entry();
+        return 0;
+    }
+    return 0;
+}
+
 struct Ipv4Header {
     u8 version_ihl;
     u8 tos;
