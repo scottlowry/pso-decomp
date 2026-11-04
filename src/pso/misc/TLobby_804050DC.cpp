@@ -6048,21 +6048,21 @@ s16 TLobby__sub_804105E0(u8 *self, u8 *pkt, s16 count, s16 idx) {
     NetIPv6SendParameters params;
     Icmp6ErrorInfo err2;
     Icmp6ErrorInfo err1;
+    Route_804105E0 *rt;
+    u8 *e;
+    u8 *p;
+    u8 *opt;
+    u8 *nexthop;
     s16 count16;
     s32 delta;
     s32 rem;
-    u8 *p;
+    s16 f26;
     s16 flag;
     u16 val;
-    u8 *opt;
     u8 t;
     s32 adv;
     s32 d;
     s16 rc;
-    s16 f26;
-    Route_804105E0 *rt;
-    u8 *e;
-    u8 *nexthop;
 
     count16 = (s16)count;
     delta = count16 - 0x28;
