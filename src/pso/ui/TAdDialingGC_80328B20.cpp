@@ -4,8 +4,8 @@
 #include "pso/TObjCMHairMenu.h"
 
 struct VtxList_80077BC0 {
-    f32 *pos;
-    u32 *col;
+    f32 *volatile pos;
+    u32 *volatile col;
     s32 n;
     s32 cap;
 };
