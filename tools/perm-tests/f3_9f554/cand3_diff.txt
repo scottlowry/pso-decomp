@@ -1,0 +1,62 @@
+era rows: 150 ours rows: 152
+R 5 O: stmw r22,0x28(r1) |N: stmw r21,0x24(r1)
+D 7 O: addi r3,r31,0x30 |N:<missing>
+R 9 O: stfs f0,0x4(r3) |N: stfs f0,0x34(r31)
+R 10 O: stfs f0,0x8(r3) |N: stfs f0,0x38(r31)
+R 28 O: addi r22,r7,lbl_8043a180@l |N: addi r25,r7,lbl_8043a180@l
+R 29 O: addi r23,r31,0x0 |N: addi r26,r6,lbl_8043a18c@l
+R 30 O: addi r24,r6,lbl_8043a18c@l |N: addi r23,r31,0xc
+R 31 O: addi r25,r31,0xc |N: addi r27,r5,lbl_8043a198@l
+R 32 O: addi r26,r5,lbl_8043a198@l |N: addi r22,r31,0x18
+R 33 O: addi r27,r31,0x18 |N: <ins>
+R 35 O: addi r29,r31,0x24 |N: addi r21,r31,0x24
+R 36 O: li r31,0x0 |N: li r24,0x0
+R 37 O: li r30,0x0 |N: li r29,0x0
+R 38 O: lwzx r3,r22,r30 |N: lwzx r3,r25,r29
+R 40 O: stwx r3,r23,r30 |N: stwx r3,r31,r29
+R 41 O: lwzx r3,r24,r30 |N: lwzx r3,r26,r29
+R 43 O: stwx r3,r25,r30 |N: stwx r3,r23,r29
+R 44 O: lwzx r3,r26,r30 |N: lwzx r3,r27,r29
+R 46 O: stwx r3,r27,r30 |N: stwx r3,r22,r29
+R 47 O: lwzx r3,r28,r30 |N: lwzx r3,r28,r29
+R 49 O: addi r31,r31,0x1 |N: addi r24,r24,0x1
+R 50 O: stwx r3,r29,r30 |N: stwx r3,r21,r29
+R 51 O: cmpwi r31,0x3 |N: cmpwi r24,0x3
+R 52 O: addi r30,r30,0x4 |N: addi r29,r29,0x4
+I 76 N: mr r5,r30 |O:<absent>
+I 76 N: lwz r3,lbl_805d4fd0@sda21(r0) |O:<absent>
+D 77 O: lwz r3,lbl_805d4fd0@sda21(r0) |N:<missing>
+R 79 O: lwz r22,0x18(r3) |N: lwz r24,0x18(r3)
+R 80 O: mr r3,r22 |N: mr r3,r24
+R 83 O: mr r3,r22 |N: mr r3,r24
+R 85 O: lwz r5,0x4(r5) |N: lwz r30,0x4(r5)
+R 86 O: addi r0,r5,0x4 |N: addi r0,r30,0x4
+R 87 O: <del> |N: mr r5,r30
+R 96 O: lwz r22,0x8(r3) |N: lwz r25,0x8(r3)
+R 97 O: mr r3,r22 |N: mr r3,r25
+R 100 O: mr r3,r22 |N: mr r3,r25
+R 112 O: lwz r8,lbl_805d9888@sda21(r0) |N: lwz r7,lbl_805d9888@sda21(r0)
+R 113 O: addi r7,r3,lbl_8043a380@l |N: addi r25,r3,lbl_8043a380@l
+R 115 O: lwz r6,0x0(r7) |N: lwz r6,0x0(r25)
+R 117 O: lwz r5,0x4(r7) |N: lwz r5,0x4(r25)
+R 118 O: li r22,0x0 |N: li r26,0x0
+R 119 O: lwz r4,0x8(r7) |N: lwz r4,0x8(r25)
+R 120 O: <del> |N: li r30,0x0
+R 121 O: <del> |N: lwz r0,0xc(r25)
+D 121 O: lwz r0,0xc(r7) |N:<missing>
+D 122 O: li r30,0x0 |N:<missing>
+R 128 O: stw r8,0x8(r1) |N: stw r7,0x8(r1)
+R 131 O: addi r0,r31,0x8 |N: mr r7,r25
+R 132 O: lhax r3,r29,r30 |N: lhax r3,r29,r31
+I 135 N: lwz r8,0x8(r1) |O:<absent>
+I 135 N: add r4,r5,r30 |O:<absent>
+I 135 N: lwz r5,0x1c(r5) |O:<absent>
+I 135 N: lwz r4,0x8(r4) |O:<absent>
+D 136 O: lwzx r4,r5,r0 |N:<missing>
+D 137 O: lwz r5,0x1c(r5) |N:<missing>
+R 140 O: addi r22,r22,0x1 |N: addi r26,r26,0x1
+R 141 O: addi r30,r30,0x2 |N: addi r31,r31,0x2
+R 142 O: cmpwi r22,0x2 |N: cmpwi r26,0x2
+R 143 O: addi r31,r31,0x10 |N: addi r30,r30,0x10
+R 145 O: lmw r22,0x28(r1) |N: lmw r21,0x24(r1)
+same: 99 of era 150 => pct 66.00

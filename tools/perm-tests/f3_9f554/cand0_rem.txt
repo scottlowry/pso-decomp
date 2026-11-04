@@ -1,0 +1,48 @@
+era rows: 150 ours rows: 150
+I 5 N: addi r3,r3,lbl_80500930@l |O:<absent>
+R 6 O: addi r31,r3,lbl_80500930@l |N: stfs f0,0x30(r3)
+R 7 O: addi r3,r31,0x30 |N: stfs f0,0x34(r3)
+R 8 O: stfs f0,0x30(r31) |N: stfs f0,0x38(r3)
+R 9 O: stfs f0,0x4(r3) |N: <ins>
+R 10 O: stfs f0,0x8(r3) |N: <ins>
+I 23 N: lis r4,lbl_80500930@ha |O:<absent>
+I 24 N: addi r27,r4,lbl_80500930@l |O:<absent>
+R 28 O: addi r22,r7,lbl_8043a180@l |N: addi r26,r7,lbl_8043a180@l
+R 29 O: addi r23,r31,0x0 |N: addi r28,r6,lbl_8043a18c@l
+R 30 O: addi r24,r6,lbl_8043a18c@l |N: addi r24,r27,0xc
+R 31 O: addi r25,r31,0xc |N: addi r31,r5,lbl_8043a198@l
+R 32 O: addi r26,r5,lbl_8043a198@l |N: addi r23,r27,0x18
+R 33 O: addi r27,r31,0x18 |N: addi r29,r4,lbl_8043a1a4@l
+R 34 O: addi r28,r4,lbl_8043a1a4@l |N: addi r22,r27,0x24
+R 35 O: addi r29,r31,0x24 |N: li r25,0x0
+R 36 O: li r31,0x0 |N: <ins>
+R 38 O: lwzx r3,r22,r30 |N: lwzx r3,r26,r30
+D 40 O: stwx r3,r23,r30 |N:<missing>
+D 41 O: lwzx r3,r24,r30 |N:<missing>
+D 42 O: bl dispatch_shared_handler_b__6tlobbyfl |N:<missing>
+D 43 O: stwx r3,r25,r30 |N:<missing>
+D 44 O: lwzx r3,r26,r30 |N:<missing>
+D 45 O: bl register_object__6tlobbyfl |N:<missing>
+I 48 N: bl dispatch_shared_handler_b__6tlobbyfl |O:<absent>
+I 48 N: stwx r3,r24,r30 |O:<absent>
+I 48 N: lwzx r3,r31,r30 |O:<absent>
+I 48 N: bl register_object__6tlobbyfl |O:<absent>
+I 48 N: stwx r3,r23,r30 |O:<absent>
+I 48 N: lwzx r3,r29,r30 |O:<absent>
+R 49 O: addi r31,r31,0x1 |N: addi r25,r25,0x1
+R 50 O: stwx r3,r29,r30 |N: stwx r3,r22,r30
+R 51 O: cmpwi r31,0x3 |N: cmpwi r25,0x3
+R 79 O: lwz r22,0x18(r3) |N: lwz r25,0x18(r3)
+R 80 O: mr r3,r22 |N: mr r3,r25
+R 83 O: mr r3,r22 |N: mr r3,r25
+R 96 O: lwz r22,0x8(r3) |N: lwz r26,0x8(r3)
+R 97 O: mr r3,r22 |N: mr r3,r26
+R 100 O: mr r3,r22 |N: mr r3,r26
+R 118 O: li r22,0x0 |N: li r26,0x0
+R 131 O: addi r0,r31,0x8 |N: addi r6,r1,0xc
+D 133 O: addi r6,r1,0xc |N:<missing>
+R 136 O: lwzx r4,r5,r0 |N: add r4,r5,r31
+I 138 N: lwz r4,0x8(r4) |O:<absent>
+R 140 O: addi r22,r22,0x1 |N: addi r26,r26,0x1
+R 142 O: cmpwi r22,0x2 |N: cmpwi r26,0x2
+same: 114 of era 150 => pct 76.00
