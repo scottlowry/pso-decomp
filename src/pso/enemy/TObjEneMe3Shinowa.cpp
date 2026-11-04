@@ -552,8 +552,6 @@ extern Tgt_800E54E8 enemy_target_candidate_table[];
 s32 sub_800E6FE0__17TObjEneMe3ShinowaFv(u8 *arg0);
 extern const f32 lbl_805DA5BC;
 extern const f32 TObjEneMe3ShinowaReal__data_805DA5CC;
-extern const f32 lbl_805DA5D8;
-extern const f32 TObjEneMe3ShinowaMirage__data_805DA5DC;
 void TObjEneMe3ShinowaReal__sub_800E5950(u8 *arg0, s32 arg1);
 s32 move_to_shot_position__9TObjEneDDFfff(void *, void *, f32, f32, f32);
 f32 sin_table_lookup(int);
@@ -1991,7 +1989,7 @@ void TObjEneMe3Shinowa::vfunc_118() {
         }
     }
     gold = this->sub_800E6FE0();
-    if (this->update_object_view_visibility(lbl_805DA5D8, TObjEneMe3ShinowaReal__data_805DA5CC) != 0) {
+    if (this->update_object_view_visibility(400.0f, TObjEneMe3ShinowaReal__data_805DA5CC) != 0) {
         TObjFish::set_global_param(this->texlist);
         TObjPlayer::toggle_particle_effect();
         if (gold != 0) {
@@ -2006,8 +2004,8 @@ void TObjEneMe3Shinowa::vfunc_118() {
         push_matrix();
         post_translate_matrix(&this->position);
         rotate_matrix_y(0, this->rotation_y);
-        scale_matrix(0, TObjEneMe3ShinowaMirage__data_805DA5DC, TObjEneMe3ShinowaMirage__data_805DA5DC,
-                     TObjEneMe3ShinowaMirage__data_805DA5DC);
+        scale_matrix(0, 1.0f, 1.0f,
+                     1.0f);
         for (i = 0; i < 3; i++) {
             if (lbl_80501000[i] != NULL) {
                 *lbl_80501000[i] = 0xB000FFB0;
