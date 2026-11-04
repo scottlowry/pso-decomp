@@ -14,6 +14,7 @@ struct RecoveredGlobal_802A3CD8___vt__14TObjNpcKenkyuW {
 
 #include "pso/technique/TechniqueContact.h"
 #include "pso/misc/TLobby.h"
+#include "pso/effect/TUnk_804CCC68.h"
 #include "pso/npc/TObjNpcBase.h"
 #include "pso/npc/TObjNpcLappy.h"
 #include "pso/ui/TAdSinglePlyChrSelectGC.h"
@@ -91,6 +92,8 @@ void *find_entity_by_id(u16 id);
 TechniqueContactList *TObjPlayer__sub_802A3FDC(Obj_802A3FDC *self, void *src);
 void TLobby__sub_8001FE7C(void*, int);
 void __dl__7TObjectFPv(void *);
+void queue_destruction__7TObjectFv(void *);
+s32 is_hit_receivable_target__10TObjPlayerFlUl(s32 arg0, u32 arg1);
 
 void TObjNpcKenkyuW::destroy_instance() {
     if ((u32) TObjNpcKenkyuW__model_resource != 0U) {
@@ -292,6 +295,40 @@ TechniqueContactList *TObjPlayer::collect_technique_contacts(void *src) {
         }
     }
     return &L_802A41CC;
+}
+
+void TObjPlayer__sub_802A445C(void *self, s32 arg) {
+    TechniqueContactList *contacts;
+    s32 state;
+
+    if (*(u32 *)((s8 *)self + 0x68) == 0) {
+        queue_destruction__7TObjectFv(self);
+    } else {
+        state = *(s32 *)((s8 *)self + 0xB0);
+        switch (state) {
+        case 1:
+            contacts = ((TObjPlayer *)self)->collect_technique_contacts((void *)(*(u32 *)((s8 *)self + 0x1C)));
+            break;
+        case 2:
+            contacts = TObjPlayer__sub_802A3FDC((Obj_802A3FDC *)self, (void *)(*(u32 *)((s8 *)self + 0x1C)));
+            break;
+        default:
+            contacts = TObjPlayer__sub_802A3DE8((Obj_802A3DE8 *)self, (void *)(*(u32 *)((s8 *)self + 0x1C)));
+            break;
+        }
+        if (contacts == NULL) {
+            ((TUnk_804CCC68 *)self)->vfunc_6();
+        } else {
+            if (is_hit_receivable_target__10TObjPlayerFlUl((long)self, *(u32 *)contacts) == 0) {
+                return;
+            }
+            if (*(u32 *)contacts == 0U) {
+                return;
+            }
+            *(u32 *)((s8 *)self + 0x38) = *(u32 *)((s8 *)contacts + 0x40);
+            ((TObjPlayer *)self)->get_center();
+        }
+    }
 }
 
 }
