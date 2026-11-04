@@ -1273,40 +1273,6 @@ s32 TLobby__sub_804060B8(u8 *data, s32 len, int type) {
 }
 #pragma pop
 
-void TLobby__sub_8040059C(u8 *arg0);
-void TLobby__sub_80402CE0(u8 *arg0);
-void TLobby__sub_803FC318(u8 *arg0);
-void TLobby__sub_803FEF4C(u8 *arg0);
-void TLobby__sub_803F9FAC(u8 *arg0);
-extern s32 lbl_805D7ADC;
-
-typedef struct Lobby_804061FC {
-    u8 state;
-    u8 pad[3];
-    u8 sub[0x140];
-} Lobby_804061FC;
-
-s32 TLobby__sub_804061FC(s32 arg0) {
-    Lobby_804061FC *l;
-    u8 *p;
-
-    lbl_805D7ADC = 0;
-    l = (Lobby_804061FC *)lbl_805C0038;
-    p = lbl_805C0038;
-    NetMemset(&lbl_805C0038[0], 0, 0x144);
-    l->state = 0;
-    TLobby__sub_8040059C(p);
-    TLobby__sub_80402CE0(p);
-    TLobby__sub_803FC318(p);
-    TLobby__sub_803FEF4C(p);
-    TLobby__sub_803F9FAC(p);
-    if (l->state == 0) {
-        l->state = 1;
-    }
-    TLobby__sub_803FD958(l->sub);
-    return 0;
-}
-
 s32 TLobby__sub_804062A0(s16 arg0) {
     Lobby_804062A0 *l = (Lobby_804062A0 *)lbl_805C0038;
 
@@ -1345,6 +1311,108 @@ void TLobby::init_packet_header(s32 arg1) {
 void TLobby::set_value_and_enable(s32 arg1) {
     *(s32 *)&this->m_name = arg1;
     *(s8 *)&this->m_flags = 1;
+}
+
+struct Seg_80406FD8 { s16 owner; u16 offset; u16 len; };
+struct Ent_80406FD8 { u8 *buf; s32 free_segs; s32 free_bytes; Seg_80406FD8 segs[8]; };
+struct Pool_80406FD8 { s16 count; s16 size; Ent_80406FD8 *ents; u8 *data; };
+
+void TLobby__sub_80406FD8(void *arg0, void *arg1, s32 arg2) {
+    NetBufferRef *dst = (NetBufferRef *)arg0;
+    NetBufferRef *src = (NetBufferRef *)arg1;
+    Ent_80406FD8 *e;
+    u32 w;
+    s16 idx;
+    s16 n;
+    u8 *sp;
+
+    switch (src->kind) {
+    case 1:
+    case 4:
+        switch (dst->kind) {
+        case 1:
+        case 4:
+            NetMemcpy((void *)dst->value, (void *)src->value, arg2);
+            break;
+        case 2:
+            w = dst->value;
+            n = ((Pool_80406FD8 *)&network_buffer_pool_state)->count;
+            idx = (s16)(w >> 24);
+            if (n < idx) {
+                return;
+            }
+            e = ((Pool_80406FD8 *)&network_buffer_pool_state)->ents + idx;
+            NetMemcpy(e->buf + (w & 0xFFFF) + e->segs[(s16)((w >> 16) & 0xFF)].offset, (void *)src->value, arg2);
+            break;
+        case 3:
+            NetMemcpy((void *)dst->value, (void *)src->value, arg2);
+            break;
+        }
+        break;
+    case 2:
+        switch (dst->kind) {
+        case 1:
+        case 4:
+            w = src->value;
+            n = ((Pool_80406FD8 *)&network_buffer_pool_state)->count;
+            idx = (s16)(w >> 24);
+            if (n < idx) {
+                return;
+            }
+            e = ((Pool_80406FD8 *)&network_buffer_pool_state)->ents + idx;
+            NetMemcpy((void *)dst->value, e->buf + (w & 0xFFFF) + e->segs[(s16)((w >> 16) & 0xFF)].offset, arg2);
+            break;
+        case 2:
+            w = src->value;
+            n = ((Pool_80406FD8 *)&network_buffer_pool_state)->count;
+            idx = (s16)(w >> 24);
+            if (n < idx) {
+                return;
+            }
+            e = ((Pool_80406FD8 *)&network_buffer_pool_state)->ents + idx;
+            sp = e->buf + (w & 0xFFFF) + e->segs[(s16)((w >> 16) & 0xFF)].offset;
+            w = dst->value;
+            idx = (s16)(w >> 24);
+            if (n < idx) {
+                return;
+            }
+            e = ((Pool_80406FD8 *)&network_buffer_pool_state)->ents + idx;
+            NetMemcpy(e->buf + (w & 0xFFFF) + e->segs[(s16)((w >> 16) & 0xFF)].offset, sp, arg2);
+            break;
+        case 3:
+            w = src->value;
+            n = ((Pool_80406FD8 *)&network_buffer_pool_state)->count;
+            idx = (s16)(w >> 24);
+            if (n < idx) {
+                return;
+            }
+            e = ((Pool_80406FD8 *)&network_buffer_pool_state)->ents + idx;
+            NetMemcpy((void *)dst->value, e->buf + (w & 0xFFFF) + e->segs[(s16)((w >> 16) & 0xFF)].offset, arg2);
+            break;
+        }
+        break;
+    case 3:
+        switch (dst->kind) {
+        case 1:
+        case 4:
+            NetMemcpy((void *)dst->value, (void *)src->value, arg2);
+            break;
+        case 2:
+            w = dst->value;
+            n = ((Pool_80406FD8 *)&network_buffer_pool_state)->count;
+            idx = (s16)(w >> 24);
+            if (n < idx) {
+                return;
+            }
+            e = ((Pool_80406FD8 *)&network_buffer_pool_state)->ents + idx;
+            NetMemcpy(e->buf + (w & 0xFFFF) + e->segs[(s16)((w >> 16) & 0xFF)].offset, (void *)src->value, arg2);
+            break;
+        case 3:
+            NetMemcpy((void *)dst->value, (void *)src->value, arg2);
+            break;
+        }
+        break;
+    }
 }
 
 struct Ent_80406B14 { s16 st; u8 pad[0x9c - 2]; };
