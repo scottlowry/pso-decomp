@@ -12388,7 +12388,7 @@ s32 get_adjusted_slot_count__6TLobbyFPv(u8 *arg0) {
 
 struct Pool_804066D8 {
     s32 f0;
-    u8 pad4[8];
+    u8 pad4[0xC];
     u32 base;
 };
 
@@ -12405,7 +12405,6 @@ s16 TLobby__sub_804066D8(Strm_80405A74 *arg0) {
     Strm_80405A74 *slot = arg0;
     u8 *G = lbl_805C0038;
     u8 *peer = *(u8 **)(G + 0x34);
-    u16 k = 0xC021;
     *(u32 *)(G + 0x110) += (u16)((TLobby *)slot)->get_field_4() + 2;
     if (slot == NULL || slot->len < 4) {
         (*(s16 *)(G + 0x122))++;
@@ -12414,8 +12413,9 @@ s16 TLobby__sub_804066D8(Strm_80405A74 *arg0) {
     u8 b0 = slot->p[0];
     u8 b1 = slot->p[1];
     u16 len = read_network_u16_be(slot->p + 2);
-    s32 big = (u16)len > k;
-    if (len == k && ((s16)*(u16 *)(peer + 0x50) & 4) != 0) {
+    s32 k = 0xC021;
+    s32 big = len >= (u16)k;
+    if (len != k && ((s16)*(u16 *)(peer + 0x50) & 4) != 0) {
         mask = *(u32 *)(peer + 0x54);
     }
     s32 h = 1;
@@ -12429,11 +12429,15 @@ s16 TLobby__sub_804066D8(Strm_80405A74 *arg0) {
     if (h == 0) {
         hdr = 3;
     }
-    s32 v = 1;
+    s32 v;
     if (lbl_805D7A7A != 0) {
         v = 0;
-    } else if (big == 0 && ((s16)*(u16 *)(peer + 0x50) & 0x100) != 0) {
-        v = 0;
+    } else {
+        s32 w = 1;
+        if (big == 0 && ((s16)*(u16 *)(peer + 0x50) & 0x100) != 0) {
+            w = 0;
+        }
+        v = w;
     }
     if (v == 0) {
         hdr -= 2;
@@ -12460,10 +12464,11 @@ s16 TLobby__sub_804066D8(Strm_80405A74 *arg0) {
         NetMemcpy(q + 0x14, slot->p, slot->len);
         *(u16 *)(pool + 4) = slot->len;
     } else {
-        *q++ = 0x7E;
         u16 *tbl = lbl_804FD3A8;
-        *(u32 *)(G + 0x114) += 1;
+        s32 seq = *(u32 *)(G + 0x114);
+        *q = 0x7E;
         q += 1;
+        *(u32 *)(G + 0x114) = seq + 1;
         s32 c;
         while ((c = get_80405A74(&slot)) != -1) {
             u8 *e = (u8 *)tbl + ((((u16)crc ^ c) & 0xFF) << 1);
@@ -12477,8 +12482,8 @@ s16 TLobby__sub_804066D8(Strm_80405A74 *arg0) {
             }
         }
         crc ^= 0xFFFF;
-        u16 c16 = (u16)crc;
-        s32 lo = crc & 0xFF;
+        s32 c16 = (u16)crc;
+        s32 lo = (u8)crc;
         if ((lo < 0x20 && (mask & (1 << lo)) != 0) || (u32)(lo - 125) <= 1) {
             *q = 0x7D;
             q[1] = (u8)(lo ^ 0x20);
