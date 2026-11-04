@@ -116,6 +116,7 @@ s32 TLobby::cancel_pending_alarms() {
 #pragma push
 #pragma pool_data on
 #pragma opt_common_subs on
+#pragma opt_propagation off
 s32 TLobby__sub_803F8E9C(void) {
     s32 i;
     s32 off;
