@@ -510,8 +510,8 @@ typedef char RecoveredGlobal_80427D0C_lbl_805CFC20_size[sizeof(RecoveredGlobal_8
 
 s16 TLobby__sub_804275B0(s32 arg0, u16 arg1) {
     u8 *pkt;
-    u8 *hdr;
     u8 *payload;
+    u8 *hdr;
     Ent_80427D40 *e;
     Ent_80427C6C *c;
     u16 x;
