@@ -3879,6 +3879,7 @@ s32 TQuestVmDownLoadServer__sub_803EDF64(u16 *keys, s32 count, u16 *out, s32 *fl
     s32 kind;
     s32 b1;
     s32 b2;
+    s32 b2c;
     u8 *p;
     u16 *cur;
     s32 n;
@@ -3922,6 +3923,7 @@ s32 TQuestVmDownLoadServer__sub_803EDF64(u16 *keys, s32 count, u16 *out, s32 *fl
     }
     cur = &keys[1];
     b2 = (u8)keys[1];
+    b2c = b2;
     b1 = (u8)keys[0];
     if (b1 == (u8)keys[1]) {
         if (cls == 12) {
@@ -3934,15 +3936,16 @@ s32 TQuestVmDownLoadServer__sub_803EDF64(u16 *keys, s32 count, u16 *out, s32 *fl
     }
     if (b1 == 0x78 || b1 == 0x58) {
         cur = &keys[1];
+        b2c = b2;
         if ((u8)b2 == 0x6e || (u8)b2 == 0x4e) {
             out[0] = TQuestVmDownLoadServer__sub_803E719C(0x73, cur[0]);
             return 2;
         }
     }
-    if ((u16)kind == 1 && (u8)b2 == 0x27) {
+    if ((u16)kind == 1 && (u8)b2c == 0x27) {
         return 2;
     }
-    cls = lbl_8047F8B8[(u8)b2] & 0xF;
+    cls = lbl_8047F8B8[(u8)b2c] & 0xF;
     if ((u8)cls == 7 && (u16)kind == 3) {
         out[0] = out[0] + 2;
         return 2;
