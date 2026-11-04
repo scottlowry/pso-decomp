@@ -790,6 +790,7 @@ void calc_sound_spatial_params(SoundRequestVoice *v) {
             targetvec.z = ((const Vec *)v->position)->z;
             if (is_split_screen() != 0) {
                 dist = lbl_805DC9F8;
+                TCameraCtrl::get_camera_id();
                 for (s32 i = 0; i < TCameraCtrl::get_camera_id(); i++) {
                     s32 player_id = TCameraCtrl::get_nth_view_player_id(i);
                     if (player_id < 12) {
@@ -823,7 +824,7 @@ void calc_sound_spatial_params(SoundRequestVoice *v) {
                 }
                 dist = PSVECDistance(&camvec, &targetvec);
             }
-            if (is_split_screen() != 0 || (v->flags & 2) == 0) {
+            if (is_split_screen() != 0 || (v->flags & 2) != 0) {
                 pan = 0;
             } else {
                 if (dist > TLobby__data_805DC9E0) {
@@ -832,7 +833,7 @@ void calc_sound_spatial_params(SoundRequestVoice *v) {
                     pan = (s8)(lbl_805DC9EC * -sin_table_lookup(yaw_pan + (s32)(10430.38043493439 * angle)));
                 }
             }
-            if (is_split_screen() != 0 || (v->flags & 8) == 0) {
+            if (is_split_screen() != 0 || (v->flags & 8) != 0) {
                 surround = 0;
             } else {
                 f32 angle2 = atan2_float(((const Vec *)v->position)->z - camvec.z, ((const Vec *)v->position)->x - camvec.x);
@@ -841,7 +842,7 @@ void calc_sound_spatial_params(SoundRequestVoice *v) {
                 f32 field2a4 = get_field_2a4__6TLobbyFPv(v->owner);
                 surround = (s32)(dist * (cos_table_lookup(angle2_int) * field2a4));
             }
-            if ((v->flags & 4) == 0) {
+            if ((v->flags & 4) != 0) {
                 vol = 0;
             } else {
                 f32 t = (dist - lbl_805DC9FC) / (far - lbl_805DC9FC);
