@@ -1081,7 +1081,7 @@ void draw_name_plate__15TWindowFukidasiFv(void *self, View_80252764 *v, u32 colo
     f32 rect[8];
     f32 width;
     f32 depth;
-    f32 x0v;
+    f64 x0v;
     s32 alpha;
     u32 a24;
     u32 argb;
@@ -1124,7 +1124,7 @@ void draw_name_plate__15TWindowFukidasiFv(void *self, View_80252764 *v, u32 colo
     }
     rect[0] = x0v;
     rect[1] = pt[1];
-    rect[2] = lbl_805DCD68 + rect[0];
+    rect[2] = lbl_805DCD68 + (f32)x0v;
     rect[3] = lbl_805DCD10 + pt[1];
     rect[4] = lbl_805DCD7C;
     rect[5] = lbl_805DCD70;
