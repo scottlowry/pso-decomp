@@ -364,10 +364,10 @@ void spawn_photon_blast_attachment_effects(void *arg0, s32 arg1) {
     PhotonAttachmentDef_801A7748 *def;
     u8 *defs;
     s32 *base_dir;
-    s32 *rot_z;
     s32 v[3];
     s32 rot[3];
     s32 dir[3];
+    s32 *rot_z = &rot[2];
     s32 a;
     s32 b;
     s32 c;
@@ -382,7 +382,6 @@ void spawn_photon_blast_attachment_effects(void *arg0, s32 arg1) {
         return;
     }
     self->effects = (struct Eff_801A7680 *)mem_alloc(self->count * 32);
-    rot_z = &rot[2];
     i = 0;
     defs = (u8 *)g->attachments;
     base_dir = lbl_80446A38;
