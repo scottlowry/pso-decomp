@@ -131,6 +131,7 @@ extern u8 lbl_805CF240[];
 
 Ent_80427C6C *TLobby__sub_80427C6C(s32 arg0, u16 arg1);
 s32 TLobby__sub_8042787C(Ent_80427D40 *e, u8 *p, u16 len);
+s16 TLobby__sub_80427988(Ent_80427D40 *e, u8 *p, u16 len);
 s32 TLobby__sub_80427F48(s16 slot, u8 *frame, u16 len);
 s16 TLobby__sub_80426D80(Ent_80427D40 *e);
 s32 TLobby__sub_80426574(s32);
@@ -506,6 +507,98 @@ void TLobby__sub_80427378(Ent_80427D40 *e) {
 
 
 typedef char RecoveredGlobal_80427D0C_lbl_805CFC20_size[sizeof(RecoveredGlobal_80427D0C_lbl_805CFC20) == 0xE20 ? 1 : -1];
+
+s16 TLobby__sub_804275B0(s32 arg0, u16 arg1) {
+    u8 *pkt;
+    u8 *hdr;
+    u8 *payload;
+    Ent_80427D40 *e;
+    Ent_80427C6C *c;
+    u8 cmd;
+    u16 len;
+    u16 x;
+    s16 ret = -1;
+    pkt = (u8 *)arg0;
+    hdr = pkt + 0xE;
+    payload = hdr + 6;
+    NetMemcpy(&len, hdr + 4, 2);
+    NetMemcpy(&cmd, hdr + 1, 1);
+    switch (cmd) {
+    case 7:
+        e = TLobby__sub_80427B6C(payload, len);
+        if (e == NULL) {
+            ret = 0;
+            return ret;
+        }
+        if (e->state != 1) {
+            ret = -1;
+            return ret;
+        }
+        e->timeout = 0;
+        NetMemcpy(e->rest, (void *)arg0, arg1);
+        *(u16 *)((u8 *)e + 0xe10) = arg1;
+        ret = TLobby__sub_80427988(e, e->rest + 0x14, len);
+        if (ret <= 0) {
+            return ret;
+        }
+        e->m_20 = e->rest + 6;
+        e->state = 2;
+        ret = TLobby__sub_80426D80(e);
+        if (ret < 0) {
+            return ret;
+        }
+        ret = ((TLobby *)e->frame)->post_send_message(e->frame_len);
+        if (ret != 0) {
+            return ret;
+        }
+        e->state = 3;
+        restart_timer(e, 2, 3000);
+        return ret;
+    case 0x65:
+        e = TLobby__sub_80427B6C(payload, len);
+        if (e == NULL) {
+            ret = 0;
+            return ret;
+        }
+        if (e->state != 3) {
+            ret = -1;
+            return ret;
+        }
+        e->timeout = 0;
+        ret = TLobby__sub_8042787C(e, payload, len);
+        if (ret <= 0) {
+            return ret;
+        }
+        NetMemcpy(&x, hdr + 2, 2);
+        e->id = x;
+        e->state = 4;
+        return ret;
+    case 0xa7:
+        c = TLobby__sub_80427C6C(arg0, arg1);
+        if (c == NULL) {
+            ret = 0;
+            return ret;
+        }
+        *(s32 *)((u8 *)c + 8) = 0;
+        TLobby::parse_tlv_records((s32)c, payload, len);
+        if (*(s16 *)c == 4) {
+            *(s16 *)c = 5;
+            ret = TLobby__sub_80426D80((Ent_80427D40 *)c);
+            if (ret < 0) {
+                return ret;
+            }
+            ret = ((TLobby *)((u8 *)c + 0x23a))->post_send_message(*(u16 *)((u8 *)c + 0x824));
+            return ret;
+        }
+        if (*(s16 *)c != -1) {
+            TLobby__sub_80426574(0);
+        }
+        *(s16 *)c = -1;
+        ret = 0;
+        return ret;
+    }
+    return ret;
+}
 
 s32 TLobby__sub_8042787C(Ent_80427D40 *e, u8 *p, u16 len) {
     s32 result = 1;
