@@ -1056,6 +1056,76 @@ void TLobby__sub_80405328(u8 *arg0) {
     }
 }
 
+struct Dst_8040555C {
+    u16 f0; u16 f2; u32 f4; u32 f8;
+    u16 fC; u16 fE; u16 f10; u16 f12;
+    u8 pad14[1];
+    u8 f15; u8 f16; u8 f17; u8 f18; u8 f19; u8 f1A; u8 f1B;
+    u8 f1C[236];
+};
+u16 TLobby__sub_803FE934(u8 *hdr, void *b, u16 n);
+
+Strm_80405A74 *TLobby__sub_8040555C(Dst_8040555C *dst, void *buf,
+                                    void *a3) {
+    u8 hdr[20];
+    u8 data40[40];
+    s32 n = 0;
+    if (dst->f1B != 0 && dst->f1B <= 0x28) {
+        n = dst->f1B;
+    } else if (dst->f12 != 0) {
+        n = 4;
+    }
+    Strm_80405A74 *obj =
+        (Strm_80405A74 *)((TLobby *)buf)->alloc_from_buffer(n + 0x14);
+    if (obj == 0) {
+        return 0;
+    }
+    u8 *data = obj->p;
+    *(u16 *)&hdr[0] = dst->f0;
+    *(u16 *)&hdr[2] = dst->f2;
+    *(u32 *)&hdr[4] = dst->f4;
+    *(u32 *)&hdr[8] = dst->f8;
+    hdr[12] = (u8)((((n + 0x14) >> 24) & 7) << 2);
+    s32 m = 0;
+    if (dst->f15 != 0) {
+        m |= 0x20;
+    }
+    if (dst->f16 != 0) {
+        m |= 0x10;
+    }
+    if (dst->f17 != 0) {
+        m |= 0x08;
+    }
+    if (dst->f18 != 0) {
+        m |= 0x04;
+    }
+    if (dst->f19 != 0) {
+        m |= 0x02;
+    }
+    if (dst->f1A != 0) {
+        m |= 0x01;
+    }
+    hdr[13] = (u8)m;
+    *(u16 *)&hdr[14] = dst->fC;
+    if (a3 == 0) {
+        *(u16 *)&hdr[16] = dst->fE;
+    } else {
+        *(u16 *)&hdr[16] = 0;
+    }
+    *(u16 *)&hdr[18] = dst->f10;
+    if ((u16)n > 0) {
+        NetMemcpy(data40, dst->f1C, dst->f1B);
+    }
+    s32 size = (u16)(n + 0x14);
+    NetMemcpy(data, hdr, size);
+    if (a3 != 0) {
+        *(u16 *)&hdr[16] =
+            TLobby__sub_803FE934((u8 *)a3, obj, *(u16 *)((u8 *)a3 + 0xA));
+    }
+    NetMemcpy(data, hdr, size);
+    return obj;
+}
+
 typedef struct Lobby_804062A0 {
     u8 state;
     u8 pad[3];
