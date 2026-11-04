@@ -20,11 +20,17 @@ struct Obj_8007F0E4 {
     u8 pad28[4];
     s32 time;
     s32 f30;
+    u32 f34;
+    u32 f38;
 };
+
+struct D_8007F27C { f32 *pos; u32 *col; s32 a; s32 b; };
 
 s32 fn_8007F4B8(void *, s32, f32);
 int sprintf(s8 *, const char *, ...);
+s32 draw_tri_fan_2d__14TObjCMHairMenuFllf(void *, s32, s32, f32);
 
+extern const char lbl_80438AB4[];
 extern const char lbl_80438AD8[];
 extern char lbl_80438AE0[];
 extern char lbl_80438AEC[];
@@ -32,8 +38,11 @@ extern const f32 lbl_805D9298;
 extern const f32 lbl_805D929C;
 extern const f32 lbl_805D92A0;
 extern const f32 lbl_805D92A4;
+extern const f32 lbl_805D92A8;
 extern const f32 lbl_805D92AC;
 extern const f32 lbl_805D92B0;
+extern const f32 lbl_805D92B4;
+extern const f32 lbl_805D92B8;
 
 #pragma push
 #pragma opt_common_subs off
@@ -164,6 +173,59 @@ void TDLGraph::draw_countdown_timer(f32 x, f32 y) {
         self->time--;
     }
 }
+
+#pragma push
+#pragma fp_contract on
+void fn_8007F27C(Obj_8007F0E4 *self, void *a, void *b) {
+    f32 pos[8];
+    u32 col[4];
+    D_8007F27C d;
+    f32 dx;
+    f32 dy;
+    f32 fx;
+    f32 fy;
+    f32 *p;
+    f32 *q;
+
+    p = (f32 *)a;
+    q = (f32 *)b;
+    d.pos = *(f32 **)lbl_80438AB4;
+    d.col = *(u32 **)(lbl_80438AB4 + 4);
+    d.a = *(s32 *)(lbl_80438AB4 + 8);
+    d.b = *(s32 *)(lbl_80438AB4 + 0xc);
+    d.pos = pos;
+    d.col = col;
+    col[0] = col[1] = col[2] = col[3] = 0xff;
+    dx = p[0] - lbl_805D92A8;
+    dy = p[1] - lbl_805D92A8;
+    fx = lbl_805D92A8 + (p[0] + q[0]);
+    fy = lbl_805D92A8 + (p[1] + q[1]);
+    pos[6] = dx;
+    pos[0] = dx;
+    pos[4] = fx;
+    pos[2] = fx;
+    pos[3] = dy;
+    pos[1] = dy;
+    pos[5] = fy;
+    pos[7] = fy;
+    draw_tri_fan_2d__14TObjCMHairMenuFllf(&d, 4, 2, lbl_805D92B4);
+    col[0] = col[1] = col[2] = col[3] = self->f34;
+    pos[6] = p[0];
+    pos[0] = p[0];
+    pos[3] = p[1];
+    pos[1] = p[1];
+    pos[4] = q[0] * self->f1C + p[0];
+    pos[2] = pos[4];
+    pos[5] = q[1] + p[1];
+    pos[7] = pos[5];
+    draw_tri_fan_2d__14TObjCMHairMenuFllf(&d, 4, 2, lbl_805D92B8);
+    col[0] = col[1] = col[2] = col[3] = self->f38;
+    pos[6] = q[0] + p[0];
+    pos[0] = pos[6];
+    draw_tri_fan_2d__14TObjCMHairMenuFllf(&d, 4, 2, lbl_805D92B8);
+}
+#pragma pop
+
 s32 fn_8007F3F8(O_8007F3F8 *arg0, f32 farg0) {
     f32 sum;
     f32 df;
