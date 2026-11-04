@@ -223,6 +223,7 @@ void TWindowSubStatusDisp__sub_80257024(Gauge_80257024 *self, Ctx_80257024 *ctx)
     f32 total;
     f32 cap;
     f32 depth;
+    f32 mul_t;
     s32 param = ctx->param;
 
     total = lbl_805DCEC4 *
@@ -233,14 +234,15 @@ void TWindowSubStatusDisp__sub_80257024(Gauge_80257024 *self, Ctx_80257024 *ctx)
     if (self->f1C <= lbl_805DCE58 && (self->flags & 8) == 0) {
         return;
     }
-    if (self->f1C <= total) {
-        cap = self->f1C;
-    } else {
+    if (self->f1C > total) {
         cap = total;
+    } else {
+        cap = self->f1C;
     }
     pos.x = ctx->f10 + self->fC;
     pos.y = ctx->f14 + self->f10;
-    depth = lbl_805DCE60 / (lbl_805DCEC8 * self->f8 + ctx->f38);
+    mul_t = lbl_805DCEC8 * self->f8;
+    depth = lbl_805DCE60 / (mul_t + ctx->f38);
     begin_screen_draw(1);
     set_global_param__8TObjFishFl(lbl_805D63F0);
     set_draw_texture_and_color(11, -1);
