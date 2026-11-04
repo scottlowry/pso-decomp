@@ -415,6 +415,8 @@ void TLobby__sub_803C5ED4(u8 *ctx) {
     s32 i;
     s32 j;
     s32 k;
+    u8 *pa;
+    u8 *pb;
     u8 *p;
     u8 *q;
     void *ch;
@@ -423,25 +425,29 @@ void TLobby__sub_803C5ED4(u8 *ctx) {
     st = (s8)ctx[1];
     if (st == 1) {
         obj = *(Strm_803C6860 **)(ctx + 0xc);
+        pa = ctx;
+        pb = ctx;
         i = 0;
         while (i < *(s32 *)(ctx + 0x58)) {
-            ((Strm_5ED4 *)(*(u32 *)(ctx + 4 + 4 * i)))->vt->lock(
-                (Strm_5ED4 *)(*(u32 *)(ctx + 4 + 4 * i)), 1, 2, &b);
+            ((Strm_5ED4 *)(*(u32 *)(pa + 4)))->vt->lock(
+                (Strm_5ED4 *)(*(u32 *)(pa + 4)), 1, 2, &b);
             if (b.size == 0) {
                 break;
             }
             v = *(s16 *)b.data;
-            *(s16 *)(ctx + 0x2cc + 2 * i) = v;
-            *(s16 *)(ctx + 0x2c8 + 2 * i) = v;
-            ((Strm_5ED4 *)(*(u32 *)(ctx + 4 + 4 * i)))->vt->f1c(
-                (Strm_5ED4 *)(*(u32 *)(ctx + 4 + 4 * i)), 1, &b);
+            *(s16 *)(pb + 0x2cc) = v;
+            *(s16 *)(pb + 0x2c8) = v;
+            ((Strm_5ED4 *)(*(u32 *)(pa + 4)))->vt->f1c(
+                (Strm_5ED4 *)(*(u32 *)(pa + 4)), 1, &b);
+            pa += 4;
+            pb += 2;
             i++;
         }
         if (i < *(s32 *)(ctx + 0x58)) {
             return;
         }
-        j = 0;
         p = ctx;
+        j = 0;
         while (j < *(s32 *)(ctx + 0x58)) {
             *(s16 *)(p + 0x88) = *(s16 *)(p + 0x2c8);
             *(s16 *)(p + 0x8c) = *(s16 *)(p + 0x2cc);
@@ -453,8 +459,8 @@ void TLobby__sub_803C5ED4(u8 *ctx) {
             return;
         }
         *(s32 *)(ctx + 0x2c) = *(s32 *)(ctx + 0x2c) + r;
-        k = 0;
         q = ctx;
+        k = 0;
         while (k < *(s32 *)(ctx + 0x58)) {
             ch = *(void **)(q + 0x80);
             calc_adx_predictor_coeffs((void *)(s16)*(s32 *)(ctx + 0x64),
