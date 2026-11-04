@@ -53,13 +53,15 @@ extern const f32 lbl_805DE558;
 void TAdEnterSerialAccessGC__sub_802C4B64(void *, void *, Q_802C4E38, int);
 void TAdPlyChrSelPlateGC::render() {
     S_802C4E38 *self = (S_802C4E38 *)this;
+    S_802C4E38 *row;
     u32 i;
     if (TMainTask::get_render_pass() != 1) {
         set_color_blending_mode(0, 8);
         set_color_blending_mode(1, 10);
         for (i = 0; i < self->f224; i++) {
             if (self->a[i] != 0) {
-                TAdEnterSerialAccessGC__sub_802C4B64(this, &self->v1C[i], self->c[i], i);
+                row = (S_802C4E38 *)((char *)self + i * 8);
+                TAdEnterSerialAccessGC__sub_802C4B64(this, &row->v1C[0], self->c[i], i);
             }
         }
         set_color_blending_mode(0, 8);
