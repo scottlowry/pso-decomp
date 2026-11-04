@@ -10,6 +10,7 @@
 #include "pso/misc/TShopArmorListWindow.h"
 #include "pso/misc/TShopEquipmentSellWindow.h"
 #include "pso/misc/TShopGetItemWindow.h"
+#include "pso/misc/TCheckRoomSequence.h"
 #include "pso/misc/TWindowHelpItem.h"
 #include "pso/misc/TWindowSubItem.h"
 #include "pso/misc/TWindowSubStatusDisp.h"
@@ -361,19 +362,25 @@ void TShopItemListWindow::vfunc_11() {
 }
 
 s32 TShopItemListWindow::prepare_tool_purchase() {
+    s32 maxQty;
     Win_8021F4B4 *self = (Win_8021F4B4 *)this;
     s32 off;
-    s32 maxQty;
     s32 count;
+    s32 cursor;
+    s32 recOff;
+    u8 *pi;
     void *obj;
     f32 scale;
 
     if (self->list == NULL) {
         return;
     }
-    off = get_cursor_value__19TWindowMenuIconLineFv(self->list) * 0x14;
-    maxQty = ((TObjPlayer *)self->player)->can_inventory_accept_item((u8 *)self + off + 0x58);
-    count = obj_getPtr2B0_20(self->player) / *(s32 *)((u8 *)self + off + 0x68);
+    cursor = get_cursor_value__19TWindowMenuIconLineFv(self->list);
+    off = cursor * 0x14;
+    recOff = off + 0x58;
+    maxQty = ((TObjPlayer *)self->player)->can_inventory_accept_item((u8 *)self + recOff);
+    pi = (u8 *)self + off;
+    count = obj_getPtr2B0_20(self->player) / *(s32 *)(pi + 0x68);
     if (count > maxQty) {
         count = maxQty;
     }
@@ -384,7 +391,7 @@ s32 TShopItemListWindow::prepare_tool_purchase() {
         }
         self->numwin = obj;
         if (self->numwin != NULL && TLobby::is_camera_ctrl_active() > 2) {
-            ((TLobby *)self->numwin)->set_position(0.75f, 0.75f);
+            ((TCheckRoomSequence *)self->numwin)->set_position(0.75f, 0.75f);
         }
         self->field4c = 0;
         ((TShopWindowBase *)self)->set_field_20(2);
