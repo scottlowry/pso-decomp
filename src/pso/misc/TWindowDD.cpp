@@ -185,10 +185,10 @@ void TWindowDD__sub_8034055C(void *selfv) {
             u32 col;
             if (i == *(s32 *)(self + 0x68) && *(s32 *)(self + 0x60) == 0) {
                 col = 0xff000000;
-            } else if (*(s32 *)(self + 0x64) > i) {
-                col = 0xff808080;
-            } else {
+            } else if (*(s32 *)(self + 0x64) <= i) {
                 col = 0xffffffff;
+            } else {
+                col = 0xff808080;
             }
             set_constant_material_color__FUl(col);
             draw_textured_quad_at_depth(quad, depth);
