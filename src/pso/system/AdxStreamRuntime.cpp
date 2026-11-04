@@ -85,7 +85,7 @@ extern s32 tlobby_stream_read_retry_limit;
 extern s32 lbl_805D7558;
 s32 memset(void *, int, int);
 s32 TLobby__sub_803C9104(Obj_803C9104 *arg0, s32 arg1, s32 arg2);
-s32 TLobby__sub_803C5ED4(int);
+void TLobby__sub_803C5ED4(u8 *ctx);
 void TLobby__sub_803C5E78(void);
 }
 void update_active_stream_reads(void);
@@ -387,10 +387,90 @@ void TLobby__sub_803C5E78(void) {
     var_r30 = 0;
     do {
         if ((s32) *(u8 *)((s8 *)((u8 *)&((PointerRecords_803C5E78_var_r31 *)var_r31)[var_r30]) + 0) == 1) {
-            TLobby__sub_803C5ED4((int) (((u8 *)&((PointerRecords_803C5E78_var_r31 *)var_r31)[var_r30])));
+            TLobby__sub_803C5ED4((u8 *)(((u8 *)&((PointerRecords_803C5E78_var_r31 *)var_r31)[var_r30])));
         }
         var_r30 += 1;
     } while (var_r30 < 8);
+}
+
+s32 write_adx_header__6TLobbyFPvPv(Obj_803C6860 *o, Strm_803C6860 *s);
+s32 calc_adx_predictor_coeffs(void *, void *, void *, void *);
+
+void TLobby__sub_803C5ED4(u8 *ctx) {
+    struct Strm_5ED4;
+    struct VT_5ED4 {
+        void *pad[6];
+        void (*lock)(Strm_5ED4 *, s32, s32, Buf_803C7C10 *);
+        void (*f1c)(Strm_5ED4 *, s32, Buf_803C7C10 *);
+    };
+    struct Strm_5ED4 { VT_5ED4 *vt; };
+
+    Strm_803C6860 *obj;
+    s16 c1;
+    s16 c0;
+    Buf_803C7C10 b;
+    s16 v;
+    s32 r;
+    s8 st;
+    s32 i;
+    s32 j;
+    s32 k;
+    u8 *p;
+    u8 *q;
+    void *ch;
+    void *mir;
+
+    st = (s8)ctx[1];
+    if (st == 1) {
+        obj = *(Strm_803C6860 **)(ctx + 0xc);
+        i = 0;
+        while (i < *(s32 *)(ctx + 0x58)) {
+            ((Strm_5ED4 *)(*(u32 *)(ctx + 4 + 4 * i)))->vt->lock(
+                (Strm_5ED4 *)(*(u32 *)(ctx + 4 + 4 * i)), 1, 2, &b);
+            if (b.size == 0) {
+                break;
+            }
+            v = *(s16 *)b.data;
+            *(s16 *)(ctx + 0x2cc + 2 * i) = v;
+            *(s16 *)(ctx + 0x2c8 + 2 * i) = v;
+            ((Strm_5ED4 *)(*(u32 *)(ctx + 4 + 4 * i)))->vt->f1c(
+                (Strm_5ED4 *)(*(u32 *)(ctx + 4 + 4 * i)), 1, &b);
+            i++;
+        }
+        if (i < *(s32 *)(ctx + 0x58)) {
+            return;
+        }
+        j = 0;
+        p = ctx;
+        while (j < *(s32 *)(ctx + 0x58)) {
+            *(s16 *)(p + 0x88) = *(s16 *)(p + 0x2c8);
+            *(s16 *)(p + 0x8c) = *(s16 *)(p + 0x2cc);
+            j++;
+            p += 2;
+        }
+        r = write_adx_header__6TLobbyFPvPv((Obj_803C6860 *)ctx, obj);
+        if (r == 0) {
+            return;
+        }
+        *(s32 *)(ctx + 0x2c) = *(s32 *)(ctx + 0x2c) + r;
+        k = 0;
+        q = ctx;
+        while (k < *(s32 *)(ctx + 0x58)) {
+            ch = *(void **)(q + 0x80);
+            calc_adx_predictor_coeffs((void *)(s16)*(s32 *)(ctx + 0x64),
+                                      (void *)*(s32 *)(ctx + 0x5c), &c0, &c1);
+            *(s16 *)((u8 *)ch + 0x4) = c0;
+            *(s16 *)((u8 *)ch + 0x6) = c1;
+            mir = *(void **)((u8 *)ch + 0x88);
+            *(s16 *)((u8 *)mir + 0x4) = c0;
+            *(s16 *)((u8 *)mir + 0x6) = c1;
+            k++;
+            q += 4;
+        }
+        ctx[1] = 2;
+    } else if (st == 2) {
+        adx_process_encoder_output(ctx);
+    }
 }
 
 void adx_process_encoder_output(u8 *arg0p) {
