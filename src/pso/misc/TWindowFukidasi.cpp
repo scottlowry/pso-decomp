@@ -1073,6 +1073,7 @@ void TUnk_804CF0B8::sub_80251DF0(s16 arg1, s32 str, s16 arg3, f32 farg0) {
 #pragma push
 #pragma fp_contract on
 #pragma opt_propagation off
+#pragma opt_lifetimes off
 void draw_name_plate__15TWindowFukidasiFv(void *self, View_80252764 *v, u32 color) {
     struct Fuki_80251EC8 *b = (struct Fuki_80251EC8 *)self;
     struct View_80251EC8 *w = (struct View_80251EC8 *)v;
@@ -1093,7 +1094,7 @@ void draw_name_plate__15TWindowFukidasiFv(void *self, View_80252764 *v, u32 colo
     }
     width = (f32)(u32)get_name_text_width((void *)b->name);
     if (w->count < 6) {
-        alpha = (s32)(lbl_805DCD5C * (f32)(f64)(w->count * 255));
+        alpha = (s32)(lbl_805DCD5C * (f32)(w->count * 255));
     } else {
         alpha = 255;
     }
@@ -1123,7 +1124,7 @@ void draw_name_plate__15TWindowFukidasiFv(void *self, View_80252764 *v, u32 colo
     }
     rect[0] = x0v;
     rect[1] = pt[1];
-    rect[2] = lbl_805DCD68 + (f32)x0v;
+    rect[2] = lbl_805DCD68 + rect[0];
     rect[3] = lbl_805DCD10 + pt[1];
     rect[4] = lbl_805DCD7C;
     rect[5] = lbl_805DCD70;
