@@ -138,6 +138,51 @@ struct Point2_803E0CC8 { f32 u, v; };
 s32 TObjPlayer__sub_803DF9D0(Point2_803E0CC8 *a, Point2_803E0CC8 *b);
 f32 TObjPlayer__sub_803DF840(Point2_803E0CC8 *p, Point2_803E0CC8 *a, Point2_803E0CC8 *b);
 extern const f32 lbl_805E0FFC;
+extern const f32 lbl_805E0FD8, lbl_805E0FDC, lbl_805E0FE0, lbl_805E0FF8;
+extern const f64 lbl_805E0FE8, lbl_805E0FF0;
+
+f32 TObjPlayer__sub_803DF840(Point2_803E0CC8 *p, Point2_803E0CC8 *a, Point2_803E0CC8 *b) {
+    f32 nx;
+    f32 ny;
+    f32 c;
+    f32 len2;
+    f32 dist;
+    f32 len;
+    if ((f32)__fabs(p->u - a->u) < lbl_805E0FD8) {
+        nx = lbl_805E0FDC;
+        ny = lbl_805E0FE0;
+        c = -p->u;
+    } else {
+        nx = a->v - p->v;
+        ny = -(a->u - p->u);
+        c = -p->u * nx - p->v * ny;
+    }
+    dist = (f32)__fabs(c + (nx * b->u + ny * b->v));
+    len2 = nx * nx + ny * ny;
+    if (len2 > lbl_805E0FE0) {
+        volatile f32 y;
+        f64 g = __frsqrte(len2);
+        g = lbl_805E0FE8 * g * (lbl_805E0FF0 - g * g * len2);
+        g = lbl_805E0FE8 * g * (lbl_805E0FF0 - g * g * len2);
+        g = lbl_805E0FE8 * g * (lbl_805E0FF0 - g * g * len2);
+        y = (f32)(len2 * g);
+        len2 = y;
+    }
+    dist = dist / len2;
+    len2 = (p->u - a->u) * (p->u - a->u) + (p->v - a->v) * (p->v - a->v);
+    if (len2 > lbl_805E0FE0) {
+        volatile f32 y;
+        f64 g = __frsqrte(len2);
+        g = lbl_805E0FE8 * g * (lbl_805E0FF0 - g * g * len2);
+        g = lbl_805E0FE8 * g * (lbl_805E0FF0 - g * g * len2);
+        g = lbl_805E0FE8 * g * (lbl_805E0FF0 - g * g * len2);
+        y = (f32)(len2 * g);
+        len = y;
+    } else {
+        len = len2;
+    }
+    return lbl_805E0FF8 * (dist * len);
+}
 
 s32 TObjPlayer__sub_803DF9D0(Point2_803E0CC8 *a, Point2_803E0CC8 *b) {
     Point2_803E0CC8 *p;
