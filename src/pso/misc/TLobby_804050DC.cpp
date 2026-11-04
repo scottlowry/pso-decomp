@@ -1056,6 +1056,71 @@ void TLobby__sub_80405328(u8 *arg0) {
     }
 }
 
+struct Dst_804053B8 {
+    u16 f0; u16 f2; u32 f4; u32 f8;
+    u16 fC; u16 fE; u16 f10; u16 f12;
+    u8 pad14[1];
+    u8 f15; u8 f16; u8 f17; u8 f18; u8 f19; u8 f1A; u8 f1B;
+    u8 f1C[236];
+};
+u32 get_field_4__6TLobbyFv(void *);
+
+s32 TLobby__sub_804053B8(Dst_804053B8 *dst, void *src) {
+    u8 buf[20];
+    s16 r = TLobby__sub_80401BCC(src, buf, 20);
+    dst->f0 = *(u16 *)&buf[0];
+    dst->f2 = *(u16 *)&buf[2];
+    dst->f4 = *(u32 *)&buf[4];
+    dst->f8 = *(u32 *)&buf[8];
+    s32 v13 = buf[13];
+    u32 v12 = buf[12];
+    dst->f15 = v13 & 0x04000000;
+    dst->f16 = v13 & 0x08000000;
+    u32 v = (v12 & 0xF0) >> 2;
+    dst->f17 = v13 & 0x10000000;
+    dst->f18 = v13 & 0x20000000;
+    dst->f19 = v13 & 0x40000000;
+    dst->f1A = v13 & 1;
+    dst->fC = *(u16 *)&buf[14];
+    dst->fE = *(u16 *)&buf[16];
+    dst->f10 = *(u16 *)&buf[18];
+    dst->f12 = (u16)r;
+    dst->f1B = (u8)(v - 20);
+    if ((u16)r < 20 || v < 20) {
+        return 0;
+    }
+    if (dst->f1B == 0) {
+        return v;
+    }
+    if (dst->f1B > (u16)get_field_4__6TLobbyFv(*(void **)src)) {
+        return 0;
+    }
+    TLobby__sub_80401BCC(src, dst->f1C, dst->f1B);
+    s32 rem = dst->f1B;
+    u8 *p = dst->f1C;
+    while ((u16)rem != 0) {
+        s32 t = p[0];
+        if (t == 0) {
+            return v;
+        }
+        s32 len = 1;
+        if (t != 1) {
+            len = p[1];
+            if (len == 0) {
+                return v;
+            }
+        }
+        if (t == 2) {
+            if ((u16)len == 4) {
+                dst->f12 = (u16)((p[2] << 8) | p[3]);
+            }
+        }
+        rem -= len;
+        p += (u16)len;
+    }
+    return v;
+}
+
 typedef struct Lobby_804062A0 {
     u8 state;
     u8 pad[3];
