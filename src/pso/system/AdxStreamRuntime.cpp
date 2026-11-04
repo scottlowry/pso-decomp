@@ -536,9 +536,7 @@ u8 *TLobby__sub_803C61C4(s32 n, Strm_803C5B50 **arr, Strm_803C5B50 *extra) {
         }
         w = w + 0xc;
     }
-    if (i >= 16) {
-        name = 0;
-    }
+    name = (i < 16) ? name : 0;
     if (name == 0) {
         ctx = 0;
     } else {
@@ -568,9 +566,7 @@ u8 *TLobby__sub_803C61C4(s32 n, Strm_803C5B50 **arr, Strm_803C5B50 *extra) {
         }
         w = w + 0xc;
     }
-    if (i >= 16) {
-        name = 0;
-    }
+    name = (i < 16) ? name : 0;
     if (name == 0) {
         ctx = 0;
     } else {
