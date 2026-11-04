@@ -159,12 +159,12 @@ void TWindowSubStatusDisp__sub_8026E1D4(TWindowSubStatusDisp *self, s32 index, s
     mode = *chat_shortcut;
     set_text_entry_string__FPUcUll((u8 *)e0, (u32)get_message_10__20TWindowSubStatusDispFl(0xc4), 0);
     fn_80266BD0(index, &sp9, &sp8, self->m_20);
-    if (sp9 == 0x33) {
-        ((Msg_8026E1D4 *)e2)->flags |= 2;
-    } else {
+    if (sp9 != 0x33) {
         pt = (f32 *)get_entry_ptr__20TWindowSubStatusDispFi(sp9);
         ((Msg_8026E1D4 *)e2)->flags &= ~2;
         set_sprite_uv_from_pixels__FPUcff((u8 *)e2, pt[0], pt[1]);
+    } else {
+        ((Msg_8026E1D4 *)e2)->flags |= 2;
     }
     pt = (f32 *)get_entry_ptr__20TWindowSubStatusDispFi(sp8);
     set_sprite_uv_from_pixels__FPUcff((u8 *)e3, pt[0], pt[1]);
@@ -176,6 +176,8 @@ void TWindowSubStatusDisp__sub_8026E1D4(TWindowSubStatusDisp *self, s32 index, s
     stack.sp18 = lbl_805DD354;
     set_text_entry_string__FPUcUll((u8 *)e8, (u32)get_message_10__20TWindowSubStatusDispFl(0x35), 0);
     switch (mode) {
+    case 0:
+        break;
     case 1:
         v = fn_80076BC4(chat_shortcut + 1);
         set_text_entry_string__FPUcUll((u8 *)e10, (u32)v, 0);
