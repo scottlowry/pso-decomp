@@ -130,7 +130,7 @@ s32 TLobby__sub_803F8E9C(void) {
     }
     n1 = lbl_805D7A68;
     z = 0;
-    for (i = n1, off = 0; i > 0; i--) {
+    for (off = 0, i = n1; i > 0; i--) {
         *(u32 *)((u8 *)lbl_805D7A6C + off) = z;
         e = (Ent_803F9B48 *)((u8 *)lbl_805D7A6C + off);
         e->key = (u32)&e->thread;
