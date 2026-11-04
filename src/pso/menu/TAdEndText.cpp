@@ -101,7 +101,14 @@ extern u32 TAdEndText__loaded_font_texture_list;
 extern u32 TAdEndText__credit_script_lines;
 extern s32 TAdEndText__font_loaded_flag;
 void bind_gvm_texture_list(const char *name, void *data);
-s32 TAdEndText__sub_8001A998(s32, f32, f32, f32);
+void set_default_alpha_blend__Fv(void);
+void set_texlist__FUl(u32);
+void get_player__20TWindowSubStatusDispFv(void);
+s32 TAdEndText__sub_8001B3BC(u8);
+s32 TAdEndText__sub_8001B3D4(u8);
+s32 TAdEndText__sub_8001B3EC(u8);
+s32 TAdEndText__sub_8001B404(u8);
+void TAdEndText__sub_8001A998(s32, u8 *, f32, f32, f32);
 s32 draw_small_font_text(s32, f32, f32, f32);
 u32 __cvt_fp2unsigned(f32);
 extern const f32 lbl_805D7E04;
@@ -126,7 +133,10 @@ s32 __ct__7TObjectFP7TObject(void *);
 extern u8 __vt__10TAdEndText[];
 extern s32 TAdEndText__class_name;
 extern const f32 lbl_805D7DF0;
+extern const f32 lbl_805D7DF4;
 extern const f32 lbl_805D7DFC;
+extern const f32 lbl_805D7E00;
+extern const f32 lbl_804345E0[];
 extern const f32 lbl_805D7E40;
 void release_texture_list(void*);
 
@@ -138,6 +148,125 @@ s32 get_ending_scene_active(void) {
 
 s32 get_end_text_font_loaded_flag(void) {
     return TAdEndText__font_loaded_flag;
+}
+
+void TAdEndText__sub_8001A998(s32 color, u8 *str, f32 x, f32 y, f32 scale) {
+    f32 box[8];
+    f32 yb;
+    s32 lastpage;
+    u8 c;
+    s32 id;
+    s32 row;
+    u32 q1;
+    u32 q2;
+    s32 cq;
+    s32 c6;
+    s32 a;
+    s32 b;
+    f32 w;
+    s32 page;
+
+    lastpage = 254;
+    set_default_alpha_blend__Fv();
+    begin_screen_draw(1);
+    set_texlist__FUl(TAdEndText__loaded_font_texture_list);
+    yb = lbl_805D7DF0 + y;
+    while ((s8)*str != 0) {
+        c = *str++;
+        id = c;
+        if (c == 0x23) {
+            continue;
+        }
+        box[0] = x;
+        if (TAdEndText__sub_8001B404(c) != 0) {
+            box[1] = yb;
+        } else {
+            box[1] = y;
+        }
+        if (TAdEndText__sub_8001B3EC(c) != 0) {
+            if (TAdEndText__sub_8001B3D4(c) != 0) {
+                id = c - 0x41;
+            } else if (TAdEndText__sub_8001B404(c) != 0) {
+                id = c - 0x3d;
+            } else if (TAdEndText__sub_8001B3BC(c) != 0) {
+                id = c + 0xe;
+            }
+        } else {
+            switch ((s8)c) {
+            case 0x28:
+                id = 0x1a;
+                break;
+            case 0x29:
+                id = 0x1b;
+                break;
+            case 0x2f:
+                id = 0x1c;
+                break;
+            case 0x2e:
+                id = 0x1d;
+                break;
+            case 0x3a:
+                id = 0x1e;
+                break;
+            case 0x26:
+                id = 0x1f;
+                break;
+            case 0x7e:
+                id = 0x20;
+                break;
+            case 0x5e:
+                id = 0x21;
+                break;
+            case 0x2d:
+                id = 0x22;
+                break;
+            case 0x2c:
+                id = 0x23;
+                break;
+            case 0x3c:
+                id = 0x48;
+                break;
+            case 0x3e:
+                id = 0x49;
+                break;
+            default:
+                id = 0x52;
+                break;
+            }
+        }
+        if ((u8)id == 0x52) {
+            x = x + lbl_805D7DF4;
+            box[4] = lbl_805D7DFC;
+            box[2] = lbl_805D7DF4 + box[0];
+            box[3] = TAdEndText__data_805D7DF8 + box[1];
+            box[5] = lbl_805D7DFC;
+            box[6] = lbl_805D7DFC;
+            box[7] = lbl_805D7DFC;
+        } else {
+            row = id / 36;
+            q1 = id - row * 36;
+            q2 = id - row * 36;
+            c6 = q2 / 6;
+            cq = q1 - (q1 / 6) * 6;
+            box[3] = TAdEndText__data_805D7DF8 + box[1];
+            b = (u8)(s32)(TAdEndText__data_805D7DF8 * ((f64)c6 - 109.0));
+            w = lbl_804345E0[row * 36 + q2];
+            a = (u8)(s32)(TAdEndText__data_805D7DF8 * ((f64)cq - 109.0));
+            box[2] = box[0] + w;
+            x = x + w;
+            box[6] = ((f32)a + w) * lbl_805D7E00;
+            box[4] = (f32)a * lbl_805D7E00;
+            box[5] = (f32)b * lbl_805D7E00;
+            box[7] = (TAdEndText__data_805D7DF8 + (f32)b) * lbl_805D7E00;
+        }
+        page = (u8)id / 36;
+        if (page != lastpage) {
+            set_draw_texture_and_color(page, color);
+            lastpage = page;
+        }
+        draw_textured_quad_at_depth(box, scale);
+    }
+    get_player__20TWindowSubStatusDispFv();
 }
 
 void render__10TAdEndTextFv(u8 *arg0) {
@@ -164,7 +293,7 @@ void render__10TAdEndTextFv(u8 *arg0) {
         switch ((s8)((char **)TAdEndText__credit_script_lines)[i][0]) {
         case 0x23:
             if (col != 0xFFFFFF) {
-                TAdEndText__sub_8001A998(col, self->pos[i].x, y, lbl_805D7E18);
+                TAdEndText__sub_8001A998(col, (u8 *)((char **)TAdEndText__credit_script_lines)[i], self->pos[i].x, y, lbl_805D7E18);
             }
             break;
         case 0x21:
