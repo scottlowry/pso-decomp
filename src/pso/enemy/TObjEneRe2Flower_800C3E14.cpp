@@ -496,7 +496,6 @@ void *TObjEneRe2Flower__ct(void *self, void *parent, void *set_data) {
     s32 b;
     s32 object_handle;
     s32 attack_handle;
-    s32 boss_handle;
     s32 i;
     s32 off;
 
@@ -539,8 +538,8 @@ void *TObjEneRe2Flower__ct(void *self, void *parent, void *set_data) {
     }
     object_handle = register_object__6TLobbyFl(lbl_8043BA94[b]);
     attack_handle = dispatch_shared_handler_b__6TLobbyFl(lbl_8043BA88[b]);
-    boss_handle = register_boss__6TLobbyFl(lbl_8043BA7C[b]);
-    ((TObjEneDD *)self)->reset_hp((u8 *)boss_handle, (u8 *)attack_handle, (u8 *)object_handle);
+    ((TObjEneDD *)self)->reset_hp((u8 *)register_boss__6TLobbyFl(lbl_8043BA7C[b]), (u8 *)attack_handle,
+                                    (u8 *)object_handle);
     lbl_805D5170 = dispatch_shared_handler_a__6TLobbyFl(lbl_8043BAA0[b]);
     if (((TObjEneRe2Flower *)self)->get_flag_11() != 0) {
         ((TObjEneDD *)self)->set_state_8();
