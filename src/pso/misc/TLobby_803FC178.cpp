@@ -1682,12 +1682,13 @@ u8 *GXLoadTexObjPreLoaded(A_80403F4C *obj, u8 *stream, s32 flag) {
     s32 n;
     u32 sum;
 
+    cur = (Strm_80405A74 *)stream;
     bp = buf;
     v = (u16)(obj->optlen + 20);
     if (v > 64) {
         v = 64;
     }
-    cur = (Strm_80405A74 *)((TLobby *)stream)->alloc_from_buffer(v);
+    cur = (Strm_80405A74 *)((TLobby *)cur)->alloc_from_buffer(v);
     cp = cur->p;
     buf[0] = (u8)(obj->version << 4 | v >> 2);
     buf[1] = obj->tos;
