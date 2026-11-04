@@ -121,7 +121,6 @@ extern f32 lbl_805D9C60;
 extern f32 lbl_805D9C64;
 
 #pragma push
-#pragma opt_common_subs off
 #pragma opt_propagation off
 void *TObjEneMoja__ct(void *arg0, void *arg1, void *arg2) {
     s8 *self;
