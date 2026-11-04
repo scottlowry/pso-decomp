@@ -93,6 +93,11 @@ struct RecoveredGlobal_8042DD70_lbl_805D1D20 {
     u8 remaining[0x18];
 };
 
+struct RecoveredGlobal_8042DE20_lbl_805D1D20 {
+    s32 value;
+    u8 remaining[0xD4];
+};
+
 typedef struct Names_8042E57C {
     char *name[6];
 } Names_8042E57C;
@@ -618,6 +623,51 @@ s32 TAdSinglePlyChrSelectGC__sub_8042DD70(s32 arg0, s32 arg1, s32 arg2) {
     return 1;
 }
 #pragma pop
+
+typedef char RecoveredGlobal_8042DE20_lbl_805D1D20_size[sizeof(RecoveredGlobal_8042DE20_lbl_805D1D20) == 0xD8 ? 1 : -1];
+
+void TAdSinglePlyChrSelectGC__sub_8042DE20(void) {
+    RecoveredGlobal_8042DE20_lbl_805D1D20 *conn = (RecoveredGlobal_8042DE20_lbl_805D1D20 *)&modem_connection_info;
+    s8 *base = (s8 *)&conn->value;
+    u32 data;
+    u32 count;
+    u32 end;
+    u32 body;
+    u32 tail;
+    u32 cmd;
+
+    count = ModemMin((s32)*(u32 *)(base + 0xB8), 0x201 - lbl_805D7C90.f2);
+    *(s32 *)(base + 0xB8) -= (s32)count;
+    data = *(u32 *)(base + 0xB4);
+    end = data + count;
+    body = OSRoundUp32B(data);
+    tail = OSRoundDown32B(end);
+    *(u32 *)(base + 0xC0) = 0;
+    *(u32 *)(base + 0xC4) = 0;
+    *(u32 *)(base + 0xC8) = 0;
+    *(u32 *)(base + 0xCC) = 0;
+    *(u32 *)(base + 0xD0) = 0;
+    *(u32 *)(base + 0xD4) = 0;
+    if (body >= tail) {
+        *(u32 *)(base + 0xC0) = data;
+        *(u32 *)(base + 0xC4) = count;
+    } else {
+        if (data != body) {
+            *(u32 *)(base + 0xC0) = data;
+            *(u32 *)(base + 0xC4) = body - data;
+        }
+        *(u32 *)(base + 0xC8) = body;
+        *(u32 *)(base + 0xCC) = tail - body;
+        DCStoreRange((void *)*(u32 *)(base + 0xC8), *(u32 *)(base + 0xCC));
+        if (tail < end) {
+            *(u32 *)(base + 0xD0) = tail;
+            *(u32 *)(base + 0xD4) = end - tail;
+        }
+    }
+    EXISelect(0, 2, 4);
+    cmd = 0x68000000 | ((u16)count << 8);
+    EXIImm(0, &cmd, 4, EXI_WRITE, TAdSinglePlyChrSelectGC__sub_8042DF4C);
+}
 
 void TAdSinglePlyChrSelectGC__sub_8042DDE4(int _w0, int _w1) {
     if (EXILock(0, 2U, (EXICallback)TAdSinglePlyChrSelectGC__sub_8042DDE4) != 0) {
