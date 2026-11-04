@@ -281,8 +281,8 @@ void TWindowDD__sub_80340A78(void *selfv) {
     E_803403F8 sp28[8];
     f32 *pd;
     const f32 *pt;
-    s32 n;
     u8 *rect;
+    s32 n;
     s32 i;
     f32 depth;
     f32 iy;
