@@ -227,15 +227,13 @@ void TWindowSubStatusDisp__sub_80257024(Gauge_80257024 *self, Ctx_80257024 *ctx)
     f32 depth;
     register f32 d1;
     register f32 d2;
-    f32 prod;
     f32 c;
     f32 diff;
     s32 param = ctx->param;
 
     c = (f32)param;
-    prod = lbl_805DCEC0 *
-           ((d1 = self->f10 / lbl_805DCEBC) + (d2 = self->fC / ctx->f18));
-    diff = c - prod;
+    d2 = ((d1 = self->f10 / lbl_805DCEBC) + (d2 = self->fC / ctx->f18)) * lbl_805DCEC0;
+    diff = c - d2;
     total = lbl_805DCEC4 * diff;
     if (total <= lbl_805DCE58) {
         return;
