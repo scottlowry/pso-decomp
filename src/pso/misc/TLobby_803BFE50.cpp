@@ -102,12 +102,13 @@ struct AudioStreamSourceVtable {
     void (*lock)(AudioStreamSource *, s32, s32, AudioStreamChunk *);
     void (*unlock)(AudioStreamSource *, s32, AudioStreamChunk *);
     void (*f20)(AudioStreamSource *, s32, AudioStreamChunk *);
+    s32 (*f24)(AudioStreamSource *, s32, void *);
 };
 
 struct AudioStreamSource { AudioStreamSourceVtable *vt; };
 
 struct AudioStreamInputState {
-    s8 f0; s8 state; u8 f2; s8 f3; u32 f4; AudioStreamSource *f8;
+    s8 f0; s8 state; u8 f2; u8 f3; u32 f4; AudioStreamSource *f8;
     SjRingBuffer *rings[4];
     u8 pad_1c[0x2C - 0x1C];
     s32 f2c; s32 f30; s32 f34; s32 f38; s32 f3c; s32 f40; s32 f44;
@@ -142,7 +143,11 @@ extern s32 lbl_805E0CB8;
 void TLobby__sub_803C0628(void *arg0_, s32 *arg1, s32 *arg2, s32 *arg3);
 void EXIGetID(Snd_803C0BE8 *arg0);
 void GXFlush(void);
-s32 TLobby__sub_803C0238();
+void TLobby__sub_803C0238(AudioStreamInputState *arg0);
+void TLobby__sub_803C34F4(u8 *arg0);
+void TLobby__sub_803C3A04(u8 *arg0);
+void TLobby__sub_803C3984(u8 *arg0);
+void init_scroll__6TLobbyFll(int rec, s32 arg1, s32 arg2);
 s32 TLobby__sub_803C3B68(s32 arg0, u16 *hdr, s32 size);
 void TLobby__sub_803D3130(s32 arg0, s32 arg1, u8 *arg2, u8 *arg3);
 void *memcpy(void *, const void *, u32);
@@ -267,12 +272,118 @@ inline void parse_audio_stream_input_header(AudioStreamInputState *arg0) {
 }
 void process_audio_stream_input(AudioStreamInputState *arg0) {
     if (arg0->state == 2) {
-        TLobby__sub_803C0238();
+        TLobby__sub_803C0238(arg0);
     } else if (arg0->state == 1) {
         parse_audio_stream_input_header(arg0);
     }
 }
 #pragma pop
+
+void TLobby__sub_803C0238(AudioStreamInputState *self) {
+    TLobby *rec;
+    TLobby *lobby;
+    AudioStreamSource *src;
+    SjRingBuffer *ring;
+    s32 v;
+    s32 w;
+    s32 a0;
+    s32 n2;
+    s32 i;
+    u8 *p8;
+    u8 *p4;
+    s32 locA[2];
+    s32 locB;
+
+    rec = (TLobby *)self->f4;
+    if (rec->get_entry_id() == 0) {
+        lobby = (TLobby *)self->f4;
+        src = self->f8;
+        if (self->f3 == 1) {
+            if (src->vt->f24(src, 1, src->vt) == 0) {
+                self->state = 3;
+                goto join;
+            }
+        }
+        src->vt->lock(src, 1, 0x7FFFFFFF, (AudioStreamChunk *)&self->rings[1]);
+        if (get_field_a8__6TLobbyFv((int)lobby) == 0 && (s32)self->rings[2] >= 2 &&
+            (u16)*(s16 *)self->rings[1] == 0x8001) {
+            self->state = 3;
+            src->vt->unlock(src, 1, (AudioStreamChunk *)&self->rings[1]);
+            goto join;
+        }
+        if (self->f34 >= TLobby__sub_803C3ABC((u8 *)lobby)) {
+            self->state = 3;
+            src->vt->unlock(src, 1, (AudioStreamChunk *)&self->rings[1]);
+            goto join;
+        }
+        v = TLobby__sub_803C3AC4((u8 *)lobby);
+        ring = self->rings[0];
+        n2 = ((s32 (*)(SjRingBuffer *, s32, s32))ring->interface->get_available)(ring, 0, (s32)ring->interface);
+        if (n2 / 2 < v) {
+            src->vt->unlock(src, 1, (AudioStreamChunk *)&self->rings[1]);
+            goto join;
+        }
+        if (get_field_a8__6TLobbyFv((int)lobby) == 10) {
+            src->vt->unlock(src, 1, (AudioStreamChunk *)&self->rings[1]);
+        }
+        init_scroll__6TLobbyFll((int)lobby, (s32)self->rings[1], (s32)self->rings[2]);
+        TLobby__sub_803C3A04((u8 *)lobby);
+    }
+join:
+    TLobby__sub_803C34F4((u8 *)rec);
+    if (rec->get_entry_id() == 3) {
+        lobby = (TLobby *)self->f4;
+        src = self->f8;
+        v = TLobby__sub_803C3ABC((u8 *)lobby);
+        w = lobby->get_field_0xa4();
+        a0 = lobby->get_field_a0();
+        v -= self->f34;
+        if (a0 < v) {
+            v = a0;
+        }
+        TLobby__sub_803D3130((s32)&self->rings[1], w, (u8 *)locA, (u8 *)&locB);
+        src->vt->f20(src, 0, (AudioStreamChunk *)locA);
+        src->vt->unlock(src, 1, (AudioStreamChunk *)&locB);
+        p8 = (u8 *)self;
+        p4 = (u8 *)self;
+        n2 = v * 2;
+        i = 0;
+        while (i < TLobby__sub_803C3B38((int)lobby)) {
+            TLobby__sub_803D3130((s32)(p8 + 0x1c), n2, (u8 *)locA, (u8 *)&locB);
+            if (self->f50 != 0) {
+                ((void (*)(s32, s32, s32, s32))self->f50)(self->f54, i, locA[0], locA[1]);
+            }
+            ring = *(SjRingBuffer **)(p4 + 0xc);
+            ring->interface->put_chunk(ring, 1, (SjChunk *)locA);
+            ring->interface->unget_chunk(ring, 0, (SjChunk *)&locB);
+            p8 += 8;
+            p4 += 4;
+            i++;
+        }
+        self->f2c += v;
+        self->f30 += w;
+        self->f34 += v;
+        self->f40 += v;
+        self->f44 += w;
+        if (self->f3c >= 0 && self->f40 >= self->f3c && self->f48 != 0) {
+            ((void (*)(s32))self->f48)(self->f4c);
+        }
+        TLobby__sub_803C3984((u8 *)lobby);
+    }
+    if (*(s16 *)((u8 *)rec + 0xa8) == 10) {
+        lobby = (TLobby *)self->f4;
+        v = TLobby__sub_803C3ABC((u8 *)lobby);
+        w = lobby->get_field_0xa4();
+        a0 = lobby->get_field_a0();
+        v -= self->f34;
+        if (a0 < v) {
+            v = a0;
+        }
+        self->f2c += v;
+        self->f30 += w;
+        self->f34 += v;
+    }
+}
 
 void TLobby__sub_803C0628(void *arg0_, s32 *arg1, s32 *arg2, s32 *arg3) {
     S_803C0628 *arg0 = (S_803C0628 *)arg0_;
