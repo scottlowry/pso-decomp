@@ -4656,7 +4656,7 @@ struct NetInfo_8040CB44 {
     u8 b0;
     u8 pad_1[8];
     u8 b9;
-    u8 pad_A[6];
+    u8 pad_A[10];
     u32 gateway;
 };
 struct Head_8040CB44 {
@@ -4671,12 +4671,12 @@ s16 TLobby__sub_8040CB44(NetPacket *pkt, u32 arg1, u32 arg2) {
     s32 TLobby__sub_8040F8A4(u32 dst, u32 gateway, u32 mask, u16 flags, u32 old_gateway);
     s32 TLobby__sub_8040CFE8(u8 type, u8 code, u32 src, u32 dst, NetPacket *pkt);
     void TLobby__sub_80420D38(u16 port, u8 code);
-    u32 pad_0[6];
-    u32 gw;
-    u8 xbuf[8];
-    NetInfo_8040CB44 payload;
-    Head_8040CB44 head;
     NetBufferRef ref;
+    Head_8040CB44 head;
+    NetInfo_8040CB44 payload;
+    u8 xbuf[8];
+    u32 gw;
+    u32 pad_0[2];
     u8 *q;
     NetBufferRef *rp;
     NetPacket *reply;
