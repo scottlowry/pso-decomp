@@ -818,10 +818,10 @@ void TAdSinglePlyChrSelectGC::get_sorted_region_samples(s32 *samples) {
 void calc_shape_region_coefficients(f32 *point) {
     s32 region = find_shape_triangle_region((u8 *)point);
     creation_shape_blend.region = region;
-    f32 w0 = lbl_804D400C[creation_region_sample_index_table[region * 3]].width;
     s32 *sample = &creation_region_sample_index_table[region * 3];
+    f32 w0 = lbl_804D400C[sample[0]].width;
     f32 w2 = lbl_804D400C[sample[2]].width;
-    f32 h0 = lbl_804D400C[creation_region_sample_index_table[region * 3]].height;
+    f32 h0 = lbl_804D400C[sample[0]].height;
     f32 h2 = lbl_804D400C[sample[2]].height;
     f32 t = (point[0] - w0) / (w2 - w0);
     f32 h1 = lbl_804D400C[sample[1]].height;
