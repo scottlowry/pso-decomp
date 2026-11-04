@@ -304,29 +304,29 @@ void TLobby__sub_803C0238(AudioStreamInputState *self) {
                 goto join;
             }
         }
-        src->vt->lock(src, 1, 0x7FFFFFFF, (AudioStreamChunk *)&self->rings[1]);
-        if (get_field_a8__6TLobbyFv((int)lobby) == 0 && (s32)self->rings[2] >= 2 &&
-            (u16)*(s16 *)self->rings[1] == 0x8001) {
+        src->vt->lock(src, 1, 0x7FFFFFFF, (AudioStreamChunk *)&self->rings[2]);
+        if (get_field_a8__6TLobbyFv((int)lobby) == 0 && (s32)self->rings[3] >= 2 &&
+            (u16)*(s16 *)self->rings[2] == 0x8001) {
             self->state = 3;
-            src->vt->unlock(src, 1, (AudioStreamChunk *)&self->rings[1]);
+            src->vt->unlock(src, 1, (AudioStreamChunk *)&self->rings[2]);
             goto join;
         }
         if (self->f34 >= TLobby__sub_803C3ABC((u8 *)lobby)) {
             self->state = 3;
-            src->vt->unlock(src, 1, (AudioStreamChunk *)&self->rings[1]);
+            src->vt->unlock(src, 1, (AudioStreamChunk *)&self->rings[2]);
             goto join;
         }
         v = TLobby__sub_803C3AC4((u8 *)lobby);
         ring = self->rings[0];
         n2 = ((s32 (*)(SjRingBuffer *, s32, s32))ring->interface->get_available)(ring, 0, (s32)ring->interface);
         if (n2 / 2 < v) {
-            src->vt->unlock(src, 1, (AudioStreamChunk *)&self->rings[1]);
+            src->vt->unlock(src, 1, (AudioStreamChunk *)&self->rings[2]);
             goto join;
         }
         if (get_field_a8__6TLobbyFv((int)lobby) == 10) {
-            src->vt->unlock(src, 1, (AudioStreamChunk *)&self->rings[1]);
+            src->vt->unlock(src, 1, (AudioStreamChunk *)&self->rings[2]);
         }
-        init_scroll__6TLobbyFll((int)lobby, (s32)self->rings[1], (s32)self->rings[2]);
+        init_scroll__6TLobbyFll((int)lobby, (s32)self->rings[2], (s32)self->rings[3]);
         TLobby__sub_803C3A04((u8 *)lobby);
     }
 join:
@@ -341,7 +341,7 @@ join:
         if (a0 < v) {
             v = a0;
         }
-        TLobby__sub_803D3130((s32)&self->rings[1], w, (u8 *)locA, (u8 *)&locB);
+        TLobby__sub_803D3130((s32)&self->rings[2], w, (u8 *)locA, (u8 *)&locB);
         src->vt->f20(src, 0, (AudioStreamChunk *)locA);
         src->vt->unlock(src, 1, (AudioStreamChunk *)&locB);
         p8 = (u8 *)self;
