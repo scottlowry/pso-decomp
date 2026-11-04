@@ -533,6 +533,7 @@ s32 TAdSinglePlyChrSelectGC__sub_8042CD64(void) {
     ModemResponseState *state;
     u32 cmd;
     u8 value;
+    u8 v;
     s32 flag;
     s32 match;
     u8 count;
@@ -560,9 +561,10 @@ s32 TAdSinglePlyChrSelectGC__sub_8042CD64(void) {
         EXISync(0);
         EXIDeselect(0);
         idx = state->length;
+        v = value;
         state->length = idx + 1;
-        state->buf[idx] = value;
-        if (value == pat[match]) {
+        state->buf[idx] = v;
+        if (v == pat[match]) {
             match++;
             if (match == 5) {
                 return -6;
@@ -570,9 +572,9 @@ s32 TAdSinglePlyChrSelectGC__sub_8042CD64(void) {
         } else {
             match = 0;
         }
-        if (value == 'O') {
+        if (v == 'O') {
             flag = 1;
-        } else if (flag == 1 && value == 'K') {
+        } else if (flag == 1 && v == 'K') {
             return 1;
         } else {
             flag = 0;
