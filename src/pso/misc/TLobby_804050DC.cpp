@@ -6052,7 +6052,6 @@ s16 TLobby__sub_804105E0(u8 *self, u8 *pkt, s16 count, s16 idx) {
     u8 *p;
     u8 *opt;
     u8 *nexthop;
-    s16 iface;
     s16 count16;
     s32 delta;
     s32 rem;
@@ -6063,7 +6062,6 @@ s16 TLobby__sub_804105E0(u8 *self, u8 *pkt, s16 count, s16 idx) {
     s32 adv;
     s32 d;
     s16 rc;
-    s16 ret;
 
     count16 = (s16)count;
     delta = count16 - 0x28;
@@ -6131,7 +6129,6 @@ route:
         }
         return -1;
     }
-    nexthop = NULL;
     if (rt->type == 1) {
         nexthop = self + 0x18;
     }
@@ -6140,8 +6137,7 @@ route:
             nexthop = rt->gateway;
         }
     }
-    iface = rt->iface;
-    f26 = TLobby::get_entry_field_26(iface);
+    f26 = TLobby::get_entry_field_26(rt->iface);
     if ((s16)count > f26) {
         if (flag == 0 || val == 0) {
             err2.type = 2;
@@ -6162,13 +6158,13 @@ route:
     *(s32 *)(e + 4) = *(s32 *)(e + 4) + 1;
     NetMemcpy(&params.source, self + 8, sizeof(params.source));
     NetMemcpy(&params.destination, self + 0x18, sizeof(params.destination));
-    if (NetIPv6IsMulticast(nexthop) == 0 && TLobby__sub_804136AC(iface) != 0) {
-        ret = TLobby__sub_80415D0C((NetPacket *)e, nexthop, &params, iface);
+    if (NetIPv6IsMulticast(nexthop) == 0 && TLobby__sub_804136AC(rt->iface) != 0) {
+        self = (u8 *)TLobby__sub_80415D0C((NetPacket *)e, nexthop, &params, rt->iface);
     } else {
-        ret = TLobby__sub_80410BA8(e, &params, iface, NULL);
+        self = (u8 *)TLobby__sub_80410BA8(e, &params, rt->iface, NULL);
     }
     ((TUdpSocket *)e)->release_entry();
-    return ret;
+    return (s16)(s32)self;
 }
 
 s16 TLobby__sub_80410958(u8 *opt, s16 len, u8 *hdr, s16 pktlen, s16 idx) {
