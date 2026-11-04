@@ -775,91 +775,82 @@ s32 adx_write_encoded_blocks(Obj_803C7C10 *arg0) {
 #pragma pop
 
 s32 fn_803C8020(AdxEncCtx_803C8020 *ctx, s32 ch_idx) {
-    s16 *pcm = (s16 *)((u8 *)ctx + 0x90 + ch_idx * 64);
-    s16 *pd = pcm;
-    AdxEncBlock_803C8020 *b = ctx->f80[ch_idx];
+    s32 i4 = ch_idx * 4;
+    s32 i2 = ch_idx * 2;
+    s32 i64 = ch_idx * 64;
+    s16 *pcm = (s16 *)((u8 *)ctx + 0x90 + i64);
+    AdxEncBlock_803C8020 *b = *(AdxEncBlock_803C8020 **)((u8 *)ctx + 0x80 + i4);
+    s16 c6 = ((s16 *)((u8 *)ctx + 0x88))[i2 + 2];
     AdxEncBlock_803C8020 *h = (AdxEncBlock_803C8020 *)b->f88;
+    s16 c4 = ((s16 *)((u8 *)ctx + 0x88))[i2];
+    s16 *pd = pcm;
     s16 *resw = b->f18;
     s32 j;
     s32 k;
 
-    b->f8 = ctx->f88[ch_idx];
-    b->fA = ctx->f8C[ch_idx];
+    b->f8 = c4;
+    b->fA = c6;
     for (j = 0; j < ctx->f44; j++) {
         s32 sample = *pd;
         pd++;
         if (j == 0) {
-            s32 zero = 0;
+            s16 zero = 0;
             s16 *qz = b->f18;
             for (k = 0; k < b->f14; k++) {
-                *qz = (s16)zero;
+                *qz = zero;
                 qz++;
             }
             b->f78 = 0;
         }
         if (b != 0) {
-            s32 v = sample - ((b->f4 * b->f8) >> 12) - ((b->f6 * b->fA) >> 12);
-            if (v < -0x8000) {
-                v = -0x8000;
-            }
-            if (v > 0x7fff) {
-                v = 0x7fff;
-            }
-            *resw = (s16)v;
+            s32 v = (sample - ((b->f4 * b->f8) >> 12)) - ((b->f6 * b->fA) >> 12);
+            s32 cl = (v < -0x8000) ? -0x8000 : ((v > 0x7fff) ? 0x7fff : v);
+            *resw = (s16)cl;
             resw++;
-            s32 av = v < 0 ? -v : v;
-            if (av > b->f78) {
-                b->f78 = av;
+            s32 cv = (s16)cl;
+            if ((cv < 0 ? -cv : cv) > b->f78) {
+                b->f78 = (cv < 0 ? -cv : cv);
             }
             b->fA = b->f8;
             b->f8 = (s16)sample;
         }
     }
+    s32 g = lbl_805D4660;
     s32 m = b->f78;
     s32 sv = (m - 1) / 7 + 1;
-    if (sv > lbl_805D4660) {
-        sv = lbl_805D4660;
-    }
-    if (sv <= 1) {
-        sv = 1;
-    }
-    b->f7C = (s16)sv;
+    s32 sc = (sv > g) ? g : ((sv <= 1) ? 1 : sv);
+    b->f7C = (s16)sc;
+    m = b->f78;
     if (m == 0) {
         b->f80 = lbl_805E0D48;
     } else {
         b->f80 = lbl_805E0D48 / (double)m;
     }
-    h->f8 = ctx->f88[ch_idx];
-    h->fA = ctx->f8C[ch_idx];
+    h->f8 = c4;
+    h->fA = c6;
     {
         s16 *pd2 = pcm;
         s16 *qw = b->f18;
         for (k = 0; k < ctx->f44; k++) {
             s32 sample = *pd2;
-            pd2++;
             b->f8 = h->f8;
             b->fA = h->fA;
             if (k == 0) {
-                s32 zero2 = 0;
+                s16 zero2 = 0;
                 s16 *qz2 = b->f18;
                 for (j = 0; j < b->f14; j++) {
-                    *qz2 = (s16)zero2;
+                    *qz2 = zero2;
                     qz2++;
                 }
                 b->f78 = 0;
             }
             if (b != 0) {
-                s32 v = sample - ((b->f4 * b->f8) >> 12) - ((b->f6 * b->fA) >> 12);
-                if (v < -0x8000) {
-                    v = -0x8000;
-                }
-                if (v > 0x7fff) {
-                    v = 0x7fff;
-                }
-                *qw = (s16)v;
-                s32 av = v < 0 ? -v : v;
-                if (av > b->f78) {
-                    b->f78 = av;
+                s32 v = (sample - ((b->f4 * b->f8) >> 12)) - ((b->f6 * b->fA) >> 12);
+                s32 cl = (v < -0x8000) ? -0x8000 : ((v > 0x7fff) ? 0x7fff : v);
+                *qw = (s16)cl;
+                s32 cv = (s16)cl;
+                if ((cv < 0 ? -cv : cv) > b->f78) {
+                    b->f78 = (cv < 0 ? -cv : cv);
                 }
                 b->fA = b->f8;
                 b->f8 = (s16)sample;
@@ -869,13 +860,8 @@ s32 fn_803C8020(AdxEncCtx_803C8020 *ctx, s32 ch_idx) {
                 qq = *qw;
             }
             qw++;
-            s32 cv = (s32)((double)qq * b->f80);
-            if (cv < -0x8000) {
-                cv = -0x8000;
-            }
-            if (cv > 0x7fff) {
-                cv = 0x7fff;
-            }
+            s32 cv = (s32)(s16)qq * b->f80;
+            cv = (cv < -0x8000) ? -0x8000 : ((cv > 0x7fff) ? 0x7fff : cv);
             s32 cr = (s16)cv;
             s32 co;
             if (cr < 0) {
@@ -883,32 +869,20 @@ s32 fn_803C8020(AdxEncCtx_803C8020 *ctx, s32 ch_idx) {
             } else {
                 co = (cr + 2340) / 4681;
             }
-            if (co < -8) {
-                co = -8;
-            }
-            if (co > 7) {
-                co = 7;
-            }
+            co = (co < -8) ? -8 : ((co > 7) ? 7 : co);
             b->f58[k] = (s8)co;
             s32 w = co * b->f7C;
-            if (w < -0x8000) {
-                w = -0x8000;
+            w = (w < -0x8000) ? -0x8000 : ((w > 0x7fff) ? 0x7fff : w);
+            AdxEncBlock_803C8020 *hn = (AdxEncBlock_803C8020 *)b->f88;
+            s32 wr = (s16)w;
+            if (hn != 0) {
+                s32 pred = ((hn->f4 * hn->f8) + (hn->f6 * hn->fA)) >> 12;
+                s32 rec = wr + pred;
+                rec = (rec <= -0x8000) ? -0x8000 : ((rec >= 0x7fff) ? 0x7fff : rec);
+                hn->fA = hn->f8;
+                hn->f8 = (s16)rec;
             }
-            if (w > 0x7fff) {
-                w = 0x7fff;
-            }
-            if (h != 0) {
-                s32 pred = ((h->f4 * h->f8) + (h->f6 * h->fA)) >> 12;
-                s32 rec = (s16)w + pred;
-                if (rec < -0x8000) {
-                    rec = -0x8000;
-                }
-                if (rec > 0x7fff) {
-                    rec = 0x7fff;
-                }
-                h->fA = h->f8;
-                h->f8 = (s16)rec;
-            }
+            pd2++;
         }
     }
     return 0;
