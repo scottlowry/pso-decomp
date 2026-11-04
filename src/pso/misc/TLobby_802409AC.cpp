@@ -1,9 +1,15 @@
 #include "types.h"
 #include "pso/audio/SoundRequestVoice.h"
+#include "pso/map/FloorArea.h"
+#include "pso/math/AngleLookup.h"
+#include "pso/misc/TCameraCtrl.h"
 #include "pso/misc/TLobby.h"
 #include "pso/misc/TLobby_8023F734.h"
 #include "pso/misc/TLobby_80242910.h"
 #include "pso/misc/TWindowSubStatusDisp.h"
+#include "pso/network/client_id.h"
+#include "pso/player/TObjPlayer_80011014.h"
+#include "pso/render/render_util.h"
 
 typedef struct Entry_8024220C
 {
@@ -39,6 +45,17 @@ void set_field0__6TLobbyFPvi(SoundRequestVoice *voice, void *owner) { voice->own
 extern const f32 TLobby__data_805DC9E0;
 extern const f32 lbl_805DC9E4;
 extern f32 lbl_805DC9E8;
+extern const f32 lbl_805DC9EC;
+extern const f32 lbl_805DC9F0;
+extern const f32 lbl_805DC9F4;
+extern const f32 lbl_805DC9F8;
+extern const f32 lbl_805DC9FC;
+
+extern "C" {
+extern void *camera_ctrl_instance;
+void *get_player_by_client_id(s32 client);
+f32 PSVECDistance(const Vec *a, const Vec *b);
+}
 
 void clamp_field9c__6TLobbyFPvf(void *arg0, f32 farg0) {
     f32 var_f1;
@@ -748,6 +765,82 @@ void clamp_params__6TLobbyFPv(void *arg0) {
     if ((s32) *(s32 *)((s8 *)arg0 + 0x38) > 0x7F) {
         *(s32 *)((s8 *)arg0 + 0x38) = 0x7F;
     }
+}
+
+void calc_sound_spatial_params(SoundRequestVoice *v) {
+    TCameraCtrl *cam = (TCameraCtrl *)camera_ctrl_instance;
+    Vec camvec;
+    s32 vol = 0;
+    s32 pan = 0;
+    s32 surround = 0;
+
+    if (cam != NULL) {
+        camvec.x = cam->pos_x;
+        camvec.y = TLobby__data_805DC9E0;
+        camvec.z = cam->pos_z;
+        if (v->position != NULL) {
+            Vec targetvec;
+            f32 far = lbl_805DC9F0;
+            f32 dist;
+
+            if (get_current_floor_area() == AREA_DARK_FALZ || get_current_floor_area() == AREA_OLGA_FLOW) {
+                far = far * lbl_805DC9F4;
+            }
+            targetvec.x = ((const Vec *)v->position)->x;
+            targetvec.y = TLobby__data_805DC9E0;
+            targetvec.z = ((const Vec *)v->position)->z;
+            if (is_split_screen() != 0) {
+                dist = lbl_805DC9F8;
+                for (s32 i = 0; i < TCameraCtrl::get_camera_id(); i++) {
+                    u16 player_id = TCameraCtrl::get_nth_view_player_id(i);
+                    if (player_id < 12) {
+                        void *player = get_player_by_client_id(player_id);
+                        if (player != NULL) {
+                            camvec.x = ((const Vec *)((char *)player + 0x38))->x;
+                            camvec.y = TLobby__data_805DC9E0;
+                            camvec.z = ((const Vec *)((char *)player + 0x38))->z;
+                        }
+                    }
+                    f32 d2 = horizontal_distance_squared(&camvec, &targetvec);
+                    if (d2 < dist) {
+                        dist = d2;
+                    }
+                }
+                if (dist != lbl_805DC9F8) {
+                    dist = newton_sqrtf(dist);
+                }
+            } else {
+                if (TLobby::is_camera_state_active() == 0) {
+                    void *player = get_player_by_client_id(local_client_id);
+                    if (player != NULL) {
+                        camvec.x = ((const Vec *)((char *)player + 0x38))->x;
+                        camvec.y = TLobby__data_805DC9E0;
+                        camvec.z = ((const Vec *)((char *)player + 0x38))->z;
+                    }
+                }
+                dist = PSVECDistance(&camvec, &targetvec);
+            }
+            if (is_split_screen() == 0 && (v->flags & 2) != 0 && dist > TLobby__data_805DC9E0) {
+                f32 angle = atan2_float(((const Vec *)v->position)->z - cam->pos_z, ((const Vec *)v->position)->x - cam->pos_x);
+                pan = (s8)(lbl_805DC9EC * -sin_table_lookup(cam->yaw + 0x4000 + (s32)(10430.38043493439 * angle)));
+            }
+            if (is_split_screen() == 0 && (v->flags & 8) != 0) {
+                f32 angle2 = atan2_float(((const Vec *)v->position)->z - camvec.z, ((const Vec *)v->position)->x - camvec.x);
+                f32 field2a4 = get_field_2a4__6TLobbyFPv(v->owner);
+                surround = (s32)(dist * (cos_table_lookup(cam->yaw - 0x4000 + (s32)(10430.38043493439 * angle2)) * field2a4));
+            }
+            if ((v->flags & 4) != 0) {
+                f32 t = (dist - lbl_805DC9FC) / (far - lbl_805DC9FC);
+                if (t < TLobby__data_805DC9E0) {
+                    t = TLobby__data_805DC9E0;
+                }
+                vol = -(s32)(t * lbl_805DC9EC);
+            }
+        }
+    }
+    v->spatial = vol;
+    v->panSpatial = pan;
+    v->surroundSpatial = surround;
 }
 
 s32 start_voice_fade(struct Voice_80241FD8 *v, s32 step) {
