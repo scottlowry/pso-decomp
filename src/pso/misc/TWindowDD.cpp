@@ -1,4 +1,5 @@
 #include "pso/misc/TWindowDD.h"
+#include "pso/misc/TWindowBase.h"
 #include "pso/TObject.h"
 #include "pso/misc/TUnk_804EFBAC.h"
 
@@ -231,6 +232,168 @@ void TWindowDD::init_layout_constants() {
     TWindowDD__layout_constants[0] = lbl_805DFC04;
     TWindowDD__layout_constants[1] = lbl_805DFC08;
     TWindowDD__layout_constants[2] = lbl_805DFC2C;
+}
+
+extern const f32 lbl_805DFC50;
+extern const f32 lbl_805DFC54;
+extern const f32 lbl_805DFC58;
+extern const f32 lbl_805DFC5C;
+extern const f32 lbl_805DFC60;
+extern const f32 lbl_805DFC64;
+extern const f32 lbl_805DFC68;
+extern const f32 lbl_805DFB24;
+extern const f32 lbl_805DFB28;
+extern const f32 lbl_805DFB38;
+extern const f32 lbl_805DFBCC;
+extern f32 lbl_805D6DC0;
+extern f32 lbl_805D6DC4;
+extern f32 lbl_805D6DCC;
+extern f32 lbl_805D6DD0;
+extern f32 lbl_805D6DD4;
+extern f32 lbl_805D6DD8;
+extern f32 lbl_805D6DDC;
+extern f32 lbl_805D6DE0;
+extern f32 lbl_805D6DE4;
+extern f32 lbl_805D6DE8;
+extern f32 lbl_805D6DEC;
+extern f32 lbl_805D6DF0;
+extern f32 lbl_805D6DF4;
+extern f32 lbl_805D6DF8;
+extern f32 lbl_805D6DFC;
+extern f32 lbl_805D6E00;
+extern s32 lbl_805D63F0;
+extern u8 TWindowDD__data_805434E8[];
+f32 TWindowDD__sub_80348AD4(f32 farg0, f32 farg1);
+void begin_screen_draw(s32);
+void set_draw_texture_and_color(s32, u32);
+void draw_textured_quad_at_depth(void *, f32);
+void set_global_param__8TObjFishFl(void *, s16, f32);
+void get_player__20TWindowSubStatusDispFv(void);
+
+struct U_80340A78 { f32 f8, fc, f10, f14, f18, f1c, f20, f24; };
+
+void TWindowDD__sub_80340A78(void *selfv) {
+    TWindowDD *self = (TWindowDD *)selfv;
+    U_80340A78 quad;
+    E_803403F8 sp28[8];
+    f32 *pd;
+    const f32 *pt;
+    u8 *rect;
+    s32 n;
+    s32 i;
+    f32 iy;
+    f32 q28;
+    f32 sc;
+    f32 hw;
+    f32 ctr;
+    f32 lo;
+    f32 hi;
+    f32 d;
+    f32 lo2;
+    f32 hi2;
+    f32 sc2;
+    f32 top;
+    f32 xe;
+    f32 ye;
+    f32 depth;
+    rect = (u8 *)TWindowDD::draw_default_entry((s32)self);
+    ((TWindowBase *)self)->calc_inner_rect(rect);
+    n = TWindowDD::get_draw_count((void **)lbl_805D63F0);
+    TWindowDD__sub_80348AD4(*(f32 *)((s8 *)self + 0x54), lbl_805DFC50);
+    ((TWindowDD *)sp28)->reset_entries(-1.0f);
+    pt = (const f32 *)(TWindowDD__data_805434E8 + 0x180);
+    pd = (f32 *)sp28;
+    iy = *(f32 *)(rect + 0x2c);
+    for (i = 0; i < 8; i++) {
+        pd[3] = pt[0];
+        pd[4] = pt[1];
+        pt += 2;
+        pd += 6;
+    }
+    sc = lbl_805DFC54 * *(f32 *)((s8 *)self + 0x4c);
+    hw = sc * iy;
+    ctr = *(f32 *)((s8 *)self + 0x44) + sc;
+    lo = ctr - hw;
+    hi = ctr + hw;
+    if (hw < lbl_805DFB28) {
+        d = (hi - lo) / lbl_805DFC58;
+    } else {
+        d = lbl_805DFC5C;
+    }
+    lo2 = lo + d;
+    hi2 = hi - d;
+    pd = (f32 *)sp28;
+    pd[7] = lo;
+    pd[1] = lo;
+    pd[19] = lo2;
+    pd[13] = lo2;
+    pd[31] = hi2;
+    pd[25] = hi2;
+    pd[43] = hi;
+    pd[37] = hi;
+    sc2 = lbl_805DFC54 * *(f32 *)((s8 *)self + 0x48);
+    top = *(f32 *)((s8 *)self + 0x40) + sc2;
+    q28 = *(f32 *)(rect + 0x28);
+    xe = top - sc2 * q28;
+    ye = xe + lbl_805DFB24 * q28;
+    pd = (f32 *)sp28;
+    for (i = 0; i < 4; i++) {
+        pd[0] = xe;
+        pd[6] = ye;
+        pd += 12;
+    }
+    quad.f8 = top - lbl_805DFC54 * lbl_805DFB38 * q28;
+    quad.f10 = top + lbl_805DFC54 * lbl_805DFB38 * q28;
+    ((TWindowDD *)sp28)->draw_transformed_primitive((void *)8, (void *)n, (void *)1);
+    depth = TWindowDD__sub_80348AD4(*(f32 *)((s8 *)self + 0x54), lbl_805DFC60);
+    set_global_param__8TObjFishFl((void *)lbl_805D63F0, 8, depth);
+    begin_screen_draw(1);
+    set_draw_texture_and_color(0, (u32)-1);
+    quad.f1c = lbl_805D6DCC;
+    quad.f24 = lbl_805D6DD0;
+    quad.f18 = lbl_805D6DD4;
+    quad.f20 = lbl_805D6DD8;
+    quad.fc = lbl_805DFBCC * iy + lo;
+    quad.f14 = iy * (lbl_805DFBCC + lbl_805DFB38) + lo;
+    draw_textured_quad_at_depth(&quad, depth);
+    quad.f18 = lbl_805D6DDC;
+    quad.f20 = lbl_805D6DE0;
+    quad.fc = hi - iy * (lbl_805DFBCC + lbl_805DFB38);
+    quad.f14 = hi - lbl_805DFBCC * iy;
+    draw_textured_quad_at_depth(&quad, depth);
+    quad.f18 = lbl_805D6DE4;
+    quad.f20 = lbl_805D6DE8;
+    quad.f1c = lbl_805D6DEC;
+    quad.f24 = lbl_805D6DF0;
+    quad.fc = lbl_805D6DC0 * iy + lo;
+    quad.f14 = iy * (lbl_805DFC64 + lbl_805D6DC0) + lo;
+    draw_textured_quad_at_depth(&quad, depth);
+    quad.f1c = lbl_805D6DF4;
+    quad.f24 = lbl_805D6DF8;
+    quad.fc = hi - iy * (lbl_805DFC64 + lbl_805D6DC0);
+    quad.f14 = hi - lbl_805D6DC0 * iy;
+    draw_textured_quad_at_depth(&quad, depth);
+    quad.f1c = lbl_805D6DFC;
+    quad.f24 = lbl_805D6E00;
+    top = lbl_805D6DC4 * iy;
+    lo2 = lo + top;
+    hi2 = hi - top;
+    if (*(f32 *)((s8 *)self + 0x64) <= *(f32 *)((s8 *)self + 0x68)) {
+        quad.fc = lo2;
+        quad.f14 = hi2;
+    } else {
+        ctr = hi2 - lo2;
+        sc = *(f32 *)((s8 *)self + 0x60) * ctr;
+        hw = sc * *(f32 *)((s8 *)self + 0x68);
+        if (hw < lbl_805DFC68) {
+            hw = lbl_805DFC68;
+        }
+        sc = sc * *(f32 *)((s8 *)self + 0x6c) + lo2;
+        quad.fc = sc;
+        quad.f14 = sc + hw;
+    }
+    draw_textured_quad_at_depth(&quad, depth);
+    get_player__20TWindowSubStatusDispFv();
 }
 
 void TWindowDD::init() { initialize_subwindow(); update_fade__11TWindowBaseFv(this); }
