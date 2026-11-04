@@ -779,8 +779,8 @@ void calc_sound_spatial_params(SoundRequestVoice *v) {
         camvec.z = ((TCameraCtrl *)camera_ctrl_instance)->pos_z;
         if (v->position != NULL) {
             Vec targetvec;
-            f32 far = lbl_805DC9F0;
             f32 dist;
+            f32 far = lbl_805DC9F0;
 
             if (get_current_floor_area() == AREA_DARK_FALZ || get_current_floor_area() == AREA_OLGA_FLOW) {
                 far = far * lbl_805DC9F4;
@@ -809,7 +809,11 @@ void calc_sound_spatial_params(SoundRequestVoice *v) {
                     dist = newton_sqrtf(dist);
                 }
             } else {
-                if (TLobby::is_camera_state_active() == 0) {
+                if (TLobby::is_camera_state_active() != 0) {
+                    camvec.x = ((TCameraCtrl *)camera_ctrl_instance)->pos_x;
+                    camvec.y = TLobby__data_805DC9E0;
+                    camvec.z = ((TCameraCtrl *)camera_ctrl_instance)->pos_z;
+                } else {
                     void *player = get_player_by_client_id(local_client_id);
                     if (player != NULL) {
                         camvec.x = ((const Vec *)((char *)player + 0x38))->x;
@@ -822,14 +826,16 @@ void calc_sound_spatial_params(SoundRequestVoice *v) {
             if (is_split_screen() == 0 && (v->flags & 2) != 0) {
                 if (dist > TLobby__data_805DC9E0) {
                     f32 angle = atan2_float(((const Vec *)v->position)->z - ((TCameraCtrl *)camera_ctrl_instance)->pos_z, ((const Vec *)v->position)->x - ((TCameraCtrl *)camera_ctrl_instance)->pos_x);
-                    pan = (s8)(lbl_805DC9EC * -sin_table_lookup((((TCameraCtrl *)camera_ctrl_instance)->yaw + 0x4000) + (s32)(10430.38043493439 * angle)));
+                    s32 yaw_pan = ((TCameraCtrl *)camera_ctrl_instance)->yaw + 0x4000;
+                    pan = (s8)(lbl_805DC9EC * -sin_table_lookup(yaw_pan + (s32)(10430.38043493439 * angle)));
                 }
             } else {
                 pan = 0;
             }
             if (is_split_screen() == 0 && (v->flags & 8) != 0) {
                 f32 angle2 = atan2_float(((const Vec *)v->position)->z - camvec.z, ((const Vec *)v->position)->x - camvec.x);
-                s32 angle2_int = (((TCameraCtrl *)camera_ctrl_instance)->yaw - 0x4000) + (s32)(10430.38043493439 * angle2);
+                s32 yaw_sur = ((TCameraCtrl *)camera_ctrl_instance)->yaw - 0x4000;
+                s32 angle2_int = yaw_sur + (s32)(10430.38043493439 * angle2);
                 f32 field2a4 = get_field_2a4__6TLobbyFPv(v->owner);
                 surround = (s32)(dist * (cos_table_lookup(angle2_int) * field2a4));
             } else {
