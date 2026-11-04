@@ -1063,7 +1063,7 @@ struct Rec_805C04A8 {
     u8 pad1C[0x14];
 };
 extern Rec_805C04A8 lbl_805C04A8;
-extern u16 lbl_805D7A8A;
+extern s16 lbl_805D7A8A;
 extern u32 lbl_805D7A8C;
 extern s32 lbl_805D7A94;
 extern u32 lbl_805D7AE0;
@@ -1072,18 +1072,18 @@ extern u16 lbl_805D7AE8;
 extern void *ppp_rx_frame_ptr;
 extern u8 lbl_805C18B0[0x200];
 extern u16 lbl_804FD3A8[0x100];
-extern s32 lbl_805D7ADC;
+extern u32 lbl_805D7ADC;
 void ppp_input_packet__6TLobbyFPv(Strm_80405A74 *);
 s32 TLobby__sub_803F812C(s32, void *, u16 *);
 s32 TLobby__sub_803F8090(void);
-s32 TLobby__sub_804290D4(s32);
+s16 TLobby__sub_804290D4(s32);
 u32 get_field_4__6TLobbyFv(void *);
 
 s32 TLobby__sub_80405700(void) {
     u8 *base = lbl_805C18B0;
     u16 cnt;
     if (lbl_805D7A8A == 10) {
-        if ((s16)TLobby__sub_804290D4(0x7fff) == 0) {
+        if (TLobby__sub_804290D4(0x7fff) == 0) {
             lbl_805D7A8A = 1;
         }
         return 0;
@@ -1091,9 +1091,10 @@ s32 TLobby__sub_80405700(void) {
     if (lbl_805D7A7A != 0) {
         Rec_805C04A8 *rec = &lbl_805C04A8;
         while (1) {
-            ppp_rx_frame_ptr = (void *)rec->f18;
+            u32 f18 = rec->f18;
+            ppp_rx_frame_ptr = (void *)f18;
             *(u32 *)(u32)ppp_rx_frame_ptr =
-                (u32)rec->f18 + ((rec->f0 + 0x83) & ~3);
+                f18 + ((rec->f0 + 0x83) & ~3);
             *(u16 *)((u8 *)ppp_rx_frame_ptr + 4) = 0;
             if (TLobby__sub_803F812C(
                     0x5d6, ((Strm_80405A74 *)ppp_rx_frame_ptr)->p,
@@ -1102,14 +1103,12 @@ s32 TLobby__sub_80405700(void) {
                 TLobby::get_time_ms(&lbl_805D7A94);
                 u8 *data = ((Strm_80405A74 *)ppp_rx_frame_ptr)->p;
                 u8 b0 = data[0];
-                s32 code;
-                if (b0 & 1) {
-                    code = b0;
-                } else {
+                s32 code = b0;
+                if ((b0 & 1) == 0) {
                     code = (b0 << 8) | data[1];
                 }
                 ppp_input_packet__6TLobbyFPv(
-                    (Strm_80405A74 *)&ppp_rx_frame_ptr);
+                    (Strm_80405A74 *)ppp_rx_frame_ptr);
                 if ((u16)code != 0x21 && (u16)code != 0x2d &&
                     (u16)code != 0x2f) {
                     break;
@@ -1131,8 +1130,8 @@ s32 TLobby__sub_80405700(void) {
         lbl_805D7AE0 = (s32)(u32)base;
     }
     Rec_805C04A8 *rec30 = &lbl_805C04A8;
-    u16 crc_init = 0xFFFF;
     u16 *tbl = lbl_804FD3A8;
+    u16 crc_init = 0xFFFF;
     while (1) {
         if (lbl_805D7ADC == lbl_805D7AE0) {
             s32 r = TLobby__sub_803F812C(0x200, base, &cnt);
@@ -1169,9 +1168,10 @@ s32 TLobby__sub_80405700(void) {
             continue;
         }
         if (ppp_rx_frame_ptr == 0) {
-            ppp_rx_frame_ptr = (void *)rec30->f18;
+            u32 f18b = rec30->f18;
+            ppp_rx_frame_ptr = (void *)f18b;
             *(u32 *)(u32)ppp_rx_frame_ptr =
-                (u32)rec30->f18 + ((rec30->f0 + 0x83) & ~3);
+                f18b + ((rec30->f0 + 0x83) & ~3);
             *(u16 *)((u8 *)ppp_rx_frame_ptr + 4) = 0;
             lbl_805D7AE4 = 0;
             lbl_805D7AE8 = crc_init;
@@ -1180,12 +1180,13 @@ s32 TLobby__sub_80405700(void) {
             lbl_805D7AE4 &= ~1;
             b ^= 0x20;
         }
-        u16 len = ((Strm_80405A74 *)ppp_rx_frame_ptr)->len;
+        Strm_80405A74 *strm = (Strm_80405A74 *)ppp_rx_frame_ptr;
+        u16 len = strm->len;
         if (len >= 0x800) {
             continue;
         }
-        ((Strm_80405A74 *)ppp_rx_frame_ptr)->len = len + 1;
-        ((Strm_80405A74 *)ppp_rx_frame_ptr)->p[len] = b;
+        strm->len = len + 1;
+        strm->p[len] = b;
         lbl_805D7AE8 = (u16)((lbl_805D7AE8 >> 8) ^
                              tbl[((lbl_805D7AE8 ^ b) & 0xFF) << 1]);
     }
@@ -1424,7 +1425,7 @@ void TLobby__sub_80402CE0(u8 *arg0);
 void TLobby__sub_803FC318(u8 *arg0);
 void TLobby__sub_803FEF4C(u8 *arg0);
 void TLobby__sub_803F9FAC(u8 *arg0);
-extern s32 lbl_805D7ADC;
+extern u32 lbl_805D7ADC;
 
 typedef struct Lobby_804061FC {
     u8 state;
