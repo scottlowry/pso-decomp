@@ -4089,7 +4089,7 @@ s16 TLobby__sub_8040B8BC(F_8040A45C *req) {
     if ((pkt[2] & 0x80) == 0) {
         return -1;
     }
-    switch (pkt[3] & 3) {
+    switch (pkt[3] & 0xF) {
     case 1:
         TLobby__sub_8040BE40(req, -0x46, 0);
         return -1;
