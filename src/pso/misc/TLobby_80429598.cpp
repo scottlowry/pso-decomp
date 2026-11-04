@@ -145,6 +145,10 @@ void TLobby__sub_80429648(void);
 extern u16 lbl_805D7C6C[2];
 extern u8 *lbl_805D7C74;
 extern u16 lbl_805D7C7A;
+extern u32 lbl_805D7C5C;
+extern u16 lbl_805D7C60;
+extern u16 lbl_805D7C70;
+extern u16 lbl_805D7C78;
 int memcmp(const void *, const void *, unsigned long);
 u32 TLobby__sub_8042BA8C(void *);
 extern s32 lbl_805D4830;
@@ -192,6 +196,132 @@ void TLobby::exi_write(s32 arg0, s32 arg1, s32 arg2) {
     EXIImmEx(0, arg1, arg2, 0);
     EXIDeselect(0);
 }
+
+#pragma push
+#pragma opt_propagation off
+void TLobby__sub_80429648(void) {
+    u16 status;
+    u16 padC;
+    u8 buf[4];
+    u32 cmd2;
+    u16 swap;
+    u16 padB;
+    u8 byt2;
+    u16 cmd4200;
+    u32 padA;
+    u8 bytF8;
+    u32 cmd;
+    u16 t;
+    u32 cmd1800;
+    u32 cmd0900;
+    struct {
+        u32 a;
+        u16 b;
+    } tmp;
+    register u16 sw;
+    register u16 *tp;
+    u16 a;
+    u16 c78;
+    u16 base;
+    u16 w0;
+    u16 w2;
+    u16 len;
+    u16 *pw;
+    u16 *p;
+    u32 off;
+    s32 i;
+    s32 count;
+    u16 *pd;
+
+    exi_dma_write_length = 0;
+    exi_dma_read_length = 0;
+    while ((a = lbl_805D7C7A) != (c78 = lbl_805D7C78)) {
+        base = (a << 8) & 0xFF00;
+        cmd = ((a << 16) & 0xFF0000) | 0x80000000;
+        EXISelect(0, 2, 5);
+        EXIImm(0, &cmd, 4, 1, 0);
+        EXISync(0);
+        EXIImmEx(0, (s32)&buf[0], 4, 0);
+        EXIDeselect(0);
+        w0 = buf[0] | ((buf[1] & 0xF) << 8);
+        *(u16 *)&lbl_805D7C5C = w0;
+        w2 = ((buf[1] & 0xF0) >> 4) | (buf[2] << 4);
+        pd = (u16 *)&lbl_805D7C5C;
+        pd[1] = w2;
+        *(u8 *)&pd[2] = buf[3];
+        cmd2 = (((base + 0x10) & 0xFFFF) << 8) | 0x80000000;
+        tmp.a = lbl_805D7C5C;
+        tmp.b = lbl_805D7C60;
+        *(u32 *)lbl_805D7C6C = tmp.a;
+        lbl_805D7C70 = tmp.b;
+        EXISelect(0, 2, 5);
+        EXIImm(0, &cmd2, 4, 1, 0);
+        EXISync(0);
+        EXIImmEx(0, (s32)&status, 2, 0);
+        EXIDeselect(0);
+        count = lbl_805D7C48;
+        if (count > 0) {
+            p = (u16 *)lbl_805D7C44;
+            for (i = 0; i < count; i++) {
+                if (*p == status) {
+                    break;
+                }
+                p++;
+            }
+            if (i == count) {
+                lbl_805D7C7A = lbl_805D7C6C[0];
+                continue;
+            }
+        }
+        if (lbl_805D7C4C != 0) {
+            pw = &lbl_805D7C6C[1];
+            lbl_805D7C74 = (u8 *)((u32 (*)(u16, u16, u8))lbl_805D7C4C)(status, *pw, ((u8 *)pw)[1]);
+            if (lbl_805D7C74 != 0) {
+                len = *pw;
+                off = base + 4;
+                if (off + len > 0x1000) {
+                    exi_dma_write_length = base + len - 0xFFC;
+                    exi_dma_read_length = len - exi_dma_write_length;
+                } else {
+                    exi_dma_read_length = len;
+                    exi_dma_write_length = 0;
+                }
+                TLobby::start_exi_dma_read((u16)off);
+                return;
+            }
+        }
+        lbl_805D7C7A = lbl_805D7C6C[0];
+    }
+    t = c78;
+    tp = &t;
+    asm {
+        lhbrx sw, tp, tp
+    }
+    swap = sw;
+    cmd1800 = 0xC0001800;
+    EXISelect(0, 2, 5);
+    EXIImm(0, &cmd1800, 4, 1, 0);
+    EXISync(0);
+    EXIImmEx(0, (s32)&swap, 2, 1);
+    EXIDeselect(0);
+    cmd0900 = 0xC0000900;
+    byt2 = 2;
+    EXISelect(0, 2, 5);
+    EXIImm(0, &cmd0900, 4, 1, 0);
+    EXISync(0);
+    EXIImmEx(0, (s32)&byt2, 1, 1);
+    EXIDeselect(0);
+    bytF8 = 0xF8;
+    cmd4200 = 0x4200;
+    EXISelect(0, 2, 5);
+    EXIImm(0, &cmd4200, 2, 1, 0);
+    EXISync(0);
+    EXIImm(0, &bytF8, 1, 1, 0);
+    EXISync(0);
+    EXIDeselect(0);
+    EXIUnlock(0);
+}
+#pragma pop
 
 void TLobby::start_exi_dma_read(u16 arg0) {
     u32 len;
