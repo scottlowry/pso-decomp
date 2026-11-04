@@ -3303,6 +3303,135 @@ void TLobby::handle_request_timeout() {
     *(s16 *)((s8 *)arg0 + 8) = 1;
 }
 
+extern "C" {
+extern u8 lbl_805D7AB8[8];
+extern const char lbl_8047FEE0[9];
+extern const char lbl_8047FEEC[30];
+
+s16 TLobby__sub_80403308(void *self, void *arg2, u32 arg3) {
+    Strm_80405A74 *ps;
+    Strm_80405A74 strm;
+    u8 *selfb;
+    u8 *pool0;
+    u8 *pool1;
+    u8 *dst;
+    u8 *p;
+    u8 *o;
+    s16 n;
+    s32 ok;
+    s32 f4;
+    const char *dec;
+    const char *str;
+    s16 len;
+    s16 code;
+    s16 d;
+    Ent_80401B20 *buf;
+
+    selfb = (u8 *)self;
+    ps = &strm;
+    pool0 = 0;
+    pool1 = 0;
+    strm.p = (u8 *)arg3;
+    int rc = TLobby__sub_80401BCC(ps, lbl_805D7AB8, 1);
+    n = rc == 1 ? (s16)lbl_805D7AB8[rc] : (s16)-1;
+    if (n != -1) {
+        pool0 = (u8 *)lbl_805C0620.value;
+        dst = pool0;
+        while (n > 0) {
+            f4 = 0;
+            ok = 0;
+            if (ps != 0) {
+                if (strm.p != 0) {
+                    ok = 1;
+                }
+            }
+            if (ok != 0) {
+                if (strm.len > 1) {
+                    f4 = 1;
+                }
+            }
+            if (f4 != 0) {
+                strm.len = strm.len - 1;
+                p = strm.p;
+                strm.p = p + 1;
+                n = (s16)p[0];
+            } else {
+                int rc2 = TLobby__sub_80401BCC(ps, lbl_805D7AB8, 1);
+                n = rc2 == 1 ? (s16)lbl_805D7AB8[rc2] : (s16)-1;
+            }
+            *dst = (u8)n;
+            dst = dst + 1;
+            n = n - 1;
+        }
+        *dst = (u8)n;
+    }
+    int rc3 = TLobby__sub_80401BCC(ps, lbl_805D7AB8, 1);
+    n = rc3 == 1 ? (s16)lbl_805D7AB8[rc3] : (s16)-1;
+    if (n != -1) {
+        pool1 = *(u8 **)lbl_805C0620.remaining;
+        dst = pool1;
+        while (n > 0) {
+            f4 = 0;
+            ok = 0;
+            if (ps != 0) {
+                if (strm.p != 0) {
+                    ok = 1;
+                }
+            }
+            if (ok != 0) {
+                if (strm.len > 1) {
+                    f4 = 1;
+                }
+            }
+            if (f4 != 0) {
+                strm.len = strm.len - 1;
+                p = strm.p;
+                strm.p = p + 1;
+                n = (s16)p[0];
+            } else {
+                int rc4 = TLobby__sub_80401BCC(ps, lbl_805D7AB8, 1);
+                n = rc4 == 1 ? (s16)lbl_805D7AB8[rc4] : (s16)-1;
+            }
+            *dst = (u8)n;
+            dst = dst + 1;
+            n = n - 1;
+        }
+        *dst = (u8)n;
+    }
+    if (*(s32 *)((u8 *)&lbl_805D7A90 + n) & 2) {
+        dec = TLobby__sub_803F7684(pool0);
+        n = -1;
+        if (dec != 0) {
+            n = NetCompareStrings((const char *)pool1, dec) != 0 ? (s16)-1 : (s16)0;
+        }
+    } else {
+        n = 0;
+    }
+    if (n != 0) {
+        str = lbl_8047FEEC;
+        code = 3;
+    } else {
+        o = *(u8 **)(selfb + 0xC);
+        *(s32 *)(o + 0x10C) = (s32)pool0;
+        str = lbl_8047FEE0;
+        code = 2;
+    }
+    len = (s16)NetStringLength(str);
+    buf = TLobby__sub_80401B20((void *)str, (u16)len);
+    buf->p0[0] = (u8)(len - 1);
+    TLobby__sub_803FE6CC(self, (u8)code, ((u8 *)arg2)[1], buf);
+    if (code == 3) {
+        if (selfb[6] != 0) {
+            selfb[6] = selfb[6] - 1;
+        } else {
+            TLobby::update_connection_state((int)(*(s32 *)((s8 *)selfb + 0xC) + 4));
+        }
+    }
+    d = (s16)(2 - code);
+    return d < 0 ? (s16)-d : d;
+}
+}
+
 struct Pap_80403634 { char *name; char *passwd; };
 B_803FADA0 *TLobby__sub_80403634(Self_803FD74C *fsm) {
     Pap_80403634 *pap = (Pap_80403634 *)fsm->f30;
