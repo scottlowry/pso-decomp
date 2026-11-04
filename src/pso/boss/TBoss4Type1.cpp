@@ -1878,7 +1878,6 @@ s32 TBoss4Type2__sub_80054FC0(void *self, f32 range) {
     for (; cnt < 0x40; cnt++) {
         VecCopy__FP3VecPC3Vec(dst, src);
         dst++;
-        src++;
     }
     cnt = 0;
     cursor = (Vec_80053914 *)&TBoss4Type2__tenchu_furu_array;
