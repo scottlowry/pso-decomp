@@ -127,7 +127,6 @@ void *TObjEneMoja__ct(void *arg0, void *arg1, void *arg2) {
     s8 *desc;
     s8 *tbl;
     s32 i;
-    s32 off;
 
     self = (s8 *)arg0;
     desc = lbl_80491828;
@@ -182,8 +181,8 @@ void *TObjEneMoja__ct(void *arg0, void *arg1, void *arg2) {
     *(u32 *)(self + 0x30) |= 0x40000;
     *(f32 *)(self + 0x38c) = lbl_805D9BD8;
     *(s32 *)(self + 0x398) = (s32)create__13TUnk_80494968FUlUl(0xff303030, 0x0a303030);
-    for (off = 0, i = 0; i < 4; off += 0x1c, i++) {
-        activate_and_dispatch__15RenderFadeStateFv(self + off + 0x39c);
+    for (i = 0; i < 4; i++) {
+        activate_and_dispatch__15RenderFadeStateFv(self + i * 0x1c + 0x39c);
     }
     ((MojaVObj *)self)->clear_lobby_object_state();
     return arg0;
