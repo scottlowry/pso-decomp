@@ -383,7 +383,6 @@ void spawn_photon_blast_attachment_effects(void *arg0, s32 arg1) {
         return;
     }
     self->effects = (struct Eff_801A7680 *)mem_alloc(self->count * 32);
-    rot_z = &rot[2];
     i = 0;
     defs = (u8 *)g->attachments;
     base_dir = lbl_80446A38;
@@ -409,7 +408,7 @@ void spawn_photon_blast_attachment_effects(void *arg0, s32 arg1) {
             rotate_matrix_y(0, *(s32 *)((s8 *)self + 0x60));
             matrix_mult_vec(0, (Vec_801A7428 *)dir, (Vec_801A7428 *)dir);
             pop_matrices(1);
-            direction_to_rotation_xz__FPUcPlPl((u8 *)dir, rot, rot_z);
+            direction_to_rotation_xz__FPUcPlPl((u8 *)dir, rot, &rot[2]);
             rot[1] = 0;
         } else {
             rot[0] = 0;
