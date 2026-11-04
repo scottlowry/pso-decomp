@@ -288,7 +288,7 @@ s32 check_equip_requirements(void *player, void *item, s32 *requirement) {
         }
         break;
     case 4:
-        if ((s32)*(u32 *)((s8 *)item + 0x10) > 999999) {
+        if (999999 < (s32)*(u32 *)((s8 *)item + 0x10)) {
             acc |= 0x20;
         }
         break;
