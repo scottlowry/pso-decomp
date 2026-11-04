@@ -189,7 +189,7 @@ struct Stack_80416008 {
     u8 trailing_storage[0x14];
 };
 
-struct E_805C1D48 { u8 pad[4]; u16 f4; s16 f6; u8 pad2[0x53C]; };
+struct E_805C1D48 { u8 pad[4]; u16 f4; s16 f6; u8 pad2[0x2BE]; s16 f2C6; u8 pad3[0x27C]; };
 struct RecoveredGlobal_8041E178_lbl_805C1D48 {
     union { s32 value; E_805C1D48 *p; };
     s16 n;
@@ -11042,7 +11042,7 @@ void TLobby__sub_8041A5B4(void) {
     g->iss += 0xFA00;
 }
 
-struct E_8041A498 { u8 pad0[6]; s16 f6; u8 pad8[6]; u8 fE; u8 padF[0x1ED]; s32 f1FC; s32 f200; u8 pad204[0xCC]; s32 f2D0; u8 pad2D4[0x270]; };
+struct E_8041A498 { u8 pad0[4]; s16 f4; s16 f6; s16 f8; u8 padA[1]; u8 fB; u8 padC[2]; u8 fE; u8 padF[0x1ED]; s32 f1FC; s32 f200; u8 pad204[0x58]; s16 f25c[4]; u8 pad264[0x6C]; s32 f2D0; u8 pad2D4[0x270]; };
 void set_slot_state_and_resume__6TLobbyFv(s16, s32, s16);
 void set_thread_state_and_resume__6TLobbyFv(s16, s32, s16);
 void TLobby__sub_8041A498(E_8041A498 *arg0, s16 arg1) {
@@ -11224,6 +11224,45 @@ s32 TLobby__sub_8041A6A4(Tcb_8041A3CC *tcb, s16 timer) {
     return 0;
 }
 #pragma pop
+
+u8 * TLobby__sub_8041B5C0(void *arg0) {
+    E_8041A498 *tcb = (E_8041A498 *)arg0;
+    G_8041A230 *g = (G_8041A230 *)&tcp_protocol_state;
+    E_805C1D48 *e;
+    s32 d;
+
+    if (tcb == 0) {
+        return 0;
+    }
+    if ((tcb->fB & 0x80) == 0) {
+        tcb->f6 = 0;
+        tcb->f25c[0] = 0;
+        tcb->f25c[1] = 0;
+        tcb->f25c[2] = 0;
+        tcb->f25c[3] = 0;
+        return (u8 *)tcb;
+    }
+    if ((tcb->fB & 0x20) == 0) {
+        d = (s32)tcb - tcp_protocol_state.value;
+        NetDispatchSocketEvent((s16)(d / 0x544), tcb->f2D0, 3, 3);
+        tcb->fB |= 0x20;
+    }
+    ((TLobby *)tcb)->close_if_open();
+    TLobby__sub_8041EB74((u8 *)tcb);
+    d = tcb->f8;
+    if ((u32)d != 0xffff) {
+        e = (E_805C1D48 *)(tcp_protocol_state.value + d * 0x544);
+        if (e->f4 == 1) {
+            e->f2C6 = (s16)(e->f2C6 - 1);
+        }
+    }
+    d = (s32)tcb - tcp_protocol_state.value;
+    NetDispatchSocketEvent((s16)(d / 0x544), tcb->f2D0, 3, 0xff);
+    tcb->f4 = 0;
+    d = (s32)tcb - tcp_protocol_state.value;
+    g->avail = (s16)(d / 0x544);
+    return 0;
+}
 
 struct Tcb_8041B724 { u8 pad0[0x264]; u16 maxseg; u8 pad266[0x16]; u8 remote[0x14]; u8 local[0x14]; };
 
