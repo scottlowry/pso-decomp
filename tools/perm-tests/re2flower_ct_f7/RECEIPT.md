@@ -26,3 +26,10 @@ Tree fleet/f7 branch card-re2flower-ct base e175bcd9. No push (lane law; GH defe
 1. Micro: kill src-base home (self+0x38 r31) via int-cast split at VecCopy site (G7 lever, per-unit re-probe) -> targets +1W.
 2. COPY-BIRTH: lobby trio result-binding — int-cast split on index array base? (lbl_8043BA94[b] lwzx r29-idx: O r27 N r29 = index reg color).
 3. Header layout fold (TObjEneRe2Flower.h -0x1C, ledger-flagged) = integrator package w/ pool-claim+renames, needs GO.
+
+## v2 spelled-successor (card-t_6624ff70, Nov-4, 2 grind + 1 confirm)
+- T1 G7-INT-CAST REMAT SPLIT AT VecCopy SRC: `(const Vec *)((s8 *)((u32)self + 0x38))` -> BYTE-IDENTICAL .o (sha 952b47aa = base). INERT. Mechanism read: G7 fired at 0x3F4 because two sites ~500 insns apart shared the FULL (self+0x3F4) node (front-end DAG); the VecCopy src home (addi r31,r30,0x38 pre-loop + addi r4,r31,0x0 staging) is RA loop-invariance across `bl VecCopy` at 2 calls — the same stratum G7's datum called window-inert. Cast spelling never reaches codegen.
+- T2 COPY-BIRTH index-array int-cast (play #2 rung): `(s32)lbl_8043BA94[b]` / `BA88[b]` / `BA7C[b]` trio -> BYTE-IDENTICAL .o. INERT (u32->s32 exact-width cast normalizes; index slwi color r29-vs-r27 = def-binding, not cast-reachable).
+- T3 confirm: clean rebuild at 152b6ab7 tip: one_shot 94.630135 paired, OURS 0x378, 11 siblings 100.0, gnm all-12 exact, rows 222/219.
+- LADDER: closes. Successor plays #1/#2 consumed inert; remaining families (COPY-BIRTH staging, loop-base fold-canonicalization, def-binding ring, LI-ZERO-COPY) are row-closed per v1 disposition — NO v3 candidacy absent a bind mechanism (era MAP) or the header-layout fold (integrator package, play #3).
+- Gate condition: 888 (0x378) = baseline condition; no size drift occurred (all probes byte-identical); src tree clean at tip.
