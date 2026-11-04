@@ -8,16 +8,18 @@ struct Obj_803C1A24 { u8 pad[0xAC]; void *fac; };
 extern RecoveredCallback_1268626c296b lbl_805D7514;
 extern s32 (*lbl_805D7510)();
 
+extern "C" {
 int memcmp(const void *, const void *, unsigned long);
-extern s32 lbl_805D4650;
-extern s32 lbl_805D4654;
+extern void *lbl_805D4650;
+extern void *lbl_805D4654;
+}
 
 s32 TLobby__sub_803C1780(u8 *arg0, s32 arg1, s16 *arg2, u8 *arg3, u8 *arg4,
                          u8 *arg5, u8 *arg6, u8 *arg7, s32 *arg8, s32 *arg9,
                          s16 *arg10) {
     s32 i;
     for (i = 0; i < arg1; i++) {
-        if (memcmp(arg0 + i, &lbl_805D4650, 4) == 0) {
+        if (memcmp(arg0 + i, lbl_805D4650, 4) == 0) {
             break;
         }
     }
@@ -28,27 +30,32 @@ s32 TLobby__sub_803C1780(u8 *arg0, s32 arg1, s16 *arg2, u8 *arg3, u8 *arg4,
         return -1;
     }
     u8 *hdr = arg0 + i;
-    s16 ver = (s16)((u32)hdr[8] | ((u32)hdr[9] << 8));
-    if (ver > 1) {
+    u16 tv = *(const u16 *)(hdr + 8);
+    if ((s16)(((tv & 0xFF) << 8) | (tv >> 8)) > 1) {
         return -1;
     }
     for (i = 0; i < arg1; i++) {
-        if (memcmp(arg0 + i, &lbl_805D4654, 4) == 0) {
+        if (memcmp(arg0 + i, lbl_805D4654, 4) == 0) {
             break;
         }
     }
     if (i == arg1) {
         return -1;
     }
-    s32 x = (s32)(((u32)hdr[5] << 8) | (u32)hdr[4] | ((u32)hdr[6] << 16) |
-                  ((u32)hdr[7] << 24));
+    u32 v = *(const u32 *)(hdr + 4);
+    s32 x = (s32)(((v >> 8) & 0xFF00) | ((v >> 24) & 0xFF) | ((v << 8) & 0xFF0000) |
+                  ((v << 24) & 0xFF000000));
     *arg2 = (s16)(i + 8);
-    *arg3 = (u8)-1;
-    *(u32 *)(arg7 + x) = (u32)hdr[0xf] | ((u32)hdr[0xe] << 8) |
-                         ((u32)hdr[0xd] << 16) | ((u32)hdr[0xc] << 24);
-    *arg6 = hdr[0xa];
-    *arg4 = hdr[0x16];
-    *arg5 = hdr[0x14];
+    *arg3 = -1;
+    u32 w = *(const u32 *)(hdr + 0xc);
+    *(u32 *)(arg7 + x) = ((w >> 24) & 0xFF) | ((w >> 8) & 0xFF00) |
+                         ((w << 8) & 0xFF0000) | ((w << 24) & 0xFF000000);
+    u16 t6 = *(const u16 *)(hdr + 0xa);
+    *arg6 = (u8)(((t6 & 0xFF) << 8) | (t6 >> 8));
+    u16 t4 = *(const u16 *)(hdr + 0x16);
+    *arg4 = (u8)(((t4 & 0xFF) << 8) | (t4 >> 8));
+    u16 t5 = *(const u16 *)(hdr + 0x14);
+    *arg5 = (u8)(((t5 & 0xFF) << 8) | (t5 >> 8));
     *arg8 = x / (s8)*arg5;
     *arg9 = 1;
     if ((s8)*arg4 == 16) {
