@@ -153,9 +153,8 @@ s32 get_end_text_font_loaded_flag(void) {
 void TAdEndText__sub_8001A998(s32 color, u8 *str, f32 x, f32 y, f32 scale) {
     f32 box[8];
     f32 yb;
+    f32 ty;
     s32 lastpage;
-    u8 c;
-    s32 id;
     s32 row;
     u32 q1;
     u32 q2;
@@ -165,6 +164,8 @@ void TAdEndText__sub_8001A998(s32 color, u8 *str, f32 x, f32 y, f32 scale) {
     s32 b;
     f32 w;
     s32 page;
+    s32 id;
+    s32 c;
 
     lastpage = 254;
     set_default_alpha_blend__Fv();
@@ -179,20 +180,21 @@ void TAdEndText__sub_8001A998(s32 color, u8 *str, f32 x, f32 y, f32 scale) {
         }
         box[0] = x;
         if (TAdEndText__sub_8001B404(c) != 0) {
-            box[1] = yb;
+            ty = yb;
         } else {
-            box[1] = y;
+            ty = y;
         }
+        box[1] = ty;
         if (TAdEndText__sub_8001B3EC(c) != 0) {
             if (TAdEndText__sub_8001B3D4(c) != 0) {
-                id = c - 0x41;
+                id = (u8)(c - 0x41);
             } else if (TAdEndText__sub_8001B404(c) != 0) {
-                id = c - 0x3d;
+                id = (u8)(c - 0x3d);
             } else if (TAdEndText__sub_8001B3BC(c) != 0) {
-                id = c + 0xe;
+                id = (u8)(c + 0xe);
             }
         } else {
-            switch ((s8)c) {
+            switch (c) {
             case 0x28:
                 id = 0x1a;
                 break;
