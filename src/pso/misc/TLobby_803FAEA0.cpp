@@ -435,6 +435,7 @@ extern s16 lbl_805D7A84;
 extern s16 lbl_805D7A88;
 extern s16 lbl_805D7A8A;
 extern s32 lbl_805D7A8C;
+extern s32 lbl_805D7BDC;
 s16 NetApplyConnectionConfig(u8 *arg0);
 extern "C" {
 
@@ -705,6 +706,53 @@ s32 NetLinkConnect(NetConnectCfg *cfg) {
         }
     }
     return -1;
+}
+
+s16 TLobby__sub_803FB358(NetLinkStatus *status) {
+    u8 *g;
+    u8 v;
+    u8 *p;
+    u32 *q;
+    u32 *src;
+    u32 a;
+    u32 b;
+
+    TLobby::lock_mutex(lbl_805C18A0.value);
+    g = lbl_805C0038;
+    v = g[0x6c];
+    p = g + 0xd4;
+    q = *(u32 **)(g + 0x104);
+    src = *(u32 **)(g + 0x9c);
+    if (v == 5) {
+        status->link_up = 1;
+    } else {
+        status->link_up = 0;
+    }
+    status->w10 = src[2];
+    status->w14 = src[3];
+    status->w18 = src[6];
+    status->w1C = src[7];
+    status->w20 = src[25];
+    status->w24 = src[26];
+    if (*p == 5) {
+        status->ppp_up = 1;
+    } else {
+        status->ppp_up = 0;
+    }
+    a = q[2];
+    b = q[3];
+    NetMemcpy(&status->addr[0], &a, 4);
+    NetMemcpy(&status->addr[1], &b, 4);
+    a = q[4];
+    b = q[5];
+    NetMemcpy(&status->addr[2], &a, 4);
+    NetMemcpy(&status->addr[3], &b, 4);
+    status->state = lbl_805D7A8A;
+    status->w8 = lbl_805D7BDC;
+    status->h6 = lbl_805D7A82;
+    status->hC = lbl_805D7A84;
+    TUdpSocket::unlock_mutex(((s32 *)&lbl_805C18A0)[0]);
+    return 0;
 }
 }
 
