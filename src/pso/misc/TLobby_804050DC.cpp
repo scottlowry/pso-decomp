@@ -12386,4 +12386,114 @@ s32 get_adjusted_slot_count__6TLobbyFPv(u8 *arg0) {
     return *(s32 *)((s8 *)arg0 + 0x530) - *(s32 *)((s8 *)arg0 + 0x20);
 }
 
+struct Pool_804066D8 {
+    s32 f0;
+    u8 pad4[0xC];
+    u8 *base;
+};
+
+extern RecoveredGlobal_80401A68_lbl_805C04A8 lbl_805C04A8;
+extern u16 lbl_804FD3A8[];
+extern s32 lbl_805D7A94;
+extern s16 lbl_805D7A8A;
+s32 send_network_frame(u16, u8 *);
+
+s16 TLobby__sub_804066D8(Strm_80405A74 *arg0) {
+    s32 crc = 0xFFFF;
+    s32 mask = -1;
+    s32 hdr = 4;
+    Strm_80405A74 *slot = arg0;
+    u8 *G = lbl_805C0038;
+    u8 *peer = *(u8 **)(G + 0x34);
+    *(u32 *)(G + 0x110) += (u16)((TLobby *)slot)->get_field_4() + 2;
+    if (slot == NULL || slot->len < 4) {
+        (*(s16 *)(G + 0x122))++;
+        return -1;
+    }
+    u8 b0 = slot->p[0];
+    u8 b1 = slot->p[1];
+    u16 len = read_network_u16_be(slot->p + 2);
+    s32 big = len > 0xC021;
+    if (len == 0xC021 && ((s16)*(u16 *)(peer + 0x50) & 4) != 0) {
+        mask = *(u32 *)(peer + 0x54);
+    }
+    s32 g = (big == 0 && ((s16)*(u16 *)(peer + 0x50) & 0x80) != 0) ? 0 : 1;
+    s32 h = (g == 0 && len < 0xFF) ? 0 : 1;
+    if (h == 0) {
+        hdr = 3;
+    }
+    s32 v = (lbl_805D7A7A != 0) ? 0 : (big || ((s16)*(u16 *)(peer + 0x50) & 0x100) == 0);
+    if (v == 0) {
+        hdr -= 2;
+    }
+    s32 k = 4 - hdr;
+    slot->len -= k;
+    slot->p += k;
+    u8 *p = slot->p;
+    if (v != 0) {
+        *p = b0;
+        p[1] = b1;
+        p += 2;
+    }
+    if (h != 0) {
+        *p++ = (u8)(len >> 8);
+    }
+    *p = (u8)len;
+    Pool_804066D8 *des = (Pool_804066D8 *)&lbl_805C04A8;
+    u8 *pool = des->base;
+    *(u32 *)pool = (u32)pool + ((des->f0 + 3) & ~3);
+    u8 *q = (u8 *)*(u32 *)pool;
+    if (lbl_805D7A7A != 0) {
+        NetMemcpy(q + 0x14, slot->p, slot->len);
+        *(u16 *)(pool + 4) = slot->len;
+    } else {
+        *q++ = 0x7E;
+        u16 *tbl = lbl_804FD3A8;
+        *(u32 *)(G + 0x114) += 1;
+        q += 1;
+        s32 c = get_80405A74(&slot);
+        while (c != -1) {
+            crc = (u16)(((crc >> 8) & 0xFF) ^
+                        *(u16 *)((u8 *)tbl + (((crc ^ c) & 0xFF) << 1)));
+            if ((c < 0x20 && (mask & (1 << c)) != 0) || (u32)(c - 125) <= 1) {
+                *q = 0x7D;
+                q[1] = (u8)(c ^ 0x20);
+                q += 2;
+            } else {
+                *q++ = (u8)c;
+            }
+            c = get_80405A74(&slot);
+        }
+        crc ^= 0xFFFF;
+        s32 lo = crc & 0xFF;
+        if ((lo < 0x20 && (mask & (1 << lo)) != 0) || (u32)(lo - 125) <= 1) {
+            *q = 0x7D;
+            q[1] = (u8)(lo ^ 0x20);
+            q += 2;
+        } else {
+            *q++ = (u8)lo;
+        }
+        s32 hi = (u16)crc >> 8;
+        if ((hi < 0x20 && (mask & (1 << hi)) != 0) || (u32)(hi - 125) <= 1) {
+            *q = 0x7D;
+            q[1] = (u8)(hi ^ 0x20);
+            q += 2;
+        } else {
+            *q++ = (u8)hi;
+        }
+        *q++ = 0x7E;
+        *(u16 *)(pool + 4) = (u16)(q - (u8 *)*(u32 *)pool);
+    }
+    s16 st = lbl_805D7A8A;
+    if (st == 7) {
+        return 0;
+    }
+    if (st != 0) {
+        TLobby::get_time_ms(&lbl_805D7A94);
+        send_network_frame(*(u16 *)(pool + 4), (u8 *)*(u32 *)pool);
+        return (s16)*(u16 *)(pool + 4);
+    }
+    return 0;
+}
+
 }
