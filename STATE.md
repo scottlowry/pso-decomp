@@ -31,5 +31,27 @@ Gate 0x10c / 268B, 67/67 rows. Baseline receipt: build/GPOE8P/baseline-d82be2a8.
 | v4 D2 i1-before-n1 | champion b4b0cee3 | **98.80597, 14 rows** |
 | v4 post-D2 grid | 7 cells E1-F4,T2 | 2 byte-identical, 5 regress/inert |
 | v4 perm gen-5b (T0 seed) | 17,184 iters full-cap | ZERO harvests |
-| v5 control probe | c3efccca rebuild | 98.80597 CONFIRMED |
-| v5 perm gen-6 | re-rooted b4b0cee3 base | (running) |
+| v5 control probe | c3efccca rebuild | 98.80597 CONFIRMED (MWCC line, 67/67) |
+| v5 perm gen-6 | re-rooted b4b0cee3 base, 900s cap, 17,781 iters, -j2 | ZERO harvests (0 outputs) |
+| v5 era-bank rosetta | 20 GC MWCC versions, verbatim flags | 0/20 era-emitter (sealed, table below) |
+
+## Era-bank fingerprint rosetta (v5, receipt: scratch b47c_v5_rosetta/rosetta_table.json)
+
+Fingerprint = binding dest regs {base1,n1,d1 | base2,n2,d2}; size 268 emitted by all 20 versions.
+
+| fingerprint | emitters |
+|---|---|
+| era {30,29,26 \| 29,30,26} (decoded from dtk era .o — non-vacuity self-check) | **0 / 20** |
+| champion {30,26,29 \| 30,26,29} | 13 (1.0, 1.1, 1.1p1, 1.2.5, 1.2.5n, 1.3, 1.3.2, 1.3.2r, 2.0, 2.0p1, 2.5, 2.6, 2.7) |
+| 3.0x collapse (n1/d1/base keys absent, d1=29) | 7 (3.0a3, .2, .3, .4, a3p1, a5, a5.2) |
+
+## v5 VERDICT — CENSUS-CLOSED FLOOR 98.80597
+
+Residual 14 rows = RA-PAIR mirror-tie b1 {n1<->d1} pair-swap + b2 {base2,n2,d2} 3-cycle =
+era-scheduler-preference bank-mirror PIN, sealed by 20/20 no-emitter fingerprint (method:
+references/equip-bank-mirror-pin.md). Census-complete evidence: 4 honest full-cap permuter
+rounds on this unit (26,367 + 26,778 + 17,184 + 17,781 = 88,110 iters, iters>0 receipts,
+zero harvests each; gen-6 is the first on twin terrain); v4 hand grids 8+7 cells; twin-screen
+corpus screen (calibrated, non-vacuous) that found and closed the ring spelling gap; 20-version
+rosetta. Budget: 1/6 grind builds (control), 0 probe builds (harank showed no word-move =>
+probes not armed), 0/1 confirm. v5 exhausted, no v6. Park push target @98.81v5.
