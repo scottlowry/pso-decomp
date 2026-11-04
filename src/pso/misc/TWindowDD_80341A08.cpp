@@ -149,18 +149,19 @@ void TWindowDD__sub_80341674(TWindowDD_WS_Word *self, u8 *entry) {
         return;
     }
     TWindowDD__sub_80348AD4(*(f32 *)((s8 *)self + 0x54), lbl_805DFCAC);
-    reset_entries__9TWindowDDFf(sp8, 1);
+    reset_entries__9TWindowDDFf(sp8, -1);
     ((TWindowDD *)sp8)->copy_point_table(1);
     TWindowDD__sub_80348A2C(entry, sp8);
     neg = -(lbl_805DFCA4 * *(f32 *)((s8 *)self + 0x4c));
     mv = (f32)*(s32 *)((s8 *)self + 0x6c) * TWindowDD__data_805DFB20 + neg;
-    pv = mv * *(f32 *)((s8 *)entry + 0x2c) + base;
-    pv2 = (mv + TWindowDD__data_805DFB20) * *(f32 *)((s8 *)entry + 0x2c) + base;
+    iy = *(f32 *)((s8 *)entry + 0x2c);
+    pv = mv * iy + base;
+    pv2 = (mv + TWindowDD__data_805DFB20) * iy + base;
     p = sp8;
     for (i = 0; i < 4; i++) {
         p[1] = pv;
         p[7] = pv2;
-        p = p + 6;
+        p = p + 12;
     }
     ((TWindowDD *)sp8)->draw_transformed_primitive((void *)8, ctx, (void *)1);
 }
