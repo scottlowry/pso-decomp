@@ -536,7 +536,13 @@ u8 *TLobby__sub_803C61C4(s32 n, Strm_803C5B50 **arr, Strm_803C5B50 *extra) {
         }
         w = w + 0xc;
     }
-    name = (i < 16) ? name : 0;
+    if (i >= 16) {
+        goto name_busy2;
+    }
+    goto name_ok2;
+name_busy2:
+    name = 0;
+name_ok2:
     if (name == 0) {
         ctx = 0;
     } else {
@@ -566,7 +572,13 @@ u8 *TLobby__sub_803C61C4(s32 n, Strm_803C5B50 **arr, Strm_803C5B50 *extra) {
         }
         w = w + 0xc;
     }
-    name = (i < 16) ? name : 0;
+    if (i >= 16) {
+        goto name_busy;
+    }
+    goto name_ok;
+name_busy:
+    name = 0;
+name_ok:
     if (name == 0) {
         ctx = 0;
     } else {
