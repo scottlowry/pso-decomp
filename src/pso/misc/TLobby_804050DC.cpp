@@ -4065,7 +4065,71 @@ s32 TLobby::build_dns_query_a(u8 *name, s16 len) {
 #pragma pop
 
 void TLobby__sub_8040BE40(F_8040A45C *req, s16 err, s16 arg);
+s32 TLobby__sub_8040BD40(F_8040A45C *req, u8 *cur, s32 rem, s32 arg);
+s32 TLobby__sub_8040BA38(F_8040A45C *req, u8 *cur, s32 rem);
 
+s16 TLobby__sub_8040B8BC(F_8040A45C *req) {
+    A_8040A45C *hdr;
+    u16 v6;
+    u8 *pkt;
+    s32 rem;
+    u8 *cur;
+    s16 n;
+    s16 m;
+    s32 r;
+    u16 cnt;
+
+    hdr = req->f1C;
+    v6 = (u16)req->f6;
+    pkt = (u8 *)hdr->f4;
+    rem = hdr->f2;
+    if (*(u16 *)pkt != v6) {
+        return -1;
+    }
+    if ((pkt[2] & 0x80) == 0) {
+        return -1;
+    }
+    switch (pkt[3] & 3) {
+    case 1:
+        TLobby__sub_8040BE40(req, -0x46, 0);
+        return -1;
+    case 3:
+        TLobby__sub_8040BE40(req, -0x47, 0);
+        return -1;
+    case 0:
+        break;
+    case 2:
+    case 6:
+    default:
+        req->fA = 1;
+        return -1;
+    }
+    if (*(u16 *)(pkt + 6) == 0) {
+        req->fA = 1;
+        return -1;
+    }
+    cnt = *(u16 *)(pkt + 4);
+    cur = pkt + 0xc;
+    rem -= 12;
+    if (cnt != 0) {
+        for (n = (s16)cnt; n > 0; n--) {
+            r = TLobby__sub_8040BD40(req, cur, rem, 0);
+            r += 4;
+            rem -= r;
+            cur += (s16)r;
+        }
+    }
+    m = *(u16 *)(pkt + 6);
+    if (m != 0) {
+        while ((s16)m > 0) {
+            r = TLobby__sub_8040BA38(req, cur, rem);
+            rem -= r;
+            cur += (s16)r;
+            m--;
+        }
+    }
+    return 0;
+}
 
 #pragma push
 #pragma dont_inline off
