@@ -154,17 +154,17 @@ void TAdEndText__sub_8001A998(s32 color, u8 *str, f32 x, f32 y, f32 scale) {
     f32 box[8];
     f32 yb;
     f32 ty;
+    s32 id;
     s32 lastpage;
     s32 row;
-    u32 q1;
-    u32 q2;
+    s32 q1;
+    s32 q2;
     s32 cq;
     s32 c6;
-    s32 a;
-    s32 b;
+    u32 a;
+    u32 b;
     f32 w;
     s32 page;
-    s32 id;
     s32 c;
 
     lastpage = 254;
@@ -173,7 +173,7 @@ void TAdEndText__sub_8001A998(s32 color, u8 *str, f32 x, f32 y, f32 scale) {
     set_texlist__FUl(TAdEndText__loaded_font_texture_list);
     yb = lbl_805D7DF0 + y;
     while ((s8)*str != 0) {
-        c = *str++;
+        c = (u32)*str++;
         id = c;
         if (c == 0x23) {
             continue;
@@ -251,9 +251,9 @@ void TAdEndText__sub_8001A998(s32 color, u8 *str, f32 x, f32 y, f32 scale) {
             c6 = q2 / 6;
             cq = q1 - (q1 / 6) * 6;
             box[3] = TAdEndText__data_805D7DF8 + box[1];
-            b = (u8)(s32)(TAdEndText__data_805D7DF8 * ((f64)c6 - 109.0));
+            b = (u8)(TAdEndText__data_805D7DF8 * (f64)c6);
             w = lbl_804345E0[row * 36 + q2];
-            a = (u8)(s32)(TAdEndText__data_805D7DF8 * ((f64)cq - 109.0));
+            a = (u8)(TAdEndText__data_805D7DF8 * (f64)cq);
             box[2] = box[0] + w;
             x = x + w;
             box[6] = ((f32)a + w) * lbl_805D7E00;
