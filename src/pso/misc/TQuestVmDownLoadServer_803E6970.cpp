@@ -3880,6 +3880,7 @@ s32 TQuestVmDownLoadServer__sub_803EDF64(u16 *keys, s32 count, u16 *out, s32 *fl
     s32 b1;
     s32 b2;
     s32 b2c;
+    u16 k1;
     u8 *p;
     u16 *cur;
     s32 n;
@@ -3922,10 +3923,11 @@ s32 TQuestVmDownLoadServer__sub_803EDF64(u16 *keys, s32 count, u16 *out, s32 *fl
         return 0;
     }
     cur = &keys[1];
-    b2 = (u8)keys[1];
+    k1 = keys[1];
+    b2 = (u8)k1;
     b2c = b2;
     b1 = (u8)keys[0];
-    if (b1 == (u8)keys[1]) {
+    if (b1 == (u8)k1) {
         if (cls == 12) {
             return 2;
         }
@@ -3935,8 +3937,8 @@ s32 TQuestVmDownLoadServer__sub_803EDF64(u16 *keys, s32 count, u16 *out, s32 *fl
         }
     }
     if (b1 == 0x78 || b1 == 0x58) {
-        cur = &keys[1];
         b2c = b2;
+        cur = &keys[1];
         if ((u8)b2 == 0x6e || (u8)b2 == 0x4e) {
             out[0] = TQuestVmDownLoadServer__sub_803E719C(0x73, cur[0]);
             return 2;
