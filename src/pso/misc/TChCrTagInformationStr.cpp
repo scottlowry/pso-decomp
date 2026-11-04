@@ -62,7 +62,7 @@ void TChCrTagInformationStr::render() {
     t2 = fade * fade;
     color1 = ((u32)(lbl_805DF10C * t2) << 24) | 0x00FFFFFF;
     t2b = lbl_805DF110 - t2;
-    color2 = ((u32)(lbl_805DF114 * fade * sin_table_lookup((s32)(lbl_805DF118 * fade))) << 24) | 0x00FFFFFF;
+    color2 = ((u32)(lbl_805DF114 * *(f32 *)((s8 *)arg0 + 0x30) * sin_table_lookup((s32)(lbl_805DF118 * fade))) << 24) | 0x00FFFFFF;
     scale = lbl_805DF11C * t2b;
     for (i = 0; i < 7; i++) {
         entry = (const char *)get_localized_text_entry(*(s32 *)((s8 *)arg0 + 0x24), *(s32 *)((s8 *)arg0 + 0x28) + i);
@@ -72,8 +72,9 @@ void TChCrTagInformationStr::render() {
                 step = 0x1000000 / (4 * j);
                 radius = (f32)j * scale;
                 for (k = 0; k < 0x1000000; k += step) {
-                    draw_menu_text(pos[0] + radius * sin_table_lookup(k),
-                                   pos[1] + radius * cos_table_lookup(k), entry, color2);
+                    f32 rp_sin = radius * sin_table_lookup(k);
+                    f32 rp_cos = radius * cos_table_lookup(k);
+                    draw_menu_text(pos[0] + rp_sin, pos[1] + rp_cos, entry, color2);
                 }
             }
         }
