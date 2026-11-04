@@ -279,10 +279,10 @@ s32 TShopKeepItemWindow::handle_deposit_list_select() {
         if (lookup_item_def__9TItemDataFPv(item) != 0) {
             count = get_bank_deposit_capacity_for_item(item, bank);
             stack = ((TItemData *)item)->get_stack_count();
-            if (count >= stack) {
-                t = stack;
-            } else {
+            if (count < stack) {
                 t = count;
+            } else {
+                t = stack;
             }
             count = t;
         } else {
