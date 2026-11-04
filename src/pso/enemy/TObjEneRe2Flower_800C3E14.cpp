@@ -28,6 +28,100 @@ struct VObj_14_2f517b : VBase_14_2f517b {
     virtual s32 m2();
 };
 
+struct VBase_18_804931FC { char pad[0x18]; };
+
+struct VObj_18_804931FC : VBase_18_804931FC {
+    virtual void m0();
+    virtual void m1();
+    virtual void m2();
+    virtual void m3();
+    virtual void m4();
+    virtual void m5();
+    virtual void m6();
+    virtual void m7();
+    virtual void m8();
+    virtual void m9();
+    virtual void m10();
+    virtual void m11();
+    virtual void m12();
+    virtual void m13();
+    virtual void m14();
+    virtual void m15();
+    virtual void m16();
+    virtual void m17();
+    virtual void m18();
+    virtual void m19();
+    virtual void m20();
+    virtual void m21();
+    virtual void m22();
+    virtual void m23();
+    virtual void m24();
+    virtual void m25();
+    virtual void m26();
+    virtual void m27();
+    virtual void m28();
+    virtual void m29();
+    virtual void m30();
+    virtual void m31();
+    virtual void m32();
+    virtual void m33();
+    virtual void m34();
+    virtual void m35();
+    virtual void m36();
+    virtual void m37();
+    virtual void m38();
+    virtual void m39();
+    virtual void m40();
+    virtual void m41();
+    virtual void m42();
+    virtual void m43();
+    virtual void m44();
+    virtual void m45();
+    virtual void m46();
+    virtual void m47();
+    virtual void m48();
+    virtual void m49();
+    virtual void m50();
+    virtual void m51();
+    virtual void m52();
+    virtual void m53();
+    virtual void m54();
+    virtual void m55();
+    virtual void m56();
+    virtual void m57();
+    virtual void m58();
+    virtual void m59();
+    virtual void m60();
+    virtual void m61();
+    virtual void m62();
+    virtual void m63();
+    virtual void m64();
+    virtual void m65();
+    virtual void m66();
+    virtual void m67();
+    virtual void m68();
+    virtual void m69();
+    virtual void m70();
+    virtual void m71();
+    virtual void m72();
+    virtual void m73();
+    virtual void m74();
+    virtual void m75();
+    virtual void m76();
+    virtual void m77();
+    virtual void m78();
+    virtual void m79();
+    virtual void m80();
+    virtual void m81();
+    virtual void m82();
+    virtual void m83();
+    virtual void m84();
+    virtual void m85();
+    virtual void m86();
+    virtual s32 m87(s16, s32);
+    virtual void m88();
+};
+
 struct Stack_800C44C4 {
     s32 sp8;
     s32 spC;
@@ -94,6 +188,24 @@ s32 begin_state_242__16TObjEneRe2FlowerFv(void);
 void queue_destruction__7TObjectFv(void *);
 
 extern "C" void vfunc_6__8TObjBaseFPsl();
+extern "C" void __ct__12TObjEneDD_STFP7TObject(void *, void *);
+extern "C" void *__ct__13TUnk_80494938Fv(void *);
+extern "C" f32 random_ratio__9TObjCharaFv(void);
+extern "C" void TObjEneRe2Flower__sub_800C3BA8(void *);
+extern "C" void sub_8002AE64__9TObjEnemyFv(void *);
+extern "C" s32 register_object__6TLobbyFl(s32);
+extern "C" s32 dispatch_shared_handler_b__6TLobbyFl(s32);
+extern "C" s32 register_boss__6TLobbyFl(s32);
+extern "C" s32 dispatch_shared_handler_a__6TLobbyFl(s32);
+extern "C" s32 lbl_805D2A48;
+extern "C" u32 lbl_805D5170;
+extern "C" const f32 lbl_805D9FFC;
+extern "C" const f32 lbl_805D9FD8;
+extern "C" u32 lbl_8043BA94[];
+extern "C" u32 lbl_8043BA88[];
+extern "C" u32 lbl_8043BA7C[];
+extern "C" u32 lbl_8043BAA0[];
+extern "C" Vec *VecCopy(Vec *, const Vec *);
 extern "C" void vfunc_105__16TObjEneRe2FlowerFv();
 extern "C" void vfunc_103__9TObjEneDDFPUc();
 extern "C" void vfunc_79__9TObjEneDDFPl();
@@ -377,6 +489,98 @@ void TObjEneRe2Flower::destroy_instance() {
         TLobby__sub_8001FE7C((void*)lbl_805D5174, 1);
         lbl_805D5174 = 0U;
     }
+}
+
+void *TObjEneRe2Flower__ct(void *self, void *parent, void *set_data) {
+    s32 b;
+    s32 boss_handle;
+    s32 attack_handle;
+    s32 object_handle;
+    s32 off;
+    s32 i;
+
+    __ct__12TObjEneDD_STFP7TObject(self, parent);
+    *(u8 **)((s8 *)self + 0x18) = (u8 *)&TObjEneRe2Flower__setup_data + 0x184;
+    __ct__13TUnk_80494938Fv((s8 *)self + 0x3F4);
+    *(s32 *)((s8 *)self + 0) = lbl_805D2A48;
+    ((TObjEneDD *)self)->invoke_initialization_hook(set_data);
+    TObjEneRe2Flower__sub_800C3BA8(self);
+    *(u32 *)((s8 *)self + 0x3C4) = 0;
+    if (get_current_floor_area() == AREA_TOWER) {
+        *(u32 *)((s8 *)self + 0x3C4) |= 0x800;
+    } else if (random_ratio__9TObjCharaFv() <= lbl_805D9FFC) {
+        *(u32 *)((s8 *)self + 0x3C4) |= 0x400;
+    }
+    ((TObjEneDD *)self)->init_position_vectors();
+    *(s32 *)((s8 *)self + 0x34) = *(s32 *)(*(s32 *)(lbl_805D5174 + 0x42C) + 8);
+    *(s32 *)((s8 *)self + 0x24) = *(s32 *)(*(s32 *)(lbl_805D5174 + 0x42C) + 0xC);
+    if (((TObjEneRe2Flower *)self)->get_flag_11() != 0) {
+        ((TObjEneDD *)self)->init_model((CollisionBody *)&TObjEneRe2Flower__setup_data.rareParts, 2);
+    } else {
+        ((TObjEneDD *)self)->init_model((CollisionBody *)&TObjEneRe2Flower__setup_data.normalParts, 2);
+    }
+    ((TObjMotion *)self)->set_field_d8((s32)((u8 *)&TObjEneRe2Flower__setup_data + 0x104));
+    ((TObjMotion *)self)->set_field_dc(*(s32 *)(*(u8 **)(lbl_805D5174 + 0x430)));
+    *(s16 *)((s8 *)self + 0xB8) = 1;
+    ((TObjMotion *)self)->set_animation(*(s16 *)((s8 *)self + 0xB8));
+    ((TObjMotion *)self)->set_field_b8(*(s16 *)((s8 *)self + 0xB8));
+    sub_8002AE64__9TObjEnemyFv(self);
+    if (((TObjEneRe2Flower *)self)->get_flag_11() != 0) {
+        b = 2;
+    } else {
+        if (((TObjEneRe2Flower *)self)->sub_800C3B8C() == 0) {
+            b = 0;
+        } else {
+            b = 1;
+        }
+    }
+    object_handle = register_object__6TLobbyFl(lbl_8043BA94[b]);
+    attack_handle = dispatch_shared_handler_b__6TLobbyFl(lbl_8043BA88[b]);
+    boss_handle = register_boss__6TLobbyFl(lbl_8043BA7C[b]);
+    ((TObjEneDD *)self)->reset_hp((u8 *)boss_handle, (u8 *)attack_handle, (u8 *)object_handle);
+    lbl_805D5170 = dispatch_shared_handler_a__6TLobbyFl(lbl_8043BAA0[b]);
+    if (((TObjEneRe2Flower *)self)->get_flag_11() != 0) {
+        ((TObjEneDD *)self)->set_state_8();
+    } else {
+        ((TObjEneDD *)self)->check_state_flag_2();
+    }
+    *(u8 **)((s8 *)self + 0x350) = (u8 *)&TObjEneRe2Flower__setup_data;
+    if (((TObjEneRe2Flower *)self)->get_flag_11() != 0) {
+        ((TObjEneDD *)self)->initialize_enemy_state(0x53);
+    } else {
+        if (((TObjEneRe2Flower *)self)->sub_800C3B8C() == 0) {
+            ((TObjEneDD *)self)->initialize_enemy_state(0xD);
+        } else {
+            ((TObjEneDD *)self)->initialize_enemy_state(0xE);
+        }
+    }
+    *(f32 *)((s8 *)self + 0x37C) = lbl_805D9FBC;
+    ((TObjEneDD_ST *)self)->enemy_init_acquire_period(0x1E);
+    ((TObjEneDD_ST *)self)->enemy_init_validate_period(0x1E);
+    ((TObjEneRe2Flower *)self)->m_3c0 = *(s32 *)((s8 *)self + 0x60);
+    *(f32 *)((s8 *)self + 0x3C8) = lbl_805D9FAC;
+    ((TObjEneRe2Flower *)self)->m_3cc = 0;
+    ((TObjEneRe2Flower *)self)->m_3d0 = 0;
+    ((TObjEneRe2Flower *)self)->m_3d4 = 0;
+    ((TObjEneRe2Flower *)self)->m_3d8 = 0;
+    for (off = 0, i = 0; i < 2; i++, off += 0xC) {
+        VecCopy((Vec *)((s8 *)self + off + 0x3DC), (const Vec *)((s8 *)self + 0x38));
+        *(f32 *)((s8 *)self + off + 0x3E0) += lbl_805D9FD8;
+    }
+    ((VObj_14_2f517b *)((s8 *)self + 0x3F4))->m0();
+    ((TObjEneRe2Flower *)self)->m_410 = 0;
+    ((TObjEneRe2Flower *)self)->m_414 = 0;
+    ((TObjEneRe2Flower *)self)->m_418 = 0;
+    ((TObjEneRe2Flower *)self)->m_41c = 0;
+    ((TObjEneRe2Flower *)self)->m_420 = 0;
+    *(f32 *)((s8 *)self + 0x424) = lbl_805D9FAC;
+    ((TObjEneRe2Flower *)self)->m_428 = 0;
+    ((TObjEneRe2Flower *)self)->sub_800C3DC4();
+    ((VObj_18_804931FC *)self)->m88();
+    ((TObjEneDD *)self)->transform_part_positions();
+    *(s16 *)((s8 *)self + 0x326) = 0;
+    ((VObj_18_804931FC *)self)->m87(*(s16 *)((s8 *)self + 0x326), 4);
+    return self;
 }
 
 extern void *tl_04;
