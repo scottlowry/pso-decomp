@@ -94,6 +94,34 @@ s32 is_valid_drop_floor();
 void *build_6x06_send_guild_card(void *arg0);
 extern Rec_80105538 *TLobby__data_805D6144;
 extern const f32 lbl_805DAAB4;
+extern "C" {
+void send_6x60_standard_drop_item_request(Obj_80105538 *self);
+int roll_weapon_special_channel15(void* p);
+int roll_weapon_special_for_stars(void*);
+
+int check_class_equip_permission(TObjPlayer *player, s32 perm) {
+    s32 t = player->class_flags;
+    if (t & CLASS_FLAG_HUNTER) {
+        if (!(perm & 1)) return 0;
+    } else if (t & CLASS_FLAG_RANGER) {
+        if (!(perm & 2)) return 0;
+    } else if (!(perm & 4)) {
+        return 0;
+    }
+    if (t & CLASS_FLAG_ANDROID) {
+        if (!(perm & 0x10)) return 0;
+    } else if (t & CLASS_FLAG_NEWMAN) {
+        if (!(perm & 0x20)) return 0;
+    } else if (t & CLASS_FLAG_HUMAN) {
+        if (!(perm & 8)) return 0;
+    }
+    if (t & CLASS_FLAG_MALE) {
+        if (!(perm & 0x40)) return 0;
+    } else if (t & CLASS_FLAG_FEMALE) {
+        if (!(perm & 0x80)) return 0;
+    }
+    return 1;
+}
 
 struct VBase_18_80105218 { char pad[0x18]; };
 
@@ -132,6 +160,7 @@ void *lookup_item_pmt_record(u8 *);
 u8 get_technique_learn_limit(u8, u8);
 int clear_fields__20TWindowSubStatusDispFv(void *);
 s32 build_player_equipment_requirement_stats(s32, ReqStats_80104FCC *);
+}
 
 s32 check_equip_requirements(void *player, void *item, s32 *requirement) {
     TObjPlayer *p = (TObjPlayer *)player;
@@ -294,34 +323,6 @@ s32 check_equip_requirements(void *player, void *item, s32 *requirement) {
     return 0;
 }
 
-void send_6x60_standard_drop_item_request(Obj_80105538 *self);
-int roll_weapon_special_channel15(void* p);
-int roll_weapon_special_for_stars(void*);
-
-int check_class_equip_permission(TObjPlayer *player, s32 perm) {
-    s32 t = player->class_flags;
-    if (t & CLASS_FLAG_HUNTER) {
-        if (!(perm & 1)) return 0;
-    } else if (t & CLASS_FLAG_RANGER) {
-        if (!(perm & 2)) return 0;
-    } else if (!(perm & 4)) {
-        return 0;
-    }
-    if (t & CLASS_FLAG_ANDROID) {
-        if (!(perm & 0x10)) return 0;
-    } else if (t & CLASS_FLAG_NEWMAN) {
-        if (!(perm & 0x20)) return 0;
-    } else if (t & CLASS_FLAG_HUMAN) {
-        if (!(perm & 8)) return 0;
-    }
-    if (t & CLASS_FLAG_MALE) {
-        if (!(perm & 0x40)) return 0;
-    } else if (t & CLASS_FLAG_FEMALE) {
-        if (!(perm & 0x80)) return 0;
-    }
-    return 1;
-}
-
 int roll_weapon_special_channel15(void* p) { return roll_weapon_special_for_stars(p); }
 }
 
@@ -366,7 +367,7 @@ void send_6x60_standard_drop_item_request(Obj_80105538 *self) {
         if (p1 != 0 && p2 != 0) {
             get_current_floor();
             if (is_valid_drop_floor() != 0 &&
-                (((TObjPlayer *)p1)->get_field_3e4() != ((TObjPlayer *)p2)->get_field_3e4() ||
+                (((TObjPlayer *)p1)->get_floor() != ((TObjPlayer *)p2)->get_floor() ||
                  TLobby__designated_client_id == local_client_id)) {
                 if (self->f2c != -1) {
                     Rec_80105538 e = TLobby__data_805D6144[self->f2c];
@@ -402,7 +403,7 @@ void TObjChara::request_box_item_drop(void *unused, s16 arg2) {
         p1 = get_player_by_client_id(TLobby__designated_client_id);
         p2 = get_player_by_client_id(local_client_id);
         if (p1 != 0 && p2 != 0 && TObjPlayer__sub_80104840(get_current_floor_area()) != AREA_PIONEER2_EP1 &&
-            (((TObjPlayer *)p1)->get_field_3e4() != ((TObjPlayer *)p2)->get_field_3e4() ||
+            (((TObjPlayer *)p1)->get_floor() != ((TObjPlayer *)p2)->get_floor() ||
              TLobby__designated_client_id == local_client_id)) {
             if (self->f2c != -1) {
                 Entry_8010567C e = quest_object_entries[self->f2c];
