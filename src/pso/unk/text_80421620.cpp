@@ -1567,7 +1567,7 @@ s32 dhcp_release_step(void) {
 #pragma push
 #pragma opt_propagation off
 s32 dhcp_request_step(void) {
-    u8 *net = lbl_805C1E00;
+    register u8 *net = lbl_805C1E00;
     u32 delta = 0;
     s32 now;
     u32 server = 0xFFFFFFFF;
