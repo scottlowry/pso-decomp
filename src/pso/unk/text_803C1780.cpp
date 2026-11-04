@@ -21,7 +21,7 @@ s32 TLobby__sub_803C1780(u8 *arg0, s32 arg1, s16 *arg2, s8 *arg3, u8 *arg4,
     u8 *hdr;
     u16 tv, sv, t6, s6, t4, s4, t5, s5;
     u32 v, w;
-    s32 x;
+    s32 x, v6;
     for (i = 0; i < arg1; i++) {
         if (memcmp(arg0 + i, lbl_805D4650, 4) == 0) {
             break;
@@ -71,8 +71,8 @@ s32 TLobby__sub_803C1780(u8 *arg0, s32 arg1, s16 *arg2, s8 *arg3, u8 *arg4,
     } else if ((s8)*arg4 == 8) {
         *arg10 = 1;
     } else    if ((s8)*arg4 == 4) {
-        s8 c6 = (s8)*arg6;
-        *arg5 = (u8)(c6 * 2);
+        v6 = (s8)*arg6;
+        *arg5 = (u8)(v6 * 2);
         *arg9 = 4;
         *arg8 = (x / 2) / (s8)*arg6;
         *arg4 = 16;
