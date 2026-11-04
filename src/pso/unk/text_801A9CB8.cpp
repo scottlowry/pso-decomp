@@ -107,11 +107,8 @@ Obj_801A9E10 *TObjPlayer__sub_801A9E10(Obj_801A9E10 *self, s32 client_id,
     s32 i;
     s32 j;
     s32 n;
-    s32 id;
     void *pl;
-    u8 *p;
     u8 *e;
-    struct Rec_801AA17C *rec;
 
     __ct__7TObjectFP7TObject(self, tl_07);
     self->vt = __vt__13TUnk_804C349C;
@@ -120,9 +117,9 @@ Obj_801A9E10 *TObjPlayer__sub_801A9E10(Obj_801A9E10 *self, s32 client_id,
     self->f44 = 0;
     self->flag4c = flag;
     for (i = 0; i < 4; i++) {
-        self->vals70[i] = arr[i] + 1;
-        self->vals50[i] = -1;
-        self->held90[i] = 0xFFFF;
+        *(s32 *)((u8 *)self + (0x70 + i * 4)) = arr[i] + 1;
+        *(s32 *)((u8 *)self + (0x50 + i * 4)) = -1;
+        *(u16 *)((u8 *)self + (0x90 + i * 2)) = 0xFFFF;
     }
     self->charge = 0;
     pl = get_player_by_client_id(client_id);
@@ -133,15 +130,16 @@ Obj_801A9E10 *TObjPlayer__sub_801A9E10(Obj_801A9E10 *self, s32 client_id,
         self->ids60[i] = 0xFFFF;
     }
     self->count = 4;
-    p = targets;
     for (n = 0; n < 4; n++) {
-        if (TObjPlayer__sub_80313114(p) == -1) {
+        if (TObjPlayer__sub_80313114(targets) == -1) {
             self->count = n;
             break;
         }
-        self->vals50[n] = TObjPlayer__sub_80313114(p);
-        self->ids60[n] = (u16)((TObjPlayer *)p)->get_section_id();
-        p += 0x18;
+        *(s32 *)((u8 *)self + (0x50 + n * 4)) =
+            TObjPlayer__sub_80313114(targets);
+        *(u32 *)((u8 *)self + (0x60 + n * 4)) =
+            (u16)((TObjPlayer *)targets)->get_section_id();
+        targets += 0x18;
     }
     self->player = get_player_by_client_id(client_id);
     apply_photon_blast_action_hold__Flll(self, self->count * 150 + 100,
@@ -160,16 +158,16 @@ Obj_801A9E10 *TObjPlayer__sub_801A9E10(Obj_801A9E10 *self, s32 client_id,
         TFogCtrl::select_fog_for_viewport(self->id, 0x3e, 0);
     }
     for (i = 0; i < 4; i++) {
-        id = self->ids60[i];
-        if (id < 4) {
-            rec = &photon_blast_sequence_table[id];
-            if (rec->state == 2) {
+        if (self->ids60[i] < 4) {
+            if (photon_blast_sequence_table[self->ids60[i]].state != 2) {
                 for (j = 0; j < 4; j++) {
-                    rec->kinds[j] = self->vals50[j];
-                    rec->participants[j] = self->ids60[j];
+                    photon_blast_sequence_table[self->ids60[i]].kinds[j] =
+                        self->vals50[j];
+                    photon_blast_sequence_table[self->ids60[i]].participants[j] =
+                        self->ids60[j];
                 }
             }
-            rec->state = 2;
+            photon_blast_sequence_table[self->ids60[i]].state = 2;
         }
     }
     self->f24 = 0;
