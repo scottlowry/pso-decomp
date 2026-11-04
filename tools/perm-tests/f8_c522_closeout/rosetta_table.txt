@@ -1,0 +1,22 @@
+fn_802855C4 rosetta fingerprint @ e175bcd9 seed 7b40c522 body; era = {s20 mr r26,r4, s21 mr r25,r3, s22 li r30,0, s40 li r31,0, s42 lis r23,17200}
+ver        size gate  s20          s21          s22        s40        s42          s70         
+1.0      0x000180 MISS  mr r28,r3    lfs f31,0(0) li r24,0   fadds f1,f30,f1 blt a6c <fn_802855C4+0xbc> lwz r8,124(r26)
+1.1      0x000180 MISS  mr r28,r3    lfs f31,0(0) li r24,0   fadds f1,f30,f1 blt a6c <fn_802855C4+0xbc> lwz r8,124(r26)
+1.1p1    0x000180 MISS  mr r28,r3    lfs f31,0(0) li r24,0   fadds f1,f30,f1 blt a70 <fn_802855C4+0xbc> lwz r8,124(r26)
+1.2.5    0x000180 MISS  mr r28,r3    lfs f31,0(0) li r24,0   fadds f1,f30,f1 blt a6c <fn_802855C4+0xbc> lwz r8,124(r26)
+1.2.5n   0x000180 MISS  mr r28,r3    lfs f31,0(0) li r24,0   fadds f1,f30,f1 blt a6c <fn_802855C4+0xbc> lwz r8,124(r26)
+1.3      0x000200 OK    mr r25,r4    mr r24,r3    li r29,0   li r30,0   lis r31,17200 lis r23,17200
+1.3.2    0x000200 OK    mr r25,r4    mr r24,r3    li r29,0   li r30,0   lis r31,17200 lis r23,17200
+1.3.2r   0x000200 OK    mr r25,r4    mr r24,r3    li r29,0   li r30,0   lis r31,17200 lis r23,17200
+2.0      0x000200 OK    mr r25,r4    mr r24,r3    li r29,0   li r30,0   lis r31,17200 lis r23,17200
+2.0p1    0x0001b8 MISS  mr r0,r3     mr r3,r21    mr r24,r0  fsubs f1,f0,f1 fmuls f2,f2,f1 mr r5,r23   
+2.5      0x000200 OK    mr r25,r4    mr r24,r3    li r29,0   li r30,0   lis r31,17200 lis r23,17200
+2.6      0x000200 OK    mr r25,r4    mr r24,r3    li r29,0   li r30,0   lis r31,17200 lis r23,17200
+2.7      0x000200 OK    mr r25,r4    mr r24,r3    li r29,0   li r30,0   lis r31,17200 lis r23,17200
+3.0a3    0x0001e0 MISS  mr r27,r3    li r24,0     li r4,1    lfs f29,0(0) b b20 <fn_802855C4+0x184> mr r4,r30   
+3.0a3.2  0x0001e0 MISS  mr r27,r3    li r24,0     li r4,1    lfs f29,0(0) b b20 <fn_802855C4+0x184> mr r4,r30   
+3.0a3.3  0x0001e0 MISS  mr r27,r3    li r24,0     li r4,1    lfs f29,0(0) b b20 <fn_802855C4+0x184> mr r4,r30   
+3.0a3.4  0x0001e0 MISS  mr r27,r3    li r24,0     li r4,1    lfs f29,0(0) b b20 <fn_802855C4+0x184> mr r4,r30   
+3.0a3p1  0x0001e0 MISS  mr r27,r3    li r24,0     li r4,1    lfs f29,0(0) b b20 <fn_802855C4+0x184> mr r4,r30   
+3.0a5    0x0001e0 MISS  mr r27,r3    li r24,0     li r4,1    lfs f29,0(0) b b20 <fn_802855C4+0x184> mr r4,r30   
+3.0a5.2  0x0001e0 MISS  mr r27,r3    li r24,0     li r4,1    lfs f29,0(0) b b20 <fn_802855C4+0x184> mr r4,r30   
