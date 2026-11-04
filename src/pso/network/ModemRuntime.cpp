@@ -186,6 +186,7 @@ extern char lbl_805D4928[7];
 extern char lbl_805D4930[5];
 extern char lbl_805D4938[7];
 extern char *modem_exi_ptr_table[22];
+extern char lbl_805D487C[6];
 s32 TAdSinglePlyChrSelectGC__sub_8042CD64(void);
 void TAdSinglePlyChrSelectGC__sub_8042D604(void);
 void TAdSinglePlyChrSelectGC__sub_8042E488(s32 value);
@@ -526,6 +527,61 @@ void TAdSinglePlyChrSelectGC__sub_8042C8D8(void) {
     } else {
         modem_command_response_state.length = 0;
     }
+}
+
+s32 TAdSinglePlyChrSelectGC__sub_8042CD64(void) {
+    s32 idx;
+    u32 cmd;
+    u8 value;
+    s8 match;
+    s16 flag;
+    s32 i;
+    u16 cmd16;
+    u8 count;
+
+    flag = 0;
+    match = 0;
+    for (;;) {
+        cmd16 = 5 << 8;
+        EXISelect(0, 2, 4);
+        EXIImm(0, &cmd16, 2, EXI_WRITE, NULL);
+        EXISync(0);
+        EXIImm(0, &count, 1, EXI_READ, NULL);
+        EXISync(0);
+        EXIDeselect(0);
+        if (count != 0) {
+            break;
+        }
+        OSYieldThread();
+    }
+    for (i = 0; i < count; i++) {
+        cmd = 0x23000000 | ((u8)1 << 8);
+        EXISelect(0, 2, 4);
+        EXIImm(0, &cmd, 4, EXI_WRITE, NULL);
+        EXISync(0);
+        EXIImm(0, &value, 1, EXI_READ, NULL);
+        EXISync(0);
+        EXIDeselect(0);
+        idx = modem_command_response_state.length;
+        modem_command_response_state.length = idx + 1;
+        modem_command_response_state.buf[idx] = value;
+        if (value == lbl_805D487C[match]) {
+            match++;
+            if (match == 5) {
+                return -6;
+            }
+        } else {
+            match = 0;
+        }
+        if (value == 'O') {
+            flag = 1;
+        } else if (flag == 1 && value == 'K') {
+            return 1;
+        } else {
+            flag = 0;
+        }
+    }
+    return 1;
 }
 
 s32 TAdSinglePlyChrSelectGC__sub_8042D49C(char *cmd) {
