@@ -200,41 +200,31 @@ void TLobby::exi_write(s32 arg0, s32 arg1, s32 arg2) {
 #pragma push
 #pragma opt_propagation off
 void TLobby__sub_80429648(void) {
-    u16 status;
-    u16 padC;
     u8 buf[4];
-    u32 cmd2;
-    u16 swap;
-    u16 padB;
-    u8 byt2;
-    u16 cmd4200;
-    u32 padA;
-    u8 bytF8;
+    u16 status;
     u32 cmd;
-    u16 t;
+    u32 cmd2;
     u32 cmd1800;
     u32 cmd0900;
-    struct {
-        u32 a;
-        u16 b;
-    } tmp;
-    u32 padD;
-    u32 padE;
-    u32 padF;
+    u16 cmd4200;
+    u16 t;
     register u16 sw;
     register u16 *tp;
+    u16 swap;
+    u32 c0;
+    u16 c1;
+    u8 byt2;
+    u8 bytF8;
     u16 a;
     u16 c78;
     u16 base;
     u16 w0;
     u16 w2;
     u16 len;
-    u16 *pw;
-    u16 *p;
-    u32 off;
     s32 i;
     s32 count;
     u16 *pd;
+    u16 *tbl;
 
     exi_dma_write_length = 0;
     exi_dma_read_length = 0;
@@ -246,17 +236,17 @@ void TLobby__sub_80429648(void) {
         EXISync(0);
         EXIImmEx(0, (s32)&buf[0], 4, 0);
         EXIDeselect(0);
-        cmd2 = (((base + 0x10) & 0xFFFF) << 8) | 0x80000000;
         w0 = buf[0] | ((buf[1] & 0xF) << 8);
         *(u16 *)&lbl_805D7C5C = w0;
         w2 = (buf[1] >> 4) | (buf[2] << 4);
         pd = (u16 *)&lbl_805D7C5C;
         pd[1] = w2;
         *(u8 *)&pd[2] = buf[3];
-        tmp.a = lbl_805D7C5C;
-        tmp.b = lbl_805D7C60;
-        *(u32 *)lbl_805D7C6C = tmp.a;
-        lbl_805D7C70 = tmp.b;
+        cmd2 = (((base + 0x10) & 0xFFFF) << 8) | 0x80000000;
+        c0 = lbl_805D7C5C;
+        c1 = lbl_805D7C60;
+        *(u32 *)lbl_805D7C6C = c0;
+        lbl_805D7C70 = c1;
         EXISelect(0, 2, 5);
         EXIImm(0, &cmd2, 4, 1, 0);
         EXISync(0);
@@ -264,12 +254,11 @@ void TLobby__sub_80429648(void) {
         EXIDeselect(0);
         count = lbl_805D7C48;
         if (count > 0) {
-            p = (u16 *)lbl_805D7C44;
+            tbl = (u16 *)lbl_805D7C44;
             for (i = 0; i < count; i++) {
-                if (*p == status) {
+                if (tbl[i] == status) {
                     break;
                 }
-                p++;
             }
             if (i == count) {
                 lbl_805D7C7A = lbl_805D7C6C[0];
@@ -277,19 +266,17 @@ void TLobby__sub_80429648(void) {
             }
         }
         if (lbl_805D7C4C != 0) {
-            pw = &lbl_805D7C6C[1];
             lbl_805D7C74 = (u8 *)((u32 (*)(u16, u16, u8))lbl_805D7C4C)(status, lbl_805D7C6C[1], *(u8 *)&lbl_805D7C6C[2]);
             if (lbl_805D7C74 != 0) {
-                len = *pw;
-                off = base + 4;
-                if (off + len > 0x1000) {
+                len = lbl_805D7C6C[1];
+                if ((base + 4) + len > 0x1000) {
                     exi_dma_write_length = base + len - 0xFFC;
                     exi_dma_read_length = len - exi_dma_write_length;
                 } else {
                     exi_dma_read_length = len;
                     exi_dma_write_length = 0;
                 }
-                        TLobby::start_exi_dma_read((u16)off);
+                TLobby::start_exi_dma_read((base + 4) & 0xFFFF);
                 return;
             }
         }
