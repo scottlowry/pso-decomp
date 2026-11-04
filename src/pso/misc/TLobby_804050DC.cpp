@@ -614,6 +614,7 @@ extern RecoveredGlobal_8040FF0C_lbl_805C1B78 ipv6_protocol_state;
 s32 NetIPv6Shutdown(void);
 void TLobby__sub_803F89D8(void *);
 extern RecoveredGlobal_80415650_lbl_805C1BF8 network_buffer_pool_state;
+void TLobby__sub_803F8D84(u32 key);
 s32 TLobby__sub_803F8E9C();
 void TLobby__sub_80419A34(void);
 s32 TLobby__sub_80419A7C(void);
@@ -8318,6 +8319,87 @@ s16 TLobby__sub_80415690(void) {
             e->segs[j].offset = ((Pool_80415690 *)&network_buffer_pool_state)->size;
             e->segs[j].len = 0;
         }
+    }
+    return 0;
+}
+#pragma pop
+
+#pragma push
+#pragma opt_common_subs on
+s16 TLobby__sub_8041579C(void *arg0) {
+    NetBufferRef *ref;
+    Pool_80415690 *pool;
+    Ent_80415690 *e;
+    u8 *pa;
+    u8 *pb;
+    u8 *pj;
+    s16 *pe;
+    s32 js;
+    u32 jr;
+    s16 i;
+    s16 j;
+    s16 k;
+    s16 k1;
+    s16 x;
+
+    ref = (NetBufferRef *)arg0;
+    if (ref->kind == 4) {
+        TLobby__sub_803F8D84(ref->value);
+        return 0;
+    }
+    i = (s16)(ref->value >> 24);
+    jr = (ref->value >> 16) & 0xFF;
+    if (i < 0 || (s16)jr < 0) {
+        return -1;
+    }
+    pool = (Pool_80415690 *)&network_buffer_pool_state;
+    if (i > pool->count) {
+        return -1;
+    }
+    j = (s16)jr;
+    if (j > 8) {
+        return -1;
+    }
+    e = &pool->ents[i];
+    js = j * 6;
+    pj = (u8 *)e + js;
+    pe = (s16 *)(pj + 0xc);
+    if (*pe == -1) {
+        return -1;
+    }
+    *pe = -1;
+    e->free_segs++;
+    e->free_bytes += *(u16 *)((u8 *)e + js + 0x10);
+    k = jr;
+    if (j != 7 && *(s16 *)((u8 *)e + js + 0x12) == -1) {
+        k = j + 1;
+    }
+    k1 = k - 1;
+    pa = (u8 *)e + k1 * 6;
+    pb = (u8 *)e + k * 6;
+    while (k1 >= 0) {
+        x = *(s16 *)(pa + 0xc);
+        if (x > 0) {
+            break;
+        }
+        if (x == 0) {
+            *(s16 *)(pa + 0xc) = -1;
+            *(s16 *)(pb + 0xc) = 0;
+            *(u16 *)(pa + 0xe) = *(u16 *)(pb + 0xe);
+            *(u16 *)(pa + 0x10) = *(u16 *)(pb + 0x10);
+            *(u16 *)(pb + 0xe) = (u16)(*(u16 *)(pb + 0xe) + *(u16 *)(pa + 0x10));
+            *(u16 *)(pb + 0x10) = 0;
+        } else if (x == -1) {
+            *(s16 *)(pb + 0xc) = 0;
+            *(u16 *)(pa + 0x10) = (u16)(*(u16 *)(pa + 0x10) + *(u16 *)(pb + 0x10));
+            *(u16 *)(pb + 0x10) = 0;
+            *(u16 *)(pb + 0xe) = (u16)(*(u16 *)(pa + 0xe) + *(u16 *)(pa + 0x10));
+        } else {
+            break;
+        }
+        pb -= 6;
+        pa -= 6;
+        k1--;
     }
     return 0;
 }
