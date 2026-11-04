@@ -548,39 +548,38 @@ s32 TAdSinglePlyChrSelectGC__sub_8042CD64(void) {
     pat = lbl_805D487C;
     for (;;) {
         count = ModemReadRegister(5);
-        if (count != 0) {
-            break;
-        }
-        OSYieldThread();
-    }
-    for (i = 0; i < count; i++) {
-        EXISelect(0, 2, 4);
-        EXIImm(0, &cmd, 4, EXI_WRITE, NULL);
-        EXISync(0);
-        EXIImm(0, &value, 1, EXI_READ, NULL);
-        EXISync(0);
-        EXIDeselect(0);
-        idx = state->length;
-        v = value;
-        state->length = idx + 1;
-        state->buf[idx] = v;
-        if (v == pat[match]) {
-            match++;
-            if (match == 5) {
-                return -6;
+        if (count == 0) {
+            OSYieldThread();
+        } else {
+            for (i = 0; i < count; i++) {
+                EXISelect(0, 2, 4);
+                EXIImm(0, &cmd, 4, EXI_WRITE, NULL);
+                EXISync(0);
+                EXIImm(0, &value, 1, EXI_READ, NULL);
+                EXISync(0);
+                EXIDeselect(0);
+                idx = state->length;
+                v = value;
+                state->length = idx + 1;
+                state->buf[idx] = v;
+                if (v == pat[match]) {
+                    match++;
+                    if (match == 5) {
+                        return -6;
+                    }
+                } else {
+                    match = 0;
+                }
+                if (v == 'O') {
+                    flag = 1;
+                } else if (flag == 1 && v == 'K') {
+                    return 1;
+                } else {
+                    flag = 0;
+                }
             }
-        } else {
-            match = 0;
-        }
-        if (v == 'O') {
-            flag = 1;
-        } else if (flag == 1 && v == 'K') {
-            return 1;
-        } else {
-            flag = 0;
         }
     }
-    return 1;
 }
 
 s32 TAdSinglePlyChrSelectGC__sub_8042D49C(char *cmd) {
