@@ -3250,6 +3250,7 @@ void PADRead(void *self, Strm_80405A74 *strm) {
     u8 *pool;
     u8 *pool8;
     u16 f4;
+    s16 v;
     s16 rc;
     s16 i;
 
@@ -3277,22 +3278,23 @@ void PADRead(void *self, Strm_80405A74 *strm) {
     case 2:
         s2 = strm;
         obj30b = *(u8 **)(selfb + 0x30);
-        rc = -1;
+        v = -1;
         if (hdr.flag == selfb[1]) {
             s16 rc2 = TLobby__sub_80401BCC(&s2, lbl_805D7AB8, 1);
-            rc = (s16)rc2 == 1 ? (s16)lbl_805D7AB8[rc2] : -1;
+            v = (s16)rc2 == 1 ? (s16)lbl_805D7AB8[rc2] : -1;
         }
-        if (rc == -1) {
-            return;
-        }
-        if (rc != 0) {
+        if (v == -1) {
+            rc = -1;
+        } else if (v != 0) {
             f4 = ((TLobby *)s2)->get_field_4();
             pool = (u8 *)&lbl_805C0620;
             pool8 = pool + 8;
-            i = (s16)TLobby__sub_80401ABC((B_803FADA0 *)s2, *(u8 **)(pool8), rc);
+            i = (s16)TLobby__sub_80401ABC((B_803FADA0 *)s2, *(u8 **)(pool8), v);
             *(u8 *)(*(u32 *)pool8 + i) = 0;
             *(u32 *)(obj30b + 8) = *(u32 *)pool8;
-            rc = (i < rc || rc < (s16)f4) ? 1 : 0;
+            rc = (i < v || v < (s16)f4) ? 1 : 0;
+        } else {
+            rc = 0;
         }
         if (rc != 0) {
             return;
@@ -3309,22 +3311,23 @@ void PADRead(void *self, Strm_80405A74 *strm) {
     case 3:
         s3 = strm;
         obj30b = *(u8 **)(selfb + 0x30);
-        rc = -1;
+        v = -1;
         if (hdr.flag == selfb[1]) {
             s16 rc2 = TLobby__sub_80401BCC(&s3, lbl_805D7AB8, 1);
-            rc = (s16)rc2 == 1 ? (s16)lbl_805D7AB8[rc2] : -1;
+            v = (s16)rc2 == 1 ? (s16)lbl_805D7AB8[rc2] : -1;
         }
-        if (rc == -1) {
-            return;
-        }
-        if (rc != 0) {
+        if (v == -1) {
+            rc = -1;
+        } else if (v != 0) {
             f4 = ((TLobby *)s3)->get_field_4();
             pool = (u8 *)&lbl_805C0620;
             pool8 = pool + 8;
-            i = (s16)TLobby__sub_80401ABC((B_803FADA0 *)s3, *(u8 **)(pool8), rc);
+            i = (s16)TLobby__sub_80401ABC((B_803FADA0 *)s3, *(u8 **)(pool8), v);
             *(u8 *)(*(u32 *)pool8 + i) = 0;
             *(u32 *)(obj30b + 8) = *(u32 *)pool8;
-            rc = (i < rc || rc < (s16)f4) ? 1 : 0;
+            rc = (i < v || v < (s16)f4) ? 1 : 0;
+        } else {
+            rc = 0;
         }
         if (rc != 0) {
             return;
