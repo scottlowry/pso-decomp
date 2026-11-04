@@ -6033,6 +6033,143 @@ s32 NetIPv6Init(void) {
 }
 
 s16 TLobby__sub_8040D510(Icmp6ErrorInfo *err, u8 *hdr, s16 len, s16 idx);
+s16 TLobby__sub_80410958(u8 *opt, s16 len, u8 *hdr, s16 pktlen, s16 idx);
+
+struct AddrHdr_804105E0 { u32 f0; u16 f4; u8 f6; u8 f7; };
+struct Route_804105E0 { u8 pad0[2]; s16 type; u8 pad4[2]; s16 iface; u8 pad8[0x10]; u8 gateway[16]; };
+
+s16 TLobby__sub_804105E0(u8 *self, u8 *pkt, s16 count, s16 idx) {
+    s32 TLobby__sub_80410BA8(void *, void *, s32, void *);
+    s32 TLobby__sub_80415D0C(NetPacket *, u8 *, NetIPv6SendParameters *, s32);
+    s16 NetIPv6IsMulticast(u8 *arg0);
+    s16 TLobby__sub_804136AC(s16 arg0);
+    AddrHdr_804105E0 hdr;
+    NetIPv6SendParameters params;
+    Icmp6ErrorInfo err2;
+    Icmp6ErrorInfo err1;
+    Route_804105E0 *rt;
+    u8 *e;
+    u8 *p;
+    u8 *opt;
+    u8 *nexthop;
+    s16 iface;
+    s16 count16;
+    s32 delta;
+    s32 rem;
+    s16 f26;
+    s16 flag;
+    u16 val;
+    u8 t;
+    s32 adv;
+    s32 d;
+    s16 rc;
+    s16 ret;
+
+    count16 = (s16)count;
+    delta = count16 - 0x28;
+    rem = (s16)delta;
+    p = pkt + 0x28;
+    opt = pkt + 6;
+    flag = 0;
+    hdr.f0 = *(u32 *)self;
+    hdr.f4 = *(u16 *)self;
+    hdr.f7 = self[6];
+    hdr.f6 = self[7];
+    t = self[6];
+    while ((s16)rem < 8) {
+        if (t == 0x2c) {
+            val = *(u16 *)(p + 2) & 0xFFF0;
+            flag = 1;
+            rem = 0;
+        } else if (t == 0) {
+            if (count16 != (s16)rem + 0x28) {
+                err1.type = 4;
+                err1.code = 1;
+                err1.pointer = (s32)(opt - pkt);
+                TLobby__sub_8040D510(&err1, pkt, count, idx);
+                return -1;
+            }
+            if ((s16)(((p[1] + 1) * 8) - 2) > (s16)rem) {
+                rc = -1;
+            } else {
+                rc = TLobby__sub_80410958(p + 2, (s16)p[1], (u8 *)(s16)rem, (s16)(s32)pkt, count);
+                rc = (rc < 0) ? -1 : 0;
+            }
+            if (rc < 0) {
+                return -1;
+            }
+            adv = (p[1] + 1) * 8;
+            t = p[0];
+            p += adv;
+            rem -= adv;
+        } else {
+            rem = 0;
+        }
+    }
+    if (hdr.f6 != 0) {
+        d = hdr.f6 - 1;
+        hdr.f6 = (u8)d;
+        if ((u8)d != 0) {
+            goto route;
+        }
+    }
+    if (flag == 0 || val == 0) {
+        err2.type = 3;
+        err2.code = 0;
+        err2.pointer = 0;
+        TLobby__sub_8040D510(&err2, pkt, count, idx);
+    }
+    return -1;
+route:
+    rt = (Route_804105E0 *)TLobby__sub_80413264(self + 0x18, (s32)(self + 8));
+    if (rt == NULL) {
+        if (flag == 0 || val == 0) {
+            err2.type = 1;
+            err2.code = 0;
+            err2.pointer = 0;
+            TLobby__sub_8040D510(&err2, pkt, count, idx);
+        }
+        return -1;
+    }
+    nexthop = NULL;
+    if (rt->type == 1) {
+        nexthop = self + 0x18;
+    }
+    if (rt->type >= 2) {
+        if (rt->type < 4) {
+            nexthop = rt->gateway;
+        }
+    }
+    iface = rt->iface;
+    f26 = TLobby::get_entry_field_26(iface);
+    if ((s16)count > f26) {
+        if (flag == 0 || val == 0) {
+            err2.type = 2;
+            err2.code = 0;
+            err2.pointer = f26;
+            TLobby__sub_8040D510(&err2, pkt, count, idx);
+        }
+        return -1;
+    }
+    e = TLobby::alloc_free_entry();
+    if (e == NULL) {
+        return -1;
+    }
+    *(s32 *)(e + 4) = 0;
+    *(s32 *)(e + 8) = delta;
+    *(s16 *)(e + 0xc + *(s32 *)(e + 4) * 12) = (s16)delta;
+    ((TLobby *)(e + 0x10 + *(s32 *)(e + 4) * 12))->set_value_and_enable((s32)(pkt + 0x28));
+    *(s32 *)(e + 4) = *(s32 *)(e + 4) + 1;
+    NetMemcpy(&params.source, self + 8, sizeof(params.source));
+    NetMemcpy(&params.destination, self + 0x18, sizeof(params.destination));
+    if (NetIPv6IsMulticast(nexthop) == 0 && TLobby__sub_804136AC(iface) != 0) {
+        ret = TLobby__sub_80415D0C((NetPacket *)e, nexthop, &params, iface);
+    } else {
+        ret = TLobby__sub_80410BA8(e, &params, iface, NULL);
+    }
+    ((TUdpSocket *)e)->release_entry();
+    return ret;
+}
 
 s16 TLobby__sub_80410958(u8 *opt, s16 len, u8 *hdr, s16 pktlen, s16 idx) {
     s16 NetIPv6IsMulticast(u8 *arg0);
