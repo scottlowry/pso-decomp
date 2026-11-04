@@ -778,8 +778,8 @@ s32 fn_803C8020(AdxEncCtx_803C8020 *ctx, s32 ch_idx) {
     s32 i4 = ch_idx * 4;
     s32 i2 = ch_idx * 2;
     s32 i64 = ch_idx * 64;
-    s16 *pcm = (s16 *)((u8 *)ctx + 0x90 + i64);
-    s16 *pd = pcm;
+    s16 *pd2 = (s16 *)((u8 *)ctx + 0x90 + i64);
+    s16 *pd = pd2;
     AdxEncBlock_803C8020 **bp = (AdxEncBlock_803C8020 **)((u8 *)ctx + i4);
     s32 j = 0;
     AdxEncBlock_803C8020 *b = bp[0x20];
@@ -827,9 +827,16 @@ s32 fn_803C8020(AdxEncCtx_803C8020 *ctx, s32 ch_idx) {
     s32 g = lbl_805D4660;
     s32 m = b->f78;
     s32 sv = (m - 1) / 7 + 1;
-    s32 ts = (sv >= g) ? g : sv;
-    s32 sc = (ts <= 1) ? 1 : ((sv >= g) ? g : sv);
-    b->f7C = (s16)sc;
+    s32 ts = g;
+    if (sv < g) {
+        ts = sv;
+    }
+    if (ts <= 1) {
+        g = 1;
+    } else if (sv < g) {
+        g = sv;
+    }
+    b->f7C = (s16)g;
     m = b->f78;
     if (m == 0) {
         b->f80 = lbl_805E0D48;
@@ -843,7 +850,6 @@ s32 fn_803C8020(AdxEncCtx_803C8020 *ctx, s32 ch_idx) {
     s16 sb2 = cf[0];
     hb->f8 = sb2;
     hb->fA = sa2;
-    s16 *pd2 = pcm;
     for (; k < ctx->f44; k++) {
         sample = *pd2;
         s16 hbA = h->fA;
@@ -872,8 +878,10 @@ s32 fn_803C8020(AdxEncCtx_803C8020 *ctx, s32 ch_idx) {
             b->fA = b->f8;
             b->f8 = (s16)sample;
         }
-        s32 qq = 0;
-        if (b != 0) {
+        s32 qq;
+        if (b == 0) {
+            qq = 0;
+        } else {
             qq = qw[0xC];
         }
         cv = (s32)(s16)qq * b->f80;
