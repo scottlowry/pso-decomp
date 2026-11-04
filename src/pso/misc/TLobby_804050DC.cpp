@@ -8377,7 +8377,7 @@ struct B_80415B38 {
     s8 c0;
     s8 c1;
     s8 c2;
-    s8 c3;
+    u8 c3;
     u8 pad4[4];
     s16 id;
     u8 padA[2];
@@ -9244,7 +9244,7 @@ s16 NetIPv6ApplyNeighborAdvertisement(Msg_80416994 *msg, u8 *name, s16 len, s32 
 }
 #pragma pop
 
-s16 TLobby__sub_80417294(void *, u32, u8 *, void *);
+s16 TLobby__sub_80417294(void *, u32, u8 *, s32);
 s16 TLobby__sub_80417494(void *, u8 *, void *);
 
 s16 NetIPv6HandleNeighborSolicitation(u8 *arg0, void *arg1, void *arg2, void *arg3) {
@@ -9393,7 +9393,7 @@ s16 NetIPv6HandleRouterAdvertisement(u8 *arg0, u8 *arg1, s32 arg2, void *arg3) {
     n -= 0x10;
     if (n >= 8U) {
         TLobby__sub_80406EB8(p + 4, 0x10);
-        r = TLobby__sub_80417294(p, n, arg1, arg3);
+        r = TLobby__sub_80417294(p, n, arg1, (s32)arg3);
         if (r < 0) {
             return r;
         }
@@ -9401,21 +9401,21 @@ s16 NetIPv6HandleRouterAdvertisement(u8 *arg0, u8 *arg1, s32 arg2, void *arg3) {
     return TLobby__sub_80417494(sp18, arg1, arg3);
 }
 
-s16 TLobby__sub_80417294(void *arg0, u32 len, u8 *addr, void *arg3) {
+s16 TLobby__sub_80417294(void *arg0, u32 len, u8 *addr, s32 arg3) {
     u8 *TLobby__sub_80406F0C(void *);
     void TLobby__sub_80406EB8(NetBufferRef *, s32);
     void TLobby__sub_80406FD8(void *, void *, s32);
     Ent_80416678 *TLobby__sub_804182DC(void *, void *, s16, s32);
     s32 TLobby__sub_80411604(int, int, void *);
     u8 *p0 = (u8 *)arg0;
-    u8 buf[0x20];
-    u32 pv = (u32)(buf + 0x10);
-    s16 size;
-    u8 *seen;
     u8 v2[8];
     u8 buf2[8];
     u8 v[0x10];
+    u8 buf[0x20];
+    u32 pv = (u32)(buf + 0x10);
     NetBufferRef ref;
+    s16 size;
+    u8 *seen;
     u8 *opt;
     s16 i;
     B_80415B38 *e;
@@ -9473,8 +9473,10 @@ s16 TLobby__sub_80417294(void *arg0, u32 len, u8 *addr, void *arg3) {
         i = ipv6_neighbor_discovery_state.nb;
         e = ipv6_neighbor_discovery_state.b;
         while (i > 0) {
-            if (e->c3 == 1 && NetMemcmp(e->addr, addr, 0x10) == 0) {
-                break;
+            if (e->c3 == 1) {
+                if (NetMemcmp(e->addr, addr, 0x10) == 0) {
+                    break;
+                }
             }
             i--;
             e++;
