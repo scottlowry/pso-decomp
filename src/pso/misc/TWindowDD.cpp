@@ -140,10 +140,10 @@ void TWindowDD__sub_8034055C(void *selfv) {
     void *ret = draw_default_entry__9TWindowDDFl(selfv);
     E_803403F8 q[8];
     f32 quad[8];
+    s32 count;
+    s32 cond;
     s32 i;
     s32 rr;
-    s32 cond;
-    s32 count;
     f32 depth;
     if (*(s32 *)((s8 *)ret + 0x30) >= 0) {
         calc_inner_rect__11TWindowBaseFPUc(selfv, (u8 *)ret);
