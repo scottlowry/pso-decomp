@@ -1,0 +1,36 @@
+--- before
++++ after
+@@ -24,13 +24,13 @@
+   s32 cnt;
+   u32 *rec;
+   void *down_4;
++  u32 *rec_3;
+   s32 cnt_2;
+   s32 owner;
+   u32 *rec_2;
+   void *down_3;
+   void *down_2;
+   s32 cnt_3;
+-  u32 *rec_3;
+   if ((*((void **) (((s8 *) arg0) + 0x1c4))) == 0)
+   {
+     return 0;
+@@ -68,7 +68,7 @@
+     down = *((void **) (((s8 *) down) + 0xC));
+   }
+ 
+-  if (cnt != (*((s16 *) (((s8 *) arg0) + 0x1c))))
++  if ((*((s16 *) (((s8 *) arg0) + 0x1c))) != cnt)
+   {
+     TObjPlayer__sub_801D4678(obj, 1);
+     return 0;
+@@ -91,6 +91,9 @@
+   sort_by_key__10TObjPlayerFv(obj);
+   cnt_3 = 0;
+   down_3 = *((void **) (((s8 *) (*((s32 *) (((s8 *) arg0) + 0x1c4)))) + 0x14));
++  if (obj)
++  {
++  }
+   rec_2 = (u32 *) (*((s32 *) (obj + 4)));
+   while (down_3 != 0)
+   {

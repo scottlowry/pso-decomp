@@ -1,0 +1,13 @@
+--- before
++++ after
+@@ -28,9 +28,9 @@
+   s32 owner;
+   u32 *rec_2;
+   void *down_3;
+-  s32 cnt_3;
+   u32 *rec_3;
+   void *down_4;
++  s32 cnt_3;
+   if ((*((void **) (((s8 *) arg0) + 0x1c4))) == 0)
+   {
+     return 0;

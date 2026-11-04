@@ -1,0 +1,32 @@
+--- before
++++ after
+@@ -22,15 +22,15 @@
+   u8 *obj;
+   void *down;
+   s32 cnt;
+-  u32 *rec;
+   void *down_2;
+   s32 cnt_2;
++  u32 *rec;
+   s32 owner;
++  void *down_3;
+   u32 *rec_2;
+-  void *down_3;
+-  s32 cnt_3;
+   u32 *rec_3;
+   void *down_4;
++  s32 cnt_3;
+   if ((*((void **) (((s8 *) arg0) + 0x1c4))) == 0)
+   {
+     return 0;
+@@ -73,8 +73,9 @@
+     TObjPlayer__sub_801D4678(obj, 1);
+     return 0;
+   }
++  cnt_3 = *((s32 *) (obj + 4));
+   cnt_2 = 0;
+-  rec = (u32 *) (*((s32 *) (obj + 4)));
++  rec = (u32 *) cnt_3;
+   down_2 = *((void **) (((s8 *) (*((s32 *) (((s8 *) arg0) + 0x1c4)))) + 0x14));
+   while (down_2 != 0)
+   {

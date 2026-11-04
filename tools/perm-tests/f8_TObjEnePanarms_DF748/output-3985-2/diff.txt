@@ -1,0 +1,14 @@
+--- before
++++ after
+@@ -10,8 +10,10 @@
+ {
+   u32 *b = (u32 *) bm7_s_paa_body_model_names;
+   u32 *d = b + 183;
++  u32 new_var;
++  new_var = b[100];
+   d[0] = b[99];
+-  d[1] = b[100];
++  d[1] = new_var;
+   d[2] = b[101];
+   u32 t0 = b[125];
+   d[26] = t0;

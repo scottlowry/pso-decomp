@@ -1,0 +1,746 @@
+[
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-135-1",
+  "status": "OK",
+  "size": 584,
+  "score": 99.07534
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-140-1",
+  "status": "OK",
+  "size": 584,
+  "score": 99.0411
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-150-1",
+  "status": "OK",
+  "size": 584,
+  "score": 98.9726
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-145-1",
+  "status": "OK",
+  "size": 584,
+  "score": 99.00685
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-140-2",
+  "status": "OK",
+  "size": 584,
+  "score": 99.0411
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-125-1",
+  "status": "OK",
+  "size": 584,
+  "score": 99.14384
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-135-2",
+  "status": "OK",
+  "size": 584,
+  "score": 99.07534
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-145-2",
+  "status": "OK",
+  "size": 584,
+  "score": 99.03425
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-160-1",
+  "status": "OK",
+  "size": 584,
+  "score": 98.9589
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-145-3",
+  "status": "OK",
+  "size": 584,
+  "score": 98.04794
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-120-1",
+  "status": "OK",
+  "size": 584,
+  "score": 99.178085
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-145-4",
+  "status": "OK",
+  "size": 584,
+  "score": 98.04794
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-155-1",
+  "status": "OK",
+  "size": 584,
+  "score": 98.938354
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-145-5",
+  "status": "OK",
+  "size": 584,
+  "score": 99.00685
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-125-2",
+  "status": "OK",
+  "size": 584,
+  "score": 99.14384
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-155-2",
+  "status": "OK",
+  "size": 584,
+  "score": 98.938354
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-115-1",
+  "status": "OK",
+  "size": 584,
+  "score": 99.212326
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-155-3",
+  "status": "OK",
+  "size": 584,
+  "score": 98.938354
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-150-2",
+  "status": "OK",
+  "size": 584,
+  "score": 98.9726
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-155-4",
+  "status": "OK",
+  "size": 584,
+  "score": 98.938354
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-155-5",
+  "status": "OK",
+  "size": 584,
+  "score": 98.938354
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-135-3",
+  "status": "OK",
+  "size": 584,
+  "score": 99.10274
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-155-6",
+  "status": "OK",
+  "size": 584,
+  "score": 98.938354
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-145-6",
+  "status": "OK",
+  "size": 584,
+  "score": 99.00685
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-145-7",
+  "status": "OK",
+  "size": 584,
+  "score": 99.00685
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-125-3",
+  "status": "OK",
+  "size": 584,
+  "score": 99.14384
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-80-1",
+  "status": "OK",
+  "size": 584,
+  "score": 99.45206
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-150-3",
+  "status": "OK",
+  "size": 584,
+  "score": 98.9726
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-160-2",
+  "status": "OK",
+  "size": 584,
+  "score": 98.904106
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-85-1",
+  "status": "OK",
+  "size": 584,
+  "score": 99.41781
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-135-4",
+  "status": "OK",
+  "size": 584,
+  "score": 99.07534
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-105-1",
+  "status": "OK",
+  "size": 584,
+  "score": 99.28082
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-150-4",
+  "status": "OK",
+  "size": 584,
+  "score": 98.9726
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-140-3",
+  "status": "OK",
+  "size": 584,
+  "score": 99.0411
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-155-7",
+  "status": "OK",
+  "size": 584,
+  "score": 98.938354
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-145-8",
+  "status": "OK",
+  "size": 584,
+  "score": 99.03425
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-150-5",
+  "status": "OK",
+  "size": 584,
+  "score": 98.9726
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-50-1",
+  "status": "OK",
+  "size": 584,
+  "score": 99.65753
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-85-2",
+  "status": "OK",
+  "size": 584,
+  "score": 99.41781
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-150-6",
+  "status": "OK",
+  "size": 584,
+  "score": 98.9726
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-145-9",
+  "status": "OK",
+  "size": 584,
+  "score": 98.04794
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-155-8",
+  "status": "OK",
+  "size": 584,
+  "score": 98.938354
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-135-5",
+  "status": "OK",
+  "size": 584,
+  "score": 99.07534
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-140-4",
+  "status": "OK",
+  "size": 584,
+  "score": 99.0411
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-100-1",
+  "status": "OK",
+  "size": 584,
+  "score": 99.31507
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-120-2",
+  "status": "OK",
+  "size": 584,
+  "score": 99.178085
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-150-7",
+  "status": "OK",
+  "size": 584,
+  "score": 98.9726
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-135-6",
+  "status": "OK",
+  "size": 584,
+  "score": 99.07534
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-115-2",
+  "status": "OK",
+  "size": 584,
+  "score": 99.212326
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-130-1",
+  "status": "OK",
+  "size": 584,
+  "score": 99.10959
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-160-3",
+  "status": "OK",
+  "size": 584,
+  "score": 98.904106
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-140-5",
+  "status": "OK",
+  "size": 584,
+  "score": 99.0411
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-150-8",
+  "status": "OK",
+  "size": 584,
+  "score": 98.9726
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-140-6",
+  "status": "OK",
+  "size": 584,
+  "score": 99.0685
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-135-7",
+  "status": "OK",
+  "size": 584,
+  "score": 99.07534
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-105-2",
+  "status": "OK",
+  "size": 584,
+  "score": 99.28082
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-65-1",
+  "status": "OK",
+  "size": 584,
+  "score": 99.554794
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-100-2",
+  "status": "OK",
+  "size": 584,
+  "score": 99.31507
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-115-3",
+  "status": "OK",
+  "size": 584,
+  "score": 99.212326
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-70-1",
+  "status": "OK",
+  "size": 584,
+  "score": 99.520546
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-150-9",
+  "status": "OK",
+  "size": 584,
+  "score": 99.0274
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-140-7",
+  "status": "OK",
+  "size": 584,
+  "score": 99.0411
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-155-9",
+  "status": "OK",
+  "size": 584,
+  "score": 98.938354
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-155-10",
+  "status": "OK",
+  "size": 584,
+  "score": 98.938354
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-145-10",
+  "status": "OK",
+  "size": 584,
+  "score": 99.03425
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-135-8",
+  "status": "OK",
+  "size": 584,
+  "score": 99.07534
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-140-8",
+  "status": "OK",
+  "size": 584,
+  "score": 99.0411
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-160-4",
+  "status": "OK",
+  "size": 584,
+  "score": 98.904106
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-150-10",
+  "status": "OK",
+  "size": 584,
+  "score": 98.9726
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-90-1",
+  "status": "OK",
+  "size": 584,
+  "score": 99.38356
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-135-9",
+  "status": "OK",
+  "size": 584,
+  "score": 99.07534
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-155-11",
+  "status": "OK",
+  "size": 584,
+  "score": 98.96575
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-135-10",
+  "status": "OK",
+  "size": 584,
+  "score": 99.10274
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-155-12",
+  "status": "OK",
+  "size": 584,
+  "score": 98.96575
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-150-11",
+  "status": "OK",
+  "size": 584,
+  "score": 98.9726
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-140-9",
+  "status": "OK",
+  "size": 584,
+  "score": 99.0685
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-155-13",
+  "status": "OK",
+  "size": 584,
+  "score": 98.99315
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-145-11",
+  "status": "OK",
+  "size": 584,
+  "score": 99.00685
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-145-12",
+  "status": "OK",
+  "size": 584,
+  "score": 99.00685
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-135-11",
+  "status": "OK",
+  "size": 584,
+  "score": 99.07534
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-125-4",
+  "status": "OK",
+  "size": 584,
+  "score": 99.14384
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-160-5",
+  "status": "OK",
+  "size": 584,
+  "score": 98.9315
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-160-6",
+  "status": "OK",
+  "size": 584,
+  "score": 98.9315
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-155-14",
+  "status": "OK",
+  "size": 584,
+  "score": 98.938354
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-120-3",
+  "status": "OK",
+  "size": 584,
+  "score": 99.178085
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-155-15",
+  "status": "OK",
+  "size": 584,
+  "score": 98.938354
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-145-13",
+  "status": "OK",
+  "size": 584,
+  "score": 99.00685
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-140-10",
+  "status": "OK",
+  "size": 584,
+  "score": 99.0411
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-115-4",
+  "status": "OK",
+  "size": 584,
+  "score": 99.26712
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-115-5",
+  "status": "OK",
+  "size": 584,
+  "score": 99.212326
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-140-11",
+  "status": "OK",
+  "size": 584,
+  "score": 99.0411
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-160-7",
+  "status": "OK",
+  "size": 584,
+  "score": 98.904106
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-105-3",
+  "status": "OK",
+  "size": 584,
+  "score": 99.28082
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-105-4",
+  "status": "OK",
+  "size": 584,
+  "score": 99.28082
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-90-2",
+  "status": "OK",
+  "size": 584,
+  "score": 99.41096
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-115-6",
+  "status": "OK",
+  "size": 584,
+  "score": 99.212326
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-160-8",
+  "status": "OK",
+  "size": 584,
+  "score": 98.904106
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-160-9",
+  "status": "OK",
+  "size": 584,
+  "score": 98.904106
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-120-4",
+  "status": "OK",
+  "size": 584,
+  "score": 99.178085
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-155-16",
+  "status": "OK",
+  "size": 584,
+  "score": 98.938354
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-140-12",
+  "status": "OK",
+  "size": 584,
+  "score": 99.0411
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-50-2",
+  "status": "OK",
+  "size": 584,
+  "score": 99.65753
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-140-13",
+  "status": "OK",
+  "size": 584,
+  "score": 99.0411
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-100-3",
+  "status": "OK",
+  "size": 584,
+  "score": 99.28082
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-155-17",
+  "status": "OK",
+  "size": 584,
+  "score": 98.938354
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-145-14",
+  "status": "OK",
+  "size": 584,
+  "score": 98.04794
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-140-14",
+  "status": "OK",
+  "size": 584,
+  "score": 99.0685
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-120-5",
+  "status": "OK",
+  "size": 584,
+  "score": 99.178085
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-145-15",
+  "status": "OK",
+  "size": 584,
+  "score": 99.00685
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-155-18",
+  "status": "OK",
+  "size": 584,
+  "score": 98.938354
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-155-19",
+  "status": "OK",
+  "size": 584,
+  "score": 98.938354
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-155-20",
+  "status": "OK",
+  "size": 584,
+  "score": 98.938354
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-155-21",
+  "status": "OK",
+  "size": 584,
+  "score": 98.938354
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-150-12",
+  "status": "OK",
+  "size": 584,
+  "score": 98.0411
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-110-1",
+  "status": "OK",
+  "size": 584,
+  "score": 99.246574
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-30-1",
+  "status": "OK",
+  "size": 584,
+  "score": 99.79452
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-40-1",
+  "status": "OK",
+  "size": 584,
+  "score": 99.72603
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-40-2",
+  "status": "OK",
+  "size": 584,
+  "score": 99.72603
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-40-3",
+  "status": "OK",
+  "size": 584,
+  "score": 99.72603
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-35-1",
+  "status": "OK",
+  "size": 584,
+  "score": 99.787674
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-35-2",
+  "status": "OK",
+  "size": 584,
+  "score": 99.787674
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r1-output-40-4",
+  "status": "OK",
+  "size": 584,
+  "score": 99.72603
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/r3-output-20-1",
+  "status": "OK",
+  "size": 584,
+  "score": 99.863014
+ },
+ {
+  "dir": "/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjPlayer_801D4368/output-0-1",
+  "status": "OK",
+  "size": 584,
+  "score": 100.0
+ }
+]

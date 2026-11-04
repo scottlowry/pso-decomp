@@ -1,0 +1,31 @@
+--- before
++++ after
+@@ -22,15 +22,15 @@
+   u8 *obj;
+   void *down;
+   s32 cnt;
++  void *down_4;
++  void *down_3;
+   u32 *rec;
++  s32 cnt_2;
+   void *down_2;
+-  s32 cnt_2;
+   s32 owner;
+   u32 *rec_2;
+-  void *down_3;
+   s32 cnt_3;
+   u32 *rec_3;
+-  void *down_4;
+   if ((*((void **) (((s8 *) arg0) + 0x1c4))) == 0)
+   {
+     return 0;
+@@ -116,8 +116,8 @@
+       if (rec_3[1] != 0)
+       {
+         set_field_1c__10TObjPlayerFl(down_4, (s32) rec_3[1]);
++      }
+         rec_3 = (u32 *) (((s8 *) rec_3) + 8);
+-      }
+     }
+     down_4 = *((void **) (((s8 *) down_4) + 0xC));
+   }

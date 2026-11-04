@@ -1,0 +1,24 @@
+--- before
++++ after
+@@ -23,10 +23,10 @@
+   void *down;
+   s32 cnt;
+   u32 *rec;
+-  void *down_2;
+   s32 cnt_2;
+   s32 owner;
+   u32 *rec_2;
++  void *down_2;
+   void *down_3;
+   s32 cnt_3;
+   u32 *rec_3;
+@@ -64,8 +64,8 @@
+     if ((is_item_valid__9TItemListFl(down) != 0) && (get_owner_if_alive__10TObjPlayerFv(down) != 0U))
+     {
+       cnt++;
++      down = *((void **) (((s8 *) down) + 0xC));
+     }
+-    down = *((void **) (((s8 *) down) + 0xC));
+   }
+ 
+   if (cnt != (*((s16 *) (((s8 *) arg0) + 0x1c))))

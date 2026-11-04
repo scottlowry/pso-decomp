@@ -1,0 +1,34 @@
+--- before
++++ after
+@@ -8,6 +8,7 @@
+ extern u8 bm7_s_paa_body_model_names[];
+ void TObjEnePanarms__sub_800DF748(void)
+ {
++  int new_var;
+   u32 *b = (u32 *) bm7_s_paa_body_model_names;
+   u32 *d = b + 183;
+   d[0] = b[99];
+@@ -113,7 +114,7 @@
+   d[73] = t48;
+   u32 t49 = b[173];
+   d[74] = t49;
+-  u32 t50 = b[174];
++  u32 t50 = b[new_var = 174];
+   d[75] = t50;
+   u32 t51 = b[175];
+   d[76] = t51;
+@@ -172,7 +173,6 @@
+   u32 t78 = b[164];
+   d[65] = t78;
+   u32 t79 = b[165];
+-  d[66] = t79;
+   u32 t80 = b[166];
+   d[67] = t80;
+   u32 t81 = b[167];
+@@ -181,5 +181,6 @@
+   d[70] = t82;
+   u32 t83 = b[182];
+   d[83] = t83;
++  d[66] = t79;
+ }
+ 

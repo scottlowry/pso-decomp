@@ -1,0 +1,15 @@
+/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjEnePanarms_800E1774/grid/champ.cpp
+/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjEnePanarms_800E1774/grid/bothpun.cpp
+/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjEnePanarms_800E1774/grid/bothmem.cpp
+/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjEnePanarms_800E1774/grid/shared_d.cpp
+/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjEnePanarms_800E1774/grid/ok_u8.cpp
+/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjEnePanarms_800E1774/grid/namedconst.cpp
+/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjEnePanarms_800E1774/grid/sentinel.cpp
+/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjEnePanarms_800E1774/grid/ok0_outer.cpp
+/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjEnePanarms_800E1774/grid/p_ok0_shared.cpp
+/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjEnePanarms_800E1774/grid/p_ok0_pun.cpp
+/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjEnePanarms_800E1774/grid/p_shared_pun.cpp
+/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjEnePanarms_800E1774/grid/p_sentinel_shared.cpp
+/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjEnePanarms_800E1774/grid/restage_self.cpp
+/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjEnePanarms_800E1774/grid/u8ret.cpp
+/Users/scott/Hermes/pso-decomp/pso-decomp-f8/tools/perm-tests/f8_TObjEnePanarms_800E1774/grid/f32casts.cpp

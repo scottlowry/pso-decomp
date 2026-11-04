@@ -1,0 +1,31 @@
+--- before
++++ after
+@@ -21,6 +21,7 @@
+ {
+   u8 *obj;
+   void *down;
++  u32 *rec_3;
+   s32 cnt;
+   u32 *rec;
+   void *down_2;
+@@ -28,9 +29,8 @@
+   s32 owner;
+   u32 *rec_2;
+   void *down_3;
++  void *down_4;
+   s32 cnt_3;
+-  u32 *rec_3;
+-  void *down_4;
+   if ((*((void **) (((s8 *) arg0) + 0x1c4))) == 0)
+   {
+     return 0;
+@@ -89,8 +89,8 @@
+   }
+ 
+   sort_by_key__10TObjPlayerFv(obj);
++  rec_2 = (u32 *) (*((s32 *) (obj + 4)));
+   cnt_3 = 0;
+-  rec_2 = (u32 *) (*((s32 *) (obj + 4)));
+   down_3 = *((void **) (((s8 *) (*((s32 *) (((s8 *) arg0) + 0x1c4)))) + 0x14));
+   while (down_3 != 0)
+   {

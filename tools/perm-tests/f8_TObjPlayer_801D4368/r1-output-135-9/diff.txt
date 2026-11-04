@@ -1,0 +1,45 @@
+--- before
++++ after
+@@ -23,14 +23,15 @@
+   void *down;
+   s32 cnt;
+   u32 *rec;
+-  void *down_2;
+   s32 cnt_2;
+   s32 owner;
++  void *down_2;
+   u32 *rec_2;
+   void *down_3;
+   s32 cnt_3;
+   u32 *rec_3;
+   void *down_4;
++  down_4 = ((s8 *) arg0) + 0x1c;
+   if ((*((void **) (((s8 *) arg0) + 0x1c4))) == 0)
+   {
+     return 0;
+@@ -39,14 +40,14 @@
+   {
+     return 0;
+   }
+-  if (((*((s16 *) (((s8 *) arg0) + 0x1c))) > 0x1e) || ((*((s16 *) (((s8 *) arg0) + 0x1c))) < 1))
++  if (((*((s16 *) down_4)) > 0x1e) || ((*((s16 *) down_4)) < 1))
+   {
+     return 0;
+   }
+   obj = __nw__FUl(8);
+   if (obj != 0)
+   {
+-    obj = TObjPlayer__sub_801D46D4(obj, *((s16 *) (((s8 *) arg0) + 0x1c)));
++    obj = TObjPlayer__sub_801D46D4(obj, *((s16 *) down_4));
+   }
+   if (obj == 0)
+   {
+@@ -68,7 +69,7 @@
+     down = *((void **) (((s8 *) down) + 0xC));
+   }
+ 
+-  if (cnt != (*((s16 *) (((s8 *) arg0) + 0x1c))))
++  if (cnt != (*((s16 *) down_4)))
+   {
+     TObjPlayer__sub_801D4678(obj, 1);
+     return 0;

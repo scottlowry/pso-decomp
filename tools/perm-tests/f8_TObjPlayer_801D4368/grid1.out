@@ -1,0 +1,116 @@
+compiled W10_merge12
+compiled W10b_merge12
+compiled W11_merge23
+compiled W11b_merge23
+compiled W1_walker3
+compiled W1b_walker3
+compiled W2_walker4
+compiled W3_rec3up
+compiled W4_p4swap
+compiled W5_w1p4swap
+compiled W6_w1rec3up
+compiled W9_combo
+compiled X1_downp10
+compiled X1_downp11
+compiled X1_downp12
+compiled X2_down_p4
+compiled X3_cntfirst
+compiled X4_walkers_head
+compiled X5_rec3_p5
+compiled X5_rec3_p6
+compiled X5_rec3_p7
+compiled X6_owner_last
+compiled X7_cnt3last
+compiled Y10_cnt2first
+compiled Y11_comma_p1
+compiled Y12_comma_cnt
+compiled Y13_p4defswap
+compiled Y14_d10comma
+compiled Y15_down_p8
+compiled Y1_down_p10
+compiled Y1_down_p11
+compiled Y1_down_p12
+compiled Y1_down_p4
+compiled Y1_down_p9
+compiled Y7_cntfirst
+compiled Y8_d2d3swap
+compiled Z1_p1defswap
+compiled Z2_p1swap_downlast
+W10_merge12                  0x248 GATE-OK  objdiff=98.69863 diff_rows=32
+W10b_merge12                 0x248 GATE-OK  objdiff=98.69863 diff_rows=32
+W11_merge23                  0x248 GATE-OK  objdiff=98.69863 diff_rows=32
+W11b_merge23                 0x248 GATE-OK  objdiff=98.69863 diff_rows=32
+W1_walker3                   0x248 GATE-OK  objdiff=98.69863 diff_rows=32
+W1b_walker3                  0x248 GATE-OK  objdiff=98.69863 diff_rows=32
+W2_walker4                   0x248 GATE-OK  objdiff=98.4589 diff_rows=38
+W3_rec3up                    0x248 GATE-OK  objdiff=99.41781 diff_rows=14
+W4_p4swap                    0x248 GATE-OK  objdiff=99.65753 diff_rows=8
+W5_w1p4swap                  0x248 GATE-OK  objdiff=98.69863 diff_rows=32
+W6_w1rec3up                  0x248 GATE-OK  objdiff=98.4589 diff_rows=38
+W9_combo                     0x248 GATE-OK  objdiff=98.4589 diff_rows=38
+X1_downp10                   0x248 GATE-OK  objdiff=99.0411 diff_rows=22
+X1_downp11                   0x248 GATE-OK  objdiff=98.83562 diff_rows=27
+X1_downp12                   0x248 GATE-OK  objdiff=98.83562 diff_rows=27
+X2_down_p4                   0x248 GATE-OK  objdiff=99.07534 diff_rows=21
+X3_cntfirst                  0x248 GATE-OK  objdiff=99.520546 diff_rows=11
+X4_walkers_head              0x248 GATE-OK  objdiff=98.869865 diff_rows=27
+X5_rec3_p5                   0x248 GATE-OK  objdiff=99.41781 diff_rows=14
+X5_rec3_p6                   0x248 GATE-OK  objdiff=99.79452 diff_rows=5
+X5_rec3_p7                   0x248 GATE-OK  objdiff=99.79452 diff_rows=5
+X6_owner_last                0x248 GATE-OK  objdiff=99.65753 diff_rows=8
+X7_cnt3last                  0x248 GATE-OK  objdiff=99.65753 diff_rows=8
+Y10_cnt2first                0x248 GATE-OK  objdiff=99.79452 diff_rows=5
+Y11_comma_p1                 0x248 GATE-OK  objdiff=99.79452 diff_rows=5
+Y12_comma_cnt                0x248 GATE-OK  objdiff=99.79452 diff_rows=5
+Y13_p4defswap                0x248 GATE-OK  objdiff=99.79452 diff_rows=5
+Y14_d10comma                 0x248 GATE-OK  objdiff=99.0411 diff_rows=22
+Y15_down_p8                  0x248 GATE-OK  objdiff=98.83562 diff_rows=27
+Y1_down_p10                  0x248 GATE-OK  objdiff=99.0411 diff_rows=22
+Y1_down_p11                  0x248 GATE-OK  objdiff=99.0411 diff_rows=22
+Y1_down_p12                  0x248 GATE-OK  objdiff=98.83562 diff_rows=27
+Y1_down_p4                   0x248 GATE-OK  objdiff=99.212326 diff_rows=18
+Y1_down_p9                   0x248 GATE-OK  objdiff=98.83562 diff_rows=27
+Y7_cntfirst                  0x248 GATE-OK  objdiff=99.65753 diff_rows=8
+Y8_d2d3swap                  0x248 GATE-OK  objdiff=99.79452 diff_rows=5
+Z1_p1defswap                 0x248 GATE-OK  objdiff=99.79452 diff_rows=5
+Z2_p1swap_downlast           0x248 GATE-OK  objdiff=98.83562 diff_rows=27
+
+=== ranked by official % (gate-passers first) ===
+  X5_rec3_p6                   0x248 objdiff=99.79452 diff_rows=5
+  X5_rec3_p7                   0x248 objdiff=99.79452 diff_rows=5
+  Y10_cnt2first                0x248 objdiff=99.79452 diff_rows=5
+  Y11_comma_p1                 0x248 objdiff=99.79452 diff_rows=5
+  Y12_comma_cnt                0x248 objdiff=99.79452 diff_rows=5
+  Y13_p4defswap                0x248 objdiff=99.79452 diff_rows=5
+  Y8_d2d3swap                  0x248 objdiff=99.79452 diff_rows=5
+  Z1_p1defswap                 0x248 objdiff=99.79452 diff_rows=5
+  W4_p4swap                    0x248 objdiff=99.65753 diff_rows=8
+  X6_owner_last                0x248 objdiff=99.65753 diff_rows=8
+  X7_cnt3last                  0x248 objdiff=99.65753 diff_rows=8
+  Y7_cntfirst                  0x248 objdiff=99.65753 diff_rows=8
+  X3_cntfirst                  0x248 objdiff=99.520546 diff_rows=11
+  W3_rec3up                    0x248 objdiff=99.41781 diff_rows=14
+  X5_rec3_p5                   0x248 objdiff=99.41781 diff_rows=14
+  Y1_down_p4                   0x248 objdiff=99.212326 diff_rows=18
+  X2_down_p4                   0x248 objdiff=99.07534 diff_rows=21
+  X1_downp10                   0x248 objdiff=99.0411 diff_rows=22
+  Y14_d10comma                 0x248 objdiff=99.0411 diff_rows=22
+  Y1_down_p10                  0x248 objdiff=99.0411 diff_rows=22
+  Y1_down_p11                  0x248 objdiff=99.0411 diff_rows=22
+  X4_walkers_head              0x248 objdiff=98.869865 diff_rows=27
+  X1_downp11                   0x248 objdiff=98.83562 diff_rows=27
+  X1_downp12                   0x248 objdiff=98.83562 diff_rows=27
+  Y15_down_p8                  0x248 objdiff=98.83562 diff_rows=27
+  Y1_down_p12                  0x248 objdiff=98.83562 diff_rows=27
+  Y1_down_p9                   0x248 objdiff=98.83562 diff_rows=27
+  Z2_p1swap_downlast           0x248 objdiff=98.83562 diff_rows=27
+  W10_merge12                  0x248 objdiff=98.69863 diff_rows=32
+  W10b_merge12                 0x248 objdiff=98.69863 diff_rows=32
+  W11_merge23                  0x248 objdiff=98.69863 diff_rows=32
+  W11b_merge23                 0x248 objdiff=98.69863 diff_rows=32
+  W1_walker3                   0x248 objdiff=98.69863 diff_rows=32
+  W1b_walker3                  0x248 objdiff=98.69863 diff_rows=32
+  W5_w1p4swap                  0x248 objdiff=98.69863 diff_rows=32
+  W2_walker4                   0x248 objdiff=98.4589 diff_rows=38
+  W6_w1rec3up                  0x248 objdiff=98.4589 diff_rows=38
+  W9_combo                     0x248 objdiff=98.4589 diff_rows=38

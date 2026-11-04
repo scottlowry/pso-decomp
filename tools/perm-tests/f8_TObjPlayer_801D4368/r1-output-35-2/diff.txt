@@ -1,0 +1,23 @@
+--- before
++++ after
+@@ -27,10 +27,10 @@
+   s32 cnt_2;
+   s32 owner;
+   u32 *rec_2;
++  u32 *rec_3;
+   void *down_3;
+   void *down_2;
+   s32 cnt_3;
+-  u32 *rec_3;
+   if ((*((void **) (((s8 *) arg0) + 0x1c4))) == 0)
+   {
+     return 0;
+@@ -96,7 +96,7 @@
+   {
+     if (((is_item_valid__9TItemListFl(down_3) != 0) && (get_owner_if_alive__10TObjPlayerFv(down_3) != 0U)) && (rec_2[1] != 0))
+     {
+-      rec_2 = (u32 *) (((s8 *) rec_2) + 8);
++      rec_2 = (u32 *) (rec_2 + 8);
+       cnt_3++;
+     }
+     down_3 = *((void **) (((s8 *) down_3) + 0xC));

@@ -1,0 +1,24 @@
+--- before
++++ after
+@@ -19,18 +19,18 @@
+ extern void set_field_1c__10TObjPlayerFl(void *, s32);
+ s32 TObjPlayer__sub_801D4368(void *arg0)
+ {
++  void *down_4;
+   u8 *obj;
+   void *down;
+   s32 cnt;
+   u32 *rec;
++  s32 cnt_2;
+   void *down_2;
+-  s32 cnt_2;
+   s32 owner;
+   u32 *rec_2;
+   void *down_3;
++  u32 *rec_3;
+   s32 cnt_3;
+-  u32 *rec_3;
+-  void *down_4;
+   if ((*((void **) (((s8 *) arg0) + 0x1c4))) == 0)
+   {
+     return 0;

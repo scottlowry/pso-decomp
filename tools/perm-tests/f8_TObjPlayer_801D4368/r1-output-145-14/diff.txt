@@ -1,0 +1,28 @@
+--- before
++++ after
+@@ -23,11 +23,11 @@
+   void *down;
+   s32 cnt;
+   u32 *rec;
+-  void *down_2;
+   s32 cnt_2;
+   s32 owner;
+   u32 *rec_2;
+   void *down_3;
++  void *down_2;
+   s32 cnt_3;
+   u32 *rec_3;
+   void *down_4;
+@@ -78,11 +78,11 @@
+   down_2 = *((void **) (((s8 *) (*((s32 *) (((s8 *) arg0) + 0x1c4)))) + 0x14));
+   while (down_2 != 0)
+   {
++    rec = (u32 *) (((s8 *) rec) + 8);
+     if ((is_item_valid__9TItemListFl(down_2) != 0) && ((owner = get_owner_if_alive__10TObjPlayerFv(down_2)) != 0U))
+     {
+       rec[1] = owner;
+       TObjPlayer__sub_801D45B0((s32 *) rec, owner);
+-      rec = (u32 *) (((s8 *) rec) + 8);
+       cnt_2++;
+     }
+     down_2 = *((void **) (((s8 *) down_2) + 0xC));

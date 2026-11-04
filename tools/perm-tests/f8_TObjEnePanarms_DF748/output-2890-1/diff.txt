@@ -1,0 +1,19 @@
+--- before
++++ after
+@@ -9,7 +9,7 @@
+ void TObjEnePanarms__sub_800DF748(void)
+ {
+   u32 *b = (u32 *) bm7_s_paa_body_model_names;
+-  u32 *d = b + 183;
++  u32 *d;
+   d[0] = b[99];
+   d[1] = b[100];
+   d[2] = b[101];
+@@ -20,6 +20,7 @@
+   u32 t2 = b[126];
+   d[27] = t2;
+   u32 t3 = b[127];
++  d = b + 183;
+   d[28] = t3;
+   u32 t4 = b[128];
+   d[29] = t4;

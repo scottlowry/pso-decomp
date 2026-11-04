@@ -113,6 +113,20 @@ struct Win_8021F9EC {
     Rec_8021F9EC recs[16];
 };
 
+struct Win_8021F4B4 {
+    u8 pad0[0x24];
+    u8 *player;
+    void *list;
+    u8 pad2c[0x30 - 0x2C];
+    void *menu;
+    void *numwin;
+    u8 pad38[0x4C - 0x38];
+    s32 field4c;
+    s32 field50;
+    u8 pad54[0x58 - 0x54];
+    Rec_8021F9EC recs[16];
+};
+
 extern "C" {
 s32 sub_8022397C__15TShopWindowBaseFv(void *);
 void *__ct__15TShopWindowBaseFv(void *arg0);
@@ -138,6 +152,13 @@ void *create_cost_window(u16);
 void *__dt__19TShopItemListWindowFv(TShopItemListWindow *arg0, s16 arg1);
 void __dl__7TObjectFPv(void *);
 void *__dt__15TShopWindowBaseFv(void *self, s16 m);
+void *create_window_menu(s32, s32, u16);
+void *__ct__18TWindowInputNumberFPvllls(void *, s32, s32, s32, s32, s16);
+s32 forward_trade_action_default__16TObjCityMainWarpFPviii(s32, s32, s32, s32);
+s32 align_menu_entry_positions(s32);
+s32 calc_window_size__17TWindowSubComCardFv(s32);
+s32 set_ready_flag__18TCheckRoomSequenceFv(s32);
+s32 set_position_xy__15TWindowAdditionFff(s32, f32, f32);
 
 void TShopItemListWindow::display_message(const char *text, s32 flags) {
     struct VObj_8021F134 *temp_r3;
@@ -337,6 +358,49 @@ void TShopItemListWindow::vfunc_11() {
     default:
         return;
     }
+}
+
+s32 TShopItemListWindow::prepare_tool_purchase() {
+    Win_8021F4B4 *self = (Win_8021F4B4 *)this;
+    s32 off;
+    s32 maxQty;
+    s32 count;
+    void *obj;
+    f32 scale;
+
+    if (self->list == NULL) {
+        return;
+    }
+    off = get_cursor_value__19TWindowMenuIconLineFv(self->list) * 0x14;
+    maxQty = ((TObjPlayer *)self->player)->can_inventory_accept_item((u8 *)self + off + 0x58);
+    count = obj_getPtr2B0_20(self->player) / *(s32 *)((u8 *)self + off + 0x68);
+    if (count > maxQty) {
+        count = maxQty;
+    }
+    if (count > 1) {
+        obj = __nw__7TObjectFUl(0x7C);
+        if (obj != NULL) {
+            obj = __ct__18TWindowInputNumberFPvllls(obj, get_window_layout_position(0x2B), 1, count, 1, ((TShopSequence *)self)->get_child_field1c());
+        }
+        self->numwin = obj;
+        if (self->numwin != NULL && TLobby::is_camera_ctrl_active() > 2) {
+            ((TLobby *)self->numwin)->set_position(0.75f, 0.75f);
+        }
+        self->field4c = 0;
+        ((TShopWindowBase *)self)->set_field_20(2);
+        return;
+    }
+    self->menu = create_window_menu(get_window_layout_position(0x2B), 2, get_entity_id(self->player));
+    forward_trade_action_default__16TObjCityMainWarpFPviii((s32)self->menu, get_shop_text(4), 6, 0);
+    forward_trade_action_default__16TObjCityMainWarpFPviii((s32)self->menu, get_shop_text(5), 6, 1);
+    calc_window_size__17TWindowSubComCardFv((s32)self->menu);
+    align_menu_entry_positions((s32)self->menu);
+    set_ready_flag__18TCheckRoomSequenceFv((s32)self->menu);
+    scale = ((TShopWindowBase *)self)->get_scale();
+    set_position_xy__15TWindowAdditionFff((s32)self->menu, ((TShopWindowBase *)self)->get_scale(), scale);
+    self->field50 = 1;
+    self->field4c = 1;
+    ((TShopWindowBase *)self)->set_field_20(2);
 }
 
 void *__dt__19TShopItemListWindowFv(TShopItemListWindow *arg0, s16 arg1) {

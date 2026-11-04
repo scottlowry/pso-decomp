@@ -1,0 +1,16 @@
+--- before
++++ after
+@@ -20,11 +20,11 @@
+ s32 TObjPlayer__sub_801D4368(void *arg0)
+ {
+   u8 *obj;
++  s32 cnt_2;
+   void *down;
+-  s32 cnt;
+   u32 *rec;
+   void *down_2;
+-  s32 cnt_2;
++  s32 cnt;
+   s32 owner;
+   u32 *rec_2;
+   void *down_3;

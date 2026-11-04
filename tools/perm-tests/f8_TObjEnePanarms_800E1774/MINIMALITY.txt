@@ -1,0 +1,3 @@
+pre-patch word-diff slots (idx, hex off, ours, orig): 67@0x10C:D8010018/D8010020, 68@0x110:8081001C/80810024
+post-patch fn bytes vs ORIG: IDENTICAL (79/79 words)
+oracle(patched) = 100.0  rows=0  (calib: champ unpatched = 99.974686/2rows)

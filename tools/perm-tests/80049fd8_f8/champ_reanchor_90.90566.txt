@@ -1,0 +1,17 @@
+ORIG  fn_80049FD8                                             match=90.90566 size=212
+OURS  fn_80049FD8                                             match=90.90566 size=212
+rows: orig 53 ours 53
+  slot  7 O: subi r5, r4, 0x4                           N: lwz r5, boss3_volopt_resources@sda21      
+  slot  8 O: mtctr r0                                   N: lwz r7, 0x42c(r5)                         
+  slot  9 O: lwz r4, 0x4(r5)                            N: subi r5, r4, 0x4                          
+  slot 10 O: lwzu r0, 0x8(r5)                           N: mtctr r0                                  
+  slot 11 O: stw r4, 0x4(r6)                            N: lwz r4, 0x4(r5)                           
+  slot 12 O: stwu r0, 0x8(r6)                           N: lwzu r0, 0x8(r5)                          
+  slot 13 O: bdnz 0x24                                  N: stw r4, 0x4(r6)                           
+  slot 14 O: lwz r4, boss3_volopt_resources@sda21       N: stwu r0, 0x8(r6)                          
+  slot 15 O: lwz r0, 0x4(r5)                            N: bdnz 0x2c                                 
+  slot 16 O: lwz r5, 0x42c(r4)                          N: lwz r0, 0x4(r5)                           
+  slot 18 O: lfs f2, 0x38(r3)                           N: lfs f0, 0x40(r3)                          
+  slot 20 O: lfs f0, 0x40(r3)                           N: lfs f2, 0x38(r3)                          
+  slot 22 O: lwz r4, 0xe8(r5)                           N: lwz r4, 0xe8(r7)                          
+  slot 23 O: lwz r0, 0xec(r5)                           N: lwz r0, 0xec(r7)                          

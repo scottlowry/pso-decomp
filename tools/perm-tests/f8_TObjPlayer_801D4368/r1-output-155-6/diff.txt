@@ -1,0 +1,40 @@
+--- before
++++ after
+@@ -21,16 +21,16 @@
+ {
+   u8 *obj;
+   void *down;
++  u32 *rec;
+   s32 cnt;
+-  u32 *rec;
+   void *down_2;
++  void *down_4;
+   s32 cnt_2;
+   s32 owner;
+   u32 *rec_2;
+   void *down_3;
+   s32 cnt_3;
+   u32 *rec_3;
+-  void *down_4;
+   if ((*((void **) (((s8 *) arg0) + 0x1c4))) == 0)
+   {
+     return 0;
+@@ -86,6 +86,9 @@
+       cnt_2++;
+     }
+     down_2 = *((void **) (((s8 *) down_2) + 0xC));
++    if (cnt_3)
++    {
++    }
+   }
+ 
+   sort_by_key__10TObjPlayerFv(obj);
+@@ -108,7 +111,7 @@
+     return 0;
+   }
+   rec_3 = (u32 *) (*((s32 *) (obj + 4)));
+-  down_4 = *((void **) (((s8 *) (*((s32 *) (((s8 *) arg0) + 0x1c4)))) + 0x14));
++  down_4 = *((void **) (0x14 + ((s8 *) (*((s32 *) (((s8 *) arg0) + 0x1c4))))));
+   while (down_4 != 0)
+   {
+     if ((is_item_valid__9TItemListFl(down_4) != 0) && (get_owner_if_alive__10TObjPlayerFv(down_4) != 0U))
