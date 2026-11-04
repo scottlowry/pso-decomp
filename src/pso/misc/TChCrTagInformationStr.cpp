@@ -44,8 +44,8 @@ void TChCrTagInformationStr::render() {
     f32 scale;
     u32 color1;
     u32 color2;
-    const char *entry;
     s32 i;
+    const char *entry;
     s32 j;
     s32 k;
     f32 radius;
