@@ -1681,7 +1681,6 @@ void TQuestVmDownLoadServer__sub_803E8924(s32 id) {
     s32 len;
     u32 entry;
     u8 sp2;
-    s32 cast;
     s32 nlen;
     u32 c;
     u32 idx;
@@ -1689,9 +1688,8 @@ void TQuestVmDownLoadServer__sub_803E8924(s32 id) {
     u32 rec;
     u8 rlen;
     s32 r;
-    u8 *d;
-    u8 *s;
-    u32 i;
+    u32 n;
+    u8 t;
 
     page = (s16)(id >> 12);
     if (lbl_805D7874 == page) {
@@ -1714,8 +1712,8 @@ void TQuestVmDownLoadServer__sub_803E8924(s32 id) {
     }
     sp2 = p[2];
     strncpy((char *)buf, (char *)(p + 3), (s16)sp2);
-    cast = (s16)sp2;
-    buf[cast] = 0;
+    c = (s16)sp2;
+    buf[c] = 0;
     c = buf[0];
     if (c >= 0xa0 && c < 0xf0) {
         idx = c - 0xa0;
@@ -1740,10 +1738,13 @@ void TQuestVmDownLoadServer__sub_803E8924(s32 id) {
     if (*(u32 *)node == (u32)p) {
         *(u32 *)node = entry;
         if (len != 0) {
-            d = (u8 *)entry;
-            s = p;
-            for (i = 0; i < len; i++) {
-                d[i] = s[i];
+            n = len;
+            while (n != 0) {
+                t = *p;
+                p += 1;
+                *(u8 *)entry = t;
+                entry += 1;
+                n -= 1;
             }
         }
         q[2] = 0;
