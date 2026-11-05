@@ -4644,6 +4644,72 @@ s32 TQuestVmDownLoadServer__sub_803F0268(const char *name, s16 len, Out_803F0268
     return 1;
 }
 
+#pragma push
+#pragma opt_common_subs off
+s32 TQuestVmDownLoadServer__sub_803F03B4(u8 *data, Ent_803F03B4 *ents, s32 n, s32 *max) {
+    Ent_803F03B4 *base;
+    Ent_803F03B4 *tail;
+    Ent_803F03B4 *e;
+    Ent_803F03B4 *s;
+    u16 head;
+    u8 *end;
+    u8 *cur;
+    u8 *p;
+    u16 v;
+    u8 c;
+    s32 found;
+
+    head = (u16)(data[0] + (data[1] << 8));
+    tail = ents + n;
+    base = ents;
+    end = data + head;
+    cur = data + data[2] + 3;
+    while (cur < end) {
+        e = tail;
+        e->a = cur[0];
+        v = cur[1];
+        cur += 2;
+        e->key = v;
+        if (v > *max) {
+            *max = e->key;
+        }
+        c = cur[0];
+        if (c <= 11) {
+            e->b = c;
+            cur += 1;
+        } else {
+            e->b = 0;
+        }
+        e->c = 0;
+        found = 0;
+        for (s = base; s < tail; s++) {
+            if (s->a == e->a && s->b == e->b) {
+                if (s->key < e->key) {
+                    s->key = e->key;
+                }
+                found = 1;
+                break;
+            }
+        }
+        if (found == 0) {
+            n++;
+            tail++;
+            if (n >= 32) {
+                break;
+            }
+        }
+        p = cur;
+        for (; p < end; p += 2) {
+            if (*p <= 56) {
+                break;
+            }
+        }
+        cur = p;
+    }
+    return n;
+}
+#pragma pop
+
 s32 TQuestVmDownLoadServer__sub_803F0500(u8 *name, s16 len, Out_803E8C2C *out) {
     s16 blen;
     s16 cnt;
