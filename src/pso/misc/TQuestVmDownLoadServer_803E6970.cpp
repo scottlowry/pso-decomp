@@ -3007,7 +3007,8 @@ void TQuestVmDownLoadServer__sub_803EC284(s32 arg0, s32 arg1) {
     Node_803EB794 *n;
     s32 cnt;
     s32 cur;
-    s32 k;
+    u32 k;
+    u8 unused[16];
 
     cur = arg0;
     if (arg1 == 1) {
