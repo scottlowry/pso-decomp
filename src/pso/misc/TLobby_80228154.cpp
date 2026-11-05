@@ -80,10 +80,10 @@ void TLobby__sub_80228154(void *arg0, s32 arg1, s32 arg2, f32 arg3) {
     set_global_param__8TObjFishFl(*(s32 *)((s8 *)arg0 + 0x18));
     e = (s16 *)(*(s32 *)((s8 *)arg0 + 0x1c) + arg1 * 0x14);
     c4 = (f32)-(s32)e[2];
-    c6 = (f32)-(s32)e[3];
-    c0 = (f32)-(s32)e[0];
-    c2 = (f32)-(s32)e[1];
+    c0 = (f32)(s32)e[0];
     pts[0] = *(f32 *)((s8 *)arg0 + 0x0) + c4 * *(f32 *)((s8 *)arg0 + 0xc);
+    c6 = c4;
+    c2 = (f32)(s32)e[1];
     pts[2] = *(f32 *)((s8 *)arg0 + 0x0) + (c4 + c0) * *(f32 *)((s8 *)arg0 + 0xc);
     pts[1] = *(f32 *)((s8 *)arg0 + 0x4) + c6 * *(f32 *)((s8 *)arg0 + 0x10);
     pts[3] = *(f32 *)((s8 *)arg0 + 0x4) + (c6 + c2) * *(f32 *)((s8 *)arg0 + 0x10);
