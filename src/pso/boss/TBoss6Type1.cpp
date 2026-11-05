@@ -2011,7 +2011,7 @@ void TBoss6Type1__sub_802B6944(TBoss6Type1 *boss) {
         v[1] = v[1] * s;
         v[2] = v[2] * s;
         if (is_normal_difficulty() != 0) {
-            TBoss6Type1::create_kakusan((s32)boss, (u8 *)pt, (u8 *)v, 0xFFFF, lbl_805DE380);
+            TBoss6Type1::create_kakusan((s32)boss, (u8 *)pt, (u8 *)v, (s16)(0x10000u - 1u), lbl_805DE380);
         } else {
             TBoss6Type1::create_kakusan((s32)boss, (u8 *)pt, (u8 *)v, ring, lbl_805DE380);
         }
