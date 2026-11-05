@@ -230,43 +230,37 @@ s32 TLobby__sub_803CC578(Snd_803CC980 *arg0, s32 arg1, s32 arg2) {
         adxf_log_write_index = i + 1;
         if (arg0 == NULL) {
             TLobby::notify_error((const char *)(base + 0x198));
-            goto adjust;
+        } else if (arg0->state == 1) {
+        } else if (arg0->state == 3) {
+            arg0->state = 1;
+        } else if (arg0->f4 == 0) {
+            TLobby::notify_error((const char *)(base + 0x1bc));
+        } else {
+            TLobby::init_once();
+            TLobby__sub_803C89C4((u8 *)arg0->f4);
+            TLobby__sub_803C85AC((u8 *)arg0->f4, &sp8);
+            arg0->f20 = sp8;
+            if (arg0->f8 != NULL && arg0->f2 == 0) {
+                if (lbl_805D75E4 == 1) {
+                    invalidate_cache__6TLobbyFv(arg0->f24, arg0->f28);
+                }
+                arg0->f8->vt->fn(arg0->f8);
+                arg0->f8 = NULL;
+            }
+            arg0->state = 1;
+            TLobby::release_ref();
+            {
+                s32 i = adxf_log_write_index % 256;
+                LogEnt_803CD16C *e = &lbl_8057B7D0[adxf_log_write_index = i];
+                e->type = 5;
+                e->phase = 1;
+                e->seq = ((LogHdr_803CC980 *)hdr)->seq;
+                e->a = (s32)arg0;
+                e->b = -1;
+                e->c = -1;
+                adxf_log_write_index = i + 1;
+            }
         }
-    }
-    if (arg0->state == 1) {
-        goto adjust;
-    }
-    if (arg0->state == 3) {
-        arg0->state = 1;
-        goto adjust;
-    }
-    if (arg0->f4 == 0) {
-        TLobby::notify_error((const char *)(base + 0x1bc));
-        goto adjust;
-    }
-    TLobby::init_once();
-    TLobby__sub_803C89C4((u8 *)arg0->f4);
-    TLobby__sub_803C85AC((u8 *)arg0->f4, &sp8);
-    arg0->f20 = sp8;
-    if (arg0->f8 != NULL && arg0->f2 == 0) {
-        if (lbl_805D75E4 == 1) {
-            invalidate_cache__6TLobbyFv(arg0->f24, arg0->f28);
-        }
-        arg0->f8->vt->fn(arg0->f8);
-        arg0->f8 = NULL;
-    }
-    arg0->state = 1;
-    TLobby::release_ref();
-    {
-        s32 i = adxf_log_write_index % 256;
-        LogEnt_803CD16C *e = &lbl_8057B7D0[adxf_log_write_index = i];
-        e->type = 5;
-        e->phase = 1;
-        e->seq = ((LogHdr_803CC980 *)hdr)->seq;
-        e->a = (s32)arg0;
-        e->b = -1;
-        e->c = -1;
-        adxf_log_write_index = i + 1;
     }
 adjust:
     if (arg2 == 0) {
