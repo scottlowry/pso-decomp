@@ -406,7 +406,7 @@ extern s32 lbl_805D786C;
 extern s32 lbl_805D7870;
 extern s32 lbl_805D7878;
 void TQuestVmDownLoadServer__sub_803E95BC(void);
-u32 aram_read_thunk__22TQuestVmDownLoadServerFUli(u32, u32, s32);
+u32 aram_read_thunk__22TQuestVmDownLoadServerFUli(u32, u32, s32, s32);
 void append_message_text__22TQuestVmDownLoadServerFPviPvUc(u8 *arg0, s32 arg1, Msg_803E90A8 *arg2, u8 arg3);
 u32 strlen(const char *);
 extern s32 lbl_805D78A4;
@@ -1926,12 +1926,12 @@ s32 TQuestVmDownLoadServer::calc_message_length() {
 #pragma pop
 
 #pragma push
-#pragma opt_common_subs off
+#pragma opt_propagation off
 s32 TQuestVmDownLoadServer__sub_803E93DC(void) {
     u8 buf[0x50];
     s32 base;
     s32 e;
-    u8 *p;
+    s32 p;
     s32 i;
     s32 nlen;
     u8 len;
@@ -1946,19 +1946,20 @@ s32 TQuestVmDownLoadServer__sub_803E93DC(void) {
     s32 nn;
     s32 e2;
     s32 n;
+    s32 uninit;
 
     base = (s32)&lbl_80591EC8.value;
     if (TQuestVmDownLoadServer::seek_or_reopen(0x1400) == -1) {
         return -1;
     }
-    if (aram_read_thunk__22TQuestVmDownLoadServerFUli(lbl_805D7904, base, 0x2000) != 0x2000) {
+    if (aram_read_thunk__22TQuestVmDownLoadServerFUli(lbl_805D7904, base, 0x2000, 0) != 0x2000) {
         return -1;
     }
     i = 0;
     e = base;
     while (i < 8) {
-        p = (u8 *)e;
-        n = (u16)((p[1] << 8) + p[0]);
+        p = e;
+        n = (u16)(((s32)*(u8 *)(p + 1) << 8) + *(u8 *)p);
         while (n != 0) {
             len = *(u8 *)(p + 2);
             if ((s16)len != 0) {
@@ -1997,16 +1998,16 @@ s32 TQuestVmDownLoadServer__sub_803E93DC(void) {
                 }
                 nn = lbl_805D7878;
                 lbl_805D7878 = *(s32 *)(nn + 4);
-                *(s32 *)nn = (s32)p;
+                *(s32 *)nn = p;
                 *(s32 *)(nn + 4) = node;
                 *(s32 *)slot = nn;
             }
-            n = (u16)((p[1] << 8) + p[0]);
+            n = (u16)(((s32)*(u8 *)(p + 1) << 8) + *(u8 *)p);
             p += n;
         }
         if (lbl_805D7874 == i) {
             e2 = e + 0x400;
-            *(s32 *)((s32)&lbl_805D7870 + e2) = (s32)p;
+            *(s32 *)((s32)&lbl_805D7870 + e2) = p;
             *(s32 *)((s32)&lbl_805D786C + e2) = e2;
         }
         i++;
