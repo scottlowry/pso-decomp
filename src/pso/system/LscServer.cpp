@@ -44,8 +44,7 @@ void lsc_poll(LscStream *lsc_stream) {
     }
     if (lsc_stream->entries[lsc_stream->read_index].status == 2) {
         open_mode = 0;
-        range_offset = open_mode;
-        range_length = open_mode;
+        range_length = range_offset = open_mode;
         if (lsc_stream->file_handle != 0) {
             TLobby__sub_803C8B38((u8 *)lsc_stream->file_handle);
             lsc_stream->file_handle = 0;
@@ -71,12 +70,15 @@ void lsc_poll(LscStream *lsc_stream) {
         entry = &lsc_stream->entries[lsc_stream->read_index];
         if (lsc_stream->queued_count > 0) {
             if (lsc_stream->file_handle == 0) {
+                s32 sectors;
                 lsc_stream->file_handle = (void *)adxstm_open_fname_range_ex_rt__6TLobbyFPviiii(entry->filename, entry->open_mode, entry->range_offset, entry->range_length, (s32)lsc_stream->stream);
                 if (lsc_stream->file_handle == 0) {
                     TLobby::log_printf("E0004: Can not open '%s'", entry->filename);
                 }
-                lsc_stream->file_sector_count = (((TLobby *)lsc_stream->file_handle)->get_field_14() + 0x7FF) / 0x800;
+                sectors = ((TLobby *)lsc_stream->file_handle)->get_field_14();
+                sectors = (sectors + 0x7FF) / 0x800;
                 lsc_stream->read_started = 0;
+                lsc_stream->file_sector_count = sectors;
                 entry->progress = 0;
             }
             if (lsc_stream->read_started == 0) {
