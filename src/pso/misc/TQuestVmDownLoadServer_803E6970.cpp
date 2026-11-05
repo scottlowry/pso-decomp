@@ -2006,17 +2006,14 @@ Seg_803E9FFC *TQuestVmDownLoadServer__sub_803E9A74(s32 pos, s32 arg1, u8 a, u8 b
             case 0x20:
             case 0x21:
             case 0x2C:
-            case 0x2D:
             case 0x2E:
             case 0x3A:
             case 0x3B:
+            case 0x3F:
             case 0x98:
             case 0x9B:
             case 0x9C:
                 ok = 1;
-                break;
-            case 0x3F:
-                ok = 0;
                 break;
             default:
                 ok = 0;
