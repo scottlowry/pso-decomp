@@ -3873,10 +3873,10 @@ u8 *TQuestVmDownLoadServer::find_keyword_entry(u16 *start, u16 *end) {
 }
 
 s32 TQuestVmDownLoadServer__sub_803EDF64(u16 *msg, s32 a1, u16 *out, s32 *out_count) {
-    u32 code;
     s32 kind;
     s32 i;
     u16 *p;
+    u32 code;
     s32 key16;
     s32 k1;
     s32 k2;
@@ -3900,8 +3900,13 @@ s32 TQuestVmDownLoadServer__sub_803EDF64(u16 *msg, s32 a1, u16 *out, s32 *out_co
     kind = 0;
     if (code <= 12) {
         if (code != 12) {
-            *out = TQuestVmDownLoadServer__sub_803E721C(msg[0]);
-            kind = (code == 10) ? 2 : 3;
+            u16 r = TQuestVmDownLoadServer__sub_803E721C(msg[0]);
+            if (code == 10) {
+                kind = 2;
+            } else {
+                kind = 3;
+            }
+            *out = r;
         } else {
             *out = TQuestVmDownLoadServer__sub_803E719C(0x73, msg[0]);
             kind = 1;
@@ -3927,7 +3932,7 @@ s32 TQuestVmDownLoadServer__sub_803EDF64(u16 *msg, s32 a1, u16 *out, s32 *out_co
         }
     }
     if (k1 == 0x78 || k1 == 0x58) {
-        if (k2 == 0x6e || k2 == 0x4e) {
+        if ((u8) k2 == 0x6e || (u8) k2 == 0x4e) {
             *out = TQuestVmDownLoadServer__sub_803E719C(0x73, key16);
             return 2;
         }
@@ -3936,11 +3941,11 @@ s32 TQuestVmDownLoadServer__sub_803EDF64(u16 *msg, s32 a1, u16 *out, s32 *out_co
         return 2;
     }
     code = lbl_8047F8B8[(u8) k2] & 0xF;
-    if (code == 7 && (u16) kind == 3) {
+    if ((u8) code == 7 && (u16) kind == 3) {
         *out = *out + 2;
         return 2;
     }
-    if (code == 6 && (u16) kind >= 2) {
+    if ((u8) code == 6 && (u16) kind >= 2) {
         *out = *out + 1;
         if ((u8) msg[0] == 0xb3) {
             *out = TQuestVmDownLoadServer__sub_803E719C(0x74, msg[1]);
@@ -3955,7 +3960,7 @@ s32 TQuestVmDownLoadServer__sub_803EDF64(u16 *msg, s32 a1, u16 *out, s32 *out_co
     }
     i = 2;
 loop:
-    if (code <= 5) {
+    if ((u8) code <= 5) {
         a1 = (s32)((TQuestVmDownLoadServer *) msg)->find_keyword_entry(msg, p + 2);
         if (a1 != 0) {
             goto emit;
@@ -3965,7 +3970,7 @@ loop:
             return -2;
         }
     adjust:
-        a1 += (code - 1) * 2;
+        a1 += ((u8) code - 1) * 2;
     emit:
         *out = TQuestVmDownLoadServer__sub_803E719C(*(u8 *) a1++, *p);
         out++;
@@ -3975,13 +3980,11 @@ loop:
         }
         return i;
     }
-    if (i >= a1) {
-        i++;
+    if (i++ >= a1) {
         return 0;
     }
-    i++;
     code = lbl_8047F8B8[(u8) *p++] & 0xF;
-    if (code >= 6 && code <= 0xc) {
+    if ((u8) code >= 6 && (u8) code <= 0xc) {
         return -2;
     }
     if (i > 4) {
