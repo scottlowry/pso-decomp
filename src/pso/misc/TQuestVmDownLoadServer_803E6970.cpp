@@ -3002,6 +3002,42 @@ inline N_803EC460 *Default_803EC460(s32 x) {
     return n;
 }
 
+void TQuestVmDownLoadServer__sub_803EC284(s32 arg0, s32 arg1) {
+    Node_803EB794 *p;
+    s32 cnt;
+    s32 cur;
+
+    cur = arg0;
+    if (arg1 == 1) {
+        TQuestVmDownLoadServer__sub_803EC09C();
+    }
+    p = *(Node_803EB794 **)((u8 *)quest_download_slot_chain_table + (lbl_805D78F0 * 0x1C) + 0xC);
+    if (lbl_805D7834 > 0) {
+        lbl_805D78A4 = 0x50;
+    } else {
+        lbl_805D78A4 = TQuestVmDownLoadServer::get_buffer_size();
+    }
+    cnt = count_fitting_groups(p);
+    while (cur >= cnt) {
+        if (cnt != 0) {
+            cur = cur - cnt;
+            p = advance_entry_groups(p, cnt);
+        }
+        cnt = count_fitting_groups(p);
+        if (cnt == 0) {
+            TQuestVmDownLoadServer__sub_803EC284(0, 0);
+            goto done;
+        }
+    }
+    lbl_805D78A0 = p;
+    lbl_805D7898 = cur;
+    lbl_805D789C = cnt;
+done:
+    if (arg1 == 1 && lbl_805D7834 == 0) {
+        TQuestVmDownLoadServer__sub_803EB4D4();
+    }
+}
+
 void TQuestVmDownLoadServer__sub_803EC460(s32 pos, s32 x) {
     N_803EC460 *first;
     N_803EC460 *tl;
