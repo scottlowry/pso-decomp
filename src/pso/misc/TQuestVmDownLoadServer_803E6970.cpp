@@ -1926,23 +1926,25 @@ s32 TQuestVmDownLoadServer::calc_message_length() {
 #pragma pop
 
 #pragma push
-s32 TQuestVmDownLoadServer__sub_803E93DC(u32 arg0, u32 arg1, u32 arg2, u32 arg3, u32 arg4, u32 arg5, u32 arg6) {
+#pragma push
+#pragma opt_propagation off
+s32 TQuestVmDownLoadServer__sub_803E93DC(u32 arg0, u32 arg1, u32 arg2, u32 arg3, u32 arg4) {
     u8 buf[0x50];
     s32 base;
     s32 e;
     s32 p;
     s32 i;
     s32 nlen;
-    s32 len;
-    s32 prev;
-    s32 node;
+    u8 len;
+    u32 prev;
+    u32 node;
     s32 idx;
     u32 c;
     s32 rec;
     s32 r;
-    s32 l2;
-    s32 slot;
-    s32 nn;
+    u8 l2;
+    u32 slot;
+    u32 nn;
     s32 e2;
 
     base = (s32)&lbl_80591EC8.value;
@@ -1961,14 +1963,14 @@ s32 TQuestVmDownLoadServer__sub_803E93DC(u32 arg0, u32 arg1, u32 arg2, u32 arg3,
             if ((s16)len != 0) {
                 strncpy((char *)buf, (char *)(p + 3), (s16)len);
                 prev = 0;
-                buf[(s16)len] = prev;
+                buf[(s16)len] = 0;
                 c = buf[0];
                 if (c >= 0xa0 && c < 0xf0) {
                     idx = c - 0xa0;
                 } else {
                     idx = 0;
                 }
-                node = *(s32 *)((base + (idx << 2)) + 0x2000);
+                node = *(u32 *)((base + (idx << 2)) + 0x2000);
                 nlen = (s16)len;
                 while (node != 0) {
                     rec = *(s32 *)node;
@@ -1982,17 +1984,17 @@ s32 TQuestVmDownLoadServer__sub_803E93DC(u32 arg0, u32 arg1, u32 arg2, u32 arg3,
                         break;
                     }
                     prev = node;
-                    node = *(s32 *)(node + 4);
+                    node = *(u32 *)(node + 4);
                 }
                 if (prev == 0) {
-                    slot = (base + (idx << 2)) + 0x2000;
+                    slot = (u32)((base + (idx << 2)) + 0x2000);
                 } else {
                     slot = prev + 4;
                 }
-                if (lbl_805D7878 == 0) {
+                if ((u32)lbl_805D7878 == 0) {
                     TQuestVmDownLoadServer__sub_803E95BC();
                 }
-                nn = lbl_805D7878;
+                nn = (u32)lbl_805D7878;
                 lbl_805D7878 = *(s32 *)(nn + 4);
                 *(s32 *)nn = p;
                 *(s32 *)(nn + 4) = node;
@@ -2002,14 +2004,15 @@ s32 TQuestVmDownLoadServer__sub_803E93DC(u32 arg0, u32 arg1, u32 arg2, u32 arg3,
         }
         if (lbl_805D7874 == i) {
             e2 = e + 0x400;
-            *(s32 *)((s32)&lbl_805D7870 + e2) = p;
-            *(s32 *)((s32)&lbl_805D786C + e2) = e2;
+            *(s32 *)(e2 - 8) = p;
+            *(s32 *)(e2 - 12) = e2;
         }
         i++;
         e += 0x400;
     }
     return 0;
 }
+#pragma pop
 
 u8 *TQuestVmDownLoadServer::get_buffer_ptr(s32 arg0) {
     return (u8 *)&(*(RecoveredGlobal_803E9594_lbl_80591EC8 *)&lbl_80591EC8).value + ((s16) (arg0 >> 0xC) << 0xA) + (s16) (arg0 & 0xFFF);
