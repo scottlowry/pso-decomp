@@ -1929,7 +1929,8 @@ u8 *TQuestVmDownLoadServer::get_buffer_ptr(s32 arg0) {
 
 #pragma push
 #pragma opt_propagation off
-void TQuestVmDownLoadServer__sub_803E95BC(void) {
+#pragma opt_common_subs off
+void TQuestVmDownLoadServer__sub_803E95BC(u32 arg0, u32 arg1, u32 arg2) {
     u8 buf[0x50];
     s32 base;
     u8 *p;
