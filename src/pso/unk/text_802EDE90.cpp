@@ -61,13 +61,11 @@ extern const u32 lbl_80473F6C[3];
 extern u8 controller_input_state[];
 }
 
-#pragma push
-#pragma opt_common_subs off
 extern "C" void *TBoss7DeRolLeC__ct(void *self_, void *arg1, void *arg2) {
     u8 *self = (u8 *)self_;
-    u8 *base;
-    Vec3 stack_vec;
+    u8 *base = lbl_804E3BF0;
     u32 exch_slot;
+    Vec3 stack_vec;
     s32 off;
     s32 i;
     u32 p;
@@ -77,7 +75,6 @@ extern "C" void *TBoss7DeRolLeC__ct(void *self_, void *arg1, void *arg2) {
     u32 v;
 
     __ct__12TObjEneDD_STFP7TObject(self);
-    base = lbl_804E3BF0;
     *(u32 *)(self + 0x18) = (u32)(base + 0x264);
     init_resources__13TBoss2DeRolLeFi((s32)(self + 0x630));
     init_resources__13TBoss2DeRolLeFi((s32)(self + 0x650));
@@ -273,4 +270,3 @@ extern "C" void *TBoss7DeRolLeC__ct(void *self_, void *arg1, void *arg2) {
     *(u16 *)(self + 0x7D2) = 0xFFFF;
     return self;
 }
-#pragma pop
