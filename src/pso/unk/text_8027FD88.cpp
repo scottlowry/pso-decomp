@@ -83,6 +83,8 @@ extern s32 TWindowSubStatusDisp__resistance_layout[];
 extern s32 TWindowSubStatusDisp__stat_page_layout[];
 s32 get_class_name_text(s32);
 extern s32 TWindowSubStatusDisp__summary_page_layout[];
+extern s32 TWindowSubStatusDisp__rank_time_records_layout[];
+extern u32 lbl_804D2B20[];
 extern "C" {
 s32 build_player_class_stat_template(s32 arg0, s32 arg1);
 s32 build_player_equipment_requirement_stats(int, void *);
@@ -160,6 +162,128 @@ void vt5__20TWindowSubStatusDispFv(u8 *arg0) {
 }
 
 void TWindowSubStatusDisp::vt15() {  }
+
+#pragma push
+#pragma opt_propagation off
+void vt4__20TWindowSubStatusDispFv(u8 *arg0) {
+    u16 *e1;
+    u16 *e2;
+    u16 *e3;
+    s32 *win;
+    s32 mode;
+    s32 t;
+    s32 v;
+
+    if ((f32) *(s32 *)((s8 *)arg0 + 0x5C) > TWindowSubStatusDisp__data_805DD708) {
+        *(s32 *)((s8 *)arg0 + 0x5C) = 7;
+    }
+    init_window_layout_entries(arg0 + 0x24, TWindowSubStatusDisp__rank_time_records_layout, *(s16 *)((s8 *)arg0 + 0x20));
+    get_type__20TWindowSubStatusDispFv(*(s32 *)((s8 *)arg0 + 0x68));
+    t = 0;
+    if (*(s16 *)((s8 *)arg0 + 0x60) == 2) {
+        t = 2;
+    }
+    mode = t;
+    e1 = (u16 *)get_array_entry__11TWindowBaseFi(arg0, 0);
+    if (t == 0) {
+        set_text_entry_string((u8 *)e1, get_message_10__20TWindowSubStatusDispFl(0x90), 0);
+    } else {
+        set_text_entry_string((u8 *)e1, get_message_10__20TWindowSubStatusDispFl(0x93), 0);
+    }
+    e1 = (u16 *)get_array_entry__11TWindowBaseFi(arg0, 1);
+    e2 = (u16 *)get_array_entry__11TWindowBaseFi(arg0, 2);
+    e3 = (u16 *)get_array_entry__11TWindowBaseFi(arg0, 3);
+    win = TWindowSubStatusDisp::get_status_window((u16) *(s16 *)((s8 *)arg0 + 0x20));
+    if (mode != 0 || win == 0 || *(s8 *)win == 0) {
+        *e1 |= 2;
+        *e2 |= 2;
+        *e3 |= 2;
+    } else {
+        *e1 &= ~2;
+        *e2 &= ~2;
+        *e3 &= ~2;
+        set_text_entry_string((u8 *)e1, get_message_10__20TWindowSubStatusDispFl(0x9B), 0);
+        set_text_entry_string((u8 *)e3, (u32)win, 0x20);
+        *(s32 *)((s8 *)e3 + 0x24) = TWindowSubStatusDisp::get_status_index((u16) *(s16 *)((s8 *)arg0 + 0x20));
+    }
+    e1 = (u16 *)get_array_entry__11TWindowBaseFi(arg0, 4);
+    e2 = (u16 *)get_array_entry__11TWindowBaseFi(arg0, 5);
+    e3 = (u16 *)get_array_entry__11TWindowBaseFi(arg0, 6);
+    v = TWindowSubStatusDisp__sub_80071868((u16) *(s16 *)((s8 *)arg0 + 0x20), mode);
+    if (v == 0) {
+        *e1 |= 2;
+        *e2 |= 2;
+        *e3 |= 2;
+    } else {
+        *e1 &= ~2;
+        *e2 &= ~2;
+        *e3 &= ~2;
+        if (mode == 0) {
+            set_text_entry_string((u8 *)e1, get_message_10__20TWindowSubStatusDispFl(0x98), 0);
+        } else {
+            set_text_entry_string((u8 *)e1, get_message_10__20TWindowSubStatusDispFl(0x9A), 0);
+        }
+        set_text_entry_string((u8 *)e3, lbl_804D2B20[v], 0);
+    }
+    e1 = (u16 *)get_array_entry__11TWindowBaseFi(arg0, 7);
+    e2 = (u16 *)get_array_entry__11TWindowBaseFi(arg0, 8);
+    e3 = (u16 *)get_array_entry__11TWindowBaseFi(arg0, 9);
+    v = TWindowSubStatusDisp__sub_80071988((u16) *(s16 *)((s8 *)arg0 + 0x20), mode);
+    if (v == 0) {
+        *e1 |= 2;
+        *e2 |= 2;
+        *e3 |= 2;
+    } else {
+        *e1 &= ~2;
+        *e2 &= ~2;
+        *e3 &= ~2;
+        if (mode == 0) {
+            set_text_entry_string((u8 *)e1, get_message_10__20TWindowSubStatusDispFl(0x95), 0);
+        } else {
+            set_text_entry_string((u8 *)e1, get_message_10__20TWindowSubStatusDispFl(0x97), 0);
+        }
+        text_builder_reset();
+        TWindowSubStatusDisp::append_play_time(v);
+        set_text_entry_string((u8 *)e3, get_shared_text_buffer(), 0x20);
+    }
+    mode = 1;
+    if (*(s16 *)((s8 *)arg0 + 0x60) == 2) {
+        mode = 3;
+    }
+    e1 = (u16 *)get_array_entry__11TWindowBaseFi(arg0, 0xA);
+    e2 = (u16 *)get_array_entry__11TWindowBaseFi(arg0, 0xB);
+    e3 = (u16 *)get_array_entry__11TWindowBaseFi(arg0, 0xC);
+    v = TWindowSubStatusDisp__sub_80071868((u16) *(s16 *)((s8 *)arg0 + 0x20), mode);
+    if (v == 0) {
+        *e1 |= 2;
+        *e2 |= 2;
+        *e3 |= 2;
+    } else {
+        *e1 &= ~2;
+        *e2 &= ~2;
+        *e3 &= ~2;
+        set_text_entry_string((u8 *)e1, get_message_10__20TWindowSubStatusDispFl(0x99), 0);
+        set_text_entry_string((u8 *)e3, lbl_804D2B20[v], 0);
+    }
+    e1 = (u16 *)get_array_entry__11TWindowBaseFi(arg0, 0xD);
+    e2 = (u16 *)get_array_entry__11TWindowBaseFi(arg0, 0xE);
+    e3 = (u16 *)get_array_entry__11TWindowBaseFi(arg0, 0xF);
+    v = TWindowSubStatusDisp__sub_80071988((u16) *(s16 *)((s8 *)arg0 + 0x20), mode);
+    if (v == 0) {
+        *e1 |= 2;
+        *e2 |= 2;
+        *e3 |= 2;
+    } else {
+        *e1 &= ~2;
+        *e2 &= ~2;
+        *e3 &= ~2;
+        set_text_entry_string((u8 *)e1, get_message_10__20TWindowSubStatusDispFl(0x96), 0);
+        text_builder_reset();
+        TWindowSubStatusDisp::append_play_time(v);
+        set_text_entry_string((u8 *)e3, get_shared_text_buffer(), 0x20);
+    }
+}
+#pragma pop
 
 void TWindowSubStatusDisp::vt18() {  }
 

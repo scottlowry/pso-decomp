@@ -12,6 +12,7 @@ void vt1__20TWindowSubStatusDispFv(u8 *arg0);
 void vt2__20TWindowSubStatusDispFv(u8 *arg0);
 void vt3__20TWindowSubStatusDispFv(u8 *arg0);
 void vt5__20TWindowSubStatusDispFv(u8 *arg0);
+void vt4__20TWindowSubStatusDispFv(u8 *arg0);
 void vt7__20TWindowSubStatusDispFv(u8 *arg0);
 }
 
