@@ -407,6 +407,73 @@ void TLobby::decode_stream_chunk() {
     }
 }
 
+u8 *TLobby__sub_803C2388(u8 *hdr, s32 *rateExp, s32 *channels, s32 *bitWidth, s32 *sampleRate) {
+    u8 *p = hdr + 0xc;
+    s32 seenComm = 0;
+    s32 seenSsnd = 0;
+    u8 *h = hdr;
+    u32 a = (u32)h[0] | (u32)h[1] << 8 | (u32)h[2] << 16 | (u32)h[3] << 24;
+    u32 b = (u32)h[4] | (u32)h[5] << 8 | (u32)h[6] << 16 | (u32)h[7] << 24;
+    u32 c = (u32)h[8] | (u32)h[9] << 8 | (u32)h[10] << 16 | (u32)h[11] << 24;
+    u32 bsw = (b >> 24 & 0xFF) | (b >> 8 & 0xFF00) | (b << 8 & 0xFF0000) | b << 24;
+    u8 *data = 0;
+    if (a - 0x4d520000 != 0x4f46) {
+        return 0;
+    }
+    if (c - 0x46460000 != 0x4941) {
+        return 0;
+    }
+    u8 *end = p + (bsw - 4);
+    u32 commMagic = 0x4d4d4f43;
+    while (p < end) {
+        u32 t = (u32)p[0] | (u32)p[1] << 8 | (u32)p[2] << 16 | (u32)p[3] << 24;
+        u32 n = (u32)p[4] | (u32)p[5] << 8 | (u32)p[6] << 16 | (u32)p[7] << 24;
+        p += 8;
+        s32 sz = (s32)((n >> 24 & 0xFF) | (n >> 8 & 0xFF00) | (n << 8 & 0xFF0000) | n << 24);
+        if (t == commMagic) {
+            if (seenComm != 0) {
+                continue;
+            }
+            if (sz < 18) {
+                return 0;
+            }
+            *channels = (u32)p[0] << 24 | (u32)p[1] << 16;
+            u32 ch = *channels;
+            *channels = (ch << 8 & 0xFFFFFF) | (ch << 24 & 0xFF000000);
+            *sampleRate = (u32)p[2] << 24 | (u32)p[3] << 16 | (u32)p[4] << 8 | (u32)p[5];
+            u32 rate = *sampleRate;
+            *sampleRate = (rate >> 24 & 0xFF) | (rate >> 8 & 0xFF00) | (rate << 8 & 0xFF0000) | rate << 24;
+            *bitWidth = (u32)p[6] << 24 | (u32)p[7] << 16;
+            u32 bw = *bitWidth;
+            *bitWidth = (bw << 8 & 0xFFFFFF) | (bw << 24 & 0xFF000000);
+            u32 top = (u32)p[8] << 8 | (u32)p[9];
+            u32 mid = (u32)p[10] << 8 | (u32)p[11];
+            p += 18;
+            s32 res = (s32)mid >> (0x400e - top);
+            *rateExp = res;
+            if (res == 0) {
+                continue;
+            }
+            return 0;
+        }
+        if ((s32)t < (s32)commMagic && t == 0x444e5353) {
+            if (seenSsnd != 0) {
+                continue;
+            }
+            seenSsnd = 1;
+            u32 ssnd = (u32)p[0] | (u32)p[1] << 8 | (u32)p[2] << 16 | (u32)p[3] << 24;
+            p += 4;
+            data = p + ((ssnd >> 24 & 0xFF) | (ssnd >> 8 & 0xFF00) | (ssnd << 8 & 0xFF0000) | ssnd << 24);
+            if (seenComm == 0) {
+                continue;
+            }
+            return data;
+        }
+        p += (sz + 1) & ~1;
+    }
+    return data;
+}
+
 void TLobby__sub_803C2A00(Strm_803C1A8C *o) {
     u8 *src = o->src;
     if (o->state == 1 && ((TLobby *)(o->id))->get_client_count() == 0) {
