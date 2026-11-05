@@ -12416,7 +12416,7 @@ s16 TLobby__sub_804066D8(Strm_80405A74 *arg0) {
     s32 k = 0xC021;
     s32 d = (u16)k - (u16)len;
     s32 big = d == 0;
-    if ((u16)len != k && ((s16)*(u16 *)(peer + 0x50) & 4) != 0) {
+    if ((u16)len != 0xC021 && ((s16)*(u16 *)(peer + 0x50) & 4) != 0) {
         mask = *(u32 *)(peer + 0x54);
     }
     s32 h = 1;
