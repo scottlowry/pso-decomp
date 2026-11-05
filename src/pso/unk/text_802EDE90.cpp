@@ -61,6 +61,8 @@ extern const u32 lbl_80473F6C[3];
 extern u8 controller_input_state[];
 }
 
+#pragma push
+#pragma opt_common_subs off
 extern "C" void *TBoss7DeRolLeC__ct(void *self_, void *arg1, void *arg2) {
     u8 *self = (u8 *)self_;
     u8 *base;
@@ -271,3 +273,4 @@ extern "C" void *TBoss7DeRolLeC__ct(void *self_, void *arg1, void *arg2) {
     *(u16 *)(self + 0x7D2) = 0xFFFF;
     return self;
 }
+#pragma pop
