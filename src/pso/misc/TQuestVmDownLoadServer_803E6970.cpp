@@ -1944,6 +1944,7 @@ void TQuestVmDownLoadServer__sub_803E95BC(u32 arg0, u32 arg1, u32 arg2) {
     s32 r;
     u8 l2;
     u32 slot;
+    s32 row;
 
     base = (s32)&lbl_80591EC8.value;
     *(u8 *)lbl_805D7870++ = 0;
@@ -1981,7 +1982,8 @@ void TQuestVmDownLoadServer__sub_803E95BC(u32 arg0, u32 arg1, u32 arg2) {
                 node = *(u32 *)(node + 4);
             }
             if (prev == 0) {
-                slot = (u32)((base + (idx << 2)) + 0x2000);
+                row = base + (idx << 2);
+                slot = (u32)(row + 0x2000);
             } else {
                 slot = prev + 4;
             }
