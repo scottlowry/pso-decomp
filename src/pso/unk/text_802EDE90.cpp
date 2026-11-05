@@ -1,9 +1,9 @@
 #include "types.h"
 
 struct Vec3 {
-    f32 x;
-    f32 y;
-    f32 z;
+    u32 w0;
+    u32 w1;
+    u32 w2;
 };
 
 extern "C" {
@@ -37,7 +37,7 @@ void *mem_alloc(s32);
 void set_matrix_identity(void *);
 u32 __ct__14TBoss7TentacleFP7TObjectll(u32, u8 *, s32, s32);
 void VecCopy__FP3VecPC3Vec(void *, const void *);
-u8 *TBoss7Joint__ct(u8 *, u8 *, s16, s16, s32, s32);
+u8 *TBoss7Joint__ct(u8 *, u8 *, s32, s16, s32, s32);
 void init_float_block__13TBoss2DeRolLeFPv(u8 *);
 u32 __ct__16TBoss7LaserLightFP7TObjectP3Vec(u32, u8 *, u8 *);
 void *__nw__FUl(u32);
@@ -57,20 +57,20 @@ extern u8 *lbl_805D6918;
 extern u8 lbl_80473C3C[];
 extern const f32 lbl_805DEA10;
 extern const f32 lbl_805DEA30;
-extern const f32 lbl_80473F6C[3];
+extern const u32 lbl_80473F6C[3];
 extern u8 controller_input_state[];
 }
 
 extern "C" void *TBoss7DeRolLeC__ct(void *self_, void *arg1, void *arg2) {
     u8 *self = (u8 *)self_;
     u8 *base = lbl_804E3BF0;
-    Vec3 stack_vec;
     u32 exch_slot;
+    Vec3 stack_vec;
     s32 off;
     s32 i;
     u32 p;
-    u16 joint_b;
-    s16 joint_a;
+    u32 joint_b;
+    s32 joint_a;
     u32 flags;
     u32 v;
 
@@ -125,14 +125,14 @@ extern "C" void *TBoss7DeRolLeC__ct(void *self_, void *arg1, void *arg2) {
     *(u32 *)(self + 0x6B0) = 0;
     *(u32 *)(self + 0x6B4) = 0;
     for (off = 0; off < 0xF0; off += 0xC) {
-        *(f32 *)((u32)self + off + 0x3EC) = lbl_805DEA10;
-        *(f32 *)((u32)self + off + 0x3F0) = lbl_805DEA10;
-        *(f32 *)((u32)self + off + 0x3F4) = lbl_805DEA10;
+        *(f32 *)((u32)self + (off + 0x3EC)) = lbl_805DEA10;
+        *(f32 *)((u32)self + (off + 0x3F0)) = lbl_805DEA10;
+        *(f32 *)((u32)self + (off + 0x3F4)) = lbl_805DEA10;
     }
     for (off = 0; off < 0x30; off += 0xC) {
-        *(f32 *)((u32)self + off + 0x4DC) = lbl_805DEA10;
-        *(f32 *)((u32)self + off + 0x4E0) = lbl_805DEA10;
-        *(f32 *)((u32)self + off + 0x4E4) = lbl_805DEA10;
+        *(f32 *)((u32)self + (off + 0x4DC)) = lbl_805DEA10;
+        *(f32 *)((u32)self + (off + 0x4E0)) = lbl_805DEA10;
+        *(f32 *)((u32)self + (off + 0x4E4)) = lbl_805DEA10;
     }
     *(u32 *)(self + 0x6D8) = (u32)mem_alloc(0xC0);
     for (i = 0; i < 4; i++) {
@@ -144,19 +144,19 @@ extern "C" void *TBoss7DeRolLeC__ct(void *self_, void *arg1, void *arg2) {
         }
         *(u32 *)(self + 0x6DC + i * 4) = p;
     }
-    stack_vec.x = lbl_80473F6C[0];
-    stack_vec.y = lbl_80473F6C[1];
-    stack_vec.z = lbl_80473F6C[2];
-    joint_b = (u16)(*(u16 *)(self + 0x1C) + 1);
-    joint_a = (s16)(*(s16 *)(self + 0x2C) + 1);
+    stack_vec.w0 = lbl_80473F6C[0];
+    stack_vec.w1 = lbl_80473F6C[1];
+    stack_vec.w2 = lbl_80473F6C[2];
+    joint_b = (u32)(*(u16 *)(self + 0x1C) + 1);
+    joint_a = *(s16 *)(self + 0x2C) + 1;
     for (i = 0; i < 10; i++) {
-        VecCopy__FP3VecPC3Vec(self + 0x530 + i * 0xC, &stack_vec);
+        VecCopy__FP3VecPC3Vec(self + (i * 0xC + 0x530), &stack_vec);
         p = __nw__7TObjectFUl(0x3C8);
         if (p != 0) {
-            p = (u32)TBoss7Joint__ct((u8 *)p, self, joint_a, (s16)joint_b,
-                                     (s32)(self + 0x530 + i * 0xC), i);
-            joint_b = (u16)(joint_b + 1);
-            joint_a = (s16)(joint_a + 1);
+            p = (u32)TBoss7Joint__ct((u8 *)p, self, (s32)joint_b, (s16)joint_a,
+                                     (s32)(self + (i * 0xC + 0x530)), i);
+            joint_b = joint_b + 1;
+            joint_a = joint_a + 1;
         }
         *(u32 *)(self + 0x5F8 + i * 4) = p;
     }
