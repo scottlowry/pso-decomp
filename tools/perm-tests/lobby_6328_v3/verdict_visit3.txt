@@ -1,0 +1,21 @@
+6328 VISIT-3 PARK RECEIPT (f8 card-tlb-80406328 t_f033b93e, base e175bcd9, tip b1e2c3bf)
+=============================================================================
+G1 v1-champ transplant (park 170787cd body verbatim, emission-order seat after
+   62A0, externs block hoist): 94.696335 one_shot, gnm OURS 0x2F4 vs gate 0x2FC
+   = -2W UNDER. Control (pre-transplant rm+ninja rc=0) + seat orig-only row
+   size=764 measured BEFORE authoring (unpaired at tip: seat absent, virgin at e175bcd9).
+G2 #pragma push / peephole off / pop function window (REAL TU, untried class):
+   CONVICTED. 0x30C (+4W over gate), 87.387436 (-7.3). Peephole-off does NOT
+   return era head rows: extsh stays r4-in-place, seed stays li r30,33 (home);
+   collateral: arg0 slot 0x40->0x8, G-home rotates r31->r30, +4 bloat rows.
+   State-stamp: peephole-OFF @ 1.2.5n pin, function-window scope.
+Sibling check (int-parse gnm, intake vs close): ZERO real-sibling size drift;
+   new @NNN symbols = seat's own two switch jump-tables (seat-owned .data,
+   display-only pool-name rows per jumptable law).
+RESIDUAL (sealed, 20-version rosetta d73f651f + v1 17-spelling sweep): era head
+   extsh r5 fresh-bind + li r6,33 pre-stwu seed + addis wide-test copy +
+   addi r30,r6 tail copy = 1.3-2.7 bind-to-home stratum; pinned 1.2.5n emits
+   extsh r4 + li r30 home-seed from EVERY spelling/version -> VERSION-PIN ASK.
+DISPOSITION: PARK 94.696335 @ 0x2F4 (-2W under, named). Park bar (gate-exact/
+   +1W) NOT reached; routes unchanged = compiler-version 1.3-2.7 config ASK
+   (integrator) or accept this body. Tree green at b1e2c3bf.
