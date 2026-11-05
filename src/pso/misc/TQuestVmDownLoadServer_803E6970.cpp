@@ -3007,7 +3007,7 @@ void TQuestVmDownLoadServer__sub_803EC284(s32 arg0, s32 arg1) {
     Node_803EB794 *n;
     s32 cnt;
     s32 cur;
-    u32 k;
+    s32 k;
     u8 unused[16];
 
     cur = arg0;
@@ -3023,7 +3023,7 @@ void TQuestVmDownLoadServer__sub_803EC284(s32 arg0, s32 arg1) {
     cnt = count_fitting_groups(p);
     while (cur >= cnt) {
         cur = cur - cnt;
-        for (k = 0; k < cnt; k++) {
+        for (k = 0; k != cnt; k++) {
             n = p;
             while (n->flags & 1) {
                 n = n->next;
