@@ -1974,23 +1974,26 @@ void TBoss6Type1::damage_players_in_range() {
         }
     }
 }
+#pragma push
+#pragma opt_common_subs off
 void TBoss6Type1__sub_802B6944(TBoss6Type1 *boss) {
     Boss_802B79DC *self = (Boss_802B79DC *)boss;
     s32 i;
     s16 ring;
-    u8 *tbl;
+    const u32 *tbl;
     s32 k;
     u32 pt[3];
     f32 v[3];
     f32 base;
     f32 scale;
     ring = boss->m_41c & 3;
-    tbl = (u8 *)lbl_80470F70;
+    tbl = &lbl_80470F70[0];
     scale = lbl_805DE37C;
     k = 0;
     base = TBoss6Type1__data_805DE338 * (f32)(boss->m_41c & 3);
     for (i = 0; i < 5; i++) {
-        u32 *rp = (u32 *)((char *)boss + 0x578 + *(u32 *)(tbl + k) * 12);
+        u32 id = *(const u32 *)((char *)tbl + k);
+        u32 *rp = (u32 *)((char *)boss + 0x578 + id * 12);
         pt[0] = rp[0];
         pt[1] = rp[1];
         pt[2] = rp[2];
@@ -2018,6 +2021,7 @@ void TBoss6Type1__sub_802B6944(TBoss6Type1 *boss) {
     }
     ((s32 (*)(int, void *, int, int))play_sound_effect)(0x4003A10B, &boss->sound_pos, 0, 0);
 }
+#pragma pop
 
 #pragma push
 #pragma fp_contract on
