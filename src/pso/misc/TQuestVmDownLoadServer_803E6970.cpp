@@ -1977,7 +1977,7 @@ void __VIRetraceHandler(void) {
     u8 *end;
     u8 *q;
     u32 n;
-    u32 k;
+    s32 k;
 
     e = (u8 *)&lbl_80591EC8;
     p = e + 0x2140;
