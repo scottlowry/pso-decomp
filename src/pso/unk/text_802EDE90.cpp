@@ -65,12 +65,10 @@ extern "C" void *TBoss7DeRolLeC__ct(void *self_, void *arg1, void *arg2) {
     u8 *self = (u8 *)self_;
     u8 *base = lbl_804E3BF0;
     Vec3 stack_vec;
-    s16 exch_slot;
+    u32 exch_slot;
     s32 off;
     s32 i;
     u32 p;
-    u32 reg_obj;
-    u32 reg_handler;
     u16 joint_b;
     s16 joint_a;
     u32 flags;
@@ -86,16 +84,15 @@ extern "C" void *TBoss7DeRolLeC__ct(void *self_, void *arg1, void *arg2) {
     if (boss7_joint_state == 0) {
         boss7_joint_state = self;
     }
-    reg_obj = (u32)register_object__6TLobbyFl(0xF);
-    reg_handler = (u32)dispatch_shared_handler_b__6TLobbyFl(0xF);
     reset_hp__9TObjEneDDFPUcPUcPUc(self, (u8 *)register_boss__6TLobbyFl(0xF),
-                                    (u8 *)reg_handler, (u8 *)reg_obj);
+        (u8 *)dispatch_shared_handler_b__6TLobbyFl(0xF),
+        (u8 *)register_object__6TLobbyFl(0xF));
     *(u32 *)(self + 0x620) = (u32)dispatch_shared_handler_a__6TLobbyFl(0xF);
     invoke_initialization_hook__9TObjEneDDFPv(self, arg2);
     *(u32 *)(self + 0x628) = 0;
     if (exchange_object_state__9TObjEnemyFls(self, 0, &exch_slot) != 0) {
-        flags = *(u32 *)&exch_slot;
-        if (((flags & 0x12008u) - 1u) <= 0x2008u) {
+        flags = exch_slot;
+        if (((flags & 0x12008u) - 1u) == 0x2008u) {
             *(u32 *)(self + 0x628) |= 0x8000u;
         }
     }
@@ -128,23 +125,22 @@ extern "C" void *TBoss7DeRolLeC__ct(void *self_, void *arg1, void *arg2) {
     *(u32 *)(self + 0x6B0) = 0;
     *(u32 *)(self + 0x6B4) = 0;
     for (off = 0; off < 0xF0; off += 0xC) {
-        *(f32 *)(self + 0x3EC + off) = lbl_805DEA10;
-        *(f32 *)(self + 0x3F0 + off) = lbl_805DEA10;
-        *(f32 *)(self + 0x3F4 + off) = lbl_805DEA10;
+        *(f32 *)((u32)self + off + 0x3EC) = lbl_805DEA10;
+        *(f32 *)((u32)self + off + 0x3F0) = lbl_805DEA10;
+        *(f32 *)((u32)self + off + 0x3F4) = lbl_805DEA10;
     }
     for (off = 0; off < 0x30; off += 0xC) {
-        *(f32 *)(self + 0x4DC + off) = lbl_805DEA10;
-        *(f32 *)(self + 0x4E0 + off) = lbl_805DEA10;
-        *(f32 *)(self + 0x4E4 + off) = lbl_805DEA10;
+        *(f32 *)((u32)self + off + 0x4DC) = lbl_805DEA10;
+        *(f32 *)((u32)self + off + 0x4E0) = lbl_805DEA10;
+        *(f32 *)((u32)self + off + 0x4E4) = lbl_805DEA10;
     }
     *(u32 *)(self + 0x6D8) = (u32)mem_alloc(0xC0);
     for (i = 0; i < 4; i++) {
-        v = *(u32 *)(self + 0x6D8);
-        set_matrix_identity((void *)(v + i * 0x30));
+        set_matrix_identity((void *)(*(s32 *)(self + 0x6D8) + i * 0x30));
         p = __nw__7TObjectFUl(0x16C);
         if (p != 0) {
             p = __ct__14TBoss7TentacleFP7TObjectll(p, self + 0x690,
-                                                   (s32)(v + i * 0x30), i);
+                *(s32 *)(self + 0x6D8) + i * 0x30, i);
         }
         *(u32 *)(self + 0x6DC + i * 4) = p;
     }
@@ -159,10 +155,10 @@ extern "C" void *TBoss7DeRolLeC__ct(void *self_, void *arg1, void *arg2) {
         if (p != 0) {
             p = (u32)TBoss7Joint__ct((u8 *)p, self, joint_a, (s16)joint_b,
                                      (s32)(self + 0x530 + i * 0xC), i);
+            joint_b = (u16)(joint_b + 1);
+            joint_a = (s16)(joint_a + 1);
         }
         *(u32 *)(self + 0x5F8 + i * 4) = p;
-        joint_b = (u16)(joint_b + 1);
-        joint_a = (s16)(joint_a + 1);
     }
     *(u32 *)(self + 0x6C0) = 0;
     *(u32 *)(self + 0x6C4) = 0;
