@@ -3833,6 +3833,49 @@ s32 TQuestVmDownLoadServer::sum_entry_sizes(s32 start, s32 n) {
     return sum;
 }
 
+u8 *TQuestVmDownLoadServer__sub_803EDDA4(u16 *start, u16 *end) {
+    const u32 *q;
+    u8 *p;
+    s32 len;
+    s32 idx;
+    u32 v;
+    s32 c;
+    u32 nx;
+
+    len = end - start;
+    if (len == 0) {
+        return (u8 *)&lbl_8047F9B8[0][1];
+    }
+    if ((u32)(len - 1) <= 1u) {
+        c = (u8)start[0];
+        if (c >= 0x61U && c <= 0x7AU) {
+            idx = c - 0x61;
+        } else if (c >= 0x41U && c <= 0x5AU) {
+            idx = c - 0x41;
+        } else {
+            return NULL;
+        }
+        q = (const u32 *)&lbl_8047FBD4[idx];
+        v = *q;
+        if (len == 1) {
+            return (u8 *)v + 1;
+        }
+        do {
+            nx = *++q;
+        } while (nx == 0);
+        c = (u8)start[1];
+        if (c >= 0x61U && c <= 0x7AU) {
+            c -= 0x20;
+        }
+        for (p = (u8 *)v + 11; p < (u8 *)nx; p += 11) {
+            if ((s32)(u8)*p == (s32)(u8)c) {
+                return p + 1;
+            }
+        }
+    }
+    return NULL;
+}
+
 u8 *TQuestVmDownLoadServer::find_keyword_entry(u16 *start, u16 *end) {
     u8 c;
     u8 *p;
