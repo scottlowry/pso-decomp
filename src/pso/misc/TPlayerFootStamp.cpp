@@ -111,10 +111,8 @@ void *__ct__16TPlayerFootStampFv(void *self, void *player, void *arg1) {
         break;
     }
     fs->m_bc = (s16)(s32)arg1;
-    if (get_entity_id(player) >= 4) {
-        queue_destruction__7TObjectFv(self);
-        return self;
-    }
+    if (get_entity_id(player) >= 4)
+        goto destroy;
     switch ((s8)get_class_index__10TObjPlayerFv(player)) {
     case 0:
         ((TPlayerFootStamp *)self)->sub_802B0204(0);
@@ -292,6 +290,9 @@ void *__ct__16TPlayerFootStampFv(void *self, void *player, void *arg1) {
     fs->m_88[10] = n1 - p1;
     fs->m_88[11] = n2 - p2;
     fs->m_c0 = 0x96;
+    return self;
+destroy:
+    queue_destruction__7TObjectFv(self);
     return self;
 }
 #pragma pop
