@@ -158,7 +158,7 @@ extern s32 lbl_8047C520[];
 extern s32 lbl_8047C540[];
 u32 adx_allocate_decoder_channel();
 Rec_803C3E88 *alloc_record__6TLobbyFiiii(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
-u32 GXSetCopyFilter(void *, void *, void *, void *, void *, void *, void *);
+u32 GXSetCopyFilter(void *hdr, s32 val, u32 *p5, u32 *p6, u32 *p7, s32 *p8, u32 *p9);
 void process_byteswapped_pcm_transfer(Snd_803C1DC4 *arg0);
 void TLobby__sub_803C2A00(Strm_803C1A8C *o);
 /* mu-law sample expansion table (8-bit code -> s16 PCM) */
@@ -508,7 +508,7 @@ s32 TLobby__sub_803C30E8(u8 *arg0, s32 arg1, s32 arg2) {
         var_r31 = 0;
         var_r5 = -1;
     } else {
-        temp_r3 = GXSetCopyFilter((void *)arg1, (void *)arg2, &sp8, &spC, &sp10, &sp14, &sp18);
+        temp_r3 = GXSetCopyFilter((void *)arg1, arg2, (u32 *)&sp8, (u32 *)&spC, (u32 *)&sp10, &sp14, (u32 *)&sp18);
         if (temp_r3 == 0U) {
             var_r5 = -1;
         } else {
@@ -564,6 +564,56 @@ s32 TLobby::is_snd_header() {
         return 1;
     }
     return 0;
+}
+
+u32 GXSetCopyFilter(void *hdr, s32 val, u32 *p5, u32 *p6, u32 *p7, s32 *p8, u32 *p9) {
+    u8 *h = (u8 *)hdr;
+    u32 a = (u32)h[0] | (u32)h[1] << 8 | (u32)h[2] << 16 | (u32)h[3] << 24;
+    u32 b = (u32)h[4] | (u32)h[5] << 8 | (u32)h[6] << 16 | (u32)h[7] << 24;
+    u32 bsw = (b >> 24 & 0xFF) | (b >> 8 & 0xFF00) | (b << 8 & 0xFF0000) | b << 24;
+    u32 c = (u32)h[8] | (u32)h[9] << 8 | (u32)h[10] << 16 | (u32)h[11] << 24;
+    u32 d = (u32)h[12] | (u32)h[13] << 8 | (u32)h[14] << 16 | (u32)h[15] << 24;
+    u32 csw = (c >> 24 & 0xFF) | (c >> 8 & 0xFF00) | (c << 8 & 0xFF0000) | c << 24;
+    u32 dsw = (d >> 24 & 0xFF) | (d >> 8 & 0xFF00) | (d << 8 & 0xFF0000) | d << 24;
+    if (a != 0x6400732E && a != 0x646E732E) {
+        return 0;
+    }
+    if ((s32)bsw <= val) {
+        return 0;
+    }
+    switch ((s32)dsw) {
+    case 1:
+        *p9 = 2;
+        *p7 = 8;
+        break;
+    case 2:
+        *p9 = 1;
+        *p7 = 8;
+        break;
+    case 3:
+        *p9 = 0;
+        *p7 = 16;
+        break;
+    default:
+        return 0;
+    }
+    u32 e = (u32)h[16] | (u32)h[17] << 8 | (u32)h[18] << 16 | (u32)h[19] << 24;
+    *p5 = e;
+    *p5 = (*p5 >> 24 & 0xFF) | (*p5 >> 8 & 0xFF00) | (*p5 << 8 & 0xFF0000) | *p5 << 24;
+    u32 f = (u32)h[20] | (u32)h[21] << 8 | (u32)h[22] << 16 | (u32)h[23] << 24;
+    *p6 = f;
+    *p6 = (*p6 >> 24 & 0xFF) | (*p6 >> 8 & 0xFF00) | (*p6 << 8 & 0xFF0000) | *p6 << 24;
+    s32 m = (s32)*p9;
+    if (m == 2) {
+        *p8 = (s32)csw / (s32)*p6;
+    } else if (m == 1) {
+        *p8 = (s32)csw / (s32)*p6;
+    } else if (m == 0) {
+        *p8 = ((s32)csw / 2) / (s32)*p6;
+    } else {
+        *p8 = 0x7fff0000;
+    }
+    return (u32)hdr + bsw;
 }
 
 void TLobby__sub_803C34F4(Obj_803C34F4 *lobby) {
