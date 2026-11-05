@@ -1,0 +1,23 @@
+6328 V2-MICRO prop-off TWIN-KNOB PROBE RECEIPT (f8 card-tlb-80406328 t_bf5f8215,
+base/tip 007b9825) — THE LAST UNTRIED KNOB. INERT.
+=============================================================================
+Probe: #pragma push / opt_propagation off / pop function window over
+TLobby__sub_80406328 at the real TU; unit pin GC/1.2.5n -O4,p -inline off
+-opt nocse (FRESH cite build.ninja:66063-66072).
+Result: prop-off .o BYTE-IDENTICAL to champion .o (sha1 febeba49a99f2780ded0d471d4b06a5773192bf6,
+both builds). gnm OURS 0x2F4 vs gate 0x2FC (-2W, unchanged); one_shot 94.696335
+(unchanged); era head rows NOT returned (extsh stays r4-in-place, li 0x21 stays
+home post-stwu). Zero sibling drift (byte-identity). Intake note: inherited .o
+was stale/pre-transplant (seat symbol absent) — rm -f + rebuild proved seat live
+at 0x2F4 before probing.
+Ledger: rosetta 20-ver (d73f651f, sealed) + peephole-off (G2 CONVICTED +4W) +
+prop-off (INERT, this receipt) = knob family EXHAUSTED at pinned config. Pin
+already -opt nocse (CSE dim off; v1 cite 66063-72), prop-off was the one
+remaining in-family dimension — MWCC 1.2.5n bind-to-home materialization is
+pragma-invariant (def-binding pin family; qvm-803ee580 prop-off positives are
+split-tempo sites, per-site screen predicted non-applicability).
+DISPOSITION: revert-with-datum; tree green (ninja rc=0, changes 100.00%
+matched/linked 56/56, report_delta --check clean, check_pr PASS). PARK stands
+94.696335 @ 0x2F4 (-2W under, named). VISIT CLOSED TOTAL: single route to gate =
+compiler-version 1.3-2.7 config ASK (integrator). Strong saturation datum for
+the version-ASK memo.
