@@ -3877,7 +3877,6 @@ s32 TQuestVmDownLoadServer__sub_803EDF64(u16 *msg, s32 a1, u16 *out, s32 *out_co
     s32 kind;
     s32 i;
     u16 *p;
-    u8 *q;
     u16 key16;
     u8 k1;
     u8 k2;
@@ -3885,18 +3884,18 @@ s32 TQuestVmDownLoadServer__sub_803EDF64(u16 *msg, s32 a1, u16 *out, s32 *out_co
     code = lbl_8047F8B8[(u8) msg[0]] & 0xF;
     *out_count = 1;
     if (code <= 9) {
-        if (code > 5) {
-            if (code > 8 && lbl_805D78E4 != 0) {
-                *out = TQuestVmDownLoadServer::map_key_to_code(msg[0]);
-            } else {
-                *out = TQuestVmDownLoadServer__sub_803E721C(msg[0]);
-            }
-            return 1;
+        if (code <= 5) {
+            p = msg;
+            a1 = (s32)((u8 *) lbl_8047F9B8 + 1);
+            i = 1;
+            goto adjust;
         }
-        p = msg;
-        q = (u8 *) lbl_8047F9B8 + 1;
-        i = 1;
-        goto adjust;
+        if (code > 8 && lbl_805D78E4 != 0) {
+            *out = TQuestVmDownLoadServer::map_key_to_code(msg[0]);
+        } else {
+            *out = TQuestVmDownLoadServer__sub_803E721C(msg[0]);
+        }
+        return 1;
     }
     kind = 0;
     if (code <= 12) {
@@ -3957,21 +3956,21 @@ s32 TQuestVmDownLoadServer__sub_803EDF64(u16 *msg, s32 a1, u16 *out, s32 *out_co
     i = 2;
 loop:
     if (code <= 5) {
-        q = ((TQuestVmDownLoadServer *) msg)->find_keyword_entry(msg, p + 2);
-        if (q != 0) {
+        a1 = (s32)((TQuestVmDownLoadServer *) msg)->find_keyword_entry(msg, p + 2);
+        if (a1 != 0) {
             goto emit;
         }
-        q = TQuestVmDownLoadServer__sub_803EDDA4(msg, p);
-        if (q == 0) {
+        a1 = (s32)TQuestVmDownLoadServer__sub_803EDDA4(msg, p);
+        if (a1 == 0) {
             return -2;
         }
     adjust:
-        q += (code - 1) * 2;
+        a1 += (code - 1) * 2;
     emit:
-        *out = TQuestVmDownLoadServer__sub_803E719C(*q++, *p);
+        *out = TQuestVmDownLoadServer__sub_803E719C(*(u8 *) a1++, *p);
         out++;
-        if (*q != 0) {
-            *out = TQuestVmDownLoadServer__sub_803E719C(*q, *p);
+        if (*(u8 *) a1 != 0) {
+            *out = TQuestVmDownLoadServer__sub_803E719C(*(u8 *) a1, *p);
             *out_count = 2;
         }
         return i;
