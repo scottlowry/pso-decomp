@@ -4107,8 +4107,9 @@ s16 TLobby__sub_8040BA38(F_8040A45C *req, u8 *pkt, s16 len) {
             key.tag = 1;
             key.size = 4;
             NetMemcpy(key.addr, pkt + 10, 4);
-            e = NULL;
-            if (q != NULL && (u32)&key != 0) {
+            if (q == NULL || (u32)&key == 0) {
+                e = NULL;
+            } else {
                 g = &dns_resolver_state;
                 e = (EntView_8040BA38 *)q->f208;
                 i = 0;
@@ -4152,8 +4153,9 @@ s16 TLobby__sub_8040BA38(F_8040A45C *req, u8 *pkt, s16 len) {
             key.tag = 0x1c;
             key.size = 6;
             NetMemcpy(key.addr, pkt + 10, 0x10);
-            e = NULL;
-            if (q != NULL && (u32)&key != 0) {
+            if (q == NULL || (u32)&key == 0) {
+                e = NULL;
+            } else {
                 g = &dns_resolver_state;
                 e = (EntView_8040BA38 *)q->f208;
                 i = 0;
