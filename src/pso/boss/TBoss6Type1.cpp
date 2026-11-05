@@ -11,6 +11,7 @@
 #include "pso/player/TObjChara.h"
 #include "pso/enemy/TObjEnemy.h"
 #include "pso/boss/TBoss6Type1.h"
+#include "pso/boss/TBoss6Mine.h"
 #include "pso/player/TObjPlayer.h"
 #include "pso/object/TObjMapCsn.h"
 #include "pso/TParticleCtrl.h"
@@ -1999,6 +2000,143 @@ void TBoss6Type1::spawn_grav_ball() {
     TBoss6Type1::create_grav_ball(this, &v);
 }
 #pragma pop
+extern "C" {
+struct Boss_802B6504 {
+    u8 pad0[0x38];
+    Vec pos;
+    u8 pad3C[0x3F8 - 0x44];
+    s32 f3f8;
+    u8 pad3FC[0x41C - 0x3FC];
+    u8 f41C;
+    u8 pad41D[0x4E0 - 0x41D];
+    s32 f4e0;
+    u8 pad4E4[0x578 - 0x4E4];
+    Vec f578;
+};
+void TBoss4DarkFalz__sub_8004B4F0(void *arg0p, void *arg1p);
+void *mem_alloc(u32 size);
+void mem_free(void *ptr);
+s32 TBoss6Type1__sub_802ABDEC(s32 seed);
+extern const Vec lbl_80470F84;
+
+void TBoss6Type1__sub_802B6504(TBoss6Type1 *boss) {
+    Boss_802B6504 *self = (Boss_802B6504 *)boss;
+    Vec tmp;
+    s32 pt;
+    s16 qp;
+    s16 z1c;
+    Vec v24;
+    Vec v58;
+    Vec v64;
+    Vec *arr;
+    s32 n;
+    s32 i;
+    s32 k;
+    s32 count;
+    s32 rv;
+    s32 prog;
+    s32 j;
+    s32 angle;
+    s32 step;
+    s32 cnt;
+    s32 denom;
+    s32 created;
+    s32 off;
+    s32 a;
+    s32 x;
+    s32 y;
+    s32 z;
+    f32 amp;
+    f32 delta;
+
+    rv = (s8)self->f41C;
+    ((TBoss6Type1 *)rv)->reset_fields_4e0();
+    TBoss4DarkFalz__sub_8004B4F0(&pt, ((TBoss6Type1 *)self->f3f8)->get_mag_mine_ptr());
+    VecCopy(&v58, &self->f578);
+    VecCopy(&v64, &lbl_80470F84);
+    z1c = 0;
+    VecCopy(&v24, &v58);
+    prog = 0;
+    count = (TBoss6PlotFalz::get_phase() == 0) ? 0x12 : 0x24;
+    n = 1;
+    i = 0;
+    k = 3;
+    while (count > n) {
+        n += k;
+        k += 3;
+        i++;
+    }
+    arr = (Vec *)mem_alloc((u32)(n * 12));
+    VecCopy(arr, &lbl_80470F84);
+    if (n > 1 && i > 0) {
+        delta = lbl_805DE378 / (f32)(double)i;
+        amp = delta;
+        j = 1;
+        angle = 0;
+        step = 0x5555;
+        cnt = 1;
+        denom = 3;
+        while (1) {
+            arr[j - 1].x = amp * sin_table_lookup(angle);
+            arr[j - 1].y = TBoss6Type1__data_805DE2D0;
+            arr[j - 1].z = amp * cos_table_lookup(angle);
+            j++;
+            if (j >= n) {
+                break;
+            }
+            angle += step;
+            if (angle <= 0x10000 - (step + 1) / 2) {
+                continue;
+            }
+            denom += 3;
+            step = 0x10000 / denom;
+            cnt++;
+            amp += delta;
+            angle = 0;
+            if ((cnt & 1) != 0) {
+                angle = (step + 1) / 2;
+            }
+        }
+    }
+    cnt = (n + 1) / 2;
+    if (cnt > 1) {
+        for (i = 0; i < cnt; i++) {
+            a = TBoss6Type1__sub_802ABDEC(rv);
+            rv = TBoss6Type1__sub_802ABDEC(a);
+            x = (a / n) * n - a;
+            y = (rv / n) * n - rv;
+            if (x == y) {
+                z = i + y + 1;
+                y = (z / n) * n - z;
+            }
+            tmp = arr[x];
+            VecCopy(&arr[x], &arr[y]);
+            VecCopy(&arr[y], &tmp);
+        }
+    }
+    self->f4e0 = 0;
+    created = 0;
+    off = 0;
+    while (created < count) {
+        VecCopy(&v64, (const Vec *)((u8 *)arr + off));
+        rv = TBoss6Type1__sub_802ABDEC(rv);
+        if (((TBoss6PlotFalz *)self->f3f8)->get_next_point((s16 *)&pt, &qp) == 0) {
+            break;
+        }
+        if (TBoss6Mine::create((s32)(long)&pt) == 0) {
+            break;
+        }
+        created++;
+        self->f4e0 = self->f4e0 + 1;
+        off += 0xc;
+        prog = (created << 16) / count;
+    }
+    mem_free(arr);
+    if (self->f4e0 > 0) {
+        ((s32 (*)(int, void *, int, int))play_sound_effect)(0x4003B51B, &self->pos, 0, 0);
+    }
+}
+}
 #pragma push
 #pragma opt_common_subs off
 void TBoss6Type1::increase_field_clamped_max() {
