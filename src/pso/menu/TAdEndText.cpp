@@ -156,24 +156,24 @@ s32 TAdEndText__sub_8001A998(s32 tex, char *str, f32 x_in, f32 y_in, f32 zoom) {
     f32 adv;
     s32 page;
     s32 code;
-    s32 c;
     s32 row;
     s32 px;
     s32 py;
-    char *p;
+    s32 c;
+    u8 *p;
 
     x = x_in;
     t = tex;
     y = y_in;
-    p = str;
+    p = (u8 *)str;
     zv = zoom;
     page = 0xfe;
     set_default_alpha_blend__Fv();
     begin_screen_draw(1);
     set_texlist__FUl(TAdEndText__loaded_font_texture_list);
     yl = lbl_805D7DF0 + y;
-    while (*p != 0) {
-        c = *(u8 *)p;
+    while ((s8)*p != 0) {
+        c = *p;
         p = p + 1;
         code = c;
         if (c == 0x23) {
@@ -191,29 +191,35 @@ s32 TAdEndText__sub_8001A998(s32 tex, char *str, f32 x_in, f32 y_in, f32 zoom) {
             }
         } else {
             switch (c) {
-            case 0x26:
-                code = 0x1f;
-                break;
             case 0x28:
                 code = 0x1a;
                 break;
             case 0x2a:
                 code = 0x1b;
                 break;
-            case 0x2c:
-                code = 0x23;
-                break;
-            case 0x2d:
-                code = 0x22;
+            case 0x2f:
+                code = 0x1c;
                 break;
             case 0x2e:
                 code = 0x1d;
                 break;
-            case 0x2f:
-                code = 0x1c;
-                break;
             case 0x3a:
                 code = 0x1e;
+                break;
+            case 0x26:
+                code = 0x1f;
+                break;
+            case 0x7e:
+                code = 0x20;
+                break;
+            case 0x5e:
+                code = 0x21;
+                break;
+            case 0x2d:
+                code = 0x22;
+                break;
+            case 0x2c:
+                code = 0x23;
                 break;
             case 0x3c:
                 code = 0x48;
@@ -221,11 +227,8 @@ s32 TAdEndText__sub_8001A998(s32 tex, char *str, f32 x_in, f32 y_in, f32 zoom) {
             case 0x3f:
                 code = 0x49;
                 break;
-            case 0x5e:
-                code = 0x21;
-                break;
-            case 0x7e:
-                code = 0x20;
+            case 0x3d:
+                code = 0x52;
                 break;
             default:
                 code = 0x52;
