@@ -1969,6 +1969,7 @@ s32 TQuestVmDownLoadServer::is_download_cmd_allowed(u8 arg0) {
 Seg_803E9FFC *TQuestVmDownLoadServer__sub_803E9A74(s32 pos, s32 arg1, u8 a, u8 b) {
     struct Chain_803E9A74 { u8 a; u8 b; u8 key; s8 link; u16 pad; u32 next; };
     Seg_803E9FFC *ret;
+    Seg_803E9FFC *seg;
     Seg_803E9FFC *p;
     Seg_803E9FFC *result;
     Chain_803E9A74 *node;
@@ -2008,11 +2009,13 @@ Seg_803E9FFC *TQuestVmDownLoadServer__sub_803E9A74(s32 pos, s32 arg1, u8 a, u8 b
             case 0x2E:
             case 0x3A:
             case 0x3B:
-            case 0x3F:
             case 0x98:
             case 0x9B:
             case 0x9C:
                 ok = 1;
+                break;
+            case 0x3F:
+                ok = 0;
                 break;
             default:
                 ok = 0;
@@ -2025,13 +2028,14 @@ Seg_803E9FFC *TQuestVmDownLoadServer__sub_803E9A74(s32 pos, s32 arg1, u8 a, u8 b
                 if (p0 == 0) {
                     return (Seg_803E9FFC *)p0;
                 }
-                ((Seg_803E9FFC *)p0)->off = 1;
-                ((Seg_803E9FFC *)p0)->a = 0xFF;
-                ((Seg_803E9FFC *)p0)->key2 = 0xFF;
-                ((Seg_803E9FFC *)p0)->b = 0;
-                ((Seg_803E9FFC *)p0)->link2 = 0;
-                ((Seg_803E9FFC *)p0)->next = 0;
-                return (Seg_803E9FFC *)p0;
+                seg = (Seg_803E9FFC *)p0;
+                seg->off = 1;
+                seg->a = 0xFF;
+                seg->key2 = 0xFF;
+                seg->b = 0;
+                seg->link2 = 0;
+                seg->next = 0;
+                return seg;
             }
         }
     }
@@ -2097,6 +2101,7 @@ Seg_803E9FFC *TQuestVmDownLoadServer__sub_803E9A74(s32 pos, s32 arg1, u8 a, u8 b
     }
     node2 = (Chain_803E9A74 *)*(u32 *)slot;
     a8 = a;
+    strbase = lbl_8047F0F8;
     strbase = lbl_8047F0F8;
     while (node2 != 0) {
         if (a8 == 0 || TQuestVmDownLoadServer__sub_803E7390(a, b, node2->a) != 0) {
