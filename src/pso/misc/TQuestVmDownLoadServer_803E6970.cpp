@@ -3749,6 +3749,55 @@ s32 TQuestVmDownLoadServer__sub_803ED84C(void *, s32, s32);
 #pragma push
 #pragma opt_common_subs off
 
+s32 TQuestVmDownLoadServer__sub_803ED84C(void *arg0, s32 idx, s32 max) {
+    Elem_803ED9AC *e;
+    Elem_803ED9AC *q;
+    s32 special;
+    s16 len;
+    s16 hl;
+    s16 xq;
+    s32 t;
+    s32 cost;
+    s32 v;
+    s32 best;
+
+    e = (Elem_803ED9AC *)arg0;
+    special = (e->sub != NULL && (e->sub->type == 0x28 || e->sub->type == 0x29));
+    if (special != 0) {
+        e->cost = 0;
+        return 0;
+    }
+    len = e->len;
+    if (e->kind == 0xFF || idx + len >= max) {
+        best = (u16)(calc_entry_cost__22TQuestVmDownLoadServerFPvPv((Arg_803ED63C *)e, NULL) + len * 0x11 + e->base + 0x32);
+    } else {
+        q = quest_download_slot_chain_table[e->kind].head;
+        if (q == NULL && lbl_805D7888 >= 3) {
+            return -1;
+        }
+        best = 0;
+        while (q != NULL) {
+            if (q == NULL) {
+                xq = e->len;
+                hl = 0;
+                t = 1;
+            } else {
+                hl = e->len;
+                t = 0;
+                xq = q->len;
+            }
+            cost = calc_entry_cost__22TQuestVmDownLoadServerFPvPv((Arg_803ED63C *)e, (Arg_803ED63C *)q);
+            v = (u16)(cost + xq * 0x11 + e->base + t * 0x32 + hl * 0x10);
+            if (v > (u16)best) {
+                best = v;
+            }
+            q = q->next;
+        }
+    }
+    e->cost = (u16)best;
+    return 0;
+}
+
 #pragma push
 #pragma dont_inline off
 #pragma inline_depth(2)
