@@ -12506,11 +12506,8 @@ s16 TLobby__sub_804066D8(Strm_80405A74 *arg0) {
         *q++ = 0x7E;
         *(u16 *)(pool + 4) = (u16)(q - (u8 *)*(u32 *)pool);
     }
-    s16 st = lbl_805D7A8A;
-    if (st == 7) {
-        return (s16)ret;
-    }
-    if (st == 0) {
+    s32 st = lbl_805D7A8A;
+    if (st == 7 || (s16)st == 0) {
         return 0;
     }
     TLobby::get_time_ms(&lbl_805D7A94);
