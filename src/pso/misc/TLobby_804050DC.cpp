@@ -12412,10 +12412,11 @@ s16 TLobby__sub_804066D8(Strm_80405A74 *arg0) {
     }
     u8 b0 = slot->p[0];
     u8 b1 = slot->p[1];
-    u16 len = read_network_u16_be(slot->p + 2);
+    s32 len = read_network_u16_be(slot->p + 2);
     s32 k = 0xC021;
-    s32 big = len >= (u16)k;
-    if (len != k && ((s16)*(u16 *)(peer + 0x50) & 4) != 0) {
+    s32 d = (u16)k - (u16)len;
+    s32 big = d == 0;
+    if ((u16)len != k && ((s16)*(u16 *)(peer + 0x50) & 4) != 0) {
         mask = *(u32 *)(peer + 0x54);
     }
     s32 h = 1;
@@ -12423,7 +12424,7 @@ s16 TLobby__sub_804066D8(Strm_80405A74 *arg0) {
     if (big == 0 && ((s16)*(u16 *)(peer + 0x50) & 0x80) != 0) {
         g = 0;
     }
-    if (g == 0 && len < 0xFF) {
+    if (g == 0 && (u16)len < 0xFF) {
         h = 0;
     }
     if (h == 0) {
