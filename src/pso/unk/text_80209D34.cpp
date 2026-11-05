@@ -24,7 +24,7 @@ struct Ent_80209D34 {
 };
 
 extern "C" {
-extern volatile u32 lbl_805D60A8;
+extern u32 lbl_805D60A8;
 extern volatile s32 lbl_805D60B4;
 extern volatile u8 *lbl_805D60BC;
 extern volatile s32 lbl_805D60C0;
