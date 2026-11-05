@@ -1080,6 +1080,7 @@ void draw_name_plate__15TWindowFukidasiFv(void *self, View_80252764 *v, u32 colo
   struct View_80251EC8 *w = (struct View_80251EC8 *) v;
   f32 *new_var;
   f32 pt[2];
+  f32 new_var2;
   f32 rect[8];
   f32 depth;
   f32 width;
@@ -1155,7 +1156,8 @@ void draw_name_plate__15TWindowFukidasiFv(void *self, View_80252764 *v, u32 colo
     draw_textured_quad_at_depth(rect, depth);
   }
   TWindowSubStatusDisp::get_player();
-  pt[0] = pt[0] + lbl_805DCD84;
+  new_var2 = pt[0];
+  pt[0] = new_var2 + lbl_805DCD84;
   if (width < TWindowFukidasi__data_805DCCFC)
   {
     pt[0] = pt[0] + (TWindowFukidasi__data_805DCD0C * (TWindowFukidasi__data_805DCCFC - width));
@@ -1163,6 +1165,9 @@ void draw_name_plate__15TWindowFukidasiFv(void *self, View_80252764 *v, u32 colo
   pt[1] = pt[1] + TWindowFukidasi__data_805DCD28;
   set_text_draw_params((s32) v, 0, 1, TWindowFukidasi__data_805DCD4C / (lbl_805DCD88 + w->f38), lbl_805DCD8C);
   draw_small_font_string_clipped(pt, (const char *) b->name, a24, lbl_805DCD54);
+  if (TWindowFukidasi__data_805DCCFC && TWindowFukidasi__data_805DCCFC)
+  {
+  }
 }
 #pragma pop
 
