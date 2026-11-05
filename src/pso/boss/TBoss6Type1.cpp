@@ -1846,43 +1846,45 @@ void TBoss6Type1__sub_802B715C(Boss_802B715C *self) {
     f32 t = self->f448;
     u32 motion = self->f444;
     p644 = &self->v644;
-    if (motion == get_bml_motion(self->f3FC, TBoss6Type1__motion_set_table[14].ids[0])) {
-        if (t >= lbl_805DE390 && t <= TBoss6Type1__data_805DE360) {
-            f32 end = lbl_805DE390 + self->f44c;
-            if (t >= lbl_805DE390 && t < end) {
-                ((s32 (*)(int, void *, int, int))play_sound_effect)(0x40038A0E, &self->v638, 0, 0);
-            }
-            ((TBoss6Type1 *)self)->update_effect_points();
-            n = TLobby::get_game_mode();
-            pd2 = (Vec_802B715C *)&d2;
-            for (i = 0; i < n; i++) {
-                inside = 1;
-                pl = get_player_data__10TObjPlayerFi(i);
-                if (is_active__14TBoss6PlotFalzFv() != 0) {
-                    arr[3] = &self->pos;
-                    j = 0;
-                    arr[0] = &self->pos;
-                    arr[1] = &self->v4c8;
-                    arr[2] = p644;
-                    for (; j < 3; j++) {
-                        VecCopy((Vec *)&d1, (const Vec *)arr[j + 1]);
-                        subtract_vector(&d1, (void *)arr[j]);
-                        VecCopy((Vec *)pd2, (const Vec *)&pl->pos);
-                        subtract_vector(pd2, (void *)arr[j]);
-                        d1.y = 0.0f;
-                        d2.y = 0.0f;
-                        vec3_cross(&d1, pd2, &cr);
-                        out[j] = cr.y;
-                        if (j > 0 && ((out[j - 1] < 0.0f && out[j] >= 0.0f) ||
-                                      (out[j - 1] > 0.0f && out[j] <= 0.0f))) {
-                            inside = 0;
-                            break;
-                        }
-                    }
-                    if (inside != 0) {
-                        pl->m21(self, ArgPair_802B7530(TBoss6PlotFalz::rand_vary_count(self->f480, TBoss6Type1__data_805DE2E0)).a, 0, -1, -1);
-                    }
+    if (motion != get_bml_motion(self->f3FC, TBoss6Type1__motion_set_table[14].ids[0]) || t < lbl_805DE390 || t > TBoss6Type1__data_805DE360) {
+        VecCopy((Vec *)&self->v4c8, (const Vec *)p644);
+        return;
+    }
+    {
+        f32 end = lbl_805DE390 + self->f44c;
+        if (t >= lbl_805DE390 && t < end) {
+            ((s32 (*)(int, void *, int, int))play_sound_effect)(0x40038A0E, &self->v638, 0, 0);
+        }
+    }
+    ((TBoss6Type1 *)self)->update_effect_points();
+    n = TLobby::get_game_mode();
+    pd2 = (Vec_802B715C *)&d2;
+    for (i = 0; i < n; i++) {
+        inside = 1;
+        pl = get_player_data__10TObjPlayerFi(i);
+        if (is_active__14TBoss6PlotFalzFv() != 0) {
+            arr[3] = &self->pos;
+            j = 0;
+            arr[0] = &self->pos;
+            arr[1] = &self->v4c8;
+            arr[2] = p644;
+            for (; j < 3; j++) {
+                VecCopy((Vec *)&d1, (const Vec *)arr[j + 1]);
+                subtract_vector(&d1, (void *)arr[j]);
+                VecCopy((Vec *)pd2, (const Vec *)&pl->pos);
+                subtract_vector(pd2, (void *)arr[j]);
+                d1.y = 0.0f;
+                d2.y = 0.0f;
+                vec3_cross(&d1, pd2, &cr);
+                out[j] = cr.y;
+                if (j > 0 && ((out[j - 1] < 0.0f && out[j] >= 0.0f) ||
+                              (out[j - 1] > 0.0f && out[j] <= 0.0f))) {
+                    inside = 0;
+                    break;
                 }
+            }
+            if (inside != 0) {
+                pl->m21(self, ArgPair_802B7530(TBoss6PlotFalz::rand_vary_count(self->f480, TBoss6Type1__data_805DE2E0)).a, 0, -1, -1);
             }
         }
     }
