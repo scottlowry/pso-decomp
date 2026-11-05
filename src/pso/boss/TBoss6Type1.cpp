@@ -1802,6 +1802,104 @@ void TBoss6Type1__sub_802B73AC(Boss_802B73AC *self) {
     }
 }
 #pragma pop
+
+struct Vec_802B715C { f32 x, y, z; };
+
+struct Boss_802B715C {
+    u8 pad0[0x38];
+    Vec_802B715C pos;
+    u8 pad44[0x3FC - 0x44];
+    s32 f3FC;
+    u8 pad400[0x444 - 0x400];
+    u32 f444;
+    f32 f448;
+    f32 f44c;
+    u8 pad450[0x480 - 0x450];
+    s32 f480;
+    u8 pad484[0x4C8 - 0x484];
+    Vec_802B715C v4c8;
+    u8 pad4D4[0x638 - 0x4D4];
+    Vec_802B715C v638;
+    Vec_802B715C v644;
+};
+
+extern const f32 lbl_805DE390;
+
+#pragma push
+#pragma fp_contract on
+#pragma inline_depth(1)
+#pragma auto_inline off
+#pragma dont_inline off
+void TBoss6Type1__sub_802B715C(Boss_802B715C *self) {
+    Vec_802B715C *p644;
+    s32 n;
+    s32 i;
+    Player_802B6B34 *pl;
+    s32 inside;
+    const Vec_802B715C *arr[4];
+    f32 out[3];
+    Vec_802B715C cr;
+    Vec_802B715C d1;
+    Vec_802B715C d2;
+    s32 j;
+    f32 t = self->f448;
+    u32 motion = self->f444;
+    p644 = &self->v644;
+    if (motion != get_bml_motion(self->f3FC, TBoss6Type1__motion_set_table[14].ids[0])) {
+        VecCopy((Vec *)&self->v4c8, (const Vec *)p644);
+        return;
+    }
+    if (t < lbl_805DE390) {
+        VecCopy((Vec *)&self->v4c8, (const Vec *)p644);
+        return;
+    }
+    if (t > TBoss6Type1__data_805DE360) {
+        VecCopy((Vec *)&self->v4c8, (const Vec *)p644);
+        return;
+    }
+    {
+        f32 end = lbl_805DE390 + self->f44c;
+        if (t >= lbl_805DE390 && t < end) {
+            ((s32 (*)(int, void *, int, int))play_sound_effect)(0x40038A0E, &self->v638, 0, 0);
+        }
+    }
+    ((TBoss6Type1 *)self)->update_effect_points();
+    n = TLobby::get_game_mode();
+    for (i = 0; i < n; i++) {
+        inside = 1;
+        pl = get_player_data__10TObjPlayerFi(i);
+        if (is_active__14TBoss6PlotFalzFv() == 0) {
+            continue;
+        }
+        arr[3] = &self->pos;
+        for (j = 0; j < 3; j++) {
+            if (j == 0) {
+                arr[0] = &self->pos;
+                arr[1] = &self->v4c8;
+                arr[2] = p644;
+            }
+            VecCopy((Vec *)&d1, (const Vec *)arr[j + 1]);
+            subtract_vector(&d1, (void *)arr[j]);
+            VecCopy((Vec *)&d2, (const Vec *)&pl->pos);
+            subtract_vector(&d2, (void *)arr[j]);
+            d1.y = 0.0f;
+            d2.y = 0.0f;
+            vec3_cross(&d1, &d2, &cr);
+            out[j] = cr.y;
+            if (j > 0 && ((out[j - 1] < 0.0f && out[j] >= 0.0f) ||
+                          (out[j - 1] > 0.0f && out[j] <= 0.0f))) {
+                inside = 0;
+                break;
+            }
+        }
+        if (inside == 0) {
+            continue;
+        }
+        pl->m21(self, ArgPair_802B7530(TBoss6PlotFalz::rand_vary_count(self->f480, TBoss6Type1__data_805DE2E0)).a, 0, -1, -1);
+    }
+    VecCopy((Vec *)&self->v4c8, (const Vec *)p644);
+}
+#pragma pop
 #pragma push
 #pragma fp_contract on
 #pragma inline_depth(1)
