@@ -1976,23 +1976,26 @@ void TBoss6Type1::damage_players_in_range() {
 }
 void TBoss6Type1__sub_802B6944(TBoss6Type1 *boss) {
     Boss_802B79DC *self = (Boss_802B79DC *)boss;
-    f32 v[3];
-    u32 pt[3];
-    s32 ring;
     s32 i;
+    s16 ring;
+    u8 *tbl;
     s32 k;
+    u32 pt[3];
+    f32 v[3];
     f32 base;
     f32 scale;
     ring = boss->m_41c & 3;
-    base = TBoss6Type1__data_805DE338 * (f32)ring;
+    tbl = (u8 *)lbl_80470F70;
     scale = lbl_805DE37C;
-    for (i = 0, k = 0; i < 5; i++, k += 4) {
-        u32 *rp = (u32 *)((char *)boss + 0x578 + *(const u32 *)((const char *)lbl_80470F70 + k) * 12);
+    k = 0;
+    base = TBoss6Type1__data_805DE338 * (f32)(boss->m_41c & 3);
+    for (i = 0; i < 5; i++) {
+        u32 *rp = (u32 *)((char *)boss + 0x578 + *(u32 *)(tbl + k) * 12);
         pt[0] = rp[0];
         pt[1] = rp[1];
         pt[2] = rp[2];
-        v[1] = base;
         v[0] = scale * cos_table_lookup(-self->rotation_y);
+        v[1] = base;
         v[2] = scale * sin_table_lookup(-self->rotation_y);
         subtract_vector(v, pt);
         f32 len = ((f32 (*)(void *))vector_length)(v);
@@ -2005,14 +2008,15 @@ void TBoss6Type1__sub_802B6944(TBoss6Type1 *boss) {
         v[1] = v[1] * s;
         v[2] = v[2] * s;
         if (is_normal_difficulty() != 0) {
-            TBoss6Type1::create_kakusan((s32)boss, (u8 *)pt, (u8 *)v, 0, lbl_805DE380);
+            TBoss6Type1::create_kakusan((s32)boss, (u8 *)pt, (u8 *)v, 0xFFFF, lbl_805DE380);
         } else {
-            TBoss6Type1::create_kakusan((s32)boss, (u8 *)pt, (u8 *)v, (s16)ring, lbl_805DE380);
+            TBoss6Type1::create_kakusan((s32)boss, (u8 *)pt, (u8 *)v, ring, lbl_805DE380);
         }
-        scale += lbl_805DE384;
         ring = (ring + 1) & 3;
+        scale += lbl_805DE384;
+        k += 4;
     }
-    ((s32 (*)(int, void *, int, int))play_sound_effect)(0x4004A10B, &boss->sound_pos, 0, 0);
+    ((s32 (*)(int, void *, int, int))play_sound_effect)(0x4003A10B, &boss->sound_pos, 0, 0);
 }
 
 #pragma push
