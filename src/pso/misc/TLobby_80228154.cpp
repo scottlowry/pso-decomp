@@ -68,6 +68,8 @@ void TLobby__sub_80228154(void *arg0, s32 arg1, s32 arg2, f32 arg3) {
     s32 i2;
     s32 i3;
     u8 *pb;
+    u32 iso;
+    u32 lz;
 
     if (arg0 == 0) {
         return;
@@ -137,7 +139,9 @@ void TLobby__sub_80228154(void *arg0, s32 arg1, s32 arg2, f32 arg3) {
         pts[4] = pts[5];
     }
     arg3 = lbl_805DC784 / arg3;
-    begin_screen_draw((arg2 & 0x20) != 0);
+    iso = (u32)(arg2 & 0x20) - 0x20;
+    lz = (u32)__cntlzw((s32)iso);
+    begin_screen_draw((s32)((lz >> 5) & 0xFF));
     set_draw_texture_and_color(e[8], color);
     draw_textured_quad_at_depth(pts, arg3);
     get_player__20TWindowSubStatusDispFv();
