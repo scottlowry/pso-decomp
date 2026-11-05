@@ -441,16 +441,18 @@ u8 *TLobby__sub_803C2388(u8 *hdr, s32 *rateExp, s32 *channels, s32 *bitWidth, s3
             *channels = (u32)p[0] << 24 | (u32)p[1] << 16;
             u32 ch = *channels;
             *channels = (ch << 8 & 0xFFFFFF) | (ch << 24 & 0xFF000000);
-            *sampleRate = (u32)p[2] << 24 | (u32)p[3] << 16 | (u32)p[4] << 8 | (u32)p[5];
+            *sampleRate = (u32)p[2] | (u32)p[3] << 8 | (u32)p[4] << 16 | (u32)p[5] << 24;
             u32 rate = *sampleRate;
             *sampleRate = (rate >> 24 & 0xFF) | (rate >> 8 & 0xFF00) | (rate << 8 & 0xFF0000) | rate << 24;
             *bitWidth = (u32)p[6] << 24 | (u32)p[7] << 16;
             u32 bw = *bitWidth;
             *bitWidth = (bw << 8 & 0xFFFFFF) | (bw << 24 & 0xFF000000);
-            u32 top = (u32)p[8] << 8 | (u32)p[9];
-            u32 mid = (u32)p[10] << 8 | (u32)p[11];
+            u32 w8 = (u32)p[8] | (u32)p[9] << 16;
+            u32 w10 = (u32)p[10] | (u32)p[11] << 16;
+            u32 sw8 = ((w8 << 8 & 0xFFFFFF) | (w8 << 24 & 0xFF000000)) & 0xFFFF;
+            u32 sw10 = ((w10 << 8 & 0xFFFFFF) | (w10 << 24 & 0xFF000000)) & 0xFFFF;
             p += 18;
-            s32 res = (s32)mid >> (0x400e - top);
+            s32 res = (s32)sw10 >> (0x400e - (s32)sw8);
             *rateExp = res;
             if (res == 0) {
                 continue;
