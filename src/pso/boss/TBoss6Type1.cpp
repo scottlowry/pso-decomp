@@ -2021,10 +2021,15 @@ extern const Vec lbl_80470F84;
 
 void TBoss6Type1__sub_802B6504(TBoss6Type1 *boss) {
     Boss_802B6504 *self = (Boss_802B6504 *)boss;
+    volatile u8 f0a[2];
+    volatile u8 f0c[6];
+    volatile u8 f0d[0x24];
+    volatile s32 vself;
+    volatile s32 f0e;
     Vec tmp;
     s32 pt;
     s16 qp;
-    s16 z1c;
+    volatile s16 z1c;
     Vec v24;
     Vec v58;
     Vec v64;
@@ -2053,6 +2058,7 @@ void TBoss6Type1__sub_802B6504(TBoss6Type1 *boss) {
     ((TBoss6Type1 *)rv)->reset_fields_4e0();
     TBoss4DarkFalz__sub_8004B4F0(&pt, ((TBoss6Type1 *)self->f3f8)->get_mag_mine_ptr());
     VecCopy(&v58, &self->f578);
+    vself = (s32)self;
     VecCopy(&v64, &lbl_80470F84);
     z1c = 0;
     VecCopy(&v24, &v58);
@@ -2069,7 +2075,7 @@ void TBoss6Type1__sub_802B6504(TBoss6Type1 *boss) {
     arr = (Vec *)mem_alloc((u32)(n * 12));
     VecCopy(arr, &lbl_80470F84);
     if (n > 1 && i > 0) {
-        delta = lbl_805DE378 / (f32)(double)i;
+        delta = lbl_805DE378 / (f32)i;
         amp = delta;
         j = 1;
         angle = 0;
@@ -2119,6 +2125,7 @@ void TBoss6Type1__sub_802B6504(TBoss6Type1 *boss) {
     off = 0;
     while (created < count) {
         VecCopy(&v64, (const Vec *)((u8 *)arr + off));
+        f0e = prog;
         rv = TBoss6Type1__sub_802ABDEC(rv);
         if (((TBoss6PlotFalz *)self->f3f8)->get_next_point((s16 *)&pt, &qp) == 0) {
             break;
