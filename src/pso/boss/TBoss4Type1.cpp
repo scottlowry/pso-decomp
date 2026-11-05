@@ -1855,6 +1855,7 @@ void create_all_tenchu_furu__11TBoss4Type2Fi(s32 arg0) {
 #pragma push
 #pragma fp_contract on
 s32 TBoss4Type2__sub_80054FC0(void *self, f32 range) {
+    RecoveredGlobal_80054F6C_lbl_804FF2A0 *pd2;
     Vec_80053914 pos;
     Vec_80053914 cand;
     TObjPlayer *players[4];
@@ -1872,14 +1873,15 @@ s32 TBoss4Type2__sub_80054FC0(void *self, f32 range) {
     s32 hit;
     s32 k;
 
-    dst = (Vec_80053914 *)&TBoss4Type2__tenchu_furu_array;
+    pd2 = &TBoss4Type2__tenchu_furu_array;
+    dst = (Vec_80053914 *)pd2;
     cnt = 0;
     for (; cnt < 0x40; cnt++) {
         VecCopy__FP3VecPC3Vec(dst, (Vec_80053914 *)lbl_80485AE0);
         dst++;
     }
     cnt = 0;
-    cursor = (Vec_80053914 *)&TBoss4Type2__tenchu_furu_array;
+    cursor = (Vec_80053914 *)pd2;
     count = 0;
     if (is_split_screen() != 0) {
         count = TLobby::get_game_mode();
