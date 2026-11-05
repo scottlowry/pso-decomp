@@ -47,6 +47,8 @@ struct Slot_803CD16C {
 
 struct LogHdr_803CD3A8 { u8 pad[0x2]; u16 seq; };
 
+struct LogHdr_803CC578 { u8 pad[0xC]; u16 seq; };
+
 struct VObj_803CC980;
 struct LogHdr_803CC980 { u8 pad[0xA]; u16 seq; };
 
@@ -186,6 +188,117 @@ s32 TLobby__sub_803CC53C(u8 *arg0) {
         return -3;
     }
     return *(s32 *)((s8 *)arg0 + 0xC);
+}
+
+s32 TLobby__sub_803CC578(Snd_803CC980 *arg0, s32 arg1, s32 arg2) {
+    s32 base = (s32)lbl_8047C818;
+    s32 sp8;
+    {
+        LogEnt_803CD16C *e;
+        s32 i = adxf_log_write_index % 256;
+        u16 seq;
+        e = &lbl_8057B7D0[i];
+        adxf_log_write_index = i;
+        seq = ++((LogHdr_803CC578 *)&lbl_8057B7B0)->seq;
+        e->type = 6;
+        e->phase = 0;
+        e->seq = seq;
+        e->a = (s32)arg0;
+        e->b = arg1;
+        e->c = arg2;
+        adxf_log_write_index = i + 1;
+    }
+    if (arg0 == NULL) {
+        TLobby::notify_error((const char *)(base + 0x174));
+        return -3;
+    }
+    if (arg0->state == 2) {
+        LogEnt_803CD16C *e;
+        s32 i = adxf_log_write_index % 256;
+        u16 seq;
+        e = &lbl_8057B7D0[i];
+        adxf_log_write_index = i;
+        seq = ((LogHdr_803CC980 *)&lbl_8057B7B0)->seq + 1;
+        e->type = 5;
+        e->phase = 0;
+        e->seq = seq;
+        e->a = (s32)arg0;
+        e->b = -1;
+        ((LogHdr_803CC980 *)&lbl_8057B7B0)->seq = seq;
+        e->c = -1;
+        adxf_log_write_index = i + 1;
+        if (arg0 == NULL) {
+            TLobby::notify_error((const char *)(base + 0x198));
+            goto adjust;
+        }
+    }
+    if (arg0->state == 1) {
+        goto adjust;
+    }
+    if (arg0->state == 3) {
+        arg0->state = 1;
+        goto adjust;
+    }
+    if (arg0->f4 == 0) {
+        TLobby::notify_error((const char *)(base + 0x1bc));
+        goto adjust;
+    }
+    TLobby::init_once();
+    TLobby__sub_803C89C4((u8 *)arg0->f4);
+    TLobby__sub_803C85AC((u8 *)arg0->f4, &sp8);
+    arg0->f20 = sp8;
+    if (arg0->f8 != NULL && arg0->f2 == 0) {
+        if (lbl_805D75E4 == 1) {
+            invalidate_cache__6TLobbyFv(arg0->f24, arg0->f28);
+        }
+        arg0->f8->vt->fn(arg0->f8);
+        arg0->f8 = NULL;
+    }
+    arg0->state = 1;
+    TLobby::release_ref();
+    {
+        s32 i = adxf_log_write_index % 256;
+        LogEnt_803CD16C *e = &lbl_8057B7D0[adxf_log_write_index = i];
+        e->type = 5;
+        e->phase = 1;
+        e->seq = ((LogHdr_803CC980 *)&lbl_8057B7B0)->seq;
+        e->a = (s32)arg0;
+        e->b = -1;
+        e->c = -1;
+        adxf_log_write_index = i + 1;
+    }
+adjust:
+    switch (arg2) {
+    case 0:
+        arg0->f14 = arg1;
+        break;
+    case 1:
+        arg0->f14 += arg1;
+        break;
+    case 2:
+        arg0->f14 = ((Slot_803CD16C *)arg0)->fc + arg1;
+        break;
+    default:
+        TLobby::notify_error((const char *)(base + 0x1e8));
+        return -3;
+    }
+    if (arg0->f14 < 0) {
+        arg0->f14 = 0;
+    } else if (arg0->f14 > ((Slot_803CD16C *)arg0)->fc) {
+        arg0->f14 = ((Slot_803CD16C *)arg0)->fc;
+    }
+    {
+        s32 i = adxf_log_write_index % 256;
+        LogEnt_803CD16C *e = &lbl_8057B7D0[adxf_log_write_index = i];
+        e->type = 6;
+        e->phase = 1;
+        e->seq = ((LogHdr_803CC578 *)&lbl_8057B7B0)->seq;
+        e->a = (s32)arg0;
+        e->b = arg1;
+        e->c = arg2;
+        adxf_log_write_index = i + 1;
+    }
+    return arg0->f14;
 }
 typedef char RecoveredGlobal_803CCB5C_lbl_8047CA28_size[sizeof(RecoveredGlobal_803CCB5C_lbl_8047CA28) == 0x154 ? 1 : -1];
 
