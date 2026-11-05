@@ -2033,8 +2033,8 @@ void TBoss6Type1__sub_802B6504(TBoss6Type1 *boss) {
     Vec v24;
     Vec v58;
     Vec v64;
-    Vec *pv58;
-    Vec *pv64;
+    Vec *pv58 = &v58;
+    Vec *pv64 = &v64;
     Vec *arr;
     s32 n;
     s32 i;
@@ -2059,10 +2059,8 @@ void TBoss6Type1__sub_802B6504(TBoss6Type1 *boss) {
     rv = (s8)self->f41C;
     ((TBoss6Type1 *)rv)->reset_fields_4e0();
     TBoss4DarkFalz__sub_8004B4F0(&pt, ((TBoss6Type1 *)self->f3f8)->get_mag_mine_ptr());
-    pv58 = &v58;
     vself = (s32)self;
     VecCopy(pv58, &self->f578);
-    pv64 = &v64;
     VecCopy(pv64, &lbl_80470F84);
     z1c = 0;
     VecCopy(&v24, pv58);
