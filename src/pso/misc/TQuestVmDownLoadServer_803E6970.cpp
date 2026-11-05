@@ -1971,7 +1971,6 @@ Seg_803E9FFC *TQuestVmDownLoadServer__sub_803E9A74(s32 pos, s32 arg1, u8 a, u8 b
     Seg_803E9FFC *ret;
     Seg_803E9FFC *seg;
     Seg_803E9FFC *p;
-    Seg_803E9FFC *result;
     Chain_803E9A74 *node;
     Chain_803E9A74 *node2;
     u8 *arr;
@@ -1983,19 +1982,21 @@ Seg_803E9FFC *TQuestVmDownLoadServer__sub_803E9A74(s32 pos, s32 arg1, u8 a, u8 b
     u8 ch;
     s32 ok;
     void *p0;
+    Seg_803E9FFC *result;
 
     result = 0;
     if (pos >= arg1) {
-        if (lbl_805D7888 >= 3) {
-            return (Seg_803E9FFC *)-1;
+        if (lbl_805D7888 < 3) {
+            return 0;
         }
-        return 0;
+        return (Seg_803E9FFC *)-1;
     }
     slot = (u8 *)quest_download_slot_chain_table + (pos * 0x1C);
     node = (Chain_803E9A74 *)*(u32 *)slot;
     if ((u32)node == 0xFF010001U) {
         return (Seg_803E9FFC *)-1;
     }
+    node = (Chain_803E9A74 *)*(u32 *)slot;
     if (node == 0) {
         c = ((u8 *)&lbl_805A0470)[pos];
         if (c >= 0xA0) {
@@ -2022,25 +2023,31 @@ Seg_803E9FFC *TQuestVmDownLoadServer__sub_803E9A74(s32 pos, s32 arg1, u8 a, u8 b
                 break;
             }
         }
-        if (ok != 0) {
-            if ((u8)a == 0 || TQuestVmDownLoadServer::is_valid_item_for_slot(a, b) != 0) {
-                p0 = TQuestVmDownLoadServer__sub_803ECF0C();
-                if (p0 == 0) {
-                    return (Seg_803E9FFC *)p0;
-                }
-                seg = (Seg_803E9FFC *)p0;
-                seg->off = 1;
-                seg->a = 0xFF;
-                seg->key2 = 0xFF;
-                seg->b = 0;
-                seg->link2 = 0;
-                seg->next = 0;
-                return seg;
+        if (ok == 0) {
+            goto chain;
+        }
+        if ((u8)a != 0) {
+            if (TQuestVmDownLoadServer::is_valid_item_for_slot(a, b) == 0) {
+                goto chain;
             }
         }
+        p0 = TQuestVmDownLoadServer__sub_803ECF0C();
+        if (p0 == 0) {
+            return (Seg_803E9FFC *)p0;
+        }
+        seg = (Seg_803E9FFC *)p0;
+        seg->off = 1;
+        seg->a = 0xFF;
+        seg->key2 = 0xFF;
+        seg->b = 0;
+        seg->link2 = 0;
+        seg->next = 0;
+        return seg;
     }
-    arr = (u8 *)&lbl_805A0470 + pos;
+chain:
+    ;
     strbase = lbl_8047F0F8;
+    arr = (u8 *)&lbl_805A0470 + pos;
     a8 = a;
     while (node != 0) {
         if (TQuestVmDownLoadServer::is_valid_item_for_slot(node->a, node->b) != 0) {
