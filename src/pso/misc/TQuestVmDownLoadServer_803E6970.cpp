@@ -3004,8 +3004,10 @@ inline N_803EC460 *Default_803EC460(s32 x) {
 
 void TQuestVmDownLoadServer__sub_803EC284(s32 arg0, s32 arg1) {
     Node_803EB794 *p;
+    Node_803EB794 *n;
     s32 cnt;
     s32 cur;
+    s32 k;
 
     cur = arg0;
     if (arg1 == 1) {
@@ -3013,15 +3015,19 @@ void TQuestVmDownLoadServer__sub_803EC284(s32 arg0, s32 arg1) {
     }
     p = *(Node_803EB794 **)((u8 *)quest_download_slot_chain_table + (lbl_805D78F0 * 0x1C) + 0xC);
     if (lbl_805D7834 > 0) {
-        lbl_805D78A4 = 0x50;
+        lbl_805D78A4 = 80;
     } else {
         lbl_805D78A4 = TQuestVmDownLoadServer::get_buffer_size();
     }
     cnt = count_fitting_groups(p);
     while (cur >= cnt) {
-        if (cnt != 0) {
-            cur = cur - cnt;
-            p = advance_entry_groups(p, cnt);
+        cur = cur - cnt;
+        for (k = 0; k < cnt; k++) {
+            n = p;
+            while (n->flags & 1) {
+                n = n->next;
+            }
+            p = n->next;
         }
         cnt = count_fitting_groups(p);
         if (cnt == 0) {
