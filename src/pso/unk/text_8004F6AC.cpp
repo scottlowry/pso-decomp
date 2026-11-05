@@ -100,7 +100,7 @@ void *TObjDFDemo4__ct(void *arg0, void *parent, const Vec *pos, s32 angle) {
         k = t;
         ((s32 *)self)[i * 3 + 0x2b] = get_bml_model(res, t);
         ((s32 *)self)[i * 3 + 0x2c] = TObjFish__sub_8001EDB0(res, k);
-        ((s32 *)self)[i * 3 + 0x2d] = get_bml_motion(res, lbl_80485720[i]);
+        ((s32 *)self)[i * 3 + 0x2d] = get_bml_motion(res, blob[i]);
     }
     {
         // The second model group's motions start two ids into the table.
