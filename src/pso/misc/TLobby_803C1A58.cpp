@@ -423,14 +423,15 @@ u8 *TLobby__sub_803C2388(u8 *hdr, s32 *rateExp, s32 *channels, s32 *bitWidth, s3
     if (c - 0x46460000 != 0x4941) {
         return 0;
     }
-    u8 *end = p + (bsw - 4);
+    u32 len = bsw - 4;
+    u8 *end = p + len;
     u32 commMagic = 0x4d4d4f43;
     while (p < end) {
         u32 t = (u32)p[0] | (u32)p[1] << 8 | (u32)p[2] << 16 | (u32)p[3] << 24;
         u32 n = (u32)p[4] | (u32)p[5] << 8 | (u32)p[6] << 16 | (u32)p[7] << 24;
         p += 8;
         s32 sz = (s32)((n >> 24 & 0xFF) | (n >> 8 & 0xFF00) | (n << 8 & 0xFF0000) | n << 24);
-        if (t == commMagic) {
+        if ((s32)t == (s32)commMagic) {
             if (seenComm != 0) {
                 continue;
             }
@@ -456,7 +457,7 @@ u8 *TLobby__sub_803C2388(u8 *hdr, s32 *rateExp, s32 *channels, s32 *bitWidth, s3
             }
             return 0;
         }
-        if ((s32)t < (s32)commMagic && t == 0x444e5353) {
+        if ((s32)t < (s32)commMagic && (s32)t == (s32)0x444e5353) {
             if (seenSsnd != 0) {
                 continue;
             }
