@@ -339,6 +339,8 @@ extern RecoveredGlobal_803E8710_lbl_8058DE08 quest_vm_download_server_file_info;
 extern s32 lbl_805D78F8;
 extern RecoveredGlobal_803E9764_lbl_80591EC8 lbl_80591EC8;
 extern s8 lbl_805D7868;
+extern s32 lbl_805D786C;
+extern s32 lbl_805D7870;
 struct Sub_803ED9AC { u8 pad[2]; u8 type; };
 struct Elem_803ED9AC {
     s16 len;
@@ -354,6 +356,9 @@ extern Slot_803ED9AC quest_download_slot_chain_table[];
 extern const u8 lbl_8047F8B8[0x100];
 extern RecoveredGlobal_803E721C_lbl_8047E698 single_byte_to_jis_table;
 s32 strcpy(void *, void *);
+void *memset(void *, int, u32);
+s32 TQuestVmDownLoadServer__sub_803E93DC(void);
+extern s32 lbl_805D7878;
 s32 dispatch_request_0x20__19TWindowKeyBoardSoftFll(void *, void *);
 s32 dispatch_request_0x1c__19TWindowKeyBoardSoftFv();
 extern s32 quest_download_initialized;
@@ -1964,6 +1969,132 @@ s32 TQuestVmDownLoadServer::is_download_cmd_allowed(u8 arg0) {
     default:
         return 0;
     }
+}
+
+void __VIRetraceHandler(void) {
+    u8 *e;
+    u8 *p;
+    u8 *end;
+    u8 *q;
+    u32 n;
+    u32 k;
+
+    e = (u8 *)&lbl_80591EC8;
+    p = e + 0x2140;
+    end = e + 0x3138;
+    n = (u32)(end + 7 - p);
+    n = n >> 3;
+    if (p < end) {
+        for (k = 0; k < n; k++) {
+            *(u32 *)(p + 4) = (u32)(p + 8);
+            p += 8;
+        }
+    }
+    *(u32 *)(p + 4) = 0;
+    lbl_805D7878 = (u32)(e + 0x2140);
+    *(u32 *)(e + 0x2000) = 0;
+    *(u32 *)(e + 0x2004) = 0;
+    *(u32 *)(e + 0x2008) = 0;
+    *(u32 *)(e + 0x200C) = 0;
+    *(u32 *)(e + 0x2010) = 0;
+    *(u32 *)(e + 0x2014) = 0;
+    *(u32 *)(e + 0x2018) = 0;
+    *(u32 *)(e + 0x201C) = 0;
+    *(u32 *)(e + 0x2020) = 0;
+    *(u32 *)(e + 0x2024) = 0;
+    *(u32 *)(e + 0x2028) = 0;
+    *(u32 *)(e + 0x202C) = 0;
+    *(u32 *)(e + 0x2030) = 0;
+    *(u32 *)(e + 0x2034) = 0;
+    *(u32 *)(e + 0x2038) = 0;
+    *(u32 *)(e + 0x203C) = 0;
+    *(u32 *)(e + 0x2040) = 0;
+    *(u32 *)(e + 0x2044) = 0;
+    *(u32 *)(e + 0x2048) = 0;
+    *(u32 *)(e + 0x204C) = 0;
+    *(u32 *)(e + 0x2050) = 0;
+    *(u32 *)(e + 0x2054) = 0;
+    *(u32 *)(e + 0x2058) = 0;
+    *(u32 *)(e + 0x205C) = 0;
+    *(u32 *)(e + 0x2060) = 0;
+    *(u32 *)(e + 0x2064) = 0;
+    *(u32 *)(e + 0x2068) = 0;
+    *(u32 *)(e + 0x206C) = 0;
+    *(u32 *)(e + 0x2070) = 0;
+    *(u32 *)(e + 0x2074) = 0;
+    *(u32 *)(e + 0x2078) = 0;
+    *(u32 *)(e + 0x207C) = 0;
+    *(u32 *)(e + 0x2080) = 0;
+    *(u32 *)(e + 0x2084) = 0;
+    *(u32 *)(e + 0x2088) = 0;
+    *(u32 *)(e + 0x208C) = 0;
+    *(u32 *)(e + 0x2090) = 0;
+    *(u32 *)(e + 0x2094) = 0;
+    *(u32 *)(e + 0x2098) = 0;
+    *(u32 *)(e + 0x209C) = 0;
+    *(u32 *)(e + 0x20A0) = 0;
+    *(u32 *)(e + 0x20A4) = 0;
+    *(u32 *)(e + 0x20A8) = 0;
+    *(u32 *)(e + 0x20AC) = 0;
+    *(u32 *)(e + 0x20B0) = 0;
+    *(u32 *)(e + 0x20B4) = 0;
+    *(u32 *)(e + 0x20B8) = 0;
+    *(u32 *)(e + 0x20BC) = 0;
+    *(u32 *)(e + 0x20C0) = 0;
+    *(u32 *)(e + 0x20C4) = 0;
+    *(u32 *)(e + 0x20C8) = 0;
+    *(u32 *)(e + 0x20CC) = 0;
+    *(u32 *)(e + 0x20D0) = 0;
+    *(u32 *)(e + 0x20D4) = 0;
+    *(u32 *)(e + 0x20D8) = 0;
+    *(u32 *)(e + 0x20DC) = 0;
+    *(u32 *)(e + 0x20E0) = 0;
+    *(u32 *)(e + 0x20E4) = 0;
+    *(u32 *)(e + 0x20E8) = 0;
+    *(u32 *)(e + 0x20EC) = 0;
+    *(u32 *)(e + 0x20F0) = 0;
+    *(u32 *)(e + 0x20F4) = 0;
+    *(u32 *)(e + 0x20F8) = 0;
+    *(u32 *)(e + 0x20FC) = 0;
+    *(u32 *)(e + 0x2100) = 0;
+    *(u32 *)(e + 0x2104) = 0;
+    *(u32 *)(e + 0x2108) = 0;
+    *(u32 *)(e + 0x210C) = 0;
+    *(u32 *)(e + 0x2110) = 0;
+    *(u32 *)(e + 0x2114) = 0;
+    *(u32 *)(e + 0x2118) = 0;
+    *(u32 *)(e + 0x211C) = 0;
+    *(u32 *)(e + 0x2120) = 0;
+    *(u32 *)(e + 0x2124) = 0;
+    *(u32 *)(e + 0x2128) = 0;
+    *(u32 *)(e + 0x212C) = 0;
+    *(u32 *)(e + 0x2130) = 0;
+    *(u32 *)(e + 0x2134) = 0;
+    *(u32 *)(e + 0x2138) = 0;
+    *(u32 *)(e + 0x213C) = 0;
+    if (TQuestVmDownLoadServer__sub_803E93DC() == -1) {
+        e[1] = 0;
+        q = e + 0x400;
+        e[0] = 0;
+        e[0x401] = 0;
+        e[0x400] = 0;
+        e[0x801] = 0;
+        e[0x800] = 0;
+        e[0xC01] = 0;
+        e[0xC00] = 0;
+        e[0x1001] = 0;
+        e[0x1000] = 0;
+        e[0x1401] = 0;
+        e[0x1400] = 0;
+        e[0x1801] = 0;
+        e[0x1800] = 0;
+        e[0x1C01] = 0;
+        e[0x1C00] = 0;
+        lbl_805D7874 = 0;
+        lbl_805D7870 = (u32)e;
+        lbl_805D786C = (u32)q;
+    }
+    lbl_805D7868 = 0;
 }
 
 Ent_803E9DE0 *find_longest_match_entry__22TQuestVmDownLoadServerFPviPv(u8 *arg0, s32 arg1, s32 *arg2) {
