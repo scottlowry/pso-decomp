@@ -402,6 +402,11 @@ extern s32 quest_download_ask_header_size;
 extern s32 quest_download_header_name_index_hi_count;
 extern s32 lbl_805D7874;
 extern s32 lbl_805D78FC;
+extern s32 lbl_805D786C;
+extern s32 lbl_805D7870;
+extern s32 lbl_805D7878;
+void TQuestVmDownLoadServer__sub_803E95BC(void);
+u32 aram_read_thunk__22TQuestVmDownLoadServerFUli(u32, u32, s32);
 void append_message_text__22TQuestVmDownLoadServerFPviPvUc(u8 *arg0, s32 arg1, Msg_803E90A8 *arg2, u8 arg3);
 u32 strlen(const char *);
 extern s32 lbl_805D78A4;
@@ -1917,6 +1922,97 @@ s32 TQuestVmDownLoadServer::calc_message_length() {
     extra = arg0->len + extra;
     n = extra + n;
     return n + 3;
+}
+#pragma pop
+
+#pragma push
+#pragma opt_common_subs off
+s32 TQuestVmDownLoadServer__sub_803E93DC(void) {
+    u8 buf[0x50];
+    s32 base;
+    s32 e;
+    u8 *p;
+    s32 i;
+    s32 nlen;
+    u8 len;
+    s32 prev;
+    s32 node;
+    s32 idx;
+    u32 c;
+    s32 rec;
+    s32 r;
+    u8 l2;
+    s32 slot;
+    s32 nn;
+    s32 e2;
+    s32 n;
+
+    base = (s32)&lbl_80591EC8.value;
+    if (TQuestVmDownLoadServer::seek_or_reopen(0x1400) == -1) {
+        return -1;
+    }
+    if (aram_read_thunk__22TQuestVmDownLoadServerFUli(lbl_805D7904, base, 0x2000) != 0x2000) {
+        return -1;
+    }
+    i = 0;
+    e = base;
+    while (i < 8) {
+        p = (u8 *)e;
+        n = (u16)((p[1] << 8) + p[0]);
+        while (n != 0) {
+            len = *(u8 *)(p + 2);
+            if ((s16)len != 0) {
+                strncpy((char *)buf, (char *)(p + 3), (s16)len);
+                prev = 0;
+                buf[(s16)len] = 0;
+                c = buf[0];
+                if (c >= 0xa0 && c < 0xf0) {
+                    idx = c - 0xa0;
+                } else {
+                    idx = 0;
+                }
+                node = *(s32 *)((base + (idx << 2)) + 0x2000);
+                nlen = (s16)len;
+                while (node != 0) {
+                    rec = *(s32 *)node;
+                    l2 = *(u8 *)(rec + 2);
+                    r = strncmp((char *)(rec + 3), (char *)buf, (s16)l2);
+                    if (r == 0) {
+                        if (nlen == (s16)l2) {
+                            break;
+                        }
+                    } else if (r > 0) {
+                        break;
+                    }
+                    prev = node;
+                    node = *(s32 *)(node + 4);
+                }
+                if (prev == 0) {
+                    slot = (base + (idx << 2)) + 0x2000;
+                } else {
+                    slot = prev + 4;
+                }
+                if (lbl_805D7878 == 0) {
+                    TQuestVmDownLoadServer__sub_803E95BC();
+                }
+                nn = lbl_805D7878;
+                lbl_805D7878 = *(s32 *)(nn + 4);
+                *(s32 *)nn = (s32)p;
+                *(s32 *)(nn + 4) = node;
+                *(s32 *)slot = nn;
+            }
+            n = (u16)((p[1] << 8) + p[0]);
+            p += n;
+        }
+        if (lbl_805D7874 == i) {
+            e2 = e + 0x400;
+            *(s32 *)((s32)&lbl_805D7870 + e2) = (s32)p;
+            *(s32 *)((s32)&lbl_805D786C + e2) = e2;
+        }
+        i++;
+        e += 0x400;
+    }
+    return 0;
 }
 #pragma pop
 
