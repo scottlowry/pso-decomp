@@ -2167,10 +2167,10 @@ s32 TQuestVmDownLoadServer__sub_803EA1A8(s32 arg0, s32 arg1) {
     s32 rv;
     u8 *p;
 
-    if ((u32)slot->x4 != 0xFFF0FFFFu) {
+    if ((u32)slot->x4 + 0x10000u != 0xffffu) {
         for (node = slot->x4; node != NULL; node = node->next) {
             ret = (N_803E9FA4 *)TQuestVmDownLoadServer__sub_803E9FFC(arg0, arg1, (Tok_803E9FFC *)node);
-            if ((u32)ret == 0xFFF0FFFFu) {
+            if ((u32)ret + 0x10000u == 0xffffu) {
                 if (slot->x8 != NULL) {
                     TQuestVmDownLoadServer__sub_803ECD8C((Node_803ECD8C *)slot->x8);
                     slot->x8 = NULL;
@@ -2188,7 +2188,7 @@ s32 TQuestVmDownLoadServer__sub_803EA1A8(s32 arg0, s32 arg1) {
         }
     }
     ret = (N_803E9FA4 *)TQuestVmDownLoadServer__sub_803E9FFC(arg0, arg1, lbl_8047F8A8);
-    if ((u32)ret == 0xFFF0FFFFu) {
+    if ((u32)ret + 0x10000u == 0xffffu) {
         if (slot->x8 != NULL) {
             TQuestVmDownLoadServer__sub_803ECD8C((Node_803ECD8C *)slot->x8);
             slot->x8 = NULL;
