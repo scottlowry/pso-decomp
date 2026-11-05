@@ -1957,7 +1957,7 @@ void TQuestVmDownLoadServer__sub_803E95BC(u32 arg0, u32 arg1, u32 arg2) {
         if ((s16)len != 0) {
             strncpy((char *)buf, (char *)(p + 3), (s16)len);
             prev = 0;
-            buf[(s16)len] = 0;
+            buf[(s16)len] = prev;
             c = buf[0];
             if (c >= 0xa0 && c < 0xf0) {
                 idx = c - 0xa0;
