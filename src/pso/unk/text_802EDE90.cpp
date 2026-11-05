@@ -63,9 +63,9 @@ extern u8 controller_input_state[];
 
 extern "C" void *TBoss7DeRolLeC__ct(void *self_, void *arg1, void *arg2) {
     u8 *self = (u8 *)self_;
-    u8 *base = lbl_804E3BF0;
-    u32 exch_slot;
+    u8 *base;
     Vec3 stack_vec;
+    u32 exch_slot;
     s32 off;
     s32 i;
     u32 p;
@@ -75,6 +75,7 @@ extern "C" void *TBoss7DeRolLeC__ct(void *self_, void *arg1, void *arg2) {
     u32 v;
 
     __ct__12TObjEneDD_STFP7TObject(self);
+    base = lbl_804E3BF0;
     *(u32 *)(self + 0x18) = (u32)(base + 0x264);
     init_resources__13TBoss2DeRolLeFi((s32)(self + 0x630));
     init_resources__13TBoss2DeRolLeFi((s32)(self + 0x650));
@@ -125,9 +126,9 @@ extern "C" void *TBoss7DeRolLeC__ct(void *self_, void *arg1, void *arg2) {
     *(u32 *)(self + 0x6B0) = 0;
     *(u32 *)(self + 0x6B4) = 0;
     for (off = 0; off < 0xF0; off += 0xC) {
-        *(f32 *)((u32)self + (off + 0x3EC)) = lbl_805DEA10;
-        *(f32 *)((u32)self + (off + 0x3F0)) = lbl_805DEA10;
-        *(f32 *)((u32)self + (off + 0x3F4)) = lbl_805DEA10;
+        *(f32 *)(self + 0 + (off + 0x3EC)) = lbl_805DEA10;
+        *(f32 *)(self + 0 + (off + 0x3F0)) = lbl_805DEA10;
+        *(f32 *)(self + 0 + (off + 0x3F4)) = lbl_805DEA10;
     }
     for (off = 0; off < 0x30; off += 0xC) {
         *(f32 *)((u32)self + (off + 0x4DC)) = lbl_805DEA10;
@@ -147,7 +148,7 @@ extern "C" void *TBoss7DeRolLeC__ct(void *self_, void *arg1, void *arg2) {
     stack_vec.w0 = lbl_80473F6C[0];
     stack_vec.w1 = lbl_80473F6C[1];
     stack_vec.w2 = lbl_80473F6C[2];
-    joint_b = (u32)(*(u16 *)(self + 0x1C) + 1);
+    joint_b = (u32)(u16)(*(u16 *)(self + 0x1C) + 1);
     joint_a = *(s16 *)(self + 0x2C) + 1;
     for (i = 0; i < 10; i++) {
         VecCopy__FP3VecPC3Vec(self + (i * 0xC + 0x530), &stack_vec);
