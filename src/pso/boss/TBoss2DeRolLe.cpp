@@ -1223,7 +1223,7 @@ void subtract_vector(void *, void *);
 extern Inst_8002FE60 lbl_804356FC[];
 extern const f64 lbl_80435A10[];
 extern u8 *TBoss2DeRolLe__data_805D4BA0;
-void TBoss2DeRolLe__sub_8002FE60(void *arg0, u32 arg1);
+void TBoss2DeRolLe__sub_8002FE60(D_8002FE60 *self, u32 arg1);
 u32 __cvt_fp2unsigned(f32);
 extern u32 *boss2_derolle_primary_color_targets[];
 extern u32 *boss2_derolle_segment_color_targets[];
@@ -1862,10 +1862,9 @@ void TBoss2DeRolLe__sub_8002FD9C(DeRolLe_8002FD9C *self, u32 arg1, s32 arg2) {
 #define VADD(d, s) ((void (*)(void *, void *)) vec3_add_to)((d), (s))
 #pragma push
 #pragma fp_contract on
-void TBoss2DeRolLe__sub_8002FE60(void *arg0, u32 arg1) {
+void TBoss2DeRolLe__sub_8002FE60(D_8002FE60 *self, u32 arg1) {
     Vec_8002FE60 *vel;
     Vec_8002FE60 *hit;
-    D_8002FE60 *self = (D_8002FE60 *) arg0;
     vel = &self->vel;
     switch (arg1) {
     case 4:
@@ -3736,7 +3735,7 @@ void dispatch_action__13TBoss2DeRolLeFiUii(s32 arg0, u32 arg1, s32 arg2) {
         ((s32 (*)(void *, void *))state_ceiling_attack__13TBoss2DeRolLeFPvUi)((void *)arg0, (void *)arg2);
         return;
     case 27:
-        TBoss2DeRolLe__sub_8002FE60((void *)arg0, (u32)arg2);
+        TBoss2DeRolLe__sub_8002FE60((D_8002FE60 *)arg0, (u32)arg2);
         return;
     case 28:
         TBoss2DeRolLe__sub_8002FD9C((DeRolLe_8002FD9C *)(arg0), arg2, 0);
