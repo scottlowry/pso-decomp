@@ -3879,14 +3879,15 @@ void TQuestVmDownLoadServer__sub_803EE2E4(void) {
 void TQuestVmDownLoadServer__sub_803EE2F4(s32 arg0, s32 arg1) {
     u8 *cursor;
     u8 *str2;
-    u16 *poolA;
-    u16 *poolB;
+    u16 *volatile poolA;
+    u16 *volatile poolB;
     s32 i;
     s32 end;
     u8 *base98;
     u8 *dst21;
     u8 *str2b;
     u8 *src;
+    u8 *tab;
     s32 n;
     s32 step;
     Node_803EB794 *node;
@@ -3902,15 +3903,16 @@ void TQuestVmDownLoadServer__sub_803EE2F4(s32 arg0, s32 arg1) {
     cursor = (u8 *)&lbl_8058DC98;
     str2 = lbl_8058DC48;
     poolA = lbl_805A0340;
-    poolB = lbl_805A0340;
     i = arg0;
+    poolB = lbl_805A0340;
     end = arg1;
     base98 = cursor;
     dst21 = cursor;
     str2b = str2;
     src = (u8 *)&lbl_805A0470;
+    tab = (u8 *)quest_download_slot_chain_table;
     while (i < end && (n = TQuestVmDownLoadServer__sub_803E9F54(i)) != 0) {
-        slot = (u8 *)quest_download_slot_chain_table + i * 0x1C;
+        slot = tab + i * 0x1C;
         if (i == lbl_805D78F0) {
             if (lbl_805D78E8 == 1 || lbl_805D7834 >= 3) {
                 node = advance_nodes__22TQuestVmDownLoadServerFPvi(lbl_805D78A0, lbl_805D7898);
