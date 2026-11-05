@@ -3769,7 +3769,6 @@ static inline u32 swap_80033684(u32 x) {
     return t;
 }
 void update_pulsing_colors__13TBoss2DeRolLeFPv(u8 *arg0) {
-    s32 i;
     f32 t;
     u8 v;
     u32 c;
@@ -3795,8 +3794,9 @@ void update_pulsing_colors__13TBoss2DeRolLeFPv(u8 *arg0) {
     scale = lbl_805D842C;
     mul = TBoss2DeRolLe__data_805D8328;
     ph = *(f32 *)((s8 *)arg0 + 0x6D4);
+    s32 i = 0;
     add = TBoss2DeRolLe__data_805D8334;
-    for (i = 0; i < 10; i++) {
+    for (; i < 10; i++) {
         ph += step;
         if (ph > wrap) {
             ph -= wrap;
