@@ -101,7 +101,7 @@ extern u32 TAdEndText__loaded_font_texture_list;
 extern u32 TAdEndText__credit_script_lines;
 extern s32 TAdEndText__font_loaded_flag;
 void bind_gvm_texture_list(const char *name, void *data);
-s32 TAdEndText__sub_8001A998(s32, f32, f32, f32);
+s32 TAdEndText__sub_8001A998(s32, char *, f32, f32, f32);
 s32 draw_small_font_text(s32, f32, f32, f32);
 u32 __cvt_fp2unsigned(f32);
 extern const f32 lbl_805D7E04;
@@ -131,6 +131,12 @@ extern const f32 lbl_805D7E40;
 void release_texture_list(void*);
 
 extern s32 ending_scene_active;
+void set_default_alpha_blend__Fv(void);
+void set_texlist__FUl(u32);
+s32 get_player__20TWindowSubStatusDispFv(void);
+extern const f32 lbl_805D7DF4;
+extern const f32 lbl_805D7E00;
+extern const f32 lbl_804345E0[];
 
 s32 get_ending_scene_active(void) {
     return ending_scene_active;
@@ -138,6 +144,122 @@ s32 get_ending_scene_active(void) {
 
 s32 get_end_text_font_loaded_flag(void) {
     return TAdEndText__font_loaded_flag;
+}
+
+s32 TAdEndText__sub_8001A998(s32 tex, char *str, f32 x_in, f32 y_in, f32 zoom) {
+    f32 q[8];
+    f32 x;
+    f32 y;
+    f32 yl;
+    f32 adv;
+    s32 page;
+    s32 code;
+    s32 c;
+    s32 row;
+    s32 px;
+    s32 py;
+    char *p;
+
+    x = x_in;
+    y = y_in;
+    page = 0xfe;
+    p = str;
+    set_default_alpha_blend__Fv();
+    begin_screen_draw(1);
+    set_texlist__FUl(TAdEndText__loaded_font_texture_list);
+    yl = lbl_805D7DF0 + y;
+    while ((s8)*p != 0) {
+        c = (u8)*p;
+        p = p + 1;
+        code = c;
+        if (c == 0x23) {
+            continue;
+        }
+        q[0] = x;
+        q[1] = TAdEndText__sub_8001B404(c) ? yl : y;
+        if (TAdEndText__sub_8001B3EC(c)) {
+            if (TAdEndText__sub_8001B3D4(c)) {
+                code = (u8)(c - 0x41);
+            } else if (TAdEndText__sub_8001B404(c)) {
+                code = (u8)(c - 0x3d);
+            } else if (TAdEndText__sub_8001B3BC(c)) {
+                code = (u8)(c + 0xe);
+            }
+        } else {
+            switch (c) {
+            case 0x26:
+                code = 0x1f;
+                break;
+            case 0x28:
+                code = 0x1a;
+                break;
+            case 0x2a:
+                code = 0x1b;
+                break;
+            case 0x2c:
+                code = 0x23;
+                break;
+            case 0x2d:
+                code = 0x22;
+                break;
+            case 0x2e:
+                code = 0x1d;
+                break;
+            case 0x2f:
+                code = 0x1c;
+                break;
+            case 0x3a:
+                code = 0x1e;
+                break;
+            case 0x3c:
+                code = 0x48;
+                break;
+            case 0x3f:
+                code = 0x49;
+                break;
+            case 0x5e:
+                code = 0x21;
+                break;
+            case 0x7e:
+                code = 0x20;
+                break;
+            default:
+                code = 0x52;
+                break;
+            }
+        }
+        if ((u8)code == 0x52) {
+            x = x + lbl_805D7DF4;
+            q[2] = lbl_805D7DF4 + q[0];
+            q[3] = TAdEndText__data_805D7DF8 + q[1];
+            q[4] = lbl_805D7DFC;
+            q[5] = lbl_805D7DFC;
+            q[6] = lbl_805D7DFC;
+            q[7] = lbl_805D7DFC;
+        } else {
+            row = (u8)code / 0x24;
+            adv = lbl_804345E0[row * 0x24 + (code - row * 0x24)];
+            x = x + adv;
+            q[2] = q[0] + adv;
+            q[3] = TAdEndText__data_805D7DF8 + q[1];
+            py = (u8)(s32)(TAdEndText__data_805D7DF8 * (f64)((code - row * 0x24) / 6));
+            px = (u8)(s32)(TAdEndText__data_805D7DF8 *
+                           (f64)((code - 0x24 * row) - 6 * ((code - 0x24 * row) / 6)));
+            q[4] = (f64)px * lbl_805D7E00;
+            q[5] = (f64)py * lbl_805D7E00;
+            q[6] = ((f64)px + adv) * lbl_805D7E00;
+            q[7] = ((f64)py + TAdEndText__data_805D7DF8) * lbl_805D7E00;
+        }
+        {
+            s32 pg = (u8)code / 0x24;
+            if (pg != (u8)page) {
+                set_draw_texture_and_color(pg, tex);
+                page = pg;
+            }
+        }
+        draw_textured_quad_at_depth(q, zoom);
+    }
+    return get_player__20TWindowSubStatusDispFv();
 }
 
 void render__10TAdEndTextFv(u8 *arg0) {
@@ -164,7 +286,8 @@ void render__10TAdEndTextFv(u8 *arg0) {
         switch ((s8)((char **)TAdEndText__credit_script_lines)[i][0]) {
         case 0x23:
             if (col != 0xFFFFFF) {
-                TAdEndText__sub_8001A998(col, self->pos[i].x, y, lbl_805D7E18);
+                TAdEndText__sub_8001A998(col, ((char **)TAdEndText__credit_script_lines)[i],
+                                         self->pos[i].x, y, lbl_805D7E18);
             }
             break;
         case 0x21:
