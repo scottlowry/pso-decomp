@@ -289,7 +289,7 @@ adjust:
         LogEnt_803CD16C *e = &lbl_8057B7D0[adxf_log_write_index = i];
         e->type = 6;
         e->phase = 1;
-        e->seq = ((LogHdr_803CC578 *)&lbl_8057B7B0)->seq;
+        e->seq = *(u16 *)((s8 *)hdr + 0xC);
         e->a = (s32)arg0;
         e->b = arg1;
         e->c = arg2;
