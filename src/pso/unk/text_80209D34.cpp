@@ -26,7 +26,7 @@ struct Ent_80209D34 {
 extern "C" {
 extern volatile u32 lbl_805D60A8;
 extern volatile s32 lbl_805D60B4;
-extern u8 *lbl_805D60BC;
+extern volatile u8 *lbl_805D60BC;
 extern volatile s32 lbl_805D60C0;
 extern volatile s32 lbl_805D60C4;
 extern volatile s32 lbl_805D60C8;
@@ -74,7 +74,7 @@ void TLobby__sub_80209D34(TLobby *lobby) {
     walk = (u8 *)lbl_805D60A8 + hdr.b;
     r29 = lbl_805D60CC - (hdr.h.count * 0x18 + 0x10);
     memset((void *)lbl_805D60B4, 0, 0x9000);
-    memset(lbl_805D60BC, 0, 0x1400);
+    memset((void *)(u8 *)lbl_805D60BC, 0, 0x1400);
     lbl_805D60C0 = 0;
     memset((void *)lbl_805D60C4, 0, 0x1000);
     off = 0;
@@ -99,13 +99,13 @@ void TLobby__sub_80209D34(TLobby *lobby) {
             }
             if (cnt > 0) {
                 *(s32 *)(lbl_805D60BC + lbl_805D60C0 * 0x14) = (s16)d26;
-                *(s16 *)((u8 *)&lbl_805D60BC + lbl_805D60C0 * 0x14 + 4) = ent.a;
-                *(s16 *)((u8 *)&lbl_805D60BC + lbl_805D60C0 * 0x14 + 6) = ent.b;
-                *(s16 *)((u8 *)&lbl_805D60BC + lbl_805D60C0 * 0x14 + 8) = ent.c;
-                *(s16 *)((u8 *)&lbl_805D60BC + lbl_805D60C0 * 0x14 + 0xA) = r27;
+                *(s16 *)(lbl_805D60BC + lbl_805D60C0 * 0x14 + 4) = ent.a;
+                *(s16 *)(lbl_805D60BC + lbl_805D60C0 * 0x14 + 6) = ent.b;
+                *(s16 *)(lbl_805D60BC + lbl_805D60C0 * 0x14 + 8) = ent.c;
+                *(s16 *)(lbl_805D60BC + lbl_805D60C0 * 0x14 + 0xA) = r27;
                 cnt2 = clamp_min_drop__6TLobbyFUl(ent.e, ent.f + 1);
-                *(s32 *)((u8 *)&lbl_805D60BC + lbl_805D60C0 * 0x14 + 0xC) = cnt2;
-                *(s32 *)((u8 *)&lbl_805D60BC + lbl_805D60C0 * 0x14 + 0x10) = r29 + lbl_805D60C8;
+                *(s32 *)(lbl_805D60BC + lbl_805D60C0 * 0x14 + 0xC) = cnt2;
+                *(s32 *)(lbl_805D60BC + lbl_805D60C0 * 0x14 + 0x10) = r29 + lbl_805D60C8;
                 flag = 12;
                 d26 = (s16)(ent.w0 + (s16)r27 + 10000);
                 ((TLobby *)&flag)->append_entity_entry();
@@ -120,13 +120,13 @@ void TLobby__sub_80209D34(TLobby *lobby) {
         TLobby__sub_8020A618(&ent, walk);
         ((TLobby *)&ent)->bswap();
         *(s32 *)(lbl_805D60BC + lbl_805D60C0 * 0x14) = (s16)d26;
-        *(s16 *)((u8 *)&lbl_805D60BC + lbl_805D60C0 * 0x14 + 4) = ent.a;
-        *(s16 *)((u8 *)&lbl_805D60BC + lbl_805D60C0 * 0x14 + 6) = ent.b;
-        *(s16 *)((u8 *)&lbl_805D60BC + lbl_805D60C0 * 0x14 + 8) = ent.c;
-        *(s16 *)((u8 *)&lbl_805D60BC + lbl_805D60C0 * 0x14 + 0xA) = r27;
+        *(s16 *)(lbl_805D60BC + lbl_805D60C0 * 0x14 + 4) = ent.a;
+        *(s16 *)(lbl_805D60BC + lbl_805D60C0 * 0x14 + 6) = ent.b;
+        *(s16 *)(lbl_805D60BC + lbl_805D60C0 * 0x14 + 8) = ent.c;
+        *(s16 *)(lbl_805D60BC + lbl_805D60C0 * 0x14 + 0xA) = r27;
         cnt2 = clamp_min_drop__6TLobbyFUl(ent.e, ent.f + 1);
-        *(s32 *)((u8 *)&lbl_805D60BC + lbl_805D60C0 * 0x14 + 0xC) = cnt2;
-        *(u32 *)((u8 *)&lbl_805D60BC + lbl_805D60C0 * 0x14 + 0x10) = ent.j;
+        *(s32 *)(lbl_805D60BC + lbl_805D60C0 * 0x14 + 0xC) = cnt2;
+        *(u32 *)(lbl_805D60BC + lbl_805D60C0 * 0x14 + 0x10) = ent.j;
         walk += 0x18;
         lbl_805D60C0 = lbl_805D60C0 + 1;
     }
