@@ -43,16 +43,17 @@ void init_floor_enemy_count__6TLobbyFlPUcUl(s32, void *, s32);
 void TLobby__sub_80209D34(TLobby *lobby) {
     Hdr_80209D34 hdr;
     Ent_80209D34 ent;
-    u8 *walk;
-    u32 *src;
-    s32 r29;
     s32 off;
+    u8 *walk;
+    s32 r29;
     s32 picked;
+    s32 r27;
+    s32 d26;
     s32 i;
     s32 cnt;
     s32 cnt2;
-    s32 d26;
-    s32 r27;
+    u32 t0;
+    u32 t1;
     u8 flag;
     s32 swp;
     u32 desc[3];
@@ -60,11 +61,14 @@ void TLobby__sub_80209D34(TLobby *lobby) {
     s32 n;
     s32 pad;
 
-    src = (u32 *)lbl_805D60A8;
-    hdr.a = src[0];
-    hdr.b = src[1];
-    hdr.h.count = src[2];
-    hdr.h.d = src[3];
+    t0 = *(u32 *)lbl_805D60A8;
+    t1 = *(u32 *)(lbl_805D60A8 + 4);
+    hdr.a = t0;
+    hdr.b = t1;
+    t0 = *(u32 *)(lbl_805D60A8 + 8);
+    t1 = *(u32 *)(lbl_805D60A8 + 12);
+    hdr.h.count = t0;
+    hdr.h.d = t1;
     ((TLobby *)&hdr)->swap_endian_header();
 
     walk = (u8 *)lbl_805D60A8 + hdr.b;
@@ -94,7 +98,7 @@ void TLobby__sub_80209D34(TLobby *lobby) {
                 }
             }
             if (cnt > 0) {
-                *(s32 *)((u8 *)&lbl_805D60BC + lbl_805D60C0 * 0x14) = (s16)d26;
+                *(s32 *)((u8 *)lbl_805D60BC + lbl_805D60C0 * 0x14) = (s16)d26;
                 *(s16 *)((u8 *)&lbl_805D60BC + lbl_805D60C0 * 0x14 + 4) = ent.a;
                 *(s16 *)((u8 *)&lbl_805D60BC + lbl_805D60C0 * 0x14 + 6) = ent.b;
                 *(s16 *)((u8 *)&lbl_805D60BC + lbl_805D60C0 * 0x14 + 8) = ent.c;
@@ -115,7 +119,7 @@ void TLobby__sub_80209D34(TLobby *lobby) {
         }
         TLobby__sub_8020A618(&ent, walk);
         ((TLobby *)&ent)->bswap();
-        *(s32 *)((u8 *)&lbl_805D60BC + lbl_805D60C0 * 0x14) = (s16)d26;
+        *(s32 *)((u8 *)lbl_805D60BC + lbl_805D60C0 * 0x14) = (s16)d26;
         *(s16 *)((u8 *)&lbl_805D60BC + lbl_805D60C0 * 0x14 + 4) = ent.a;
         *(s16 *)((u8 *)&lbl_805D60BC + lbl_805D60C0 * 0x14 + 6) = ent.b;
         *(s16 *)((u8 *)&lbl_805D60BC + lbl_805D60C0 * 0x14 + 8) = ent.c;
