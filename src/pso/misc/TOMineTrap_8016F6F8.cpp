@@ -454,7 +454,7 @@ u8 *TOMineTrap__ct(u8 *arg0, u8 *arg1, s32 arg2, s32 arg3) {
             f32 tbl = lbl_80442138[area];
             self->f358 = lbl_805DB86C * tbl *
                           (lbl_805DB870 * (lbl_805DB878 *
-                                ((f64)((u16)(((s32)((VObj_18_fe98p *)player)->m14()) ^ 0x8000)) - lbl_804421F8) + lbl_805DB874));
+                                (f32)((f64)(s16)((VObj_18_fe98p *)player)->m14() - lbl_804421F8) + lbl_805DB874));
         }
         if (self->f358 < lbl_805DB85C) {
             self->f358 = lbl_805DB85C;
