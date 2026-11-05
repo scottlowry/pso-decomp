@@ -3873,13 +3873,13 @@ u8 *TQuestVmDownLoadServer::find_keyword_entry(u16 *start, u16 *end) {
 }
 
 s32 TQuestVmDownLoadServer__sub_803EDF64(u16 *msg, s32 a1, u16 *out, s32 *out_count) {
-    s32 code;
+    u32 code;
     s32 kind;
     s32 i;
     u16 *p;
-    u16 key16;
-    u8 k1;
-    u8 k2;
+    s32 key16;
+    s32 k1;
+    s32 k2;
 
     code = lbl_8047F8B8[(u8) msg[0]] & 0xF;
     *out_count = 1;
@@ -3899,12 +3899,12 @@ s32 TQuestVmDownLoadServer__sub_803EDF64(u16 *msg, s32 a1, u16 *out, s32 *out_co
     }
     kind = 0;
     if (code <= 12) {
-        if (code == 12) {
-            *out = TQuestVmDownLoadServer__sub_803E719C(0x73, msg[0]);
-            kind = 1;
-        } else {
+        if (code != 12) {
             *out = TQuestVmDownLoadServer__sub_803E721C(msg[0]);
             kind = (code == 10) ? 2 : 3;
+        } else {
+            *out = TQuestVmDownLoadServer__sub_803E719C(0x73, msg[0]);
+            kind = 1;
         }
     }
     if (a1 == 1) {
@@ -3915,14 +3915,14 @@ s32 TQuestVmDownLoadServer__sub_803EDF64(u16 *msg, s32 a1, u16 *out, s32 *out_co
     }
     p = msg + 2;
     key16 = msg[0];
-    k1 = (u8) msg[0];
+    k1 = (u8) key16;
     k2 = (u8) msg[1];
     if (k1 == k2) {
         if (code == 0xc) {
             return 2;
         }
         if (code == 0xd) {
-            *out = TQuestVmDownLoadServer__sub_803E719C(0x43, msg[1]);
+            *out = TQuestVmDownLoadServer__sub_803E719C(0x43, *p);
             return 1;
         }
     }
@@ -3932,10 +3932,10 @@ s32 TQuestVmDownLoadServer__sub_803EDF64(u16 *msg, s32 a1, u16 *out, s32 *out_co
             return 2;
         }
     }
-    if ((u16) kind == 1 && k2 == 0x27) {
+    if ((u16) kind == 1 && (u8) k2 == 0x27) {
         return 2;
     }
-    code = lbl_8047F8B8[k2] & 0xF;
+    code = lbl_8047F8B8[(u8) k2] & 0xF;
     if (code == 7 && (u16) kind == 3) {
         *out = *out + 2;
         return 2;
@@ -3984,10 +3984,10 @@ loop:
     if (code >= 6 && code <= 0xc) {
         return -2;
     }
-    if (i <= 4) {
-        goto loop;
+    if (i > 4) {
+        return -2;
     }
-    return -2;
+    goto loop;
 }
 
 void TQuestVmDownLoadServer__sub_803EE2E4(void) {
