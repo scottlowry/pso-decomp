@@ -48,7 +48,7 @@ void *find_model_node__FUll(void *, s32);
 void TObjPlayer__sub_800F0928();
 s32 spawn_npc_enemy__6TLobbyFsllPvff(s16, s32, s32, void *, f32, f32);
 
-void load_resources__17TObjEneMe1CanadinFv(void) {
+void fn_8009F554(void) {
     void *res;
     s32 i;
     s32 p;
