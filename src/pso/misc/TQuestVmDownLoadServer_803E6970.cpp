@@ -394,6 +394,8 @@ extern s32 lbl_805D7900;
 s32 TQuestVmDownLoadServer__sub_803EEF2C(Req_803EEF2C *arg0);
 void TQuestVmDownLoadServer__sub_803E8924(s32 id);
 void TQuestVmDownLoadServer__sub_803EF8E0(u8 *p);
+u8 *TQuestVmDownLoadServer__sub_803EDDA4(u16 *arg0, u16 *arg1);
+extern s32 lbl_805D78E4;
 extern u32 lbl_805D7910;
 extern File_803F09FC lbl_805D7914;
 extern u8 lbl_80591AC4[];
@@ -3868,6 +3870,126 @@ u8 *TQuestVmDownLoadServer::find_keyword_entry(u16 *start, u16 *end) {
         }
     }
     return NULL;
+}
+
+s32 TQuestVmDownLoadServer__sub_803EDF64(u16 *msg, s32 a1, u16 *out, s32 *out_count) {
+    s32 code;
+    s32 kind;
+    s32 i;
+    u16 *p;
+    u8 *q;
+    u16 *w;
+    u16 word;
+
+    code = lbl_8047F8B8[(u8) msg[0]] & 0xF;
+    w = out;
+    *out_count = 1;
+    if (code <= 9) {
+        if (code <= 5) {
+            p = msg;
+            q = (u8 *) lbl_8047F9B8 + 1;
+            i = 1;
+            goto adjust;
+        }
+        if (code > 8 && lbl_805D78E4 != 0) {
+            *w = TQuestVmDownLoadServer::map_key_to_code(msg[0]);
+        } else {
+            *w = TQuestVmDownLoadServer__sub_803E721C(msg[0]);
+        }
+        return 1;
+    }
+    kind = 0;
+    if (code <= 12) {
+        if (code == 12) {
+            *w = TQuestVmDownLoadServer__sub_803E719C(0x73, msg[0]);
+            kind = 1;
+        } else {
+            *w = TQuestVmDownLoadServer__sub_803E721C(msg[0]);
+            kind = (code == 10) ? 2 : 3;
+        }
+    }
+    if (a1 == 1) {
+        if ((u16) kind != 0) {
+            return -1;
+        }
+        return 0;
+    }
+    p = msg + 2;
+    if ((u8) msg[0] == (u8) msg[1]) {
+        if (code == 0xc) {
+            return 2;
+        }
+        if (code == 0xd) {
+            *w = TQuestVmDownLoadServer__sub_803E719C(0x43, msg[1]);
+            return 1;
+        }
+    }
+    if (((u8) msg[0] == 0x78 || (u8) msg[0] == 0x58) && ((u8) msg[1] == 0x6e || (u8) msg[1] == 0x4e)) {
+        *w = TQuestVmDownLoadServer__sub_803E719C(0x73, msg[0]);
+        return 2;
+    }
+    if ((u16) kind == 1 && (u8) msg[1] == 0x27) {
+        return 2;
+    }
+    code = lbl_8047F8B8[(u8) msg[1]] & 0xF;
+    if (code == 7) {
+        if ((u16) kind == 3) {
+            *w = *w + 2;
+            return 2;
+        }
+    }
+    if (code == 6) {
+        if ((u16) kind >= 2) {
+            *w = *w + 1;
+            if ((u8) msg[0] == 0xb3) {
+                *w = TQuestVmDownLoadServer__sub_803E719C(0x74, msg[1]);
+            }
+            return 2;
+        }
+    }
+    if ((u16) kind >= 2) {
+        return 1;
+    }
+    if (code > 5 && code <= 0xe && (u16) kind == 1) {
+        return 1;
+    }
+    i = 2;
+loop:
+    if (code <= 5) {
+        q = ((TQuestVmDownLoadServer *) msg)->find_keyword_entry(msg, p + 2);
+        if (q == 0) {
+            q = TQuestVmDownLoadServer__sub_803EDDA4(msg, p);
+            if (q == 0) {
+                return -2;
+            }
+            q += (code - 1) * 2;
+        }
+        goto emit;
+    }
+    if (i >= a1) {
+        i++;
+        return 0;
+    }
+    i++;
+    word = *p++;
+    code = lbl_8047F8B8[(u8) word] & 0xF;
+    if (code >= 6 && code <= 0xc) {
+        return -2;
+    }
+    if (i <= 4) {
+        goto loop;
+    }
+    return -2;
+adjust:
+    q += (code - 1) * 2;
+emit:
+    *w = TQuestVmDownLoadServer__sub_803E719C(*q++, msg[0]);
+    w++;
+    if (*q != 0) {
+        *w = TQuestVmDownLoadServer__sub_803E719C(*q, msg[0]);
+        *out_count = 2;
+    }
+    return i;
 }
 
 void TQuestVmDownLoadServer__sub_803EE2E4(void) {
