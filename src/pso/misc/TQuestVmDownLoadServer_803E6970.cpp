@@ -1968,7 +1968,6 @@ s32 TQuestVmDownLoadServer::is_download_cmd_allowed(u8 arg0) {
 
 Seg_803E9FFC *TQuestVmDownLoadServer__sub_803E9A74(s32 pos, s32 arg1, u8 a, u8 b) {
     struct Chain_803E9A74 { u8 a; u8 b; u8 key; s8 link; u16 pad; u32 next; };
-    Seg_803E9FFC *seg;
     Seg_803E9FFC *ret;
     Seg_803E9FFC *p;
     Seg_803E9FFC *result;
@@ -2026,14 +2025,13 @@ Seg_803E9FFC *TQuestVmDownLoadServer__sub_803E9A74(s32 pos, s32 arg1, u8 a, u8 b
                 if (p0 == 0) {
                     return (Seg_803E9FFC *)p0;
                 }
-                seg = (Seg_803E9FFC *)p0;
-                seg->off = 1;
-                seg->a = 0xFF;
-                seg->key2 = 0xFF;
-                seg->b = 0;
-                seg->link2 = 0;
-                seg->next = 0;
-                return seg;
+                ((Seg_803E9FFC *)p0)->off = 1;
+                ((Seg_803E9FFC *)p0)->a = 0xFF;
+                ((Seg_803E9FFC *)p0)->key2 = 0xFF;
+                ((Seg_803E9FFC *)p0)->b = 0;
+                ((Seg_803E9FFC *)p0)->link2 = 0;
+                ((Seg_803E9FFC *)p0)->next = 0;
+                return (Seg_803E9FFC *)p0;
             }
         }
     }
@@ -2044,11 +2042,14 @@ Seg_803E9FFC *TQuestVmDownLoadServer__sub_803E9A74(s32 pos, s32 arg1, u8 a, u8 b
         if (TQuestVmDownLoadServer::is_valid_item_for_slot(node->a, node->b) != 0) {
             if (a8 == 0 || TQuestVmDownLoadServer__sub_803E7390(a, b, node->a) != 0) {
                 key = strbase[node->key];
-                if (pos + key < arg1) {
-                    ch = arr[key];
-                    if ((u32)(lbl_805D7888 - 1) <= 1U) {
-                        ok = 0;
-                    } else {
+                if (pos + key >= arg1) {
+                    goto create;
+                }
+                ch = arr[key];
+                if ((u32)(lbl_805D7888 - 1) <= 1U) {
+                    ok = 0;
+                } else {
+                    {
                         switch (ch) {
                         case 0x9D:
                         case 0xA1:
@@ -2071,19 +2072,22 @@ Seg_803E9FFC *TQuestVmDownLoadServer__sub_803E9A74(s32 pos, s32 arg1, u8 a, u8 b
                         }
                     }
                 }
-                if (pos + key >= arg1 || ok == 0) {
-                    p0 = TQuestVmDownLoadServer__sub_803ECF0C();
-                    if (p0 != 0) {
-                        seg = (Seg_803E9FFC *)p0;
-                        seg->off = (s16)key;
-                        seg->a = node->a;
-                        seg->key2 = node->a;
-                        seg->b = node->b;
-                        seg->link2 = node->b;
-                        seg->next = result;
-                        result = seg;
-                    }
+                if (ok != 0) {
+                    goto advance;
                 }
+            create:
+                p0 = TQuestVmDownLoadServer__sub_803ECF0C();
+                if (p0 != 0) {
+                    ((Seg_803E9FFC *)p0)->off = (s16)key;
+                    ((Seg_803E9FFC *)p0)->a = node->a;
+                    ((Seg_803E9FFC *)p0)->key2 = node->a;
+                    ((Seg_803E9FFC *)p0)->b = node->b;
+                    ((Seg_803E9FFC *)p0)->link2 = node->b;
+                    ((Seg_803E9FFC *)p0)->next = result;
+                    result = (Seg_803E9FFC *)p0;
+                }
+            advance:
+                ;
             }
         }
         if (node->link == 0) {
