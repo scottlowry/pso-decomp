@@ -4252,7 +4252,6 @@ s32 TQuestVmDownLoadServer__sub_803EF208(Req_803EEF2C *msg) {
     s32 is_new = 1;
     s16 n;
     s32 c;
-    s32 size;
     s32 d;
     if (lbl_805D7904 == -1) {
         return -3;
@@ -4286,10 +4285,9 @@ s32 TQuestVmDownLoadServer__sub_803EF208(Req_803EEF2C *msg) {
         return 0;
     }
     if (d == -1) {
-        size = (u16)(p[0] + (p[1] << 8));
-        d = -size;
+        d = -(s32)(u16)(p[0] + (p[1] << 8));
+        s = p + (u16)(p[0] + (p[1] << 8));
         e = end + 2;
-        s = p + size;
         if (d > 0) {
             e--;
             q = d + e;
@@ -4297,11 +4295,9 @@ s32 TQuestVmDownLoadServer__sub_803EF208(Req_803EEF2C *msg) {
                 *q-- = *e--;
             }
         } else if (d < 0) {
-            if (s < e) {
-                q = d + s;
-                for (; s < e; s++, q++) {
-                    *q = *s;
-                }
+            q = d + s;
+            for (; s < e; s++, q++) {
+                *q = *s;
             }
         }
     } else {
