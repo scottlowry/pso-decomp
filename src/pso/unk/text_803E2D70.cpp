@@ -721,7 +721,7 @@ void dispatch_chunk_polygon_list(s16 *list, s32 buffer) {
                 } else {
                     setup_chunk_tev_stages();
                     GXSetTexCoordGen2(0, 1, 4, 0x3C, 0, 0x7D);
-                    draw_chunk_textured_strips(list, (Vtx_803E352C *)buffer, info, op == 0x42);
+                    draw_chunk_textured_strips(list, (Vtx_803E352C *)buffer, info, (0x42 - op) == 0);
                 }
                 break;
             }
