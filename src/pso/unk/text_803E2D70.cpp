@@ -683,8 +683,8 @@ void dispatch_chunk_polygon_list(s16 *list, s32 buffer) {
             list += 2;
             info = t;
             if ((u32)(model_render_flags & 0x800) != 0) {
-                cmd = (s16)(cmd & chunk_polygon_flags_and_mask);
-                cmd = (s16)(cmd | chunk_polygon_flags_or_mask);
+                u32 f = (u32)cmd & (u32)chunk_polygon_flags_and_mask;
+                cmd = (s16)((s32)f | chunk_polygon_flags_or_mask);
             }
             cmd = (s16)(cmd >> 8);
             changed = cmd ^ chunk_previous_strip_flags;
