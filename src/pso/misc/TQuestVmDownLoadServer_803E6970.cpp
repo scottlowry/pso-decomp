@@ -4227,9 +4227,6 @@ s32 TQuestVmDownLoadServer__sub_803EEFC8(u8 *rec, Req_803EEF2C *msg) {
 }
 #pragma pop
 
-#pragma push
-#pragma dont_inline off
-#pragma inline_depth(2)
 inline void shift_tail_bytes(u8 *p, u8 *end, s32 delta) {
     if (delta > 0) {
         for (end--; p <= end; end--) {
@@ -4242,6 +4239,83 @@ inline void shift_tail_bytes(u8 *p, u8 *end, s32 delta) {
     }
 }
 
+#pragma push
+#pragma dont_inline off
+#pragma inline_depth(1)
+s32 TQuestVmDownLoadServer__sub_803EF208(Req_803EEF2C *msg) {
+    char buf[0x54];
+    u8 *end;
+    u8 *p;
+    u8 *e;
+    u8 *s;
+    u8 *q;
+    s32 is_new = 1;
+    s16 n;
+    s32 c;
+    s32 size;
+    s32 d;
+    if (lbl_805D7904 == -1) {
+        return -3;
+    }
+    if (lbl_805D78F8 == 0x8000) {
+        return -6;
+    }
+    strncpy(buf, msg->name, msg->len);
+    buf[msg->len] = 0;
+    p = get_cached_page__22TQuestVmDownLoadServerFi(((TQuestVmDownLoadServer *)buf)->find_name_index());
+    for (end = p; (d = (u16)(end[0] + (end[1] << 8))) != 0; end += d) {
+    }
+    while (p < end) {
+        n = p[2];
+        c = strncmp((const char *)(p + 3), buf, n);
+        if (c == 0) {
+            if (n == msg->len) {
+                is_new = 0;
+                break;
+            }
+        } else if (c > 0) {
+            break;
+        }
+        p += (u16)(p[0] + (p[1] << 8));
+    }
+    if (is_new) {
+        return 0;
+    }
+    d = TQuestVmDownLoadServer__sub_803EEFC8(p, msg);
+    if (d == 0) {
+        return 0;
+    }
+    if (d == -1) {
+        size = (u16)(p[0] + (p[1] << 8));
+        d = -size;
+        e = end + 2;
+        s = p + size;
+        if (d > 0) {
+            e--;
+            q = d + e;
+            while (s <= e) {
+                *q-- = *e--;
+            }
+        } else if (d < 0) {
+            if (s < e) {
+                q = d + s;
+                for (; s < e; s++, q++) {
+                    *q = *s;
+                }
+            }
+        }
+    } else {
+        shift_tail_bytes(p + (u16)(p[0] + (p[1] << 8)) + d, end + 2, -d);
+    }
+    TQuestVmDownLoadServer__sub_803E79AC();
+    TQuestVmDownLoadServer::set_active();
+    return 3;
+}
+#pragma pop
+
+#pragma push
+#pragma dont_inline off
+#pragma inline_depth(2)
 inline s32 max_entry_index(u8 *rec) {
     s32 max = 0;
     u8 *end = rec + (u16)(rec[0] + (rec[1] << 8));
