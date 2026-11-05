@@ -12402,6 +12402,7 @@ s16 TLobby__sub_804066D8(Strm_80405A74 *arg0) {
     s32 crc = 0xFFFF;
     s32 mask = -1;
     s32 hdr = 4;
+    s32 ret;
     Strm_80405A74 *slot = arg0;
     u8 *G = lbl_805C0038;
     u8 *peer = *(u8 **)(G + 0x34);
@@ -12464,6 +12465,7 @@ s16 TLobby__sub_804066D8(Strm_80405A74 *arg0) {
     if (lbl_805D7A7A != 0) {
         NetMemcpy(q + 0x14, slot->p, slot->len);
         *(u16 *)(pool + 4) = slot->len;
+        ret = (s32)slot;
     } else {
         u16 *tbl = lbl_804FD3A8;
         s32 seq = *(u32 *)(G + 0x114);
@@ -12500,18 +12502,19 @@ s16 TLobby__sub_804066D8(Strm_80405A74 *arg0) {
         } else {
             *q++ = (u8)hi;
         }
+        ret = hi;
         *q++ = 0x7E;
         *(u16 *)(pool + 4) = (u16)(q - (u8 *)*(u32 *)pool);
     }
     s16 st = lbl_805D7A8A;
     if (st == 7) {
+        return (s16)ret;
+    }
+    if (st == 0) {
         return 0;
     }
-    if (st != 0) {
-        TLobby::get_time_ms(&lbl_805D7A94);
-        return (s16)send_network_frame(*(u16 *)(pool + 4), (u8 *)*(u32 *)pool);
-    }
-    return 0;
+    TLobby::get_time_ms(&lbl_805D7A94);
+    return (s16)send_network_frame(*(u16 *)(pool + 4), (u8 *)*(u32 *)pool);
 }
 
 }
