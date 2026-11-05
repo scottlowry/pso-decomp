@@ -148,8 +148,10 @@ s32 get_end_text_font_loaded_flag(void) {
 
 s32 TAdEndText__sub_8001A998(s32 tex, char *str, f32 x_in, f32 y_in, f32 zoom) {
     f32 q[8];
+    s32 t;
     f32 x;
     f32 y;
+    f32 zv;
     f32 yl;
     f32 adv;
     s32 page;
@@ -161,15 +163,17 @@ s32 TAdEndText__sub_8001A998(s32 tex, char *str, f32 x_in, f32 y_in, f32 zoom) {
     char *p;
 
     x = x_in;
+    t = tex;
     y = y_in;
-    page = 0xfe;
     p = str;
+    zv = zoom;
+    page = 0xfe;
     set_default_alpha_blend__Fv();
     begin_screen_draw(1);
     set_texlist__FUl(TAdEndText__loaded_font_texture_list);
     yl = lbl_805D7DF0 + y;
-    while ((s8)*p != 0) {
-        c = (u8)*p;
+    while (*p != 0) {
+        c = *(u8 *)p;
         p = p + 1;
         code = c;
         if (c == 0x23) {
@@ -253,11 +257,11 @@ s32 TAdEndText__sub_8001A998(s32 tex, char *str, f32 x_in, f32 y_in, f32 zoom) {
         {
             s32 pg = (u8)code / 0x24;
             if (pg != (u8)page) {
-                set_draw_texture_and_color(pg, tex);
+                set_draw_texture_and_color(pg, t);
                 page = pg;
             }
         }
-        draw_textured_quad_at_depth(q, zoom);
+        draw_textured_quad_at_depth(q, zv);
     }
     return get_player__20TWindowSubStatusDispFv();
 }
