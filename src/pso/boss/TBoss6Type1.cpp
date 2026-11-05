@@ -2033,6 +2033,8 @@ void TBoss6Type1__sub_802B6504(TBoss6Type1 *boss) {
     Vec v24;
     Vec v58;
     Vec v64;
+    Vec *pv58;
+    Vec *pv64;
     Vec *arr;
     s32 n;
     s32 i;
@@ -2057,11 +2059,13 @@ void TBoss6Type1__sub_802B6504(TBoss6Type1 *boss) {
     rv = (s8)self->f41C;
     ((TBoss6Type1 *)rv)->reset_fields_4e0();
     TBoss4DarkFalz__sub_8004B4F0(&pt, ((TBoss6Type1 *)self->f3f8)->get_mag_mine_ptr());
-    VecCopy(&v58, &self->f578);
+    pv58 = &v58;
     vself = (s32)self;
-    VecCopy(&v64, &lbl_80470F84);
+    VecCopy(pv58, &self->f578);
+    pv64 = &v64;
+    VecCopy(pv64, &lbl_80470F84);
     z1c = 0;
-    VecCopy(&v24, &v58);
+    VecCopy(&v24, pv58);
     prog = 0;
     count = (TBoss6PlotFalz::get_phase() == 0) ? 0x12 : 0x24;
     n = 1;
@@ -2124,7 +2128,7 @@ void TBoss6Type1__sub_802B6504(TBoss6Type1 *boss) {
     created = 0;
     off = 0;
     while (created < count) {
-        VecCopy(&v64, (const Vec *)((u8 *)arr + off));
+        VecCopy(pv64, (const Vec *)((u8 *)arr + off));
         f0e = prog;
         rv = TBoss6Type1__sub_802ABDEC(rv);
         if (((TBoss6PlotFalz *)self->f3f8)->get_next_point((s16 *)&pt, &qp) == 0) {
