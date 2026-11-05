@@ -4078,12 +4078,11 @@ s16 TLobby__sub_8040BA38(F_8040A45C *req, u8 *pkt, s16 len) {
         u16 tag; u16 pad1A; s32 id; C_8040A45C *next; D_8040A45C *owner;
     };
     struct Key_8040BA38 { u32 pad0; u32 size; u8 addr[0x10]; u16 tag; };
-    G_8040A45C *g = &dns_resolver_state;
     Hdr_8040BA38 hdr;
     Key_8040BA38 key;
+    G_8040A45C *g;
     D_8040A45C *q;
     EntView_8040BA38 *e;
-    s16 pos;
     s16 i;
     s16 n;
 
@@ -4092,98 +4091,110 @@ s16 TLobby__sub_8040BA38(F_8040A45C *req, u8 *pkt, s16 len) {
         return len;
     }
     pkt += n;
-    pos = n + 10;
     NetMemcpy(&hdr, pkt, 10);
-    if (len < (s16)pos + (s16)hdr.dlen) {
+    n += 10;
+    if (len < n + (s16)hdr.dlen) {
         return len;
     }
-    pos += hdr.dlen;
-    if (hdr.type != 1) {
-        return pos;
-    }
-    switch (hdr.op) {
-    case 1:
-        q = (D_8040A45C *)req->f38;
-        if (q == NULL) {
+    n += hdr.dlen;
+    if (hdr.type == 1) {
+        switch (hdr.op) {
+        case 1:
+            q = (D_8040A45C *)req->f38;
+            if (q == NULL) {
+                break;
+            }
+            key.tag = 1;
+            key.size = 4;
+            NetMemcpy(key.addr, pkt + 10, 4);
+            e = NULL;
+            if (q != NULL && (u32)&key != 0) {
+                g = &dns_resolver_state;
+                e = (EntView_8040BA38 *)q->f208;
+                i = 0;
+                for (;;) {
+                    if (e == NULL || i >= g->nc) {
+                        e = NULL;
+                        break;
+                    }
+                    if (TLobby__sub_8040C9E0((u8 *)e, (u8 *)&key) == 0) {
+                        break;
+                    }
+                    e = (EntView_8040BA38 *)e->next;
+                    i++;
+                }
+            }
+            if (e == NULL) {
+                e = (EntView_8040BA38 *)TLobby__sub_8040C248(q);
+                if (e == NULL) {
+                    break;
+                }
+                e->f0 = 1;
+                e->tag = 1;
+                e->size = 4;
+                NetMemcpy(e->addr, pkt + 10, 4);
+                e->owner = q;
+                append_to_list__6TLobbyFPvPv((O_8040C4B0 *)q, (N_8040C4B0 *)e);
+            }
+            e->id = hdr.id;
+            break;
+        case 5:
+            q = (D_8040A45C *)req->f38;
+            if (q != NULL && q->f104 == 0) {
+                TLobby__sub_8040BD40(req, pkt + 10, hdr.dlen, &q->f104);
+            }
+            break;
+        case 0x1c:
+            q = (D_8040A45C *)req->f38;
+            if (q == NULL) {
+                break;
+            }
+            key.tag = 0x1c;
+            key.size = 6;
+            NetMemcpy(key.addr, pkt + 10, 0x10);
+            e = NULL;
+            if (q != NULL && (u32)&key != 0) {
+                g = &dns_resolver_state;
+                e = (EntView_8040BA38 *)q->f208;
+                i = 0;
+                for (;;) {
+                    if (e == NULL || i >= g->nc) {
+                        e = NULL;
+                        break;
+                    }
+                    if (TLobby__sub_8040C9E0((u8 *)e, (u8 *)&key) == 0) {
+                        break;
+                    }
+                    e = (EntView_8040BA38 *)e->next;
+                    i++;
+                }
+            }
+            if (e == NULL) {
+                e = (EntView_8040BA38 *)TLobby__sub_8040C248(q);
+                if (e == NULL) {
+                    break;
+                }
+                e->f0 = 1;
+                e->tag = 0x1c;
+                e->size = 6;
+                NetMemcpy(e->addr, pkt + 10, 0x10);
+                e->owner = q;
+                append_to_list__6TLobbyFPvPv((O_8040C4B0 *)q, (N_8040C4B0 *)e);
+            }
+            e->id = hdr.id;
+            break;
+        case 0xc: {
+            struct Conn_8040BA38 { u8 pad[0x18]; s32 f18; u8 f1C[4]; };
+            Conn_8040BA38 *c = (Conn_8040BA38 *)req->f2C;
+            if (c != NULL) {
+                c->f18 = hdr.id;
+                TLobby__sub_8040BD40(req, pkt + 10, hdr.dlen, c->f1C);
+            }
             break;
         }
-        key.tag = 1;
-        key.size = 4;
-        NetMemcpy(key.addr, pkt + 10, 4);
-        e = (EntView_8040BA38 *)q->f208;
-        i = 0;
-        while (e != NULL && i < g->nc) {
-            if (TLobby__sub_8040C9E0((u8 *)e, (u8 *)&key) == 0) {
-                break;
-            }
-            e = (EntView_8040BA38 *)e->next;
-            i++;
         }
-        if (i >= g->nc) {
-            e = NULL;
-        }
-        if (e == NULL) {
-            e = (EntView_8040BA38 *)TLobby__sub_8040C248(q);
-            if (e == NULL) {
-                break;
-            }
-            e->f0 = 1;
-            e->tag = 1;
-            e->size = 4;
-            NetMemcpy(e->addr, pkt + 10, 4);
-            e->owner = q;
-            append_to_list__6TLobbyFPvPv((O_8040C4B0 *)q, (N_8040C4B0 *)e);
-        }
-        e->id = hdr.id;
-        break;
-    case 5:
-        q = (D_8040A45C *)req->f38;
-        if (q != NULL && q->f104 == 0) {
-            TLobby__sub_8040BD40(req, pkt + 10, hdr.dlen, &q->f104);
-        }
-        break;
-    case 0xc:
-        if (req->f2C != NULL) {
-            req->f2C->f18 = hdr.id;
-            TLobby__sub_8040BD40(req, pkt + 10, hdr.dlen, &req->f2C->f1C);
-        }
-        break;
-    case 0x1c:
-        q = (D_8040A45C *)req->f38;
-        if (q == NULL) {
-            break;
-        }
-        key.tag = 0x1c;
-        key.size = 6;
-        NetMemcpy(key.addr, pkt + 10, 0x10);
-        e = (EntView_8040BA38 *)q->f208;
-        i = 0;
-        while (e != NULL && i < g->nc) {
-            if (TLobby__sub_8040C9E0((u8 *)e, (u8 *)&key) == 0) {
-                break;
-            }
-            e = (EntView_8040BA38 *)e->next;
-            i++;
-        }
-        if (i >= g->nc) {
-            e = NULL;
-        }
-        if (e == NULL) {
-            e = (EntView_8040BA38 *)TLobby__sub_8040C248(q);
-            if (e == NULL) {
-                break;
-            }
-            e->f0 = 1;
-            e->tag = 0x1c;
-            e->size = 6;
-            NetMemcpy(e->addr, pkt + 10, 0x10);
-            e->owner = q;
-            append_to_list__6TLobbyFPvPv((O_8040C4B0 *)q, (N_8040C4B0 *)e);
-        }
-        e->id = hdr.id;
-        break;
     }
-    return pos;
+    return n;
 }
 
 void TLobby__sub_8040BE40(F_8040A45C *req, s16 err, s16 arg);
