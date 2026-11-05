@@ -268,17 +268,13 @@ s32 TLobby__sub_803CC578(Snd_803CC980 *arg0, s32 arg1, s32 arg2) {
         adxf_log_write_index = i + 1;
     }
 adjust:
-    switch (arg2) {
-    case 0:
+    if (arg2 == 0) {
         arg0->f14 = arg1;
-        break;
-    case 1:
+    } else if (arg2 == 1) {
         arg0->f14 += arg1;
-        break;
-    case 2:
+    } else if (arg2 == 2) {
         arg0->f14 = ((Slot_803CD16C *)arg0)->fc + arg1;
-        break;
-    default:
+    } else {
         TLobby::notify_error((const char *)(base + 0x1e8));
         return -3;
     }
