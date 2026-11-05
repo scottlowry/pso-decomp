@@ -39,6 +39,11 @@ void set_field0__6TLobbyFPvi(SoundRequestVoice *voice, void *owner) { voice->own
 extern const f32 TLobby__data_805DC9E0;
 extern const f32 lbl_805DC9E4;
 extern f32 lbl_805DC9E8;
+extern const f32 lbl_805DC9EC;
+extern const f32 lbl_805DC9F0;
+extern const f32 lbl_805DC9F4;
+extern const f32 lbl_805DC9F8;
+extern const f32 lbl_805DC9FC;
 
 void clamp_field9c__6TLobbyFPvf(void *arg0, f32 farg0) {
     f32 var_f1;
@@ -147,6 +152,20 @@ u32 sndFXCheck(u32);
 extern s8 TLobby__data_805434A8[];
 extern s32 TLobby__lobby_state_flags;
 void TLobby__sub_80241798(Sound_80241798 *arg0);
+extern void *camera_ctrl_instance;
+extern s32 local_client_id;
+s32 get_current_floor_area__Fv(void);
+s32 is_split_screen(void);
+s32 get_camera_id__11TCameraCtrlFv(void);
+s32 get_nth_view_player_id__11TCameraCtrlFl(s32);
+void *get_player_by_client_id(s32);
+f32 horizontal_distance_squared(void *, void *);
+f32 newton_sqrtf(f32);
+f32 PSVECDistance(void *, void *);
+s32 is_camera_state_active__6TLobbyFv(void);
+f64 atan2_float(f32, f32);
+f32 sin_table_lookup(s32);
+f32 cos_table_lookup(s32);
 }
 void send_voice_controller_updates(u8 *arg0);
 
@@ -748,6 +767,117 @@ void clamp_params__6TLobbyFPv(void *arg0) {
     if ((s32) *(s32 *)((s8 *)arg0 + 0x38) > 0x7F) {
         *(s32 *)((s8 *)arg0 + 0x38) = 0x7F;
     }
+}
+
+void calc_sound_spatial_params(SoundRequestVoice *v) {
+    f32 viewer_pos[3];
+    f32 target_pos[3];
+    f32 dist;
+    f32 near_dist;
+    f32 max_dist;
+    f32 owner_f2a4;
+    f32 ratio;
+    f32 sin_value;
+    f64 angle;
+    
+    s32 pan;
+    s32 attenuate;
+    s32 surround;
+    s32 view_index;
+    s32 player_id;
+    void *player;
+
+    pan = 0;
+    attenuate = 0;
+    surround = 0;
+    if ((u8 *)camera_ctrl_instance == NULL) {
+        goto write;
+    }
+    viewer_pos[0] = *(f32 *)((u8 *)camera_ctrl_instance + 0x178);
+    viewer_pos[1] = TLobby__data_805DC9E0;
+    viewer_pos[2] = *(f32 *)((u8 *)camera_ctrl_instance + 0x180);
+    if (v->position == NULL) {
+        goto write;
+    }
+    max_dist = lbl_805DC9F0;
+    if (get_current_floor_area__Fv() == 0xE || get_current_floor_area__Fv() == 0x1F) {
+        max_dist = max_dist * lbl_805DC9F4;
+    }
+    target_pos[0] = *(f32 *)v->position;
+    target_pos[1] = TLobby__data_805DC9E0;
+    target_pos[2] = *(f32 *)((char *)v->position + 0x8);
+    if (is_split_screen()) {
+        dist = lbl_805DC9F8;
+        get_camera_id__11TCameraCtrlFv();
+        for (view_index = 0; view_index < get_camera_id__11TCameraCtrlFv(); view_index++) {
+            player_id = (u16) get_nth_view_player_id__11TCameraCtrlFl(view_index);
+            if (player_id < 12) {
+                player = get_player_by_client_id(player_id);
+                if (player != NULL) {
+                    viewer_pos[0] = *(f32 *)((char *)player + 0x38);
+                    viewer_pos[1] = TLobby__data_805DC9E0;
+                    viewer_pos[2] = *(f32 *)((char *)player + 0x40);
+                }
+            }
+            near_dist = horizontal_distance_squared(viewer_pos, target_pos);
+            if (dist > near_dist) {
+                dist = near_dist;
+            }
+        }
+        if (lbl_805DC9F8 != dist) {
+            dist = newton_sqrtf(dist);
+        }
+    } else {
+        if (is_camera_state_active__6TLobbyFv()) {
+            viewer_pos[0] = *(f32 *)((u8 *)camera_ctrl_instance + 0x178);
+            viewer_pos[1] = TLobby__data_805DC9E0;
+            viewer_pos[2] = *(f32 *)((u8 *)camera_ctrl_instance + 0x180);
+        } else {
+            player = get_player_by_client_id(local_client_id);
+            if (player != NULL) {
+                viewer_pos[0] = *(f32 *)((char *)player + 0x38);
+                viewer_pos[1] = TLobby__data_805DC9E0;
+                viewer_pos[2] = *(f32 *)((char *)player + 0x40);
+            }
+        }
+        dist = PSVECDistance(viewer_pos, target_pos);
+    }
+    if (is_split_screen() || (v->flags & 2)) {
+        pan = 0;
+    } else {
+        if (dist > 0.0f) {
+            angle = atan2_float(*(f32 *)((char *)v->position + 0x8) - *(f32 *)((u8 *)camera_ctrl_instance + 0x180),
+                                *(f32 *)v->position - *(f32 *)((u8 *)camera_ctrl_instance + 0x178));
+            sin_value = sin_table_lookup(0x4000 + *(s32 *)((u8 *)camera_ctrl_instance + 0x194) +
+                                         (s32)(10430.38043493439 * angle));
+            sin_value = -sin_value;
+            pan = (s8)(s32)(lbl_805DC9EC * sin_value);
+        }
+    }
+    if (is_split_screen() || (v->flags & 8)) {
+        surround = 0;
+    } else {
+        angle = atan2_float(*(f32 *)((char *)v->position + 0x8) - viewer_pos[2],
+                            *(f32 *)v->position - viewer_pos[0]);
+        view_index = *(s32 *)((u8 *)camera_ctrl_instance + 0x194) - 0x4000 +
+                     (s32)(10430.38043493439 * angle);
+        owner_f2a4 = get_field_2a4__6TLobbyFPv(v->owner);
+        surround = (s32)(dist * (cos_table_lookup(view_index) * owner_f2a4));
+    }
+    if (v->flags & 4) {
+        attenuate = 0;
+    } else {
+        ratio = (dist - lbl_805DC9FC) / (max_dist - lbl_805DC9FC);
+        if (ratio < 0.0f) {
+            ratio = 0.0f;
+        }
+        ratio = ratio * lbl_805DC9EC;
+        attenuate = -(s32)ratio;
+    }
+write:
+    v->spatial = attenuate;
+    v->panSpatial = pan;
+    v->surroundSpatial = surround;
 }
 
 s32 start_voice_fade(struct Voice_80241FD8 *v, s32 step) {
