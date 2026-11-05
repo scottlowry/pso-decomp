@@ -155,15 +155,34 @@ void *__dt__19TShopItemListWindowFv(TShopItemListWindow *arg0, s16 arg1);
 void __dl__7TObjectFPv(void *);
 void *__dt__15TShopWindowBaseFv(void *self, s16 m);
 f32 get_scale__15TShopWindowBaseFv(void *);
-s32 create_window_menu(s32 arg0, s32 arg1, s32 arg2);
-void align_menu_entry_positions(s32);
-int forward_trade_action_default__16TObjCityMainWarpFPviii(void *p, int a1, int a2, int a3);
+void *create_window_menu(void *, s32, s32);
+void align_menu_entry_positions(void *);
+void forward_trade_action_default__16TObjCityMainWarpFPviii(void *, s32, s32, s32);
 void calc_window_size__17TWindowSubComCardFv(void *);
 void set_ready_flag__18TCheckRoomSequenceFv(void *);
 void set_position_xy__15TWindowAdditionFff(void *, f32, f32);
 void set_position__18TCheckRoomSequenceFff(void *, f32, f32);
 void *__ct__18TWindowInputNumberFPvllls(void *, s32, s32, s32, s32, s16);
 extern const f32 lbl_805DC6F8;
+s32 is_confirmed__18TWindowInputNumberFv(s32);
+s32 get_result__24TShopEquipmentSellWindowFv(void *);
+s32 is_confirmed__24TShopEquipmentSellWindowFv(s32);
+s32 is_decided__11TWindowMenuFv(s32);
+s32 is_cancelled__11TWindowMenuFv(s32);
+s32 get_selected_value__11TWindowMenuFv(void *);
+void close__11TWindowBaseFv(void *);
+void clear_decided__19TWindowMenuIconLineFv(void *);
+void set_field_20__15TShopWindowBaseFl(void *, s32);
+s32 get_item_def__18TCheckRoomSequenceFUl(u32);
+void set_stack_count__9TItemDataFUc(TItemData *, u8);
+s32 try_buy_item(u32, TItemData *);
+s32 is_single_purchase_shop_item__FPUc(u8 *);
+void mark_shop_tool_sold_out__Fll(s32, s32);
+void save_cursor_selection__20TShopArmorListWindowFv(void *);
+s32 count_items_by_id__10TObjPlayerFl(void *, s32);
+void set_entry1_field20__20TWindowSubStatusDispFl(void *, s32);
+s32 advance_item_id_counter(u16);
+extern u32 local_client_id;
 
 void TShopItemListWindow::display_message(const char *text, s32 flags) {
     struct VObj_8021F134 *temp_r3;
@@ -180,6 +199,94 @@ void TShopItemListWindow::vfunc_6() {
     temp_r3 = (struct VObj_8021F16C_8021F134 *)*(void **)((s8 *)this + 0x2C);
     if (temp_r3 != NULL) {
         temp_r3->m4();
+    }
+}
+
+s32 TShopItemListWindow::handle_amount_confirm() {
+    switch ((s32)this->m_4c) {
+    case 0: {
+        s32 num = this->m_34;
+        if (num != 0 && is_confirmed__18TWindowInputNumberFv(num) != 0) {
+            if (this->m_30 == 0) {
+                u16 temp_r31 = (u16)get_entity_id((void *)this->m_24);
+                this->m_30 = (u32)create_window_menu((void *)get_window_layout_position(43), 2, (s32)temp_r31);
+                forward_trade_action_default__16TObjCityMainWarpFPviii((void *)this->m_30, get_shop_text(4), 6, 0);
+                forward_trade_action_default__16TObjCityMainWarpFPviii((void *)this->m_30, get_shop_text(5), 6, 1);
+                calc_window_size__17TWindowSubComCardFv((void *)this->m_30);
+                align_menu_entry_positions((void *)this->m_30);
+                set_ready_flag__18TCheckRoomSequenceFv((void *)this->m_30);
+                f32 scale = get_scale__15TShopWindowBaseFv(this);
+                set_position_xy__15TWindowAdditionFff((void *)this->m_30, get_scale__15TShopWindowBaseFv(this), scale);
+            }
+            this->m_50 = get_result__24TShopEquipmentSellWindowFv((void *)this->m_34);
+            close__11TWindowBaseFv((void *)this->m_34);
+            this->m_34 = 0;
+            this->m_4c = 1;
+        }
+        if (this->m_34 == 0) {
+            return;
+        }
+        if (is_confirmed__24TShopEquipmentSellWindowFv(this->m_34) == 0) {
+            return;
+        }
+        close__11TWindowBaseFv((void *)this->m_34);
+        this->m_34 = 0;
+        if (this->m_28 != 0) {
+            clear_decided__19TWindowMenuIconLineFv((void *)this->m_28);
+        }
+        set_field_20__15TShopWindowBaseFl(this, 1);
+        return;
+    }
+    case 1: {
+        s32 menu = this->m_30;
+        if (menu != 0 && is_decided__11TWindowMenuFv(menu) != 0) {
+            s32 sel = get_selected_value__11TWindowMenuFv((void *)this->m_30);
+            if (sel == 0) {
+                if (this->m_28 != 0) {
+                    s32 cur = get_cursor_value__19TWindowMenuIconLineFv((void *)this->m_28);
+                    s32 off = cur * 0x14;
+                    TItemData tmp = *(TItemData *)((u8 *)this + off + 0x58);
+                    tmp.id = advance_item_id_counter((u16)local_client_id);
+                    if (get_item_def__18TCheckRoomSequenceFUl((u32)&tmp) != 0) {
+                        set_stack_count__9TItemDataFUc(&tmp, (u8)this->m_50);
+                    }
+                    try_buy_item(this->m_24, &tmp);
+                    if (this->m_3c != 0) {
+                        s32 n = count_items_by_id__10TObjPlayerFl(*(void **)(this->m_24 + 0xD00), (s32)((u8 *)this + off + 0x58));
+                        set_entry1_field20__20TWindowSubStatusDispFl((void *)this->m_3c, n);
+                    }
+                    if (is_single_purchase_shop_item__FPUc((u8 *)this + off + 0x58) != 0) {
+                        mark_shop_tool_sold_out__Fll(cur, sub_8022397C__15TShopWindowBaseFv(this));
+                    }
+                    save_cursor_selection__20TShopArmorListWindowFv((void *)this->m_28);
+                }
+                close__11TWindowBaseFv((void *)this->m_30);
+                this->m_30 = 0;
+                set_field_20__15TShopWindowBaseFl(this, 0);
+            }
+            if (sel == 1) {
+                close__11TWindowBaseFv((void *)this->m_30);
+                this->m_30 = 0;
+                if (this->m_28 != 0) {
+                    clear_decided__19TWindowMenuIconLineFv((void *)this->m_28);
+                }
+                set_field_20__15TShopWindowBaseFl(this, 1);
+            }
+        }
+        if (this->m_30 == 0) {
+            return;
+        }
+        if (is_cancelled__11TWindowMenuFv(this->m_30) == 0) {
+            return;
+        }
+        close__11TWindowBaseFv((void *)this->m_30);
+        this->m_30 = 0;
+        if (this->m_28 != 0) {
+            clear_decided__19TWindowMenuIconLineFv((void *)this->m_28);
+        }
+        set_field_20__15TShopWindowBaseFl(this, 1);
+        return;
+    }
     }
 }
 
@@ -219,11 +326,11 @@ s32 TShopItemListWindow::prepare_tool_purchase() {
         return;
     }
     eid = get_entity_id((void *)self->player);
-    self->menu = create_window_menu(get_window_layout_position(0x2B), 2, eid);
+    self->menu = (s32)create_window_menu((void *)get_window_layout_position(0x2B), 2, eid);
     forward_trade_action_default__16TObjCityMainWarpFPviii((void *)self->menu, (int)(get_shop_text(4)), 6, 0);
     forward_trade_action_default__16TObjCityMainWarpFPviii((void *)self->menu, (int)(get_shop_text(5)), 6, 1);
     calc_window_size__17TWindowSubComCardFv((void *)self->menu);
-    align_menu_entry_positions(self->menu);
+    align_menu_entry_positions((void *)self->menu);
     set_ready_flag__18TCheckRoomSequenceFv((void *)self->menu);
     sc = get_scale__15TShopWindowBaseFv(self);
     set_position_xy__15TWindowAdditionFff((void *)self->menu, get_scale__15TShopWindowBaseFv(self), sc);
