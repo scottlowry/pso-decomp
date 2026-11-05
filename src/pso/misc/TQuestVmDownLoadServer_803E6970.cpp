@@ -4655,7 +4655,7 @@ s32 TQuestVmDownLoadServer__sub_803F03B4(u8 *data, Ent_803F03B4 *ents, s32 n, s3
     u8 *end;
     u8 *cur;
     u8 *p;
-    u16 v;
+    s32 v;
     u8 c;
     s32 found;
 
@@ -4670,7 +4670,7 @@ s32 TQuestVmDownLoadServer__sub_803F03B4(u8 *data, Ent_803F03B4 *ents, s32 n, s3
         v = cur[1];
         cur += 2;
         e->key = v;
-        if (v > *max) {
+        if ((u16)v > *max) {
             *max = e->key;
         }
         c = cur[0];
