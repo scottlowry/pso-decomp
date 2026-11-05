@@ -24,13 +24,13 @@ struct Ent_80209D34 {
 };
 
 extern "C" {
-extern u32 lbl_805D60A8;
-extern s32 lbl_805D60B4;
-extern s32 lbl_805D60BC;
-extern s32 lbl_805D60C0;
-extern s32 lbl_805D60C4;
-extern s32 lbl_805D60C8;
-extern s32 lbl_805D60CC;
+extern volatile u32 lbl_805D60A8;
+extern volatile s32 lbl_805D60B4;
+extern u8 *lbl_805D60BC;
+extern volatile s32 lbl_805D60C0;
+extern volatile s32 lbl_805D60C4;
+extern volatile s32 lbl_805D60C8;
+extern volatile s32 lbl_805D60CC;
 
 s32 clamp_min_drop__6TLobbyFUl(s32, s32);
 void TLobby__sub_802097B0(s16);
@@ -74,7 +74,7 @@ void TLobby__sub_80209D34(TLobby *lobby) {
     walk = (u8 *)lbl_805D60A8 + hdr.b;
     r29 = lbl_805D60CC - (hdr.h.count * 0x18 + 0x10);
     memset((void *)lbl_805D60B4, 0, 0x9000);
-    memset((void *)lbl_805D60BC, 0, 0x1400);
+    memset(lbl_805D60BC, 0, 0x1400);
     lbl_805D60C0 = 0;
     memset((void *)lbl_805D60C4, 0, 0x1000);
     off = 0;
@@ -98,7 +98,7 @@ void TLobby__sub_80209D34(TLobby *lobby) {
                 }
             }
             if (cnt > 0) {
-                *(s32 *)((u8 *)lbl_805D60BC + lbl_805D60C0 * 0x14) = (s16)d26;
+                *(s32 *)(lbl_805D60BC + lbl_805D60C0 * 0x14) = (s16)d26;
                 *(s16 *)((u8 *)&lbl_805D60BC + lbl_805D60C0 * 0x14 + 4) = ent.a;
                 *(s16 *)((u8 *)&lbl_805D60BC + lbl_805D60C0 * 0x14 + 6) = ent.b;
                 *(s16 *)((u8 *)&lbl_805D60BC + lbl_805D60C0 * 0x14 + 8) = ent.c;
@@ -119,7 +119,7 @@ void TLobby__sub_80209D34(TLobby *lobby) {
         }
         TLobby__sub_8020A618(&ent, walk);
         ((TLobby *)&ent)->bswap();
-        *(s32 *)((u8 *)lbl_805D60BC + lbl_805D60C0 * 0x14) = (s16)d26;
+        *(s32 *)(lbl_805D60BC + lbl_805D60C0 * 0x14) = (s16)d26;
         *(s16 *)((u8 *)&lbl_805D60BC + lbl_805D60C0 * 0x14 + 4) = ent.a;
         *(s16 *)((u8 *)&lbl_805D60BC + lbl_805D60C0 * 0x14 + 6) = ent.b;
         *(s16 *)((u8 *)&lbl_805D60BC + lbl_805D60C0 * 0x14 + 8) = ent.c;
