@@ -2164,6 +2164,7 @@ s32 TQuestVmDownLoadServer__sub_803EA1A8(s32 arg0, s32 arg1) {
     N_803E9FA4 *next;
     Rec_803EA1A8 *rec;
     s32 i;
+    s32 rv;
     u8 *p;
 
     if ((u32)slot->x4 != 0xFFF0FFFFu) {
@@ -2203,26 +2204,27 @@ s32 TQuestVmDownLoadServer__sub_803EA1A8(s32 arg0, s32 arg1) {
         }
         slot2->x8 = cur;
     }
-    if (slot->x8 != NULL) {
-        return 1;
-    }
-    rec = (Rec_803EA1A8 *)TQuestVmDownLoadServer__sub_803ECF48();
-    if (rec == NULL) {
-        return -1;
-    }
-    for (i = arg0 + 1, p = (u8 *)&lbl_805A0470 + i; i < arg1; i++, p++) {
-        if (TQuestVmDownLoadServer::is_download_cmd_allowed(*p) == 0) {
-            break;
+    if (slot->x8 == NULL) {
+        rec = (Rec_803EA1A8 *)TQuestVmDownLoadServer__sub_803ECF48();
+        if (rec == NULL) {
+            return -1;
         }
+        for (i = arg0 + 1, p = (u8 *)&lbl_805A0470 + i; i < arg1; p++, i++) {
+            if (TQuestVmDownLoadServer::is_download_cmd_allowed(*p) == 0) {
+                break;
+            }
+        }
+        rec->len = (s16)(i - arg0);
+        rec->type = 0x28;
+        rec->x3 = 0;
+        rv = 1;
+        rec->x4 = 0;
+        rec->x8 = 0;
+        rec->xa = 0;
+        rec->xc = 0;
+        slot->x8 = (N_803E9FA4 *)rec;
+        return rv;
     }
-    rec->len = (s16)(i - arg0);
-    rec->type = 0x28;
-    rec->x3 = 0;
-    rec->x4 = 0;
-    rec->x8 = 0;
-    rec->xa = 0;
-    rec->xc = 0;
-    slot->x8 = (N_803E9FA4 *)rec;
     return 1;
 }
 #pragma pop
