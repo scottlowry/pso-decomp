@@ -192,6 +192,7 @@ s32 TLobby__sub_803CC53C(u8 *arg0) {
 
 s32 TLobby__sub_803CC578(Snd_803CC980 *arg0, s32 arg1, s32 arg2) {
     s32 base = (s32)lbl_8047C818;
+    LogHdr_803CC578 *hdr = (LogHdr_803CC578 *)&lbl_8057B7B0;
     s32 sp8;
     {
         LogEnt_803CD16C *e;
@@ -199,7 +200,7 @@ s32 TLobby__sub_803CC578(Snd_803CC980 *arg0, s32 arg1, s32 arg2) {
         u16 seq;
         e = &lbl_8057B7D0[i];
         adxf_log_write_index = i;
-        seq = ++((LogHdr_803CC578 *)&lbl_8057B7B0)->seq;
+        seq = ++hdr->seq;
         e->type = 6;
         e->phase = 0;
         e->seq = seq;
@@ -218,13 +219,13 @@ s32 TLobby__sub_803CC578(Snd_803CC980 *arg0, s32 arg1, s32 arg2) {
         u16 seq;
         e = &lbl_8057B7D0[i];
         adxf_log_write_index = i;
-        seq = ((LogHdr_803CC980 *)&lbl_8057B7B0)->seq + 1;
+        seq = ((LogHdr_803CC980 *)hdr)->seq + 1;
         e->type = 5;
         e->phase = 0;
         e->seq = seq;
         e->a = (s32)arg0;
         e->b = -1;
-        ((LogHdr_803CC980 *)&lbl_8057B7B0)->seq = seq;
+        ((LogHdr_803CC980 *)hdr)->seq = seq;
         e->c = -1;
         adxf_log_write_index = i + 1;
         if (arg0 == NULL) {
@@ -261,7 +262,7 @@ s32 TLobby__sub_803CC578(Snd_803CC980 *arg0, s32 arg1, s32 arg2) {
         LogEnt_803CD16C *e = &lbl_8057B7D0[adxf_log_write_index = i];
         e->type = 5;
         e->phase = 1;
-        e->seq = ((LogHdr_803CC980 *)&lbl_8057B7B0)->seq;
+        e->seq = ((LogHdr_803CC980 *)hdr)->seq;
         e->a = (s32)arg0;
         e->b = -1;
         e->c = -1;
