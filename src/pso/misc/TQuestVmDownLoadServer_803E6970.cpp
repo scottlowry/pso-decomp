@@ -3902,9 +3902,7 @@ void TQuestVmDownLoadServer__sub_803EE2F4(s32 arg0, s32 arg1) {
 
     cursor = (u8 *)&lbl_8058DC98;
     str2 = lbl_8058DC48;
-    poolA = lbl_805A0340;
     i = arg0;
-    poolB = lbl_805A0340;
     end = arg1;
     base98 = cursor;
     dst21 = cursor;
@@ -3924,6 +3922,8 @@ void TQuestVmDownLoadServer__sub_803EE2F4(s32 arg0, s32 arg1) {
         }
         if (lbl_805D7848 == 3 || lbl_805D7834 > 2) {
             if ((s8)slot[0x16] != 0 && (s8)slot[0x16] != (s8)slot[0x15]) {
+                poolA = lbl_805A0340;
+                poolB = lbl_805A0340;
                 step = n;
                 strncpy((char *)dst21, (char *)src + i, step);
                 zero = 0;
