@@ -3875,8 +3875,8 @@ u8 *TQuestVmDownLoadServer::find_keyword_entry(u16 *start, u16 *end) {
 s32 TQuestVmDownLoadServer__sub_803EDF64(u16 *msg, s32 a1, u16 *out, s32 *out_count) {
     s32 kind;
     s32 i;
-    u16 *p;
     u32 code;
+    u16 *p;
     s32 key16;
     s32 k1;
     s32 k2;
@@ -3947,7 +3947,7 @@ s32 TQuestVmDownLoadServer__sub_803EDF64(u16 *msg, s32 a1, u16 *out, s32 *out_co
     }
     if ((u8) code == 6 && (u16) kind >= 2) {
         *out = *out + 1;
-        if ((u8) msg[0] == 0xb3) {
+        if (k1 == 0xb3) {
             *out = TQuestVmDownLoadServer__sub_803E719C(0x74, msg[1]);
         }
         return 2;
@@ -3987,10 +3987,10 @@ loop:
     if ((u8) code >= 6 && (u8) code <= 0xc) {
         return -2;
     }
-    if (i > 4) {
-        return -2;
+    if (i <= 4) {
+        goto loop;
     }
-    goto loop;
+    return -2;
 }
 
 void TQuestVmDownLoadServer__sub_803EE2E4(void) {
