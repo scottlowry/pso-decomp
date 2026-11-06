@@ -1918,8 +1918,8 @@ s32 TBoss4Type2__sub_80054FC0(void *self, f32 range) {
     }
     for (j = 0; j < 0x100 && cnt < 0x40; j++) {
         cand.x = lbl_805D8B4C * (lbl_805D8B90 * (f32)rand() - lbl_805D8B60);
-        cand.y = lbl_805D8B20;
         cand.z = lbl_805D8B4C * (lbl_805D8B90 * (f32)rand() - lbl_805D8B60);
+        cand.y = lbl_805D8B20;
         if (cand.x * cand.x + cand.z * cand.z >= lbl_805D8B94) {
             continue;
         }
