@@ -342,6 +342,89 @@ void TUnk_804C3248::update_photon_blast_attachments() {
 
 void TUnk_804C3248::free_photon() { void* m = *(void* *)&this->m_148; if (m) mem_free(m); }
 
+struct Eff_801A7748 {
+    void *obj;
+    u8 pad4[0x10 - 0x4];
+    s32 flag;
+    s32 vec[3];
+};
+
+extern "C" {
+void *mem_alloc(u32);
+void copy_xyz__FPvPv(void *, void *);
+s32 rotate_matrix_z(s32, s32);
+s32 rotate_matrix_x(s32, s32);
+void direction_to_rotation_xz__FPUcPlPl(u8 *, s32 *, s32 *);
+void *create_timed_particle_emitter_with_angles__FPvPvllll(void *, void *, s32, s32, s32, s32);
+extern s32 lbl_80446A38[];
+
+void spawn_photon_blast_attachment_effects(void *arg0, s32 arg1) {
+    Group_801A7428 *g;
+    struct Self_801A7680 *self;
+    PhotonAttachmentDef_801A7748 *def;
+    u8 *defs;
+    s32 *base_dir;
+    s32 *rot_z;
+    s32 v[3];
+    s32 rot[3];
+    s32 dir[3];
+    s32 a;
+    s32 b;
+    s32 c;
+    s32 u;
+    u32 i;
+    s32 off;
+    void *emitter;
+
+    g = &photon_blast_attachment_table[arg1];
+    self = (struct Self_801A7680 *)arg0;
+    self->count = g->attachment_count;
+    if (self->count == 0) {
+        return;
+    }
+    self->effects = (struct Eff_801A7680 *)mem_alloc(self->count * 32);
+    i = 0;
+    defs = (u8 *)g->attachments;
+    base_dir = lbl_80446A38;
+    off = 0;
+    while (i < self->count) {
+        def = (PhotonAttachmentDef_801A7748 *)(defs + off);
+        b = def->unk4;
+        c = def->unk8;
+        a = def->unk0;
+        copy_xyz__FPvPv(v, def->unk10);
+        u = def->unk1C;
+        dir[0] = base_dir[0];
+        dir[1] = base_dir[1];
+        dir[2] = base_dir[2];
+        if (v[2] != 0 || v[0] != 0 || v[1] != 0) {
+            push_matrix_from(identity_matrix);
+            rotate_matrix_z(0, v[2]);
+            rotate_matrix_x(0, v[0]);
+            rotate_matrix_y(0, v[1]);
+            matrix_mult_vec(0, (Vec_801A7428 *)dir, (Vec_801A7428 *)dir);
+            pop_matrices(1);
+            push_matrix_from(identity_matrix);
+            rotate_matrix_y(0, *(s32 *)((s8 *)self + 0x60));
+            matrix_mult_vec(0, (Vec_801A7428 *)dir, (Vec_801A7428 *)dir);
+            pop_matrices(1);
+            direction_to_rotation_xz__FPUcPlPl((u8 *)dir, rot, &rot[2]);
+            rot[1] = 0;
+        } else {
+            rot[0] = 0;
+            rot[1] = 0;
+            rot[2] = 0;
+        }
+        emitter = create_timed_particle_emitter_with_angles__FPvPvllll((void *)&self->pos, (void *)rot, a, b, c, (u16)u);
+        ((struct Eff_801A7748 *)((u8 *)self->effects + off))->obj = emitter;
+        ((struct Eff_801A7748 *)((u8 *)self->effects + off))->flag = def->unkC;
+        copy_xyz__FPvPv((u8 *)self->effects + off + 0x14, v);
+        i = i + 1;
+        off = off + 0x20;
+    }
+}
+}
+
 int update_all_default__8TFogCtrlFv(void) { return update_all__8TFogCtrlFl((void*)(0)); }
 void apply_all_default__8TFogCtrlFv(void) { TFogCtrl::apply_all((s32)((void*)63), (s32)((void*)0)); }
 
