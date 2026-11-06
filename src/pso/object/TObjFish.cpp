@@ -325,7 +325,7 @@ void TObjFish::run_task() {
     s32 phase;
     s32 t;
     s32 rot;
-    s32 kind;
+    s16 kind;
     s32 ang_t;
     f32 k3;
     f32 k2;
