@@ -92,6 +92,7 @@ void TWindowDD__sub_80341674(TWindowDD_WS_Word *selfv, u8 *entry) {
     f32 d24;
     f32 neg;
     f32 f2v;
+    f32 c;
     f32 m88;
     f32 w2;
     f32 t;
@@ -119,11 +120,14 @@ void TWindowDD__sub_80341674(TWindowDD_WS_Word *selfv, u8 *entry) {
     cornerA = neg * width + depth;
     cornerB = f2v * width + depth;
     if (*(s32 *)(self + 0x64) == 0) {
-        lo = lbl_805DFB40;
+        c = lbl_805DFB40;
+        lo = c;
+        hi = c + TWindowDD__data_805DFB20;
     } else {
-        lo = lbl_805DFB44;
+        c = lbl_805DFB44;
+        lo = c;
+        hi = c + TWindowDD__data_805DFB20;
     }
-    hi = lo + TWindowDD__data_805DFB20;
     m88 = -(*(f32 *)(self + 0x88));
     lo = lo * TWindowDD__data_805DFB18;
     hi = hi * TWindowDD__data_805DFB18;
