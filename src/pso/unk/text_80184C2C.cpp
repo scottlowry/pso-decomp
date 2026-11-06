@@ -95,7 +95,6 @@ void TLobby::free_buffers() {
 }
 
 extern "C" void TLobby__sub_80184DF4(void) {
-    u8 *base;
     ResBlock_80184DF4 *res;
     ModelEnt_80184DF4 *me;
     TLobby *tbl;
@@ -103,6 +102,7 @@ extern "C" void TLobby__sub_80184DF4(void) {
     s32 i;
     s32 m1;
     void *n;
+    u8 *base;
 
     base = lbl_804B5E80;
     TLobby::clear_global_array(base);
