@@ -101,7 +101,6 @@ Obj_801A9CB8 *TObjPlayer__sub_801A9E10(Obj_801A9CB8 *self, s32 client_id, u8 *re
     s32 neg1;
     s32 player;
     s32 *obj;
-    u8 *rec;
 
     __ct__7TObjectFP7TObject(self, (void *)tl_07);
     self->vt = __vt__13TUnk_804C349C;
@@ -122,15 +121,14 @@ Obj_801A9CB8 *TObjPlayer__sub_801A9E10(Obj_801A9CB8 *self, s32 client_id, u8 *re
         self->ids[i] = 0xFFFF;
     }
     self->count = 4;
-    rec = records;
     for (i = 0; i < 4; i++) {
-        if ((s16)TObjPlayer__sub_80313114(rec) == -1) {
+        if ((s16)TObjPlayer__sub_80313114(records) == -1) {
             self->count = i;
             break;
         }
-        self->entries50[i] = (s16)TObjPlayer__sub_80313114(rec);
-        self->ids[i] = (u16)get_section_id__10TObjPlayerFv(rec);
-        rec += 24;
+        self->entries50[i] = (s16)TObjPlayer__sub_80313114(records);
+        self->ids[i] = (u16)get_section_id__10TObjPlayerFv(records);
+        records += 24;
     }
     self->player = (s32)get_player_by_client_id(client_id);
     apply_photon_blast_action_hold__Flll((s32)self, self->count * 150 + 100, client_id);
