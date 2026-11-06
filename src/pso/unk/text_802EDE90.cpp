@@ -165,9 +165,9 @@ extern "C" void *TBoss7DeRolLeC__ct(void *self_, void *arg1, void *arg2)
     if (p != 0)
     {
       new_var2 = (s16) joint_a;
-      p = (u32) TBoss7Joint__ct((u8 *) p, self, (s32) joint_b, new_var2, (s32) (self + ((i * 0xC) + 0x530)), i);
       joint_b = joint_b + 1;
       joint_a = joint_a + 1;
+      p = (u32) TBoss7Joint__ct((u8 *) p, self, (s32) joint_b, new_var2, (s32) (self + ((i * 0xC) + 0x530)), i);
     }
     *((u32 *) ((self + 0x5F8) + (i * 4))) = p;
   }
