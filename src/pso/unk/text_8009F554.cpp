@@ -46,7 +46,8 @@ void *__nw__FUl(u32);
 s32 init_from_model__11TBreakUpMdlFl(s32, s32);
 void *find_model_node__FUll(void *, s32);
 void TObjPlayer__sub_800F0928();
-s32 spawn_npc_enemy__6TLobbyFsllPvff(s16, s32, s32, void *, f32, f32);
+struct NJS_TEXLIST;
+s32 spawn_npc_enemy__6TLobbyFslP11NJS_TEXLISTPvff(s16, s32, NJS_TEXLIST *, void *, f32, f32);
 
 void fn_8009F554(void) {
     void *res;
@@ -54,12 +55,15 @@ void fn_8009F554(void) {
     s32 p;
     void *mdl;
     void *n;
+    s32 tx;
+    s32 mdlx;
     s32 ids;
     s32 sp[4];
 
     f32 z = lbl_805D9898;
-    f32 *fade = lbl_80500930.fade_vals;
-    lbl_80500930.fade_vals[0] = z;
+    CanadinFloorState *pool = &lbl_80500930;
+    f32 *fade = pool->fade_vals;
+    pool->fade_vals[0] = z;
     fade[1] = z;
     fade[2] = z;
     if (check_v2_mode__9TObjEneDDFv() != 0) {
@@ -111,10 +115,11 @@ void fn_8009F554(void) {
     sp[3] = lbl_8043A380[3];
     sp[0] = *(s32 *)((s32)lbl_805D4FD0 + 0x430);
     for (i = 0; i < 2; i++) {
-        spawn_npc_enemy__6TLobbyFsllPvff(((s16 *)&ids)[i],
-            *(s32 *)(*(s32 *)((s32)lbl_805D4FD0 + 0x42C) + 8 + i * 0x10),
-            *(s32 *)(*(s32 *)((s32)lbl_805D4FD0 + 0x42C) + 0x1C),
-            &sp[0], lbl_805D9930, lbl_805D98A4);
+        s32 off = 8 + i * 0x10;
+        tx = *(s32 *)(*(s32 *)((s32)lbl_805D4FD0 + 0x42C) + 0x1C);
+        mdlx = *(s32 *)(*(s32 *)((s32)lbl_805D4FD0 + 0x42C) + off);
+        spawn_npc_enemy__6TLobbyFslP11NJS_TEXLISTPvff(((s16 *)&ids)[i],
+            mdlx, (NJS_TEXLIST *)tx, (void *)&sp[0], (f32)lbl_805D9930, (f32)lbl_805D98A4);
     }
 }
 }
