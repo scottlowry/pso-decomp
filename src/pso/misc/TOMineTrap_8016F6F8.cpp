@@ -314,7 +314,7 @@ void TOMineTrap::run_task() {
                     L_rec_1000:;
                         record_attack_source(self->target, get_trap_type__10TOMineTrapFv(this));
                     }
-                    if (this->m_380 != 1) {
+                    if ((s32)this->m_380 != 1) {
                         this->m_380 = TOMineTrap::show_owner_message((s32)this, (u32)p);
                     }
                 }
