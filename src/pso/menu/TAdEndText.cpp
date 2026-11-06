@@ -151,10 +151,10 @@ s32 TAdEndText__sub_8001A998(s32 tex, char *str, f32 x_in, f32 y_in, f32 zoom)
   f32 q[8];
   s32 t;
   double new_var2;
-  f32 x;
   f32 y;
-  f32 zv;
+  f32 x;
   f32 yl;
+  f32 zv;
   f32 adv;
   s32 page;
   s32 code;
@@ -185,6 +185,7 @@ s32 TAdEndText__sub_8001A998(s32 tex, char *str, f32 x_in, f32 y_in, f32 zoom)
     }
     q[0] = x;
     q[1] = (TAdEndText__sub_8001B404(c)) ? (yl) : (y);
+    y = TAdEndText__data_805D7DF8;
     if (TAdEndText__sub_8001B3EC(c))
     {
       if (TAdEndText__sub_8001B3D4(c))
@@ -273,22 +274,21 @@ s32 TAdEndText__sub_8001A998(s32 tex, char *str, f32 x_in, f32 y_in, f32 zoom)
       q[4] = lbl_805D7DFC;
       q[5] = lbl_805D7DFC;
       q[6] = lbl_805D7DFC;
-      q[3] = TAdEndText__data_805D7DF8 + q[1];
       q[7] = lbl_805D7DFC;
     }
     else
     {
       row = ((u8) code) / 0x24;
       new_var = row;
-      new_var2 = TAdEndText__data_805D7DF8 * ((f64) ((code - (0x24 * row)) - (6 * ((code - (0x24 * new_var)) / 6))));
+      new_var2 = y * ((f64) ((code - (0x24 * row)) - (6 * ((code - (0x24 * new_var)) / 6))));
       adv = lbl_804345E0[(new_var * 0x24) + (code - (row * 0x24))];
       x = x + adv;
       q[2] = q[0] + adv;
-      py = (u8) ((s32) (TAdEndText__data_805D7DF8 * ((f64) ((code - (new_var * 0x24)) / 6))));
+      py = (u8) ((s32) (y * ((f64) ((code - (new_var * 0x24)) / 6))));
       px = (u8) ((s32) new_var2);
       q[5] = ((f64) py) * lbl_805D7E00;
       q[6] = (((f64) px) + adv) * lbl_805D7E00;
-      q[7] = (((f64) py) + TAdEndText__data_805D7DF8) * lbl_805D7E00;
+      q[7] = (((f64) py) + y) * lbl_805D7E00;
     }
     {
       s32 pg = ((u8) code) / 0x24;
@@ -303,6 +303,7 @@ s32 TAdEndText__sub_8001A998(s32 tex, char *str, f32 x_in, f32 y_in, f32 zoom)
 
   return get_player__20TWindowSubStatusDispFv();
   q[4] = ((f64) px) * lbl_805D7E00;
+  q[3] = y + q[1];
 }
 
 void render__10TAdEndTextFv(u8 *arg0) {
