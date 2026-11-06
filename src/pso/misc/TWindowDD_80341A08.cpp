@@ -72,6 +72,8 @@ extern const f32 lbl_805DFB44;
 extern const double TWindowDD__data_80478610;
 }
 
+#pragma push
+#pragma fp_contract on
 void TWindowDD__sub_80341674(TWindowDD_WS_Word *selfv, u8 *entry) {
     u8 *self = (u8 *)selfv;
     E_80341674 q[4];
@@ -134,31 +136,34 @@ void TWindowDD__sub_80341674(TWindowDD_WS_Word *selfv, u8 *entry) {
         }
         d24 = t * width + cornerA;
         z = hi - t * TWindowDD__data_805DFB18;
+        pd = (f32 *)q;
         for (k = 0; k < 4; k++) {
-            pd = q[k].v;
             pd[1] = cornerA;
             pd[4] = z;
             pd[7] = d24;
             pd[10] = hi;
+            pd += 12;
         }
         ((TWindowDD *)q)->draw_transformed_primitive((void *)8, (void *)count, (void *)1);
         cornerA = d24;
     }
     if (n > 0) {
         d24 = TWindowDD__data_805DFB20 * width;
+        pd = (f32 *)q;
         for (k = 0; k < 4; k++) {
-            pd = q[k].v;
             pd[4] = lo;
             pd[10] = hi;
+            pd += 12;
         }
         i = 0;
         k4 = 4;
         while (i < n) {
             cornerB = cornerA + d24;
+            pd = (f32 *)q;
             for (k = 0; k < k4; k++) {
-                pd = q[k].v;
                 pd[1] = cornerA;
                 pd[7] = cornerB;
+                pd += 12;
             }
             ((TWindowDD *)q)->draw_transformed_primitive((void *)8, (void *)count, (void *)1);
             cornerA = cornerB;
@@ -169,12 +174,13 @@ void TWindowDD__sub_80341674(TWindowDD_WS_Word *selfv, u8 *entry) {
         t = lbl_805DFCA4 * *(f32 *)(self + 0x4c);
         z = lo - norm * TWindowDD__data_805DFB18;
         t = t * width + depth;
+        pd = (f32 *)q;
         for (k = 0; k < 4; k++) {
-            pd = q[k].v;
             pd[1] = cornerB;
             pd[4] = lo;
             pd[7] = t;
             pd[10] = z;
+            pd += 12;
         }
         ((TWindowDD *)q)->draw_transformed_primitive((void *)8, (void *)count, (void *)1);
     }
@@ -201,6 +207,7 @@ void TWindowDD__sub_80341674(TWindowDD_WS_Word *selfv, u8 *entry) {
         }
     }
 }
+#pragma pop
 
 #define sub_80341AC0__17TWindowDD_WS_WordFv ((s32 (*)(void))sub_80341AC0__17TWindowDD_WS_WordFv)
 
