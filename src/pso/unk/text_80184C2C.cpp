@@ -35,6 +35,13 @@ int TLobby__sub_80184C2C(int a0) {  return city_season_xmas_model_table[a0]; }
 int get_season_model_resource(int a0) {  return city_season_easter_egg_model_table[a0]; }
 
 extern s32 lbl_805D5B30;
+extern u8 lbl_804B5E80[];
+extern s32 get_main_phase(void);
+extern void *load_resource_from_descriptor(void *, s32, void *, s32, s32, s32);
+void *operator new(size_t size);
+
+struct ModelEnt_80184DF4 { s32 f0; s32 f4; s32 f8; s32 fc; };
+struct ResBlock_80184DF4 { u8 pad0[0x42C]; ModelEnt_80184DF4 *models; s32 pad430; s32 model_count; };
 
 u8 TLobby__sub_80184C54(void) {
     return (u8) (lbl_805D5B30 != -1);
@@ -84,6 +91,115 @@ void TLobby::free_buffers() {
         }
         city_season_easter_egg_model_table[i] = 0;
         city_season_xmas_model_table[i] = 0;
+    }
+}
+
+void TLobby__sub_80184DF4(void) {
+    ResBlock_80184DF4 *res;
+    ModelEnt_80184DF4 *me;
+    TLobby *tbl;
+    s16 *flags;
+    s32 i;
+    s32 m1;
+    void *n;
+
+    TLobby::clear_global_array(lbl_804B5E80);
+    if (get_main_phase() == 0xf) {
+        TLobby__sub_80184C80(lbl_804B5E80);
+    } else {
+        TLobby__sub_80184CE0(lbl_804B5E80);
+    }
+    lbl_805D5B30 = -1;
+    for (i = 0; i < 6; i++) {
+        if (TLobby__sub_80184C6C(i) != 0) {
+            lbl_805D5B30 = i;
+            break;
+        }
+    }
+    if (lbl_805D5B30 != -1) {
+        for (i = 0; i < 6; i++) {
+            city_season_easter_egg_model_table[i] = 0;
+            city_season_xmas_model_table[i] = 0;
+        }
+        res = (ResBlock_80184DF4 *)::operator new(0x440);
+        if (res != NULL) {
+            res = (ResBlock_80184DF4 *)load_resource_from_descriptor(res, 1,
+                    (void *)*(s32 *)(lbl_804B5E80 + 0x15c + lbl_805D5B30 * 4), 0, 0, 0);
+        }
+        city_season_easter_egg_model_table[lbl_805D5B30] = (s32)res;
+        for (i = 0; i < res->model_count; i++) {
+            me = &res->models[i];
+            if (me->fc == 0) {
+                continue;
+            }
+            city_season_xmas_model_table[lbl_805D5B30] = me->fc;
+            break;
+        }
+        if (lbl_805D5B30 == 0) {
+            m1 = res->models[1].f8;
+            tbl = (TLobby *)::operator new(0x14);
+            n = tbl;
+            if (tbl != NULL) {
+                n = tbl->alloc_tables(m1, 3);
+            }
+            lbl_805D5B34 = n;
+            flags = (s16 *)(*(s32 *)(*(s32 *)(*(s32 *)(m1 + 0x2c) + 4) + 4) + 0xc);
+            *flags &= (s16)~0x1000;
+        } else if (lbl_805D5B30 == 4) {
+            m1 = res->models[1].f8;
+            tbl = (TLobby *)::operator new(0x14);
+            n = tbl;
+            if (tbl != NULL) {
+                n = tbl->alloc_tables(m1, 0);
+            }
+            lbl_805D5B34 = n;
+            flags = (s16 *)(*(s32 *)(*(s32 *)(*(s32 *)(m1 + 0x2c) + 4) + 4) + 0xc);
+            *flags &= (s16)~0x1000;
+        } else {
+            lbl_805D5B34 = 0;
+        }
+    }
+    if (lbl_805D5B30 == 2) {
+        res = (ResBlock_80184DF4 *)::operator new(0x440);
+        if (res != NULL) {
+            res = (ResBlock_80184DF4 *)load_resource_from_descriptor(res, 1,
+                    (void *)(lbl_804B5E80 + 0x130), 0, 0, 0);
+        }
+        lbl_805D5B3C = res->models[0].f8;
+        lbl_805D5B40 = res->models[1].f8;
+    } else if (lbl_805D5B30 == 4) {
+        res = (ResBlock_80184DF4 *)::operator new(0x440);
+        if (res != NULL) {
+            res = (ResBlock_80184DF4 *)load_resource_from_descriptor(res, 1,
+                    (void *)(lbl_804B5E80 + 0x14c), 0, 0, 0);
+        }
+        lbl_805D5B3C = res->models[0].f8;
+        lbl_805D5B40 = res->models[1].f8;
+    } else {
+        res = (ResBlock_80184DF4 *)::operator new(0x440);
+        if (res != NULL) {
+            res = (ResBlock_80184DF4 *)load_resource_from_descriptor(res, 1,
+                    (void *)(lbl_804B5E80 + 0x114), 0, 0, 0);
+        }
+        lbl_805D5B3C = res->models[0].f8;
+        lbl_805D5B40 = res->models[1].f8;
+    }
+    tbl = (TLobby *)::operator new(0x14);
+    n = tbl;
+    if (tbl != NULL) {
+        n = tbl->alloc_tables(lbl_805D5B3C, 2);
+    }
+    lbl_805D5B48 = n;
+    flags = (s16 *)(*(s32 *)(*(s32 *)(lbl_805D5B3C + 4) + 4) + 0xc);
+    *flags &= (s16)~0x2000;
+    lbl_805D5B38 = res;
+    for (i = 0; i < res->model_count; i++) {
+        me = &res->models[i];
+        if (me->fc == 0) {
+            continue;
+        }
+        lbl_805D5B44 = me->fc;
+        break;
     }
 }
 
