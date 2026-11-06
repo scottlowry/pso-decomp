@@ -1077,6 +1077,7 @@ void TUnk_804CF0B8::sub_80251DF0(s16 arg1, s32 str, s16 arg3, f32 farg0) {
 void draw_name_plate__15TWindowFukidasiFv(void *self, View_80252764 *v, u32 color)
 {
   struct Fuki_80251EC8 *b = (struct Fuki_80251EC8 *) self;
+  f32 new_var4;
   struct View_80251EC8 *w = (struct View_80251EC8 *) v;
   f32 *new_var;
   f32 pt[2];
@@ -1111,7 +1112,7 @@ void draw_name_plate__15TWindowFukidasiFv(void *self, View_80252764 *v, u32 colo
   new_var2 = w->x;
   pt[0] = new_var2 - lbl_805DCD60;
   pt[1] = w->y - TWindowFukidasi__data_805DCD1C;
-  depth = TWindowFukidasi__data_805DCD4C / (lbl_805DCD64 + w->f38);
+  new_var4 = (depth = TWindowFukidasi__data_805DCD4C / (lbl_805DCD64 + w->f38));
   begin_screen_draw(1);
   render_forward__20TWindowSubStatusDispFPv();
   set_draw_texture_and_color(0, (s32) argb);
@@ -1125,7 +1126,7 @@ void draw_name_plate__15TWindowFukidasiFv(void *self, View_80252764 *v, u32 colo
   rect[6] = lbl_805DCD74;
   rect[7] = TWindowFukidasi__data_805DCCE8;
   apply_context_transform_to_rect(v, rect);
-  draw_textured_quad_at_depth(rect, depth);
+  draw_textured_quad_at_depth(rect, new_var4);
   if (width < TWindowFukidasi__data_805DCCFC)
   {
     x0v = lbl_805DCD78 + ((TWindowFukidasi__data_805DCCFC + pt[0]) - lbl_805DCD68);
@@ -1143,7 +1144,7 @@ void draw_name_plate__15TWindowFukidasiFv(void *self, View_80252764 *v, u32 colo
   rect[6] = lbl_805DCD80;
   rect[7] = TWindowFukidasi__data_805DCCE8;
   apply_context_transform_to_rect(v, rect);
-  draw_textured_quad_at_depth(rect, depth);
+  draw_textured_quad_at_depth(rect, new_var4);
   if (width > TWindowFukidasi__data_805DCCFC)
   {
     rect[0] = lbl_805DCD68 + (new_var3 = pt[0]);
@@ -1155,7 +1156,7 @@ void draw_name_plate__15TWindowFukidasiFv(void *self, View_80252764 *v, u32 colo
     rect[6] = lbl_805DCD7C;
     rect[7] = TWindowFukidasi__data_805DCCE8;
     apply_context_transform_to_rect(v, rect);
-    draw_textured_quad_at_depth(rect, depth);
+    draw_textured_quad_at_depth(rect, new_var4);
   }
   TWindowSubStatusDisp::get_player();
   new_var2 = pt[0];
