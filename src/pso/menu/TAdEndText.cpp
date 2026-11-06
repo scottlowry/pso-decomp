@@ -176,8 +176,8 @@ s32 TAdEndText__sub_8001A998(s32 tex, char *str, f32 x_in, f32 y_in, f32 zoom)
   yl = lbl_805D7DF0 + y;
   while (((s8) (*p)) != 0)
   {
-    c = *p;
     p = p + 1;
+    c = *p;
     code = c;
     if (c == 0x23)
     {
