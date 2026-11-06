@@ -159,10 +159,11 @@ s32 TAdEndText__sub_8001A998(s32 tex, char *str, f32 x_in, f32 y_in, f32 zoom)
   s32 row;
   f32 adv;
   s32 px;
+  f32 *new_var4;
   s32 page;
   s32 py;
-  s32 c;
   f32 x;
+  s32 c;
   volatile unsigned char new_var;
   u8 *p;
   x = x_in;
@@ -217,7 +218,6 @@ s32 TAdEndText__sub_8001A998(s32 tex, char *str, f32 x_in, f32 y_in, f32 zoom)
           break;
 
         case 0x29:
-          if (y)
         {
         }
           code = 0x1d;
@@ -283,7 +283,8 @@ s32 TAdEndText__sub_8001A998(s32 tex, char *str, f32 x_in, f32 y_in, f32 zoom)
       q[2] = lbl_805D7DF4 + q[0];
       {
       }
-      q[3] = TAdEndText__data_805D7DF8 + q[1];
+      new_var4 = q;
+      q[3] = TAdEndText__data_805D7DF8 + new_var4[1];
       q[4] = lbl_805D7DFC;
       q[5] = lbl_805D7DFC;
       q[6] = lbl_805D7DFC;
@@ -300,8 +301,8 @@ s32 TAdEndText__sub_8001A998(s32 tex, char *str, f32 x_in, f32 y_in, f32 zoom)
       px = (u8) ((s32) new_var2);
       q[5] = ((f64) py) * lbl_805D7E00;
       q[6] = (((f64) px) + adv) * lbl_805D7E00;
-      q[7] = (((f64) py) + y) * lbl_805D7E00;
-      q[2] = q[0] + adv;
+      q[7] = (py + y) * lbl_805D7E00;
+      q[2] = new_var4[0] + adv;
     }
     {
       s32 pg = ((u8) code) / 0x24;
@@ -311,12 +312,12 @@ s32 TAdEndText__sub_8001A998(s32 tex, char *str, f32 x_in, f32 y_in, f32 zoom)
         page = pg;
       }
     }
-    draw_textured_quad_at_depth(q, zv);
+    draw_textured_quad_at_depth(new_var4, zv);
   }
 
   return get_player__20TWindowSubStatusDispFv();
   q[4] = ((f64) px) * lbl_805D7E00;
-  q[3] = y + q[1];
+  q[3] = y + new_var4[1];
 }
 
 void render__10TAdEndTextFv(u8 *arg0) {
