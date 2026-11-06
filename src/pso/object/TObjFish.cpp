@@ -340,10 +340,11 @@ void TObjFish::run_task() {
 
     if (this->m_a0 != 0) {
         f = (Fish_8029D5C8 *)(this->m_a0);
-        k3 = lbl_805DDD54;
-        k2 = lbl_805DDD50;
+        n = (s32)this->m_94;
         k1 = lbl_805DDD4C;
-        for (n = (s32)this->m_94; n != 0; n--) {
+        k2 = lbl_805DDD50;
+        k3 = lbl_805DDD54;
+        for (; n != 0; n--) {
             tick = (s32)this->m_98;
             t = (s16)(f->timer - 1);
             f->timer = (s16)t;
@@ -371,8 +372,8 @@ void TObjFish::run_task() {
             f->velz = f->velz * k3;
             if (f->flag38 == 1) {
                 d2 = (f->ty - f->y) * (f->ty - f->y);
-                d2 = (f->tx - f->x) * (f->tx - f->x) + d2;
-                d2 = (f->tz - f->z) * (f->tz - f->z) + d2;
+                d2 += (f->tx - f->x) * (f->tx - f->x);
+                d2 += (f->tz - f->z) * (f->tz - f->z);
                 if (d2 < lbl_805DDD58) {
                     f->flag38 = 0;
                 } else {
@@ -390,8 +391,8 @@ void TObjFish::run_task() {
                 goto Ltail_rot;
             }
             get_game_mode__6TLobbyFv();
-            ent = find_entity_by_id((u16)local_client_id);
             dist = lbl_805DDD5C;
+            ent = find_entity_by_id((u16)local_client_id);
             if (ent != NULL) {
                 py = *(f32 *)((u8 *)ent + 0x3c) - *(f32 *)((s8 *)this + 0x3c);
                 px = *(f32 *)((u8 *)ent + 0x38) - *(f32 *)((s8 *)this + 0x38);
@@ -422,22 +423,26 @@ void TObjFish::run_task() {
             d2 = f->velz * f->velz + d2;
             if (d2 <= lbl_805DDD6C) {
                 f->timer = TObjFish__data_805DDD44 * (lbl_805DDD64 * (f32)rand());
-                f->velx = lbl_805DDD68 * (lbl_805DDD70 * (lbl_805DDD64 * (f32)rand() - lbl_805DDD60)) + f->velx;
+                d2 = lbl_805DDD70 * (lbl_805DDD64 * (f32)rand() - lbl_805DDD60);
+                f->velx = lbl_805DDD68 * d2 + f->velx;
                 f->vely = lbl_805DDD78 * (lbl_805DDD64 * (f32)rand() - lbl_805DDD60) + f->vely;
-                f->velz = lbl_805DDD68 * (lbl_805DDD70 * (lbl_805DDD64 * (f32)rand() - lbl_805DDD60)) + f->velz;
+                d2 = lbl_805DDD70 * (lbl_805DDD64 * (f32)rand() - lbl_805DDD60);
+                f->velz = lbl_805DDD68 * d2 + f->velz;
                 goto Ltail_burst;
             }
             d2 = (f->y - f->ty) * (f->y - f->ty);
-            d2 = (f->x - f->tx) * (f->x - f->tx) + d2;
-            d2 = (f->z - f->tz) * (f->z - f->tz) + d2;
+            d2 += (f->x - f->tx) * (f->x - f->tx);
+            d2 += (f->z - f->tz) * (f->z - f->tz);
             if (d2 > lbl_805DDD58) {
                 f->flag38 = 1;
             }
         Ltail_burst:
             if (lbl_805DDD64 * (f32)rand() < lbl_805DDD74) {
-                f->velx = lbl_805DDD68 * (lbl_805DDD70 * (lbl_805DDD64 * (f32)rand() - lbl_805DDD60)) + f->velx;
+                d2 = lbl_805DDD70 * (lbl_805DDD64 * (f32)rand() - lbl_805DDD60);
+                f->velx = lbl_805DDD68 * d2 + f->velx;
                 f->vely = lbl_805DDD78 * (lbl_805DDD64 * (f32)rand() - lbl_805DDD60) + f->vely;
-                f->velz = lbl_805DDD68 * (lbl_805DDD70 * (lbl_805DDD64 * (f32)rand() - lbl_805DDD60)) + f->velz;
+                d2 = lbl_805DDD70 * (lbl_805DDD64 * (f32)rand() - lbl_805DDD60);
+                f->velz = lbl_805DDD68 * d2 + f->velz;
             }
         Ltail_rot:
             if (fabs_float(f->velz) > lbl_805DDD7C && (phase & 3) == 0) {
