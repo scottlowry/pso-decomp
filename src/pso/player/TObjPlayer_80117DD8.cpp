@@ -10,6 +10,36 @@ extern "C" {
 f32 horizontal_distance_squared(void *, void *);
 void *get_player_by_client_id(s32 i);
 extern const f64 lbl_8043E650[];
+
+extern const f64 lbl_8043E648[];
+
+s32 TObjPlayer__sub_80117E50(u16 idx) {
+    s32 key;
+    Pl_80117F14 *me;
+    s32 mask;
+    s32 result;
+    u16 i;
+    Pl_80117F14 *other;
+
+    result = 0;
+    me = (Pl_80117F14 *)get_player_by_client_id(idx);
+    if (me != NULL) {
+        mask = (*(u32 *)((u8 *)me + 0x890) & 1) + 1;
+        key = ((TObjPlayer *)me)->get_floor();
+        for (i = 0; i != 4; i++) {
+            if (i != idx) {
+                other = (Pl_80117F14 *)get_player_by_client_id(i);
+                if (other != NULL && (*(u32 *)((u8 *)other + 0x890) & mask) != 0 &&
+                    ((TObjPlayer *)other)->get_floor() == key &&
+                    horizontal_distance_squared(me->pos, other->pos) < lbl_8043E648[0]) {
+                    result = 1;
+                    break;
+                }
+            }
+        }
+    }
+    return result;
+}
 s32 TObjPlayer::count_nearby_players_with_shield(u16 idx, u8 *item) {
     s32 key;
     Pl_80117F14 *me;
