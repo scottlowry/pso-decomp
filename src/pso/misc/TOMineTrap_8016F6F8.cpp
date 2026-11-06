@@ -66,25 +66,25 @@ struct VTrap_18_8016F908 : VBase_18_33b813 {
     virtual void m4(); virtual void m5(); virtual void m6(); virtual void m7();
     virtual void m8(); virtual void m9(); virtual void m10(); virtual void m11();
     virtual void m12(); virtual void m13(); virtual void m14(); virtual void m15();
-    virtual void m16(void *, f32);
-    virtual void m17(void *, s32 *, s32, s32, s32, s32, s32);
-    virtual void m18(); virtual void m19(); virtual void m20(); virtual void m21();
+    virtual void m16(); virtual void m17(); virtual void m18(); virtual void m19();
+    virtual void m20(void *, f32);
+    virtual void m21(void *, s32 *, s32, s32, s32, s32, s32);
     virtual void m22(); virtual void m23(); virtual void m24(); virtual void m25();
     virtual void m26(); virtual void m27(); virtual void m28(); virtual void m29();
     virtual void m30(); virtual void m31(); virtual void m32(); virtual void m33();
     virtual void m34(); virtual void m35(); virtual void m36(); virtual void m37();
     virtual void m38(); virtual void m39(); virtual void m40(); virtual void m41();
-    virtual void m42(s32);
-    virtual void m43(); virtual void m44(); virtual void m45(); virtual void m46();
+    virtual void m42(); virtual void m43(); virtual void m44(); virtual void m45();
+    virtual void m46(s32);
     virtual void m47(); virtual void m48(); virtual void m49(); virtual void m50();
     virtual void m51(); virtual void m52(); virtual void m53(); virtual void m54();
     virtual void m55(); virtual void m56(); virtual void m57(); virtual void m58();
     virtual void m59(); virtual void m60(); virtual void m61(); virtual void m62();
     virtual void m63(); virtual void m64(); virtual void m65(); virtual void m66();
-    virtual void m67();
-    virtual void m68(s32);
+    virtual void m67(); virtual void m68(); virtual void m69(); virtual void m70();
+    virtual void m71();
+    virtual void m72(s32);
 };
-
 struct Stack_80170AC8
 {
   f32 sp8;
@@ -297,14 +297,18 @@ void TOMineTrap::run_task() {
                         self->target = p;
                         kind = (s32)this->m_354;
                         if (kind == 2) {
-                            ((VTrap_18_8016F908 *)self->target)->m42(0);
-                            goto L_rec_1000;
+                            goto L_m46a;
                         }
+                        goto L_m21a;
+                    L_m46a:
+                        ((VTrap_18_8016F908 *)self->target)->m46(0);
+                        goto L_rec_1000;
+                    L_m21a:
                         {
                             s32 v358 = self->f358;
                             a1000[0] = kind;
                             a1000[1] = v358;
-                            ((VTrap_18_8016F908 *)self->target)->m17(this, a1000, 0, -1, -1, a1000[0], a1000[1]);
+                            ((VTrap_18_8016F908 *)self->target)->m21(this, a1000, 0, -1, -1, a1000[0], a1000[1]);
                         }
                     L_rec_1000:;
                         record_attack_source(self->target, get_trap_type__10TOMineTrapFv(this));
@@ -318,15 +322,19 @@ void TOMineTrap::run_task() {
                     self->target = p;
                     kind = (s32)this->m_354;
                     if (kind == 2) {
-                        ((VTrap_18_8016F908 *)self->target)->m42(0);
-                        ((VTrap_18_8016F908 *)self->target)->m68(0);
-                        goto L_rec_4000;
+                        goto L_m46b;
                     }
+                    goto L_m21b;
+                L_m46b:
+                    ((VTrap_18_8016F908 *)self->target)->m46(0);
+                    ((VTrap_18_8016F908 *)self->target)->m72(0);
+                    goto L_rec_4000;
+                L_m21b:
                     {
                         s32 v358 = self->f358;
                         a4000[0] = kind;
                         a4000[1] = v358;
-                        ((VTrap_18_8016F908 *)self->target)->m17(pl, a4000, 0, -1, -1, a4000[0], a4000[1]);
+                        ((VTrap_18_8016F908 *)self->target)->m21(pl, a4000, 0, -1, -1, a4000[0], a4000[1]);
                     }
                 L_rec_4000:;
                     record_attack_source(self->target, get_trap_type__10TOMineTrapFv(this));
@@ -337,7 +345,7 @@ void TOMineTrap::run_task() {
                 }
                 if (horizontal_distance_squared(self->pos, (u8 *)p + 0x38) < this->m_350 * this->m_350) {
                     self->target = p;
-                    ((VTrap_18_8016F908 *)self->target)->m16(this, TOMineTrap__data_805DB868);
+                    ((VTrap_18_8016F908 *)self->target)->m20(this, TOMineTrap__data_805DB868);
                 }
             }
         }
