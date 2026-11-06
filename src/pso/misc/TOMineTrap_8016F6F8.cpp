@@ -31,30 +31,6 @@ s32 record_attack_source(void *, u32);
 int get_trap_type__10TOMineTrapFv(void *);
 }
 
-struct VTrap_18_8016F908 {
-    char pad[0x18];
-    virtual void m0(); virtual void m1(); virtual void m2(); virtual void m3();
-    virtual void m4(); virtual void m5(); virtual void m6(); virtual void m7();
-    virtual void m8(); virtual void m9(); virtual void m10(); virtual void m11();
-    virtual void m12(); virtual void m13(); virtual void m14(); virtual void m15();
-    virtual void m16(void *, f32);
-    virtual void m17(void *, s32 *, s32, s32, s32, s32, s32);
-    virtual void m18(); virtual void m19(); virtual void m20(); virtual void m21();
-    virtual void m22(); virtual void m23(); virtual void m24(); virtual void m25();
-    virtual void m26(); virtual void m27(); virtual void m28(); virtual void m29();
-    virtual void m30(); virtual void m31(); virtual void m32(); virtual void m33();
-    virtual void m34(); virtual void m35(); virtual void m36(); virtual void m37();
-    virtual void m38(); virtual void m39(); virtual void m40(); virtual void m41();
-    virtual void m42(s32);
-    virtual void m43(); virtual void m44(); virtual void m45(); virtual void m46();
-    virtual void m47(); virtual void m48(); virtual void m49(); virtual void m50();
-    virtual void m51(); virtual void m52(); virtual void m53(); virtual void m54();
-    virtual void m55(); virtual void m56(); virtual void m57(); virtual void m58();
-    virtual void m59(); virtual void m60(); virtual void m61(); virtual void m62();
-    virtual void m63(); virtual void m64(); virtual void m65(); virtual void m66();
-    virtual void m67();
-    virtual void m68(s32);
-};
 
 struct VBase_18_33b813
 {
@@ -83,6 +59,30 @@ struct VObj_18_33b813 : VBase_18_33b813 {
     virtual void m18();
     virtual void m19();
     virtual s32 m20(s32, f32);
+};
+
+struct VTrap_18_8016F908 : VBase_18_33b813 {
+    virtual void m0(); virtual void m1(); virtual void m2(); virtual void m3();
+    virtual void m4(); virtual void m5(); virtual void m6(); virtual void m7();
+    virtual void m8(); virtual void m9(); virtual void m10(); virtual void m11();
+    virtual void m12(); virtual void m13(); virtual void m14(); virtual void m15();
+    virtual void m16(void *, f32);
+    virtual void m17(void *, s32 *, s32, s32, s32, s32, s32);
+    virtual void m18(); virtual void m19(); virtual void m20(); virtual void m21();
+    virtual void m22(); virtual void m23(); virtual void m24(); virtual void m25();
+    virtual void m26(); virtual void m27(); virtual void m28(); virtual void m29();
+    virtual void m30(); virtual void m31(); virtual void m32(); virtual void m33();
+    virtual void m34(); virtual void m35(); virtual void m36(); virtual void m37();
+    virtual void m38(); virtual void m39(); virtual void m40(); virtual void m41();
+    virtual void m42(s32);
+    virtual void m43(); virtual void m44(); virtual void m45(); virtual void m46();
+    virtual void m47(); virtual void m48(); virtual void m49(); virtual void m50();
+    virtual void m51(); virtual void m52(); virtual void m53(); virtual void m54();
+    virtual void m55(); virtual void m56(); virtual void m57(); virtual void m58();
+    virtual void m59(); virtual void m60(); virtual void m61(); virtual void m62();
+    virtual void m63(); virtual void m64(); virtual void m65(); virtual void m66();
+    virtual void m67();
+    virtual void m68(s32);
 };
 
 struct Stack_80170AC8
@@ -296,14 +296,17 @@ void TOMineTrap::run_task() {
                     if (((TObjChara *)p)->obj_isState2_324() == 0) {
                         self->target = p;
                         kind = (s32)this->m_354;
-                        if (kind != 2) {
+                        if (kind == 2) {
+                            ((VTrap_18_8016F908 *)self->target)->m42(0);
+                            goto L_rec_1000;
+                        }
+                        {
                             s32 v358 = self->f358;
                             a1000[0] = kind;
                             a1000[1] = v358;
                             ((VTrap_18_8016F908 *)self->target)->m17(this, a1000, 0, -1, -1, a1000[0], a1000[1]);
-                        } else {
-                            ((VTrap_18_8016F908 *)self->target)->m42(0);
                         }
+                    L_rec_1000:;
                         record_attack_source(self->target, get_trap_type__10TOMineTrapFv(this));
                     }
                     if (this->m_380 != 1) {
@@ -314,15 +317,18 @@ void TOMineTrap::run_task() {
                 if (horizontal_distance_squared(self->pos, (u8 *)p + 0x38) < this->m_350 * this->m_350) {
                     self->target = p;
                     kind = (s32)this->m_354;
-                    if (kind != 2) {
+                    if (kind == 2) {
+                        ((VTrap_18_8016F908 *)self->target)->m42(0);
+                        ((VTrap_18_8016F908 *)self->target)->m68(0);
+                        goto L_rec_4000;
+                    }
+                    {
                         s32 v358 = self->f358;
                         a4000[0] = kind;
                         a4000[1] = v358;
                         ((VTrap_18_8016F908 *)self->target)->m17(pl, a4000, 0, -1, -1, a4000[0], a4000[1]);
-                    } else {
-                        ((VTrap_18_8016F908 *)self->target)->m42(0);
-                        ((VTrap_18_8016F908 *)self->target)->m68(0);
                     }
+                L_rec_4000:;
                     record_attack_source(self->target, get_trap_type__10TOMineTrapFv(this));
                 }
             } else {
