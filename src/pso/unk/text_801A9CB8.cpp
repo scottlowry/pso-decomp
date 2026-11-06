@@ -101,6 +101,8 @@ void freeze_players_for_photon_blast__FsPUs(s16, u16 *);
 s16 get_room__8TObjBaseFv(void *);
 s32 get_entity_id(void *);
 
+#pragma push
+#pragma opt_common_subs off
 Obj_801A9E10 *TObjPlayer__sub_801A9E10(Obj_801A9E10 *self, s32 client_id,
                                        u8 *targets, s32 *arr, s32 flag,
                                        s32 val) {
@@ -117,13 +119,12 @@ Obj_801A9E10 *TObjPlayer__sub_801A9E10(Obj_801A9E10 *self, s32 client_id,
     self->f44 = 0;
     self->flag4c = flag;
     {
-        volatile s32 *d70 = (volatile s32 *)((u8 *)self + 0x70);
-        volatile s32 *d50 = (volatile s32 *)((u8 *)self + 0x50);
-        volatile u16 *d90 = (volatile u16 *)((u8 *)self + 0x90);
+        volatile s32 *w = (volatile s32 *)(void *)self;
+        volatile u16 *h = (volatile u16 *)(void *)self;
         for (i = 0; i < 4; i++) {
-            d70[i] = arr[i] + 1;
-            d50[i] = -1;
-            d90[i] = 0xFFFF;
+            w[i + 0x1C] = arr[i] + 1;
+            w[i + 0x14] = -1;
+            h[i + 0x48] = 0xFFFF;
         }
     }
     self->charge = 0;
@@ -163,16 +164,16 @@ Obj_801A9E10 *TObjPlayer__sub_801A9E10(Obj_801A9E10 *self, s32 client_id,
         TFogCtrl::select_fog_for_viewport(self->id, 0x3e, 0);
     }
     for (i = 0; i < 4; i++) {
-        if (self->ids60[i] < 4) {
-            if (photon_blast_sequence_table[self->ids60[i]].state != 2) {
+        s32 *p60 = (s32 *)((u8 *)self + (0x60 + i * 4));
+        if (*p60 < 4) {
+            if (photon_blast_sequence_table[*p60].state != 2) {
                 for (j = 0; j < 4; j++) {
-                    photon_blast_sequence_table[self->ids60[i]].kinds[j] =
-                        self->vals50[j];
-                    photon_blast_sequence_table[self->ids60[i]].participants[j] =
-                        self->ids60[j];
+                    s32 *pj = (s32 *)((u8 *)self + j * 4);
+                    photon_blast_sequence_table[*p60].kinds[j] = pj[0x14];
+                    photon_blast_sequence_table[*p60].participants[j] = pj[0x18];
                 }
             }
-            photon_blast_sequence_table[self->ids60[i]].state = 2;
+            photon_blast_sequence_table[*p60].state = 2;
         }
     }
     self->f24 = 0;
@@ -209,6 +210,8 @@ Obj_801A9E10 *TObjPlayer__sub_801A9E10(Obj_801A9E10 *self, s32 client_id,
     }
     return self;
 }
+
+#pragma pop
 }
 extern "C" {
 
