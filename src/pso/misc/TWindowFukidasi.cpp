@@ -1108,7 +1108,8 @@ void draw_name_plate__15TWindowFukidasiFv(void *self, View_80252764 *v, u32 colo
   }
   a24 = ((u32) alpha) << 24;
   argb = (a24 & 0xFF000000U) | (color & 0x00FFFFFFU);
-  pt[0] = w->x - lbl_805DCD60;
+  new_var2 = w->x;
+  pt[0] = new_var2 - lbl_805DCD60;
   pt[1] = w->y - TWindowFukidasi__data_805DCD1C;
   depth = TWindowFukidasi__data_805DCD4C / (lbl_805DCD64 + w->f38);
   begin_screen_draw(1);
