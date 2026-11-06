@@ -215,6 +215,7 @@ s32 TAdEndText__sub_8001A998(s32 tex, char *str, f32 x_in, f32 y_in, f32 zoom)
           break;
 
         case 0x29:
+          code = 0x1d;
           break;
 
         case 0x2f:
@@ -222,7 +223,6 @@ s32 TAdEndText__sub_8001A998(s32 tex, char *str, f32 x_in, f32 y_in, f32 zoom)
           break;
 
         case 0x2e:
-          code = 0x1d;
           break;
 
         case 0x3a:
