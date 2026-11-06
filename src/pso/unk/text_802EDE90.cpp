@@ -67,7 +67,7 @@ extern "C" void *TBoss7DeRolLeC__ct(void *self_, void *arg1, void *arg2)
   u8 *base = lbl_804E3BF0;
   u8 *self = (u8 *) self_;
   int new_var2;
-  u32 exch_slot;
+  long long exch_slot;
   s32 off;
   int new_var;
   s32 i;
@@ -272,7 +272,11 @@ extern "C" void *TBoss7DeRolLeC__ct(void *self_, void *arg1, void *arg2)
   if (((*((u32 *) (((u8 *) self_) + 0x628))) & 0x8000u) == 0)
   {
     *((s16 *) (((u8 *) self_) + 0x326)) = 1;
- do { (*((void (**)(u8 *, s16, s32)) ((*((u32 *) (((u8 *) self_) + 0x18))) + 0x15C)))((u8 *) self_, *((s16 *) (((u8 *) self_) + 0x326)), 4); } while (0);
+    do
+    {
+      (*((void (**)(u8 *, s16, s32)) ((*((u32 *) (((u8 *) self_) + 0x18))) + 0x15C)))((u8 *) self_, *((s16 *) (((u8 *) self_) + 0x326)), 4);
+    }
+    while (0);
   }
   p = __nw__7TObjectFUl(0x3C);
   if (p != 0)
