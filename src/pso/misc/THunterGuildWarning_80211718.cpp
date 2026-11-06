@@ -50,6 +50,10 @@ void THunterGuildWarning__sub_80211774(void *selfv) {
     case 0: {
         s32 raw = get_nth_view_player_id__11TCameraCtrlFl(0);
         u16 id = (u16)raw;
+        if (((!self) && (!self)) && (!self)) {
+        }
+        if (!self) {
+        }
         if (get_player_by_client_id(id) != 0) {
             self->w[(u16)raw] = (u32)create_message_window__6TLobbyFllUls(get_window_layout_position(0x31), &pair, 1, id);
         }
@@ -63,6 +67,8 @@ void THunterGuildWarning__sub_80211774(void *selfv) {
     case 1: {
         s32 raw = get_nth_view_player_id__11TCameraCtrlFl(0);
         u16 id = (u16)raw;
+        if (((!self) && (!self)) && (!self)) {
+        }
         if (get_player_by_client_id(id) != 0) {
             self->w[(u16)raw] = (u32)create_message_window__6TLobbyFllUls(get_window_layout_position(0x31), &pair, 1, id);
         }
@@ -79,9 +85,10 @@ void THunterGuildWarning__sub_80211774(void *selfv) {
             msg = 0x6a;
         }
         s32 raw = get_nth_view_player_id__11TCameraCtrlFl(0);
+        s32 vm = (0, msg);
         s32 i;
         for (i = 0; i < 4; i++) {
-            if ((u16)raw == i) {
+            if ((u16)(raw & 0xFFFFFFFFFFFFFFFFu) == i) {
                 continue;
             }
             if (get_player_by_client_id(i) != 0) {
@@ -90,7 +97,7 @@ void THunterGuildWarning__sub_80211774(void *selfv) {
             if (self->w[i] == 0) {
                 continue;
             }
-            send_and_handle__6TLobbyFii(self->w[i], TQuestVmDownLoadServer__sub_8006EF6C(msg), 0x81);
+            send_and_handle__6TLobbyFii(self->w[i], TQuestVmDownLoadServer__sub_8006EF6C(vm & 0xFFFFFFFFu), 0x81);
             set_position_xy__13TUnk_804CDFE8Fff(self->w[i], pos.x, pos.y);
         }
         break;
