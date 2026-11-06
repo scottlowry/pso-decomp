@@ -40,8 +40,8 @@ void *TChCrTagInformationStr::create(void *arg0, void *arg1) {
 void TChCrTagInformationStr::render() {
     u8 *arg0 = (u8 *)this;
     f32 fade;
-    f32 t2;
     f32 scale;
+    f32 t2;
     u32 color1;
     u32 color2;
     s32 i;
