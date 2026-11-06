@@ -141,8 +141,8 @@ void TLobby__sub_80209D34(TLobby *lobby) {
         heap = (u8 *)alloc_heap_slot__6TLobbyFll((s32)lobby, n * 0x14 + r29 + pad + 0x10);
         if (heap != 0) {
             desc[1] = 0x10;
-            desc[2] = lbl_805D60C0;
-            desc[0] = lbl_805D60C0 * 0x14 + 0x10;
+            desc[2] = n;
+            desc[0] = n * 0x14 + 0x10;
             move_data__6TLobbyFPCvUl(heap, desc, (void *)0x10);
             n = lbl_805D60C0;
             if (n > 0) {
