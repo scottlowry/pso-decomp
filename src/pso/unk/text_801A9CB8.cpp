@@ -13,12 +13,22 @@ struct Rec_801AA17C {
 struct Obj_801A9CB8 {
     u8 pad0[0x18];
     void *vt;
-    u8 pad1c[0x20];
+    u32 f1c;
+    u32 f20;
+    u32 f24;
+    s32 count;
+    u8 pad2c[0xc];
+    s32 player;
     u16 id;
-    u8 pad3e[0xe];
+    s32 charge;
+    s32 f44;
     s32 active;
-    u8 pad50[0x10];
+    s32 f4c;
+    s32 entries50[4];
     u32 ids[4];
+    s32 counts70[4];
+    s32 types80[4];
+    u16 holds90[4];
 };
 
 extern struct Rec_801AA17C photon_blast_sequence_table[];
@@ -35,7 +45,24 @@ void __dl__7TObjectFPv(void *);
 void TLobby__sub_8024AC20(s32);
 extern u8 __vt__13TUnk_804C349C[];
 extern s32 local_client_id;
+extern s32 tl_07;
 Obj_801A9CB8 *__dt__13TUnk_804C349CFv(Obj_801A9CB8 *self, s16 flag);
+void __ct__7TObjectFP7TObject(void *, void *);
+s32 get_photon_blast_charge__10TObjPlayerFv(void *);
+s32 TObjPlayer__sub_80313114(void *);
+s32 get_section_id__10TObjPlayerFv(void *);
+void apply_photon_blast_action_hold__Flll(s32, s32, s32);
+void send_neg30__6TLobbyFv(void);
+void TObjPlayer__sub_8024ABDC(s32);
+void VecCopy__FP3VecPC3Vec(void *, void *);
+s32 play_sound_effect(s32, s32, s32, s32);
+void clear_photon_blast_hits__Fv(void);
+void clear_deferred_photon_blast_hits__Fv(void);
+s32 get_entity_id(void *);
+void *find_photon_blast_by_section_id__10TObjPlayerFl(s32, s32);
+s32 get_entity_type__10TObjPlayerFv(void *);
+s32 get_room__8TObjBaseFv(void *);
+void freeze_players_for_photon_blast__FsPUs(s32, u16 *);
 
 }
 TUnk_804C349C::~TUnk_804C349C() {
@@ -66,6 +93,97 @@ TUnk_804C349C::~TUnk_804C349C() {
     }
 }
 extern "C" {
+
+Obj_801A9CB8 *TObjPlayer__sub_801A9E10(Obj_801A9CB8 *self, s32 client_id, u8 *records,
+                                       u32 *ids_src, s32 flag, s32 cost) {
+    s32 i;
+    s32 j;
+    s32 neg1;
+    s32 player;
+    s32 *obj;
+    u8 *rec;
+
+    __ct__7TObjectFP7TObject(self, (void *)tl_07);
+    self->vt = __vt__13TUnk_804C349C;
+    self->id = (u16)client_id;
+    self->active = cost;
+    self->f44 = 0;
+    self->f4c = flag;
+    for (i = 0; i < 4; i++) {
+        self->counts70[i] = ids_src[i] + 1;
+        self->entries50[i] = -1;
+        self->holds90[i] = 0xFFFF;
+    }
+    self->charge = 0;
+    if (get_player_by_client_id(client_id) != 0) {
+        self->charge = get_photon_blast_charge__10TObjPlayerFv(get_player_by_client_id(client_id));
+    }
+    for (i = 0; i < 4; i++) {
+        self->ids[i] = 0xFFFF;
+    }
+    self->count = 4;
+    rec = records;
+    for (i = 0; i < 4; i++) {
+        if ((s16)TObjPlayer__sub_80313114(rec) == -1) {
+            self->count = i;
+            break;
+        }
+        self->entries50[i] = (s16)TObjPlayer__sub_80313114(rec);
+        self->ids[i] = (u16)get_section_id__10TObjPlayerFv(rec);
+        rec += 24;
+    }
+    self->player = (s32)get_player_by_client_id(client_id);
+    apply_photon_blast_action_hold__Flll((s32)self, self->count * 150 + 100, client_id);
+    if (self->f4c != 0) {
+        send_neg30__6TLobbyFv();
+        TObjPlayer__sub_8024ABDC(local_client_id);
+        if (self->player != 0) {
+            VecCopy__FP3VecPC3Vec(self->pad2c, (void *)(self->player + 0x38));
+            play_sound_effect(0x40021927, (s32)self->pad2c, 0, 0);
+        }
+        clear_photon_blast_hits__Fv();
+    } else {
+        clear_deferred_photon_blast_hits__Fv();
+        TFogCtrl::select_fog_for_viewport(self->id, 0x3e, 0);
+    }
+    for (i = 0; i < 4; i++) {
+        if (self->ids[i] < 4) {
+            if (photon_blast_sequence_table[self->ids[i]].state != 2) {
+                for (j = 0; j < 4; j++) {
+                    photon_blast_sequence_table[self->ids[i]].kinds[j] = self->entries50[j];
+                    photon_blast_sequence_table[self->ids[i]].participants[j] = self->ids[j];
+                }
+            }
+            photon_blast_sequence_table[self->ids[i]].state = 2;
+        }
+    }
+    self->f1c = 0;
+    self->f20 = 0;
+    self->f24 = 0;
+    neg1 = -1;
+    for (i = 0; i < 4; i++) {
+        self->types80[i] = neg1;
+    }
+    if (self->player != 0 && get_player_by_client_id(local_client_id) != 0 &&
+        (obj = (s32 *)find_photon_blast_by_section_id__10TObjPlayerFl(
+                    get_entity_id((void *)self->player), neg1)) != 0) {
+        for (i = 0; i < 4; i++) {
+            if ((u16)get_entity_type__10TObjPlayerFv(obj) != 0xFFFF &&
+                (u16)get_entity_type__10TObjPlayerFv(obj) != (u16)self->id) {
+                self->types80[i] = (u16)get_entity_type__10TObjPlayerFv(obj);
+            }
+            obj++;
+        }
+    }
+    if (self->f4c != 0) {
+        player = (s32)get_player_by_client_id(self->id);
+        if (player != 0) {
+            freeze_players_for_photon_blast__FsPUs(get_room__8TObjBaseFv((void *)player),
+                                                   self->holds90);
+        }
+    }
+    return self;
+}
 
 s32 get_photon_blast_chain(struct Rec_801AA17C *output, s32 player) {
     s32 i;
