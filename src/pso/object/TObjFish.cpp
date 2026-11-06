@@ -173,6 +173,7 @@ inline void wrap_8029D5C8(s16 *p) {
 void render__8TObjFishFv(u8 *arg0) {
     Fish_8029D5C8 *f;
     s32 n;
+    s32 tick;
     struct { f32 x, y, z; } d;
 
     if (TMainTask::get_render_pass() != 1 &&
@@ -320,14 +321,15 @@ extern const f64 lbl_80465E00;
 void TObjFish::run_task() {
     Fish_8029D5C8 *f;
     s32 n;
+    s32 tick;
     s32 phase;
     s32 t;
     s32 rot;
     s32 kind;
     s32 ang_t;
-    f32 k1;
-    f32 k2;
     f32 k3;
+    f32 k2;
+    f32 k1;
     f32 d2;
     f32 dist;
     f32 px;
@@ -336,16 +338,16 @@ void TObjFish::run_task() {
     f32 inv;
     void *ent;
 
-    if ((s32)this->m_a0 != 0) {
+    if (this->m_a0 != 0) {
         f = (Fish_8029D5C8 *)(this->m_a0);
-        n = (s32)this->m_94;
-        k1 = lbl_805DDD4C;
-        k2 = lbl_805DDD50;
         k3 = lbl_805DDD54;
-        while (n != 0) {
+        k2 = lbl_805DDD50;
+        k1 = lbl_805DDD4C;
+        for (n = (s32)this->m_94; n != 0; n--) {
+            tick = (s32)this->m_98;
             t = (s16)(f->timer - 1);
             f->timer = (s16)t;
-            phase = (s32)this->m_98 + n;
+            phase = tick + n;
             if (t <= 0) {
                 f->timer = 0;
             }
@@ -368,14 +370,14 @@ void TObjFish::run_task() {
             f->velx = f->velx * k3;
             f->velz = f->velz * k3;
             if (f->flag38 == 1) {
-                d2 = (f->ty - f->y) * (f->ty - f->y) + (f->tx - f->x) * (f->tx - f->x) +
-                    (f->tz - f->z) * (f->tz - f->z);
+                d2 = (f->ty - f->y) * (f->ty - f->y);
+                d2 = (f->tx - f->x) * (f->tx - f->x) + d2;
+                d2 = (f->tz - f->z) * (f->tz - f->z) + d2;
                 if (d2 < lbl_805DDD58) {
                     f->flag38 = 0;
                 } else {
                     if ((phase & 7) == 0) {
                         f++;
-                        n--;
                         continue;
                     }
                     phase >>= 3;
@@ -395,22 +397,29 @@ void TObjFish::run_task() {
                 px = *(f32 *)((u8 *)ent + 0x38) - *(f32 *)((s8 *)this + 0x38);
                 py = py - f->y;
                 px = px - f->x;
+                d2 = py * py;
                 pz = *(f32 *)((u8 *)ent + 0x40) - *(f32 *)((s8 *)this + 0x40);
                 pz = pz - f->z;
-                dist = py * py + px * px + pz * pz;
-                if (dist > lbl_805DDD5C) {
-                    dist = lbl_805DDD5C;
+                d2 = px * px + d2;
+                d2 = pz * pz + d2;
+                if (dist > d2) {
+                    dist = d2;
                 }
             }
             if (dist < lbl_805DDD5C) {
                 f->timer = lbl_805DDD60 * (TObjFish__data_805DDD44 * (lbl_805DDD64 * (f32)rand()));
                 inv = lbl_805DDD68 / newton_sqrtf(dist);
-                f->velx = -(px * inv);
-                f->vely = -(py * inv);
-                f->velz = -(pz * inv);
+                px = px * inv;
+                py = py * inv;
+                pz = pz * inv;
+                f->velx = -px;
+                f->vely = -py;
+                f->velz = -pz;
                 goto Ltail_burst;
             }
-            d2 = f->velx * f->velx + f->vely * f->vely + f->velz * f->velz;
+            d2 = f->velx * f->velx;
+            d2 = f->vely * f->vely + d2;
+            d2 = f->velz * f->velz + d2;
             if (d2 <= lbl_805DDD6C) {
                 f->timer = TObjFish__data_805DDD44 * (lbl_805DDD64 * (f32)rand());
                 f->velx = lbl_805DDD68 * (lbl_805DDD70 * (lbl_805DDD64 * (f32)rand() - lbl_805DDD60)) + f->velx;
@@ -418,8 +427,9 @@ void TObjFish::run_task() {
                 f->velz = lbl_805DDD68 * (lbl_805DDD70 * (lbl_805DDD64 * (f32)rand() - lbl_805DDD60)) + f->velz;
                 goto Ltail_burst;
             }
-            d2 = (f->y - f->ty) * (f->y - f->ty) + (f->x - f->tx) * (f->x - f->tx) +
-                (f->z - f->tz) * (f->z - f->tz);
+            d2 = (f->y - f->ty) * (f->y - f->ty);
+            d2 = (f->x - f->tx) * (f->x - f->tx) + d2;
+            d2 = (f->z - f->tz) * (f->z - f->tz) + d2;
             if (d2 > lbl_805DDD58) {
                 f->flag38 = 1;
             }
@@ -430,36 +440,30 @@ void TObjFish::run_task() {
                 f->velz = lbl_805DDD68 * (lbl_805DDD70 * (lbl_805DDD64 * (f32)rand() - lbl_805DDD60)) + f->velz;
             }
         Ltail_rot:
-            if (fabs_float(f->velz) > lbl_805DDD7C && (phase & 1) == 0) {
+            if (fabs_float(f->velz) > lbl_805DDD7C && (phase & 3) == 0) {
                 f->pitch = (s16)(lbl_80465E00 * atan2_float(f->velx, f->velz));
             }
             rot = f->rot;
             f->rot = (s16)(rot + (s32)((f32)(s16)(f->pitch - rot) * lbl_805DDD80));
-            if ((phase & 1) == 0) {
+            if ((phase & 3) == 0) {
                 ang_t = (s32)(lbl_80465E00 * atan2_float(f->tx - f->x, f->tz - f->z));
                 f->ang = f->ang +
                     (s32)((f32)(s16)(f->ang - (s16)(ang_t - *(s32 *)((s8 *)this + 0x60))) * lbl_805DDD84);
             }
             kind = f->kind;
-            if (kind < 0) {
+            if (kind < 0 || kind > 2) {
                 f->frame += lbl_80465D74[TObjFish__area_event_stage * 3];
                 if (f->frame >= lbl_80465DB0[TObjFish__area_event_stage * 3]) {
                     f->frame -= lbl_80465DB0[TObjFish__area_event_stage * 3];
                 }
-            } else if (kind <= 2) {
+            } else {
                 f->frame += lbl_80465D74[TObjFish__area_event_stage * 3 + kind];
                 if (f->frame >= lbl_80465DB0[TObjFish__area_event_stage * 3 + kind]) {
                     f->frame -= lbl_80465DB0[TObjFish__area_event_stage * 3 + kind];
                 }
-            } else {
-                f->frame += lbl_80465D74[TObjFish__area_event_stage * 3];
-                if (f->frame >= lbl_80465DB0[TObjFish__area_event_stage * 3]) {
-                    f->frame -= lbl_80465DB0[TObjFish__area_event_stage * 3];
-                }
             }
             f->seen = 0;
             f++;
-            n--;
         }
         this->m_98 = (s32)this->m_98 + 1;
     }
