@@ -53,6 +53,145 @@ void TWindowDD_WS_Word::render() {
     draw_visible_window_entries(self, &self->entries, entry);
 }
 
+struct E_80341674 { f32 v[12]; };
+
+extern "C" {
+void reset_entries__9TWindowDDFf(void *, s32);
+void copy_point_table__9TWindowDDFl(void *, s32);
+f32 TWindowDD__sub_80348AD4(f32, f32);
+void TWindowDD__sub_80348A2C(void *, void *);
+f32 fn_803D6308(f32, f32, f32);
+extern u32 lbl_805D63F0;
+extern const f32 lbl_805DFCA4;
+extern const f32 lbl_805DFCAC;
+extern const f32 TWindowDD__data_805DFB18;
+extern const f32 TWindowDD__data_805DFB20;
+extern const float TWindowDD__data_805DFCA8;
+extern const f32 lbl_805DFB40;
+extern const f32 lbl_805DFB44;
+extern const double TWindowDD__data_80478610;
+}
+
+void TWindowDD__sub_80341674(TWindowDD_WS_Word *selfv, u8 *entry) {
+    u8 *self = (u8 *)selfv;
+    E_80341674 q[4];
+    f32 *pd;
+    s32 p0;
+    s32 p1;
+    s32 p2;
+    s32 count;
+    f32 depth;
+    f32 width;
+    f32 neg;
+    f32 lo;
+    f32 hi;
+    f32 cornerA;
+    f32 cornerB;
+    f32 norm;
+    f32 t;
+    f32 d24;
+    f32 z;
+    s32 n;
+    s32 i;
+    s32 k;
+    p0 = *(s32 *)lbl_805D63F0;
+    p1 = *(s32 *)(p0 + 0x20);
+    p2 = *(s32 *)(p1 + 0xC);
+    count = *(s32 *)p2;
+    if (*(s32 *)(entry + 0x30) < 0) {
+        return;
+    }
+    depth = *(f32 *)(self + 0x44) + lbl_805DFCA4 * *(f32 *)(self + 0x4c);
+    TWindowDD__sub_80348AD4(*(f32 *)(self + 0x54), TWindowDD__data_805DFCA8);
+    reset_entries__9TWindowDDFf(q, -1);
+    copy_point_table__9TWindowDDFl(q, *(s32 *)(self + 0x64));
+    TWindowDD__sub_80348A2C(entry, q);
+    width = *(f32 *)(entry + 0x2c);
+    neg = -(lbl_805DFCA4 * *(f32 *)(self + 0x4c));
+    cornerA = neg * width + depth;
+    cornerB = (neg + TWindowDD__data_805DFB20) * width + depth;
+    n = *(s32 *)(self + 0x78);
+    t = ((s32)*(f32 *)(self + 0x64) == 0) ? lbl_805DFB40 : lbl_805DFB44;
+    lo = t * TWindowDD__data_805DFB18;
+    hi = (t + TWindowDD__data_805DFB20) * TWindowDD__data_805DFB18;
+    t = fn_803D6308(-(*(f32 *)(self + 0x88)) / TWindowDD__data_805DFB20, TWindowDD__data_805DFB18, lbl_805DFCA4);
+    norm = TWindowDD__data_805DFB20 * t;
+    if (TWindowDD__data_805DFCA8 != norm) {
+        if (norm >= TWindowDD__data_805DFCA8) {
+            t = norm;
+            norm = norm - TWindowDD__data_805DFB20;
+        } else {
+            t = norm + TWindowDD__data_805DFB20;
+        }
+        n = n - 1;
+        d24 = t * width + cornerA;
+        z = hi - t * TWindowDD__data_805DFB18;
+        for (k = 0; k < 4; k++) {
+            pd = q[k].v;
+            pd[1] = cornerA;
+            pd[4] = z;
+            pd[7] = d24;
+            pd[10] = hi;
+        }
+        ((TWindowDD *)q)->draw_transformed_primitive((void *)8, (void *)count, (void *)1);
+        cornerA = d24;
+    }
+    if (n > 0) {
+        d24 = TWindowDD__data_805DFB20 * width;
+        for (k = 0; k < 4; k++) {
+            pd = q[k].v;
+            pd[4] = lo;
+            pd[10] = hi;
+        }
+        i = 0;
+        while (i < n) {
+            cornerB = cornerA + d24;
+            for (k = 0; k < 4; k++) {
+                pd = q[k].v;
+                pd[1] = cornerA;
+                pd[7] = cornerB;
+            }
+            ((TWindowDD *)q)->draw_transformed_primitive((void *)8, (void *)count, (void *)1);
+            cornerA = cornerB;
+            i = i + 1;
+        }
+    }
+    if (TWindowDD__data_805DFCA8 != norm) {
+        t = lbl_805DFCA4 * *(f32 *)(self + 0x4c);
+        z = lo - norm * TWindowDD__data_805DFB18;
+        t = t * width + depth;
+        for (k = 0; k < 4; k++) {
+            pd = q[k].v;
+            pd[1] = cornerB;
+            pd[4] = lo;
+            pd[7] = t;
+            pd[10] = z;
+        }
+        ((TWindowDD *)q)->draw_transformed_primitive((void *)8, (void *)count, (void *)1);
+    }
+    if (selfv->m_74 > 0) {
+        if (selfv->sub_80342254() != 0) {
+            TWindowDD__sub_80348AD4(*(f32 *)(self + 0x54), lbl_805DFCAC);
+            reset_entries__9TWindowDDFf(q, -1);
+            copy_point_table__9TWindowDDFl(q, 1);
+            TWindowDD__sub_80348A2C(entry, q);
+            t = (f32) selfv->m_6c;
+            z = t * TWindowDD__data_805DFB20 - lbl_805DFCA4 * *(f32 *)(self + 0x4c);
+            t = z + TWindowDD__data_805DFB20;
+            z = z * width + depth;
+            t = t * width + depth;
+            pd = (f32 *)q;
+            for (k = 0; k < 4; k++) {
+                pd[1] = z;
+                pd += 6;
+                pd[1] = t;
+                pd += 6;
+            }
+            ((TWindowDD *)q)->draw_transformed_primitive((void *)8, (void *)count, (void *)1);
+        }
+    }
+}
+
 #define sub_80341AC0__17TWindowDD_WS_WordFv ((s32 (*)(void))sub_80341AC0__17TWindowDD_WS_WordFv)
 
 s32 TWindowDD_WS_Word::can_scroll(s32 arg1) {
