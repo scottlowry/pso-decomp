@@ -82,18 +82,18 @@ void TWindowDD__sub_80341674(TWindowDD_WS_Word *selfv, u8 *entry) {
     s32 p1;
     s32 p2;
     s32 count;
+    f32 cornerB;
     f32 depth;
     f32 width;
+    f32 lo;
+    f32 cornerA;
+    f32 hi;
+    f32 norm;
+    f32 d24;
     f32 neg;
     f32 f2v;
-    f32 lo;
-    f32 hi;
-    f32 cornerA;
-    f32 cornerB;
-    f32 c;
-    f32 norm;
+    f32 m88;
     f32 t;
-    f32 d24;
     f32 z;
     s32 n;
     s32 i;
@@ -118,13 +118,15 @@ void TWindowDD__sub_80341674(TWindowDD_WS_Word *selfv, u8 *entry) {
     cornerA = neg * width + depth;
     cornerB = f2v * width + depth;
     if (*(s32 *)(self + 0x64) == 0) {
-        c = lbl_805DFB40;
+        lo = lbl_805DFB40;
     } else {
-        c = lbl_805DFB44;
+        lo = lbl_805DFB44;
     }
-    lo = c * TWindowDD__data_805DFB18;
-    hi = (c + TWindowDD__data_805DFB20) * TWindowDD__data_805DFB18;
-    t = fn_803D6308(-(*(f32 *)(self + 0x88)) / TWindowDD__data_805DFB20, TWindowDD__data_805DFB18, lbl_805DFCA4);
+    hi = lo + TWindowDD__data_805DFB20;
+    m88 = -(*(f32 *)(self + 0x88));
+    lo = lo * TWindowDD__data_805DFB18;
+    hi = hi * TWindowDD__data_805DFB18;
+    t = fn_803D6308(m88 / TWindowDD__data_805DFB20, TWindowDD__data_805DFB18, lbl_805DFCA4);
     norm = TWindowDD__data_805DFB20 * t;
     if (TWindowDD__data_805DFCA8 != norm) {
         n = *(s32 *)(self + 0x78) - 1;
