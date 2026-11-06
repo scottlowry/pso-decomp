@@ -156,10 +156,10 @@ s32 TAdEndText__sub_8001A998(s32 tex, char *str, f32 x_in, f32 y_in, f32 zoom)
   f32 yl;
   f32 zv;
   f32 adv;
-  s32 page;
   s32 code;
   s32 row;
   s32 px;
+  s32 page;
   s32 py;
   s32 c;
   volatile unsigned char new_var;
@@ -284,10 +284,10 @@ s32 TAdEndText__sub_8001A998(s32 tex, char *str, f32 x_in, f32 y_in, f32 zoom)
       row = ((u8) code) / 0x24;
       new_var = row;
       new_var2 = y * ((f64) ((code - (0x24 * row)) - (6 * ((code - (0x24 * new_var)) / 6))));
-      adv = lbl_804345E0[(new_var * 0x24) + (code - (row * 0x24))];
+      adv = lbl_804345E0[(0x24 * new_var) + (code - (row * 0x24))];
       x = x + adv;
-      q[2] = q[0] + adv;
       py = (u8) ((s32) (y * ((f64) ((code - (new_var * 0x24)) / 6))));
+      q[2] = q[0] + adv;
       px = (u8) ((s32) new_var2);
       q[5] = ((f64) py) * lbl_805D7E00;
       q[6] = (((f64) px) + adv) * lbl_805D7E00;
