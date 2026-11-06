@@ -254,12 +254,12 @@ void TTecGiFoie::calc_params() {
 void run_task__13TUnk_804CC800Fv(Task_80230EA0 *self) {
     s32 mode;
     s32 rot_z;
-    long rot_x;
+    s32 rot[2];
     Vec_80230EA0 off;
     u32 dir[3];
     s32 idx;
-    s32 i;
     s32 elem;
+    s32 i;
     switch (self->band) {
     case 0:
         mode = 0;
@@ -314,17 +314,18 @@ void run_task__13TUnk_804CC800Fv(Task_80230EA0 *self) {
         rotate_matrix_y(0, self->x48);
         rotate_vector_by_matrix(0, dir, dir);
         pop_matrix();
-        rot_x = 0;
+        rot[0] = 0;
+        rot[1] = 0;
         rot_z = 0;
-        direction_to_rotation_xz__FPUcPlPl((const u8 *)dir, &rot_x, (long *)&rot_z);
+        direction_to_rotation_xz__FPUcPlPl((const u8 *)dir, (long *)rot, (long *)&rot_z);
         set_position__13TParticleCtrlFPv((void *)*(u32 *)self->emitters, &self->pos2);
-        set_direction__13TParticleCtrlFPv((void *)*(u32 *)self->emitters, &rot_x);
+        set_direction__13TParticleCtrlFPv((void *)*(u32 *)self->emitters, rot);
     } else {
         rot_z = 0x4000;
-        rot_x = (long)(lbl_8044D360 * atan2_float(self->pos2.x - self->pos.x, self->pos2.z - self->pos.z)) - 0x8000;
+        *(long *)rot = (long)(lbl_8044D360 * atan2_float(self->pos2.x - self->pos.x, self->pos2.z - self->pos.z)) - 0x8000;
         for (i = 0, elem = 0; i < TTecGiFoie__emitter_profile_table[self->band].count; i++, elem += 4) {
             set_position__13TParticleCtrlFPv((void *)*(u32 *)(self->emitters + elem), &self->pos2);
-            set_direction__13TParticleCtrlFPv((void *)*(u32 *)(self->emitters + elem), &rot_x);
+            set_direction__13TParticleCtrlFPv((void *)*(u32 *)(self->emitters + elem), rot);
         }
     }
 }
