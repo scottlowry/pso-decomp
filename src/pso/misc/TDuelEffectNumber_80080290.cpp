@@ -36,14 +36,14 @@ void TDuelEffectNumber__sub_800802F8(void *arg0, void *arg1, f32 arg2) {
     get_camera_no__11TCameraCtrlFv();
     get_scale__15TWindowCtrlMainFv();
     f32 ratio = lbl_805D9308 / arg2;
-    *(f32 *)&q[0] = *(f32 *)((s8 *)arg1 + 0x0) * arg2 + *(f32 *)((s8 *)arg0 + 0x1C);
-    *(f32 *)&q[1] = *(f32 *)((s8 *)arg1 + 0x4) * arg2 + *(f32 *)((s8 *)arg0 + 0x20);
-    *(f32 *)&q[2] = (*(f32 *)((s8 *)arg1 + 0x0) + *(f32 *)((s8 *)arg1 + 0x8)) * arg2 + *(f32 *)((s8 *)arg0 + 0x1C);
-    *(f32 *)&q[3] = (*(f32 *)((s8 *)arg1 + 0x4) + *(f32 *)((s8 *)arg1 + 0xC)) * arg2 + *(f32 *)((s8 *)arg0 + 0x20);
     f32 t4 = *(f32 *)((s8 *)arg1 + 0x10);
     f32 t5 = *(f32 *)((s8 *)arg1 + 0x14);
     f32 t6 = t4 + *(f32 *)((s8 *)arg1 + 0x8);
     f32 t7 = t5 + *(f32 *)((s8 *)arg1 + 0xC);
+    *(f32 *)&q[0] = *(f32 *)((s8 *)arg1 + 0x0) * arg2 + *(f32 *)((s8 *)arg0 + 0x1C);
+    *(f32 *)&q[1] = *(f32 *)((s8 *)arg1 + 0x4) * arg2 + *(f32 *)((s8 *)arg0 + 0x20);
+    *(f32 *)&q[2] = (*(f32 *)((s8 *)arg1 + 0x0) + *(f32 *)((s8 *)arg1 + 0x8)) * arg2 + *(f32 *)((s8 *)arg0 + 0x1C);
+    *(f32 *)&q[3] = (*(f32 *)((s8 *)arg1 + 0x4) + *(f32 *)((s8 *)arg1 + 0xC)) * arg2 + *(f32 *)((s8 *)arg0 + 0x20);
     *(f32 *)&q[4] = t4;
     *(f32 *)&q[5] = t5;
     *(f32 *)&q[6] = t6;
