@@ -1088,6 +1088,7 @@ void draw_name_plate__15TWindowFukidasiFv(void *self, View_80252764 *v, u32 colo
   s32 alpha;
   u32 a24;
   u32 argb;
+  f32 new_var3;
   if (b->name == 0)
   {
     return;
@@ -1144,9 +1145,9 @@ void draw_name_plate__15TWindowFukidasiFv(void *self, View_80252764 *v, u32 colo
   draw_textured_quad_at_depth(rect, depth);
   if (width > TWindowFukidasi__data_805DCCFC)
   {
-    rect[0] = lbl_805DCD68 + pt[0];
+    rect[0] = lbl_805DCD68 + (new_var3 = pt[0]);
     rect[1] = *new_var;
-    rect[2] = lbl_805DCD78 + ((pt[0] + width) - lbl_805DCD68);
+    rect[2] = lbl_805DCD78 + ((new_var3 + width) - lbl_805DCD68);
     rect[3] = lbl_805DCD10 + pt[1];
     rect[4] = lbl_805DCD74;
     rect[5] = lbl_805DCD70;
