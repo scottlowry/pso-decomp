@@ -1,5 +1,7 @@
 #include "types.h"
 #include "pso/misc/TWindowSubSymbolChatPartsSet.h"
+#include "pso/system/ModelDrawContext.h"
+#include "pso/TMainTask.h"
 #include "pso/TAdPlyChrSelPlateGC.h"
 struct O_802C4D5C { u8 pad[0x2a8]; f32 v[1]; };
 
@@ -48,6 +50,22 @@ void copy_vec2__28TWindowSubSymbolChatPartsSetFPv(void *, void *);
 extern const f32 lbl_805DE550;
 extern const f32 lbl_805DE554;
 extern const f32 lbl_805DE558;
+void TAdEnterSerialAccessGC__sub_802C4B64(void *, void *, Q_802C4E38, int);
+void TAdPlyChrSelPlateGC::render() {
+    S_802C4E38 *self = (S_802C4E38 *)this;
+    u32 i;
+    if (TMainTask::get_render_pass() != 1) {
+        set_color_blending_mode(0, 8);
+        set_color_blending_mode(1, 10);
+        for (i = 0; i < self->f224; i++) {
+            if (self->a[i] != 0) {
+                TAdEnterSerialAccessGC__sub_802C4B64(this, &self->v1C[i], self->c[i], i);
+            }
+        }
+        set_color_blending_mode(0, 8);
+        set_color_blending_mode(1, 6);
+    }
+}
 bool TAdPlyChrSelPlateGC::is_slot_value_ready(s32 i) {
     O_802C4D5C *self = (O_802C4D5C *)this;
     return (self->v[i] >= 127.5f) ? true : false;
