@@ -12,7 +12,7 @@ struct Entry_800803D4 { u8 data[0x18]; };
 extern "C" {
 void TDuelEffectNumber__sub_800802F8(void *, void *, f32);
 void get_camera_no__11TCameraCtrlFv();
-void get_scale__15TWindowCtrlMainFv();
+f32 get_scale__15TWindowCtrlMainFv();
 void draw_textured_quad_at_depth(f32 *, f32);
 extern const f32 lbl_805D9308;
 extern const f32 lbl_805D930C;
@@ -34,8 +34,8 @@ typedef char RecoveredGlobal_80080438_lbl_80438DD4_size[sizeof(RecoveredGlobal_8
 void TDuelEffectNumber__sub_800802F8(void *arg0, void *arg1, f32 arg2) {
     f32 q[8];
     get_camera_no__11TCameraCtrlFv();
-    get_scale__15TWindowCtrlMainFv();
-    f32 ratio = lbl_805D9308 / arg2;
+    f32 scale = get_scale__15TWindowCtrlMainFv();
+    f32 ratio = lbl_805D9308 / scale;
     f32 t4 = *(f32 *)((s8 *)arg1 + 0x10);
     f32 t5 = *(f32 *)((s8 *)arg1 + 0x14);
     f32 t6 = t4 + *(f32 *)((s8 *)arg1 + 0x8);
