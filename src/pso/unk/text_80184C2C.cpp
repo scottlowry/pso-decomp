@@ -130,10 +130,10 @@ extern "C" void TLobby__sub_80184DF4(void) {
         }
         city_season_easter_egg_model_table[lbl_805D5B30] = (s32)res;
         for (i = 0; i < res->model_count; i++) {
-            me = &res->models[i];
-            if (me->fc == 0) {
+            if (res->models[i].fc == 0) {
                 continue;
             }
+            me = &res->models[i];
             city_season_xmas_model_table[lbl_805D5B30] = me->fc;
             break;
         }
@@ -192,14 +192,15 @@ extern "C" void TLobby__sub_80184DF4(void) {
         n = tbl->alloc_tables(lbl_805D5B3C, 2);
     }
     lbl_805D5B48 = n;
+    i = 0;
     flags = (s16 *)(*(s32 *)(*(s32 *)(lbl_805D5B3C + 4) + 4) + 0xc);
     *flags &= (s16)~0x2000;
     lbl_805D5B38 = res;
-    for (i = 0; i < res->model_count; i++) {
-        me = &res->models[i];
-        if (me->fc == 0) {
+    for (; i < res->model_count; i++) {
+        if (res->models[i].fc == 0) {
             continue;
         }
+        me = &res->models[i];
         lbl_805D5B44 = me->fc;
         break;
     }
