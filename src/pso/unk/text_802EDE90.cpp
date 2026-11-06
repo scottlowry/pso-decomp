@@ -167,7 +167,7 @@ extern "C" void *TBoss7DeRolLeC__ct(void *self_, void *arg1, void *arg2)
       new_var2 = (s16) joint_a;
       joint_b = joint_b + 1;
       joint_a = joint_a + 1;
-      p = (u32) TBoss7Joint__ct((u8 *) p, self, (s32) joint_b, new_var2, (s32) (self + ((i * 0xC) + 0x530)), i);
+      p = (u32) TBoss7Joint__ct((u8 *) p, self, (s32) joint_b, new_var2, (s32) (self + ((((((((((i & 0xFF) & 0xFF) & 0xFF) & 0xFF) & 0xFF) & 0xFF) & 0xFF) & 0xFF) * 0xC) + 0x530)), i);
     }
     *((u32 *) ((self + 0x5F8) + (i * 4))) = p;
   }
@@ -272,7 +272,7 @@ extern "C" void *TBoss7DeRolLeC__ct(void *self_, void *arg1, void *arg2)
   if (((*((u32 *) (((u8 *) self_) + 0x628))) & 0x8000u) == 0)
   {
     *((s16 *) (((u8 *) self_) + 0x326)) = 1;
-    (*((void (**)(u8 *, s16, s32)) ((*((u32 *) (((u8 *) self_) + 0x18))) + 0x15C)))((u8 *) self_, *((s16 *) (((u8 *) self_) + 0x326)), 4);
+ do { (*((void (**)(u8 *, s16, s32)) ((*((u32 *) (((u8 *) self_) + 0x18))) + 0x15C)))((u8 *) self_, *((s16 *) (((u8 *) self_) + 0x326)), 4); } while (0);
   }
   p = __nw__7TObjectFUl(0x3C);
   if (p != 0)
