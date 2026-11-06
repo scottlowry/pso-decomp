@@ -153,16 +153,16 @@ s32 TAdEndText__sub_8001A998(s32 tex, char *str, f32 x_in, f32 y_in, f32 zoom)
   double new_var2;
   f32 y;
   f32 new_var3;
-  f32 x;
   f32 yl;
   f32 zv;
-  f32 adv;
   s32 code;
   s32 row;
+  f32 adv;
   s32 px;
   s32 page;
   s32 py;
   s32 c;
+  f32 x;
   volatile unsigned char new_var;
   u8 *p;
   x = x_in;
@@ -274,10 +274,15 @@ s32 TAdEndText__sub_8001A998(s32 tex, char *str, f32 x_in, f32 y_in, f32 zoom)
       }
 
     }
+    if (((!lbl_805D7E00) && (!lbl_805D7E00)) && (!lbl_805D7E00))
+    {
+    }
     if (((u8) code) == 0x52)
     {
       x = x + lbl_805D7DF4;
       q[2] = lbl_805D7DF4 + q[0];
+      {
+      }
       q[3] = TAdEndText__data_805D7DF8 + q[1];
       q[4] = lbl_805D7DFC;
       q[5] = lbl_805D7DFC;
