@@ -330,11 +330,11 @@ void TObjFish::run_task() {
     f32 k3;
     f32 k2;
     f32 k1;
-    f32 d2;
-    f32 dist;
     f32 px;
     f32 py;
     f32 pz;
+    f32 dist;
+    f32 d2;
     f32 inv;
     void *ent;
 
