@@ -1,5 +1,6 @@
 #include "types.h"
 #include "pso/TDuelEffectNumber.h"
+#pragma fp_contract on
 
 struct RecoveredGlobal_80080438_lbl_80438DD4 {
     s32 value;
@@ -10,6 +11,11 @@ struct Entry_800803D4 { u8 data[0x18]; };
 
 extern "C" {
 void TDuelEffectNumber__sub_800802F8(void *, void *, f32);
+void get_camera_no__11TCameraCtrlFv();
+void get_scale__15TWindowCtrlMainFv();
+void draw_textured_quad_at_depth(f32 *, f32);
+extern const f32 lbl_805D9308;
+extern const f32 lbl_805D930C;
 extern RecoveredGlobal_80080438_lbl_80438DD4 duel_number_default_layout;
 extern Entry_800803D4 duel_number_pair_layout[];
 }
@@ -24,6 +30,30 @@ TDuelEffectNumber::TDuelEffectNumber(TObject *object, void *arg2, void *arg3) : 
 }
 
 typedef char RecoveredGlobal_80080438_lbl_80438DD4_size[sizeof(RecoveredGlobal_80080438_lbl_80438DD4) == 0x18 ? 1 : -1];
+
+void TDuelEffectNumber__sub_800802F8(void *arg0, void *arg1, f32 arg2) {
+    f32 q[8];
+    get_camera_no__11TCameraCtrlFv();
+    get_scale__15TWindowCtrlMainFv();
+    f32 ratio = lbl_805D9308 / arg2;
+    *(f32 *)&q[0] = *(f32 *)((s8 *)arg1 + 0x0) * arg2 + *(f32 *)((s8 *)arg0 + 0x1C);
+    *(f32 *)&q[1] = *(f32 *)((s8 *)arg1 + 0x4) * arg2 + *(f32 *)((s8 *)arg0 + 0x20);
+    *(f32 *)&q[2] = (*(f32 *)((s8 *)arg1 + 0x0) + *(f32 *)((s8 *)arg1 + 0x8)) * arg2 + *(f32 *)((s8 *)arg0 + 0x1C);
+    *(f32 *)&q[3] = (*(f32 *)((s8 *)arg1 + 0x4) + *(f32 *)((s8 *)arg1 + 0xC)) * arg2 + *(f32 *)((s8 *)arg0 + 0x20);
+    f32 t4 = *(f32 *)((s8 *)arg1 + 0x10);
+    f32 t5 = *(f32 *)((s8 *)arg1 + 0x14);
+    f32 t6 = t4 + *(f32 *)((s8 *)arg1 + 0x8);
+    f32 t7 = t5 + *(f32 *)((s8 *)arg1 + 0xC);
+    *(f32 *)&q[4] = t4;
+    *(f32 *)&q[5] = t5;
+    *(f32 *)&q[6] = t6;
+    *(f32 *)&q[7] = t7;
+    *(f32 *)&q[4] = t4 * lbl_805D930C;
+    *(f32 *)&q[5] = t5 * lbl_805D930C;
+    *(f32 *)&q[6] = t6 * lbl_805D930C;
+    *(f32 *)&q[7] = t7 * lbl_805D930C;
+    draw_textured_quad_at_depth(q, ratio);
+}
 
 void TDuelEffectNumber::render_pair(f32 f) {
     s32 i;
