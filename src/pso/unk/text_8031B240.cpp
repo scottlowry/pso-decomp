@@ -52,7 +52,7 @@ s32 dispatch_shared_handler_a__6TLobbyFl(s32);
 void set_entry_value_clamped__18TObjEneMe3SinowZoaFlf(s32, f32);
 void *find_model_node__FUll(void *, s32);
 void *init__11TBreakUpMdlFPviif(void *, s32, s32, f64);
-s32 spawn_npc_enemy__6TLobbyFsllPvff(s32, s32, s32, void *, f32, f32);
+s32 spawn_npc_enemy__6TLobbyFsllPvff(s16, s64, s64, void *, f32, f32);
 
 void TObjEneMe3SinowZoa__sub_8031B240(void) {
     u8 *init_base = (u8 *)TObjEneMe3SinowZoa_init_params;
@@ -96,7 +96,9 @@ void TObjEneMe3SinowZoa__sub_8031B240(void) {
     count = *(s32 *)(tbl + 4);
     cp[1] = count;
     ctrl->alloc = mem_alloc((u32)(count * 12));
-    for (i = 0, off = 0; i < count; i++, off += 12) {
+    off = 0;
+    i = 0;
+    for (; i < count; i++, off += 12) {
         copy_vec3__10TObjPlayerFPv((u8 *)ctrl->alloc + off, *(u8 **)tbl + off);
     }
     for (i = 0; i < 3; i++) {
@@ -104,44 +106,43 @@ void TObjEneMe3SinowZoa__sub_8031B240(void) {
             *(s32 *)((u8 *)ctrl->alloc + (s32)i * 12 + 0x2C);
     }
     {
-        s32 *dp = ctrl->boss_ids;
+        volatile s32 *dp = ctrl->boss_ids;
         const s32 *sp = lbl_80475E0C;
-        for (i = 0, off = 0; i < 2; i++, off += 4) {
-            *(s32 *)((u8 *)dp + off) =
-                register_boss__6TLobbyFl(*(s32 *)((u8 *)sp + off));
+        for (i = 0; i < 2; i++) {
+            dp[i] = register_boss__6TLobbyFl(sp[i]);
         }
     }
     {
-        s32 *dp = ctrl->handler_b_ids;
+        volatile s32 *dp = ctrl->handler_b_ids;
         const s32 *sp = lbl_80475E14;
-        for (i = 0, off = 0; i < 2; i++, off += 4) {
-            *(s32 *)((u8 *)dp + off) =
-                dispatch_shared_handler_b__6TLobbyFl(*(s32 *)((u8 *)sp + off));
+        for (i = 0; i < 2; i++) {
+            dp[i] = dispatch_shared_handler_b__6TLobbyFl(sp[i]);
         }
     }
     {
-        s32 *dp = ctrl->object_ids;
+        volatile s32 *dp = ctrl->object_ids;
         const s32 *sp = lbl_80475E1C;
-        for (i = 0, off = 0; i < 2; i++, off += 4) {
-            *(s32 *)((u8 *)dp + off) =
-                register_object__6TLobbyFl(*(s32 *)((u8 *)sp + off));
+        for (i = 0; i < 2; i++) {
+            dp[i] = register_object__6TLobbyFl(sp[i]);
         }
     }
     {
         const s32 *sp = lbl_80475E24;
-        s32 *dp = ctrl->handler_a_ids;
-        for (i = 0, off = 0; i < 2; i++, off += 4) {
-            *(s32 *)((u8 *)dp + off) =
-                dispatch_shared_handler_a__6TLobbyFl(*(s32 *)((u8 *)sp + off));
+        volatile s32 *dp = ctrl->handler_a_ids;
+        for (i = 0; i < 2; i++) {
+            dp[i] = dispatch_shared_handler_a__6TLobbyFl(sp[i]);
         }
     }
-    mn = (MdlNode *)ctrl->handler_a_ids[0];
-    set_entry_value_clamped__18TObjEneMe3SinowZoaFlf(7, *(f32 *)((u8 *)mn + 0xC));
-    set_entry_value_clamped__18TObjEneMe3SinowZoaFlf(4, *(f32 *)((u8 *)mn + 0x10));
+    {
+        volatile s32 *nb = ctrl->handler_a_ids;
+        mn = (MdlNode *)nb[0];
+        set_entry_value_clamped__18TObjEneMe3SinowZoaFlf(7, *(f32 *)((u8 *)mn + 0xC));
+        set_entry_value_clamped__18TObjEneMe3SinowZoaFlf(4, *(f32 *)((u8 *)mn + 0x10));
+    }
     zero_f = TObjEneMe3SinowZoa__data_805DF31C;
     w34 = (volatile f32 *)ctrl->f34;
     lbl_805D6ADC = 0;
-    ctrl->f34[0] = zero_f;
+    w34[0] = zero_f;
     w34[1] = zero_f;
     w34[2] = zero_f;
     res = (void *)TObjEneMe3SinowZoa__data_805D6AD8;
@@ -193,20 +194,20 @@ void TObjEneMe3SinowZoa__sub_8031B240(void) {
     pos1.w[3] = fa[3];
     pos2.w[0] = *(s32 *)((u8 *)res + 0x430);
     pos1.w[0] = *(s32 *)((u8 *)res + 0x430);
-    spawn_npc_enemy__6TLobbyFsllPvff(0x49, *(s32 *)(mgr + 8), *(s32 *)(mgr + 0xC),
+    spawn_npc_enemy__6TLobbyFsllPvff(0x49, (s64)*(s32 *)(mgr + 8), (s64)*(s32 *)(mgr + 0xC),
                                      &pos1.w[0], TObjEneMe3SinowZoa__data_805DF2FC,
                                      TObjEneMe3SinowZoa__data_805DF31C);
-    spawn_npc_enemy__6TLobbyFsllPvff(0x4A, *(s32 *)(mgr + 8), (s32)&ctrl->alloc,
+    spawn_npc_enemy__6TLobbyFsllPvff(0x4A, (s64)*(s32 *)(mgr + 8), (s64)(u32)ctrl->alloc,
                                      &pos2.w[0], TObjEneMe3SinowZoa__data_805DF2FC,
                                      TObjEneMe3SinowZoa__data_805DF31C);
     res = (void *)TObjEneMe3SinowZoa__data_805D6AD8;
     mgr = *(u8 **)((u8 *)res + 0x42C);
-    spawn_npc_enemy__6TLobbyFsllPvff(0x4B, *(s32 *)(mgr + 8), *(s32 *)(mgr + 0xC),
+    spawn_npc_enemy__6TLobbyFsllPvff(0x4B, (s64)*(s32 *)(mgr + 8), (s64)*(s32 *)(mgr + 0xC),
                                      &pos1.w[0], TObjEneMe3SinowZoa__data_805DF2FC,
                                      TObjEneMe3SinowZoa__data_805DF31C);
     res = (void *)TObjEneMe3SinowZoa__data_805D6AD8;
     mgr = *(u8 **)((u8 *)res + 0x42C);
-    spawn_npc_enemy__6TLobbyFsllPvff(0x4C, *(s32 *)(mgr + 8), (s32)&ctrl->alloc,
+    spawn_npc_enemy__6TLobbyFsllPvff(0x4C, (s64)*(s32 *)(mgr + 8), (s64)(u32)ctrl->alloc,
                                      &pos2.w[0], TObjEneMe3SinowZoa__data_805DF2FC,
                                      TObjEneMe3SinowZoa__data_805DF31C);
 }
