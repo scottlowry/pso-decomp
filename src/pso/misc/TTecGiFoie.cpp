@@ -253,11 +253,12 @@ void TTecGiFoie::calc_params() {
 #pragma fp_contract on
 void run_task__13TUnk_804CC800Fv(Task_80230EA0 *self) {
     s32 mode;
-    s32 rot_z;
-    s32 rot[2];
-    Vec_80230EA0 off;
     u32 dir[3];
+    Vec_80230EA0 off;
+    s32 rot[2];
+    s32 rot_z;
     s32 idx;
+    s32 ang;
     s32 elem;
     s32 i;
     switch (self->band) {
@@ -321,9 +322,12 @@ void run_task__13TUnk_804CC800Fv(Task_80230EA0 *self) {
         set_position__13TParticleCtrlFPv((void *)*(u32 *)self->emitters, &self->pos2);
         set_direction__13TParticleCtrlFPv((void *)*(u32 *)self->emitters, rot);
     } else {
-        rot_z = 0x4000;
-        *(long *)rot = (long)(lbl_8044D360 * atan2_float(self->pos2.x - self->pos.x, self->pos2.z - self->pos.z)) - 0x8000;
+        ang = (s32)(lbl_8044D360 * atan2_float(self->pos2.x - self->pos.x, self->pos2.z - self->pos.z));
+        rot[1] = ang;
+        rot[0] = ang - 0x8000;
+        rot[1] = 0;
         for (i = 0, elem = 0; i < TTecGiFoie__emitter_profile_table[self->band].count; i++, elem += 4) {
+            rot_z = 0x4000;
             set_position__13TParticleCtrlFPv((void *)*(u32 *)(self->emitters + elem), &self->pos2);
             set_direction__13TParticleCtrlFPv((void *)*(u32 *)(self->emitters + elem), rot);
         }
