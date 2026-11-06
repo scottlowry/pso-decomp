@@ -287,11 +287,11 @@ s32 TAdEndText__sub_8001A998(s32 tex, char *str, f32 x_in, f32 y_in, f32 zoom)
       adv = lbl_804345E0[(0x24 * new_var) + (code - (row * 0x24))];
       x = x + adv;
       py = (u8) ((s32) (y * ((f64) ((code - (new_var * 0x24)) / 6))));
-      q[2] = q[0] + adv;
       px = (u8) ((s32) new_var2);
       q[5] = ((f64) py) * lbl_805D7E00;
       q[6] = (((f64) px) + adv) * lbl_805D7E00;
       q[7] = (((f64) py) + y) * lbl_805D7E00;
+      q[2] = q[0] + adv;
     }
     {
       s32 pg = ((u8) code) / 0x24;
