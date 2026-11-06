@@ -1158,7 +1158,8 @@ void draw_name_plate__15TWindowFukidasiFv(void *self, View_80252764 *v, u32 colo
   }
   TWindowSubStatusDisp::get_player();
   new_var2 = pt[0];
-  pt[0] = new_var2 + lbl_805DCD84;
+  depth = lbl_805DCD84;
+  pt[0] = new_var2 + depth;
   if (width < TWindowFukidasi__data_805DCCFC)
   {
     pt[0] = pt[0] + (TWindowFukidasi__data_805DCD0C * (TWindowFukidasi__data_805DCCFC - width));
