@@ -152,6 +152,7 @@ s32 TAdEndText__sub_8001A998(s32 tex, char *str, f32 x_in, f32 y_in, f32 zoom)
   s32 t;
   double new_var2;
   f32 y;
+  f32 new_var3;
   f32 x;
   f32 yl;
   f32 zv;
@@ -166,9 +167,10 @@ s32 TAdEndText__sub_8001A998(s32 tex, char *str, f32 x_in, f32 y_in, f32 zoom)
   u8 *p;
   x = x_in;
   t = tex;
+  new_var3 = zoom;
   y = y_in;
   p = (u8 *) str;
-  zv = zoom;
+  zv = new_var3;
   page = 0xfe;
   set_default_alpha_blend__Fv();
   if (((!y) && (!y)) && (!y))
@@ -215,6 +217,9 @@ s32 TAdEndText__sub_8001A998(s32 tex, char *str, f32 x_in, f32 y_in, f32 zoom)
           break;
 
         case 0x29:
+          if (y)
+        {
+        }
           code = 0x1d;
           break;
 
