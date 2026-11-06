@@ -138,15 +138,16 @@ struct SVec_8029D5C8 { s16 x, y, z; };
 struct Fish_8029D5C8 {
     f32 x, y, z;
     f32 tx, ty, tz;
-    u8 pad18[0xC];
+    f32 velx, vely, velz;
     s32 ang;
     f32 frame;
     s16 rot;
-    u8 pad2e[2];
+    s16 pitch;
     s16 kind;
-    u8 pad32[2];
+    s16 timer;
     s32 seen;
-    u8 pad38[0xC];
+    s32 flag38;
+    u8 pad3c[8];
 };
 
 extern "C" {
@@ -295,6 +296,175 @@ extern const f32 lbl_805DDD60;
 extern const f32 lbl_805DDD64;
 extern const f32 lbl_805DDD70;
 extern const f32 lbl_805DDD7C;
+f32 fabs_float(f32);
+f64 atan2_float(f32, f32);
+f32 newton_sqrtf(f32);
+void *find_entity_by_id(u16);
+s32 get_game_mode__6TLobbyFv(void);
+extern s32 local_client_id;
+extern const f32 lbl_805DDD4C;
+extern const f32 lbl_805DDD50;
+extern const f32 lbl_805DDD54;
+extern const f32 lbl_805DDD58;
+extern const f32 lbl_805DDD5C;
+extern const f32 lbl_805DDD68;
+extern const f32 lbl_805DDD6C;
+extern const f32 lbl_805DDD74;
+extern const f32 lbl_805DDD78;
+extern const f32 lbl_805DDD80;
+extern const f32 lbl_805DDD84;
+extern const f64 lbl_80465E00;
+
+#pragma push
+#pragma fp_contract on
+void TObjFish::run_task() {
+    Fish_8029D5C8 *f;
+    s32 n;
+    s32 phase;
+    s32 t;
+    s32 rot;
+    s32 kind;
+    s32 ang_t;
+    f32 k1;
+    f32 k2;
+    f32 k3;
+    f32 d2;
+    f32 dist;
+    f32 px;
+    f32 py;
+    f32 pz;
+    f32 inv;
+    void *ent;
+
+    if ((s32)this->m_a0 != 0) {
+        f = (Fish_8029D5C8 *)(this->m_a0);
+        n = (s32)this->m_94;
+        k1 = lbl_805DDD4C;
+        k2 = lbl_805DDD50;
+        k3 = lbl_805DDD54;
+        while (n != 0) {
+            t = (s16)(f->timer - 1);
+            f->timer = (s16)t;
+            phase = (s32)this->m_98 + n;
+            if (t <= 0) {
+                f->timer = 0;
+            }
+            f->x += f->velx;
+            f->y += f->vely;
+            f->z += f->velz;
+            if (fabs_float(f->x) >= *(f32 *)((s8 *)this + 0x68)) {
+                f->x -= f->velx;
+                f->velx = -f->velx;
+            }
+            if (fabs_float(f->y) >= *(f32 *)((s8 *)this + 0x6c)) {
+                f->y -= f->vely;
+                f->vely = -f->vely;
+            }
+            if (fabs_float(f->z) >= *(f32 *)((s8 *)this + 0x70)) {
+                f->z -= f->velz;
+                f->velz = -f->velz;
+            }
+            f->vely = k1 * (k2 + f->vely);
+            f->velx = f->velx * k3;
+            f->velz = f->velz * k3;
+            if (f->flag38 == 1) {
+                d2 = (f->ty - f->y) * (f->ty - f->y) + (f->tx - f->x) * (f->tx - f->x) +
+                    (f->tz - f->z) * (f->tz - f->z);
+                if (d2 < lbl_805DDD58) {
+                    f->flag38 = 0;
+                } else {
+                    if ((phase & 7) == 0) {
+                        f++;
+                        n--;
+                        continue;
+                    }
+                    phase >>= 3;
+                }
+            }
+            if ((phase & 7) != 0) {
+                goto Ltail_rot;
+            }
+            if (f->timer != 0) {
+                goto Ltail_rot;
+            }
+            get_game_mode__6TLobbyFv();
+            ent = find_entity_by_id((u16)local_client_id);
+            dist = lbl_805DDD5C;
+            if (ent != NULL) {
+                py = *(f32 *)((u8 *)ent + 0x3c) - *(f32 *)((s8 *)this + 0x3c);
+                px = *(f32 *)((u8 *)ent + 0x38) - *(f32 *)((s8 *)this + 0x38);
+                py = py - f->y;
+                px = px - f->x;
+                pz = *(f32 *)((u8 *)ent + 0x40) - *(f32 *)((s8 *)this + 0x40);
+                pz = pz - f->z;
+                dist = py * py + px * px + pz * pz;
+                if (dist > lbl_805DDD5C) {
+                    dist = lbl_805DDD5C;
+                }
+            }
+            if (dist < lbl_805DDD5C) {
+                f->timer = lbl_805DDD60 * (TObjFish__data_805DDD44 * (lbl_805DDD64 * (f32)rand()));
+                inv = lbl_805DDD68 / newton_sqrtf(dist);
+                f->velx = -(px * inv);
+                f->vely = -(py * inv);
+                f->velz = -(pz * inv);
+                goto Ltail_burst;
+            }
+            d2 = f->velx * f->velx + f->vely * f->vely + f->velz * f->velz;
+            if (d2 <= lbl_805DDD6C) {
+                f->timer = TObjFish__data_805DDD44 * (lbl_805DDD64 * (f32)rand());
+                f->velx = lbl_805DDD68 * (lbl_805DDD70 * (lbl_805DDD64 * (f32)rand() - lbl_805DDD60)) + f->velx;
+                f->vely = lbl_805DDD78 * (lbl_805DDD64 * (f32)rand() - lbl_805DDD60) + f->vely;
+                f->velz = lbl_805DDD68 * (lbl_805DDD70 * (lbl_805DDD64 * (f32)rand() - lbl_805DDD60)) + f->velz;
+                goto Ltail_burst;
+            }
+            d2 = (f->y - f->ty) * (f->y - f->ty) + (f->x - f->tx) * (f->x - f->tx) +
+                (f->z - f->tz) * (f->z - f->tz);
+            if (d2 > lbl_805DDD58) {
+                f->flag38 = 1;
+            }
+        Ltail_burst:
+            if (lbl_805DDD64 * (f32)rand() < lbl_805DDD74) {
+                f->velx = lbl_805DDD68 * (lbl_805DDD70 * (lbl_805DDD64 * (f32)rand() - lbl_805DDD60)) + f->velx;
+                f->vely = lbl_805DDD78 * (lbl_805DDD64 * (f32)rand() - lbl_805DDD60) + f->vely;
+                f->velz = lbl_805DDD68 * (lbl_805DDD70 * (lbl_805DDD64 * (f32)rand() - lbl_805DDD60)) + f->velz;
+            }
+        Ltail_rot:
+            if (fabs_float(f->velz) > lbl_805DDD7C && (phase & 1) == 0) {
+                f->pitch = (s16)(lbl_80465E00 * atan2_float(f->velx, f->velz));
+            }
+            rot = f->rot;
+            f->rot = (s16)(rot + (s32)((f32)(s16)(f->pitch - rot) * lbl_805DDD80));
+            if ((phase & 1) == 0) {
+                ang_t = (s32)(lbl_80465E00 * atan2_float(f->tx - f->x, f->tz - f->z));
+                f->ang = f->ang +
+                    (s32)((f32)(s16)(f->ang - (s16)(ang_t - *(s32 *)((s8 *)this + 0x60))) * lbl_805DDD84);
+            }
+            kind = f->kind;
+            if (kind < 0) {
+                f->frame += lbl_80465D74[TObjFish__area_event_stage * 3];
+                if (f->frame >= lbl_80465DB0[TObjFish__area_event_stage * 3]) {
+                    f->frame -= lbl_80465DB0[TObjFish__area_event_stage * 3];
+                }
+            } else if (kind <= 2) {
+                f->frame += lbl_80465D74[TObjFish__area_event_stage * 3 + kind];
+                if (f->frame >= lbl_80465DB0[TObjFish__area_event_stage * 3 + kind]) {
+                    f->frame -= lbl_80465DB0[TObjFish__area_event_stage * 3 + kind];
+                }
+            } else {
+                f->frame += lbl_80465D74[TObjFish__area_event_stage * 3];
+                if (f->frame >= lbl_80465DB0[TObjFish__area_event_stage * 3]) {
+                    f->frame -= lbl_80465DB0[TObjFish__area_event_stage * 3];
+                }
+            }
+            f->seen = 0;
+            f++;
+            n--;
+        }
+        this->m_98 = (s32)this->m_98 + 1;
+    }
+}
+#pragma pop
 
 #pragma push
 #pragma fp_contract on
