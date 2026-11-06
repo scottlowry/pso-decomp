@@ -7,7 +7,7 @@
 struct TWindowSubEquip : public TObject {
     TWindowSubEquip(s32 arg1, s32 arg2);
     virtual ~TWindowSubEquip();
-    int build_equipment_list();
+    void build_equipment_list();
     u8 m_1c;
     u8 _pad1D[0x3];
     u32 m_20;
