@@ -262,7 +262,7 @@ void TEF_LensFlare::render() {
         refl_alpha = 1.0f - halo_alpha;
         set = (FlareDefSet *)lbl_804C5820;
         refl_base = 1.0f;
-        for (i = 1; i <= 9; i++, element++) {
+        for (i = 0; i < 9; i++, element++) {
             refl_scale = element->size * (refl_base - refl_alpha * element->alpha);
             if (refl_scale < 0.0f) {
                 refl_scale = 0.0f;
