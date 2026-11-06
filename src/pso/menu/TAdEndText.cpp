@@ -159,13 +159,13 @@ s32 TAdEndText__sub_8001A998(s32 tex, char *str, f32 x_in, f32 y_in, f32 zoom)
   s32 row;
   f32 adv;
   s32 px;
-  f32 *new_var4;
   s32 page;
   s32 py;
   f32 x;
   s32 c;
   volatile unsigned char new_var;
   u8 *p;
+  f32 *new_var4;
   x = x_in;
   t = tex;
   new_var3 = zoom;
