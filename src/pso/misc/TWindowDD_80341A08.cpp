@@ -82,17 +82,18 @@ void TWindowDD__sub_80341674(TWindowDD_WS_Word *selfv, u8 *entry) {
     s32 p1;
     s32 p2;
     s32 count;
-    f32 cornerB;
     f32 depth;
     f32 width;
-    f32 lo;
     f32 cornerA;
+    f32 cornerB;
+    f32 lo;
     f32 hi;
     f32 norm;
     f32 d24;
     f32 neg;
     f32 f2v;
     f32 m88;
+    f32 w2;
     f32 t;
     f32 z;
     s32 n;
@@ -196,8 +197,9 @@ void TWindowDD__sub_80341674(TWindowDD_WS_Word *selfv, u8 *entry) {
             neg = -(lbl_805DFCA4 * *(f32 *)(self + 0x4c));
             z = t * TWindowDD__data_805DFB20 + neg;
             t = z + TWindowDD__data_805DFB20;
-            z = z * width + depth;
-            t = t * width + depth;
+            w2 = *(f32 *)(entry + 0x2c);
+            z = z * w2 + depth;
+            t = t * w2 + depth;
             pd = (f32 *)q;
             for (k = 0; k < 4; k++) {
                 pd[1] = z;
