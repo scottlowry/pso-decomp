@@ -187,11 +187,11 @@ s32 TAdEndText__sub_8001A998(s32 tex, char *str, f32 x_in, f32 y_in, f32 zoom)
     }
     q[0] = x;
     q[1] = (TAdEndText__sub_8001B404(c)) ? (yl) : (y);
-    y = TAdEndText__data_805D7DF8;
     if (TAdEndText__sub_8001B3EC(c))
     {
       if (TAdEndText__sub_8001B3D4(c))
       {
+        y = TAdEndText__data_805D7DF8;
         code = (u8) (c - 0x41);
       }
       else
@@ -283,7 +283,7 @@ s32 TAdEndText__sub_8001A998(s32 tex, char *str, f32 x_in, f32 y_in, f32 zoom)
     {
       row = ((u8) code) / 0x24;
       new_var = row;
-      new_var2 = y * ((f64) ((code - (0x24 * row)) - (6 * ((code - (0x24 * new_var)) / 6))));
+      new_var2 = y * ((code - (0x24 * row)) - (6 * ((code - (0x24 * new_var)) / 6)));
       adv = lbl_804345E0[(0x24 * new_var) + (code - (row * 0x24))];
       x = x + adv;
       py = (u8) ((s32) (y * ((f64) ((code - (new_var * 0x24)) / 6))));
