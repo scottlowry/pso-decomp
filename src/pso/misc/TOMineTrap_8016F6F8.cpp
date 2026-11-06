@@ -417,7 +417,6 @@ u8 *TOMineTrap__ct(u8 *arg0, u8 *arg1, s32 arg2, s32 arg3) {
     s32 floor;
     s32 area;
     s32 kind;
-    s16 trap_kind;
 
     TOMine__ct(arg0, tl_05);
     self->vt = (void *)__vt__10TOMineTrap;
@@ -440,10 +439,9 @@ u8 *TOMineTrap__ct(u8 *arg0, u8 *arg1, s32 arg2, s32 arg3) {
         queue_destruction__7TObjectFv(arg0);
         return arg0;
     }
-    trap_kind = (s16)arg2;
-    switch (trap_kind) {
+    switch ((s16)arg2) {
     default:
-        trap_kind = 0;
+        arg2 = 0;
         // fall through
     case 0:
         self->f354 = 1;
@@ -473,7 +471,7 @@ u8 *TOMineTrap__ct(u8 *arg0, u8 *arg1, s32 arg2, s32 arg3) {
         self->f358 = lbl_805DB85C;
         break;
     }
-    self->f37E = (u16)((u16)get_trap_type__10TOMineTrapFv(arg0) * 0x50 + trap_kind * 0x14 + (s16)arg3);
+    self->f37E = (u16)((u16)get_trap_type__10TOMineTrapFv(arg0) * 0x50 + (s16)arg2 * 0x14 + (s16)arg3);
     copied = VecCopy((Vec *)(arg0 + 0x38), (const Vec *)(arg1 + 0x38));
     copied = VecCopy((Vec *)(arg0 + 0x50), copied);
     VecCopy((Vec *)(arg0 + 0x334), copied);
