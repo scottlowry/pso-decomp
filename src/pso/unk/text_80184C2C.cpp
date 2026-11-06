@@ -95,6 +95,7 @@ void TLobby::free_buffers() {
 }
 
 extern "C" void TLobby__sub_80184DF4(void) {
+    u8 *base;
     ResBlock_80184DF4 *res;
     ModelEnt_80184DF4 *me;
     TLobby *tbl;
@@ -103,11 +104,12 @@ extern "C" void TLobby__sub_80184DF4(void) {
     s32 m1;
     void *n;
 
-    TLobby::clear_global_array(lbl_804B5E80);
+    base = lbl_804B5E80;
+    TLobby::clear_global_array(base);
     if (get_main_phase() == 0xf) {
-        TLobby__sub_80184C80(lbl_804B5E80);
+        TLobby__sub_80184C80(base);
     } else {
-        TLobby__sub_80184CE0(lbl_804B5E80);
+        TLobby__sub_80184CE0(base);
     }
     lbl_805D5B30 = -1;
     for (i = 0; i < 6; i++) {
@@ -124,7 +126,7 @@ extern "C" void TLobby__sub_80184DF4(void) {
         res = (ResBlock_80184DF4 *)::operator new(0x440);
         if (res != NULL) {
             res = (ResBlock_80184DF4 *)load_resource_from_descriptor(res, 1,
-                    (void *)*(s32 *)(lbl_804B5E80 + 0x15c + lbl_805D5B30 * 4), 0, 0, 0);
+                    (void *)*(s32 *)(base + 0x15c + lbl_805D5B30 * 4), 0, 0, 0);
         }
         city_season_easter_egg_model_table[lbl_805D5B30] = (s32)res;
         for (i = 0; i < res->model_count; i++) {
@@ -163,7 +165,7 @@ extern "C" void TLobby__sub_80184DF4(void) {
         res = (ResBlock_80184DF4 *)::operator new(0x440);
         if (res != NULL) {
             res = (ResBlock_80184DF4 *)load_resource_from_descriptor(res, 1,
-                    (void *)(lbl_804B5E80 + 0x130), 0, 0, 0);
+                    (void *)(base + 0x130), 0, 0, 0);
         }
         lbl_805D5B3C = res->models[0].f8;
         lbl_805D5B40 = res->models[1].f8;
@@ -171,7 +173,7 @@ extern "C" void TLobby__sub_80184DF4(void) {
         res = (ResBlock_80184DF4 *)::operator new(0x440);
         if (res != NULL) {
             res = (ResBlock_80184DF4 *)load_resource_from_descriptor(res, 1,
-                    (void *)(lbl_804B5E80 + 0x14c), 0, 0, 0);
+                    (void *)(base + 0x14c), 0, 0, 0);
         }
         lbl_805D5B3C = res->models[0].f8;
         lbl_805D5B40 = res->models[1].f8;
@@ -179,7 +181,7 @@ extern "C" void TLobby__sub_80184DF4(void) {
         res = (ResBlock_80184DF4 *)::operator new(0x440);
         if (res != NULL) {
             res = (ResBlock_80184DF4 *)load_resource_from_descriptor(res, 1,
-                    (void *)(lbl_804B5E80 + 0x114), 0, 0, 0);
+                    (void *)(base + 0x114), 0, 0, 0);
         }
         lbl_805D5B3C = res->models[0].f8;
         lbl_805D5B40 = res->models[1].f8;
