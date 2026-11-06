@@ -20,6 +20,8 @@ extern const char lbl_80444A00[];
 extern const char lbl_80444A10[];
 extern const char *labo_map_warp_dest_name_table_b[];
 void TLobby__sub_8001FE7C(void *, s32);
+s32 get_main_phase(void);
+void *load_resource_from_descriptor(void *, s32, void *, s32, s32, s32);
 extern int city_season_easter_egg_model_table[];
 extern int city_season_xmas_model_table[];
 extern void *lbl_805D5B34;
@@ -36,8 +38,6 @@ int get_season_model_resource(int a0) {  return city_season_easter_egg_model_tab
 
 extern s32 lbl_805D5B30;
 extern u8 lbl_804B5E80[];
-extern s32 get_main_phase(void);
-extern void *load_resource_from_descriptor(void *, s32, void *, s32, s32, s32);
 void *operator new(size_t size);
 
 struct ModelEnt_80184DF4 { s32 f0; s32 f4; s32 f8; s32 fc; };
@@ -94,7 +94,7 @@ void TLobby::free_buffers() {
     }
 }
 
-void TLobby__sub_80184DF4(void) {
+extern "C" void TLobby__sub_80184DF4(void) {
     ResBlock_80184DF4 *res;
     ModelEnt_80184DF4 *me;
     TLobby *tbl;
