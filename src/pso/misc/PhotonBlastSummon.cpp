@@ -371,8 +371,8 @@ void spawn_photon_blast_attachment_effects(void *arg0, s32 arg1) {
     s32 a;
     s32 b;
     s32 c;
-    s32 u;
     u32 i;
+    s32 u;
     s32 off;
     void *emitter;
 
