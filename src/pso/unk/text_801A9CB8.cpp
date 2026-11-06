@@ -22,8 +22,8 @@ struct Obj_801A9CB8 {
     u16 id;
     s32 charge;
     s32 f44;
+    s32 f48;
     s32 active;
-    s32 f4c;
     s32 entries50[4];
     u32 ids[4];
     s32 counts70[4];
@@ -105,9 +105,9 @@ Obj_801A9CB8 *TObjPlayer__sub_801A9E10(Obj_801A9CB8 *self, s32 client_id, u8 *re
     __ct__7TObjectFP7TObject(self, (void *)tl_07);
     self->vt = __vt__13TUnk_804C349C;
     self->id = (u16)client_id;
-    self->active = cost;
+    self->f48 = cost;
     self->f44 = 0;
-    self->f4c = flag;
+    self->active = flag;
     for (i = 0; i < 4; i++) {
         self->counts70[i] = ids_src[i] + 1;
         self->entries50[i] = -1;
@@ -132,7 +132,7 @@ Obj_801A9CB8 *TObjPlayer__sub_801A9E10(Obj_801A9CB8 *self, s32 client_id, u8 *re
     }
     self->player = (s32)get_player_by_client_id(client_id);
     apply_photon_blast_action_hold__Flll((s32)self, self->count * 150 + 100, client_id);
-    if (self->f4c != 0) {
+    if (self->active != 0) {
         send_neg30__6TLobbyFv();
         TObjPlayer__sub_8024ABDC(local_client_id);
         if (self->player != 0) {
@@ -173,7 +173,7 @@ Obj_801A9CB8 *TObjPlayer__sub_801A9E10(Obj_801A9CB8 *self, s32 client_id, u8 *re
             obj++;
         }
     }
-    if (self->f4c != 0) {
+    if (self->active != 0) {
         player = (s32)get_player_by_client_id(self->id);
         if (player != 0) {
             freeze_players_for_photon_blast__FsPUs(get_room__8TObjBaseFv((void *)player),
