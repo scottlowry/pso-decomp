@@ -72,8 +72,7 @@ extern "C" void *TBoss7DeRolLeC__ct(void *self_, void *arg1, void *arg2)
   int new_var;
   s32 i;
   u32 p;
-  u32 joint_b;
-  s32 joint_a;
+  int new_var3[2];
   u32 flags;
   u32 v;
   __ct__12TObjEneDD_STFP7TObject(self);
@@ -156,18 +155,18 @@ extern "C" void *TBoss7DeRolLeC__ct(void *self_, void *arg1, void *arg2)
   stack_vec.w0 = lbl_80473F6C[0];
   stack_vec.w1 = lbl_80473F6C[1];
   stack_vec.w2 = lbl_80473F6C[2];
-  joint_b = (u32) ((*((u16 *) (self + 0x1C))) + 1);
-  joint_a = (*((s16 *) (self + 0x2C))) + 1;
+  new_var3[0] = (u32) ((*((u16 *) (self + 0x1C))) + 1);
+  new_var3[1] = (*((s16 *) (self + 0x2C))) + 1;
   for (i = 0; i < 10; i++)
   {
     VecCopy__FP3VecPC3Vec(self + ((i * 0xC) + 0x530), &stack_vec);
     p = __nw__7TObjectFUl(0x3C8);
     if (p != 0)
     {
-      new_var2 = (s16) joint_a;
-      joint_b = joint_b + 1;
-      joint_a = joint_a + 1;
-      p = (u32) TBoss7Joint__ct((u8 *) p, self, (s32) joint_b, new_var2, (s32) (self + ((((((((((i & 0xFF) & 0xFF) & 0xFF) & 0xFF) & 0xFF) & 0xFF) & 0xFF) & 0xFF) * 0xC) + 0x530)), i);
+      new_var2 = (s16) new_var3[1];
+      new_var3[0] = new_var3[0] + 1;
+      new_var3[1] = new_var3[1] + 1;
+      p = (u32) TBoss7Joint__ct((u8 *) p, self, (s32) new_var3[0], new_var2, (s32) (self + ((((((((((i & 0xFF) & 0xFF) & 0xFF) & 0xFF) & 0xFF) & 0xFF) & 0xFF) & 0xFF) * 0xC) + 0x530)), i);
     }
     *((u32 *) ((self + 0x5F8) + (i * 4))) = p;
   }
