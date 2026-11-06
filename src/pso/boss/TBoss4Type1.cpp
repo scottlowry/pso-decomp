@@ -1856,9 +1856,9 @@ void create_all_tenchu_furu__11TBoss4Type2Fi(s32 arg0) {
 #pragma fp_contract on
 s32 TBoss4Type2__sub_80054FC0(void *self, f32 range) {
     RecoveredGlobal_80054F6C_lbl_804FF2A0 *pd2;
-    Vec_80053914 pos;
-    Vec_80053914 cand;
     TObjPlayer *players[4];
+    Vec_80053914 cand;
+    Vec_80053914 pos;
     Vec_80053914 *dst;
     Vec_80053914 *src;
     Vec_80053914 *cursor;
