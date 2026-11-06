@@ -298,8 +298,9 @@ void TOMineTrap::run_task() {
                         kind = (s32)this->m_354;
                         if (kind == 2) {
                             goto L_m46a;
+                        } else {
+                            goto L_m21a;
                         }
-                        goto L_m21a;
                     L_m46a:
                         ((VTrap_18_8016F908 *)self->target)->m46(0);
                         goto L_rec_1000;
@@ -323,8 +324,9 @@ void TOMineTrap::run_task() {
                     kind = (s32)this->m_354;
                     if (kind == 2) {
                         goto L_m46b;
+                    } else {
+                        goto L_m21b;
                     }
-                    goto L_m21b;
                 L_m46b:
                     ((VTrap_18_8016F908 *)self->target)->m46(0);
                     ((VTrap_18_8016F908 *)self->target)->m72(0);
