@@ -83,16 +83,19 @@ void TWindowDD__sub_80341674(TWindowDD_WS_Word *selfv, u8 *entry) {
     f32 depth;
     f32 width;
     f32 neg;
+    f32 f2v;
     f32 lo;
     f32 hi;
     f32 cornerA;
     f32 cornerB;
+    f32 c;
     f32 norm;
     f32 t;
     f32 d24;
     f32 z;
     s32 n;
     s32 i;
+    s32 k4;
     s32 k;
     p0 = *(s32 *)lbl_805D63F0;
     p1 = *(s32 *)(p0 + 0x20);
@@ -101,29 +104,34 @@ void TWindowDD__sub_80341674(TWindowDD_WS_Word *selfv, u8 *entry) {
     if (*(s32 *)(entry + 0x30) < 0) {
         return;
     }
-    depth = *(f32 *)(self + 0x44) + lbl_805DFCA4 * *(f32 *)(self + 0x4c);
+    depth = lbl_805DFCA4 * *(f32 *)(self + 0x4c) + *(f32 *)(self + 0x44);
     TWindowDD__sub_80348AD4(*(f32 *)(self + 0x54), TWindowDD__data_805DFCA8);
     reset_entries__9TWindowDDFf(q, -1);
     copy_point_table__9TWindowDDFl(q, *(s32 *)(self + 0x64));
     TWindowDD__sub_80348A2C(entry, q);
-    width = *(f32 *)(entry + 0x2c);
     neg = -(lbl_805DFCA4 * *(f32 *)(self + 0x4c));
-    cornerA = neg * width + depth;
-    cornerB = (neg + TWindowDD__data_805DFB20) * width + depth;
+    f2v = neg + TWindowDD__data_805DFB20;
+    width = *(f32 *)(entry + 0x2c);
     n = *(s32 *)(self + 0x78);
-    t = ((s32)*(f32 *)(self + 0x64) == 0) ? lbl_805DFB40 : lbl_805DFB44;
-    lo = t * TWindowDD__data_805DFB18;
-    hi = (t + TWindowDD__data_805DFB20) * TWindowDD__data_805DFB18;
+    cornerA = neg * width + depth;
+    cornerB = f2v * width + depth;
+    if (*(s32 *)(self + 0x64) == 0) {
+        c = lbl_805DFB40;
+    } else {
+        c = lbl_805DFB44;
+    }
+    lo = c * TWindowDD__data_805DFB18;
+    hi = (c + TWindowDD__data_805DFB20) * TWindowDD__data_805DFB18;
     t = fn_803D6308(-(*(f32 *)(self + 0x88)) / TWindowDD__data_805DFB20, TWindowDD__data_805DFB18, lbl_805DFCA4);
     norm = TWindowDD__data_805DFB20 * t;
     if (TWindowDD__data_805DFCA8 != norm) {
-        if (norm >= TWindowDD__data_805DFCA8) {
+        n = *(s32 *)(self + 0x78) - 1;
+        if (norm < TWindowDD__data_805DFCA8) {
+            t = norm + TWindowDD__data_805DFB20;
+        } else {
             t = norm;
             norm = norm - TWindowDD__data_805DFB20;
-        } else {
-            t = norm + TWindowDD__data_805DFB20;
         }
-        n = n - 1;
         d24 = t * width + cornerA;
         z = hi - t * TWindowDD__data_805DFB18;
         for (k = 0; k < 4; k++) {
@@ -144,9 +152,10 @@ void TWindowDD__sub_80341674(TWindowDD_WS_Word *selfv, u8 *entry) {
             pd[10] = hi;
         }
         i = 0;
+        k4 = 4;
         while (i < n) {
             cornerB = cornerA + d24;
-            for (k = 0; k < 4; k++) {
+            for (k = 0; k < k4; k++) {
                 pd = q[k].v;
                 pd[1] = cornerA;
                 pd[7] = cornerB;
@@ -176,7 +185,8 @@ void TWindowDD__sub_80341674(TWindowDD_WS_Word *selfv, u8 *entry) {
             copy_point_table__9TWindowDDFl(q, 1);
             TWindowDD__sub_80348A2C(entry, q);
             t = (f32) selfv->m_6c;
-            z = t * TWindowDD__data_805DFB20 - lbl_805DFCA4 * *(f32 *)(self + 0x4c);
+            neg = -(lbl_805DFCA4 * *(f32 *)(self + 0x4c));
+            z = t * TWindowDD__data_805DFB20 + neg;
             t = z + TWindowDD__data_805DFB20;
             z = z * width + depth;
             t = t * width + depth;
