@@ -160,7 +160,7 @@ struct Vec_80230EA0 { f32 x, y, z; };
 struct Task_80230EA0 {
     u8 pad0[0x18];
     void **vt;
-    u32 *emitters;
+    u8 *emitters;
     Vec_80230EA0 pos;
     Vec_80230EA0 pos2;
     f32 x38;
@@ -210,7 +210,7 @@ f32 atan2_float(f32 y, f32 x);
 void rotate_matrix_x(void *matrix, s32 angle);
 void rotate_vector_by_matrix(s32 matrix, void *src, void *dst);
 s32 pop_matrix(void);
-void direction_to_rotation_xz(u8 *dir, s32 *rot_a, s32 *rot_b);
+void direction_to_rotation_xz__FPUcPlPl(const u8 *dir, long *rot_a, long *rot_b);
 void set_position__13TParticleCtrlFPv(void *particle, void *pos);
 void set_direction__13TParticleCtrlFPv(void *particle, void *dir);
 
@@ -250,12 +250,13 @@ void TTecGiFoie::calc_params() {
 #pragma opt_common_subs off
 #pragma opt_propagation off
 #pragma opt_dead_assignments off
+#pragma fp_contract on
 void run_task__13TUnk_804CC800Fv(Task_80230EA0 *self) {
     s32 mode;
-    u32 dir[3];
-    Vec_80230EA0 off;
-    long rot_x;
     s32 rot_z;
+    long rot_x;
+    Vec_80230EA0 off;
+    u32 dir[3];
     s32 idx;
     s32 i;
     s32 elem;
@@ -315,15 +316,15 @@ void run_task__13TUnk_804CC800Fv(Task_80230EA0 *self) {
         pop_matrix();
         rot_x = 0;
         rot_z = 0;
-        direction_to_rotation_xz((u8 *)dir, (s32 *)&rot_x, &rot_z);
-        set_position__13TParticleCtrlFPv((void *)self->emitters[0], &self->pos2);
-        set_direction__13TParticleCtrlFPv((void *)self->emitters[0], &rot_x);
+        direction_to_rotation_xz__FPUcPlPl((const u8 *)dir, &rot_x, (long *)&rot_z);
+        set_position__13TParticleCtrlFPv((void *)*(u32 *)self->emitters, &self->pos2);
+        set_direction__13TParticleCtrlFPv((void *)*(u32 *)self->emitters, &rot_x);
     } else {
         rot_z = 0x4000;
         rot_x = (long)(lbl_8044D360 * atan2_float(self->pos2.x - self->pos.x, self->pos2.z - self->pos.z)) - 0x8000;
-        for (i = 0, elem = 0; i < (s32)TTecGiFoie__emitter_profile_table[self->band].count; i++, elem += 4) {
-            set_position__13TParticleCtrlFPv((void *)self->emitters[elem], &self->pos2);
-            set_direction__13TParticleCtrlFPv((void *)self->emitters[elem], &rot_x);
+        for (i = 0, elem = 0; i < TTecGiFoie__emitter_profile_table[self->band].count; i++, elem += 4) {
+            set_position__13TParticleCtrlFPv((void *)*(u32 *)(self->emitters + elem), &self->pos2);
+            set_direction__13TParticleCtrlFPv((void *)*(u32 *)(self->emitters + elem), &rot_x);
         }
     }
 }
