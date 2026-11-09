@@ -2,6 +2,83 @@
 #include "pso/unk/text_801E283C.h"
 #include "pso/system/date.h"
 
+struct Date_801E21A8 {
+    u16 year;
+    u8 mon;
+    u8 mday;
+    u8 hour;
+    u8 min;
+    u8 sec;
+    u8 pad;
+    u8 pad8[4];
+};
+
+extern "C" u8 fill_date_from_seconds(u32 seconds, Date_801E21A8 *date);
+extern const s32 lbl_80449700[12];
+
+extern "C" u8 fill_date_from_seconds(u32 seconds, Date_801E21A8 *date) {
+    s32 daysBeforeMonth[12];
+    s32 minutes = seconds / 60;
+    s32 totalDays = seconds / 86400;
+    s32 years4 = seconds / 31536000;
+    s32 totalHours = seconds / 3600;
+    s32 leapDays = (years4 + 1) / 4;
+    s32 hoursFromMin = minutes / 60;
+    s32 n;
+
+    for (n = 0; n < 12; n += 2) {
+        daysBeforeMonth[n] = lbl_80449700[n];
+        daysBeforeMonth[n + 1] = lbl_80449700[n + 1];
+    }
+
+    date->sec = seconds % 60;
+    s32 yearsInDays = totalDays / 365;
+    date->min = minutes % 60;
+    s32 dayInYear = totalDays % 365;
+    date->hour = totalHours % 24;
+
+    s32 dayOfYear;
+    if (leapDays > dayInYear) {
+        date->year = years4 + 1999;
+        dayOfYear = dayInYear + (365 - leapDays);
+        if (date->year % 4 == 0) {
+            dayOfYear++;
+        }
+    } else {
+        date->year = years4 + 2000;
+        dayOfYear = dayInYear - leapDays;
+    }
+
+    s32 month;
+    if (date->year % 4 == 0) {
+        month = 1;
+        if (dayOfYear >= daysBeforeMonth[1]) {
+            for (month = 2; month < 12; month++) {
+                if (dayOfYear < daysBeforeMonth[month] + 1) {
+                    break;
+                }
+            }
+        }
+    } else {
+        for (month = 1; month < 12; month++) {
+            if (dayOfYear < daysBeforeMonth[month]) {
+                break;
+            }
+        }
+    }
+
+    date->mon = month;
+    date->mday = dayOfYear - daysBeforeMonth[month - 1] + 1;
+    if (date->year % 4 == 0 && date->mon > 2) {
+        date->mday--;
+    }
+
+    date->pad = calc_day_of_week(date->year, date->mon, date->mday);
+    u8 dayInCycle = calc_day_in_cycle((s32 *)date);
+    date->pad8[0] = dayInCycle;
+    return dayInCycle;
+}
+
 u8 calc_day_in_cycle(s32 *date) {
     u32 sp8;
     u32 var_r4;
