@@ -274,8 +274,8 @@ void run_task__13TUnk_804CC800Fv(Task_802312E4 *self) {
         self->pos2.z = self->pos.z + v.z;
     } else {
         self->x38 = self->x38 + lbl_805DC814;
-        self->x3c = self->x3c + (s32)(lbl_805DC818 * (f64)(self->band + 9));
-        i = (s32)(lbl_805DC818 * (f64)(self->x40 * 15));
+        self->x3c = self->x3c + (s32)(lbl_805DC818 * (f32)(self->band + 9));
+        i = (s32)(lbl_805DC818 * (f32)(self->x40 * 15));
         self->pos2.y = self->pos.y + lbl_8044D338[k] * sin_table_lookup(i);
         self->pos2.x = self->pos.x + self->x38 * cos_table_lookup(self->x3c);
         self->pos2.z = self->pos.z + self->x38 * sin_table_lookup(self->x3c);
