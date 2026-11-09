@@ -6495,7 +6495,7 @@ s32 TLobby__sub_80418D7C(u8 *node, u8 *self, u16 p1, u16 flags, u16 p2, u8 last,
   s32 TLobby__sub_8041979C(void);
   u8 **new_var;
   u8 *g = (u8 *) (&packet_fragment_pool_state);
-  s16 cnt;
+  u32 c16;
   u8 **pb;
   s16 *pn;
   u8 *e;
@@ -6512,7 +6512,7 @@ s32 TLobby__sub_80418D7C(u8 *node, u8 *self, u16 p1, u16 flags, u16 p2, u8 last,
   u8 *ep;
   u32 off;
   u8 *nx;
-  u32 c16;
+  s16 cnt;
   O_80406B6C tmp;
   if (flags == 0)
   {
