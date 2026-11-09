@@ -315,6 +315,7 @@ void TUnk_8048E778::run_task() {
     f32 g;
     f32 b;
     f32 a;
+    f32 cv;
     f32 tilt;
     s32 frames;
 
@@ -365,31 +366,93 @@ void TUnk_8048E778::run_task() {
     if (1.0f - t < p->fade_out_start) {
         fade_out = (1.0f - t) * fade_out_scale;
     }
-    if (fade_in < fade_out) {
-        alpha = fade_in;
-    } else {
-        alpha = fade_out;
-    }
+    alpha = fade_in < fade_out ? fade_in : fade_out;
     if (TParticleCtrl__data_80511F70[sprite_index]->sprites->flags & 1) {
         if (flags & 0x100) {
-            r = fade_particle_channel(p->color_rate[0] * t + color_base[0], alpha);
-            g = fade_particle_channel(p->color_rate[1] * t + color_base[1], alpha);
-            b = fade_particle_channel(p->color_rate[2] * t + color_base[2], alpha);
+            cv = p->color_rate[0] * t + color_base[0];
+            if (cv < 0.0f) {
+                r = 0.0f;
+            } else {
+                cv = (cv < 1.0f) ? cv : 1.0f;
+                r = alpha * cv;
+            }
+            cv = p->color_rate[1] * t + color_base[1];
+            if (cv < 0.0f) {
+                g = 0.0f;
+            } else {
+                cv = (cv < 1.0f) ? cv : 1.0f;
+                g = alpha * cv;
+            }
+            cv = p->color_rate[2] * t + color_base[2];
+            if (cv < 0.0f) {
+                b = 0.0f;
+            } else {
+                cv = (cv < 1.0f) ? cv : 1.0f;
+                b = alpha * cv;
+            }
         } else {
-            r = fade_particle_channel(p->color_rate[0] * t + p->color_base[0], alpha);
-            g = fade_particle_channel(p->color_rate[1] * t + p->color_base[1], alpha);
-            b = fade_particle_channel(p->color_rate[2] * t + p->color_base[2], alpha);
+            cv = p->color_rate[0] * t + p->color_base[0];
+            if (cv < 0.0f) {
+                r = 0.0f;
+            } else {
+                cv = (cv < 1.0f) ? cv : 1.0f;
+                r = alpha * cv;
+            }
+            cv = p->color_rate[1] * t + p->color_base[1];
+            if (cv < 0.0f) {
+                g = 0.0f;
+            } else {
+                cv = (cv < 1.0f) ? cv : 1.0f;
+                g = alpha * cv;
+            }
+            cv = p->color_rate[2] * t + p->color_base[2];
+            if (cv < 0.0f) {
+                b = 0.0f;
+            } else {
+                cv = (cv < 1.0f) ? cv : 1.0f;
+                b = alpha * cv;
+            }
         }
         a = 1.0f;
     } else {
         if (flags & 0x100) {
-            r = clamp_particle_channel(p->color_rate[0] * t + color_base[0]);
-            g = clamp_particle_channel(p->color_rate[1] * t + color_base[1]);
-            b = clamp_particle_channel(p->color_rate[2] * t + color_base[2]);
+            r = p->color_rate[0] * t + color_base[0];
+            if (r < 0.0f) {
+                r = 0.0f;
+            } else {
+                r = (r < 1.0f) ? r : 1.0f;
+            }
+            g = p->color_rate[1] * t + color_base[1];
+            if (g < 0.0f) {
+                g = 0.0f;
+            } else {
+                g = (g < 1.0f) ? g : 1.0f;
+            }
+            b = p->color_rate[2] * t + color_base[2];
+            if (b < 0.0f) {
+                b = 0.0f;
+            } else {
+                b = (b < 1.0f) ? b : 1.0f;
+            }
         } else {
-            r = clamp_particle_channel(p->color_rate[0] * t + p->color_base[0]);
-            g = clamp_particle_channel(p->color_rate[1] * t + p->color_base[1]);
-            b = clamp_particle_channel(p->color_rate[2] * t + p->color_base[2]);
+            r = p->color_rate[0] * t + p->color_base[0];
+            if (r < 0.0f) {
+                r = 0.0f;
+            } else {
+                r = (r < 1.0f) ? r : 1.0f;
+            }
+            g = p->color_rate[1] * t + p->color_base[1];
+            if (g < 0.0f) {
+                g = 0.0f;
+            } else {
+                g = (g < 1.0f) ? g : 1.0f;
+            }
+            b = p->color_rate[2] * t + p->color_base[2];
+            if (b < 0.0f) {
+                b = 0.0f;
+            } else {
+                b = (b < 1.0f) ? b : 1.0f;
+            }
         }
         a = alpha;
     }
@@ -424,7 +487,7 @@ void TUnk_8048E778::run_task() {
     if (flags & 0x10) {
         TObjCollidable *target_obj = find_entity_by_id(target_id);
         if (target_obj == NULL) {
-            queue_destruction();
+            queue_destruction__7TObjectFv(this);
             return;
         }
         Vec *center = (Vec *)target_obj->get_center();
@@ -443,7 +506,7 @@ void TUnk_8048E778::run_task() {
     }
     motion_frame += unk_C0;
     if (motion != NULL && (f32)(motion->nbFrame - 1) <= motion_frame) {
-        motion_frame = motion->nbFrame - 1;
+        motion_frame = (f32)(motion->nbFrame - 1);
     }
     retire_ballistic_particle_if_done();
 }
