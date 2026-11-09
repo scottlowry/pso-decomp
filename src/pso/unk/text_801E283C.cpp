@@ -54,9 +54,8 @@ extern "C" u8 fill_date_from_seconds(u32 seconds, Date_801E21A8 *date) {
         }
     }
 
-    s32 month;
+    s32 month = 1;
     if (date->year % 4 == 0) {
-        month = 1;
         if (dayOfYear >= daysBeforeMonth[1]) {
             for (month = 2; month < 12; month++) {
                 if (dayOfYear < daysBeforeMonth[month] + 1) {
