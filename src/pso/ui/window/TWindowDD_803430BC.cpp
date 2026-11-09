@@ -249,6 +249,8 @@ extern char **TWindowDD__data_805D6E28;
 extern Pair_80344980 *TWindowDD__data_805D6E40;
 extern Pair_80344980 *TWindowDD__data_805D6E44;
 extern u8 *TWindowDD__data_805D6E48;
+extern s32 lbl_805DFCC0;
+extern s32 lbl_805DFCC4;
 s32 format_message_text__9TWindowDDFPvPvUs(DD_803461CC *arg0, char *arg1, u16 arg2);
 void TWindowDD__sub_8034694C(DD_803461CC *, s32, char *, char *, char *, s32 *);
 s32 format_german_message__9TWindowDDFPvPvUs(DD_803461CC *arg0, char *arg1, u16 arg2);
@@ -1732,6 +1734,342 @@ s32 format_german_message__9TWindowDDFPvPvUs(DD_803461CC *src, char *window_dd, 
     }
     window_dd[pos++] = 0;
     return pos;
+}
+
+s32 TWindowDD__sub_80345608(DD_803461CC *src, char *window_dd, u16 arg2)
+{
+  s32 i;
+  s32 k;
+  s32 n;
+  s32 m;
+  s32 pos;
+  i = 0;
+  pos = i;
+  n = src->count;
+  if (n == 0)
+  {
+    window_dd[0] = i;
+    return 1;
+  }
+  switch (src->type)
+  {
+    case 1:
+      TWindowDD__sub_8034740C(src, window_dd, &pos);
+      break;
+
+    case 2:
+      if (n > 2)
+    {
+      n = 2;
+    }
+      for (m = 0; m < n; m++)
+    {
+      if (m == 1)
+      {
+        append_char__9TWindowDDFSclPl(0x20, window_dd, &pos);
+      }
+      TWindowDD__sub_8034886C(src->ids[m], window_dd, &pos);
+    }
+
+      append_char__9TWindowDDFSclPl(0x3F, window_dd, &pos);
+      if (src->count > 2)
+    {
+      append_prompt_newline__9TWindowDDFPl(window_dd, &pos);
+      TWindowDD__sub_8034886C(src->ids[2], window_dd, &pos);
+    }
+      break;
+
+    case 3:
+      if (n > 1)
+    {
+      struct 
+      {
+        DD_803461CC dd;
+        u8 pad[0x18];
+      } tmp;
+      TWindowDD__sub_80347758(src, &tmp.dd);
+      pos = TWindowDD__sub_80345608(&tmp.dd, window_dd, arg2);
+    }
+    else
+    {
+      TWindowDD__sub_8034886C(src->ids[0], window_dd, &pos);
+    }
+      break;
+
+    case 4:
+    {
+      s32 id;
+      s32 i;
+      if (n > 3)
+      {
+        i = src->ids[3];
+        if (src->ids[3] == 0x685)
+        {
+          append_string__9TWindowDDFllPl((char *) (&lbl_805DFCC0), window_dd, &pos);
+        }
+        else
+          if (i == 0x686)
+        {
+          append_string__9TWindowDDFllPl((char *) (&lbl_805DFCC4), window_dd, &pos);
+        }
+      }
+      m = src->ids[0];
+      id = m;
+      if (id != 0x2C8)
+      {
+        TWindowDD__sub_8034886C(id, window_dd, &pos);
+      }
+      if (id == 0x2C7)
+      {
+        append_char__9TWindowDDFSclPl(0x2C, window_dd, &pos);
+        append_string__9TWindowDDFllPl(TWindowDD__data_805D6E28[0xA8C / 4], window_dd, &pos);
+        k = 2;
+      }
+      else
+        if ((id >= 0x68C) && (id <= 0x697))
+      {
+        append_char__9TWindowDDFSclPl(0x2C, window_dd, &pos);
+        append_string__9TWindowDDFllPl(TWindowDD__data_805D6E28[0xA80 / 4], window_dd, &pos);
+        k = 1;
+      }
+      else
+        if (id == 0x698)
+      {
+        append_string__9TWindowDDFllPl(TWindowDD__data_805D6E28[0xA80 / 4], window_dd, &pos);
+        k = 1;
+      }
+      else
+      {
+        k = 0;
+      }
+      if (n > 1)
+      {
+        i = src->ids[1];
+        show_message_by_count__9TWindowDDFll(window_dd, &pos);
+        if (k == 0)
+        {
+          TWindowDD__sub_8034886C(i, window_dd, &pos);
+        }
+        else
+        {
+          Pair_80344980 *p;
+          if (k == 1)
+          {
+            p = &TWindowDD__data_805D6E40[1];
+          }
+          else
+          {
+            p = &TWindowDD__data_805D6E40[0];
+          }
+          append_string__9TWindowDDFllPl(TWindowDD__data_805D6E28[p->list[i - 0x5AC]], window_dd, &pos);
+        }
+      }
+      if (n > 2)
+      {
+        show_message_by_count__9TWindowDDFll(window_dd, &pos);
+        TWindowDD__sub_80347474(src, src->ids[2], window_dd, &pos);
+      }
+      if (n > 3)
+      {
+        TWindowDD__sub_8034886C(src->ids[3], window_dd, &pos);
+      }
+      window_dd[0] = fn_80228C54(window_dd[0]);
+      break;
+    }
+
+    case 5:
+    {
+      s32 mode;
+      if (n > 2)
+      {
+        if (src->ids[2] == 0x685)
+        {
+          append_string__9TWindowDDFllPl((char *) (&lbl_805DFCC0), window_dd, &pos);
+        }
+        else
+          if (src->ids[2] == 0x686)
+        {
+          append_string__9TWindowDDFllPl((char *) (&lbl_805DFCC4), window_dd, &pos);
+        }
+      }
+      k = src->ids[0];
+      TWindowDD__sub_80347474(src, k, window_dd, &pos);
+      if (k == 0x2C4)
+      {
+        mode = 0;
+        i = get_player_battle_flag_state__9TWindowDDFUs(arg2);
+      }
+      else
+        if (k == 0x2C7)
+      {
+        mode = 2;
+        append_char__9TWindowDDFSclPl(0x2C, window_dd, &pos);
+        append_string__9TWindowDDFllPl(TWindowDD__data_805D6E28[0xA8C / 4], window_dd, &pos);
+        if (get_player_battle_flag_state__9TWindowDDFUs(arg2) == 2)
+        {
+          i = 3;
+        }
+        else
+        {
+          i = 1;
+        }
+      }
+      else
+        if ((k >= 0x68C) && (k <= 0x697))
+      {
+        mode = 1;
+        append_char__9TWindowDDFSclPl(0x2C, window_dd, &pos);
+        append_string__9TWindowDDFllPl(TWindowDD__data_805D6E28[0xA80 / 4], window_dd, &pos);
+        i = get_player_battle_flag_state__9TWindowDDFUs(k - 0x68C);
+      }
+      else
+      {
+        mode = 3;
+        if (k == 0x2C5)
+        {
+          i = 0;
+        }
+        else
+          if (k == 0x2C6)
+        {
+          i = 2;
+        }
+        else
+        {
+          switch (TWindowDD__data_805D6E48[clamp_range_2C9_552__9TWindowDDFs(k)])
+          {
+            case 0:
+              i = 0;
+              break;
+
+            case 1:
+              i = 1;
+              break;
+
+            case 2:
+              i = 2;
+              break;
+
+            case 3:
+              i = 3;
+              break;
+
+          }
+
+        }
+      }
+      if (n > 1)
+      {
+        s32 b;
+        s32 code;
+        s32 found;
+        show_message_by_count__9TWindowDDFll(window_dd, &pos);
+        k = src->ids[1];
+        b = ((u8 *) lbl_805D6E4C)[clamp_range_5FA_682__9TWindowDDFs(k)];
+        switch (b)
+        {
+          default:
+            found = 0;
+            break;
+
+          case 0:
+            found = 1;
+            switch (mode)
+          {
+            case 0:
+              code = 0x697;
+              break;
+
+            case 1:
+              code = 0x699;
+              break;
+
+            case 2:
+              code = 0x698;
+              break;
+
+            case 3:
+              code = 0x69A;
+
+            default:
+              break;
+
+          }
+
+            break;
+
+          case 1:
+            found = 1;
+            switch (mode)
+          {
+            case 0:
+              code = 0x69B;
+              break;
+
+            case 1:
+              code = 0x279;
+              break;
+
+            case 2:
+              code = 0x69C;
+              break;
+
+            case 3:
+              code = 0x69D;
+
+            default:
+              break;
+
+          }
+
+            break;
+
+        }
+
+        if (found != 0)
+        {
+          append_string__9TWindowDDFllPl(TWindowDD__data_805D6E28[code], window_dd, &pos);
+          show_message_by_count__9TWindowDDFll(window_dd, &pos);
+        }
+        if (i == 0)
+        {
+          TWindowDD__sub_80347474(src, k, window_dd, &pos);
+        }
+        else
+        {
+          Pair_80344980 *p;
+          if (i == 1)
+          {
+            p = &TWindowDD__data_805D6E44[0];
+          }
+          else
+            if (i == 2)
+          {
+            p = &TWindowDD__data_805D6E44[1];
+          }
+          else
+          {
+            p = &TWindowDD__data_805D6E44[2];
+          }
+          TWindowDD__sub_803474CC(src, k, TWindowDD__data_805D6E28[p->list[clamp_range_5FA_682__9TWindowDDFs(k)]], window_dd, &pos);
+        }
+      }
+      if (n > 2)
+      {
+        TWindowDD__sub_8034886C(src->ids[2], window_dd, &pos);
+      }
+      window_dd[0] = fn_80228C54(window_dd[0]);
+      break;
+    }
+
+    case 6:
+      format_type6_message__9TWindowDDFlPv(src, window_dd, &pos);
+      break;
+
+  }
+
+  window_dd[pos++] = 0;
+  return pos;
 }
 
 #pragma push
