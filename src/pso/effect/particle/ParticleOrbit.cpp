@@ -315,7 +315,7 @@ void TUnk_8048E790::run_task() {
     if (flags & 0x10) {
         TObjCollidable *target_obj = find_entity_by_id(target_id);
         if (target_obj == NULL) {
-            queue_destruction();
+            queue_destruction__7TObjectFv(this);
             return;
         }
         Vec *center = (Vec *)target_obj->get_center();
