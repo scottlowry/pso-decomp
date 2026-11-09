@@ -162,6 +162,9 @@ extern const f32 lbl_805D81D8;
 extern const f32 lbl_805D81DC;
 extern const f32 lbl_805D81E0;
 extern const f32 lbl_805D81E4;
+extern const f32 lbl_805D81E8;
+extern const f32 lbl_805D81F0;
+extern const f32 lbl_805D81C8;
 extern const f32 lbl_805D81F4;
 extern const f32 lbl_805D81F8;
 
@@ -170,6 +173,7 @@ void post_translate_matrix(void *);
 void set_chunk_material_override_pair(s32, s32, s32, s32);
 void queue_destruction__7TObjectFv();
 void *__nw__7TObjectFUl(int);
+void *__nw__FUl(unsigned long);
 void mem_free(void *p);
 void *mem_alloc(u32);
 f32 calc_nearest_crater_distance(void *);
@@ -184,6 +188,10 @@ s32 TBoss8Dragon__sub_8002DB04(void *arg0);
 void *destroy__12TBoss8DragonFPvs(void *arg0, s16 arg1);
 Grid_8002DB7C *init_grid_mesh__12TBoss8DragonFPviiiPv(Grid_8002DB7C *g, s32 width, s32 strips, s32 materialWords, s16 *material);
 f32 rand_signed_unit(void);
+extern u8 lbl_804FE238[];
+extern u8 lbl_804FE250[];
+extern const f32 lbl_805D81C4;
+extern const f32 lbl_805D81EC;
 
 void TObjBoss1MokoHill_Solo::run_task() {
     Trail_8002CC48 *self = (Trail_8002CC48 *)this;
@@ -440,6 +448,190 @@ void update_dragon_trail_uvs(Obj_8002D4C0 *self) {
 }
 
 void TBoss8Dragon::free_resources() { mem_free((void *)lbl_805D4B78); lbl_805D4B78 = 0; mem_free((void *)lbl_805D4B6C); lbl_805D4B6C = 0; ((int (*)(void*, void*))destroy__12TBoss8DragonFPvs)((void*)lbl_805D4B64, (void*)1); lbl_805D4B64 = 0; ((int (*)(void*, void*))destroy__12TBoss8DragonFPvs)((void*)lbl_805D4B68, (void*)1); lbl_805D4B68 = 0; ((int (*)(void*, void*))destroy__12TBoss8DragonFPvs)((void*)lbl_805D4B60, (void*)1); lbl_805D4B60 = 0; }
+
+extern "C" void TBoss8Dragon__sub_8002D5F8(void) {
+    f32 (*apply_default_velocity_scale)(f32 *);
+    f32 v[3];
+    Grid_8002DB7C *g;
+    Grid_8002DB7C *g1;
+    f32 *w;
+    s16 *mat;
+    s16 *poly;
+    s16 *pp;
+    s16 *q;
+    const f32 *tbl;
+    f32 *thr;
+    s8 *d;
+    s8 *p;
+    f32 y;
+    f32 xv;
+    f32 zv;
+    f32 step1;
+    f32 step2;
+    f32 outer;
+    f32 inner;
+    s32 n;
+    s32 cnt;
+    s32 j;
+    s32 i;
+    s32 row;
+    u16 a;
+    u16 b;
+    u16 val;
+    u32 bits;
+
+    p = *(s8 **)(lbl_805D4B50 + 0x42C);
+    p = *(s8 **)(p + 0x48);
+    d = *(s8 **)(p + 0x4);
+    mat = *(s16 **)(d + 0x4);
+    g = (Grid_8002DB7C *)__nw__FUl(0x68);
+    if (g != NULL) {
+        g = init_grid_mesh__12TBoss8DragonFPviiiPv(g, 11, 10, 8, mat);
+    }
+    lbl_805D4B60 = (int)g;
+    g1 = (Grid_8002DB7C *)TBoss8Dragon__sub_8002DB04((void *)lbl_805D4B60);
+    outer = lbl_805D81E4;
+    step2 = lbl_805D81E8;
+    for (i = 0; i < 11; i++) {
+        w = (f32 *)g1;
+        inner = lbl_805D81E4;
+        for (j = 0; j < 11; j++) {
+            v[0] = inner;
+            v[2] = outer;
+            w[0] = inner;
+            y = ((TBoss8Dragon *)v)->apply_default_velocity_scale();
+            w[1] = y;
+            w[2] = outer;
+            w[3] = v[0];
+            w[4] = v[1];
+            w[5] = v[2];
+            w += 6;
+            inner -= step2;
+        }
+        w += 6;
+        outer -= step2;
+    }
+    w = (f32 *)g1;
+    for (i = 0; i < 11; i++) {
+        ((s16 *)lbl_804FE238)[i] = (s16)(lbl_805D81D8 * (lbl_805D81DC * w[0]));
+        y = w[0];
+        ((s16 *)lbl_804FE250)[i] = (s16)(lbl_805D81D8 * (lbl_805D81E0 * y));
+        w += 6;
+    }
+    g = (Grid_8002DB7C *)__nw__FUl(0x68);
+    if (g != NULL) {
+        g = init_grid_mesh__12TBoss8DragonFPviiiPv(g, 5, 4, 8, mat);
+    }
+    lbl_805D4B68 = (int)g;
+    g = (Grid_8002DB7C *)TBoss8Dragon__sub_8002DB04((void *)lbl_805D4B68);
+    w = (f32 *)g;
+    outer = lbl_805D8198;
+    step1 = lbl_805D8184;
+    step2 = lbl_805D81F0;
+    for (i = 0; i < 5; i++) {
+        f32 inner = lbl_805D81EC;
+        for (s32 j = 0; j < 5; j++) {
+            v[0] = inner;
+            v[2] = outer;
+            w[0] = inner;
+            y = ((TBoss8Dragon *)v)->apply_default_velocity_scale() + step1;
+            w[1] = y;
+            w[2] = outer;
+            w[3] = v[0];
+            w[4] = v[1];
+            w[5] = v[2];
+            w += 6;
+            inner -= step2;
+        }
+        g = (Grid_8002DB7C *)((s8 *)g + 0x18);
+        outer -= step2;
+    }
+    q = (s16 *)(*(s32 *)lbl_805D4B68 + 0x14);
+    bits = (u32)q[7];
+    q[7] = (s16)(((bits >> 16) & 3) | 5);
+    q[8] = (s16)(q[8] | 0x900);
+    pp = (s16 *)(TBoss8Dragon__sub_8002DAEC((void *)lbl_805D4B68) + 2);
+    b = 0x300;
+    for (row = 0; row < 4; row++) {
+        a = b;
+        b = (u16)(b - 0x100);
+        val = 0;
+        for (i = 0; i < 5; i++) {
+            pp[1] = (s16)val;
+            pp[2] = (s16)a;
+            pp[4] = (s16)val;
+            pp[5] = (s16)b;
+            pp += 6;
+            val += 0x100;
+        }
+    }
+    g = (Grid_8002DB7C *)__nw__FUl(0x68);
+    if (g != NULL) {
+        p = *(s8 **)(lbl_805D4B50 + 0x42C);
+        p = *(s8 **)(p + 0x38);
+        p = *(s8 **)(p + 0x4);
+        g = init_grid_mesh__12TBoss8DragonFPviiiPv(g, 11, 1, 8, *(s16 **)p);
+    }
+    lbl_805D4B64 = (int)g;
+    p = *(s8 **)(lbl_805D4B50 + 0x42C);
+    p = *(s8 **)(p + 0x38);
+    d = *(s8 **)(p + 0x4);
+    ((s16 *)d)[8] = 0x408;
+    lbl_805D4B70 = (Hdr_8002D4C0 *)(d + 0x14);
+    lbl_805D4B70->count = 0x242;
+    cnt = *(s32 *)(d + 0x18) & 0x3FFFF;
+    poly = (s16 *)(d + 0x1A);
+    n = 0;
+    for (i = 0; i < cnt; i++) {
+        j = poly[i];
+        if (j < 0) {
+            j = -j;
+        }
+        n += j;
+    }
+    lbl_805D4B6C = (int)mem_alloc(n * 4);
+    tbl = (const f32 *)(*(s32 *)d + 8);
+    poly = (s16 *)(d + 0x1A);
+    pp = (s16 *)lbl_805D4B6C;
+    for (i = 0; i < cnt; i++) {
+        j = *poly++;
+        if (j < 0) {
+            j = -j;
+        }
+        while (j > 0) {
+            *pp++ = (s16)(lbl_805D81D8 * (lbl_805D81DC * tbl[*poly * 6]));
+            y = tbl[*poly * 6 + 2];
+            *pp++ = (s16)(lbl_805D81D8 * (lbl_805D81E0 * y));
+            poly += 3;
+            j--;
+        }
+    }
+    thr = (f32 *)(*(s32 *)d + 4);
+    cnt = (s32)(*(u32 *)thr >> 16);
+    lbl_805D4B74 = 0;
+    for (i = 0; i < cnt; i++) {
+        y = thr[1];
+        if (y > lbl_805D81EC) {
+            lbl_805D4B74 = lbl_805D4B74 + 1;
+        }
+        thr += 6;
+    }
+    w = (f32 *)mem_alloc(lbl_805D4B74 * 16);
+    lbl_805D4B78 = (int)w;
+    thr = (f32 *)tbl;
+    for (i = 0; i < cnt; i++) {
+        y = thr[1];
+        if (y > lbl_805D81EC) {
+            ((s32 *)w)[0] = (s32)(thr + 1);
+            w[1] = y;
+            w[2] = lbl_805D81C4;
+            xv = lbl_805D81C8 * (lbl_805D818C * (f32)rand());
+            w[3] = (s32)xv + 2;
+            w += 4;
+        }
+        thr += 6;
+    }
+}
 
 s32 TBoss8Dragon__sub_8002DAEC(void *arg0) {
     return *(s32 *)((s8 *)arg0 + 0x14) + ((*(s32 *)((s8 *)arg0 + 0xC) + 3) * 2);
