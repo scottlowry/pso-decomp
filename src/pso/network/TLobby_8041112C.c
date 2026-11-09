@@ -1404,8 +1404,8 @@ inline s16 cmp16_80411604(void *a, void *b) {
 }
 
 inline void remove_80411604(RecoveredGlobal_8041123C_lbl_805C1BB8 *g, s16 len, void *grp, void *src) {
-    s16 n = g->ab.a;
     u8 *e = *(u8 **)((u8 *)g + 24);
+    s16 n = g->ab.a;
     for (; n > 0; n--, e += 42) {
         if (*(s16 *)e == 1 && *(s16 *)(e + 40) == len && cmp16_80411604(e + 8, grp) == 0 && cmp16_80411604(e + 24, src) == 0) {
             *(s16 *)e = 0;
