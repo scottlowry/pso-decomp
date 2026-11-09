@@ -296,8 +296,8 @@ void run_task__13TUnk_804CC800Fv(Task_802312E4 *self) {
         set_position__13TParticleCtrlFPv((void *)self->emitters[0], &self->pos2);
         set_direction__13TParticleCtrlFPv((void *)self->emitters[0], dir);
     } else {
-        dir[2] = 0x4000;
         i = (s32)(lbl_8044D360 * atan2_float(self->pos2.x - self->pos.x, self->pos2.z - self->pos.z));
+        dir[2] = 0x4000;
         dir[1] = i;
         dir[0] = i - 0x8000;
         dir[1] = 0;
