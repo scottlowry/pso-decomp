@@ -673,9 +673,11 @@ s32 test_box_sphere_contact(Vec_803E1B1C *box, CollisionSphere *sphere)
   Vec_803E1B1C boxMin;
   Vec_803E1B1C boxMax;
   Vec_803E1B1C sphereMin;
+  u8 *new_var3;
   Vec_803E1B1C sphereMax;
   calc_bounds_min_max__10TObjPlayerFPvPvPv(box, &boxMin, &boxMax);
-  ((TObjPlayer *)(u8 *) sphere)->calc_bounds((u8 *) (&sphereMin), (u8 *) (&sphereMax));
+  new_var3 = (u8 *) (&sphereMax);
+  ((TObjPlayer *)(u8 *) sphere)->calc_bounds((u8 *) (&sphereMin), new_var3);
   if (((TObjPlayer *)(u8 *) (&boxMin))->test_aabb_overlap((u8 *) (&boxMax), (u8 *) (&sphereMin), (u8 *) (&sphereMax)) != 0)
   {
     Faces_803E0ED4 faces = box_face_vertex_index_table;
@@ -722,8 +724,8 @@ s32 test_box_sphere_contact(Vec_803E1B1C *box, CollisionSphere *sphere)
         f32 ey = a->y - b->y;
         f32 ez = a->z - b->z;
         f32 s = ((ez * (pz - a->z)) + ((ex * (px - a->x)) + (ey * (py - a->y)))) / ((ez * ez) + ((ex * ex) + (ey * ey)));
-        f32 fz = (ez * s) + a->z;
         f32 fx = inline_fn2345(ex, s, a);
+        f32 fz = (ez * s) + a->z;
         f32 fy = (ey * s) + a->y;
         f32 dx = fx - px;
         f32 dy = fy - py;
