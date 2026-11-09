@@ -473,6 +473,7 @@ extern "C" void TBoss8Dragon__sub_8002D5F8(void) {
     s32 n;
     s32 cnt;
     s32 j;
+    s32 k;
     s32 i;
     s32 row;
     s32 a;
@@ -599,12 +600,12 @@ extern "C" void TBoss8Dragon__sub_8002D5F8(void) {
         if (j < 0) {
             j = (s16)-j;
         }
-        while (j > 0) {
-            *pp++ = (s16)(lbl_805D81D8 * (lbl_805D81DC * tbl[*poly * 6]));
-            y = tbl[*poly * 6 + 2];
-            *pp++ = (s16)(lbl_805D81D8 * (lbl_805D81E0 * y));
+        for (k = 0; k < j; k++) {
+            const f32 *e = tbl + *poly * 6;
             poly += 3;
-            j--;
+            *pp++ = (s16)(lbl_805D81D8 * (lbl_805D81DC * e[0]));
+            y = e[2];
+            *pp++ = (s16)(lbl_805D81D8 * (lbl_805D81E0 * y));
         }
     }
     thr = (f32 *)(*(s32 *)d + 4);
