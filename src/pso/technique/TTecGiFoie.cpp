@@ -227,6 +227,8 @@ void TTecGiFoie::calc_params() {
   }
 }
 
+#pragma push
+#pragma fp_contract on
 void run_task__13TUnk_804CC800Fv(Task_802312E4 *self) {
     s32 k;
     s32 i;
@@ -305,6 +307,7 @@ void run_task__13TUnk_804CC800Fv(Task_802312E4 *self) {
         }
     }
 }
+#pragma pop
 
 u8 *__dt__13TUnk_804CC800Fv(Task_80231224 *task, s16 flag) {
     u32 i;
