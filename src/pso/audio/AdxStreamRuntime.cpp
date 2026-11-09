@@ -2207,7 +2207,6 @@ u8 adxm_vblank_stack[ADXM_VBLANK_STACK_BYTES];
 u8 adxm_busy_wait_stack[ADXM_BUSY_WAIT_STACK_BYTES];
 
 void TLobby__sub_803CB858(s32 *arg0) {
-    u8 *pool = (u8 *)&adxm_worker_thread;
     lbl_805E0D78;
     if (lbl_805D7590 == 0) {
         TLobby::init_callback_tables();
@@ -2233,13 +2232,13 @@ void TLobby__sub_803CB858(s32 *arg0) {
             b = arg0[4];
             ((s32 *)&lbl_804F9D80)[4] = b;
         }
-        OSCreateThread((OSThread *)(pool + 0x620), (void *(*)(void *))TLobby::wait_for_lock_release, NULL,
+        OSCreateThread(&adxm_busy_wait_thread, (void *(*)(void *))TLobby::wait_for_lock_release, NULL,
                        adxm_busy_wait_stack + ADXM_BUSY_WAIT_STACK_BYTES, ADXM_BUSY_WAIT_STACK_BYTES,
                        ((s32 *)&lbl_804F9D80)[1], 1);
-        OSCreateThread((OSThread *)(pool + 0x310), (void *(*)(void *))TLobby__sub_803CBB14, NULL,
+        OSCreateThread((OSThread *)&adxm_vblank_thread, (void *(*)(void *))TLobby__sub_803CBB14, NULL,
                        adxm_vblank_stack + ADXM_VBLANK_STACK_BYTES, ADXM_VBLANK_STACK_BYTES,
                        ((s32 *)&lbl_804F9D80)[2], 1);
-        OSCreateThread((OSThread *)pool, (void *(*)(void *))TLobby::worker_thread_loop, NULL,
+        OSCreateThread((OSThread *)&adxm_worker_thread, (void *(*)(void *))TLobby::worker_thread_loop, NULL,
                        adxm_worker_stack + ADXM_WORKER_STACK_BYTES, ADXM_WORKER_STACK_BYTES,
                        lbl_804F9D80.prio, 1);
         lbl_805D75A8 = OSGetCurrentThread();
@@ -2250,8 +2249,8 @@ void TLobby__sub_803CB858(s32 *arg0) {
         lbl_805D75B4 = 0;
         lbl_805D75C4 = 0;
         lbl_805D75B0 = 0;
-        OSResumeThread((OSThread *)(pool + 0x310));
-        OSResumeThread((OSThread *)pool);
+        OSResumeThread((OSThread *)&adxm_vblank_thread);
+        OSResumeThread((OSThread *)&adxm_worker_thread);
         TLobby__sub_803D34B0(5, (void (*)(s32))TLobby::adxm_goto_mwidle_border, 0);
     }
     lbl_805D7590++;
