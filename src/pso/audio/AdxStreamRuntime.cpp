@@ -897,6 +897,14 @@ extern Ch_803CB5C4 adx_decoder_channel_pool[16];
 void TLobby__sub_803CB194(u8 *arg0);
 extern s32 lbl_805D7590;
 s32 TLobby__sub_803CB844(void);
+void TLobby__sub_803CB858(s32 *arg0);
+void TLobby__sub_803D33E4(s32 arg0, s32 arg1);
+void TLobby__sub_803D33D4(s32 arg0, s32 arg1);
+void TLobby__sub_803D34B0(s32 arg0, void (*arg1)(s32), s32 arg2);
+void __OSCallResetFunctions(void);
+void fn_803CBCA0(void);
+extern void *lbl_805D75A8;
+extern s32 lbl_805D75B0;
 void TLobby__sub_803C0758(u8 *arg0);
 void configure_audio_stream_output(Stream_803C9FCC *self);
 extern char adxt_start_filename_open_error[];
@@ -2188,6 +2196,67 @@ s32 TLobby__sub_803CB844(void) {
     return lbl_805D7590 != 0;
 }
 
+// Thread/stack storage defined above first use: the era object computed the
+// anchor-relative symbol differences at compile time (plain-displacement
+// addressing); extern-only visibility forces @ha/@l pairs per symbol.
+OSThread adxm_worker_thread;
+OSThread adxm_vblank_thread;
+OSThread adxm_busy_wait_thread;
+u8 adxm_worker_stack[ADXM_WORKER_STACK_BYTES];
+u8 adxm_vblank_stack[ADXM_VBLANK_STACK_BYTES];
+u8 adxm_busy_wait_stack[ADXM_BUSY_WAIT_STACK_BYTES];
+
+void TLobby__sub_803CB858(s32 *arg0) {
+    u8 *pool = (u8 *)&adxm_worker_thread;
+    lbl_805E0D78;
+    if (lbl_805D7590 == 0) {
+        TLobby::init_callback_tables();
+        TLobby__sub_803D33E4((s32)__OSCallResetFunctions, 0);
+        TLobby__sub_803D33D4((s32)fn_803CBCA0, 0);
+        if (arg0 == NULL) {
+            ((s32 *)&lbl_804F9D80)[3] = 0x10;
+            ((s32 *)&lbl_804F9D80)[0] = 1;
+            ((s32 *)&lbl_804F9D80)[1] = 8;
+            ((s32 *)&lbl_804F9D80)[2] = 0xc;
+            ((s32 *)&lbl_804F9D80)[4] = 0x18;
+        } else {
+            s32 a;
+            s32 b;
+            a = arg0[0];
+            b = arg0[1];
+            ((s32 *)&lbl_804F9D80)[0] = a;
+            ((s32 *)&lbl_804F9D80)[1] = b;
+            a = arg0[2];
+            b = arg0[3];
+            ((s32 *)&lbl_804F9D80)[2] = a;
+            ((s32 *)&lbl_804F9D80)[3] = b;
+            b = arg0[4];
+            ((s32 *)&lbl_804F9D80)[4] = b;
+        }
+        OSCreateThread((OSThread *)(pool + 0x620), (void *(*)(void *))TLobby::wait_for_lock_release, NULL,
+                       adxm_busy_wait_stack + ADXM_BUSY_WAIT_STACK_BYTES, ADXM_BUSY_WAIT_STACK_BYTES,
+                       ((s32 *)&lbl_804F9D80)[1], 1);
+        OSCreateThread((OSThread *)(pool + 0x310), (void *(*)(void *))TLobby__sub_803CBB14, NULL,
+                       adxm_vblank_stack + ADXM_VBLANK_STACK_BYTES, ADXM_VBLANK_STACK_BYTES,
+                       ((s32 *)&lbl_804F9D80)[2], 1);
+        OSCreateThread((OSThread *)pool, (void *(*)(void *))TLobby::worker_thread_loop, NULL,
+                       adxm_worker_stack + ADXM_WORKER_STACK_BYTES, ADXM_WORKER_STACK_BYTES,
+                       lbl_804F9D80.prio, 1);
+        lbl_805D75A8 = OSGetCurrentThread();
+        lobby_worker_thread_run_flag = 1;
+        lbl_805D75B8 = 1;
+        lbl_805D75C8 = 1;
+        lbl_805D75BC = 0;
+        lbl_805D75B4 = 0;
+        lbl_805D75C4 = 0;
+        lbl_805D75B0 = 0;
+        OSResumeThread((OSThread *)(pool + 0x310));
+        OSResumeThread((OSThread *)pool);
+        TLobby__sub_803D34B0(5, (void (*)(s32))TLobby::adxm_goto_mwidle_border, 0);
+    }
+    lbl_805D7590++;
+}
+
 void TLobby__sub_803CBA18(void) {
     set_callback_params__6TLobbyFll();
 }
@@ -2257,10 +2326,4 @@ void TLobby::adxm_goto_mwidle_border() {
 RecoveredGlobal_803C90B0_lbl_80575140 adx_stream_read_requests;
 Ch_803CB5C4 adx_decoder_channel_pool[16];
 
-OSThread adxm_worker_thread;
-OSThread adxm_vblank_thread;
-OSThread adxm_busy_wait_thread;
-u8 adxm_worker_stack[ADXM_WORKER_STACK_BYTES];
-u8 adxm_vblank_stack[ADXM_VBLANK_STACK_BYTES];
-u8 adxm_busy_wait_stack[ADXM_BUSY_WAIT_STACK_BYTES];
 typedef char AdxmOriginalThreadSize[sizeof(OSThread)==0x310 ? 1 : -1];
