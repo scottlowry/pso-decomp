@@ -53,3 +53,26 @@ llvm-nm -S build/GPOE8P/src/pso/player/TObjPlayer_803DF7A8.o   # INT-parse, gate
 # era .fn: build/GPOE8P/asm/pso/player/TObjPlayer_803DF7A8.s lines 258..1472 (cache copy cache/dfb1c_era.fn)
 # battery: ninja; tools/report_delta.py cache/base_report_df7a8.json build/GPOE8P/report.json --check; tools/check_pr.py
 ```
+
+---
+
+# VISIT-2 (card-fb1c-v2, base 00cda35c, tip park-echo 30dbc191)
+
+- ABSORPTION SCREEN: origin/master == park base == 00cda35c; zero commits touched the file since c6153df7. No absorption — park leads by construction.
+- MEASURE-AT-TIP: master echo 98.851456 / 232 rows / gate 0x11AC, then TRANSPLANT VERBATIM (cherry-pick 379d7deb c6153df7, author-flagged; blob-identity: `git diff card-803dfb1c-v1 HEAD` empty). Tip echo = 98.8992 / 178 rows / 0x11AC — one_shot dump byte-identical to cache/dfb1c_v3_oneshot.txt.
+- PIN live-cited at build.ninja `build/GPOE8P/src/pso/player/TObjPlayer_803DF7A8.o`: GC/2.6 -O3,p (unchanged from v1).
+- Base snapshot: cache/base_report_w81.json. DOL (file sha1sum) = 0d85744b51d7379efb025a943d0cd5aaae2191a3 expected-constant, unit unlinked => inertness confirmed.
+
+## 20-row rotation frontier — VERDICT: SEALED (def-binding), zero rungs spent on builds
+- Rank-preserve diagnostic FIRST (zero-build, w81): era->ours fp map over full census MULTI-VALUED: f18->{f23,f27}, f19->{f23,f28}, f20->{f27,f29} (also inverse) => non-injective, no bijection, no cyclic shift. PADREAD-template law: stable-home decl grid cannot spell shared regs => RA-spill/home-ring sealed. Block-2 window (394-400) rides this ring terrain; blocks 1/3 (86-95, 693-698) are pure positional shifts of `mr r3, r28` (identical regs, multiset-equal window).
+- Era decode (zero-build): all 3 windows = lfs prevB pair via r28 -> `mr r3,r28` -> A-delta lengthSq chain -> li/mtctr -> loop-head `lfs 0x0(r3)` consume. Era binds the j-loop base in the PREHEADER; our emitter sinks it to loop-head. v1 r2 datum (named-bind `bp=b` x3) BYTE-INERT at pin = emitter-internal def-binding/clobber-analysis hoist (EB4D4 kin). Closed-class item 2 covers the ONLY lever a permuter permutes (statement order) => permuter SKIPPED despite lifecycle bar met (1131 insns >= 400i): permutation of an inert class = re-roll, banned. Expected yield <=+0.02pp per v1 receipt.
+- ERA POLARITY DECODE: 6x `cror eq, gt, eq` (slope guards, 2/projection block: 0x803DFF04/0x803E008C/0x803E03B4/0x803E053C/0x803E085C/0x803E09E4) — none appear in the 178-row census => guard polarity byte-exact vs era. No inversion door. Datum, zero-build.
+- DECL-ORDER-NULL probe (T1, 1 build): block-1 decl reorder to era def-order kin (prevBu/prevBv raised before toPrev/toCur/length, mirroring block-2 list) => BYTE-IDENTICAL rows, 98.8992, gate held, siblings 0 drift. Decl grid insensitive below list extremes (80412618 datum reconfirmed on this terrain). Reverted.
+- FADD-COMM probe (T2, 1 build): lengthSqA term swap x3 => 98.87798 (178->181 rows): fadd direction OBSERVABLE; committed spelling already era-direction (fmuls f17=du^2 first). Swapping ADDS rows. Reverted.
+
+## Battery (tip 30dbc191, probes reverted, tracked-clean)
+- Full ninja rc=0. report_delta cache/base_report_w81.json --check: all counters +0, regressions 0. check_pr.py PASS (2871 linked units all exact). 39-sym int-parse: seat 0x11ac gate-exact, test_box_sphere_contact 0x738 = 1848 drift-free. Unit census: 25 fns, 23 paired-100.0, open = this seat (parked) + test_box_sphere_contact (separate card).
+
+## Verdict visit-2
+PARK MAX-METER at 98.8992 gate-exact. Seat floor is CLOSED: 66 pool (accepted, twin-proof) + 92 home-ring (sealed, non-injective rank census) + 20 rotation (sealed def-binding: r2 inert datum + rank-preserve + DECL-ORDER-NULL + polarity) — 100.0 unreachable at any spelled/config rung => NOT PR material (sub-100 ledger inventory).
+## Visit-3 (only if ladder law changes): nothing spelled remains. Seat = DONE-class candidate; unit supply = test_box_sphere_contact card (boxesphere kit round 9, AFTER this card's file ownership releases).
