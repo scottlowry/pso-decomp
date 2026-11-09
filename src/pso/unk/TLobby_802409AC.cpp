@@ -830,7 +830,7 @@ void calc_sound_spatial_params(SoundRequestVoice *v) {
                 if (dist > TLobby__data_805DC9E0) {
                     f32 angle = atan2_float(((const Vec *)v->position)->z - ((TCameraCtrl *)camera_ctrl_instance)->pos_z, ((const Vec *)v->position)->x - ((TCameraCtrl *)camera_ctrl_instance)->pos_x);
                     s32 yaw_pan = ((TCameraCtrl *)camera_ctrl_instance)->yaw + 0x4000;
-                    pan = (s8)(lbl_805DC9EC * -sin_table_lookup(yaw_pan + (s32)(10430.38043493439 * angle)));
+                    pan = (s8)(lbl_805DC9EC * -sin_table_lookup((s32)(10430.38043493439 * angle) + yaw_pan));
                 }
             }
             if (is_split_screen() != 0 || (v->flags & 8) != 0) {
