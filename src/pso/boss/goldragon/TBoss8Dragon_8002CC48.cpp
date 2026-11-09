@@ -451,7 +451,6 @@ void TBoss8Dragon::free_resources() { mem_free((void *)lbl_805D4B78); lbl_805D4B
 
 extern "C" void TBoss8Dragon__sub_8002D5F8(void) {
     f32 (*apply_default_velocity_scale)(f32 *);
-    f32 v[3];
     Grid_8002DB7C *g;
     Grid_8002DB7C *g1;
     f32 *w;
@@ -494,6 +493,7 @@ extern "C" void TBoss8Dragon__sub_8002D5F8(void) {
     outer = lbl_805D81E4;
     step2 = lbl_805D81E8;
     for (i = 0; i < 11; i++) {
+        f32 v[3];
         w = (f32 *)g1;
         inner = lbl_805D81E4;
         for (j = 0; j < 11; j++) {
@@ -530,6 +530,7 @@ extern "C" void TBoss8Dragon__sub_8002D5F8(void) {
     step1 = lbl_805D8184;
     step2 = lbl_805D81F0;
     for (i = 0; i < 5; i++) {
+        f32 v[3];
         f32 inner = lbl_805D81EC;
         for (s32 j = 0; j < 5; j++) {
             v[0] = inner;
@@ -547,14 +548,14 @@ extern "C" void TBoss8Dragon__sub_8002D5F8(void) {
         g = (Grid_8002DB7C *)((s8 *)g + 0x18);
         outer -= step2;
     }
-    q = (s16 *)(*(s32 *)lbl_805D4B68 + 0x14);
-    bits = (u32)q[7];
-    q[7] = (s16)(((bits >> 16) & 3) | 5);
-    q[8] = (s16)(q[8] | 0x900);
-    pp = (s16 *)(TBoss8Dragon__sub_8002DAEC((void *)lbl_805D4B68) + 2);
+    bits = (u32)((s16 *)(*(s32 *)lbl_805D4B68 + 0x14))[7];
+    ((s16 *)(*(s32 *)lbl_805D4B68 + 0x14))[7] = (s16)(((bits >> 16) & 3) | 5);
+    ((s16 *)(*(s32 *)lbl_805D4B68 + 0x14))[8] = (s16)(((s16 *)(*(s32 *)lbl_805D4B68 + 0x14))[8] | 0x900);
+    pp = (s16 *)TBoss8Dragon__sub_8002DAEC((void *)lbl_805D4B68);
     a = 0x400;
     b = 0x300;
     for (row = 0; row < 4; row++) {
+        pp += 2;
         val = 0;
         for (i = 0; i < 5; i++) {
             pp[1] = (s16)val;
@@ -581,7 +582,7 @@ extern "C" void TBoss8Dragon__sub_8002D5F8(void) {
     ((s16 *)d)[8] = 0x408;
     lbl_805D4B70 = (Hdr_8002D4C0 *)(d + 0x14);
     lbl_805D4B70->count = 0x242;
-    cnt = *(s16 *)(d + 0x14) & 0x3FFFF;
+    cnt = (s32)*(u16 *)(d + 0x14) & 0x3FFFF;
     poly = (s16 *)(d + 0x16);
     n = 0;
     for (i = 0; i < cnt; i++) {
@@ -600,7 +601,7 @@ extern "C" void TBoss8Dragon__sub_8002D5F8(void) {
         if (j < 0) {
             j = (s16)-j;
         }
-        for (k = 0; k < j; k++) {
+        for (k = 0; k < (s16)j; k++) {
             const f32 *e = tbl + *poly * 6;
             poly += 3;
             *pp++ = (s16)(lbl_805D81D8 * (lbl_805D81DC * e[0]));
