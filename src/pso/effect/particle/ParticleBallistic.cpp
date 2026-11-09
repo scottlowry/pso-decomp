@@ -366,11 +366,7 @@ void TUnk_8048E778::run_task() {
     if (1.0f - t < p->fade_out_start) {
         fade_out = (1.0f - t) * fade_out_scale;
     }
-    if (fade_in < fade_out) {
-        alpha = fade_in;
-    } else {
-        alpha = fade_out;
-    }
+    alpha = fade_in < fade_out ? fade_in : fade_out;
     if (TParticleCtrl__data_80511F70[sprite_index]->sprites->flags & 1) {
         if (flags & 0x100) {
             cv = p->color_rate[0] * t + color_base[0];
