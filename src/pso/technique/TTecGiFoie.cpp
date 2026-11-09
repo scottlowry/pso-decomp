@@ -122,7 +122,8 @@ struct Task_802312E4 {
     u8 band;
     s8 x45;
     u8 x46;
-    u8 single;
+    u8 x47;
+    s32 x48;
 };
 
 typedef struct RecoveredGlobal_80231638___vt__10TTecGiFoie RecoveredGlobal_80231638___vt__10TTecGiFoie;
@@ -182,14 +183,28 @@ void run_task__10TTecGiFoieFv(u8 *self);
 void * TTecGiFoie__ct(void *self_, void *source, void *origin, void *level);
 void matrix_mult_vec(void *, void *, void *);
 void rotate_matrix_y(void *, s32);
+void rotate_matrix_x(s32, s32);
+void rotate_vector_by_matrix(s32, void *, void *);
+s32 pop_matrix(void);
 s32 push_matrix_from(void *src);
 s32 pop_matrices(s32 arg0);
+f32 atan2_float(f32, f32);
+f32 sin_table_lookup(s32);
+f32 cos_table_lookup(s32);
+void set_position__13TParticleCtrlFPv(void *, void *);
+void set_direction__13TParticleCtrlFPv(void *, void *);
+void direction_to_rotation_xz__FPUcPlPl(u8 *, s32 *, s32 *);
 
 extern const f32 TTecGiFoie__data_805DC81C;
+extern const f32 lbl_805DC814;
 extern RecoveredGlobal_80231638___vt__10TTecGiFoie __vt__10TTecGiFoie;
 extern Profile_802312E4 TTecGiFoie__emitter_profile_table[];
 extern u8 lbl_8044D324[];
 extern Vec_8023179C lbl_8044D32C;
+extern const f32 lbl_8044D338[3];
+extern Vec_802312E4 lbl_8044D344;
+extern const f64 lbl_8044D358;
+extern const f64 lbl_8044D360;
 extern RecoveredGlobal_80230D9C_lbl_804CC510 tech_high_level_linear_power_table;
 extern RecoveredGlobal_80230D9C_lbl_804CC55C lbl_804CC55C;
 extern void *lbl_804CC800[];
@@ -210,6 +225,82 @@ void TTecGiFoie::calc_params() {
   {
     ((RecoveredFields_80230D9C_arg0 *) arg0)->field_88 = (f32) (((RecoveredFields_80230D9C_arg0 *) arg0)->field_88 * (*((f32 *) (((s8 *)&lbl_804CC55C.value) + 8))));
   }
+}
+
+void run_task__13TUnk_804CC800Fv(Task_802312E4 *self) {
+    s32 k;
+    s32 i;
+    s32 dir[3];
+    switch (self->band) {
+    case 0:
+        k = 0;
+        break;
+    case 1:
+        k = 1;
+        break;
+    case 2:
+        k = 2;
+        break;
+    case 3:
+        k = 0;
+        break;
+    case 4:
+        k = 1;
+        break;
+    case 5:
+        k = 2;
+        break;
+    default:
+        k = 0;
+        break;
+    }
+    self->x40 = self->x40 + 1;
+    if (self->x46 != 0) {
+        Vec_802312E4 v;
+        self->x38 = self->x38 + lbl_8044D358;
+        self->x3c = self->x3c + 0x1C71;
+        v.x = self->x38 * cos_table_lookup(self->x3c);
+        v.y = lbl_805DC810;
+        v.z = self->x38 * sin_table_lookup(self->x3c);
+        push_matrix_from(identity_matrix);
+        rotate_matrix_y(0, self->x48);
+        rotate_matrix_x(0, 0x4000);
+        rotate_vector_by_matrix(0, &v, &v);
+        pop_matrix();
+        self->pos2.x = self->pos.x + v.x;
+        self->pos2.y = self->pos.y + v.y;
+        self->pos2.z = self->pos.z + v.z;
+    } else {
+        self->x38 = self->x38 + lbl_805DC814;
+        self->x3c = self->x3c + (s32)(lbl_805DC818 * (f64)(self->band + 9));
+        i = (s32)(lbl_805DC818 * (f64)(self->x40 * 15));
+        self->pos2.y = self->pos.y + lbl_8044D338[k] * sin_table_lookup(i);
+        self->pos2.x = self->pos.x + self->x38 * cos_table_lookup(self->x3c);
+        self->pos2.z = self->pos.z + self->x38 * sin_table_lookup(self->x3c);
+    }
+    if (self->x47 != 0) {
+        Vec_802312E4 v;
+        v = lbl_8044D344;
+        push_matrix_from(identity_matrix);
+        rotate_matrix_y(0, self->x48);
+        rotate_vector_by_matrix(0, &v, &v);
+        pop_matrix();
+        dir[0] = 0;
+        dir[1] = 0;
+        dir[2] = 0;
+        direction_to_rotation_xz__FPUcPlPl((u8 *)&v, &dir[0], &dir[2]);
+        set_position__13TParticleCtrlFPv((void *)self->emitters[0], &self->pos2);
+        set_direction__13TParticleCtrlFPv((void *)self->emitters[0], dir);
+    } else {
+        dir[2] = 0x40000000;
+        i = (s32)(lbl_8044D360 * atan2_float(self->pos2.x - self->pos.x, self->pos2.z - self->pos.z));
+        dir[0] = i - 0x8000;
+        dir[1] = 0;
+        for (i = 0; i < (s32)TTecGiFoie__emitter_profile_table[self->band].count; i++) {
+            set_position__13TParticleCtrlFPv((void *)self->emitters[i], &self->pos2);
+            set_direction__13TParticleCtrlFPv((void *)self->emitters[i], dir);
+        }
+    }
 }
 
 u8 *__dt__13TUnk_804CC800Fv(Task_80231224 *task, s16 flag) {
@@ -245,8 +336,8 @@ Task_802312E4 *construct_orbit__10TTecGiFoieFPvPviUciPvUc(Task_802312E4 *self, V
     self->x3c = arg2;
     self->x38 = lbl_805DC810;
     self->x40 = 0;
-    self->single = single;
-    if (self->single != 0) {
+    self->x47 = single;
+    if (self->x47 != 0) {
         Rot_802312E4 r;
         self->emitters = (u32 *)mem_alloc(4);
         r.x = 0;
