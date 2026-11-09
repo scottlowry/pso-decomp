@@ -308,6 +308,7 @@ void TUnk_8048E790::run_task() {
     f32 g;
     f32 b;
     f32 a;
+    f32 cv;
     f32 tilt;
     s32 frames;
 
@@ -388,42 +389,48 @@ void TUnk_8048E790::run_task() {
     }
     if (TParticleCtrl__data_80511F70[sprite_index]->sprites->flags & 1) {
         if (flags & 0x100) {
-            r = p->orbit_red_rate * t + color_base[0];
-            if (r < 0.0f) {
+            cv = p->orbit_red_rate * t + color_base[0];
+            if (cv < 0.0f) {
                 r = 0.0f;
             } else {
-                r = alpha * ((r < 1.0f) ? r : 1.0f);
+                cv = (cv < 1.0f) ? cv : 1.0f;
+                r = alpha * cv;
             }
-            g = p->unk_38 * t + color_base[1];
-            if (g < 0.0f) {
+            cv = p->unk_38 * t + color_base[1];
+            if (cv < 0.0f) {
                 g = 0.0f;
             } else {
-                g = alpha * ((g < 1.0f) ? g : 1.0f);
+                cv = (cv < 1.0f) ? cv : 1.0f;
+                g = alpha * cv;
             }
-            b = p->unk_3C * t + color_base[2];
-            if (b < 0.0f) {
+            cv = p->unk_3C * t + color_base[2];
+            if (cv < 0.0f) {
                 b = 0.0f;
             } else {
-                b = alpha * ((b < 1.0f) ? b : 1.0f);
+                cv = (cv < 1.0f) ? cv : 1.0f;
+                b = alpha * cv;
             }
         } else {
-            r = p->orbit_red_rate * t + p->color_base[0];
-            if (r < 0.0f) {
+            cv = p->orbit_red_rate * t + p->color_base[0];
+            if (cv < 0.0f) {
                 r = 0.0f;
             } else {
-                r = alpha * ((r < 1.0f) ? r : 1.0f);
+                cv = (cv < 1.0f) ? cv : 1.0f;
+                r = alpha * cv;
             }
-            g = p->unk_38 * t + p->color_base[1];
-            if (g < 0.0f) {
+            cv = p->unk_38 * t + p->color_base[1];
+            if (cv < 0.0f) {
                 g = 0.0f;
             } else {
-                g = alpha * ((g < 1.0f) ? g : 1.0f);
+                cv = (cv < 1.0f) ? cv : 1.0f;
+                g = alpha * cv;
             }
-            b = p->unk_3C * t + p->color_base[2];
-            if (b < 0.0f) {
+            cv = p->unk_3C * t + p->color_base[2];
+            if (cv < 0.0f) {
                 b = 0.0f;
             } else {
-                b = alpha * ((b < 1.0f) ? b : 1.0f);
+                cv = (cv < 1.0f) ? cv : 1.0f;
+                b = alpha * cv;
             }
         }
         a = 1.0f;
