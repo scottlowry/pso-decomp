@@ -321,10 +321,10 @@ void TUnk_8048E778::run_task() {
 
     if (param->flags & 8) {
         if (age >= 0.5f) {
+            approach_camera_vector(&pos, &origin, fabs_float(step.y));
+        } else {
             vec3_add_to(&pos, &step);
             VecCopy(&velocity, &step);
-        } else {
-            approach_camera_vector(&pos, &origin, fabs_float(step.y));
         }
     } else {
         if (flags & 2) {
