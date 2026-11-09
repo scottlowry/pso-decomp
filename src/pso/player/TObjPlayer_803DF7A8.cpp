@@ -744,7 +744,7 @@ s32 test_box_sphere_contact(Vec_803E1B1C *box, CollisionSphere *sphere)
       f32 dx = px - sphere->center.x;
       f32 dy = py - sphere->center.y;
       f32 dz = pz - sphere->center.z;
-      f32 scale = 1.0f / collisionRoot((dz * dz) + ((dy * dy) + (dx * dx)));
+      f32 scale = 1.0f / collisionRoot((dz * dz) + ((dx * dx) + (dy * dy)));
       dx *= scale;
       dy *= scale;
       dz *= scale;
