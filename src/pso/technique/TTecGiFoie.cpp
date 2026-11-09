@@ -202,7 +202,7 @@ extern Profile_802312E4 TTecGiFoie__emitter_profile_table[];
 extern u8 lbl_8044D324[];
 extern Vec_8023179C lbl_8044D32C;
 extern const f32 lbl_8044D338[3];
-extern Vec_802312E4 lbl_8044D344;
+extern const s32 lbl_8044D344[3];
 extern const f64 lbl_8044D358;
 extern const f64 lbl_8044D360;
 extern RecoveredGlobal_80230D9C_lbl_804CC510 tech_high_level_linear_power_table;
@@ -279,16 +279,19 @@ void run_task__13TUnk_804CC800Fv(Task_802312E4 *self) {
         self->pos2.z = self->pos.z + self->x38 * sin_table_lookup(self->x3c);
     }
     if (self->x47 != 0) {
-        Vec_802312E4 v;
-        v = lbl_8044D344;
+        s32 v3[3];
+        s32 n;
+        for (n = 0; n < 3; n++) {
+            v3[n] = lbl_8044D344[n];
+        }
         push_matrix_from(identity_matrix);
         rotate_matrix_y(0, self->x48);
-        rotate_vector_by_matrix(0, &v, &v);
+        rotate_vector_by_matrix(0, v3, v3);
         pop_matrix();
         dir[0] = 0;
         dir[1] = 0;
         dir[2] = 0;
-        direction_to_rotation_xz__FPUcPlPl((u8 *)&v, &dir[0], &dir[2]);
+        direction_to_rotation_xz__FPUcPlPl((u8 *)v3, &dir[0], &dir[2]);
         set_position__13TParticleCtrlFPv((void *)self->emitters[0], &self->pos2);
         set_direction__13TParticleCtrlFPv((void *)self->emitters[0], dir);
     } else {
