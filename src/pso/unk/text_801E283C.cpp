@@ -14,13 +14,13 @@ struct Date_801E21A8 {
 };
 
 extern "C" u8 fill_date_from_seconds(u32 seconds, Date_801E21A8 *date);
-extern const s32 lbl_80449700[12];
+extern const u32 lbl_80449700[12];
 
 extern "C" u8 fill_date_from_seconds(u32 seconds, Date_801E21A8 *date) {
-    s32 daysBeforeMonth[12];
+    u32 daysBeforeMonth[12];
     s32 n;
-    const s32 *src = lbl_80449700 - 1;
-    s32 *dst = daysBeforeMonth - 1;
+    const u32 *src = lbl_80449700 - 1;
+    u32 *dst = daysBeforeMonth - 1;
 
     for (n = 0; n < 6; n++) {
         dst[1] = src[1];
@@ -42,7 +42,7 @@ extern "C" u8 fill_date_from_seconds(u32 seconds, Date_801E21A8 *date) {
     u32 dayInYear = totalDays % 365;
     date->hour = totalHours % 24;
 
-    s32 dayOfYear;
+    u32 dayOfYear;
     if (leapDays <= dayInYear) {
         date->year = years4 + 2000;
         dayOfYear = dayInYear - leapDays;
