@@ -36,6 +36,28 @@ struct Gauge_802571B4 {
 
 struct Gauge_80256E0C { u8 p0[0x14]; f32 max; };
 
+struct Gauge_80257024 {
+    u16 flags;
+    u8 pad2[6];
+    f32 m_8;
+    f32 x_off;
+    f32 y_off;
+    u8 pad14[4];
+    u32 color;
+    f32 cur;
+};
+
+struct Ctx_80257024 {
+    u8 pad[0x10];
+    f32 x;
+    f32 y;
+    f32 w;
+    u8 pad1c[0x14];
+    s32 pivot_x;
+    u8 pad34[4];
+    f32 scale_x;
+};
+
 struct Pos_80256E0C { f32 x; f32 y; };
 
 struct Quad_80256E0C { f32 x0, y0, x1, y1, u0, v0, u1, v1; };
@@ -54,6 +76,11 @@ void draw_status_gauge_bar__13TUnk_804CF930FPvPvff(Gauge_80256E0C *self, void *c
 void TWindowSubStatusDisp__sub_80256BF8(void);
 void TWindowSubStatusDisp__sub_80256BFC(void);
 void *destroy__13TUnk_804CF930Fs(void *arg0, s16 arg1);
+void begin_screen_draw(s32 arg0);
+void set_draw_texture_and_color(s32 idx, s32 arg1);
+void set_constant_material_color__FUl(u32 x);
+void get_player__20TWindowSubStatusDispFv();
+extern s32 lbl_805D63F0;
 
 void *TUnk_804CF930::destroy(s16 arg1) {
     if (this != NULL) {
@@ -183,6 +210,48 @@ void TUnk_804CF930::draw_status_gauge_bar(void *ctx, void *pos_arg, f32 depth, f
         draw_textured_quad_at_depth((f32 *)&q, depth);
     }
 }
+
+#pragma push
+#pragma fp_contract on
+void TWindowSubStatusDisp__sub_80257024(Gauge_80256E0C *self, TWindowKeyBoardSoft *ctx) {
+    struct Gauge_80257024 *g = (struct Gauge_80257024 *)self;
+    struct Ctx_80257024 *c = (struct Ctx_80257024 *)ctx;
+    Pos_80256E0C pos;
+    f32 v;
+    f32 w;
+    f32 scale;
+    f32 d;
+    f32 t;
+    f32 m;
+    d = (f32)c->pivot_x;
+    t = g->y_off / 21.0f + g->x_off / c->w;
+    m = t * 7.5f;
+    v = 17.0f * (d - m);
+    if (v <= 0.0f) {
+        return;
+    }
+    if (g->cur <= 0.0f) {
+        if ((g->flags & 8) == 0) {
+            return;
+        }
+    }
+    w = (g->cur <= v) ? g->cur : v;
+    pos.x = c->x + g->x_off;
+    pos.y = c->y + g->y_off;
+    scale = -1.0f / (0.299f * g->m_8 + c->scale_x);
+    begin_screen_draw(1);
+    TObjFish::set_global_param(lbl_805D63F0);
+    set_draw_texture_and_color(0xb, -1);
+    if (g->flags & 8) {
+        TWindowSubStatusDisp__sub_80256C40(self, ctx, &pos, scale);
+    }
+    if (v > 0.0f) {
+        set_constant_material_color__FUl(g->color);
+        draw_status_gauge_bar__13TUnk_804CF930FPvPvff(self, ctx, &pos, scale, w);
+    }
+    get_player__20TWindowSubStatusDispFv();
+}
+#pragma pop
 
 void step_gauge_bar_width(Gauge_802571B4 *g) {
     f32 target;
