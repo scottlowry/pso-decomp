@@ -628,7 +628,7 @@ extern "C" void TBoss8Dragon__sub_8002D5F8(void) {
             w[1] = y;
             w[2] = lbl_805D81C4;
             xv = lbl_805D81C8 * (lbl_805D818C * (f32)rand());
-            w[3] = (s32)xv + 2;
+            ((s32 *)w)[3] = (s32)xv + 2;
             w += 4;
         }
         thr += 6;
