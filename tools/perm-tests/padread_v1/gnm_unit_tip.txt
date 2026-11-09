@@ -1,0 +1,210 @@
+00000080 00000024 d @1204
+00000000 00000007 d @30
+0000001c 00000034 d @359
+00000000 0000001c d @360
+00000050 00000030 d @391
+00001cb8 0000017c T GXLoadTexObjPreLoaded
+000050a4 00000af4 T MD5Transform
+                  U NetCompareStrings
+                  U NetCopyString
+                  U NetIPv6CPSetInterfaceIdentifier
+                  U NetMemcpy
+                  U NetMemset
+                  U NetStoreTick
+                  U NetStringLength
+00005f24 00000300 T PADRead
+                  U TLobby__sub_803F7684
+                  U TLobby__sub_803F778C
+                  U TLobby__sub_803F7980
+                  U TLobby__sub_803F79BC
+                  U TLobby__sub_803F808C
+                  U TLobby__sub_803F811C
+                  U TLobby__sub_803F97E8
+                  U TLobby__sub_803FC1CC
+                  U TLobby__sub_803FC684
+00000000 00000148 T TLobby__sub_803FCF44
+0000017c 0000004c T TLobby__sub_803FD0C0
+000001c8 00000110 T TLobby__sub_803FD10C
+000002d8 000000f4 T TLobby__sub_803FD21C
+000003cc 000000f4 T TLobby__sub_803FD310
+000004c0 0000008c T TLobby__sub_803FD404
+0000054c 00000024 T TLobby__sub_803FD490
+00000570 00000024 T TLobby__sub_803FD4B4
+00000594 00000024 T TLobby__sub_803FD4D8
+000005b8 00000024 T TLobby__sub_803FD4FC
+00000660 00000068 T TLobby__sub_803FD5A4
+000006c8 00000088 T TLobby__sub_803FD60C
+00000750 000000b8 T TLobby__sub_803FD694
+00000918 000000fc T TLobby__sub_803FD85C
+00000a14 00000110 T TLobby__sub_803FD958
+00000cb4 00000a08 T TLobby__sub_803FDBF8
+000016bc 00000058 T TLobby__sub_803FE600
+00001714 00000074 T TLobby__sub_803FE658
+00001788 00000154 T TLobby__sub_803FE6CC
+000018dc 00000024 T TLobby__sub_803FE820
+00001900 00000008 T TLobby__sub_803FE844
+00001908 00000004 T TLobby__sub_803FE84C
+00001978 00000078 T TLobby__sub_803FE8BC
+000019f0 000000c4 T TLobby__sub_803FE934
+00001ab4 00000090 T TLobby__sub_803FE9F8
+00001b44 00000174 T TLobby__sub_803FEA88
+00001e34 000001d4 T TLobby__sub_803FED78
+00002008 000001ec T TLobby__sub_803FEF4C
+00002388 00000038 T TLobby__sub_803FF2CC
+000023c0 00000048 T TLobby__sub_803FF304
+00002430 00000010 T TLobby__sub_803FF374
+00002440 000000ac T TLobby__sub_803FF384
+00002524 00000024 T TLobby__sub_803FF468
+00002548 00000080 T TLobby__sub_803FF48C
+000025c8 0000018c T TLobby__sub_803FF50C
+00002754 000001c0 T TLobby__sub_803FF698
+00002914 0000014c T TLobby__sub_803FF858
+00002a60 000001e0 T TLobby__sub_803FF9A4
+00002c40 000005f0 T TLobby__sub_803FFB84
+00003230 000000fc T TLobby__sub_80400174
+0000332c 000000c8 T TLobby__sub_80400270
+000033f4 000001a4 T TLobby__sub_80400338
+00003658 000001a8 T TLobby__sub_8040059C
+00003800 00000244 T TLobby__sub_80400744
+00003a44 00000004 T TLobby__sub_80400988
+00003a48 00000140 T TLobby__sub_8040098C
+00003b88 00000068 T TLobby__sub_80400ACC
+00003c54 00000010 T TLobby__sub_80400B98
+00003d08 0000015c T TLobby__sub_80400C4C
+00003e64 00000174 T TLobby__sub_80400DA8
+00003fd8 00000184 T TLobby__sub_80400F1C
+0000415c 00000240 T TLobby__sub_804010A0
+000047e8 000000ac T TLobby__sub_8040172C
+00004894 000001d0 T TLobby__sub_804017D8
+00004b78 00000064 T TLobby__sub_80401ABC
+00004bdc 0000006c T TLobby__sub_80401B20
+00004c88 000000e0 T TLobby__sub_80401BCC
+00004d68 00000034 T TLobby__sub_80401CAC
+00004de8 0000018c T TLobby__sub_80401D2C
+00004f74 000000f0 T TLobby__sub_80401EB8
+00005bb8 0000002c T TLobby__sub_80402AFC
+00005c70 0000012c T TLobby__sub_80402BB4
+00005d9c 00000134 T TLobby__sub_80402CE0
+00006224 000000b0 T TLobby__sub_80403168
+000063c4 0000032c T TLobby__sub_80403308
+000066f0 000000c8 T TLobby__sub_80403634
+000067b8 00000034 T TLobby__sub_804036FC
+000067ec 00000080 T TLobby__sub_80403730
+0000686c 00000040 T TLobby__sub_804037B0
+000068ac 00000074 T TLobby__sub_804037F0
+00006920 00000090 T TLobby__sub_80403864
+000069b0 000000d4 T TLobby__sub_804038F4
+00006a84 0000013c T TLobby__sub_804039C8
+00006bc0 000000a4 T TLobby__sub_80403B04
+00006c64 000000b8 T TLobby__sub_80403BA8
+00006d1c 000000c8 T TLobby__sub_80403C60
+00006de4 00000080 T TLobby__sub_80403D28
+00006e64 000001a4 T TLobby__sub_80403DA8
+00007008 00000194 T TLobby__sub_80403F4C
+0000719c 00000808 T TLobby__sub_804040E0
+                  U TLobby__sub_80405000
+                  U TLobby__sub_80405298
+                  U TLobby__sub_80405304
+                  U TLobby__sub_80405328
+                  U TLobby__sub_804053B8
+                  U TLobby__sub_8040555C
+                  U TLobby__sub_804061FC
+                  U TLobby__sub_804062A0
+                  U TLobby__sub_80406328
+                  U TLobby__sub_80406624
+                  U TLobby__sub_804098B4
+                  U TLobby__sub_80409908
+                  U TLobby__sub_80409A3C
+00004c48 00000040 T alloc_from_buffer
+                  U check_connection_status
+                  U clear_flag_bit4
+0000061c 00000044 T clear_socket_slot
+                  U clear_table_entry_locked
+00004a64 000000c0 T configure_mode_by_type
+00002408 00000028 T free_field_98
+000024ec 00000038 T free_field_98_and_clear
+000005dc 00000040 T get_checked_status_value
+00004d9c 00000008 T get_field_4
+                  U get_remaining
+                  U get_time_ms
+00006354 00000070 T handle_request_timeout
+                  U init_buffer_desc_b
+00005064 00000040 T init_md5_state
+00005c1c 00000028 T init_net_block_620
+                  U init_net_block_620_params
+00005c44 0000002c T init_net_block_620_secondary
+                  U init_net_buffer_desc
+00004da4 00000044 T init_net_buffer_entry
+                  U init_net_list
+00004b24 00000028 T init_net_state_c
+00004b4c 0000002c T init_net_subsystem_block
+                  U is_timed_out
+                  U lbl_8047FE18
+                  U lbl_8047FE3C
+                  U lbl_8047FE50
+                  U lbl_8047FE68
+                  U lbl_8047FE78
+                  U lbl_8047FEB8
+                  U lbl_8047FEC8
+                  U lbl_8047FEE0
+                  U lbl_8047FEEC
+                  U lbl_805C0038
+                  U lbl_805C02D0
+00000018 000000d8 B lbl_805C0328
+000000f0 000000a8 B lbl_805C0400
+00000198 00000030 B lbl_805C04A8
+000001c8 00000148 B lbl_805C04D8
+00000310 00000018 B lbl_805C0620
+00000328 000000a0 B lbl_805C0638
+                  U lbl_805C18A0
+                  U lbl_805D7A7A
+                  U lbl_805D7A7C
+                  U lbl_805D7A7E
+                  U lbl_805D7A80
+                  U lbl_805D7A82
+                  U lbl_805D7A90
+                  U lbl_805D7A9A
+                  U lbl_805D7AA0
+                  U lbl_805D7AA8
+                  U lbl_805D7AB8
+                  U lbl_805D7AC0
+                  U lbl_805D7AC4
+                  U lbl_805E1170
+                  U lbl_805E1178
+                  U lbl_805E1180
+                  U lcp_read_byte_buffer
+                  U lcp_read_value_buffer
+                  U lobby_modem_connect_state
+00000000 00000018 B lobby_net_buffer_desc_b
+                  U lobby_read_byte_buffer
+                  U lock_mutex
+00005ed0 00000028 T mark_ready
+                  U mark_sub_ready
+                  U open_network_transport
+0000439c 0000044c T parse_lcp_option
+                  U process_expired_timers
+00003c30 00000024 T queue_command_81
+0000190c 0000006c T read_2_bytes
+00005b98 00000020 T read_network_u16_be
+                  U recv_network_frame
+00003bf0 00000040 T reset_connection_slot
+000062d4 00000080 T reset_connection_state
+                  U reset_network_timer_list
+00003c64 000000a4 T save_timer_state
+                  U send_network_frame
+00005ef8 0000002c T set_active
+                  U set_active_flag
+000022e0 00000038 T set_filter_id
+000022a8 00000038 T set_filter_index
+00000148 00000034 T set_flags_and_state
+                  U set_ppp_auth_protocol
+000021f4 0000007c T set_socket_flags_by_mode
+00002350 00000038 T set_target_id
+00002270 00000038 T set_target_index
+00002318 00000038 T set_target_slot
+                  U unlock_mutex
+00000808 00000110 T update_connection_state
+00000b24 00000190 T update_countdown_state
+00003598 000000c0 T wait_for_connection
+00005be4 00000014 T write_network_u16_be
+00005bf8 00000024 T write_network_u32_be

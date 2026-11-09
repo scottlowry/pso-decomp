@@ -1,0 +1,32 @@
+ORIG  PADRead                                                 match=99.24479 size=768
+OURS  PADRead                                                 match=99.24479 size=768
+rows: orig 192 ours 192
+  slot  8 O: lwz r31, 0x30(r30)                         N: lwz r29, 0x30(r30)                        
+  slot 35 O: lwz r29, 0xc(r30)                          N: lwz r26, 0xc(r30)                         
+  slot 45 O: lbz r0, 0x2(r29)                           N: lbz r0, 0x2(r26)                          
+  slot 46 O: addi r3, r29, 0x0                          N: addi r3, r26, 0x0                         
+  slot 48 O: stb r0, 0x2(r29)                           N: stb r0, 0x2(r26)                          
+  slot 55 O: lwz r28, 0x30(r30)                         N: lwz r29, 0x30(r30)                        
+  slot 81 O: addi r29, r3, 0x0                          N: addi r28, r3, 0x0                         
+  slot 88 O: li r3, 0x0                                 N: li r5, 0x0                                
+  slot 89 O: stbx r3, r4, r0                            N: stbx r5, r4, r0                           
+  slot 93 O: stw r0, 0x8(r28)                           N: stw r0, 0x8(r29)                          
+  slot 95 O: extsh r0, r29                              N: extsh r0, r28                             
+  slot107 O: lwz r28, 0xc(r30)                          N: lwz r26, 0xc(r30)                         
+  slot117 O: lbz r0, 0x2(r28)                           N: lbz r0, 0x2(r26)                          
+  slot118 O: addi r3, r28, 0x0                          N: addi r3, r26, 0x0                         
+  slot120 O: stb r0, 0x2(r28)                           N: stb r0, 0x2(r26)                          
+  slot127 O: lwz r27, 0x30(r30)                         N: lwz r31, 0x30(r30)                        
+  slot143 O: extsh r28, r0                              N: extsh r27, r0                             
+  slot144 O: cmpwi r28, -0x1                            N: cmpwi r27, -0x1                           
+  slot146 O: extsh. r0, r28                             N: extsh. r0, r27                            
+  slot153 O: addi r29, r3, 0x0                          N: addi r28, r3, 0x0                         
+  slot156 O: mr r5, r28                                 N: mr r5, r27                                
+  slot160 O: li r3, 0x0                                 N: li r5, 0x0                                
+  slot161 O: stbx r3, r4, r0                            N: stbx r5, r4, r0                           
+  slot162 O: cmpw r0, r28                               N: cmpw r0, r27                              
+  slot165 O: stw r0, 0x8(r27)                           N: stw r0, 0x8(r31)                          
+  slot167 O: extsh r0, r29                              N: extsh r0, r28                             
+  slot168 O: cmpw r28, r0                               N: cmpw r27, r0                              
+  slot181 O: stw r3, 0x0(r31)                           N: stw r3, 0x0(r29)                          
+  slot183 O: stw r3, 0x4(r31)                           N: stw r3, 0x4(r29)                          
