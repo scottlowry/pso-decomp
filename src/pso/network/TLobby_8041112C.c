@@ -1404,8 +1404,8 @@ inline s16 cmp16_80411604(void *a, void *b) {
 }
 
 inline void remove_80411604(RecoveredGlobal_8041123C_lbl_805C1BB8 *g, s16 len, void *grp, void *src) {
-    u8 *e = *(u8 **)((u8 *)g + 24);
     s16 n = g->ab.a;
+    u8 *e = *(u8 **)((u8 *)g + 24);
     for (; n > 0; n--, e += 42) {
         if (*(s16 *)e == 1 && *(s16 *)(e + 40) == len && cmp16_80411604(e + 8, grp) == 0 && cmp16_80411604(e + 24, src) == 0) {
             *(s16 *)e = 0;
@@ -1424,12 +1424,12 @@ void *pp;
   void TLobby__sub_80414B98(u8 *, s16, u8 *);
   u8 *new_var;
   s32 TLobby__sub_80412618(void *, s16);
-  s16 len;
   u8 *k;
   void *h;
+  s16 len;
+  s16 i;
   RecoveredGlobal_8041123C_lbl_805C1BB8 *g = &ipv6_address_routing_state;
   u8 *ent;
-  s16 i;
   s16 t;
   u8 *e;
   u8 *p = (u8 *) pp;
