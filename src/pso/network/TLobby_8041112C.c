@@ -6504,12 +6504,12 @@ s32 TLobby__sub_80418D7C(u8 *node, u8 *self, u16 p1, u16 flags, u16 p2, u8 last,
   u8 *cur;
   u8 *n0;
   s16 i;
-  s16 n;
+  u8 *ep;
   s16 res;
   s32 len;
   s16 ls;
   s32 sum;
-  u8 *ep;
+  s16 n;
   u32 off;
   u8 *nx;
   s16 cnt;
