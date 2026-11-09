@@ -6460,11 +6460,11 @@ inline u8 *take_80418D7C(u8 **pb, s16 *pn) {
     return 0;
 }
 inline s16 contig_80418D7C(u8 *node, s16 *pn, u8 *g) {
-    u8 *f;
-    s16 cnt;
-    s16 n;
     s16 lim;
+    u8 *f;
     u32 acc;
+    s16 n;
+    s16 cnt;
     acc = 0;
     f = *(u8 **)(node + 44);
     cnt = *pn;
