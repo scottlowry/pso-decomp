@@ -1,0 +1,22 @@
+ORIG  TLobby__sub_803FE6CC                                    match=98.35294 size=340
+OURS  TLobby__sub_803FE6CC                                    match=98.35294 size=340
+rows: orig 85 ours 85
+  slot  4 O: mr. r30, r6                                N: mr. r28, r6                               
+  slot  5 O: addi r28, r3, 0x0                          N: addi r29, r3, 0x0                         
+  slot  6 O: mr r29, r4                                 N: mr r30, r4                                
+  slot 18 O: addi r30, r4, 0x0                          N: mr r28, r4                                
+  slot 20 O: clrlwi r4, r29, 24                         N: clrlwi r4, r30, 24                        
+  slot 23 O: lis r3, jumptable_804FD5F8@ha              N: lis r3, @391@ha                           
+  slot 24 O: addi r3, r3, jumptable_804FD5F8@l          N: addi r3, r3, @391@l                       
+  slot 30 O: stb r0, 0x1(r28)                           N: stb r0, 0x1(r29)                          
+  slot 44 O: lwz r4, 0x30(r28)                          N: lwz r4, 0x30(r29)                         
+  slot 45 O: lwz r3, 0x0(r30)                           N: lwz r3, 0x0(r28)                          
+  slot 48 O: mr r3, r30                                 N: mr r3, r28                                
+  slot 50 O: addi r0, r30, 0x0                          N: addi r0, r28, 0x0                         
+  slot 51 O: addi r30, r3, 0x4                          N: addi r28, r3, 0x4                         
+  slot 57 O: mr r4, r30                                 N: mr r4, r28                                
+  slot 58 O: stb r29, 0x0(r3)                           N: stb r30, 0x0(r3)                          
+  slot 63 O: addi r30, r26, 0x0                         N: addi r28, r26, 0x0                        
+  slot 67 O: lwz r4, 0x2c(r28)                          N: lwz r4, 0x2c(r29)                         
+  slot 68 O: addi r6, r30, 0x0                          N: addi r6, r28, 0x0                         
+  slot 77 O: lwz r5, 0x2c(r28)                          N: lwz r5, 0x2c(r29)                         
