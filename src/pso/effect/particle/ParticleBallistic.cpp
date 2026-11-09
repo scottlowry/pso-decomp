@@ -505,7 +505,7 @@ void TUnk_8048E778::run_task() {
         }
     }
     motion_frame += unk_C0;
-    if (motion != NULL && !((f32)(motion->nbFrame - 1) <= motion_frame)) {
+    if (motion != NULL && (f32)(motion->nbFrame - 1) <= motion_frame) {
         motion_frame = (f32)(motion->nbFrame - 1);
     }
     retire_ballistic_particle_if_done();
