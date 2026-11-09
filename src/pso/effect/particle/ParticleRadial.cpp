@@ -244,6 +244,7 @@ void TUnk_8048E7A8::run_task() {
     f32 g;
     f32 b;
     f32 a;
+    f32 cv;
     s32 frames;
 
     speed *= param->speed_decay;
@@ -272,19 +273,19 @@ void TUnk_8048E7A8::run_task() {
     }
     if (TParticleCtrl__data_80511F70[sprite_index]->sprites->flags & 1) {
         if (flags & 0x100) {
-            r = p->color_rate[0] * t + color_base[0];
-            if (r < 0.0f) { r = 0.0f; } else { r = alpha * ((r < 1.0f) ? r : 1.0f); }
-            g = p->color_rate[1] * t + color_base[1];
-            if (g < 0.0f) { g = 0.0f; } else { g = alpha * ((g < 1.0f) ? g : 1.0f); }
-            b = p->color_rate[2] * t + color_base[2];
-            if (b < 0.0f) { b = 0.0f; } else { b = alpha * ((b < 1.0f) ? b : 1.0f); }
+            cv = p->color_rate[0] * t + color_base[0];
+            if (cv < 0.0f) { r = 0.0f; } else { cv = (cv < 1.0f) ? cv : 1.0f; r = alpha * cv; }
+            cv = p->color_rate[1] * t + color_base[1];
+            if (cv < 0.0f) { g = 0.0f; } else { cv = (cv < 1.0f) ? cv : 1.0f; g = alpha * cv; }
+            cv = p->color_rate[2] * t + color_base[2];
+            if (cv < 0.0f) { b = 0.0f; } else { cv = (cv < 1.0f) ? cv : 1.0f; b = alpha * cv; }
         } else {
-            r = p->color_rate[0] * t + p->color_base[0];
-            if (r < 0.0f) { r = 0.0f; } else { r = alpha * ((r < 1.0f) ? r : 1.0f); }
-            g = p->color_rate[1] * t + p->color_base[1];
-            if (g < 0.0f) { g = 0.0f; } else { g = alpha * ((g < 1.0f) ? g : 1.0f); }
-            b = p->color_rate[2] * t + p->color_base[2];
-            if (b < 0.0f) { b = 0.0f; } else { b = alpha * ((b < 1.0f) ? b : 1.0f); }
+            cv = p->color_rate[0] * t + p->color_base[0];
+            if (cv < 0.0f) { r = 0.0f; } else { cv = (cv < 1.0f) ? cv : 1.0f; r = alpha * cv; }
+            cv = p->color_rate[1] * t + p->color_base[1];
+            if (cv < 0.0f) { g = 0.0f; } else { cv = (cv < 1.0f) ? cv : 1.0f; g = alpha * cv; }
+            cv = p->color_rate[2] * t + p->color_base[2];
+            if (cv < 0.0f) { b = 0.0f; } else { cv = (cv < 1.0f) ? cv : 1.0f; b = alpha * cv; }
         }
         a = 1.0f;
     } else {
