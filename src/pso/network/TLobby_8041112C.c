@@ -6442,9 +6442,9 @@ s32 TLobby__sub_80418C40(u8* self, void* p1, s16 p2, u8 p3, u32 p4, void* p5, u1
 #pragma dont_inline off
 #pragma inline_depth(4)
 inline u8 *take_80418D7C(u8 **pb, s16 *pn) {
-    u8 *ent;
-    s16 i;
     s16 n;
+    s16 i;
+    u8 *ent;
     ent = *pb;
     n = *pn;
     for (i = 0; i < n; i++) {
