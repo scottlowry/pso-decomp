@@ -333,7 +333,8 @@ void TLobby__sub_80429648(void)
   volatile u16 *new_var;
   u32 sh;
   u16 *p;
-  u16 *q;
+  u8 *pb;
+  u16 *w;
   u16 h24;
   volatile u32 t4;
   volatile u16 t2;
@@ -367,12 +368,13 @@ void TLobby__sub_80429648(void)
 
       if ((i != n) && (lbl_805D7C4C != 0))
       {
-        q = lbl_805D7C6C;
-        lbl_805D7C74 = ((u8 *(*)(u16, u16, u8)) lbl_805D7C4C)(id46, q[1], *((u8 *) (&q[2])));
+        pb = (u8 *) lbl_805D7C6C;
+        w = (u16 *) (pb + 2);
+        lbl_805D7C74 = ((u8 *(*)(u16, u16, u8)) lbl_805D7C4C)(id46, *w, pb[4]);
         if (lbl_805D7C74 != 0)
         {
           i = sh + 4;
-          len = q[1];
+          len = *w;
           if (((sh + 4) + len) > 0x1000)
           {
             exi_dma_write_length = (sh + len) - 0xFFC;
