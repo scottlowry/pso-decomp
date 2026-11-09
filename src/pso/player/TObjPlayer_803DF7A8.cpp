@@ -652,6 +652,7 @@ static inline f32 collisionRoot(f32 x) {
 
 s32 test_box_sphere_contact(Vec_803E1B1C *box, CollisionSphere *sphere)
 {
+  float new_var2;
   Vec_803E1B1C *new_var;
   Vec_803E1B1C boxMin;
   Vec_803E1B1C boxMax;
@@ -676,7 +677,8 @@ s32 test_box_sphere_contact(Vec_803E1B1C *box, CollisionSphere *sphere)
       new_var = n;
       new_var->y = -(((box[face[1]].z - box[face[0]].z) * (box[face[2]].x - box[face[0]].x)) - ((box[face[1]].x - box[face[0]].x) * (box[face[2]].z - box[face[0]].z)));
       new_var->z = -(((box[face[1]].x - box[face[0]].x) * (box[face[2]].y - box[face[0]].y)) - ((box[face[1]].y - box[face[0]].y) * (box[face[2]].x - box[face[0]].x)));
-      scale = 1.0f / collisionRoot((new_var->z * new_var->z) + ((new_var->x * new_var->x) + (new_var->y * new_var->y)));
+      new_var2 = 1.0f / collisionRoot((new_var->z * new_var->z) + ((new_var->x * new_var->x) + (new_var->y * new_var->y)));
+      scale = new_var2;
       new_var->x *= scale;
       new_var->y *= scale;
       new_var->z *= scale;
@@ -703,7 +705,7 @@ s32 test_box_sphere_contact(Vec_803E1B1C *box, CollisionSphere *sphere)
         f32 ex = a->x - b->x;
         f32 ey = a->y - b->y;
         f32 ez = a->z - b->z;
-        f32 s = ((ez * (pz - a->z)) + ((ex * (px - a->x)) + (ey * (py - a->y)))) / ((ez * ez) + ((ex * ex) + (ey * ey)));
+        f32 s = ((ez * (pz - a->z)) + ((ex * (px - a->x)) + (ey * (py - a->y)))) / ((ez * ez) + ((ey * ey) + (ex * ex)));
         f32 fy = (ey * s) + a->y;
         f32 fz = (ez * s) + a->z;
         f32 fx = (ex * s) + a->x;
