@@ -19,12 +19,14 @@ extern const s32 lbl_80449700[12];
 extern "C" u8 fill_date_from_seconds(u32 seconds, Date_801E21A8 *date) {
     s32 daysBeforeMonth[12];
     s32 n;
-    const s32 *src = lbl_80449700;
-    s32 *dst = daysBeforeMonth;
+    const s32 *src = lbl_80449700 - 1;
+    s32 *dst = daysBeforeMonth - 1;
 
     for (n = 0; n < 6; n++) {
-        *dst++ = *src++;
-        *dst++ = *src++;
+        dst[1] = src[1];
+        dst[2] = src[2];
+        dst += 2;
+        src += 2;
     }
 
     u32 minutes = seconds / 60;
