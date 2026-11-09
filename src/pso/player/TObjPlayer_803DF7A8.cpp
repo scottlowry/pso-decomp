@@ -665,6 +665,9 @@ static inline f32 inline_fn234(Vec_803E1B1C *arg0, f32 arg1, Vec_803E1B1C *arg2)
 static inline f32 inline_fn2345(f32 arg0, f32 arg1, Vec_803E1B1C *arg2) {
     return (arg0 * arg1) + arg2->x;
 }
+static inline f32 inline_fn23456(f32 arg0, f32 arg1, Vec_803E1B1C *arg2) {
+    return (arg0 * arg1) + arg2->y;
+}
 
 s32 test_box_sphere_contact(Vec_803E1B1C *box, CollisionSphere *sphere)
 {
@@ -726,7 +729,7 @@ s32 test_box_sphere_contact(Vec_803E1B1C *box, CollisionSphere *sphere)
         f32 s = ((ez * (pz - a->z)) + ((ex * (px - a->x)) + (ey * (py - a->y)))) / ((ez * ez) + ((ex * ex) + (ey * ey)));
         f32 fx = inline_fn2345(ex, s, a);
         f32 fz = (ez * s) + a->z;
-        f32 fy = (ey * s) + a->y;
+        f32 fy = inline_fn23456(ey, s, a);
         f32 dx = fx - px;
         f32 dy = fy - py;
         f32 dz = fz - pz;
