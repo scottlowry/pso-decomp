@@ -838,7 +838,7 @@ void calc_sound_spatial_params(SoundRequestVoice *v) {
             } else {
                 f32 angle2 = atan2_float(((const Vec *)v->position)->z - camvec.z, ((const Vec *)v->position)->x - camvec.x);
                 s32 yaw_sur = ((TCameraCtrl *)camera_ctrl_instance)->yaw - 0x4000;
-                s32 angle2_int = yaw_sur + (s32)(10430.38043493439 * angle2);
+                s32 angle2_int = (s32)(10430.38043493439 * angle2) + yaw_sur;
                 f32 field2a4 = get_field_2a4__6TLobbyFPv(v->owner);
                 surround = (s32)(dist * (cos_table_lookup(angle2_int) * field2a4));
             }
