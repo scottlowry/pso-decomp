@@ -24,7 +24,13 @@ s32 memset(void *, int, int);
 
 u32 RlcDirectoryEntry::get_size() { return read_be32(size_be); }
 u32 RlcDirectoryEntry::get_offset() { return read_be32(offset_be); }
-u32 RlcDirectoryEntry::read_be32(const s8 *bytes) { return 0; }
+u32 RlcDirectoryEntry::read_be32(const s8 *bytes) {
+    s32 t = (bytes[1] << 16) & 0x0FFF0000;
+    t |= bytes[0] << 24;
+    t |= (bytes[2] << 8) & 0xFF00;
+    t |= bytes[3] & 0xFF;
+    return t;
+}
 
 u32 RlcHeader::get_directory_offset() { return read_be32(directory_offset_be); }
 u32 RlcHeader::get_chunk_count() { return read_be32(chunk_count_be); }
