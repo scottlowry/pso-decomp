@@ -18,12 +18,12 @@ extern const s32 lbl_80449700[12];
 
 extern "C" u8 fill_date_from_seconds(u32 seconds, Date_801E21A8 *date) {
     s32 daysBeforeMonth[12];
-    s32 minutes = seconds / 60;
-    s32 totalDays = seconds / 86400;
-    s32 years4 = seconds / 31536000;
-    s32 totalHours = seconds / 3600;
-    s32 leapDays = (years4 + 1) / 4;
-    s32 hoursFromMin = minutes / 60;
+    u32 minutes = seconds / 60;
+    u32 totalDays = seconds / 86400;
+    u32 years4 = seconds / 31536000;
+    u32 totalHours = seconds / 3600;
+    u32 leapDays = (years4 + 1) / 4;
+    u32 hoursFromMin = minutes / 60;
     s32 n;
 
     for (n = 0; n < 12; n += 2) {
@@ -32,9 +32,9 @@ extern "C" u8 fill_date_from_seconds(u32 seconds, Date_801E21A8 *date) {
     }
 
     date->sec = seconds % 60;
-    s32 yearsInDays = totalDays / 365;
+    u32 yearsInDays = totalDays / 365;
     date->min = minutes % 60;
-    s32 dayInYear = totalDays % 365;
+    u32 dayInYear = totalDays % 365;
     date->hour = totalHours % 24;
 
     s32 dayOfYear;
