@@ -1252,7 +1252,7 @@ extern void TLobby__sub_803FCC10(void *self_, void *src_, int v)
 {
   u8 *g;
   u8 *src;
-  int new_var4;
+  int new_var4[2];
   u8 *r28;
   u8 ctx[0x58];
   u8 *new_var;
@@ -1278,7 +1278,8 @@ extern void TLobby__sub_803FCC10(void *self_, void *src_, int v)
   cnt = (TLobby__sub_80401BCC((UnkSumBuf **) (&v), &lbl_805D7A98, 1) != 1) ? (-1) : ((s16) lbl_805D7A98);
   if (cnt != (-1))
   {
-    dst1 = out = *((u8 **) (g + 0x15c));
+    dst1 = *((u8 **) (g + 0x15c));
+    out = dst1;
     for (i = 0; i < cnt; i++)
     {
       *(out++) = rd_803FCC10((UnkSumBuf **) (&v));
@@ -1291,11 +1292,11 @@ extern void TLobby__sub_803FCC10(void *self_, void *src_, int v)
   {
     rem = 0x7f;
   }
-  new_var4 = rem;
-  if (new_var4 != 0)
+  new_var4[0] = rem;
+  if (new_var4[0] != 0)
   {
     u8 *p = *((u8 **) (g + 0x150));
-    for (i = 0; i < new_var4; i++)
+    for (i = 0; i < new_var4[0]; i++)
     {
       do
       {
@@ -1324,7 +1325,7 @@ extern void TLobby__sub_803FCC10(void *self_, void *src_, int v)
   *((u16 *) (r28 + 0x10)) = r22 + 0x11;
   ent = TLobby__sub_80401B20(*pq, *((u16 *) (r28 + 0x10)));
   TLobby__sub_803FE6CC((u8 *) new_var3, 2, r28[0xe], ent);
-  TLobby__sub_80405328(((u8 *) new_var3) + 0x10);
+  TLobby__sub_80405328(((u8 *) new_var3) + (new_var4[1] = 0x10));
   ((u8 *) new_var3)[3] -= 1;
   if (((u8 *) new_var3)[6] != 0)
   {
