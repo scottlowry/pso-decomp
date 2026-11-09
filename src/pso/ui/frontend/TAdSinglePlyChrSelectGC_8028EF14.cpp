@@ -22,7 +22,7 @@ struct W_80290250 { u8 pad[0xfc]; s32 bufp; s32 rc; u8 data[4]; };
 
 struct Opaque_80290088;
 
-extern const f32 lbl_805DD944;
+extern const f32 lbl_805DD944[1];
 extern const f32 lbl_805DD948;
 extern const f32 lbl_805DD94C;
 extern const f32 lbl_805DD950;
@@ -768,13 +768,13 @@ s32 find_shape_triangle_region(u8 *arg0) {
         if (temp_f3 >= (lbl_805DD948 * temp_f4)) {
             return 0;
         }
-        if (temp_f3 <= (lbl_805DD954 * (temp_f4 - lbl_805DD944))) {
+        if (temp_f3 <= (lbl_805DD954 * (temp_f4 - lbl_805DD944[0]))) {
             return 1;
         }
         return 2;
     }
     temp_f4_2 = *(f32 *)((s8 *)arg0 + 4);
-    if (temp_f3 <= (lbl_805DD954 * (temp_f4_2 - lbl_805DD944))) {
+    if (temp_f3 <= (lbl_805DD954 * (temp_f4_2 - lbl_805DD944[0]))) {
         return 3;
     }
     if (temp_f3 >= (lbl_805DD948 * temp_f4_2)) {
@@ -804,10 +804,10 @@ void calc_shape_region_coefficients(f32 *point) {
     s32 region = find_shape_triangle_region((u8 *)point);
 
     creation_shape_blend.region = region;
+    f32 total = lbl_805DD944[region * 3];
     s32 ia = creation_region_sample_index_table[region * 3];
     s32 ib = creation_region_sample_index_table[region * 3 + 1];
     s32 ic = creation_region_sample_index_table[region * 3 + 2];
-    f32 total = *(const f32 *)((const u8 *)&lbl_805DD944 + region * 12);
 
     f32 k = (point[0] - lbl_804D400C[ia].width) / (lbl_804D400C[ic].width - lbl_804D400C[ia].width);
     f32 m = (point[1] - lbl_804D400C[ia].height - (lbl_804D400C[ic].height - lbl_804D400C[ia].height) * k) /
