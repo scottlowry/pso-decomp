@@ -217,9 +217,9 @@ void TWindowSubStatusDisp__sub_80257024(Gauge_80256E0C *self, TWindowKeyBoardSof
     struct Gauge_80257024 *g = (struct Gauge_80257024 *)self;
     struct Ctx_80257024 *c = (struct Ctx_80257024 *)ctx;
     Pos_80256E0C pos;
+    f32 scale;
     f32 v;
     f32 w;
-    f32 scale;
     f32 d;
     f32 t;
     f32 m;
