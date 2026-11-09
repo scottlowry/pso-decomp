@@ -737,7 +737,7 @@ s32 __ct__15TObjEnemyCustomFP7TObject(void *);
 #define update_walk_to_target__10TObjPlayerFPv ((s32 (*)(void *))update_walk_to_target__10TObjPlayerFPv)
 #define init_params_from_table__15TObjEneGyaranzoFv ((s32 (*)(void *))init_params_from_table__15TObjEneGyaranzoFv)
 #define update__19TObjGyaranzoMissileFPv ((s32 (*)(void *))update__19TObjGyaranzoMissileFPv)
-void fn_800D2A68(void *);
+s32 fn_800D2A68(void *);
 void TObjPlayer__sub_800D2E8C(Ene_800D2E8C *arg0);
 void vfunc_63__15TObjEneGyaranzoFv(u8 *arg0);
 void vfunc_62__15TObjEneGyaranzoFv(u8 *arg0);
@@ -1188,7 +1188,7 @@ void TObjEneGyaranzo::sub_800D2900() {
     }
 }
 
-void fn_800D2A68(void *arg0) {
+s32 fn_800D2A68(void *arg0) {
     Params_800D2900 p1 = lbl_8043C278;
     Params_800D2900 p2 = lbl_8043C2C4;
     Params_800D2900 p3 = lbl_8043C310;
@@ -1228,8 +1228,9 @@ void fn_800D2A68(void *arg0) {
     }
     obj = __nw__7TObjectFUl(0x234);
     if (obj != NULL) {
-        __ct__8TObjChipFP7TObjectP14TObjChipParams((u8 *)obj, tl_05, (u8 *)&p3);
+        obj = __ct__8TObjChipFP7TObjectP14TObjChipParams((u8 *)obj, tl_05, (u8 *)&p3);
     }
+    return (s32)obj;
 }
 
 void TObjPlayer::update_aim_and_fire() {
