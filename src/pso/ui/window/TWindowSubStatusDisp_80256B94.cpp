@@ -223,9 +223,9 @@ void TWindowSubStatusDisp__sub_80257024(Gauge_80256E0C *self, TWindowKeyBoardSof
     f32 d;
     f32 t;
     f32 m;
-    d = (f32)c->pivot_x;
     t = g->y_off / 21.0f + g->x_off / c->w;
     m = t * 7.5f;
+    d = (f32)c->pivot_x;
     v = 17.0f * (d - m);
     if (v <= 0.0f) {
         return;
