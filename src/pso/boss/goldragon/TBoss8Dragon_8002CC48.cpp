@@ -475,9 +475,9 @@ extern "C" void TBoss8Dragon__sub_8002D5F8(void) {
     s32 j;
     s32 i;
     s32 row;
-    u16 a;
-    u16 b;
-    u16 val;
+    s32 a;
+    s32 b;
+    s32 val;
     u32 bits;
 
     p = *(s8 **)(lbl_805D4B50 + 0x42C);
@@ -551,10 +551,9 @@ extern "C" void TBoss8Dragon__sub_8002D5F8(void) {
     q[7] = (s16)(((bits >> 16) & 3) | 5);
     q[8] = (s16)(q[8] | 0x900);
     pp = (s16 *)(TBoss8Dragon__sub_8002DAEC((void *)lbl_805D4B68) + 2);
+    a = 0x400;
     b = 0x300;
     for (row = 0; row < 4; row++) {
-        a = b;
-        b = (u16)(b - 0x100);
         val = 0;
         for (i = 0; i < 5; i++) {
             pp[1] = (s16)val;
@@ -564,6 +563,8 @@ extern "C" void TBoss8Dragon__sub_8002D5F8(void) {
             pp += 6;
             val += 0x100;
         }
+        a = b;
+        b = b - 0x100;
     }
     g = (Grid_8002DB7C *)__nw__FUl(0x68);
     if (g != NULL) {
