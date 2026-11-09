@@ -802,12 +802,13 @@ void map_shape_region_samples(s32 region, s32 *samples) {
 // total minus the two as the ia weight. Stores region + weights[3].
 void calc_shape_region_coefficients(f32 *point) {
     s32 region = find_shape_triangle_region((u8 *)point);
+
+    creation_shape_blend.region = region;
     s32 ia = creation_region_sample_index_table[region * 3];
     s32 ib = creation_region_sample_index_table[region * 3 + 1];
     s32 ic = creation_region_sample_index_table[region * 3 + 2];
     f32 total = *(const f32 *)((const u8 *)&lbl_805DD944 + region * 12);
 
-    creation_shape_blend.region = region;
     f32 k = (point[0] - lbl_804D400C[ia].width) / (lbl_804D400C[ic].width - lbl_804D400C[ia].width);
     f32 m = (point[1] - lbl_804D400C[ia].height - (lbl_804D400C[ic].height - lbl_804D400C[ia].height) * k) /
             (lbl_804D400C[ib].height - lbl_804D400C[ia].height);
