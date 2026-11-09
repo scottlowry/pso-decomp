@@ -153,6 +153,18 @@ struct Inner_800D2900 { u8 pad[0x3c]; s32 x3c; };
 
 struct Outer_800D2900 { u8 pad[0x42c]; Inner_800D2900 *p42c; };
 
+struct Inner2_800D2A68 {
+    u8 pad0[8];
+    s32 x8;
+    s32 xc;
+    u8 pad10[8];
+    s32 x18;
+    s32 x1c;
+    u8 pad20[8];
+    s32 x28;
+    s32 x2c;
+};
+
 extern "C" {
 f32 random_ratio__9TObjCharaFv(s32);
 u8 * TObjGyaranzoMissile__sub_800D4668(void *, void *, void *, s32, s32);
@@ -164,6 +176,10 @@ extern const f32 lbl_805DA270;
 
 u8 *__ct__8TObjChipFP7TObjectP14TObjChipParams(u8 *arg0, u8 *arg1, u8 *arg2);
 extern Params_800D2900 lbl_8043C35C;
+extern Params_800D2900 lbl_8043C278;
+extern Params_800D2900 lbl_8043C2C4;
+extern Params_800D2900 lbl_8043C310;
+extern const f32 lbl_805DA264;
 u32 *gyaranzo_model_resources[0x16];
 u8 *gyaranzo_resource_ptrs[13];
 EnemyTargetCandidate TObjGyaranzoMissile_target_slots[4];
@@ -721,7 +737,7 @@ s32 __ct__15TObjEnemyCustomFP7TObject(void *);
 #define update_walk_to_target__10TObjPlayerFPv ((s32 (*)(void *))update_walk_to_target__10TObjPlayerFPv)
 #define init_params_from_table__15TObjEneGyaranzoFv ((s32 (*)(void *))init_params_from_table__15TObjEneGyaranzoFv)
 #define update__19TObjGyaranzoMissileFPv ((s32 (*)(void *))update__19TObjGyaranzoMissileFPv)
-s32 fn_800D2A68(void *);
+void fn_800D2A68(void *);
 void TObjPlayer__sub_800D2E8C(Ene_800D2E8C *arg0);
 void vfunc_63__15TObjEneGyaranzoFv(u8 *arg0);
 void vfunc_62__15TObjEneGyaranzoFv(u8 *arg0);
@@ -1169,6 +1185,50 @@ void TObjEneGyaranzo::sub_800D2900() {
                 }
             }
         }
+    }
+}
+
+void fn_800D2A68(void *arg0) {
+    Params_800D2900 p1 = lbl_8043C278;
+    Params_800D2900 p2 = lbl_8043C2C4;
+    Params_800D2900 p3 = lbl_8043C310;
+    s32 vz = *(s32 *)((u8 *)arg0 + 0x40);
+    s32 vy = *(s32 *)((u8 *)arg0 + 0x3C);
+    s32 vx = *(s32 *)((u8 *)arg0 + 0x38);
+    *(volatile f32 *)&vy = *(f32 *)&vy + lbl_805DA264;
+    Inner_800D2900 *ip;
+    ip = (*(Outer_800D2900 * *)&gyaranzo_bml_resource)->p42c;
+    p1.pos.x = *(f32 *)&vx;
+    p1.pos.y = *(volatile f32 *)&vy;
+    p1.pos.z = *(f32 *)&vz;
+    p1.x38 = *(volatile f32 *)((s8 *)((u8 *)arg0) + 0x3C);
+    p1.x40 = ((Inner2_800D2A68 *)ip)->x8;
+    p1.x44 = ((Inner2_800D2A68 *)ip)->xc;
+    ip = (*(Outer_800D2900 * *)&gyaranzo_bml_resource)->p42c;
+    p2.pos.x = *(f32 *)&vx;
+    p2.pos.y = *(f32 *)&vy;
+    p2.pos.z = *(f32 *)&vz;
+    p2.x38 = *(volatile f32 *)((s8 *)((u8 *)arg0) + 0x3C);
+    p2.x40 = ((Inner2_800D2A68 *)ip)->x18;
+    p2.x44 = ((Inner2_800D2A68 *)ip)->x1c;
+    ip = (*(Outer_800D2900 * *)&gyaranzo_bml_resource)->p42c;
+    p3.pos.x = *(f32 *)&vx;
+    p3.pos.y = *(f32 *)&vy;
+    p3.pos.z = *(f32 *)&vz;
+    p3.x38 = *(volatile f32 *)((s8 *)((u8 *)arg0) + 0x3C);
+    p3.x40 = ((Inner2_800D2A68 *)ip)->x28;
+    p3.x44 = ((Inner2_800D2A68 *)ip)->x2c;
+    void *obj = __nw__7TObjectFUl(0x234);
+    if (obj != NULL) {
+        __ct__8TObjChipFP7TObjectP14TObjChipParams((u8 *)obj, tl_05, (u8 *)&p1);
+    }
+    obj = __nw__7TObjectFUl(0x234);
+    if (obj != NULL) {
+        __ct__8TObjChipFP7TObjectP14TObjChipParams((u8 *)obj, tl_05, (u8 *)&p2);
+    }
+    obj = __nw__7TObjectFUl(0x234);
+    if (obj != NULL) {
+        __ct__8TObjChipFP7TObjectP14TObjChipParams((u8 *)obj, tl_05, (u8 *)&p3);
     }
 }
 
