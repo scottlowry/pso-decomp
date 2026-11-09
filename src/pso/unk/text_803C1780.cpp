@@ -29,10 +29,12 @@ struct WavFmtChunk {
 extern char *lbl_805D4650; // "fmt "
 extern char *lbl_805D4654; // "data"
 
+#pragma opt_common_subs off
 s32 TLobby__sub_803C1780(s32 buf, s32 len, s16 *data_offset, s8 *marker, s8 *bits, s8 *block_align, s8 *channels,
                          s32 *sample_rate, s32 *sample_count, s32 *samples_per_block, s16 *encoding) {
     WavFmtChunk *fmt;
     u32 size;
+    s32 base;
     s32 i;
 
     for (i = 0; i < len; i++) {
@@ -58,7 +60,8 @@ s32 TLobby__sub_803C1780(s32 buf, s32 len, s16 *data_offset, s8 *marker, s8 *bit
     if (i == len) {
         return -1;
     }
-    size = LE32(((WavFmtChunk *)(i + buf))->size);
+    base = i + buf;
+    size = LE32(*(u32 *)(base + 4));
     *data_offset = i + 8;
     *marker = -1;
     *sample_rate = LE32(fmt->sample_rate);
@@ -89,6 +92,7 @@ s32 TLobby__sub_803C1780(s32 buf, s32 len, s16 *data_offset, s8 *marker, s8 *bit
     }
     return *sample_rate == 0 ? -1 : 0;
 }
+#pragma opt_common_subs on
 
 void TLobby__sub_803C19D8(void) {
     lbl_805D7510();
