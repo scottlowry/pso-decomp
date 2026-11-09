@@ -149,6 +149,16 @@ struct Params_800D2900 {
     u8 pad48[4];
 };
 
+struct P1_800D2A68 {
+    u8 pad0[0xC];
+    Vec_800D2900 pos;
+    u8 pad18[0x38 - 0x18];
+    f32 x38;
+    u8 pad3c[4];
+    s32 x40;
+    s32 x44;
+};
+
 struct Inner_800D2900 { u8 pad[0x3c]; s32 x3c; };
 
 struct Outer_800D2900 { u8 pad[0x42c]; Inner_800D2900 *p42c; };
@@ -1189,22 +1199,24 @@ void TObjEneGyaranzo::sub_800D2900() {
 }
 
 s32 fn_800D2A68(void *arg0) {
-    Params_800D2900 p1 = lbl_8043C278;
-    Params_800D2900 p2 = lbl_8043C2C4;
-    s32 vz = *(s32 *)((u8 *)arg0 + 0x40);
-    s32 vy = *(s32 *)((u8 *)arg0 + 0x3C);
-    s32 vx = *(s32 *)((u8 *)arg0 + 0x38);
-    *(volatile f32 *)&vy = *(f32 *)&vy + lbl_805DA264;
+    f32 sp_c = lbl_805DA264;
+    s32 vz, vy, vx;
+    vy = *(s32 *)((u8 *)arg0 + 0x3C);
+    vx = *(s32 *)((u8 *)arg0 + 0x38);
+    vz = *(s32 *)((u8 *)arg0 + 0x40);
+    *(volatile f32 *)&vy = *(f32 *)&vy + sp_c;
+    P1_800D2A68 p1 = *(const P1_800D2A68 *)&lbl_8043C278;
     Inner_800D2900 *ip;
     ip = (*(Outer_800D2900 * *)&gyaranzo_bml_resource)->p42c;
+    Params_800D2900 p2 = lbl_8043C2C4;
     p1.pos.x = *(f32 *)&vx;
     p1.pos.y = *(volatile f32 *)&vy;
     p1.pos.z = *(f32 *)&vz;
     p1.x38 = *(volatile f32 *)((s8 *)((u8 *)arg0) + 0x3C);
     p1.x40 = ((Inner2_800D2A68 *)ip)->x8;
     p1.x44 = ((Inner2_800D2A68 *)ip)->xc;
-    ip = (*(Outer_800D2900 * *)&gyaranzo_bml_resource)->p42c;
     Params_800D2900 p3 = lbl_8043C310;
+    ip = (*(Outer_800D2900 * *)&gyaranzo_bml_resource)->p42c;
     p2.pos.x = *(f32 *)&vx;
     p2.pos.y = *(f32 *)&vy;
     p2.pos.z = *(f32 *)&vz;
@@ -1227,10 +1239,10 @@ s32 fn_800D2A68(void *arg0) {
         __ct__8TObjChipFP7TObjectP14TObjChipParams((u8 *)obj, tl_05, (u8 *)&p2);
     }
     obj = __nw__7TObjectFUl(0x234);
-    if (obj == NULL) {
-        return (s32)obj;
+    if (obj != NULL) {
+        obj = __ct__8TObjChipFP7TObjectP14TObjChipParams((u8 *)obj, tl_05, (u8 *)&p3);
     }
-    return (s32)__ct__8TObjChipFP7TObjectP14TObjChipParams((u8 *)obj, tl_05, (u8 *)&p3);
+    return (s32)obj;
 }
 
 void TObjPlayer::update_aim_and_fire() {
