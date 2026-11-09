@@ -1191,7 +1191,6 @@ void TObjEneGyaranzo::sub_800D2900() {
 s32 fn_800D2A68(void *arg0) {
     Params_800D2900 p1 = lbl_8043C278;
     Params_800D2900 p2 = lbl_8043C2C4;
-    Params_800D2900 p3 = lbl_8043C310;
     s32 vz = *(s32 *)((u8 *)arg0 + 0x40);
     s32 vy = *(s32 *)((u8 *)arg0 + 0x3C);
     s32 vx = *(s32 *)((u8 *)arg0 + 0x38);
@@ -1205,6 +1204,7 @@ s32 fn_800D2A68(void *arg0) {
     p1.x40 = ((Inner2_800D2A68 *)ip)->x8;
     p1.x44 = ((Inner2_800D2A68 *)ip)->xc;
     ip = (*(Outer_800D2900 * *)&gyaranzo_bml_resource)->p42c;
+    Params_800D2900 p3 = lbl_8043C310;
     p2.pos.x = *(f32 *)&vx;
     p2.pos.y = *(f32 *)&vy;
     p2.pos.z = *(f32 *)&vz;
