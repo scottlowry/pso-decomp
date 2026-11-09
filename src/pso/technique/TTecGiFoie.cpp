@@ -282,10 +282,9 @@ void run_task__13TUnk_804CC800Fv(Task_802312E4 *self) {
     }
     if (self->x47 != 0) {
         s32 v3[3];
-        s32 n;
-        for (n = 0; n < 3; n++) {
-            v3[n] = lbl_8044D344[n];
-        }
+        v3[0] = lbl_8044D344[0];
+        v3[1] = lbl_8044D344[1];
+        v3[2] = lbl_8044D344[2];
         push_matrix_from(identity_matrix);
         rotate_matrix_y(0, self->x48);
         rotate_vector_by_matrix(0, v3, v3);
