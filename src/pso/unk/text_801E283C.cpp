@@ -43,15 +43,15 @@ extern "C" u8 fill_date_from_seconds(u32 seconds, Date_801E21A8 *date) {
     date->hour = totalHours % 24;
 
     s32 dayOfYear;
-    if (leapDays > dayInYear) {
+    if (leapDays <= dayInYear) {
+        date->year = years4 + 2000;
+        dayOfYear = dayInYear - leapDays;
+    } else {
         date->year = years4 + 1999;
         dayOfYear = dayInYear + (365 - leapDays);
         if (date->year % 4 == 0) {
             dayOfYear++;
         }
-    } else {
-        date->year = years4 + 2000;
-        dayOfYear = dayInYear - leapDays;
     }
 
     s32 month;
