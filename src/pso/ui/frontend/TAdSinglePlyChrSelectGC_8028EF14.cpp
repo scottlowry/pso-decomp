@@ -795,6 +795,28 @@ void map_shape_region_samples(s32 region, s32 *samples) {
     }
 }
 
+#pragma push
+#pragma fp_contract on
+// Solves the blend weights of `point` in the proportion-plane triangle of its
+// region: k along the ia->ic edge, m along ia->ib, and the region's weight
+// total minus the two as the ia weight. Stores region + weights[3].
+void calc_shape_region_coefficients(f32 *point) {
+    s32 region = find_shape_triangle_region((u8 *)point);
+    s32 ia = creation_region_sample_index_table[region * 3];
+    s32 ib = creation_region_sample_index_table[region * 3 + 1];
+    s32 ic = creation_region_sample_index_table[region * 3 + 2];
+    f32 total = *(const f32 *)((const u8 *)&lbl_805DD944 + region * 12);
+
+    creation_shape_blend.region = region;
+    f32 k = (point[0] - lbl_804D400C[ia].width) / (lbl_804D400C[ic].width - lbl_804D400C[ia].width);
+    f32 m = (point[1] - lbl_804D400C[ia].height - (lbl_804D400C[ic].height - lbl_804D400C[ia].height) * k) /
+            (lbl_804D400C[ib].height - lbl_804D400C[ia].height);
+    creation_shape_blend.weights[2] = k;
+    creation_shape_blend.weights[1] = m;
+    creation_shape_blend.weights[0] = total - (m + k);
+}
+#pragma pop
+
 void TAdSinglePlyChrSelectGC::get_sorted_region_samples(s32 *samples) {
     s32 j;
     s32 y;
