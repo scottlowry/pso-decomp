@@ -580,24 +580,24 @@ extern "C" void TBoss8Dragon__sub_8002D5F8(void) {
     ((s16 *)d)[8] = 0x408;
     lbl_805D4B70 = (Hdr_8002D4C0 *)(d + 0x14);
     lbl_805D4B70->count = 0x242;
-    cnt = *(s32 *)(d + 0x18) & 0x3FFFF;
-    poly = (s16 *)(d + 0x1A);
+    cnt = *(s16 *)(d + 0x14) & 0x3FFFF;
+    poly = (s16 *)(d + 0x16);
     n = 0;
     for (i = 0; i < cnt; i++) {
-        j = poly[i];
+        j = *poly++;
         if (j < 0) {
-            j = -j;
+            j = (s16)-j;
         }
-        n += j;
+        n += (s16)j;
     }
     lbl_805D4B6C = (int)mem_alloc(n * 4);
     tbl = (const f32 *)(*(s32 *)d + 8);
-    poly = (s16 *)(d + 0x1A);
+    poly = (s16 *)(d + 0x16);
     pp = (s16 *)lbl_805D4B6C;
     for (i = 0; i < cnt; i++) {
         j = *poly++;
         if (j < 0) {
-            j = -j;
+            j = (s16)-j;
         }
         while (j > 0) {
             *pp++ = (s16)(lbl_805D81D8 * (lbl_805D81DC * tbl[*poly * 6]));
