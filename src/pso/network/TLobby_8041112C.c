@@ -6647,35 +6647,35 @@ s32 TLobby__sub_80418D7C(u8 *node, u8 *self, u16 p1, u16 flags, u16 p2, u8 last,
   ep = tail + 24;
   n = 0;
   i = 0;
-  pb = (u8 **)*((u32 *)(node + 44));
+  self = *((u8 **) (node + 44));
   cnt = *pn;
-  while ((pb != 0) && (cnt > 0))
+  while ((self != 0) && (cnt > 0))
   {
     if (i == 0)
     {
-      NetMemcpy(tail + 16, ((u8 *)pb) + 8, 8);
+      NetMemcpy(tail + 16, self + 8, 8);
       *((s32 *) (tail + 4)) = 1;
       ep += 0;
       i++;
       *((s32 *) (tail + 8)) = *((u16 *) (node + 32));
       *((s16 *) (tail + 12)) = *((s16 *) (node + 32));
-      NetMemcpy(ep + 4, ((u8 *)pb) + 8, 8);
+      NetMemcpy(ep + 4, self + 8, 8);
       *((s32 *) (tail + 4)) += 1;
-      *((s32 *) (tail + 8)) += *((u16 *) (((u8 *)pb) + 18));
-      *((s16 *) ep) = *((s16 *) (((u8 *)pb) + 18));
+      *((s32 *) (tail + 8)) += *((u16 *) (self + 18));
+      *((s16 *) ep) = *((s16 *) (self + 18));
       n = 2;
       TLobby__sub_80406EB8(ep + 4, *((u16 *) (node + 32)));
     }
     else
     {
-      NetMemcpy((tail + (n * 12)) + 16, ((u8 *)pb) + 8, 8);
+      NetMemcpy((tail + (n * 12)) + 16, self + 8, 8);
       *((s32 *) (tail + 4)) += 1;
-      *((s32 *) (tail + 8)) += *((u16 *) (((u8 *)pb) + 18));
-      *((s16 *) ((tail + (6 * (2 * i))) + 12)) = *((s16 *) (((u8 *)pb) + 18));
+      *((s32 *) (tail + 8)) += *((u16 *) (self + 18));
+      *((s16 *) ((tail + (6 * (2 * i))) + 12)) = *((s16 *) (self + 18));
       n++;
     }
-    cur = (u8 *)pb;
-    pb = *((u8 **)(((u8 *)pb) + 20));
+    cur = self;
+    self = *((u8 **) (self + 20));
     *((s16 *) (cur + 4)) = 0;
     cnt--;
     i++;
