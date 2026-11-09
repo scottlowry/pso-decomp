@@ -721,7 +721,7 @@ s32 test_box_sphere_contact(Vec_803E1B1C *box, CollisionSphere *sphere)
         f32 ex = inline_fn23(a, b);
         f32 ey = a->y - b->y;
         f32 ez = a->z - b->z;
-        f32 s = ((ez * (pz - a->z)) + ((ex * (px - a->x)) + (ey * (py - a->y)))) / ((ez * ez) + ((ey * ey) + (ex * ex)));
+        f32 s = ((ez * (pz - a->z)) + ((ex * (px - a->x)) + (ey * (py - a->y)))) / ((ez * ez) + ((ex * ex) + (ey * ey)));
         f32 fz = (ez * s) + a->z;
         f32 fx = inline_fn2345(ex, s, a);
         f32 fy = (ey * s) + a->y;
