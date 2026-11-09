@@ -262,8 +262,8 @@ void run_task__13TUnk_804CC800Fv(Task_802312E4 *self) {
         self->x38 = self->x38 + lbl_8044D358;
         self->x3c = self->x3c + 0x1C71;
         v.x = self->x38 * cos_table_lookup(self->x3c);
-        v.y = lbl_805DC810;
         v.z = self->x38 * sin_table_lookup(self->x3c);
+        v.y = lbl_805DC810;
         push_matrix_from(identity_matrix);
         rotate_matrix_y(0, self->x48);
         rotate_matrix_x(0, 0x4000);
