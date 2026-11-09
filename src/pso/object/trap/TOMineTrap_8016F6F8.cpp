@@ -14,7 +14,7 @@
 #include "pso/math/AngleLookup.h"
 #include "pso/unk/text_80087278.h"
 
-struct Trap_8016F704 { u8 pad0[0x38]; f32 pos[3]; u8 pad44[0x84 - 0x44]; s32 delay; u8 pad88[0x2A8 - 0x88]; void *target; u8 pad2AC[0x34C - 0x2AC]; f32 range; u8 pad350[0x35C - 0x350]; u16 targetId; };
+struct Trap_8016F704 { u8 pad0[0x28]; s16 f28; u8 pad2A[0x2E - 0x2A]; s16 f2E; u8 pad30[0x38 - 0x30]; f32 pos[3]; u8 pad44[0x84 - 0x44]; s32 delay; s32 f88; u8 pad8C[0xA4 - 0x8C]; s32 fA4; u8 padA8[0x2A8 - 0xA8]; void *target; u8 pad2AC[0x34C - 0x2AC]; f32 range; u8 pad350[0x358 - 0x350]; s32 f358; u16 targetId; };
 
 extern "C" {
 s32 obj_testFlags30__14TObjCollidableFUl(void *, u32);
@@ -28,7 +28,10 @@ extern s32 enable_v2_features;
 s32 create_placed_trap__10TOMineTrapFUiss(u32 arg0, s16 arg1, s16 arg2);
 s32 is_split_screen();
 extern s32 local_client_id;
+s32 record_attack_source(void *, u32);
+int get_trap_type__10TOMineTrapFv(void *);
 }
+
 
 struct VBase_18_33b813
 {
@@ -59,6 +62,30 @@ struct VObj_18_33b813 : VBase_18_33b813 {
     virtual s32 m20(s32, f32);
 };
 
+struct VTrap_18_8016F908 : VBase_18_33b813 {
+    virtual void m0(); virtual void m1(); virtual void m2(); virtual void m3();
+    virtual void m4(); virtual void m5(); virtual void m6(); virtual void m7();
+    virtual void m8(); virtual void m9(); virtual void m10(); virtual void m11();
+    virtual void m12(); virtual void m13(); virtual void m14(); virtual void m15();
+    virtual void m16(); virtual void m17(); virtual void m18(); virtual void m19();
+    virtual void m20(void *, f32);
+    virtual void m21(void *, s32 *, s32, s32, s32, s32, s32);
+    virtual void m22(); virtual void m23(); virtual void m24(); virtual void m25();
+    virtual void m26(); virtual void m27(); virtual void m28(); virtual void m29();
+    virtual void m30(); virtual void m31(); virtual void m32(); virtual void m33();
+    virtual void m34(); virtual void m35(); virtual void m36(); virtual void m37();
+    virtual void m38(); virtual void m39(); virtual void m40(); virtual void m41();
+    virtual void m42(); virtual void m43(); virtual void m44(); virtual void m45();
+    virtual void m46(s32);
+    virtual void m47(); virtual void m48(); virtual void m49(); virtual void m50();
+    virtual void m51(); virtual void m52(); virtual void m53(); virtual void m54();
+    virtual void m55(); virtual void m56(); virtual void m57(); virtual void m58();
+    virtual void m59(); virtual void m60(); virtual void m61(); virtual void m62();
+    virtual void m63(); virtual void m64(); virtual void m65(); virtual void m66();
+    virtual void m67(); virtual void m68(); virtual void m69(); virtual void m70();
+    virtual void m71();
+    virtual void m72(s32);
+};
 struct Stack_80170AC8
 {
   f32 sp8;
@@ -196,6 +223,137 @@ void TOMineTrap::vfunc_86() {
     this->mode = 2;
     ((TObjCollidable *)arg0)->set_indexed_flags(0, 1);
     this->actorFlags = (s32) (this->actorFlags & 0xFFFBFFFF);
+}
+
+void TOMineTrap::run_task() {
+    Trap_8016F704 *self = (Trap_8016F704 *)this;
+    s32 a1000[2];
+    s32 a4000[2];
+    void *p;
+    void *pl;
+    s32 i;
+    u16 id;
+    s32 floor;
+    s32 kind;
+
+    this->update_float_height();
+    switch (this->mode) {
+    case 0:
+    case 2:
+        if (this->find_target_in_range() == 1) {
+            this->set_triggered();
+        }
+        VecCopy((Vec *)&this->m_2fc, (const Vec *)&this->float_position);
+        VecCopy((Vec *)(self->fA4 + 0x1C), (const Vec *)&this->float_position);
+        break;
+    case 3:
+        if (self->f88-- >= 0) {
+            this->set_state();
+            this->send_state_packet(2);
+        }
+        TOMineTrap__sub_80170CD4(this);
+        submit_cursor_candidate(this, -1);
+        break;
+    case 4:
+        pl = get_player_by_client_id((u16)this->get_trap_type());
+        if (pl == 0) {
+            pl = this;
+        }
+        for (i = 0; i < lbl_805D5868; i++) {
+            p = (void *)get_player_data__10TObjPlayerFi(i);
+            if (p == 0) {
+                continue;
+            }
+            if (p == (void *)this) {
+                continue;
+            }
+            if (obj_testFlags30__14TObjCollidableFUl(p, 0x400800) != 0) {
+                continue;
+            }
+            if (((Trap_8016F704 *)p)->f2E != self->f2E && ((Trap_8016F704 *)p)->f28 != self->f28 &&
+                ((Trap_8016F704 *)p)->f28 != self->f2E) {
+                continue;
+            }
+            id = get_entity_id(p);
+            if (id == 0xFFFF) {
+                continue;
+            }
+            if (id == this->get_trap_type() && TOMineTrap::get_trap_count() != 1) {
+                continue;
+            }
+            if (id < 0x1000) {
+                if (TObjPlayer::get_player_count() != 1) {
+                    continue;
+                }
+                floor = get_current_floor();
+                if (((TObjPlayer *)p)->get_floor() != floor) {
+                    continue;
+                }
+                if (horizontal_distance_squared(self->pos, (u8 *)p + 0x38) < this->m_350 * this->m_350) {
+                    if (((TObjChara *)p)->obj_isState2_324() == 0) {
+                        self->target = p;
+                        kind = (s32)this->attack.kind;
+                        if (kind == 2) {
+                            goto L_m46a;
+                        } else {
+                            goto L_m21a;
+                        }
+                    L_m46a:
+                        ((VTrap_18_8016F908 *)self->target)->m46(0);
+                        goto L_rec_1000;
+                    L_m21a:
+                        {
+                            s32 v358 = self->f358;
+                            a1000[0] = kind;
+                            a1000[1] = v358;
+                            ((VTrap_18_8016F908 *)self->target)->m21(this, a1000, 0, -1, -1, a1000[0], a1000[1]);
+                        }
+                    L_rec_1000:;
+                        record_attack_source(self->target, get_trap_type__10TOMineTrapFv(this));
+                    }
+                    if ((s32)this->m_380 != 1) {
+                        this->m_380 = TOMineTrap::show_owner_message((s32)this, (u32)p);
+                    }
+                }
+            } else if (id < 0x4000) {
+                if (horizontal_distance_squared(self->pos, (u8 *)p + 0x38) < this->m_350 * this->m_350) {
+                    self->target = p;
+                    kind = (s32)this->attack.kind;
+                    if (kind == 2) {
+                        goto L_m46b;
+                    } else {
+                        goto L_m21b;
+                    }
+                L_m46b:
+                    ((VTrap_18_8016F908 *)self->target)->m46(0);
+                    ((VTrap_18_8016F908 *)self->target)->m72(0);
+                    goto L_rec_4000;
+                L_m21b:
+                    {
+                        s32 v358 = self->f358;
+                        a4000[0] = kind;
+                        a4000[1] = v358;
+                        ((VTrap_18_8016F908 *)self->target)->m21(pl, a4000, 0, -1, -1, a4000[0], a4000[1]);
+                    }
+                L_rec_4000:;
+                    record_attack_source(self->target, get_trap_type__10TOMineTrapFv(this));
+                }
+            } else {
+                if (check_value_equals__13TUnk_804B6C24Fl(p, TOMineTrap__data_805D3080) == 0) {
+                    continue;
+                }
+                if (horizontal_distance_squared(self->pos, (u8 *)p + 0x38) < this->m_350 * this->m_350) {
+                    self->target = p;
+                    ((VTrap_18_8016F908 *)self->target)->m20(this, TOMineTrap__data_805DB868);
+                }
+            }
+        }
+        this->mode = 5;
+        this->clear_player_status_flag(0, 1);
+        this->sub_8017070C();
+        queue_destruction__7TObjectFv(this);
+        break;
+    }
 }
 
 void TOMineTrap::destroy_matching_traps() {
