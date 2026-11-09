@@ -1227,10 +1227,10 @@ s32 fn_800D2A68(void *arg0) {
         __ct__8TObjChipFP7TObjectP14TObjChipParams((u8 *)obj, tl_05, (u8 *)&p2);
     }
     obj = __nw__7TObjectFUl(0x234);
-    if (obj != NULL) {
-        obj = __ct__8TObjChipFP7TObjectP14TObjChipParams((u8 *)obj, tl_05, (u8 *)&p3);
+    if (obj == NULL) {
+        return (s32)obj;
     }
-    return (s32)obj;
+    return (s32)__ct__8TObjChipFP7TObjectP14TObjChipParams((u8 *)obj, tl_05, (u8 *)&p3);
 }
 
 void TObjPlayer::update_aim_and_fire() {
