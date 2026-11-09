@@ -6442,9 +6442,9 @@ s32 TLobby__sub_80418C40(u8* self, void* p1, s16 p2, u8 p3, u32 p4, void* p5, u1
 #pragma dont_inline off
 #pragma inline_depth(4)
 inline u8 *take_80418D7C(u8 **pb, s16 *pn) {
-    u8 *ent;
-    s16 i;
     s16 n;
+    s16 i;
+    u8 *ent;
     ent = *pb;
     n = *pn;
     for (i = 0; i < n; i++) {
@@ -6460,11 +6460,11 @@ inline u8 *take_80418D7C(u8 **pb, s16 *pn) {
     return 0;
 }
 inline s16 contig_80418D7C(u8 *node, s16 *pn, u8 *g) {
-    u8 *f;
-    s16 cnt;
-    s16 n;
     s16 lim;
+    u8 *f;
     u32 acc;
+    s16 n;
+    s16 cnt;
     acc = 0;
     f = *(u8 **)(node + 44);
     cnt = *pn;
@@ -6495,7 +6495,7 @@ s32 TLobby__sub_80418D7C(u8 *node, u8 *self, u16 p1, u16 flags, u16 p2, u8 last,
   s32 TLobby__sub_8041979C(void);
   u8 **new_var;
   u8 *g = (u8 *) (&packet_fragment_pool_state);
-  s16 cnt;
+  u32 c16;
   u8 **pb;
   s16 *pn;
   u8 *e;
@@ -6504,15 +6504,15 @@ s32 TLobby__sub_80418D7C(u8 *node, u8 *self, u16 p1, u16 flags, u16 p2, u8 last,
   u8 *cur;
   u8 *n0;
   s16 i;
-  s16 n;
+  u8 *ep;
   s16 res;
   s32 len;
   s16 ls;
   s32 sum;
-  u8 *ep;
+  s16 n;
   u32 off;
   u8 *nx;
-  u32 c16;
+  s16 cnt;
   O_80406B6C tmp;
   if (flags == 0)
   {
