@@ -195,9 +195,10 @@ extern RecoveredGlobal_80230D9C_lbl_804CC510 tech_high_level_linear_power_table;
 extern RecoveredGlobal_80230D9C_lbl_804CC55C lbl_804CC55C;
 extern void *lbl_804CC800[];
 extern const f32 lbl_8044D338[3];
-extern const Vec lbl_8044D344;
+extern const u32 lbl_8044D344[];
 extern u32 TTecGiFoie__name;
 extern const f32 lbl_805DC810;
+extern const f32 lbl_805DC814;
 extern const f32 lbl_805DC818;
 extern const f32 lbl_805DC820;
 extern const f32 lbl_805DC824;
@@ -214,79 +215,106 @@ void TTecGiFoie::calc_params() {
   }
 }
 
+#pragma push
+#pragma opt_common_subs off
+#pragma opt_propagation off
+#pragma opt_dead_assignments off
+#pragma fp_contract on
 void TUnk_804CC800::run_task() {
-    s32 rot[3];
-    s32 bob;
+    u32 sel;
+    s32 euler[3];
+    f32 orbit[3];
+    u32 stage[3];
+    f32 c;
+    f32 s;
+    s32 a;
+    u32 off;
+    u32 i;
+    s32 *new_var;
+
     switch (pad_44) {
     case 0:
-        bob = 0;
+        sel = 0;
         break;
     case 1:
-        bob = 1;
+        sel = 1;
         break;
     case 2:
-        bob = 2;
+        sel = 2;
         break;
     case 3:
-        bob = 0;
+        sel = 0;
         break;
     case 4:
-        bob = 1;
+        sel = 1;
         break;
     case 5:
-        bob = 2;
+        sel = 2;
         break;
     default:
-        bob = 0;
+        sel = 0;
         break;
     }
-    pad_40++;
-    if (pad_46) {
-        Vec offset;
+    pad_40 = pad_40 + 1;
+    if (pad_46 != 0) {
         pad_38 += 0.015;
-        pad_3C += 0x1C71;
-        offset.x = pad_38 * cos_table_lookup(pad_3C);
-        offset.z = pad_38 * sin_table_lookup(pad_3C);
-        offset.y = 0.0f;
+        pad_3C = pad_3C + 0x1C71;
+        c = cos_table_lookup(pad_3C);
+        orbit[0] = pad_38 * c;
+        s = sin_table_lookup(pad_3C);
+        orbit[2] = pad_38 * s;
+        orbit[1] = lbl_805DC810;
         push_matrix_from(identity_matrix);
         rotate_matrix_y(0, pad_48);
         rotate_matrix_x(0, 0x4000);
-        rotate_vector_by_matrix(0, &offset, &offset);
+        rotate_vector_by_matrix(0, (const Vec *)orbit, (Vec *)orbit);
         pop_matrix();
-        pad_2C.x = pad_20.x + offset.x;
-        pad_2C.y = pad_20.y + offset.y;
-        pad_2C.z = pad_20.z + offset.z;
+        pad_2C.x = pad_20.x + orbit[0];
+        pad_2C.y = pad_20.y + orbit[1];
+        pad_2C.z = pad_20.z + orbit[2];
     } else {
-        pad_38 += 0.55f;
-        pad_3C += (s32)(182.04445f * (f32)(pad_44 + 9));
-        pad_2C.y = lbl_8044D338[bob] * sin_table_lookup((s32)(182.04445f * (f32)(pad_40 * 15))) + pad_20.y;
-        pad_2C.x = pad_38 * cos_table_lookup(pad_3C) + pad_20.x;
-        pad_2C.z = pad_38 * sin_table_lookup(pad_3C) + pad_20.z;
+        pad_38 = pad_38 + lbl_805DC814;
+        pad_3C = pad_3C + (s32)(lbl_805DC818 * (f32)(pad_44 + 9));
+        s = sin_table_lookup((s32)(lbl_805DC818 * (f32)(pad_40 * 15)));
+        f32 tv = lbl_8044D338[sel];
+        pad_2C.y = tv * s + pad_20.y;
+        c = cos_table_lookup(pad_3C);
+        pad_2C.x = pad_38 * c + pad_20.x;
+        s = sin_table_lookup(pad_3C);
+        pad_2C.z = pad_38 * s + pad_20.z;
     }
-    if (pad_47) {
-        Vec dir = lbl_8044D344;
+    if (pad_47 != 0) {
+        stage[0] = lbl_8044D344[0];
+        stage[1] = lbl_8044D344[1];
+        stage[2] = lbl_8044D344[2];
         push_matrix_from(identity_matrix);
         rotate_matrix_y(0, pad_48);
-        rotate_vector_by_matrix(0, &dir, &dir);
+        rotate_vector_by_matrix(0, (const Vec *)stage, (Vec *)stage);
         pop_matrix();
-        rot[0] = 0;
-        rot[1] = 0;
-        rot[2] = 0;
-        direction_to_rotation_xz((u8 *)&dir, &rot[0], &rot[2]);
+        new_var = &euler[2];
+        euler[0] = 0;
+        euler[1] = 0;
+        euler[2] = 0;
+        direction_to_rotation_xz((u8 *)stage, &euler[0], new_var);
         pad_1C[0]->set_position(&pad_2C);
-        pad_1C[0]->set_direction(rot);
+        pad_1C[0]->set_direction(euler);
     } else {
-        u32 i = 0;
-        rot[1] = (s32)(10430.38043493439 * atan2_float(pad_2C.x - pad_20.x, pad_2C.z - pad_20.z));
-        rot[0] = rot[1] - 0x8000;
-        rot[1] = 0;
-        rot[2] = 0x4000;
-        for (; i < TTecGiFoie__emitter_profile_table[pad_44].count; i++) {
-            pad_1C[i]->set_position(&pad_2C);
-            pad_1C[i]->set_direction(rot);
+        a = (s32)(10430.38043493439 * atan2_float(pad_2C.x - pad_20.x, pad_2C.z - pad_20.z));
+        euler[1] = a;
+        euler[0] = a - 32768;
+        euler[1] = 0;
+        euler[2] = 0x4000;
+        i = 0;
+        off = 0;
+        while (i < TTecGiFoie__emitter_profile_table[pad_44].count) {
+            ((TParticleCtrl *)(void *)*(u32 *)((u8 *)pad_1C + off))->set_position(&pad_2C);
+            ((TParticleCtrl *)(void *)*(u32 *)((u8 *)pad_1C + off))->set_direction(euler);
+            i = i + 1;
+            off = off + 4;
         }
     }
 }
+#pragma pop
 
 u8 *__dt__13TUnk_804CC800Fv(Task_80231224 *task, s16 flag) {
     u32 i;
