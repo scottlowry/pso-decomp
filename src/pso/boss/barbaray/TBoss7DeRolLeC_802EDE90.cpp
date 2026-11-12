@@ -15,8 +15,7 @@ extern "C" {
 extern const char *TBoss7DeRolLeC__class_name;
 extern const CollisionBody lbl_80473C3C;
 extern const Vec lbl_80473F6C;
-extern s32 lbl_804E3D1C[];
-extern u8 lbl_804E3C8C[];
+extern s32 lbl_804E3BF0[];
 void *mem_alloc(u32 size);
 void fill_value_array(PointerBuffer *buffer);
 void TObjPlayer__sub_802E7EA0(void *arg0);
@@ -24,6 +23,7 @@ void TObjPlayer__sub_802E7EA0(void *arg0);
 
 TBoss7DeRolLeC::TBoss7DeRolLeC(TObject *parent, void *set_data) : TObjEneDD_ST(parent), unk_690(NULL) {
     u32 flags;
+    u8 *blob = (u8 *)lbl_804E3BF0;
 
     m_name = TBoss7DeRolLeC__class_name;
     if (boss7_joint_state == 0) {
@@ -44,13 +44,13 @@ TBoss7DeRolLeC::TBoss7DeRolLeC(TObject *parent, void *set_data) : TObjEneDD_ST(p
     set_collision_body(&unk_3C0);
     transform_part_positions();
     motion_flags = 0;
-    set_field_d8((s32)&lbl_804E3D1C[4]);
+    set_field_d8((s32)(blob + 0x13c));
     set_field_dc((s32)((BmlResource *)lbl_805D6918)->motions);
     requested_action = 0;
     set_animation(requested_action);
     set_field_b8(requested_action);
     check_state_flag_2();
-    movementParameters = lbl_804E3C8C;
+    movementParameters = blob + 0x9c;
     initialize_enemy_state(0x49);
     unk_37C = 20.0f;
     enemy_init_acquire_period(30);
