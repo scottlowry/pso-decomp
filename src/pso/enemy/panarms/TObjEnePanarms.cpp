@@ -385,6 +385,15 @@ PanarmsMotionParam *lbl_80495914[2] = { lbl_80495484, lbl_80495524 };
 
 s32 panarms_turn_delta_table[2] = { 0x4000, -0x4000 };
 
+/* The sound-id pairs are remapped per area, so the first caller fills them and
+ * leaves the flag set; the tables themselves start zeroed like any other .data. */
+s32 panarms_sound_effect_pair[2] = { 0, 0 };
+s32 TObjEnePanarms__sound_ids[2] = { 0, 0 };
+s8 lbl_805D5288;
+s8 TObjEnePanarms__sound_ids_initialized;
+f32 panarms_particle_frame_window;
+s8 panarms_particle_frame_window_initialized;
+
 void clear_render_callback__8TObjFishFv(void) { set_chunk_model_node_callback(0); }
 
 s32 TObjEnePanarms__sub_800E2FB4(O_800E2FB4 *self) {
@@ -1261,7 +1270,11 @@ void TObjEnePanBARA::update_hit_state() {
 void TObjEnePanBARA::sub_800E0B9C() {
     m_384 = 1;
     m_388 = 1;
-    static s32 panarms_sound_effect_pair[2] = { remap_sound_for_area(0x4003BC34), remap_sound_for_area(0x4003BC33) };
+    if (lbl_805D5288 == 0) {
+        panarms_sound_effect_pair[0] = remap_sound_for_area(0x4003BC34);
+        panarms_sound_effect_pair[1] = remap_sound_for_area(0x4003BC33);
+        lbl_805D5288 = 1;
+    }
     play_sound_effect(panarms_sound_effect_pair[m_380], &position, 0, 0);
     motion_flags &= ~1;
     set_field_b8(5);
@@ -1289,7 +1302,11 @@ void TObjEnePanBARA::sub_800E0A44() {
         }
     }
     set_field_b8__10TObjMotionFs((u8 *)this, var_r30);
-    static s32 TObjEnePanarms__sound_ids[2] = { remap_sound_for_area(0x4003B836), remap_sound_for_area(0x4003BB35) };
+    if (TObjEnePanarms__sound_ids_initialized == 0) {
+        TObjEnePanarms__sound_ids[0] = remap_sound_for_area(0x4003B836);
+        TObjEnePanarms__sound_ids[1] = remap_sound_for_area(0x4003BB35);
+        TObjEnePanarms__sound_ids_initialized = 1;
+    }
     play_sound_effect(TObjEnePanarms__sound_ids[this->m_380], &position, 0, 0);
     this->action_timer = 0xA4;
 }
@@ -1301,7 +1318,10 @@ void TObjEnePanBARA::sub_800E0950() {
     f32 temp_f2;
     s32 temp_r0;
     *(s32 *)((s8 *)this + 0x3B4) = (s32) (*(s32 *)((s8 *)this + 0x3B4) - 1);
-    static f32 panarms_particle_frame_window = lbl_80495484[6].unk_8;
+    if (panarms_particle_frame_window_initialized == 0) {
+        panarms_particle_frame_window = lbl_80495484[6].unk_8;
+        panarms_particle_frame_window_initialized = 1;
+    }
     temp_f2 = *(f32 *)((s8 *)this + 0xC0);
     if ((temp_f2 >= 24.0f) && (temp_f2 < (24.0f + panarms_particle_frame_window))) {
         VecCopy((Vec *)(&stack.sp8), (const Vec *)unk_3A4);
