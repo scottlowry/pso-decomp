@@ -204,6 +204,38 @@ static inline s16 read_text_field(u8 *self, Hdr_803FC4B4 *hdr, s32 src) {
     return -1;
 }
 
+extern u8 lbl_805D7AB8[8];
+static inline s16 read_text_field_alt(u8 *self, Hdr_803FC4B4 *hdr, s32 src) {
+    s32 ret;
+    u8 **pdst;
+    s32 rv;
+    s16 fld;
+    s16 n;
+    u8 *obj;
+    obj = *(u8 **)(self + 0x30);
+    if (hdr->flag != self[1]) {
+        return -1;
+    }
+    n = (TLobby__sub_80401BCC(&src, lbl_805D7AB8, 1) != 1) ? -1 : (s16)lbl_805D7AB8[0];
+    if (n != -1) {
+        if (n != 0) {
+            fld = (s16)get_field_4((void *)src);
+            pdst = &lbl_805C0620.message;
+            rv = TLobby__sub_80401ABC((u8 *)src, *pdst, n);
+            (*pdst)[(s16)rv] = 0;
+            *(u8 **)(obj + 8) = *pdst;
+            ret = 1;
+            if ((s16)rv < n || n < fld) {
+            } else {
+                ret = 0;
+            }
+            return ret;
+        }
+        return 0;
+    }
+    return -1;
+}
+
 static inline void finish_pending_step(u8 *self, u8 bit) {
     u8 *link;
     link = *(u8 **)(self + 0xC);
@@ -251,7 +283,7 @@ void PADRead(u8 *self, s32 arg1)
       return;
 
     case 3:
-      if (read_text_field(self, &hdr, arg1) != 0)
+      if (read_text_field_alt(self, &hdr, arg1) != 0)
     {
       return;
     }
