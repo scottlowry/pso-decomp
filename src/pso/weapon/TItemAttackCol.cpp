@@ -298,7 +298,7 @@ extern "C" f32 normalize_vector(Vec *v);
 const char *TItemAttackCol__name = "TItemAttackCol";
 
 // The particle's direction before the collider's heading is added.
-static ParticleAngles particle_direction = {0x4000, 0, 0x4000};
+static ParticleAngles lbl_804E3530 = {0x4000, 0, 0x4000};
 
 TItemAttackCol::TItemAttackCol(TObject *parent, S_802E449C *params) : TUnk_804E355C(parent, params) {
     m_name = TItemAttackCol__name;
@@ -366,7 +366,7 @@ TItemAttackCol::TItemAttackCol(TObject *parent, S_802E449C *params) : TUnk_804E3
             particle = create_particle_emitter(&position, params->particle);
             if (particle != NULL) {
                 s32 rot = params->rotation_y;
-                ParticleAngles direction = particle_direction;
+                ParticleAngles direction = lbl_804E3530;
                 direction.x += rot;
                 particle->set_direction(&direction);
             }
