@@ -330,6 +330,42 @@ extern s32 model_render_flags;
 extern const char *lbl_805D2AB8;
 extern const s32 lbl_8043CD38[2];
 
+/* The halves' state machine entry points, named as the object names them. */
+void reset_state__14TObjEnePanBARAFv(TObjEnePanBARA *self);
+void snap_to_parent_position__14TObjEnePanBARAFv(TObjEnePanBARA *self);
+void init_split__14TObjEnePanBARAFv(TObjEnePanBARA *self);
+void handle_split_flag__14TObjEnePanBARAFv(TObjEnePanBARA *self);
+void start_action__14TObjEnePanBARAFv(TObjEnePanBARA *self);
+void sub_800E10D0__14TObjEnePanBARAFv(TObjEnePanBARA *self);
+void init_state_1__14TObjEnePanBARAFv(TObjEnePanBARA *self);
+void update_move_to_target__14TObjEnePanBARAFv(TObjEnePanBARA *self);
+void init_state_16__14TObjEnePanBARAFv(TObjEnePanBARA *self);
+void sub_800E0D1C__14TObjEnePanBARAFv(TObjEnePanBARA *self);
+void restore_from_linked_object__14TObjEnePanBARAFv(TObjEnePanBARA *self);
+void update_hit_state__14TObjEnePanBARAFv(TObjEnePanBARA *self);
+void sub_800E0B9C__14TObjEnePanBARAFv(TObjEnePanBARA *self);
+void apply_effect_if_flagged__14TObjEnePanBARAFv(TObjEnePanBARA *self);
+void sub_800E0A44__14TObjEnePanBARAFv(TObjEnePanBARA *self);
+void sub_800E0950__14TObjEnePanBARAFv(TObjEnePanBARA *self);
+void sub_800E0930__14TObjEnePanBARAFv(TObjEnePanBARA *self);
+void sub_800E092C__14TObjEnePanBARAFv(TObjEnePanBARA *self);
+void init_state_2__14TObjEnePanBARAFv(TObjEnePanBARA *self);
+void update_chase_target__14TObjEnePanBARAFv(TObjEnePanBARA *self);
+void init_action__14TObjEnePanBARAFv(TObjEnePanBARA *self);
+void sub_800E055C__14TObjEnePanBARAFv(TObjEnePanBARA *self);
+void init_attack_state2__14TObjEnePanBARAFv(TObjEnePanBARA *self);
+void update_attack__14TObjEnePanBARAFv(TObjEnePanBARA *self);
+void sub_800E0344__14TObjEnePanBARAFv(TObjEnePanBARA *self);
+void sub_800E0214__14TObjEnePanBARAFv(TObjEnePanBARA *self);
+void start_phase2_timer150__14TObjEnePanBARAFv(TObjEnePanBARA *self);
+void sub_800E0048__14TObjEnePanBARAFv(TObjEnePanBARA *self);
+void start_phase3_timer12__14TObjEnePanBARAFv(TObjEnePanBARA *self);
+void update_move_timer__14TObjEnePanBARAFv(TObjEnePanBARA *self);
+void init_open_state__14TObjEnePanBARAFv(TObjEnePanBARA *self);
+void sub_800DFE08__14TObjEnePanBARAFv(TObjEnePanBARA *self);
+void init_attack_state__14TObjEnePanBARAFv(TObjEnePanBARA *self);
+void update_action_timer__14TObjEnePanBARAFv(TObjEnePanBARA *self);
+
 /* A half's one collision sphere (init_collision_body_parts in the constructor). */
 CollisionBody lbl_80495458[1] = {
     { { 0.0f, 16.5f, 0.0f }, 7.5f, 0.0f, 0, 0x8003, { 0.0f, 0.0f, 0.0f }, 0.0f },
@@ -355,26 +391,34 @@ struct PanBARAState {
     PanBARAStateFn update;
 };
 
-/* Indexed by the half's state (0x378): set_state runs enter, run_task runs update. */
-static PanBARAState TObjEnePanarms__state_fn_table[17] = {
-    { &TObjEnePanBARA::reset_state, &TObjEnePanBARA::snap_to_parent_position },
-    { &TObjEnePanBARA::init_split, &TObjEnePanBARA::handle_split_flag },
-    { &TObjEnePanBARA::start_action, &TObjEnePanBARA::sub_800E10D0 },
-    { &TObjEnePanBARA::init_state_1, &TObjEnePanBARA::update_move_to_target },
-    { &TObjEnePanBARA::init_state_16, &TObjEnePanBARA::sub_800E0D1C },
-    { &TObjEnePanBARA::restore_from_linked_object, &TObjEnePanBARA::update_hit_state },
-    { &TObjEnePanBARA::sub_800E0B9C, &TObjEnePanBARA::apply_effect_if_flagged },
-    { &TObjEnePanBARA::sub_800E0A44, &TObjEnePanBARA::sub_800E0950 },
-    { &TObjEnePanBARA::sub_800E0930, &TObjEnePanBARA::sub_800E092C },
-    { &TObjEnePanBARA::init_state_2, &TObjEnePanBARA::update_chase_target },
-    { &TObjEnePanBARA::init_action, &TObjEnePanBARA::sub_800E055C },
-    { &TObjEnePanBARA::init_attack_state2, &TObjEnePanBARA::update_attack },
-    { &TObjEnePanBARA::sub_800E0344, &TObjEnePanBARA::sub_800E0214 },
-    { &TObjEnePanBARA::start_phase2_timer150, &TObjEnePanBARA::sub_800E0048 },
-    { &TObjEnePanBARA::start_phase3_timer12, &TObjEnePanBARA::update_move_timer },
-    { &TObjEnePanBARA::init_open_state, &TObjEnePanBARA::sub_800DFE08 },
-    { &TObjEnePanBARA::init_attack_state, &TObjEnePanBARA::update_action_timer },
+/* The pool of member-function pointers __sinit copies out of: adjustment,
+ * class marker, entry point, in table order. The first entry's enter stays
+ * null, so the pool is one record longer than the copy reaches.
+ */
+static u32 lbl_804955C4[102] = {
+    0, 0xFFFFFFFF, (u32)&reset_state__14TObjEnePanBARAFv,   0, 0xFFFFFFFF, (u32)&snap_to_parent_position__14TObjEnePanBARAFv,
+    0, 0xFFFFFFFF, (u32)&init_split__14TObjEnePanBARAFv,   0, 0xFFFFFFFF, (u32)&handle_split_flag__14TObjEnePanBARAFv,
+    0, 0xFFFFFFFF, (u32)&start_action__14TObjEnePanBARAFv,   0, 0xFFFFFFFF, (u32)&sub_800E10D0__14TObjEnePanBARAFv,
+    0, 0xFFFFFFFF, (u32)&init_state_1__14TObjEnePanBARAFv,   0, 0xFFFFFFFF, (u32)&update_move_to_target__14TObjEnePanBARAFv,
+    0, 0xFFFFFFFF, (u32)&init_state_16__14TObjEnePanBARAFv,   0, 0xFFFFFFFF, (u32)&sub_800E0D1C__14TObjEnePanBARAFv,
+    0, 0xFFFFFFFF, (u32)&restore_from_linked_object__14TObjEnePanBARAFv,   0, 0xFFFFFFFF, (u32)&update_hit_state__14TObjEnePanBARAFv,
+    0, 0xFFFFFFFF, (u32)&sub_800E0B9C__14TObjEnePanBARAFv,   0, 0xFFFFFFFF, (u32)&apply_effect_if_flagged__14TObjEnePanBARAFv,
+    0, 0xFFFFFFFF, (u32)&sub_800E0A44__14TObjEnePanBARAFv,   0, 0xFFFFFFFF, (u32)&sub_800E0950__14TObjEnePanBARAFv,
+    0, 0xFFFFFFFF, (u32)&sub_800E0930__14TObjEnePanBARAFv,   0, 0xFFFFFFFF, (u32)&sub_800E092C__14TObjEnePanBARAFv,
+    0, 0xFFFFFFFF, (u32)&init_state_2__14TObjEnePanBARAFv,   0, 0xFFFFFFFF, (u32)&update_chase_target__14TObjEnePanBARAFv,
+    0, 0xFFFFFFFF, (u32)&init_action__14TObjEnePanBARAFv,   0, 0xFFFFFFFF, (u32)&sub_800E055C__14TObjEnePanBARAFv,
+    0, 0xFFFFFFFF, (u32)&init_attack_state2__14TObjEnePanBARAFv,   0, 0xFFFFFFFF, (u32)&update_attack__14TObjEnePanBARAFv,
+    0, 0xFFFFFFFF, (u32)&sub_800E0344__14TObjEnePanBARAFv,   0, 0xFFFFFFFF, (u32)&sub_800E0214__14TObjEnePanBARAFv,
+    0, 0xFFFFFFFF, (u32)&start_phase2_timer150__14TObjEnePanBARAFv,   0, 0xFFFFFFFF, (u32)&sub_800E0048__14TObjEnePanBARAFv,
+    0, 0xFFFFFFFF, (u32)&start_phase3_timer12__14TObjEnePanBARAFv,   0, 0xFFFFFFFF, (u32)&update_move_timer__14TObjEnePanBARAFv,
+    0, 0xFFFFFFFF, (u32)&init_open_state__14TObjEnePanBARAFv,   0, 0xFFFFFFFF, (u32)&sub_800DFE08__14TObjEnePanBARAFv,
+    0, 0xFFFFFFFF, (u32)&init_attack_state__14TObjEnePanBARAFv,   0, 0xFFFFFFFF, (u32)&update_action_timer__14TObjEnePanBARAFv
 };
+
+/* Indexed by the half's state (0x378): set_state runs enter, run_task runs
+ * update. The image is empty until __sinit has copied the pool over it.
+ */
+static u32 TObjEnePanarms__state_fn_table[102] = { 0 };
 
 TObjFishNodeEntry lbl_804958F4[2] = {
     { 3 },
@@ -454,6 +498,219 @@ void TObjMotion::clear_motion_flags(s32 arg1) {
   new_var2 = ~arg1;
   new_var = (s32 *) (((s8 *) this) + 0xB0);
   *new_var = (s32) ((this->motion_flags) & new_var2);
+}
+
+/* The .data anchor is the first object of the fragment, so the pool and the
+ * table are both reached from it: pool words 0x16C..0x300, table 0x304.
+ */
+void __sinit_TObjEnePanarms_cpp(void) {
+    u32 *anchor = (u32 *)lbl_80495458;
+    u32 *entry = (u32 *)((u8 *)anchor + 0x304);
+
+    u32 v0 = anchor[117];
+    u32 v1 = anchor[115];
+    u32 v2 = anchor[118];
+    entry[24] = v1;
+    u32 v3 = anchor[119];
+    entry[26] = v0;
+    u32 v4 = anchor[120];
+    entry[27] = v2;
+    u32 v5 = anchor[121];
+    entry[28] = v3;
+    u32 v6 = anchor[122];
+    entry[29] = v4;
+    u32 v7 = anchor[123];
+    entry[30] = v5;
+    u32 v8 = anchor[124];
+    entry[31] = v6;
+    u32 v9 = anchor[125];
+    entry[32] = v7;
+    u32 v10 = anchor[126];
+    entry[33] = v8;
+    u32 v11 = anchor[127];
+    entry[34] = v9;
+    u32 v12 = anchor[128];
+    entry[35] = v10;
+    u32 v13 = anchor[129];
+    entry[36] = v11;
+    u32 v14 = anchor[130];
+    entry[37] = v12;
+    u32 v15 = anchor[131];
+    entry[38] = v13;
+    u32 v16 = anchor[132];
+    entry[39] = v14;
+    u32 v17 = anchor[133];
+    entry[40] = v15;
+    u32 v18 = anchor[134];
+    entry[41] = v16;
+    u32 v19 = anchor[135];
+    entry[42] = v17;
+    u32 v20 = anchor[91];
+    u32 v21 = anchor[92];
+    u32 v22 = anchor[93];
+    u32 v23 = anchor[94];
+    u32 v24 = anchor[95];
+    u32 v25 = anchor[96];
+    u32 v26 = anchor[97];
+    u32 v27 = anchor[98];
+    u32 v28 = anchor[99];
+    u32 v29 = anchor[100];
+    u32 v30 = anchor[101];
+    u32 v31 = anchor[102];
+    u32 v32 = anchor[103];
+    u32 v33 = anchor[104];
+    u32 v34 = anchor[105];
+    u32 v35 = anchor[106];
+    u32 v36 = anchor[107];
+    u32 v37 = anchor[108];
+    u32 v38 = anchor[109];
+    u32 v39 = anchor[110];
+    u32 v40 = anchor[111];
+    u32 v41 = anchor[112];
+    u32 v42 = anchor[113];
+    u32 v43 = anchor[114];
+    u32 v44 = anchor[116];
+    entry[43] = v18;
+    entry[0] = v20;
+    entry[1] = v21;
+    entry[2] = v22;
+    entry[3] = v23;
+    entry[4] = v24;
+    entry[5] = v25;
+    entry[6] = v26;
+    entry[7] = v27;
+    entry[8] = v28;
+    entry[9] = v29;
+    entry[10] = v30;
+    entry[11] = v31;
+    entry[12] = v32;
+    entry[13] = v33;
+    entry[14] = v34;
+    entry[15] = v35;
+    entry[16] = v36;
+    entry[17] = v37;
+    entry[18] = v38;
+    entry[19] = v39;
+    entry[20] = v40;
+    entry[21] = v41;
+    entry[22] = v42;
+    entry[23] = v43;
+    entry[25] = v44;
+    entry[44] = v19;
+    u32 v45 = anchor[162];
+    u32 v46 = anchor[160];
+    u32 v47 = anchor[163];
+    entry[69] = v46;
+    u32 v48 = anchor[164];
+    entry[71] = v45;
+    u32 v49 = anchor[165];
+    entry[72] = v47;
+    u32 v50 = anchor[166];
+    entry[73] = v48;
+    u32 v51 = anchor[167];
+    entry[74] = v49;
+    u32 v52 = anchor[168];
+    entry[75] = v50;
+    u32 v53 = anchor[169];
+    entry[76] = v51;
+    u32 v54 = anchor[170];
+    entry[77] = v52;
+    u32 v55 = anchor[171];
+    entry[78] = v53;
+    u32 v56 = anchor[172];
+    entry[79] = v54;
+    u32 v57 = anchor[173];
+    entry[80] = v55;
+    u32 v58 = anchor[174];
+    entry[81] = v56;
+    u32 v59 = anchor[175];
+    entry[82] = v57;
+    u32 v60 = anchor[176];
+    entry[83] = v58;
+    u32 v61 = anchor[177];
+    entry[84] = v59;
+    u32 v62 = anchor[178];
+    entry[85] = v60;
+    u32 v63 = anchor[179];
+    entry[86] = v61;
+    u32 v64 = anchor[180];
+    entry[87] = v62;
+    u32 v65 = anchor[136];
+    u32 v66 = anchor[137];
+    u32 v67 = anchor[138];
+    u32 v68 = anchor[139];
+    u32 v69 = anchor[140];
+    u32 v70 = anchor[141];
+    u32 v71 = anchor[142];
+    u32 v72 = anchor[143];
+    u32 v73 = anchor[144];
+    u32 v74 = anchor[145];
+    u32 v75 = anchor[146];
+    u32 v76 = anchor[147];
+    u32 v77 = anchor[148];
+    u32 v78 = anchor[149];
+    u32 v79 = anchor[150];
+    u32 v80 = anchor[151];
+    u32 v81 = anchor[152];
+    u32 v82 = anchor[153];
+    u32 v83 = anchor[154];
+    u32 v84 = anchor[155];
+    u32 v85 = anchor[156];
+    u32 v86 = anchor[157];
+    u32 v87 = anchor[158];
+    u32 v88 = anchor[159];
+    u32 v89 = anchor[161];
+    entry[88] = v63;
+    entry[45] = v65;
+    entry[46] = v66;
+    entry[47] = v67;
+    entry[48] = v68;
+    entry[49] = v69;
+    entry[50] = v70;
+    entry[51] = v71;
+    entry[52] = v72;
+    entry[53] = v73;
+    entry[54] = v74;
+    entry[55] = v75;
+    entry[56] = v76;
+    entry[57] = v77;
+    entry[58] = v78;
+    entry[59] = v79;
+    entry[60] = v80;
+    entry[61] = v81;
+    entry[62] = v82;
+    entry[63] = v83;
+    entry[64] = v84;
+    entry[65] = v85;
+    entry[66] = v86;
+    entry[67] = v87;
+    entry[68] = v88;
+    entry[70] = v89;
+    entry[89] = v64;
+    u32 v90 = anchor[181];
+    u32 v91 = anchor[182];
+    u32 v92 = anchor[183];
+    u32 v93 = anchor[184];
+    u32 v94 = anchor[185];
+    u32 v95 = anchor[186];
+    u32 v96 = anchor[187];
+    u32 v97 = anchor[188];
+    u32 v98 = anchor[189];
+    u32 v99 = anchor[190];
+    u32 v100 = anchor[191];
+    u32 v101 = anchor[192];
+    entry[90] = v90;
+    entry[91] = v91;
+    entry[92] = v92;
+    entry[93] = v93;
+    entry[94] = v94;
+    entry[95] = v95;
+    entry[96] = v96;
+    entry[97] = v97;
+    entry[98] = v98;
+    entry[99] = v99;
+    entry[100] = v100;
+    entry[101] = v101;
 }
 
 s32 TObjEnePanarms::create_bara(void *setData, s32 index) {
@@ -575,7 +832,8 @@ void TObjEnePanBARA::run_task() {
     m_3d4 = 10430.38043493439 * ((f32 (*)(f32, f32))atan2_float)(pad_3c8.x, pad_3c8.z);
     pad_3d8 = vector_length(&pad_3c8);
     m_45c++;
-    fn = TObjEnePanarms__state_fn_table[m_378].update;
+    PanBARAState *states = (PanBARAState *)TObjEnePanarms__state_fn_table;
+    fn = states[m_378].update;
     if (fn == 0) {
         return;
     }
@@ -800,7 +1058,7 @@ void TObjEnePanarms__sub_800E1C98(void *panarms, s32 state) {
     if (self->state < 0 || self->state >= 17) {
         return;
     }
-    enter = TObjEnePanarms__state_fn_table[self->state].enter;
+    enter = ((PanBARAState *)TObjEnePanarms__state_fn_table)[self->state].enter;
     if (enter) {
         (((TObjEnePanBARA *)panarms)->*enter)();
     }
@@ -1730,3 +1988,5 @@ int TObjEnePanarms::find_nearest_enemy_with_flag(s32 arg1, f32 farg0) {
 }
 
 }
+
+__declspec(section ".ctors") static void *const __sinit_TObjEnePanarms_cpp_ref = (void *)__sinit_TObjEnePanarms_cpp;
