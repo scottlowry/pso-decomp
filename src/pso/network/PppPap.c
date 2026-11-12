@@ -178,8 +178,8 @@ static inline s16 read_text_field(u8 *self, Hdr_803FC4B4 *hdr, s32 src) {
     u8 **pdst;
     s32 rv;
     s16 fld;
-    s16 n;
     u8 *obj;
+    s16 n;
     obj = *(u8 **)(self + 0x30);
     if (hdr->flag != self[1]) {
         return -1;
