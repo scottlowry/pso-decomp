@@ -212,7 +212,8 @@ void TEF_LensFlare::render() {
                 TWindowSubStatusDisp::get_player();
             }
             e = elements;
-            for (i = 1; i < 10; i++) {
+            i = 1;
+            do {
                 NJS_COLOR tint;
                 FlareQuad quad;
                 f32 w;
@@ -248,7 +249,7 @@ void TEF_LensFlare::render() {
                 draw_textured_quad_at_depth(&quad.x0, 0.5f);
                 TWindowSubStatusDisp::get_player();
                 e++;
-            }
+            } while (i++ < 9);
             restore_saved_depth_alpha_state();
         }
         TParticleCtrl::end_effect_render();
