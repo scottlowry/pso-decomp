@@ -1098,6 +1098,7 @@ extern s32 TLobby__sub_8040BA38(DnsQuery *self, u8 *p, s32 n)
   DnsRrHeader hdr;
   DnsAddr rec;
   DnsAddr *found;
+  DnsHost *obj;
   s32 ret;
   s32 l;
   u8 *rr;
@@ -1122,7 +1123,7 @@ extern s32 TLobby__sub_8040BA38(DnsQuery *self, u8 *p, s32 n)
   {
     case 1:
     {
-      DnsHost *obj = self->req.lookup.host;
+      obj = self->req.lookup.host;
       if (obj == 0)
       {
         break;
@@ -1158,7 +1159,7 @@ extern s32 TLobby__sub_8040BA38(DnsQuery *self, u8 *p, s32 n)
     }
     case 0x1c:
     {
-      DnsHost *obj = self->req.lookup.host;
+      obj = self->req.lookup.host;
       if (obj == 0)
       {
         break;
