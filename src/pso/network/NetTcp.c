@@ -1441,8 +1441,7 @@ s32 TLobby__sub_8041D0C8(u8 *self, u8 *data, s16 total, u8 *p6)
       switch (data[0])
       {
         case 2:
-          e = p6;
-          if ((sz == 4) && (e[0xd] & 2))
+          if ((sz == 4) && (p6[0xd] & 2))
         {
           NetMemcpy(&tmp16, data + 2, 2);
           *((u16 *) (self + offsetof(TcpTcb, peer_mss))) = tmp16;
@@ -1485,7 +1484,7 @@ s32 TLobby__sub_8041D0C8(u8 *self, u8 *data, s16 total, u8 *p6)
             e += 8;
           }
 
-          TLobby__sub_8041D584(self, e, tbl, (s16) n);
+          TLobby__sub_8041D584(self, p6, tbl, (s16) n);
           if (TLobby__sub_8041D524(self, last) != 0)
           {
             *((s32 *) (self + offsetof(TcpTcb, edge))) = *((s32 *) (self + offsetof(TcpTcb, snd_una)));
