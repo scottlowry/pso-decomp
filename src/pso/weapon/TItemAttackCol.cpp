@@ -146,6 +146,7 @@ void apply_camera_shake__10TObjPlayerFiii(s32 arg0, s32 arg1, s32 arg2);
 extern const f32 lbl_805DE914;
 extern const f32 lbl_805DE928;
 extern const f32 lbl_805DE91C;
+extern const f64 lbl_804729C0;
 extern const float lbl_805DE918;
 extern const f32 lbl_805DE924;
 Hit_802E3D8C *csnVector(void *, void *, s32);
@@ -305,8 +306,8 @@ TItemAttackCol::TItemAttackCol(TObject *parent, S_802E449C *params) : TUnk_804E3
     if (params->flags & 1) {
         VecCopy(&velocity, &params->direction);
         normalize_vector(&velocity);
-        rotation[0] = -(s32)(10430.38043493439 * atan2_float(velocity.y, newton_sqrtf(velocity.x * velocity.x + velocity.z * velocity.z)));
-        rotation[1] = (s32)(10430.38043493439 * atan2_float(velocity.x, velocity.z));
+        rotation[0] = -(s32)(lbl_804729C0 * atan2_float(velocity.y, newton_sqrtf(velocity.x * velocity.x + velocity.z * velocity.z)));
+        rotation[1] = (s32)(lbl_804729C0 * atan2_float(velocity.x, velocity.z));
         rotation[2] = 0;
     } else {
         velocity.x = sin_table_lookup(params->rotation_y);
