@@ -230,7 +230,7 @@ void TEF_LensFlare::render() {
                 at.y = dy * e->position + screen[1];
                 at.z = 0.0f;
                 VecCopy(&sp->pos, &at);
-                sp->scale_y = sp->scale_x = size;
+                sp->scale_y = sp->scale_x = (f64)size;
                 begin_screen_draw(1);
                 TObjFish::set_global_param(lbl_804C5820[e->sprite + 9].param);
                 set_draw_texture_and_color(lbl_804C5820[e->sprite + 9].tex, -1);
