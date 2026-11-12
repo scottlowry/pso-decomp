@@ -1,0 +1,47 @@
+{
+ "tip_score": 98.05556,
+ "rows_total": 94,
+ "semantic_rows": 0,
+ "class_global_rotation_bind_to_home_rank": {
+  "rows": 81,
+  "map_era_to_ours": {
+   "r31": "r27",
+   "r27": "r28",
+   "r30": "r31",
+   "r29": "r30",
+   "r28": "r30"
+  },
+  "disposition": "SEALED class v9-kit-1 (v8 INERT x3, sibling LIVE-NEGATIVE d1f7c873)"
+ },
+ "class_per_zone_rank_shift": {
+  "rows": 13,
+  "slots": [
+   75,
+   85,
+   118,
+   120,
+   123,
+   125,
+   126,
+   133,
+   196,
+   205,
+   219,
+   227,
+   234
+  ],
+  "disposition": "same family: per-zone lobby/a4 home rank (era r29/r30 vs ours r30/r31)"
+ },
+ "v2_census_class_status": {
+  "A_hop_transposition": "DEAD at today's body \u2014 zero mr-r0 insns, gate exact 252/252 (hop was OURS artifact at 253-row body)",
+  "B_D3130_slot_stratum": "RESOLVED \u2014 no frame-disp diff rows today (loc@0x8/0xc match era)",
+  "C_loop_bank_kcycle": "RESOLVED \u2014 r23..r26 bank rows absent from diff set entirely",
+  "D_lobby_remat": "SUBSUMED into per-zone rank shift rows",
+  "E_cmp_polarity": "RESOLVED \u2014 no cmplwi/cmpwi diff rows",
+  "F_branch_display": "ABSENT \u2014 exact-size body, LCS-aligned, no display rows"
+ },
+ "openers_remaining": [
+  "1: 20-version rosetta at exact flags (running)",
+  "2: partition (done, this file)"
+ ]
+}
