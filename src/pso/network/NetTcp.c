@@ -349,10 +349,10 @@ send:
             NetMemcpy(optp + 2, &tmp, 2);
             optlen = 4;
             if (tp->sack_flags & 1) {
-                optp[4] = 4;
-                optp[5] = 2;
-                optp[6] = 1;
-                optp[7] = 1;
+                opt[4] = 4;
+                opt[5] = 2;
+                opt[6] = 1;
+                opt[7] = 1;
                 optlen = 8;
             }
         }
