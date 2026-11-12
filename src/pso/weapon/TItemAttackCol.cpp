@@ -145,6 +145,7 @@ s32 play_weapon_hit_sound(void *);
 void apply_camera_shake__10TObjPlayerFiii(s32 arg0, s32 arg1, s32 arg2);
 extern const f32 lbl_805DE914;
 extern const f32 lbl_805DE928;
+extern const f32 lbl_805DE91C;
 extern const float lbl_805DE918;
 extern const f32 lbl_805DE924;
 Hit_802E3D8C *csnVector(void *, void *, s32);
@@ -309,7 +310,7 @@ TItemAttackCol::TItemAttackCol(TObject *parent, S_802E449C *params) : TUnk_804E3
         rotation[2] = 0;
     } else {
         velocity.x = sin_table_lookup(params->rotation_y);
-        velocity.y = 0.0f;
+        velocity.y = lbl_805DE914;
         velocity.z = cos_table_lookup(params->rotation_y);
         rotation[0] = 0;
         rotation[1] = params->rotation_y;
@@ -329,15 +330,15 @@ TItemAttackCol::TItemAttackCol(TObject *parent, S_802E449C *params) : TUnk_804E3
     pad_114[0] = 0;
     pad_114[1] = 0;
     pad_114[2] = 0;
-    pad_120[0] = 1.0f;
-    pad_120[1] = 1.0f;
-    pad_120[2] = 1.0f;
+    pad_120[0] = lbl_805DE918;
+    pad_120[1] = lbl_805DE918;
+    pad_120[2] = lbl_805DE918;
     hit_wall_flags.reset();
     if (params->flags & 2) {
         const StarLightParameters star = {
             params->star_width,
             7.0f,
-            {{0, 255.0f * params->star_color[0], 255.0f * params->star_color[1], 255.0f * params->star_color[2]}},
+            {{0, lbl_805DE91C * params->star_color[0], lbl_805DE91C * params->star_color[1], lbl_805DE91C * params->star_color[2]}},
             0,
             20.0f,
         };
