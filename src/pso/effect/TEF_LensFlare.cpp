@@ -212,7 +212,7 @@ void TEF_LensFlare::render() {
                 TWindowSubStatusDisp::get_player();
             }
             e = elements;
-            for (i = 0; i < 9; i++) {
+            for (i = 1; i < 10; i++) {
                 NJS_COLOR tint;
                 FlareQuad quad;
                 f32 w;
