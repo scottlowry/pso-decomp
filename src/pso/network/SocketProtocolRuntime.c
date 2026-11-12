@@ -659,6 +659,8 @@ s32 TLobby__sub_8041FFF8(u32 len, TcpTcb *self) {
 }
 #pragma pop
 
+#pragma push
+#pragma opt_propagation off
 s32 TLobby__sub_80420410(u32 off, u32 len, NetPacket *pkt, TcpTcb *o) {
     TcpSendEntry ent;
     NetBufferRef c;
@@ -904,6 +906,8 @@ s32 TLobby__sub_80420410(u32 off, u32 len, NetPacket *pkt, TcpTcb *o) {
     }
     return 0;
 }
+#pragma pop
+
 s32 TLobby__sub_80420BD0(NetPacket *req, TcpTcb *s, void (*done)(s16, s16)) {
     u32 v;
     if (s->f204_b7 == 1) {
