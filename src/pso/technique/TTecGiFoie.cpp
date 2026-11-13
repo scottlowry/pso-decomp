@@ -215,11 +215,6 @@ void TTecGiFoie::calc_params() {
   }
 }
 
-#pragma push
-#pragma opt_common_subs off
-#pragma opt_propagation off
-#pragma opt_dead_assignments off
-#pragma fp_contract on
 void TUnk_804CC800::run_task() {
     u32 sel;
     s32 euler[3];
@@ -314,7 +309,6 @@ void TUnk_804CC800::run_task() {
         }
     }
 }
-#pragma pop
 
 u8 *__dt__13TUnk_804CC800Fv(Task_80231224 *task, s16 flag) {
     u32 i;
