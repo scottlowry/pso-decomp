@@ -24,15 +24,37 @@ s32 memset(void *, int, int);
 
 u32 RlcDirectoryEntry::get_size() { return read_be32(size_be); }
 u32 RlcDirectoryEntry::get_offset() { return read_be32(offset_be); }
+#pragma push
+#pragma peephole off
 u32 RlcDirectoryEntry::read_be32(const s8 *bytes) {
-    return (bytes[0] << 24) | ((bytes[1] << 16) & 0xFF0000) | ((bytes[2] << 8) & 0xFF00) | (bytes[3] & 0xFF);
+    s32 b1 = bytes[1];
+    s32 b0 = bytes[0];
+    s32 b2 = bytes[2];
+    s32 b3 = bytes[3];
+    s32 t = (b1 << 16) & 0x00FF0000;
+    t |= b0 << 24;
+    t |= (b2 << 8) & 0xFF00;
+    t |= b3 & 0xFF;
+    return t;
 }
+#pragma pop
 
 u32 RlcHeader::get_directory_offset() { return read_be32(directory_offset_be); }
 u32 RlcHeader::get_chunk_count() { return read_be32(chunk_count_be); }
+#pragma push
+#pragma peephole off
 u32 RlcHeader::read_be32(const s8 *bytes) {
-    return (bytes[0] << 24) | ((bytes[1] << 16) & 0xFF0000) | ((bytes[2] << 8) & 0xFF00) | (bytes[3] & 0xFF);
+    s32 b1 = bytes[1];
+    s32 b0 = bytes[0];
+    s32 b2 = bytes[2];
+    s32 b3 = bytes[3];
+    s32 t = (b1 << 16) & 0x00FF0000;
+    t |= b0 << 24;
+    t |= (b2 << 8) & 0xFF00;
+    t |= b3 & 0xFF;
+    return t;
 }
+#pragma pop
 
 s32 fn_802A5C3C(u32 *arg0) {
     u32 temp_r0;
